@@ -42,7 +42,7 @@ namespace xamarinJKH.DialogViews
                 PickerDisp.Focus();                 
             }); };
             Layout.GestureRecognizers.Add(pickerOpen);
-            PickerDisp.Focus();
+            
         }
         
 
@@ -51,7 +51,7 @@ namespace xamarinJKH.DialogViews
             try
             {
                 ItemsList<NamedValue> result = await server.GetDispatcherList();
-                dispList = result.Data;
+                dispList = new List<NamedValue>(result.Data.Where(x=>x.Name != null));
                 BindingContext = null;
                 BindingContext = new DispListModel()
                 {
@@ -59,6 +59,7 @@ namespace xamarinJKH.DialogViews
                     hex = HexColor,
                     SelectedDisp = dispList[0]
                 };
+                await ShowToast("Загружено");
             }
             catch (Exception e)
             {

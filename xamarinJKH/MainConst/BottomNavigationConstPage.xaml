@@ -6,6 +6,7 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             xmlns:mainConst="clr-namespace:xamarinJKH.MainConst;assembly=xamarinJKH"
             xmlns:xamarinZkh="clr-namespace:xamarinJKH"
+            xmlns:pushNotification="clr-namespace:xamarinJKH.PushNotification;assembly=xamarinJKH"
             BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
             android:TabbedPage.IsSwipePagingEnabled="False"
             android:TabbedPage.ToolbarPlacement="Bottom"
@@ -15,6 +16,11 @@
             <local:AppsConstPage Title="{x:Static xamarinZkh:AppResources.App_NavBar}" IconImageSource="ic_apps" />
         </x:Arguments>
     </NavigationPage>
+    <NavigationPage x:Name="NotifNavBar" Title="{x:Static xamarinZkh:AppResources.Notifications}" IconImageSource="ic_notification" BarBackgroundColor="Black" BarTextColor="White">
+        <x:Arguments>
+            <pushNotification:SendPushPage Title="{x:Static xamarinZkh:AppResources.Notifications}" IconImageSource="ic_notification" />
+        </x:Arguments>
+    </NavigationPage> 
     <NavigationPage x:Name="monNavBar" Title="{x:Static xamarinZkh:AppResources.Monitoring_NavBar}" IconImageSource="ic_monitor" BarBackgroundColor="Black" BarTextColor="White">
         <x:Arguments>
             <mainConst:MonitorPage Title="{x:Static xamarinZkh:AppResources.Monitoring_NavBar}" IconImageSource="ic_monitor" />

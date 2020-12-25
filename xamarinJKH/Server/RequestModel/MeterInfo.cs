@@ -33,6 +33,7 @@ namespace xamarinJKH.Server.RequestModel
         public int ValuesEndDay { get; set; }
         public bool ValuesCanAdd { get; set; }
         public bool ValuesPeriodStartIsCurrent { get; set; }
+        
         public bool ValuesPeriodEndIsCurrent { get; set; }
 
         // ед измерения
@@ -57,6 +58,7 @@ namespace xamarinJKH.Server.RequestModel
         // Дата
         public string Period { get; set; }
         // Значение (Т1 для 2х 3х тарифныз)
+        public bool IsCurrentPeriod  { get; set; }
         public decimal Value { get; set; }
         // Значение Т2
         public decimal? ValueT2 { get; set; }

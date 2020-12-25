@@ -1592,4 +1592,10 @@
   <data name="NoMetersIdent" xml:space="preserve">
     <value>За даним особови рахунок відсутні прилади обліку</value>
   </data>
+  <data name="EnterHeader" xml:space="preserve">
+    <value>Введіть заголовок ...</value>
+  </data>
+  <data name="EnterTextPush" xml:space="preserve">
+    <value>Введіть текст повідомлення ...</value>
+  </data>
 </root>

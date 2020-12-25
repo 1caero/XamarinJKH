@@ -9,8 +9,7 @@
              xmlns:generic="clr-namespace:System.Collections.Generic;assembly=netstandard"
              x:Class="xamarinJKH.PushNotification.SendPushPage"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
-                          xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
->
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     <ContentPage.Content>
         <Grid VerticalOptions="FillAndExpand">
             <Image x:Name="ImageFon"
@@ -34,8 +33,8 @@
                         HorizontalOptions="EndAndExpand"
                         Orientation="Horizontal">
                         <!--BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"-->
-                        <xamarinJkh:ButtonSupport x:Name="LabelTech"></xamarinJkh:ButtonSupport>
-                        <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
+                        <xamarinJkh:ButtonSupport x:Name="LabelTech" />
+                        <xamarinJkh:ButtonProfile x:Name="IconViewProfile" Margin="2,0,5,0" />
 
                         <!--<forms:SvgCachedImage x:Name="IconViewTech"
                                               Source="resource://xamarinJKH.Resources.ic_tech.svg"
@@ -80,13 +79,16 @@
                         HorizontalOptions="Start" />
                 </StackLayout>
                 <StackLayout VerticalOptions="FillAndExpand">
-                    <pancakeView:PancakeView Elevation="20"                                                   
-                                                   x:Name="Frame"
-                                                   CornerRadius="30"
-                                                   VerticalOptions="FillAndExpand"
-                                                   Margin="10, 15, 10, 15"
-                                                   BackgroundColor="White"
-                                                   Padding="15,20">
+                    <pancakeView:PancakeView
+                        x:Name="Frame"
+                        CornerRadius="30"
+                        VerticalOptions="FillAndExpand"
+                        BorderThickness="1"
+                        BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=Transparent}"
+                        BackgroundColor="White"
+                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                        Margin="10, 15, 10, 15"
+                        Padding="15,20">
                         <ScrollView
                             HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                             <StackLayout Spacing="2">
@@ -98,27 +100,27 @@
                                        Text=""
                                        PlaceholderColor="#A2A2A2"
                                        HorizontalOptions="FillAndExpand"
-                                       Placeholder="{x:Static xamarinJkh:AppResources.EnterName}"
+                                       Placeholder="{x:Static xamarinJkh:AppResources.EnterHeader}"
                                        Keyboard="Text" />
                                 <Label
                                     HeightRequest="1"
                                     Margin="0, 0, 0, 15"
                                     BackgroundColor="{x:DynamicResource MainColor}"
                                     HorizontalOptions="FillAndExpand" />
-                                <pancakeView:PancakeView CornerRadius="15" x:Name="commentFrame"
-                                       BackgroundColor="White"
-                                       BorderColor="{x:DynamicResource MainColor}"
+                                <pancakeView:PancakeView CornerRadius="20" x:Name="commentFrame"
+                                                         BackgroundColor="White"
+                                                         BorderColor="{x:DynamicResource MainColor}"
                                                          BorderThickness="1"
-                                       Padding="0" HeightRequest="100">
+                                                         Padding="10" HeightRequest="60">
                                     <xamarinJkh:BordlessEditor x:Name="BordlessEditor"
                                                                FontSize="16"
                                                                VerticalOptions="FillAndExpand"
-                                                               Text=""     
+                                                               Text=""
                                                                AutoSize="TextChanges"
                                                                WidthRequest="100"
                                                                IsSpellCheckEnabled="True"
                                                                PlaceholderColor="#A2A2A2"
-                                                               Placeholder="{x:Static xamarinJkh:AppResources.SfPdfViewerPlaceHolderText}"
+                                                               Placeholder="{x:Static xamarinJkh:AppResources.EnterTextPush}"
                                                                TextColor="Black"
                                                                HorizontalOptions="FillAndExpand"
                                                                Focused="BordlessEditor_Focused"
@@ -129,94 +131,105 @@
                                     <Switch
                                         HorizontalOptions="Start"
                                         VerticalOptions="Center"
-                                        x:Name="CheckBox"                                        
-                                       
-                                        IsToggled="False"                                        
-                                        OnColor="{x:DynamicResource MainColor}"
-                                 />
+                                        x:Name="CheckBox"
+
+                                        IsToggled="False"
+                                        OnColor="{x:DynamicResource MainColor}" />
                                     <!--Color="{x:DynamicResource MainColor}"-->
                                     <Label
                                         TextColor="Black"
                                         x:Name="LabelDoc"
                                         HorizontalTextAlignment="Start"
                                         VerticalOptions="Center"
+                                        FontAttributes="Bold"
+                                        FontSize="15"
                                         HorizontalOptions="Start"
                                         Text="{x:Static xamarinJkh:AppResources.ShowMainPage}" />
                                 </StackLayout>
-                                <Label
-                                    TextColor="Black"
-                                    HorizontalTextAlignment="Start"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Start"
-                                    Text="{x:Static xamarinJkh:AppResources.FromToDate}" Margin="0,10" />
+                                <StackLayout Orientation="Horizontal">
+                                    <forms:SvgCachedImage
+                                        Source="resource://xamarinJKH.Resources.ic_calendar.svg"
+                                        HeightRequest="25"
+                                        HorizontalOptions="Start"
+                                        ReplaceStringMap="{Binding isRefresh, Converter={x:StaticResource SvgColor}}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        TextColor="Black"
+                                        HorizontalTextAlignment="Start"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Start"
+                                        FontSize="15"
+                                        FontAttributes="Bold"
+                                        Text="{x:Static xamarinJkh:AppResources.FromToDate}" Margin="0,10" />
+                                </StackLayout>
                                 <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
                                         <Label Text="{x:Static xamarinJkh:AppResources.With}"
-                                           FontSize="16"
-                                           TextColor="Black"
-                                           HorizontalOptions="Center"
-                                           Margin="0"
-                                           VerticalOptions="Center" />
+                                               FontSize="16"
+                                               TextColor="Black"
+                                               HorizontalOptions="Center"
+                                               Margin="0"
+                                               VerticalOptions="Center" />
                                         <StackLayout Spacing="0" x:Name="StackLayoutDate">
                                             <StackLayout Orientation="Horizontal" x:Name="StackLayoutDo">
                                                 <xamarinJkh:BorderlessDatePicker
-                                                x:Name="DatePicker"
-                                                Margin="0,0,0,0"
-                                                Format="dd.MM.yyyy"
-                                                FontSize="16"
-                                                DateSelected="DatePicker_OnDateSelected"
-                                                HorizontalOptions="Center"
-                                                TextColor="{x:StaticResource MainColor}" />
+                                                    x:Name="DatePicker"
+                                                    Margin="0,0,0,0"
+                                                    Format="dd.MM.yyyy"
+                                                    FontSize="16"
+                                                    DateSelected="DatePicker_OnDateSelected"
+                                                    HorizontalOptions="Center"
+                                                    TextColor="{x:StaticResource MainColor}" />
                                                 <forms:SvgCachedImage
-                                                Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
-                                                HeightRequest="12"
-                                                Rotation="90"
-                                                Margin="0,5,0,0"
-                                                HorizontalOptions="Start"
-                                                ReplaceStringMap="{Binding isRefresh, Converter={x:StaticResource SvgColor}}"
-                                                VerticalOptions="Center" />
+                                                    Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                                    HeightRequest="12"
+                                                    Rotation="90"
+                                                    Margin="0,5,0,0"
+                                                    HorizontalOptions="Start"
+                                                    ReplaceStringMap="{Binding isRefresh, Converter={x:StaticResource SvgColor}}"
+                                                    VerticalOptions="Center" />
                                             </StackLayout>
                                             <Label
-                                            HeightRequest="1"
-                                            BackgroundColor="{x:StaticResource MainColor}"
-                                            HorizontalOptions="Fill" />
+                                                HeightRequest="1"
+                                                BackgroundColor="{x:StaticResource MainColor}"
+                                                HorizontalOptions="Fill" />
                                         </StackLayout>
                                     </StackLayout>
-                                    <StackLayout  Orientation="Horizontal" HorizontalOptions="End">
-                                        <Label Text="{x:Static xamarinJkh:AppResources.To}"
-                                           FontSize="16"
-                                           TextColor="Black"
-                                           HorizontalOptions="Center"
-                                           Margin="0"
-                                           VerticalOptions="Center" />
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                                        <Label Text="{x:Static xamarinJkh:AppResources.ToDate}"
+                                               FontSize="16"
+                                               TextColor="Black"
+                                               HorizontalOptions="Center"
+                                               Margin="0"
+                                               VerticalOptions="Center" />
                                         <StackLayout Spacing="0" x:Name="StackLayoutDate2">
                                             <StackLayout Orientation="Horizontal">
                                                 <xamarinJkh:BorderlessDatePicker
-                                                x:Name="DatePicker2"
-                                                Margin="0,0,0,0"
-                                                Format="dd.MM.yyyy"
-                                                FontSize="16"
-                                                DateSelected="DatePicker2_OnDateSelected"
-                                                HorizontalOptions="Center"
-                                                TextColor="{x:StaticResource MainColor}" />
+                                                    x:Name="DatePicker2"
+                                                    Margin="0,0,0,0"
+                                                    Format="dd.MM.yyyy"
+                                                    FontSize="16"
+                                                    DateSelected="DatePicker2_OnDateSelected"
+                                                    HorizontalOptions="Center"
+                                                    TextColor="{x:StaticResource MainColor}" />
                                                 <forms:SvgCachedImage
-                                                Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
-                                                HeightRequest="12"
-                                                Rotation="90"
-                                                Margin="0,5,0,0"
-                                                HorizontalOptions="Start"
-                                                ReplaceStringMap="{Binding isRefresh, Converter={x:StaticResource SvgColor}}"
-                                                VerticalOptions="Center" />
+                                                    Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                                    HeightRequest="12"
+                                                    Rotation="90"
+                                                    Margin="0,5,0,0"
+                                                    HorizontalOptions="Start"
+                                                    ReplaceStringMap="{Binding isRefresh, Converter={x:StaticResource SvgColor}}"
+                                                    VerticalOptions="Center" />
                                             </StackLayout>
                                             <Label
-                                            HeightRequest="1"
-                                            BackgroundColor="{x:StaticResource MainColor}"
-                                            HorizontalOptions="Fill" />
+                                                HeightRequest="1"
+                                                BackgroundColor="{x:StaticResource MainColor}"
+                                                HorizontalOptions="Fill" />
                                         </StackLayout>
                                     </StackLayout>
-                                   
+
                                 </StackLayout>
-                                <StackLayout Orientation="Horizontal" Margin="0,10">
+                                <StackLayout IsVisible="False" Orientation="Horizontal" Margin="0,10">
                                     <StackLayout Spacing="0" Margin="0, 10,0,0" x:Name="StackLayoutKind"
                                                  HorizontalOptions="StartAndExpand">
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
@@ -241,31 +254,214 @@
                                             BackgroundColor="{x:StaticResource MainColor}"
                                             HorizontalOptions="Fill" />
                                     </StackLayout>
-                                    <StackLayout Spacing="0" Margin="0, 10,0,0" x:Name="StackLayoutOs"
-                                                 HorizontalOptions="EndAndExpand">
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-                                            <Label
-                                                x:Name="LabelKindOs"
-                                                Margin="0,0,0,0"
-                                                FontSize="16"
-                                                Text="{x:Static xamarinJkh:AppResources.OsTake}"
-                                                HorizontalOptions="Fill"
-                                                TextColor="{x:StaticResource MainColor}" />
-                                            <forms:SvgCachedImage
-                                                Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
-                                                HeightRequest="12"
-                                                Rotation="90"
-                                                Margin="0,5,0,0"
-                                                HorizontalOptions="Start"
-                                                ReplaceStringMap="{Binding isRefresh, Converter={x:StaticResource SvgColor}}"
-                                                VerticalOptions="Center" />
-                                        </StackLayout>
-                                        <Label
-                                            HeightRequest="1"
-                                            BackgroundColor="{x:StaticResource MainColor}"
-                                            HorizontalOptions="Fill" />
-                                    </StackLayout>
+                                    
                                 </StackLayout>
+                                <!-- Выбор ОС -->
+                                <StackLayout>
+                                    <Grid HorizontalOptions="FillAndExpand"
+                                          ColumnSpacing="10"
+                                          Margin="0, 10, 0, 0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Frame CornerRadius="10"
+                                               x:Name="FrameAll"
+                                               Grid.Column="0"
+                                               VerticalOptions="EndAndExpand"
+                                               HasShadow="True"
+                                               BorderColor="{x:DynamicResource MainColor}"
+                                               BackgroundColor="White"
+                                               Margin="0, 10, 0, 5"
+                                               Padding="0">
+                                            <Button
+                                                x:Name="ButtonAll"
+                                                Text="{x:Static xamarinJkh:AppResources.All}"
+                                                TextColor="{x:DynamicResource MainColor}"
+                                                Clicked="Button_All_OS_Click"
+                                                BackgroundColor="Transparent" />
+                                        </Frame>
+                                        <Frame CornerRadius="10"
+                                               Grid.Column="1"
+                                               x:Name="FrameAnd"
+                                               VerticalOptions="EndAndExpand"
+                                               HasShadow="False"
+                                               BorderColor="Gray"
+                                               BackgroundColor="White"
+                                               Margin="0, 10, 0, 5"
+                                               Padding="0">
+                                            <Button
+                                                x:Name="ButtonAnd"
+                                                Text="Android"
+                                                Clicked="Button_Android_OS_Click"
+                                                TextColor="Black"
+                                                BackgroundColor="Transparent" />
+                                        </Frame>
+                                        <Frame CornerRadius="10"
+                                               Grid.Column="2"
+                                               x:Name="FrameIos"
+                                               VerticalOptions="EndAndExpand"
+                                               HasShadow="False"
+                                               BorderColor="Gray"
+                                               BackgroundColor="White"
+                                               Margin="0, 10, 0, 5"
+                                               Padding="0">
+                                            <Button
+                                                x:Name="ButtonIos"
+                                                Text="iOS"
+                                                Clicked="Button_IOS_Clcik"
+                                                TextColor="Black"
+                                                BackgroundColor="Transparent" />
+                                        </Frame>
+                                    </Grid>
+                                </StackLayout>
+
+                                <!-- Выбор типа -->
+                                <StackLayout>
+                                    <Grid HorizontalOptions="FillAndExpand"
+                                          ColumnSpacing="12"
+                                          RowSpacing="12"
+                                          Margin="0, 10, 0, 0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                       
+                                        <Frame CornerRadius="10"
+                                               x:Name="FrameDuty"
+                                               Padding="0"
+                                               Grid.Row="0"
+                                               Grid.Column="0"
+                                               HasShadow="False"
+                                               BorderColor="Gray"
+                                               BackgroundColor="White"
+                                               HorizontalOptions="FillAndExpand">
+                                            <StackLayout
+                                                Orientation="Horizontal"
+                                                Spacing="0"
+                                                Margin="18,0,0,0"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="Center">
+                                                <forms:SvgCachedImage
+                                                    x:Name="ImageDuty"
+                                                    Source="resource://xamarinJKH.Resources.ic_duty.svg"
+                                                    HeightRequest="25"
+                                                    HorizontalOptions="Start"
+                                                    ReplaceStringMap="{Binding isRefresh, Converter={x:StaticResource SvgColor}, ConverterParameter='#777777|#777777'}"
+                                                    VerticalOptions="Center" />
+                                                <Button x:Name="ButtonDuty"
+                                                        Text="{x:Static xamarinJkh:AppResources.ByDuty}"
+                                                        Padding="0"
+                                                        Clicked="ButtonDuty_OnClicked"
+                                                        TextColor="Black"
+                                                        BackgroundColor="Transparent" />
+                                            </StackLayout>
+                                        </Frame> 
+                                        <Frame CornerRadius="10"
+                                               x:Name="FrameIdent"
+                                               Padding="0"
+                                               Grid.Row="0"
+                                               Grid.Column="1"
+                                               HasShadow="False"
+                                               BorderColor="Gray"
+                                               BackgroundColor="White"
+                                               HorizontalOptions="FillAndExpand">
+                                            <StackLayout
+                                                Orientation="Horizontal"
+                                                Spacing="0"
+                                                Margin="18,0,0,0"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="Center">
+                                                <forms:SvgCachedImage
+                                                    x:Name="ImageIdent"
+                                                    Source="resource://xamarinJKH.Resources.ic_ident_ls.svg"
+                                                    HeightRequest="25"
+                                                    HorizontalOptions="Start"
+                                                    ReplaceStringMap="{Binding isRefresh, Converter={x:StaticResource SvgColor}, ConverterParameter='#777777|#777777'}"
+                                                    VerticalOptions="Center" />
+                                                <Button
+                                                    x:Name="ButtonIdent"
+                                                        Text="{x:Static xamarinJkh:AppResources.ByLS}"
+                                                        Padding="0"
+                                                        TextColor="Black"
+                                                    Clicked="ButtonIdent_OnClicked"
+                                                        BackgroundColor="Transparent" />
+                                            </StackLayout>
+                                        </Frame>
+                                        <Frame CornerRadius="10"
+                                               Padding="0"
+                                               x:Name="FrameRyon"
+                                               Grid.Row="1"
+                                               Grid.Column="0"
+                                               HasShadow="False"
+                                               BorderColor="Gray"
+                                               BackgroundColor="White"
+                                               HorizontalOptions="FillAndExpand">
+                                            <StackLayout
+                                                Orientation="Horizontal"
+                                                Spacing="0"
+                                                Margin="18,0,0,0"
+                                                VerticalOptions="CenterAndExpand"
+                                                
+                                                HorizontalOptions="Center">
+                                                <forms:SvgCachedImage
+                                                    x:Name="ImageRyon"
+                                                    Source="resource://xamarinJKH.Resources.ic_ryon.svg"
+                                                    HeightRequest="25"
+                                                    HorizontalOptions="Start"
+                                                    ReplaceStringMap="{Binding isRefresh, Converter={x:StaticResource SvgColor}, ConverterParameter='#777777|#777777'}"
+                                                    VerticalOptions="Center" />
+                                                <Button 
+                                                    x:Name="ButtonRyon"
+                                                        Text="{x:Static xamarinJkh:AppResources.ToRayon}"
+                                                        Padding="0"
+                                                        TextColor="Black"
+                                                    Clicked="ButtonRyon_OnClicked"
+                                                        BackgroundColor="Transparent" />
+                                            </StackLayout>
+                                        </Frame> 
+                                        <Frame CornerRadius="10"
+                                               x:Name="FrameHouse"
+                                               Padding="0"
+                                               Grid.Row="1"
+                                               Grid.Column="1"
+                                               HasShadow="True"
+                                               BorderColor="{x:DynamicResource MainColor}"
+                                               BackgroundColor="White"
+                                               HorizontalOptions="FillAndExpand">
+                                            <StackLayout
+                                                Orientation="Horizontal"
+                                                Spacing="0"
+                                                Margin="18,0,0,0"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="Center">
+                                                <forms:SvgCachedImage
+                                                    x:Name="ImageHouse"
+                                                    Source="resource://xamarinJKH.Resources.ic_house_ident.svg"
+                                                    HeightRequest="25"
+                                                    HorizontalOptions="Start"
+                                                    ReplaceStringMap="{Binding isRefresh, Converter={x:StaticResource SvgColor}}"
+                                                    VerticalOptions="Center" />
+                                                <Button
+                                                    x:Name="ButtonHouse"
+                                                        Text="{x:Static xamarinJkh:AppResources.ByHome}"
+                                                        Padding="0"
+                                                    Clicked="ButtonHouse_OnClicked"
+                                                        TextColor="{x:DynamicResource MainColor}"
+                                                        BackgroundColor="Transparent" />
+                                            </StackLayout>
+                                        </Frame>
+                                        </Grid>
+                                </StackLayout>
+                                
                                 <StackLayout
                                     Margin="0,10,0,0"
                                     x:Name="LayoutRayon"
@@ -293,23 +489,24 @@
                                     HorizontalOptions="Start"
                                     Padding="0">
                                     <!--<ScrollView>-->
-                                        <xForms:SfAutoComplete x:Name="autoCompleteHouses"
-                                                               DisplayMemberPath="Address"
-                                                               MultiSelectMode="Token"
-                                                               TokensWrapMode="Wrap"
-                                                               IsSelectedItemsVisibleInDropDown="False"
-                                                               MaximumDropDownHeight="150"
-                                                               BorderColor="{x:StaticResource MainColor}"
-                                                               EnableAutoSize="True"
-                                                               VerticalOptions="Fill"
-                                                               HighlightedTextColor="{x:StaticResource MainColor}"
-                                                               ShowSuggestionsOnFocus="True"
-                                                               SuggestionMode="ContainsWithCaseSensitive"
-                                                               Watermark="{x:Static xamarinJkh:AppResources.StartEnterHome}"
-                                                               FocusChanged="AutoCompleteHouses_OnFocusChanged"
-                                                               SelectionChanged="AutoCompleteHouses_OnSelectionChanged"
-                                                               DropDownItemHeight="50"
-                                                               DataSource="{Binding HouseProfiles}" />
+                                    <xForms:SfAutoComplete x:Name="autoCompleteHouses"
+                                                           DisplayMemberPath="Address"
+                                                           MultiSelectMode="Token"
+                                                           TokensWrapMode="Wrap"
+                                                           IsSelectedItemsVisibleInDropDown="False"
+                                                           MaximumDropDownHeight="150"
+                                                           BorderColor="{x:StaticResource MainColor}"
+                                                           EnableAutoSize="True"
+                                                           VerticalOptions="Fill"
+                                                           HighlightedTextColor="{x:StaticResource MainColor}"
+                                                           ShowSuggestionsOnFocus="True"
+                                                           SuggestionMode="ContainsWithCaseSensitive"
+                                                           Watermark="{x:Static xamarinJkh:AppResources.StartEnterHome}"
+                                                           FocusChanged="AutoCompleteHouses_OnFocusChanged"
+                                                           SelectionChanged="AutoCompleteHouses_OnSelectionChanged"
+                                                           DropDownItemHeight="50"
+                                                           DataSource="{Binding HouseProfiles}"/>
+                                       
                                     <!--</ScrollView>-->
                                 </StackLayout>
                                 <StackLayout Margin="0,15,0,0"
@@ -350,11 +547,11 @@
                                         HorizontalOptions="FillAndExpand" />
                                 </StackLayout>
                                 <pancakeView:PancakeView CornerRadius="15"
-                                       VerticalOptions="EndAndExpand"
-                                       BackgroundColor="{x:DynamicResource MainColor}"
-                                       Margin="0, 10, 0, 5"
-                                       x:Name="FrameBtnAdd"
-                                       Padding="0">
+                                                         VerticalOptions="EndAndExpand"
+                                                         BackgroundColor="{x:DynamicResource MainColor}"
+                                                         Margin="0, 10, 0, 5"
+                                                         x:Name="FrameBtnAdd"
+                                                         Padding="0">
                                     <Button x:Name="BtnAdd"
                                             Text="{x:Static xamarinJkh:AppResources.Create}"
                                             TextColor="White"

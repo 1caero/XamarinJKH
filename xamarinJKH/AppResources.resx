@@ -1635,7 +1635,7 @@
     <value>По району</value>
   </data>
   <data name="ByHome" xml:space="preserve">
-    <value>По домам</value>
+    <value>По дому</value>
   </data>
   <data name="ByLS" xml:space="preserve">
     <value>По л/сч</value>
@@ -1650,13 +1650,13 @@
     <value>Показывать на главной</value>
   </data>
   <data name="FromToDate" xml:space="preserve">
-    <value>Сроки действия:</value>
+    <value>Срок действия:</value>
   </data>
   <data name="With" xml:space="preserve">
     <value>С</value>
   </data>
   <data name="ToDate" xml:space="preserve">
-    <value>До</value>
+    <value> до </value>
   </data>
   <data name="ShowMore" xml:space="preserve">
     <value>Показать ещё</value>
@@ -1711,5 +1711,11 @@
   </data>
   <data name="NoMetersIdent" xml:space="preserve">
     <value>По данному лицевому счету отсутствуют приборы учета.</value>
+  </data>
+  <data name="EnterHeader" xml:space="preserve">
+    <value>Введите заголовок...</value>
+  </data>
+  <data name="EnterTextPush" xml:space="preserve">
+    <value>Введите текст уведомления...</value>
   </data>
 </root>

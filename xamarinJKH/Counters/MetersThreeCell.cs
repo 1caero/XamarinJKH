@@ -767,7 +767,7 @@ namespace xamarinJKH.Main
 
             if (Values.Count == 1)
             {
-                counterDate1.Text = Values[0].Period;
+                counterDate1.Text = Values[0].Period.Equals("01.01.0001")? "-" : Values[0].Period;
                 count1.Text =
                     String.Format(GetFormat(DecimalPoint), Values[0].Value);
                                 
@@ -794,7 +794,7 @@ namespace xamarinJKH.Main
             }
             else if (Values.Count == 2)
             {
-                counterDate1.Text = Values[0].Period;
+                counterDate1.Text = Values[0].Period.Equals("01.01.0001")? "-" : Values[0].Period;
                 count1.Text =
                     String.Format(GetFormat(DecimalPoint), Values[0].Value); //.ToString(CultureInfo.InvariantCulture);
 
@@ -818,7 +818,7 @@ namespace xamarinJKH.Main
                     count1t3Stack.IsVisible = false;
                 }
 
-                counterDate2.Text = Values[1].Period;
+                counterDate2.Text = Values[1].Period.Equals("01.01.0001")? "-" : Values[1].Period;
                 count2.Text =
                     String.Format(GetFormat(DecimalPoint), Values[1].Value); //.ToString(CultureInfo.InvariantCulture);
 
@@ -845,7 +845,7 @@ namespace xamarinJKH.Main
             }
             else if (Values.Count == 3)
             {
-                counterDate1.Text = Values[0].Period;
+                counterDate1.Text = Values[0].Period.Equals("01.01.0001")? "-" : Values[0].Period;
                 count1.Text =
                     String.Format(GetFormat(DecimalPoint), Values[0].Value);
 
@@ -869,7 +869,7 @@ namespace xamarinJKH.Main
                     count1t3Stack.IsVisible = false;
                 }
 
-                counterDate2.Text = Values[1].Period;
+                counterDate2.Text = Values[1].Period.Equals("01.01.0001")? "-" : Values[1].Period;
                 count2.Text =
                     String.Format(GetFormat(DecimalPoint), Values[1].Value); //.ToString(CultureInfo.InvariantCulture);
 
@@ -894,7 +894,7 @@ namespace xamarinJKH.Main
                     //count2t3.IsVisible = false;
                 }
 
-                counterDate3.Text = Values[2].Period;
+                counterDate3.Text = Values[2].Period.Equals("01.01.0001")? "-" : Values[2].Period;
                 count3.Text =
                     String.Format(GetFormat(DecimalPoint), Values[2].Value); //.ToString(CultureInfo.InvariantCulture);
 
@@ -938,7 +938,7 @@ namespace xamarinJKH.Main
                         Console.WriteLine(e);
                     }
                     
-                }else if (Values.Count > 0 && int.Parse(Values[0].Period.Split('.')[1]) == DateTime.Now.Month && !meterInfo.AutoValueGettingOnly)
+                }else if (Values.Count > 0 && Values[0].IsCurrentPeriod && !meterInfo.AutoValueGettingOnly)
                 {
                     SetEditButton(Values[0].Period, mInfo);
                     SetDellValue(MeterID, mInfo);

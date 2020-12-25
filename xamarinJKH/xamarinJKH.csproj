@@ -90,6 +90,10 @@
     <None Remove="Resources\ic_password_login.svg" />
     <None Remove="Resources\ic_pays.svg" />
     <None Remove="Resources\ic_receipt.svg" />
+    <None Remove="Resources\ic_ryon.svg" />
+    <None Remove="Resources\ic_house_ident.svg" />
+    <None Remove="Resources\ic_duty.svg" />
+    <None Remove="Resources\ic_ident_ls.svg" />
     <None Remove="Resources\whatsapp.svg" />
   </ItemGroup>
 
@@ -111,6 +115,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource> 
     <EmbeddedResource Include="Resources\ic_pays.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ic_ident_ls.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ic_house_ident.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ic_ryon.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ic_duty.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\icon_add_app.svg" />

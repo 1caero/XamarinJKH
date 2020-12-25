@@ -1719,4 +1719,10 @@ A bot will call you on your number PHONE and tell an access code</value>
   <data name="NoMetersIdent" xml:space="preserve">
     <value>Connected account doesn't have meters</value>
   </data>
+  <data name="EnterHeader" xml:space="preserve">
+    <value>Enter a title ...</value>
+  </data>
+  <data name="EnterTextPush" xml:space="preserve">
+    <value>Enter your notification text ...</value>
+  </data>
 </root>

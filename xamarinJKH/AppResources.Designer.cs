@@ -19,7 +19,7 @@ namespace xamarinJKH {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class AppResources {
@@ -583,7 +583,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to По домам.
+        ///   Looks up a localized string similar to По дому.
         /// </summary>
         internal static string ByHome {
             get {
@@ -1205,6 +1205,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Введите заголовок....
+        /// </summary>
+        internal static string EnterHeader {
+            get {
+                return ResourceManager.GetString("EnterHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Добавьте Ваш лицевой счет.
         /// </summary>
         internal static string EnterIdent {
@@ -1282,6 +1291,15 @@ namespace xamarinJKH {
         internal static string EnterTarifMeters {
             get {
                 return ResourceManager.GetString("EnterTarifMeters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите текст уведомления....
+        /// </summary>
+        internal static string EnterTextPush {
+            get {
+                return ResourceManager.GetString("EnterTextPush", resourceCulture);
             }
         }
         
@@ -1916,7 +1934,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Сроки действия:.
+        ///   Looks up a localized string similar to Срок действия:.
         /// </summary>
         internal static string FromToDate {
             get {
@@ -4584,7 +4602,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to До.
+        ///   Looks up a localized string similar to  до .
         /// </summary>
         internal static string ToDate {
             get {

@@ -11,6 +11,7 @@ using Plugin.FilePicker.Abstractions;
 using Rg.Plugins.Popup.Services;
 using Syncfusion.SfAutoComplete.XForms;
 using Xamarin.Forms;
+using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
@@ -36,7 +37,8 @@ namespace xamarinJKH.PushNotification
         public SendPushPage()
         {
             InitializeComponent();
-
+            DatePicker2.MinimumDate = DatePicker.Date;
+            Frame.SetAppThemeColor(PancakeView.BorderColorProperty,(Color)Application.Current.Resources["MainColor"],Color.Transparent );
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
@@ -100,25 +102,37 @@ namespace xamarinJKH.PushNotification
 
             //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
 
-            var takeOS = new TapGestureRecognizer();
-            
-            takeOS.Tapped += async (s, e) =>
-            {
-                var action = await DisplayActionSheet(AppResources.OsTake, AppResources.Cancel, null,
-                    "Android", "iOS", AppResources.All);
-                if (action != null && !action.Equals(AppResources.Cancel))
-                {
-                    _os = action;
-                    LabelKindOs.Text = action;
-                }
-            };
-            StackLayoutOs.GestureRecognizers.Add(takeOS); 
+            // var takeOS = new TapGestureRecognizer();
+            //
+            // takeOS.Tapped += async (s, e) =>
+            // {
+            //     var action = await DisplayActionSheet(AppResources.OsTake, AppResources.Cancel, null,
+            //         "Android", "iOS", AppResources.All);
+            //     if (action != null && !action.Equals(AppResources.Cancel))
+            //     {
+            //         _os = action;
+            //         LabelKindOs.Text = action;
+            //     }
+            // };
+            // StackLayoutOs.GestureRecognizers.Add(takeOS); 
             var takeDate = new TapGestureRecognizer();
             takeDate.Tapped += async (s, e) =>
             {
                 Device.BeginInvokeOnMainThread(() => DatePicker.Focus());
             };
             StackLayoutDate.GestureRecognizers.Add(takeDate); 
+            var takeDuty = new TapGestureRecognizer();
+            takeDuty.Tapped += async (s, e) => ButtonDuty_OnClicked(FrameDuty, null);
+            FrameDuty.GestureRecognizers.Add(takeDuty); 
+            var takeRyon = new TapGestureRecognizer();
+            takeRyon.Tapped += async (s, e) => ButtonRyon_OnClicked(FrameRyon, null);
+            FrameRyon.GestureRecognizers.Add(takeRyon); 
+            var takeIdent = new TapGestureRecognizer();
+            takeIdent.Tapped += async (s, e) => ButtonIdent_OnClicked(FrameIdent, null);
+            FrameIdent.GestureRecognizers.Add(takeIdent); 
+            var takeHouse = new TapGestureRecognizer();
+            takeHouse.Tapped += async (s, e) => ButtonHouse_OnClicked(FrameHouse, null);
+            FrameHouse.GestureRecognizers.Add(takeHouse); 
             var takeDate2 = new TapGestureRecognizer();
             takeDate2.Tapped += async (s, e) =>
             {
@@ -135,62 +149,69 @@ namespace xamarinJKH.PushNotification
                 {
                     LabelKind.Text = action;
 
-                    if (action.Contains(AppResources.ToRayon))
-                    {
-                        LayoutRayon.IsVisible = true;
-                        LayoutHouses.IsVisible = false;
-                        LayoutLs.IsVisible = false;
-                        LayoutDebt.IsVisible = false;
-                        autoCompleteHouses.Clear();
-                        SelecttHouses.Clear();
-                        EntryLS.Text = "";
-                        EntryDebt.Text = "";
-                        autoCompleteHouses.EnableAutoSize = false;
-                        Device.BeginInvokeOnMainThread(() => autoComplete.Focus());
-                    }
-                    else if (action.Contains(AppResources.ByHome))
-                    {
-                        LayoutRayon.IsVisible = false;
-                        LayoutHouses.IsVisible = true;
-                        LayoutLs.IsVisible = false;
-                        LayoutDebt.IsVisible = false;
-                        autoComplete.Clear();
-                        _selectedGroupId = -1;
-                        EntryLS.Text = "";
-                        EntryDebt.Text = "";
-                        autoCompleteHouses.EnableAutoSize = true;
-                        Device.BeginInvokeOnMainThread(() => autoCompleteHouses.Focus());
-                    }else if (action.Contains(AppResources.ByLS))
-                    {
-                        LayoutLs.IsVisible = true;
-                        LayoutRayon.IsVisible = false;
-                        LayoutHouses.IsVisible = false;
-                        LayoutDebt.IsVisible = false;
-                        EntryLS.Focus();
-                        autoComplete.Clear();
-                        autoCompleteHouses.Clear();
-                        SelecttHouses.Clear();
-                        _selectedGroupId = -1;
-                        autoCompleteHouses.EnableAutoSize = false;
-                        EntryDebt.Text = "";
-                    }else if (action.Contains(AppResources.ByDuty))
-                    {
-                        LayoutDebt.IsVisible = true;
-                        LayoutLs.IsVisible = false;
-                        LayoutRayon.IsVisible = false;
-                        LayoutHouses.IsVisible = false;
-                        autoComplete.Clear();
-                        autoCompleteHouses.Clear();
-                        EntryDebt.Focus();
-                        SelecttHouses.Clear();
-                        autoCompleteHouses.EnableAutoSize = false;
-                        _selectedGroupId = -1;
-                        EntryLS.Text = "";
-                    }
+                    SetKind(action);
                 }
             };
             StackLayoutKind.GestureRecognizers.Add(kind);
             BackStackLayout.GestureRecognizers.Add(backClick);
+        }
+
+        private void SetKind(string action)
+        {
+            if (action.Contains(AppResources.ToRayon))
+            {
+                LayoutRayon.IsVisible = true;
+                LayoutHouses.IsVisible = false;
+                LayoutLs.IsVisible = false;
+                LayoutDebt.IsVisible = false;
+                autoCompleteHouses.Clear();
+                SelecttHouses.Clear();
+                EntryLS.Text = "";
+                EntryDebt.Text = "";
+                autoCompleteHouses.EnableAutoSize = false;
+                Device.BeginInvokeOnMainThread(() => autoComplete.Focus());
+            }
+            else if (action.Contains(AppResources.ByHome))
+            {
+                LayoutRayon.IsVisible = false;
+                LayoutHouses.IsVisible = true;
+                LayoutLs.IsVisible = false;
+                LayoutDebt.IsVisible = false;
+                autoComplete.Clear();
+                _selectedGroupId = -1;
+                EntryLS.Text = "";
+                EntryDebt.Text = "";
+                autoCompleteHouses.EnableAutoSize = true;
+                Device.BeginInvokeOnMainThread(() => autoCompleteHouses.Focus());
+            }
+            else if (action.Contains(AppResources.ByLS))
+            {
+                LayoutLs.IsVisible = true;
+                LayoutRayon.IsVisible = false;
+                LayoutHouses.IsVisible = false;
+                LayoutDebt.IsVisible = false;
+                EntryLS.Focus();
+                autoComplete.Clear();
+                autoCompleteHouses.Clear();
+                SelecttHouses.Clear();
+                _selectedGroupId = -1;
+                autoCompleteHouses.EnableAutoSize = false;
+                EntryDebt.Text = "";
+            }
+            else if (action.Contains(AppResources.ByDuty))
+            {
+                LayoutDebt.IsVisible = true;
+                LayoutLs.IsVisible = false;
+                LayoutRayon.IsVisible = false;
+                LayoutHouses.IsVisible = false;
+                autoComplete.Clear();
+                autoCompleteHouses.Clear();
+                EntryDebt.Focus();
+                SelecttHouses.Clear();
+                autoCompleteHouses.EnableAutoSize = false;
+                _selectedGroupId = -1;
+                EntryLS.Text = "";
+            }
         }
 
         private string _os = "";
@@ -380,13 +401,6 @@ namespace xamarinJKH.PushNotification
                                     Device.BeginInvokeOnMainThread(async () =>
                                     {
                                         await DisplayAlert("", AppResources.SendingPush, "OK");
-                                        try
-                                        {
-                                            _ = await Navigation.PopAsync();
-                                        }
-                                        catch
-                                        {
-                                        }
                                     });
                                 }
                             }
@@ -417,8 +431,173 @@ namespace xamarinJKH.PushNotification
         {
             DatePicker.MaximumDate = DatePicker2.Date;
         }
-        
-        
-      
+
+        Color hex = (Color) Application.Current.Resources["MainColor"];
+
+        private void Button_All_OS_Click(object sender, EventArgs e)
+        {
+            _os = ButtonAll.Text;
+            FrameAll.HasShadow = true;
+            FrameAll.BorderColor = hex;
+            ButtonAll.TextColor = hex;
+
+            FrameAnd.HasShadow = false;
+            FrameAnd.BorderColor = Color.Gray;
+            ButtonAnd.TextColor = Color.Black;
+            
+            FrameIos.HasShadow = false;
+            FrameIos.BorderColor = Color.Gray;
+            ButtonIos.TextColor = Color.Black;
+            
+        }
+
+        private void Button_Android_OS_Click(object sender, EventArgs e)
+        {
+            _os = ButtonAnd.Text;
+            FrameAnd.HasShadow = true;
+            FrameAnd.BorderColor = hex;
+            ButtonAnd.TextColor = hex;
+
+            FrameAll.HasShadow = false;
+            FrameAll.BorderColor = Color.Gray;
+            ButtonAll.TextColor = Color.Black;
+            
+            FrameIos.HasShadow = false;
+            FrameIos.BorderColor = Color.Gray;
+            ButtonIos.TextColor = Color.Black;
+        }
+
+        private void Button_IOS_Clcik(object sender, EventArgs e)
+        {
+            _os = ButtonIos.Text;
+            FrameIos.HasShadow = true;
+            FrameIos.BorderColor = hex;
+            ButtonIos.TextColor = hex;
+
+            FrameAll.HasShadow = false;
+            FrameAll.BorderColor = Color.Gray;
+            ButtonAll.TextColor = Color.Black;
+            
+            FrameAnd.HasShadow = false;
+            FrameAnd.BorderColor = Color.Gray;
+            ButtonAnd.TextColor = Color.Black;
+        }
+
+        private void ButtonDuty_OnClicked(object sender, EventArgs e)
+        {
+            SetKind(ButtonDuty.Text);
+            
+            FrameDuty.HasShadow = true;
+            FrameDuty.BorderColor = hex;
+            ButtonDuty.TextColor = hex;
+            
+            ImageDuty.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", hex.ToHex() } };
+            
+            FrameHouse.HasShadow = false;
+            FrameHouse.BorderColor = Color.Gray;
+            ButtonHouse.TextColor = Color.Gray;
+            
+            ImageHouse.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+           
+            FrameRyon.HasShadow = false;
+            FrameRyon.BorderColor = Color.Gray;
+            ButtonRyon.TextColor = Color.Gray;
+            
+            ImageRyon.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            
+            FrameIdent.HasShadow = false;
+            FrameIdent.BorderColor = Color.Gray;
+            ButtonIdent.TextColor = Color.Gray;
+            
+            ImageIdent.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            
+        }
+
+        private void ButtonIdent_OnClicked(object sender, EventArgs e)
+        {
+            SetKind(ButtonIdent.Text);
+            
+            FrameIdent.HasShadow = true;
+            FrameIdent.BorderColor = hex;
+            ButtonIdent.TextColor = hex;
+            
+            ImageIdent.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", hex.ToHex() } };
+            
+            FrameHouse.HasShadow = false;
+            FrameHouse.BorderColor = Color.Gray;
+            ButtonHouse.TextColor = Color.Gray;
+            
+            ImageHouse.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+           
+            FrameRyon.HasShadow = false;
+            FrameRyon.BorderColor = Color.Gray;
+            ButtonRyon.TextColor = Color.Gray;
+            
+            ImageRyon.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            
+            FrameDuty.HasShadow = false;
+            FrameDuty.BorderColor = Color.Gray;
+            ButtonDuty.TextColor = Color.Gray;
+            
+            ImageDuty.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+        }
+
+        private void ButtonRyon_OnClicked(object sender, EventArgs e)
+        {
+            SetKind(ButtonRyon.Text);
+            
+            FrameRyon.HasShadow = true;
+            FrameRyon.BorderColor = hex;
+            ButtonRyon.TextColor = hex;
+            
+            ImageRyon.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", hex.ToHex() } };
+            
+            FrameHouse.HasShadow = false;
+            FrameHouse.BorderColor = Color.Gray;
+            ButtonHouse.TextColor = Color.Gray;
+            
+            ImageHouse.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+           
+            FrameIdent.HasShadow = false;
+            FrameIdent.BorderColor = Color.Gray;
+            ButtonIdent.TextColor = Color.Gray;
+            
+            ImageIdent.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            
+            FrameDuty.HasShadow = false;
+            FrameDuty.BorderColor = Color.Gray;
+            ButtonDuty.TextColor = Color.Gray;
+            
+            ImageDuty.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+        }
+
+        private void ButtonHouse_OnClicked(object sender, EventArgs e)
+        {
+            SetKind(ButtonHouse.Text);
+            
+            FrameHouse.HasShadow = true;
+            FrameHouse.BorderColor = hex;
+            ButtonHouse.TextColor = hex;
+            
+            ImageHouse.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", hex.ToHex() } };
+            
+            FrameRyon.HasShadow = false;
+            FrameRyon.BorderColor = Color.Gray;
+            ButtonRyon.TextColor = Color.Gray;
+            
+            ImageRyon.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+           
+            FrameIdent.HasShadow = false;
+            FrameIdent.BorderColor = Color.Gray;
+            ButtonIdent.TextColor = Color.Gray;
+            
+            ImageIdent.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            
+            FrameDuty.HasShadow = false;
+            FrameDuty.BorderColor = Color.Gray;
+            ButtonDuty.TextColor = Color.Gray;
+            
+            ImageDuty.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+        }
     }
 }

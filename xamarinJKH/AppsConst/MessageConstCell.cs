@@ -24,6 +24,8 @@ namespace xamarinJKH.AppsConst
         private Label LabelDateA = new Label();
         Frame frameDateA = new Frame();
         IconView imageA = new IconView();
+        IconView imageHiden = new IconView();
+        IconView imageHiden2 = new IconView();
         Frame frameA = new Frame();
 
         public MessageCellAuthor(RequestMessage message, Page p, string DateUniq, out string newDate)
@@ -68,7 +70,19 @@ namespace xamarinJKH.AppsConst
             Frame frameTextA = new Frame();
             frameTextA.HorizontalOptions = LayoutOptions.End;
             frameTextA.VerticalOptions = LayoutOptions.StartAndExpand;
-            frameTextA.BackgroundColor = (Color) Application.Current.Resources["MainColor"];
+            if (message.IsHidden)
+            {
+                frameTextA.SetAppThemeColor(Frame.BorderColorProperty,(Color) Application.Current.Resources["MainColor"], Color.Transparent );
+                frameTextA.BackgroundColor = Color.FromHex("#EBEBEB");
+                LabelTextA.TextColor = Color.Black;
+            }
+            else
+            {
+                frameTextA.BackgroundColor = (Color) Application.Current.Resources["MainColor"];
+                LabelTextA.TextColor = Color.White;
+
+            }
+
             frameTextA.Margin = new Thickness(0, 0, 0, 10);
             frameTextA.Padding = new Thickness(15, 15, 15, 15);
             frameTextA.CornerRadius = 20;
@@ -77,7 +91,6 @@ namespace xamarinJKH.AppsConst
             StackLayout stackLayoutContentA = new StackLayout();
             stackLayoutContentA.HorizontalOptions = LayoutOptions.End;
 
-            LabelTextA.TextColor = Color.White;
             LabelTextA.FontSize = 15;
 
             LabelTextA.HorizontalOptions = LayoutOptions.Center;
@@ -89,6 +102,15 @@ namespace xamarinJKH.AppsConst
             imageA.WidthRequest = 40;
             imageA.Foreground = Color.White;
             imageA.Source = "ic_file_download";
+
+            imageHiden.IsVisible = message.IsHidden;
+            imageHiden.HorizontalOptions = LayoutOptions.Start;
+            imageHiden.VerticalOptions = LayoutOptions.Center;
+            imageHiden.HeightRequest = 20;
+            imageHiden.WidthRequest = 20;
+            imageHiden.Margin = new Thickness(-10, -10, 0, 0);
+            imageHiden.Foreground = (Color) Application.Current.Resources["MainColor"];
+            imageHiden.Source = "ic_close_password";
 
             ActivityIndicator indicator = new ActivityIndicator();
             indicator.WidthRequest = 40;
@@ -150,10 +172,16 @@ namespace xamarinJKH.AppsConst
             stackLayoutIcon.Spacing = 0;
             stackLayoutIcon.HorizontalOptions = LayoutOptions.End;
             frameTextA.Content = stackLayoutContentA;
-
-            stackLayoutIcon.Children.Add(frameTextA);
+            
+            Grid grid = new Grid();
+            grid.Children.Add(frameTextA);
+            grid.Children.Add(imageHiden);
+            
+            stackLayoutIcon.Children.Add(grid);
             stackLayoutIcon.Children.Add(frameA);
 
+            
+            
             frameDateA.HorizontalOptions = LayoutOptions.Center;
             frameDateA.VerticalOptions = LayoutOptions.Start;
             frameDateA.BackgroundColor = Color.FromHex("#E2E2E2");
@@ -224,6 +252,7 @@ namespace xamarinJKH.AppsConst
         private Label LabelDate = new Label();
         Frame frameDate = new Frame();
         IconView image = new IconView();
+        IconView imageHiden = new IconView();
         Frame frame = new Frame();
 
         private RestClientMP _server = new RestClientMP();
@@ -275,7 +304,18 @@ namespace xamarinJKH.AppsConst
             frameText.Padding = new Thickness(15, 15, 15, 15);
             frameText.CornerRadius = 20;
             frameText.SetOnAppTheme(Frame.HasShadowProperty, false, true);
+            if (message.IsHidden)
+            {
+                frameText.SetAppThemeColor(Frame.BorderColorProperty,(Color) Application.Current.Resources["MainColor"], Color.Transparent );
+                frameText.BackgroundColor = Color.FromHex("#EBEBEB");
+                LabelText.TextColor = Color.Black;
+            }
+            else
+            {
+                frameText.BackgroundColor = (Color) Application.Current.Resources["MainColor"];
+                LabelText.TextColor = Color.White;
 
+            }
             StackLayout stackLayoutContent = new StackLayout();
 
             image.IsVisible = message.FileID != -1;
@@ -285,6 +325,15 @@ namespace xamarinJKH.AppsConst
             image.Foreground = Color.White;
             image.Source = "ic_file_download";
 
+            imageHiden.IsVisible = message.IsHidden;
+            imageHiden.HorizontalOptions = LayoutOptions.Start;
+            imageHiden.VerticalOptions = LayoutOptions.Center;
+            imageHiden.HeightRequest = 20;
+            imageHiden.WidthRequest = 20;
+            imageHiden.Margin = new Thickness(-10, -10, 0, 0);
+            imageHiden.Foreground = (Color) Application.Current.Resources["MainColor"];
+            imageHiden.Source = "ic_close_password";
+            
             if (message.FileID != -1)
             {
                 var tgr = new TapGestureRecognizer();
@@ -314,7 +363,6 @@ namespace xamarinJKH.AppsConst
                 image.GestureRecognizers.Add(tgr);
             }
 
-            LabelText.TextColor = Color.Black;
             LabelText.FontSize = 15;
             LabelText.HorizontalTextAlignment = TextAlignment.Start;
             LabelText.HorizontalOptions = LayoutOptions.Start;
@@ -329,6 +377,7 @@ namespace xamarinJKH.AppsConst
 
             stackLayoutIconB.Children.Add(frame);
             stackLayoutIconB.Children.Add(frameText);
+            stackLayoutIconB.Children.Add(imageHiden);
 
 
             frameDate.HorizontalOptions = LayoutOptions.Center;

@@ -70,6 +70,7 @@ namespace xamarinJKH.Server.RequestModel
         public string Added { get; set; }
         public string AuthorName { get; set; }
         public string Text { get; set; }
+        public bool IsHidden  { get; set; }
         public int FileID { get; set; }
         // сообщение создано текущим пользователем
         public bool IsSelf { get; set; }
