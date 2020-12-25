@@ -390,7 +390,8 @@ namespace xamarinJKH.Main
             MessagingCenter.Subscribe<Object>(this, "UpdateCounters", async (sender) => await RefreshCountersData());
             MessagingCenter.Subscribe<Object, AccountInfo>(this, "AddIdent", async (sender, ident) =>
             {
-                //await Task.Delay(TimeSpan.FromMilliseconds(500));
+                if (Device.RuntimePlatform == "iOS")
+                    await Task.Delay(TimeSpan.FromMilliseconds(500));
                 if (ident != null)
                 {
                     var contain = Accounts.FirstOrDefault(x => x.Ident == ident.Ident);
@@ -426,7 +427,8 @@ namespace xamarinJKH.Main
             });
             MessagingCenter.Subscribe<Object, AccountInfo>(this, "RemoveIdent", async (sender, ident) =>
             {
-                //await Task.Delay(TimeSpan.FromMilliseconds(500));
+                if (Device.RuntimePlatform == "iOS")
+                    await Task.Delay(TimeSpan.FromMilliseconds(500));
                 Device.BeginInvokeOnMainThread(() => 
                 {
                     if (SelectedAccount != null && ident != null)
