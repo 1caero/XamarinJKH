@@ -63,6 +63,18 @@ namespace xamarinJKH.Main
             }
         }
 
+        bool OnTimerTick()
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                if (IsRefreshing || IsBusy)
+                {
+                    IsRefreshing = false;
+                    IsBusy = false;
+                }
+            });
+            return true;
+        }
 
         public async Task RefreshCountersData()
         {
@@ -81,7 +93,12 @@ namespace xamarinJKH.Main
 
             try
             {
+                IsBusy = true;
+                IsRefreshing = true;
                 ItemsList<MeterInfo> info = await _server.GetThreeMeters();
+                IsRefreshing = false;
+                IsBusy = false;
+                //Device.StartTimer(TimeSpan.FromSeconds(5), OnTimerTick);
                 if (info.Error == null && info.Data != null)
                 {
                     if (string.IsNullOrEmpty(account) || string.IsNullOrWhiteSpace(account))
@@ -150,25 +167,29 @@ namespace xamarinJKH.Main
                             //    }
                             //    //Accounts.Insert(0, new AccountInfo() { Ident = AppResources.All, Selected = true });
                             //}
-                            
-                            if (SelectedAccount == null)
+                            try
                             {
-                                //Accounts.Insert(0, new AccountInfo() { Ident = AppResources.All, Selected = true });
-                                if (Accounts.Count > 0)
-                                SelectedAccount = Accounts[0];
-
-                            }
-                            else if (SelectedAccount.Ident == AppResources.All)
-                                SelectedAccount = Accounts[0];
-                            else if (!Accounts.Contains(SelectedAccount))
-                            {
-                                SelectedAccount = Accounts[0];
-                                foreach (var account in Accounts)
+                                if (SelectedAccount == null)
                                 {
-                                    account.Selected = false;
+                                    //Accounts.Insert(0, new AccountInfo() { Ident = AppResources.All, Selected = true });
+                                    if (Accounts.Count > 0)
+                                        SelectedAccount = Accounts[0];
+
                                 }
-                                SelectedAccount.Selected = true;
+                                else if (SelectedAccount.Ident == AppResources.All)
+                                    SelectedAccount = Accounts[0];
+                                else if (!Accounts.Contains(SelectedAccount))
+                                {
+                                    SelectedAccount = Accounts[0];
+                                    foreach (var account in Accounts)
+                                    {
+                                        account.Selected = false;
+                                    }
+                                    SelectedAccount.Selected = true;
+                                }
                             }
+                            catch { }
+                            
                             //addIdentLbl.IsVisible = false;
 
                             List<MeterInfo> meters_ = new List<MeterInfo>();

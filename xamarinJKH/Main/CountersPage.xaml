@@ -253,7 +253,7 @@
                                         VerticalOptions="FillAndExpand">
                                     <StackLayout>
                                         <ActivityIndicator x:Name="aIndicator" Color="{Binding hex}" Scale="2" Margin="20"
-                                                       IsRunning="True" IsEnabled="True" IsVisible="false"
+                                                       IsRunning="{Binding IsRefreshing}" IsEnabled="{Binding IsRefreshing}" IsVisible="{Binding IsRefreshing}"
                                                        HorizontalOptions="CenterAndExpand"
                                                        VerticalOptions="CenterAndExpand" />
                                         <StackLayout x:Name="baseForCounters" VerticalOptions="FillAndExpand" />
