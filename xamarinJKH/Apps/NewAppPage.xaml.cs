@@ -176,7 +176,7 @@ _appModel = new AddAppModel()
                 else
                 {
                     SetDefaultApp();
-                    EntryMess.Text = "";
+                    // EntryMess.Text = "";
                     isPassAPP = false;
                 }
             });

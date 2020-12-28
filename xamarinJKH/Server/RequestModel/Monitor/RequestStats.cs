@@ -9,5 +9,7 @@ namespace xamarinJKH.Server.RequestModel
         public PeriodStats Month { get; set; }
         public List<Requests> TotalUnperformedRequestsList { get; set; }
         public string Error { get; set; }
+        // статистика за произвольный период
+        public PeriodStats CustomPeriod{ get; set; }
     }
 }

@@ -151,11 +151,11 @@ namespace xamarinJKH.MainConst
             EntryFio.Text = Settings.Person.FIO;
             EntryEmail.Text = Settings.Person.Email;
 
-#if DEBUG
-            FrameOffers.IsVisible = true;
-#else
-            FrameOffers.IsVisible = Settings.Person.UserSettings.RightCreateAnnouncements;
-#endif
+// #if DEBUG
+//             FrameOffers.IsVisible = true;
+// #else
+//             FrameOffers.IsVisible = Settings.Person.UserSettings.RightCreateAnnouncements;
+// #endif
 
             MessagingCenter.Subscribe<Object>(this, "ChangeThemeConst", (sender) =>
             {
