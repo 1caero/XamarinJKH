@@ -162,6 +162,15 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\ItunesArtwork@2x.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_notification.imageset\ic_notification_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_notification.imageset\ic_notification_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_notification.imageset\ic_notification_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\ic_shop.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -172,6 +181,9 @@
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\ic_shop.imageset\ic_shop3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_notification.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -365,7 +377,6 @@
     <BundleResource Include="Resources\ic_news_top.png" />
     <BundleResource Include="Resources\ic_news_top_light.png" />
     <BundleResource Include="Resources\ic_next_disp.png" />
-    <BundleResource Include="Resources\ic_notification.png" />
     <BundleResource Include="Resources\ic_notification_top.png" />
     <BundleResource Include="Resources\ic_notification_top_light.png" />
     <BundleResource Include="Resources\ic_not_author.png" />
