@@ -175,6 +175,7 @@
                                             SelectionChangedCommand="{Binding SelectTyp}"
                                             SelectionChangedCommandParameter="{Binding SelectedTyp}"
                                             HeightRequest="60"
+                                            Margin="0,0,20,0"
                                             SelectionMode="Single">
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>

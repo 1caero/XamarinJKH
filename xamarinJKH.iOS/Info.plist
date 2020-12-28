@@ -21,7 +21,7 @@
 	<key>MinimumOSVersion</key>
 	<string>10.0</string>
 	<key>CFBundleIdentifier</key>
-	<string>rom.best.tih-gavan</string>
+	<string>rom.best.osnova</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
@@ -70,7 +70,7 @@
 		<false/>
 	</dict>
 	<key>CFBundleDisplayName</key>
-	<string>Тихая гавань</string>
+	<string>ЕДС Основа</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>whatsapp</string>
