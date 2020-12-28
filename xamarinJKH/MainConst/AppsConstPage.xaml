@@ -98,6 +98,8 @@
                                         DateApp="{Binding Added}"
                                         Check = "{Binding IsCheked}"
                                         AddressApp = "{Binding Address}"
+                                            Read="{Binding IsReaded}"
+                                            ID="{Binding ID}"
                                         TextApp="{Binding Name}" />
                                     </DataTemplate>
 

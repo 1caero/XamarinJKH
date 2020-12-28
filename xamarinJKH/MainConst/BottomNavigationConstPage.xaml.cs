@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -112,12 +113,28 @@ namespace xamarinJKH.MainConst
                 this.CurrentPage = this.Children[0];
                 MessagingCenter.Send<Object, int>(this, "OpenAppConst", args);
             });
-            
+
+            MessagingCenter.Subscribe<Object, int>(this, "SetRequestsAmount", (sender, args) =>
+            {
+                Device.BeginInvokeOnMainThread(() => RequestsAmount = args);
+            });
+
+            BindingContext = this;
 
         }
         void StartUpdateToken()
         {
             Device.StartTimer(TimeSpan.FromMinutes(5), OnTimerTick);
+        }
+        int requestsAmount;
+        public int RequestsAmount
+        {
+            get => requestsAmount;
+            set
+            {
+                requestsAmount = value;
+                OnPropertyChanged("RequestsAmount");
+            }
         }
 
         private  bool OnTimerTick()

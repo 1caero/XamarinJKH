@@ -16,6 +16,7 @@ namespace xamarinJKH.AppsConst
         private Label LabelText = new Label();
         private Label LabelAddressApp = new Label();
         private CheckBox checkBox;
+        Frame ReadIndicator;
         public AppConstCell()
         {
             MaterialFrame frame = new MaterialFrame();
@@ -125,6 +126,34 @@ namespace xamarinJKH.AppsConst
             containerData.Children.Add(LabelAddressApp);
             containerData.Children.Add(stackLayoutText);
 
+            containerData.Children.Add(grid);
+            containerData.Children.Add(LabelDate);
+            containerData.Children.Add(stackLayoutStatus);
+
+            Frame readindicator = new Frame
+            {
+                BackgroundColor = Color.Red,
+                CornerRadius = 5
+            };
+
+            Grid containerMain = new Grid();
+            containerMain.Padding = 0;
+            containerMain.ColumnDefinitions = new ColumnDefinitionCollection
+            {
+                new ColumnDefinition{ Width = GridLength.Star },
+                new ColumnDefinition{ Width = new GridLength(5) }
+            };
+
+            containerMain.RowDefinitions = new RowDefinitionCollection
+            {
+                new RowDefinition { Height = new GridLength(5)},
+                new RowDefinition { Height = GridLength.Star }
+            };
+
+            container.Children.Add(containerData);
+            container.Children.Add(arrow);
+
+            
 
             container.Children.Add(containerData);
             
@@ -146,10 +175,33 @@ namespace xamarinJKH.AppsConst
 #endif
             container.Children.Add(arrow);
 
-            frame.Content = container;
+            containerMain.Children.Add(container);
+            Grid.SetRowSpan(container, 2);
+            Grid.SetColumnSpan(container, 2);
 
 
-            View = frame;
+            ReadIndicator = new Frame
+            {
+                CornerRadius = 5,
+                BackgroundColor = Color.Red,
+                IsVisible = false
+            };
+            ReadIndicator.SetBinding(View.IsVisibleProperty, "Read", BindingMode.TwoWay);
+            containerMain.Children.Add(ReadIndicator, 1, 0);
+            frame.Content = containerMain;
+
+            var stackLMain = new StackLayout() { Margin = new Thickness(0, 2) };
+            stackLMain.Children.Add(frame);
+            View = stackLMain;
+
+            MessagingCenter.Subscribe<Object, int>(this, "SetAppReadConst", (sender, args) =>
+            {
+                if (this.ID == args)
+                {
+                    ReadIndicator.IsVisible = false;
+                }
+            });
+            //View = frame;
         }
 
 
@@ -171,7 +223,13 @@ namespace xamarinJKH.AppsConst
         
         public static readonly BindableProperty CheckCommandProperty =
             BindableProperty.Create("CheckCommand", typeof(bool), typeof(AppConstCell), true);
-        
+
+        public static readonly BindableProperty ReadProperty =
+            BindableProperty.Create("Read", typeof(bool), typeof(AppConstCell));
+
+        public static readonly BindableProperty IDProperty =
+            BindableProperty.Create("ID", typeof(int), typeof(AppConstCell));
+
         public string Number
         {
             get { return (string)GetValue(NumberProperty); }
@@ -211,6 +269,17 @@ namespace xamarinJKH.AppsConst
             set { SetValue(AddressAppProperty, value); }
         }
 
+        public bool Read
+        {
+            get { return (bool)GetValue(ReadProperty); }
+            set { SetValue(ReadProperty, value); }
+        }
+
+        public int ID
+        {
+            get { return (int)GetValue(IDProperty); }
+            set { SetValue(IDProperty, value); }
+        }
 
         protected override async void OnBindingContextChanged()
         {
@@ -309,7 +378,8 @@ namespace xamarinJKH.AppsConst
                     Console.WriteLine(e);
                 }
                 checkBox.CheckedChanged += checkBoxOnCheckedChanged;
-                
+                //await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
+                ReadIndicator.IsVisible = !Read;// && StatusID != 6;
             }
         }
         

@@ -22,6 +22,7 @@ using xamarinJKH.Tech;
 using xamarinJKH.Utils;
 using xamarinJKH.ViewModels;
 using Xamarin.Essentials;
+using System.Runtime.Serialization;
 
 namespace xamarinJKH.MainConst
 {
@@ -93,6 +94,7 @@ namespace xamarinJKH.MainConst
             IsVisibleFunction();
             additionalList.ItemsSource = null;
             additionalList.ItemsSource = RequestInfos;
+            MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", RequestInfos.Where(x => !x.IsReaded).Count());
             Empty = RequestInfos.Count == 0;
         }
 
@@ -393,6 +395,7 @@ namespace xamarinJKH.MainConst
                 // setReaded(_requestList.Requests);
                 SetReaded();
                 Settings.UpdateKey = _requestList.UpdateKey;
+                MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", _requestList.Requests.Where(x => !x.IsReaded).Count());
             }
             else
             {
@@ -439,6 +442,10 @@ namespace xamarinJKH.MainConst
             RequestInfo select = e.Item as RequestInfo;
             if (Navigation.NavigationStack.FirstOrDefault(x => x is AppConstPage) == null)
                 await Navigation.PushAsync(new AppConstPage(select));
+
+            await Task.Delay(TimeSpan.FromSeconds(1));
+
+            MessagingCenter.Send<Object, int>(this, "SetAppReadConst", select.ID);
         }
 
         private async void startNewApp(object sender, EventArgs e)
