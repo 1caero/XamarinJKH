@@ -561,6 +561,17 @@ namespace xamarinJKH.AppsConst
                     }
                 }
             });
+
+            if (!requestInfo.IsReaded)
+            {
+                Task.Run(async () =>
+                {
+                    var res = await _server.SetReadedFlag(requestInfo.ID);
+                    MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", -1);
+                    MessagingCenter.Send<Object, int>(this, "SetAppReadConst", requestInfo.ID);
+                    requestInfo.IsReaded = true;
+                });
+            }
             // additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
         }
 
