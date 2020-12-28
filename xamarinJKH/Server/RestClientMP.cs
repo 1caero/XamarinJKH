@@ -2570,7 +2570,8 @@ namespace xamarinJKH.Server
         /// <param name="districtId">ид района</param>
         /// <param name="houseId">ид дома</param>
         /// <returns>объект со статистикой</returns>
-        public async Task<ItemsList<RequestStats>> RequestStats(int? districtId = null, int? houseId = -1)
+        public async Task<ItemsList<RequestStats>> RequestStats(int? districtId = null, int? houseId = -1, string customPeriodStart =null,
+            string customPeriodEnd = null)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             RestRequest restRequest = new RestRequest(GET_REQUESTS_STATS, Method.GET);
@@ -2580,6 +2581,8 @@ namespace xamarinJKH.Server
             restRequest.AddHeader("acx", Settings.Person.acx);
             restRequest.AddParameter("districtId", districtId);
             restRequest.AddParameter("houseId", houseId);
+            restRequest.AddParameter("customPeriodStart", customPeriodStart);
+            restRequest.AddParameter("customPeriodEnd", customPeriodEnd);
             var response = await restClientMp.ExecuteTaskAsync<ItemsList<RequestStats>>(restRequest);
             // Проверяем статус
             if (response.StatusCode != HttpStatusCode.OK)
