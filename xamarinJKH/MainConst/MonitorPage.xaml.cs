@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
+using FFImageLoading.Svg.Forms;
 using Microsoft.AppCenter.Analytics;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
@@ -31,7 +32,10 @@ namespace xamarinJKH.MainConst
         public int fontSize2 { get; set; }
         public int fontSize3 { get; set; }
         public int StarSize { get; set; }
-        private List<string> period = new List<string>() {AppResources.TodayPeriod, AppResources.WeekPeriod, AppResources.MonthPeriod};
+
+        private List<string> period = new List<string>()
+            {AppResources.TodayPeriod, AppResources.WeekPeriod, AppResources.MonthPeriod};
+
         private Dictionary<string, string> HousesGroup = new Dictionary<string, string>();
         private Dictionary<string, string> Houses = new Dictionary<string, string>();
         private Thickness IconViewNotComplite;
@@ -41,6 +45,7 @@ namespace xamarinJKH.MainConst
         private string street = "";
         public ObservableCollection<NamedValue> Areas { get; set; }
         NamedValue selectedArea;
+
         public NamedValue SelectedArea
         {
             get => selectedArea;
@@ -50,8 +55,10 @@ namespace xamarinJKH.MainConst
                 OnPropertyChanged("SelectedArea");
             }
         }
+
         public ObservableCollection<HouseProfile> Streets { get; set; }
         HouseProfile selectedStreet;
+
         public HouseProfile SelectedStreet
         {
             get => selectedStreet;
@@ -63,6 +70,7 @@ namespace xamarinJKH.MainConst
         }
 
         bool busy;
+
         public bool IsBusy
         {
             get => busy;
@@ -75,7 +83,6 @@ namespace xamarinJKH.MainConst
 
         private async void TechSend(object sender, EventArgs e)
         {
-
             // await PopupNavigation.Instance.PushAsync(new TechDialog(false));
             if (Settings.Person != null && !string.IsNullOrWhiteSpace(Settings.Person.Phone))
             {
@@ -94,14 +101,14 @@ namespace xamarinJKH.MainConst
             Areas = new ObservableCollection<NamedValue>();
             Streets = new ObservableCollection<HouseProfile>();
             NavigationPage.SetHasNavigationBar(this, false);
-            hex = (Color)Application.Current.Resources["MainColor"];
+            hex = (Color) Application.Current.Resources["MainColor"];
             fontSize = 13;
             fontSize2 = 20;
             fontSize3 = 13;
             StarSize = 33;
             IconViewNotComplite = new Thickness(0, 5, 0, 0);
             IconViewPrMargin = new Thickness(0, 5, 0, 0);
-            
+
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
@@ -153,7 +160,7 @@ namespace xamarinJKH.MainConst
             IconViewProfile.GestureRecognizers.Add(profile);
 
             var techSend = new TapGestureRecognizer();
-            techSend.Tapped += TechSend;// async (s, e) => {  await Navigation.PushAsync(new AppPage()); };
+            techSend.Tapped += TechSend; // async (s, e) => {  await Navigation.PushAsync(new AppPage()); };
             LabelTech.GestureRecognizers.Add(techSend);
             var addClick = new TapGestureRecognizer();
             addClick.Tapped += async (s, e) => { await StartStatistick(); };
@@ -188,10 +195,7 @@ namespace xamarinJKH.MainConst
                 _grid = LayoutGrid
             });
             SetText();
-            ChangeTheme = new Command(async () =>
-            {
-                SetAdminName();
-            });
+            ChangeTheme = new Command(async () => { SetAdminName(); });
             MessagingCenter.Subscribe<Object>(this, "ChangeAdminMonitor", (sender) => ChangeTheme.Execute(null));
             BindingContext = this;
             Device.BeginInvokeOnMainThread(async () => await StartStatistick());
@@ -206,16 +210,21 @@ namespace xamarinJKH.MainConst
 
 
         public RestClientMP _server = new RestClientMP();
-
+        private int Ryon = -1;
+        private int HouseID = -1;
         async Task getMonitorStandart(int id, int houseID = -1)
         {
             if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
             {
-                Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
+                Device.BeginInvokeOnMainThread(async () =>
+                    await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                 return;
             }
+
             IsBusy = true;
             ItemsList<RequestStats> result = await _server.RequestStats(id, houseID);
+            Ryon = id;
+            HouseID = houseID;
             IsBusy = false;
             if (result.Error == null)
             {
@@ -238,489 +247,631 @@ namespace xamarinJKH.MainConst
             int i = 0;
             foreach (var each in periodStatses)
             {
-                MaterialFrame container = new MaterialFrame();
-                container.SetAppThemeColor(Frame.BorderColorProperty, (Color)Application.Current.Resources["MainColor"], Color.White);
-                container.Margin = new Thickness(20, 0, 20, 10);
-                container.CornerRadius = 35;
-                container.SetOnAppTheme(Frame.HasShadowProperty, false, true);
-                container.SetOnAppTheme(MaterialFrame.ElevationProperty, 0, 20);
-                container.BackgroundColor = Color.White;
-                container.Padding = new Thickness(0, 0, 0, 25);
-
-                StackLayout stackLayoutFrame = new StackLayout();
-                stackLayoutFrame.Spacing = 0;
-
-                container.Content = stackLayoutFrame;
-
-                MaterialFrame materialFrameTop = new MaterialFrame();
-                materialFrameTop.SetAppThemeColor(Frame.BorderColorProperty, (Color)Application.Current.Resources["MainColor"], Color.White);
-                materialFrameTop.CornerRadius = 35;
-                materialFrameTop.BackgroundColor = Color.White;
-                materialFrameTop.SetOnAppTheme(Frame.HasShadowProperty, false, true);
-                materialFrameTop.SetOnAppTheme(MaterialFrame.ElevationProperty, 0, 20);
-                materialFrameTop.Padding = new Thickness(0, 25, 0, 25);
-
-                stackLayoutFrame.Children.Add(materialFrameTop);
-
-                StackLayout stackLayoutTop = new StackLayout();
-                stackLayoutTop.Orientation = StackOrientation.Horizontal;
-
-                materialFrameTop.Content = stackLayoutTop;
-
-                IconView iconViewTop = new IconView()
-                {
-                    Source = "ic_calendar",
-                    Foreground = hex,
-                    HeightRequest = 30,
-                    Margin = new Thickness(-10, 0, 0, 0),
-                    HorizontalOptions = LayoutOptions.Start,
-                    VerticalOptions = LayoutOptions.Center
-                };
-
-                Label labelTitleTop = new Label()
-                {
-                    Text = period[i],
-                    FontSize = 15,
-                    TextColor = Color.Black,
-                    FontAttributes = FontAttributes.Bold,
-                    Margin = new Thickness(-20, 0, 0, 0),
-                    HorizontalOptions = LayoutOptions.FillAndExpand,
-                    VerticalOptions = LayoutOptions.Center
-                };
-
-                IconView iconViewArrow = new IconView()
-                {
-                    Source = "ic_arrow_up_monitorpng",
-                    HeightRequest = 25,
-                    WidthRequest = 25,
-                    Foreground = hex,
-                    Margin = new Thickness(0, 0, 15, 0),
-                    HorizontalOptions = LayoutOptions.End,
-                    VerticalOptions = LayoutOptions.Center
-                };
-
-
-                stackLayoutTop.Children.Add(iconViewTop);
-                stackLayoutTop.Children.Add(labelTitleTop);
-                stackLayoutTop.Children.Add(iconViewArrow);
-
-                StackLayout stackLayoutBot = new StackLayout()
-                {
-                    Margin = new Thickness(20, 0, 20, 0),
-                    Spacing = 0
-                };
-
-                var colapse = new TapGestureRecognizer();
-                colapse.Tapped += async (s, e) =>
-                {
-                    stackLayoutBot.IsVisible = !stackLayoutBot.IsVisible;
-                    if (stackLayoutBot.IsVisible)
-                    {
-                        iconViewArrow.Source = "ic_arrow_up_monitorpng";
-                        container.Padding = new Thickness(0, 0, 0, 25);
-                        colapseAll(labelTitleTop.Text);
-                    }
-                    else
-                    {
-                        iconViewArrow.Source = "ic_arrow_down_monitor";
-                        container.Padding = 0;
-                    }
-                };
-
-                if (i > 0)
-                {
-                    stackLayoutBot.IsVisible = false;
-                    iconViewArrow.Source = "ic_arrow_down_monitor";
-                    container.Padding = 0;
-                }
-
-                if (!_visibleModels.ContainsKey(period[i]))
-                {
-                    _visibleModels.Add(period[i], new VisibleModel()
-                    {
-                        IconView = iconViewArrow,
-                        _materialFrame = container,
-                        _grid = stackLayoutBot
-                    });
-                }
-                else
-                {
-                    _visibleModels[period[i]] = new VisibleModel()
-                    {
-                        //IconView = IconViewArrow,
-                        _materialFrame = container,
-                        _grid = stackLayoutBot
-                    };
-                }
-
-                materialFrameTop.GestureRecognizers.Add(colapse);
-
-                stackLayoutFrame.Children.Add(stackLayoutBot);
-
-                FormattedString formatted = new FormattedString();
-                formatted.Spans.Add(new Span
-                {
-                    Text = $"{AppResources.RequestsReceived} ",
-                    TextColor = Color.Black
-                });
-                formatted.Spans.Add(new Span
-                {
-                    Text = each.RequestsCount.ToString(),
-                    TextColor = hex,
-                    FontAttributes = FontAttributes.Bold
-                });
-
-                Label labelCountApps = new Label()
-                {
-                    FontSize = 15,
-                    Margin = new Thickness(0, 10, 0, 10),
-                    TextColor = Color.Black,
-                    FontAttributes = FontAttributes.Bold,
-                    HorizontalOptions = LayoutOptions.Center,
-                    FormattedText = formatted
-                };
-
-                Grid grid = new Grid
-                {
-                    RowSpacing = 0,
-                    RowDefinitions =
-                    {
-                        new RowDefinition {Height = new GridLength(1, GridUnitType.Star)},
-                    },
-                    ColumnDefinitions =
-                    {
-                        new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)},
-                        new ColumnDefinition {Width = new GridLength(1, GridUnitType.Absolute)},
-                        new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)},
-                    }
-                };
-
-                StackLayout stackLayoutGridOne = new StackLayout();
-
-                StackLayout stackLayoutNotDoing = new StackLayout()
-                {
-                    Orientation = StackOrientation.Horizontal
-                };
-
-                IconView iconViewDis = new IconView()
-                {
-                    Source = "ic_dislike",
-                    HeightRequest = fontSize2,
-                    WidthRequest = fontSize2,
-                    Foreground = hex,
-                    HorizontalOptions = LayoutOptions.Center
-                };
-
-                Label labelNotDoing = new Label()
-                {
-                    Text = $"{AppResources.FailedReq}:",
-                    FontSize = fontSize3,
-                    TextColor = Color.Black,
-                    VerticalOptions = LayoutOptions.Center,
-                    HorizontalOptions = LayoutOptions.Start
-                };
-
-                StackLayout stackLayoutnotDoingCount = new StackLayout()
-                {
-                    Spacing = 0
-                };
-
-                StackLayout stackLayoutNotDoingContent = new StackLayout()
-                {
-                    Orientation = StackOrientation.Horizontal,
-                    Spacing = 0
-                };
-
-                Label labelCountNotDoing = new Label()
-                {
-                    Text = each.UnperformedRequestsList.Count.ToString(),
-                    TextColor = hex,
-                    FontSize = fontSize,
-                    FontAttributes = FontAttributes.Bold
-                };
-
-                var forwardAppsNot = new TapGestureRecognizer();
-                forwardAppsNot.Tapped += async (s, e) =>
-                {
-                    if (each.UnperformedRequestsList.Count > 0)
-                    {
-                        if (Navigation.NavigationStack.FirstOrDefault(x => x is MonitorAppsPage) == null)
-                            await Navigation.PushAsync(new MonitorAppsPage(each.UnperformedRequestsList));
-                    }
-                };
-
-                stackLayoutNotDoingContent.GestureRecognizers.Add(forwardAppsNot);
-
-
-                IconView iconViewArrowForward = new IconView()
-                {
-                    Source = "ic_arrow_forward",
-                    HeightRequest = IconViewNotCompliteHeightRequest,
-                    WidthRequest = IconViewNotCompliteHeightRequest,
-                    Margin = IconViewNotComplite,
-                    VerticalOptions = LayoutOptions.Center,
-                    Foreground = hex,
-                    HorizontalOptions = LayoutOptions.Center
-                };
-
-                stackLayoutNotDoingContent.Children.Add(labelCountNotDoing);
-                stackLayoutNotDoingContent.Children.Add(iconViewArrowForward);
-
-                Label labelSeparatorNotDoing = new Label()
-                {
-                    HeightRequest = 1,
-                    BackgroundColor = hex,
-                    HorizontalOptions = LayoutOptions.Fill
-                };
-
-                stackLayoutnotDoingCount.Children.Add(stackLayoutNotDoingContent);
-                stackLayoutnotDoingCount.Children.Add(labelSeparatorNotDoing);
-
-
-                stackLayoutNotDoing.Children.Add(iconViewDis);
-                stackLayoutNotDoing.Children.Add(labelNotDoing);
-                stackLayoutNotDoing.Children.Add(stackLayoutnotDoingCount);
-
-                stackLayoutGridOne.Children.Add(stackLayoutNotDoing);
-
-                Label separatorVertical = new Label()
-                {
-                    WidthRequest = 1,
-                    BackgroundColor = Color.FromHex("#878787"),
-                    HorizontalOptions = LayoutOptions.CenterAndExpand,
-                    VerticalOptions = LayoutOptions.FillAndExpand
-                };
-
-                StackLayout stackLayoutUnperformed = new StackLayout()
-                {
-                    Orientation = StackOrientation.Horizontal,
-                    VerticalOptions = LayoutOptions.Start
-                };
-
-                IconView iconViewUnperformed = new IconView()
-                {
-                    Source = "ic_time",
-                    HeightRequest = fontSize2,
-                    WidthRequest = fontSize2,
-                    Foreground = hex,
-                    HorizontalOptions = LayoutOptions.Center
-                };
-                Label labelUnperformed = new Label()
-                {
-                    Text = AppResources.Overdue,
-                    FontSize = fontSize3,
-                    TextColor = Color.Black,
-                    VerticalOptions = LayoutOptions.Center,
-                    HorizontalOptions = LayoutOptions.Start
-                };
-
-                StackLayout stackLayoutUnperformedCount = new StackLayout()
-                {
-                    Spacing = 0,
-                    VerticalOptions = LayoutOptions.Center
-                };
-
-                StackLayout stackLayoutUnperformedContent = new StackLayout()
-                {
-                    Orientation = StackOrientation.Horizontal,
-                    Spacing = 0
-                };
-
-                Label labelCountUnperformed = new Label()
-                {
-                    Text = each.OverdueRequestsList.Count.ToString(),
-                    TextColor = hex,
-                    FontSize = fontSize,
-                    FontAttributes = FontAttributes.Bold
-                };
-                IconView iconViewUnperformedArrowForward = new IconView()
-                {
-                    Source = "ic_arrow_forward",
-                    HeightRequest = IconViewPrHeightRequest,
-                    WidthRequest = IconViewPrHeightRequest,
-                    Margin = IconViewPrMargin,
-                    VerticalOptions = LayoutOptions.Start,
-                    Foreground = hex,
-                    HorizontalOptions = LayoutOptions.Center
-                };
-
-                var forwardAppsUnper = new TapGestureRecognizer();
-                forwardAppsUnper.Tapped += async (s, e) =>
-                {
-                    if (each.OverdueRequestsList.Count > 0)
-
-                        if (Navigation.NavigationStack.FirstOrDefault(x => x is MonitorAppsPage) == null)
-                            await Navigation.PushAsync(new MonitorAppsPage(each.OverdueRequestsList));
-                };
-
-                stackLayoutUnperformedCount.GestureRecognizers.Add(forwardAppsUnper);
-
-                stackLayoutUnperformedContent.Children.Add(labelCountUnperformed);
-                stackLayoutUnperformedContent.Children.Add(iconViewUnperformedArrowForward);
-
-                Label labelSeparatorUnperformed = new Label()
-                {
-                    HeightRequest = 1,
-                    BackgroundColor = hex,
-                    HorizontalOptions = LayoutOptions.Fill
-                };
-
-                stackLayoutUnperformedCount.Children.Add(stackLayoutUnperformedContent);
-                stackLayoutUnperformedCount.Children.Add(labelSeparatorUnperformed);
-
-                stackLayoutUnperformed.Children.Add(iconViewUnperformed);
-                stackLayoutUnperformed.Children.Add(labelUnperformed);
-                stackLayoutUnperformed.Children.Add(stackLayoutUnperformedCount);
-
-                grid.Children.Add(stackLayoutGridOne, 0, 0);
-                grid.Children.Add(separatorVertical, 1, 0);
-                grid.Children.Add(stackLayoutUnperformed, 2, 0);
-
-                setCustumerXaml(ref grid, each);
-
-                Label separatorHorizontal = new Label()
-                {
-                    HeightRequest = 1,
-                    Margin = new Thickness(0, 10, 0, 0),
-                    HorizontalOptions = LayoutOptions.FillAndExpand,
-                    BackgroundColor = Color.FromHex("#878787")
-                };
-
-                StackLayout stackLayoutStar = new StackLayout()
-                {
-                    Orientation = StackOrientation.Horizontal
-                };
-
-                StackLayout stackLayoutPoint = new StackLayout()
-                {
-                    HorizontalOptions = LayoutOptions.StartAndExpand,
-                    VerticalOptions = LayoutOptions.Center,
-                    Orientation = StackOrientation.Vertical
-                };
-
-                Label labelTitlePoint = new Label()
-                {
-                    Text = $"{AppResources.Marks}:",
-                    FontSize = fontSize,
-                    FontAttributes = FontAttributes.Bold,
-                    TextColor = Color.Black
-                };
-                stackLayoutPoint.Children.Add(labelTitlePoint);
-
-                StackLayout stackLayoutStarItems = new StackLayout()
-                {
-                    Spacing = 5,
-                    HorizontalOptions = LayoutOptions.EndAndExpand,
-                    VerticalOptions = LayoutOptions.Center,
-                    Orientation = StackOrientation.Horizontal
-                };
-
-                int[] points = new[]
-                {
-                    each.ClosedRequestsWithMark1Count,
-                    each.ClosedRequestsWithMark2Count,
-                    each.ClosedRequestsWithMark3Count,
-                    each.ClosedRequestsWithMark4Count,
-                    each.ClosedRequestsWithMark5Count
-                };
-
-                for (int j = 0; j < points.Length; j++)
-                {
-                    StackLayout stackLayoutStarItem = new StackLayout()
-                    {
-                        Spacing = -10
-                    };
-                    var forwardStar = new TapGestureRecognizer();
-                    List<Requests> requests = getRequestsStar(each, j);
-                    forwardStar.Tapped += async (s, e) =>
-                    {
-                        if (requests.Count > 0)
-                        {
-                            if (Navigation.NavigationStack.FirstOrDefault(x => x is MonitorAppsPage) == null)
-                                await Navigation.PushAsync(new MonitorAppsPage(requests));
-                        }
-                    };
-
-                    stackLayoutStarItem.GestureRecognizers.Add(forwardStar);
-                    Frame frameStarContainer = new Frame()
-                    {
-                        Padding = 0,
-                        CornerRadius = 0,
-                        HasShadow = false,
-                        BackgroundColor = Color.Transparent,
-                        IsClippedToBounds = true
-                    };
-
-                    Grid gridContentStar = new Grid()
-                    {
-                        HeightRequest = 50,
-                        IsClippedToBounds = true
-                    };
-
-                    IconView iconViewStar = new IconView()
-                    {
-                        Source = "ic_star",
-                        HeightRequest = StarSize,
-                        WidthRequest = StarSize,
-                        Foreground = hex,
-                        VerticalOptions = LayoutOptions.Center
-                    };
-
-                    Frame frameContentStar = new Frame()
-                    {
-                        Margin = 0,
-                        Padding = 0,
-                        CornerRadius = 5,
-                        BackgroundColor = Color.Transparent,
-                        HasShadow = false,
-                        IsClippedToBounds = true
-                    };
-
-                    Label labelTextStar = new Label()
-                    {
-                        Text = points[j].ToString(),
-                        FontSize = fontSize,
-                        HorizontalOptions = LayoutOptions.Center,
-                        Margin = 0,
-                        VerticalOptions = LayoutOptions.Center,
-                        TextColor = Color.White
-                    };
-
-                    frameContentStar.Content = labelTextStar;
-
-                    gridContentStar.Children.Add(iconViewStar);
-                    gridContentStar.Children.Add(frameContentStar);
-
-                    frameStarContainer.Content = gridContentStar;
-
-                    Label labelNumberPoints = new Label()
-                    {
-                        Text = (j + 1).ToString(),
-                        FontSize = fontSize,
-                        TextColor = Color.FromHex("#878787"),
-                        HorizontalOptions = LayoutOptions.Center
-                    };
-
-                    stackLayoutStarItem.Children.Add(frameStarContainer);
-                    stackLayoutStarItem.Children.Add(labelNumberPoints);
-
-
-                    stackLayoutStarItems.Children.Add(stackLayoutStarItem);
-                }
-
-
-                stackLayoutStar.Children.Add(stackLayoutPoint);
-                stackLayoutStar.Children.Add(stackLayoutStarItems);
-
-                stackLayoutBot.Children.Add(labelCountApps);
-                stackLayoutBot.Children.Add(grid);
-                stackLayoutBot.Children.Add(separatorHorizontal);
-                stackLayoutBot.Children.Add(stackLayoutStar);
-
+                var container = AddMonitorPeriod(i, each, DateTime.Now);
 
                 i++;
                 LayoutContent.Children.Add(container);
             }
+        }
+
+        private StackLayout AddCalendar(int period, DateTime isReplace)
+        {
+            StackLayout container = new StackLayout
+            {
+                HorizontalOptions = LayoutOptions.StartAndExpand,
+                VerticalOptions = LayoutOptions.Center,
+                Spacing = 0
+            };
+
+
+            StackLayout dateCont = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal
+            };
+            BorderlessDatePicker datePicker = new BorderlessDatePicker
+            {
+                IsVisible = false,
+                Format = "dd.MM.yyyy",
+                FontSize = 16,
+                HorizontalOptions = LayoutOptions.Center,
+                TextColor = hex
+            };
+            Label lableDate = new Label
+            {
+                FontSize = 16,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.End,
+                TextColor = hex
+            };
+            string text = isReplace.ToString("dd.MM.yyyy");
+            switch (period)
+            {
+                case 0:
+                    datePicker.MaximumDate = DateTime.Now;
+                    datePicker.DateSelected += async (sender, args) =>
+                    {
+                        // lableDate.Text = datePicker.Date.ToString("dd.MM.yyyy");
+                        ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID, 
+                            datePicker.Date.ToString("dd.MM.yyyy"),datePicker.Date.ToString("dd.MM.yyyy"));
+                        if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
+                        {
+                            var container = AddMonitorPeriod(0, result.Data[0].CustomPeriod, datePicker.Date);
+                            if (LayoutContent != null && LayoutContent.Children.Count > 0)
+                                LayoutContent.Children[0] = container;
+                            colapseAllByName(this.period[0]);
+                            colapseAll(this.period[0]);
+                        }
+
+                    }; 
+                    break;
+                case 1:
+                    DateTime dateMonday = isReplace.AddDays((DateTime.Now.DayOfWeek.GetHashCode() - 1) * -1).Date;
+                    DateTime dateSunday = isReplace.AddDays(7 - DateTime.Now.DayOfWeek.GetHashCode()).Date;
+                    text = dateMonday.ToString("dd.MM") + "-" + dateSunday.ToString("dd.MM.yyyy");
+                    datePicker.DateSelected += async (sender, args) =>
+                    {
+                        DateTime dateMonday = datePicker.Date.AddDays((datePicker.Date.DayOfWeek.GetHashCode() - 1) * -1).Date;
+                        DateTime dateSunday = datePicker.Date.AddDays(7 - datePicker.Date.DayOfWeek.GetHashCode()).Date;
+                        // lableDate.Text = dateMonday.ToString("dd.MM") + "-" + dateSunday.ToString("dd.MM.yyyy");
+                        ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID, 
+                            dateMonday.ToString("dd.MM.yyyy"),dateSunday.ToString("dd.MM.yyyy"));
+                        if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
+                        {
+                            var container = AddMonitorPeriod(1, result.Data[0].CustomPeriod, datePicker.Date);
+                            if (LayoutContent != null && LayoutContent.Children.Count > 0)
+                                LayoutContent.Children[1] = container;
+                            colapseAllByName(this.period[1]);
+                            colapseAll(this.period[1]);
+                        }
+                    }; 
+                    break;
+                case 2:
+                    string s = isReplace.ToString("MMMM yyyy");
+                    text = FirstLetterToUpper(s);
+                    datePicker.MaximumDate = DateTime.Now;
+                    datePicker.DateSelected += async (sender, args) =>
+                    {
+                        // lableDate.Text = datePicker.Date.ToString("MMMM yyyy");
+                        DateTime now = datePicker.Date;
+                        var startDate = new DateTime(now.Year, now.Month, 1);
+                        var endDate = startDate.AddMonths(1).AddDays(-1);
+                        ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID, 
+                            startDate.ToString("dd.MM.yyyy"),endDate.ToString("dd.MM.yyyy"));
+                        if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
+                        {
+                            var container = AddMonitorPeriod(2, result.Data[0].CustomPeriod, datePicker.Date);
+                            if (LayoutContent != null && LayoutContent.Children.Count > 0)
+                                LayoutContent.Children[2] = container;
+                            colapseAllByName(this.period[2]);
+                            colapseAll(this.period[2]);
+                        }
+                    }; 
+                    break;
+            }
+            lableDate.Text = text;
+
+           
+            SvgCachedImage arrow = new SvgCachedImage
+            {
+                Source = "resource://xamarinJKH.Resources.ic_arrow_forward.svg",
+                HeightRequest = 12,
+                Rotation = 90,
+                Margin = new Thickness(0, 5, 0, 0),
+                HorizontalOptions = LayoutOptions.Start,
+                VerticalOptions = LayoutOptions.Center,
+                ReplaceStringMap = new Dictionary<string, string> {{"#000000", $"#{Settings.MobileSettings.color}"}}
+            };
+
+            Label splitLine = new Label
+            {
+                HeightRequest = 1,
+                BackgroundColor = hex,
+                HorizontalOptions = LayoutOptions.Fill
+            };
+
+            var openPicker = new TapGestureRecognizer();
+            openPicker.Tapped += async (s, e) => { Device.BeginInvokeOnMainThread(async () => datePicker.Focus()); };
+            container.GestureRecognizers.Add(openPicker);
+
+            dateCont.Children.Add(datePicker);
+            dateCont.Children.Add(lableDate);
+            dateCont.Children.Add(arrow);
+
+            container.Children.Add(dateCont);
+            container.Children.Add(splitLine);
+
+            return container;
+        }
+        public static string FirstLetterToUpper(string str)
+        {
+            if (str.Length > 0) { return Char.ToUpper(str[0]) + str.Substring(1); }
+            return "";
+        }
+        private MaterialFrame AddMonitorPeriod(int i, PeriodStats each, DateTime dateTitle)
+        {
+            MaterialFrame container = new MaterialFrame();
+            container.SetAppThemeColor(Frame.BorderColorProperty, (Color) Application.Current.Resources["MainColor"],
+                Color.White);
+            container.Margin = new Thickness(20, 0, 20, 10);
+            container.CornerRadius = 35;
+            container.SetOnAppTheme(Frame.HasShadowProperty, false, true);
+            container.SetOnAppTheme(CustomRenderers.MaterialFrame.ElevationProperty, 0, 20);
+            container.BackgroundColor = Color.White;
+            container.Padding = new Thickness(0, 0, 0, 25);
+
+            StackLayout stackLayoutFrame = new StackLayout();
+            stackLayoutFrame.Spacing = 0;
+
+            container.Content = stackLayoutFrame;
+
+            MaterialFrame materialFrameTop = new MaterialFrame();
+            materialFrameTop.SetAppThemeColor(Frame.BorderColorProperty,
+                (Color) Application.Current.Resources["MainColor"],
+                Color.White);
+            materialFrameTop.CornerRadius = 35;
+            materialFrameTop.BackgroundColor = Color.White;
+            materialFrameTop.SetOnAppTheme(Frame.HasShadowProperty, false, true);
+            materialFrameTop.SetOnAppTheme(CustomRenderers.MaterialFrame.ElevationProperty, 0, 20);
+            materialFrameTop.Padding = new Thickness(0, 25, 0, 25);
+
+            stackLayoutFrame.Children.Add(materialFrameTop);
+
+            StackLayout stackLayoutTop = new StackLayout();
+            stackLayoutTop.Orientation = StackOrientation.Horizontal;
+
+            materialFrameTop.Content = stackLayoutTop;
+
+            IconView iconViewTop = new IconView()
+            {
+                Source = "ic_calendar",
+                Foreground = hex,
+                HeightRequest = 30,
+                Margin = new Thickness(-10, 0, 0, 0),
+                HorizontalOptions = LayoutOptions.Start,
+                VerticalOptions = LayoutOptions.Center
+            };
+
+            Label labelTitleTop = new Label()
+            {
+                Text = period[i],
+                FontSize = 15,
+                TextColor = Color.Black,
+                FontAttributes = FontAttributes.Bold,
+                Margin = new Thickness(-20, 0, 0, 0),
+                HorizontalOptions = LayoutOptions.Fill,
+                VerticalOptions = LayoutOptions.Center
+            };
+
+            IconView iconViewArrow = new IconView()
+            {
+                Source = "ic_arrow_up_monitorpng",
+                HeightRequest = 25,
+                WidthRequest = 25,
+                Foreground = hex,
+                Margin = new Thickness(0, 0, 15, 0),
+                HorizontalOptions = LayoutOptions.End,
+                VerticalOptions = LayoutOptions.Center
+            };
+
+
+            stackLayoutTop.Children.Add(iconViewTop);
+            stackLayoutTop.Children.Add(labelTitleTop);
+            stackLayoutTop.Children.Add(AddCalendar(i, dateTitle));
+            stackLayoutTop.Children.Add(iconViewArrow);
+
+            StackLayout stackLayoutBot = new StackLayout()
+            {
+                Margin = new Thickness(20, 0, 20, 0),
+                Spacing = 0
+            };
+
+            var colapse = new TapGestureRecognizer();
+            colapse.Tapped += async (s, e) =>
+            {
+                stackLayoutBot.IsVisible = !stackLayoutBot.IsVisible;
+                if (stackLayoutBot.IsVisible)
+                {
+                    iconViewArrow.Source = "ic_arrow_up_monitorpng";
+                    container.Padding = new Thickness(0, 0, 0, 25);
+                    colapseAll(labelTitleTop.Text);
+                }
+                else
+                {
+                    iconViewArrow.Source = "ic_arrow_down_monitor";
+                    container.Padding = 0;
+                }
+            };
+
+            if (i > 0)
+            {
+                stackLayoutBot.IsVisible = false;
+                iconViewArrow.Source = "ic_arrow_down_monitor";
+                container.Padding = 0;
+            }
+
+            if (!_visibleModels.ContainsKey(period[i]))
+            {
+                _visibleModels.Add(period[i], new VisibleModel()
+                {
+                    IconView = iconViewArrow,
+                    _materialFrame = container,
+                    _grid = stackLayoutBot
+                });
+            }
+            else
+            {
+                _visibleModels[period[i]] = new VisibleModel()
+                {
+                    //IconView = IconViewArrow,
+                    _materialFrame = container,
+                    _grid = stackLayoutBot
+                };
+            }
+
+            materialFrameTop.GestureRecognizers.Add(colapse);
+
+            stackLayoutFrame.Children.Add(stackLayoutBot);
+
+            FormattedString formatted = new FormattedString();
+            formatted.Spans.Add(new Span
+            {
+                Text = $"{AppResources.RequestsReceived} ",
+                TextColor = Color.Black
+            });
+            formatted.Spans.Add(new Span
+            {
+                Text = each.RequestsCount.ToString(),
+                TextColor = hex,
+                FontAttributes = FontAttributes.Bold
+            });
+
+            Label labelCountApps = new Label()
+            {
+                FontSize = 15,
+                Margin = new Thickness(0, 10, 0, 10),
+                TextColor = Color.Black,
+                FontAttributes = FontAttributes.Bold,
+                HorizontalOptions = LayoutOptions.Center,
+                FormattedText = formatted
+            };
+
+            Grid grid = new Grid
+            {
+                RowSpacing = 0,
+                RowDefinitions =
+                {
+                    new RowDefinition {Height = new GridLength(1, GridUnitType.Star)},
+                },
+                ColumnDefinitions =
+                {
+                    new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition {Width = new GridLength(1, GridUnitType.Absolute)},
+                    new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)},
+                }
+            };
+
+            StackLayout stackLayoutGridOne = new StackLayout();
+
+            StackLayout stackLayoutNotDoing = new StackLayout()
+            {
+                Orientation = StackOrientation.Horizontal
+            };
+
+            IconView iconViewDis = new IconView()
+            {
+                Source = "ic_dislike",
+                HeightRequest = fontSize2,
+                WidthRequest = fontSize2,
+                Foreground = hex,
+                HorizontalOptions = LayoutOptions.Center
+            };
+
+            Label labelNotDoing = new Label()
+            {
+                Text = $"{AppResources.FailedReq}:",
+                FontSize = fontSize3,
+                TextColor = Color.Black,
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Start
+            };
+
+            StackLayout stackLayoutnotDoingCount = new StackLayout()
+            {
+                Spacing = 0
+            };
+
+            StackLayout stackLayoutNotDoingContent = new StackLayout()
+            {
+                Orientation = StackOrientation.Horizontal,
+                Spacing = 0
+            };
+
+            Label labelCountNotDoing = new Label()
+            {
+                Text = each.UnperformedRequestsList.Count.ToString(),
+                TextColor = hex,
+                FontSize = fontSize,
+                FontAttributes = FontAttributes.Bold
+            };
+
+            var forwardAppsNot = new TapGestureRecognizer();
+            forwardAppsNot.Tapped += async (s, e) =>
+            {
+                if (each.UnperformedRequestsList.Count > 0)
+                {
+                    if (Navigation.NavigationStack.FirstOrDefault(x => x is MonitorAppsPage) == null)
+                        await Navigation.PushAsync(new MonitorAppsPage(each.UnperformedRequestsList));
+                }
+            };
+
+            stackLayoutNotDoingContent.GestureRecognizers.Add(forwardAppsNot);
+
+
+            IconView iconViewArrowForward = new IconView()
+            {
+                Source = "ic_arrow_forward",
+                HeightRequest = IconViewNotCompliteHeightRequest,
+                WidthRequest = IconViewNotCompliteHeightRequest,
+                Margin = IconViewNotComplite,
+                VerticalOptions = LayoutOptions.Center,
+                Foreground = hex,
+                HorizontalOptions = LayoutOptions.Center
+            };
+
+            stackLayoutNotDoingContent.Children.Add(labelCountNotDoing);
+            stackLayoutNotDoingContent.Children.Add(iconViewArrowForward);
+
+            Label labelSeparatorNotDoing = new Label()
+            {
+                HeightRequest = 1,
+                BackgroundColor = hex,
+                HorizontalOptions = LayoutOptions.Fill
+            };
+
+            stackLayoutnotDoingCount.Children.Add(stackLayoutNotDoingContent);
+            stackLayoutnotDoingCount.Children.Add(labelSeparatorNotDoing);
+
+
+            stackLayoutNotDoing.Children.Add(iconViewDis);
+            stackLayoutNotDoing.Children.Add(labelNotDoing);
+            stackLayoutNotDoing.Children.Add(stackLayoutnotDoingCount);
+
+            stackLayoutGridOne.Children.Add(stackLayoutNotDoing);
+
+            Label separatorVertical = new Label()
+            {
+                WidthRequest = 1,
+                BackgroundColor = Color.FromHex("#878787"),
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+
+            StackLayout stackLayoutUnperformed = new StackLayout()
+            {
+                Orientation = StackOrientation.Horizontal,
+                VerticalOptions = LayoutOptions.Start
+            };
+
+            IconView iconViewUnperformed = new IconView()
+            {
+                Source = "ic_time",
+                HeightRequest = fontSize2,
+                WidthRequest = fontSize2,
+                Foreground = hex,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            Label labelUnperformed = new Label()
+            {
+                Text = AppResources.Overdue,
+                FontSize = fontSize3,
+                TextColor = Color.Black,
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Start
+            };
+
+            StackLayout stackLayoutUnperformedCount = new StackLayout()
+            {
+                Spacing = 0,
+                VerticalOptions = LayoutOptions.Center
+            };
+
+            StackLayout stackLayoutUnperformedContent = new StackLayout()
+            {
+                Orientation = StackOrientation.Horizontal,
+                Spacing = 0
+            };
+
+            Label labelCountUnperformed = new Label()
+            {
+                Text = each.OverdueRequestsList.Count.ToString(),
+                TextColor = hex,
+                FontSize = fontSize,
+                FontAttributes = FontAttributes.Bold
+            };
+            IconView iconViewUnperformedArrowForward = new IconView()
+            {
+                Source = "ic_arrow_forward",
+                HeightRequest = IconViewPrHeightRequest,
+                WidthRequest = IconViewPrHeightRequest,
+                Margin = IconViewPrMargin,
+                VerticalOptions = LayoutOptions.Start,
+                Foreground = hex,
+                HorizontalOptions = LayoutOptions.Center
+            };
+
+            var forwardAppsUnper = new TapGestureRecognizer();
+            forwardAppsUnper.Tapped += async (s, e) =>
+            {
+                if (each.OverdueRequestsList.Count > 0)
+
+                    if (Navigation.NavigationStack.FirstOrDefault(x => x is MonitorAppsPage) == null)
+                        await Navigation.PushAsync(new MonitorAppsPage(each.OverdueRequestsList));
+            };
+
+            stackLayoutUnperformedCount.GestureRecognizers.Add(forwardAppsUnper);
+
+            stackLayoutUnperformedContent.Children.Add(labelCountUnperformed);
+            stackLayoutUnperformedContent.Children.Add(iconViewUnperformedArrowForward);
+
+            Label labelSeparatorUnperformed = new Label()
+            {
+                HeightRequest = 1,
+                BackgroundColor = hex,
+                HorizontalOptions = LayoutOptions.Fill
+            };
+
+            stackLayoutUnperformedCount.Children.Add(stackLayoutUnperformedContent);
+            stackLayoutUnperformedCount.Children.Add(labelSeparatorUnperformed);
+
+            stackLayoutUnperformed.Children.Add(iconViewUnperformed);
+            stackLayoutUnperformed.Children.Add(labelUnperformed);
+            stackLayoutUnperformed.Children.Add(stackLayoutUnperformedCount);
+
+            grid.Children.Add(stackLayoutGridOne, 0, 0);
+            grid.Children.Add(separatorVertical, 1, 0);
+            grid.Children.Add(stackLayoutUnperformed, 2, 0);
+
+            setCustumerXaml(ref grid, each);
+
+            Label separatorHorizontal = new Label()
+            {
+                HeightRequest = 1,
+                Margin = new Thickness(0, 10, 0, 0),
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                BackgroundColor = Color.FromHex("#878787")
+            };
+
+            StackLayout stackLayoutStar = new StackLayout()
+            {
+                Orientation = StackOrientation.Horizontal
+            };
+
+            StackLayout stackLayoutPoint = new StackLayout()
+            {
+                HorizontalOptions = LayoutOptions.StartAndExpand,
+                VerticalOptions = LayoutOptions.Center,
+                Orientation = StackOrientation.Vertical
+            };
+
+            Label labelTitlePoint = new Label()
+            {
+                Text = $"{AppResources.Marks}:",
+                FontSize = fontSize,
+                FontAttributes = FontAttributes.Bold,
+                TextColor = Color.Black
+            };
+            stackLayoutPoint.Children.Add(labelTitlePoint);
+
+            StackLayout stackLayoutStarItems = new StackLayout()
+            {
+                Spacing = 5,
+                HorizontalOptions = LayoutOptions.EndAndExpand,
+                VerticalOptions = LayoutOptions.Center,
+                Orientation = StackOrientation.Horizontal
+            };
+
+            int[] points = new[]
+            {
+                each.ClosedRequestsWithMark1Count,
+                each.ClosedRequestsWithMark2Count,
+                each.ClosedRequestsWithMark3Count,
+                each.ClosedRequestsWithMark4Count,
+                each.ClosedRequestsWithMark5Count
+            };
+
+            for (int j = 0; j < points.Length; j++)
+            {
+                StackLayout stackLayoutStarItem = new StackLayout()
+                {
+                    Spacing = -10
+                };
+                var forwardStar = new TapGestureRecognizer();
+                List<Requests> requests = getRequestsStar(each, j);
+                forwardStar.Tapped += async (s, e) =>
+                {
+                    if (requests.Count > 0)
+                    {
+                        if (Navigation.NavigationStack.FirstOrDefault(x => x is MonitorAppsPage) == null)
+                            await Navigation.PushAsync(new MonitorAppsPage(requests));
+                    }
+                };
+
+                stackLayoutStarItem.GestureRecognizers.Add(forwardStar);
+                Frame frameStarContainer = new Frame()
+                {
+                    Padding = 0,
+                    CornerRadius = 0,
+                    HasShadow = false,
+                    BackgroundColor = Color.Transparent,
+                    IsClippedToBounds = true
+                };
+
+                Grid gridContentStar = new Grid()
+                {
+                    HeightRequest = 50,
+                    IsClippedToBounds = true
+                };
+
+                IconView iconViewStar = new IconView()
+                {
+                    Source = "ic_star",
+                    HeightRequest = StarSize,
+                    WidthRequest = StarSize,
+                    Foreground = hex,
+                    VerticalOptions = LayoutOptions.Center
+                };
+
+                Frame frameContentStar = new Frame()
+                {
+                    Margin = 0,
+                    Padding = 0,
+                    CornerRadius = 5,
+                    BackgroundColor = Color.Transparent,
+                    HasShadow = false,
+                    IsClippedToBounds = true
+                };
+
+                Label labelTextStar = new Label()
+                {
+                    Text = points[j].ToString(),
+                    FontSize = fontSize,
+                    HorizontalOptions = LayoutOptions.Center,
+                    Margin = 0,
+                    VerticalOptions = LayoutOptions.Center,
+                    TextColor = Color.White
+                };
+
+                frameContentStar.Content = labelTextStar;
+
+                gridContentStar.Children.Add(iconViewStar);
+                gridContentStar.Children.Add(frameContentStar);
+
+                frameStarContainer.Content = gridContentStar;
+
+                Label labelNumberPoints = new Label()
+                {
+                    Text = (j + 1).ToString(),
+                    FontSize = fontSize,
+                    TextColor = Color.FromHex("#878787"),
+                    HorizontalOptions = LayoutOptions.Center
+                };
+
+                stackLayoutStarItem.Children.Add(frameStarContainer);
+                stackLayoutStarItem.Children.Add(labelNumberPoints);
+
+
+                stackLayoutStarItems.Children.Add(stackLayoutStarItem);
+            }
+
+
+            stackLayoutStar.Children.Add(stackLayoutPoint);
+            stackLayoutStar.Children.Add(stackLayoutStarItems);
+
+            stackLayoutBot.Children.Add(labelCountApps);
+            stackLayoutBot.Children.Add(grid);
+            stackLayoutBot.Children.Add(separatorHorizontal);
+            stackLayoutBot.Children.Add(stackLayoutStar);
+            return container;
         }
 
         List<Requests> getRequestsStar(PeriodStats stats, int i)
@@ -764,7 +915,9 @@ namespace xamarinJKH.MainConst
             try
             {
                 if (_visibleModels != null)
-                    foreach (var each in _visibleModels.Where(each => !string.IsNullOrEmpty(each.Key) && each.Value != null).Where(each => !each.Key.Equals(name) && each.Value._grid.IsVisible))
+                    foreach (var each in _visibleModels
+                        .Where(each => !string.IsNullOrEmpty(each.Key) && each.Value != null)
+                        .Where(each => !each.Key.Equals(name) && each.Value._grid.IsVisible))
                     {
                         each.Value._grid.IsVisible = false;
                         each.Value._materialFrame.Padding = 0;
@@ -775,16 +928,36 @@ namespace xamarinJKH.MainConst
             {
                 Console.WriteLine(e);
             }
-           
+        }
+        void colapseAllByName(string name)
+        {
+            try
+            {
+                if (_visibleModels != null)
+                    foreach (var each in _visibleModels
+                        .Where(each => !string.IsNullOrEmpty(each.Key) && each.Value != null)
+                        .Where(each => each.Key.Equals(name)))
+                    {
+                        each.Value._grid.IsVisible = true;
+                        each.Value._materialFrame.Padding = new Thickness(0,0,0,10);
+                        each.Value.IconView.Source = "ic_arrow_forward";
+                    }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         async Task getHouseGroups()
         {
             if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
             {
-                Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
+                Device.BeginInvokeOnMainThread(async () =>
+                    await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                 return;
             }
+
             IsBusy = true;
             ItemsList<NamedValue> groups = await _server.GetHouseGroups();
             IsBusy = false;
@@ -797,6 +970,7 @@ namespace xamarinJKH.MainConst
                     {
                         Areas.Add(group);
                     }
+
                     SelectedArea = Areas[0];
 
                     setListGroups(groups, ref param);
@@ -806,8 +980,8 @@ namespace xamarinJKH.MainConst
                     street = SelectedArea.Name;
                     await getMonitorStandart(Int32.Parse(HousesGroup[SelectedArea.Name]));
                 });
-                
-                
+
+
                 return;
                 var action = await DisplayActionSheet(AppResources.AreaChoose, AppResources.Cancel, null, param);
                 if (action != null && !action.Equals(AppResources.Cancel))
@@ -821,7 +995,7 @@ namespace xamarinJKH.MainConst
             }
             else
             {
-               await DisplayAlert(AppResources.ErrorTitle, groups.Error, "OK");
+                await DisplayAlert(AppResources.ErrorTitle, groups.Error, "OK");
             }
         }
 
@@ -829,13 +1003,15 @@ namespace xamarinJKH.MainConst
         {
             if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
             {
-                Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
+                Device.BeginInvokeOnMainThread(async () =>
+                    await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                 return;
             }
+
             IsBusy = true;
             ItemsList<HouseProfile> groups = await _server.GetHouse();
             IsBusy = false;
-            
+
             if (groups.Error == null)
             {
                 Device.BeginInvokeOnMainThread(async () =>
@@ -846,6 +1022,7 @@ namespace xamarinJKH.MainConst
                         if (!string.IsNullOrEmpty(group.Address))
                             Streets.Add(group);
                     }
+
                     SelectedStreet = Streets[0];
                     StreetsCollection.ScrollTo(SelectedStreet);
                     string[] param = null;
@@ -1163,6 +1340,7 @@ namespace xamarinJKH.MainConst
         }
 
         public Command ChangeTheme { get; set; }
+
         void SetText()
         {
             UkName.Text = Settings.MobileSettings.main_name;
@@ -1182,7 +1360,7 @@ namespace xamarinJKH.MainConst
             OSAppTheme currentTheme = Application.Current.RequestedTheme;
             //if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
             //    currentTheme = OSAppTheme.Dark;
-            
+
             formatted.Spans.Add(new Span
             {
                 Text = Settings.Person.FIO + ", ",
@@ -1205,13 +1383,14 @@ namespace xamarinJKH.MainConst
             selectedStreet = this.SelectedStreet;
 
             if (this.Areas != null)
-            foreach (var area in this.Areas)
-            {
-                area.Selected = true;
-                area.Selected = false;
-            }
+                foreach (var area in this.Areas)
+                {
+                    area.Selected = true;
+                    area.Selected = false;
+                }
+
             if (SelectedArea != null)
-            SelectedArea.Selected = true;
+                SelectedArea.Selected = true;
 
             if (this.Streets != null)
             {
@@ -1220,6 +1399,7 @@ namespace xamarinJKH.MainConst
                     street.Selected = true;
                     street.Selected = false;
                 }
+
                 if (SelectedStreet != null)
                     SelectedStreet.Selected = true;
             }
@@ -1247,15 +1427,17 @@ namespace xamarinJKH.MainConst
                         {
                             area.Selected = false;
                         }
+
                         selection.Selected = true;
                     }
-                (sender as CollectionView).ScrollTo(selection);
+
+                    (sender as CollectionView).ScrollTo(selection);
                     await getHouse();
                 });
-                
             }
-            catch { }
-            
+            catch
+            {
+            }
         }
 
         private async void StreetCollectionSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1275,19 +1457,20 @@ namespace xamarinJKH.MainConst
                             {
                                 street.Selected = false;
                             }
+
                             selection.Selected = true;
                         }
+
                         LayoutContent.Children.Clear();
                         MaterialFrameNotDoingContainer.IsVisible = false;
                         //LabelHouse.Text = action;
                         await getMonitorStandart(-1, Int32.Parse(Houses[action]));
-
                     }
                 });
-                
             }
-            catch { }
-            
+            catch
+            {
+            }
         }
     }
 }
