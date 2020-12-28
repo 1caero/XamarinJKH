@@ -7,11 +7,24 @@
             xmlns:mainConst="clr-namespace:xamarinJKH.MainConst;assembly=xamarinJKH"
             xmlns:xamarinZkh="clr-namespace:xamarinJKH"
             xmlns:pushNotification="clr-namespace:xamarinJKH.PushNotification;assembly=xamarinJKH"
+            xmlns:badge="clr-namespace:Plugin.Badge.Abstractions;assembly=Plugin.Badge.Abstractions"
+            xmlns:converters="clr-namespace:xamarinJKH.Converters"
             BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
             android:TabbedPage.IsSwipePagingEnabled="False"
             android:TabbedPage.ToolbarPlacement="Bottom"
             x:Class="xamarinJKH.MainConst.BottomNavigationConstPage">
-    <NavigationPage x:Name="appNavBar" Title="{x:Static xamarinZkh:AppResources.App_NavBar}" IconImageSource="ic_apps" BarBackgroundColor="Black" BarTextColor="White">
+    <TabbedPage.Resources>
+        <ResourceDictionary>
+            <converters:BadgeBackgroundColorConverter x:Key="BadgeColor"/>
+            <Style TargetType="badge:Badge">
+                <Setter Property="badge:TabBadge.BadgeColor" Value="Red"/>
+                <Setter Property="badge:TabBadge.BadgeTextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </TabbedPage.Resources>
+    <NavigationPage x:Name="appNavBar" Title="{x:Static xamarinZkh:AppResources.App_NavBar}" IconImageSource="ic_apps" BarBackgroundColor="Black" BarTextColor="White"
+                    badge:TabBadge.BadgeText="{Binding RequestsAmount}"
+                    badge:TabBadge.BadgeColor="{Binding RequestsAmount, Converter={x:StaticResource BadgeColor}}">
         <x:Arguments>
             <local:AppsConstPage Title="{x:Static xamarinZkh:AppResources.App_NavBar}" IconImageSource="ic_apps" />
         </x:Arguments>
