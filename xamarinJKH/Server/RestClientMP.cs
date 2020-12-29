@@ -204,6 +204,8 @@ namespace xamarinJKH.Server
         public const string ADD_TECH_FILE = "https://help.1caero.ru/MobileAPI/TechSupport/AddFile.ashx";//  Скрипт,  который отдаст файл от пользователя в тех поддеркжку
         public const string GET_TECH_FILE = " https://help.1caero.ru/MobileAPI/TechSupport/DownloadFile.ashx";//  Скрипт,  который отдаст файл от пользователя в тех поддеркжку
 
+        public const string GEOLOCATION = "Dispatcher/AddGeolocating";
+
         /// <summary>
         /// Аунтификация сотрудника
         /// </summary>
@@ -2863,6 +2865,35 @@ namespace xamarinJKH.Server
                 ID
             });
             var response = await restClientMp.ExecuteTaskAsync<CommonResult>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new CommonResult()
+                {
+                    Error = $"Ошибка {response.StatusDescription}"
+                };
+            }
+
+            return response.Data;
+        }
+
+
+        public async Task<CommonResult> SendGeolocation(double Lat, double Lng)
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(GEOLOCATION, Method.POST);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            restRequest.AddBody(new
+            {
+                Lat,
+                Lng
+            });
+
+            var response = await restClientMp.ExecuteTaskAsync<CommonResult>(restRequest);
+
             // Проверяем статус
             if (response.StatusCode != HttpStatusCode.OK)
             {
