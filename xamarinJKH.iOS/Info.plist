@@ -21,7 +21,7 @@
 	<key>MinimumOSVersion</key>
 	<string>10.0</string>
 	<key>CFBundleIdentifier</key>
-	<string>rom.best.osnova</string>
+	<string>rom.best.tsnsputnik</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
@@ -70,7 +70,7 @@
 		<false/>
 	</dict>
 	<key>CFBundleDisplayName</key>
-	<string>ЕДС Основа</string>
+	<string>ТСН «Спутник» Ростов-на-Дону</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>whatsapp</string>

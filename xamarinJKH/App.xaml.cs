@@ -325,6 +325,8 @@ namespace xamarinJKH
             {
                 Analytics.TrackEvent("открыт пуш");
                 System.Diagnostics.Debug.WriteLine("Opened");
+                if (rea != null)
+                    if (rea.Data != null)
                 if (rea.Data.ContainsKey("type_push") || rea.Data.ContainsKey("gcm.notification.type_push"))
                 {
                     string o = "";
@@ -347,23 +349,38 @@ namespace xamarinJKH
                                 if (loginResult.Error == null)
                                 {
                                     Settings.EventBlockData = await server.GetEventBlockData();
-                                    foreach (var each in Settings.EventBlockData.Announcements)
+                                    if (Settings.EventBlockData != null)
                                     {
-                                        if (rea.Data.ContainsKey("aps.alert.title") && rea.Data.ContainsKey("aps.alert.body"))
+                                        if (Settings.EventBlockData.Announcements != null)
                                         {
-                                            if (rea.Data["aps.alert.title"].Equals(each.Header) & rea.Data["aps.alert.body"].Equals(each.Text))
+                                            foreach (var each in Settings.EventBlockData.Announcements)
                                             {
-                                                await MainPage.Navigation.PushModalAsync(new NotificationOnePage(each));
+                                                if (rea.Data.ContainsKey("aps.alert.title") && rea.Data.ContainsKey("aps.alert.body"))
+                                                {
+                                                    if (rea.Data["aps.alert.title"].Equals(each.Header) & rea.Data["aps.alert.body"].Equals(each.Text))
+                                                    {
+                                                        await MainPage.Navigation.PushModalAsync(new NotificationOnePage(each));
+                                                    }
+                                                }
+                                                if (rea.Data.ContainsKey("title") && rea.Data.ContainsKey("body"))
+                                                {
+                                                    if (rea.Data["title"].Equals(each.Header) & rea.Data["body"].Equals(each.Text))
+                                                    {
+                                                        await MainPage.Navigation.PushModalAsync(new NotificationOnePage(each));
+                                                    }
+                                                }
                                             }
                                         }
-                                        if (rea.Data.ContainsKey("title") && rea.Data.ContainsKey("body"))
+                                        else
                                         {
-                                            if (rea.Data["title"].Equals(each.Header) & rea.Data["body"].Equals(each.Text))
-                                            {
-                                                await MainPage.Navigation.PushModalAsync(new NotificationOnePage(each));
-                                            }
+                                            Analytics.TrackEvent("Объявления пустые");
                                         }
                                     }
+                                    else
+                                    {
+                                        Analytics.TrackEvent($"Сервер вернул ошибку при загрузке данных: {Settings.EventBlockData}");
+                                    }
+                                        
                                 }
                                 else
                                 {
@@ -420,15 +437,23 @@ namespace xamarinJKH
                                         if (isCons)
                                         {
                                             RequestList requestList = await server.GetRequestsListConst();
-                                            var request = requestList.Requests.Find(x => x.ID == id);
-                                            await MainPage.Navigation.PushModalAsync(new AppConstPage(request));
+                                            if (requestList != null)
+                                            {
+                                                var request = requestList.Requests.FirstOrDefault(x => x.ID == id);
+                                                if (request != null)
+                                                    await MainPage.Navigation.PushModalAsync(new AppConstPage(request));
+                                            }
                                         }
                                         else
                                         {
                                             RequestList requestsList = await server.GetRequestsList();
-                                            var request = requestsList.Requests.Find(x => x.ID == id);
-                                            await MainPage.Navigation.PushModalAsync(new AppPage(request, false,
-                                                request.IsPaid));
+                                            if (requestsList != null)
+                                            {
+                                                var request = requestsList.Requests.FirstOrDefault(x => x.ID == id);
+                                                if (request != null)
+                                                    await MainPage.Navigation.PushModalAsync(new AppPage(request, false,
+                                                    request.IsPaid));
+                                            }
                                         }
                                     }
                         }

@@ -69,8 +69,22 @@ namespace xamarinJKH.Main
         public async Task RefreshPaysData()
         {
             getInfo();
+            //Device.StartTimer(TimeSpan.FromSeconds(5), OnTimerTick);
             //additionalList.ItemsSource = null;
             //additionalList.ItemsSource = _accountingInfo;
+        }
+
+        bool OnTimerTick()
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                if (IsRefreshing || IsBusy)
+                {
+                    IsRefreshing = false;
+                    IsBusy = false;
+                }
+            });
+            return true;
         }
 
         //PaysPageViewModel viewModel { get; set; }
@@ -266,8 +280,10 @@ namespace xamarinJKH.Main
                     await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                 return;
             }
-
+            IsBusy = true;
+            IsRefreshing = true;
             ItemsList<AccountAccountingInfo> info = await _server.GetAccountingInfo();
+            IsBusy = false;
             if (info.Error == null)
             {
                 _accountingInfo = info.Data;
@@ -278,6 +294,7 @@ namespace xamarinJKH.Main
             }
             else
             {
+                IsRefreshing = false;
                 await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorCountersNoData, "OK");
             }
         }
