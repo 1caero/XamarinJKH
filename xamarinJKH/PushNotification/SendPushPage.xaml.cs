@@ -232,9 +232,14 @@ namespace xamarinJKH.PushNotification
         {
             ItemsList<NamedValue> result = await _server.GetHouseGroups();
             ItemsList<HouseProfile> resultHouse = await _server.GetHouse();
-            groups = new ObservableCollection<NamedValue>(result.Data);
-            HouseProfiles = new ObservableCollection<HouseProfile>(resultHouse.Data.Where(x => x.Address != null));
-            DefaultHouses = resultHouse.Data;
+            if (result.Data != null)
+                groups = new ObservableCollection<NamedValue>(result.Data);
+            if (resultHouse.Data != null)
+            {
+                HouseProfiles = new ObservableCollection<HouseProfile>(resultHouse.Data.Where(x => x.Address != null));
+                DefaultHouses = resultHouse.Data;
+            }
+            
             BindingContext = this;
         }
 

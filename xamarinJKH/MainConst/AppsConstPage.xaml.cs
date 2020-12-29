@@ -88,6 +88,10 @@ namespace xamarinJKH.MainConst
         
         public async Task RefreshData()
         {
+            if (RequestInfos == null)
+            {
+                RequestInfos = new ObservableCollection<RequestInfo>();
+            }
             SetDisableCheck();
             CheckRequestInfos.Clear();
             getApps();
