@@ -125,6 +125,11 @@ namespace xamarinJKH.MainConst
                 Device.BeginInvokeOnMainThread(() => RequestsAmount = args);
             });
 
+            MessagingCenter.Subscribe<Object>(this, "LocationRequest", sender =>
+            {
+                OnAppearing();
+            });
+
             BindingContext = this;
 
         }
@@ -179,6 +184,10 @@ namespace xamarinJKH.MainConst
             var i = Children.IndexOf(CurrentPage);
             if (i == 0)
                 MessagingCenter.Send<Object>(this, "UpdateAppCons");
+            if (i == 2)
+            {
+                MessagingCenter.Send<Object>(this, "StartStatistic");
+            }
         }
 
         async void RegisterNewDevice()

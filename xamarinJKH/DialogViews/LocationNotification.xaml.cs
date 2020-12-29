@@ -25,8 +25,15 @@ namespace xamarinJKH.DialogViews
 
         public async void AskPermission(object sender, EventArgs args)
         {
-            await PopupNavigation.PopAllAsync();
-            await CrossPermissions.Current.RequestPermissionsAsync(Permission.LocationWhenInUse);
+            try
+            {
+                var result = await CrossPermissions.Current.RequestPermissionsAsync(Permission.LocationWhenInUse);
+                if (result[Permission.LocationWhenInUse] == PermissionStatus.Granted)
+                    await PopupNavigation.PopAllAsync();
+                else
+                    MessagingCenter.Send<Object>(this, "LocationRequest");
+            }
+            catch { }
             
         }
     }
