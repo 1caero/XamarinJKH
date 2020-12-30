@@ -190,7 +190,7 @@
     <value>Поделитесь своим мнением:</value>
   </data>
   <data name="ChangePenance" xml:space="preserve">
-    <value>Изменить показания</value>
+    <value>Изменить</value>
   </data>
   <data name="Change" xml:space="preserve">
     <value>Изменить</value>
@@ -296,7 +296,7 @@
     <value>Выйти</value>
   </data>
   <data name="FacNum" xml:space="preserve">
-    <value>Заводской №</value>
+    <value>Заводской №:</value>
   </data>
   <data name="FailedReq" xml:space="preserve">
     <value>Не выполнено</value>
@@ -1717,5 +1717,14 @@
   </data>
   <data name="EnterTextPush" xml:space="preserve">
     <value>Введите текст уведомления...</value>
+  </data>
+  <data name="LastPenanse" xml:space="preserve">
+    <value>Последнее показание</value>
+  </data>
+  <data name="AllPenance" xml:space="preserve">
+    <value>Все показания</value>
+  </data>
+  <data name="Initial" xml:space="preserve">
+    <value>Начальные</value>
   </data>
 </root>

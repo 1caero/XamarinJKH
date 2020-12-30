@@ -28,6 +28,8 @@ namespace xamarinJKH.Main
         private Label recheckup = new Label();
         private Label tarif1 = new Label();
         private StackLayout tarif1Stack = new StackLayout();
+        private Label del = new Label();
+
         //private Label tarif1t2 = new Label();
         //private Label tarif1t3 = new Label();
 
@@ -65,20 +67,38 @@ namespace xamarinJKH.Main
         StackLayout count1Stack = new StackLayout();
         StackLayout count2Stack = new StackLayout();
         StackLayout count3Stack = new StackLayout();
-
+        StackLayout editStack = new StackLayout
+        {
+            Orientation = StackOrientation.Horizontal,
+            IsVisible = false,
+            Spacing = 3
+        }; 
+        StackLayout AllPenanseStack = new StackLayout
+        {
+            Orientation = StackOrientation.Horizontal,
+            Spacing = 3
+        }; 
+        StackLayout delStack = new StackLayout
+        {
+            Orientation = StackOrientation.Horizontal,
+            IsVisible = false,
+            Spacing = 3
+        };
         private Label labelЗPeriod = new Label();
         private Label editLabel = new Label();
 
         private Label labelDisable = new Label();
 
         MaterialFrame frame = new MaterialFrame();
+        Label separator = new Label();
 
-        public MeterInfo meterInfo { get; set; }      
-
+        public MeterInfo meterInfo { get; set; }
+        private CountersPage countersPage;
         public MetersThreeCell(/*List<MeterValueInfo> Values, int DecimalPoint, int MeterID, bool IsDisabled, string Resource, string Address,
-            string CustomName, string UniqueNum, string Units, string CheckupDate, string RecheckInterval,*/ MeterInfo mInfo)
+            string CustomName, string UniqueNum, string Units, string CheckupDate, string RecheckInterval,*/ MeterInfo mInfo, CountersPage countersPage)
         {
             meterInfo = mInfo;
+            this.countersPage = countersPage;
 
             frame.SetAppThemeColor(Frame.BorderColorProperty, (Color)Application.Current.Resources["MainColor"],
                 Color.White);
@@ -100,17 +120,19 @@ namespace xamarinJKH.Main
 
             resource.FontSize = 15;
             resource.TextColor = Color.Black;
+            resource.VerticalTextAlignment = TextAlignment.Center;
             resource.HorizontalTextAlignment = TextAlignment.Center;
 
             img.WidthRequest = 25;
+            img.HeightRequest = 25;
             // imgEdit.WidthRequest = 20;
             // imgEdit.HeightRequest = 20;
             // imgEdit.Source = "edit";
             // imgEdit.Foreground = (Color)Application.Current.Resources["MainColor"];
 
             Edit = new SvgCachedImage();
-            Edit.WidthRequest = 25;
-            Edit.HeightRequest = 25;
+            Edit.WidthRequest = 17;
+            Edit.HeightRequest = 17;
             Edit.ReplaceStringMap = new Dictionary<string, string> { { "#000000", $"#{Settings.MobileSettings.color}" } };
             Edit.Source = "resource://xamarinJKH.Resources.edit.svg";
 
@@ -137,7 +159,7 @@ namespace xamarinJKH.Main
             Label adressLbl = new Label();
             adressLbl.Text = $"{AppResources.Adress}:";
             adressLbl.FontSize = 15;
-            adressLbl.TextColor = Color.FromHex("#A2A2A2");
+            adressLbl.TextColor = Color.Black;
             adressLbl.HorizontalTextAlignment = TextAlignment.Start;
             adressLbl.HorizontalOptions = LayoutOptions.Fill;
             adressLbl.MinimumWidthRequest = 60;
@@ -152,15 +174,16 @@ namespace xamarinJKH.Main
             b.Color = Color.LightGray;
             b.MinimumWidthRequest = 10;
 
-            grid0.Children.Add(b);
+            // grid0.Children.Add(b);
 
             grid.Children.Add(grid0);
 
 
             adress.FontSize = 15;
             adress.TextColor = Color.Black;
-            adress.HorizontalTextAlignment = TextAlignment.End;
+            adress.HorizontalTextAlignment = TextAlignment.Start;
             adress.HorizontalOptions = LayoutOptions.Fill;
+            adress.FontAttributes = FontAttributes.Bold;
             adress.MaxLines = 3;
             if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 700)
             {
@@ -189,14 +212,16 @@ namespace xamarinJKH.Main
             Label numberLbl = new Label();
             numberLbl.Text = AppResources.FacNum;
             numberLbl.FontSize = 12;
-            numberLbl.TextColor = Color.FromHex("#A2A2A2");
+            numberLbl.TextColor = Color.Black;
             numberLbl.HorizontalTextAlignment = TextAlignment.Start;
             numberLbl.HorizontalOptions = LayoutOptions.Start;
             numberLbl.MaxLines = 1;
 
-            number.FontSize = 12;
+            number.FontSize = 11;
             number.HorizontalOptions = LayoutOptions.End;
             number.TextColor = Color.Black;
+            number.VerticalOptions = LayoutOptions.Center;
+            number.FontAttributes = FontAttributes.Bold;
             number.HorizontalTextAlignment = TextAlignment.End;
             number.MaxLines = 1;
 
@@ -208,7 +233,7 @@ namespace xamarinJKH.Main
             linesNumb.HorizontalOptions = LayoutOptions.FillAndExpand;
 
             numberStack.Children.Add(numberLbl);
-            numberStack.Children.Add(linesNumb);
+            // numberStack.Children.Add(linesNumb);
             numberStack.Children.Add(number);
             container.Children.Add(numberStack);
 
@@ -219,14 +244,16 @@ namespace xamarinJKH.Main
             Label checkupDateLbl = new Label();
             checkupDateLbl.Text = AppResources.LastCheck;
             checkupDateLbl.FontSize = 12;
-            checkupDateLbl.TextColor = Color.FromHex("#A2A2A2");
+            checkupDateLbl.TextColor = Color.Black;
             checkupDateLbl.HorizontalTextAlignment = TextAlignment.Start;
             checkupDateLbl.HorizontalOptions = LayoutOptions.Start;
             checkupDateLbl.MaxLines = 1;
 
-            checkup_date.FontSize = 12;
+            checkup_date.FontSize = 11;
             checkup_date.TextColor = Color.Black;
-            checkup_date.HorizontalTextAlignment = TextAlignment.End;
+            checkup_date.FontAttributes = FontAttributes.Bold;
+            checkup_date.HorizontalTextAlignment = TextAlignment.Start;
+            checkup_date.VerticalOptions = LayoutOptions.Center;
             checkup_date.HorizontalOptions = LayoutOptions.End;
             checkup_date.MaxLines = 1;
 
@@ -239,7 +266,7 @@ namespace xamarinJKH.Main
             linesPover.HorizontalOptions = LayoutOptions.FillAndExpand;
 
             checkupDateStack.Children.Add(checkupDateLbl);
-            checkupDateStack.Children.Add(linesPover);
+            // checkupDateStack.Children.Add(linesPover);
             checkupDateStack.Children.Add(checkup_date);
             container.Children.Add(checkupDateStack);
 
@@ -250,37 +277,99 @@ namespace xamarinJKH.Main
             Label recheckLbl = new Label();
             recheckLbl.Text = AppResources.CheckInterval;
             recheckLbl.FontSize = 12;
-            recheckLbl.TextColor = Color.FromHex("#A2A2A2");
+            recheckLbl.TextColor = Color.Black;
             recheckLbl.HorizontalTextAlignment = TextAlignment.Start;
             recheckLbl.HorizontalOptions = LayoutOptions.Start;
             recheckLbl.MaxLines = 1;
             // recheckLbl.WidthRequest = 150;
             recheckup.FontSize = 12;
             recheckup.TextColor = Color.Black;
-            recheckup.HorizontalTextAlignment = TextAlignment.End;
+            recheckup.FontAttributes = FontAttributes.Bold;
+            recheckup.HorizontalTextAlignment = TextAlignment.Start;
+            recheckup.VerticalOptions = LayoutOptions.Center;
             recheckup.HorizontalOptions = LayoutOptions.End;
             recheckup.MaxLines = 1;
 
             Label linesInterv = new Label();
             linesInterv.HeightRequest = 1;
-            linesInterv.BackgroundColor = Color.LightGray;
+            linesInterv.BackgroundColor = (Color)Application.Current.Resources["MainColor"];
             ;
             linesInterv.VerticalOptions = LayoutOptions.Center;
             linesInterv.Margin = new Thickness(0, 2, 0, 0);
             linesInterv.HorizontalOptions = LayoutOptions.FillAndExpand;
 
             recheckStack.Children.Add(recheckLbl);
-            recheckStack.Children.Add(linesInterv);
+            // recheckStack.Children.Add(linesInterv);
             recheckStack.Children.Add(recheckup);
             container.Children.Add(recheckStack);
 
-            Label separator = new Label();
 
             separator.HeightRequest = 1;
-            separator.BackgroundColor = Color.LightGray;
+            separator.BackgroundColor = (Color)Application.Current.Resources["MainColor"];
             separator.Margin = new Thickness(0, 5, 0, 5);
             container.Children.Add(separator);
 
+            count1Stack.Orientation = StackOrientation.Horizontal;
+            count1Stack.Spacing = 15;
+            count1Stack.HorizontalOptions = LayoutOptions.FillAndExpand;
+
+            
+            SvgCachedImage EditPenanse = new SvgCachedImage();
+            EditPenanse.WidthRequest = 12;
+            EditPenanse.HeightRequest = 12;
+            EditPenanse.ReplaceStringMap = new Dictionary<string, string> { { "#000000", $"#{Settings.MobileSettings.color}" } };
+            EditPenanse.Source = "resource://xamarinJKH.Resources.edit.svg";
+            
+            SvgCachedImage delPenanse = new SvgCachedImage();
+            delPenanse.WidthRequest = 12;
+            delPenanse.HeightRequest = 12;
+            delPenanse.ReplaceStringMap = new Dictionary<string, string> { { "#000000", $"#{Settings.MobileSettings.color}" } };
+            delPenanse.Source = "resource://xamarinJKH.Resources.ic_close.svg";
+            
+            editLabel = new Label()
+            {
+                Text = AppResources.ChangePenance,
+                FontSize = 12,
+                FontAttributes = FontAttributes.Bold,
+                TextDecorations = TextDecorations.Underline,
+                TextColor = (Color)Application.Current.Resources["MainColor"],
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalTextAlignment = TextAlignment.Start
+            };
+            
+            
+           
+            
+            SvgCachedImage AllPenanse = new SvgCachedImage();
+            AllPenanse.WidthRequest = 12;
+            AllPenanse.HeightRequest = 12;
+            AllPenanse.ReplaceStringMap = new Dictionary<string, string> { { "#000000", $"#{Settings.MobileSettings.color}" } };
+            AllPenanse.Source = "resource://xamarinJKH.Resources.ic_all_penance.svg";
+            
+            Label AllPenanceLabel = new Label()
+            {
+                Text = AppResources.AllPenance,
+                FontSize = 12,
+                FontAttributes = FontAttributes.Bold,
+                TextDecorations = TextDecorations.Underline,
+                TextColor = (Color)Application.Current.Resources["MainColor"],
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalTextAlignment = TextAlignment.Start
+            };
+            
+            AllPenanseStack.Children.Add(AllPenanse);
+            AllPenanseStack.Children.Add(AllPenanceLabel);
+            
+            editStack.Children.Add(EditPenanse);
+            editStack.Children.Add(editLabel);
+            
+            delStack.Children.Add(delPenanse);
+            delStack.Children.Add(del);
+            
+            count1Stack.Children.Add(editStack);
+            count1Stack.Children.Add(delStack);
+            count1Stack.Children.Add(AllPenanseStack);
+            
             tarif1.FontSize = 13;
             tarif1.TextColor = Color.FromHex("#A2A2A2"); //Color.Red;
             tarif1.HorizontalTextAlignment = TextAlignment.Center;
@@ -313,8 +402,7 @@ namespace xamarinJKH.Main
 
             //tarif3.Text = string.IsNullOrWhiteSpace(mInfo.Tariff3Name) ? AppResources.tarif3 : mInfo.Tariff3Name;
 
-            count1Stack.Orientation = StackOrientation.Horizontal;
-            count1Stack.HorizontalOptions = LayoutOptions.FillAndExpand;
+           
                         
             counterDate1.FontSize = 15;
             counterDate1.TextColor = Color.FromHex("#A2A2A2");
@@ -360,10 +448,10 @@ namespace xamarinJKH.Main
             lines.VerticalOptions = LayoutOptions.Center;
             lines.HorizontalOptions =  LayoutOptions.FillAndExpand;
 
-            count1Stack.Children.Add(counterDate1);
-            count1Stack.Children.Add(lines);
-            count1Stack.Children.Add(tarif1);
-            count1Stack.Children.Add(count1);           
+            // count1Stack.Children.Add(counterDate1);
+            // count1Stack.Children.Add(lines);
+            // count1Stack.Children.Add(tarif1);
+            // count1Stack.Children.Add(count1);           
 
             container.Children.Add(count1Stack);
 
@@ -376,7 +464,7 @@ namespace xamarinJKH.Main
             count1t2Stack.Children.Add(t21);
             count1t2Stack.Children.Add(count1t2);
                         
-            container.Children.Add(count1t2Stack);
+            // container.Children.Add(count1t2Stack);
 
             count1t3Stack.Orientation = StackOrientation.Horizontal;
             count1t3Stack.HorizontalOptions = LayoutOptions.End;
@@ -387,7 +475,7 @@ namespace xamarinJKH.Main
             count1t3Stack.Children.Add(t31);
             count1t3Stack.Children.Add(count1t3);
 
-            container.Children.Add(count1t3Stack);
+            // container.Children.Add(count1t3Stack);
 
             count2Stack.Orientation = StackOrientation.Horizontal;
             count2Stack.HorizontalOptions = LayoutOptions.FillAndExpand;
@@ -455,7 +543,7 @@ namespace xamarinJKH.Main
             //        tarif1.IsVisible = false;
 
             count2Stack.Children.Add(count2);
-            container.Children.Add(count2Stack);
+            // container.Children.Add(count2Stack);
 
             count2t2Stack.Orientation = StackOrientation.Horizontal;
             count2t2Stack.HorizontalOptions = LayoutOptions.End;
@@ -466,7 +554,7 @@ namespace xamarinJKH.Main
             count2t2Stack.Children.Add(t22);
             count2t2Stack.Children.Add(count2t2);
 
-            container.Children.Add(count2t2Stack);
+            // container.Children.Add(count2t2Stack);
 
             count2t3Stack.Orientation = StackOrientation.Horizontal;
             count2t3Stack.HorizontalOptions = LayoutOptions.End;
@@ -477,7 +565,7 @@ namespace xamarinJKH.Main
             count2t3Stack.Children.Add(t32);
             count2t3Stack.Children.Add(count2t3);
 
-            container.Children.Add(count2t3Stack);
+            // container.Children.Add(count2t3Stack);
            
 
             count3Stack.Orientation = StackOrientation.Horizontal;
@@ -536,7 +624,7 @@ namespace xamarinJKH.Main
 
             //count3Stack.Children.Add(tarif1);
             count3Stack.Children.Add(count3);
-            container.Children.Add(count3Stack);
+            // container.Children.Add(count3Stack);
 
             count3t2Stack.Orientation = StackOrientation.Horizontal;
             count3t2Stack.HorizontalOptions = LayoutOptions.End;
@@ -548,7 +636,7 @@ namespace xamarinJKH.Main
             count3t2Stack.Children.Add(t23);
             count3t2Stack.Children.Add(count3t2);
 
-            container.Children.Add(count3t2Stack);
+            // container.Children.Add(count3t2Stack);
 
             count3t3Stack.Orientation = StackOrientation.Horizontal;
             count3t3Stack.HorizontalOptions = LayoutOptions.End;
@@ -559,7 +647,7 @@ namespace xamarinJKH.Main
             count3t3Stack.Children.Add(t33);
             count3t3Stack.Children.Add(count3t3);
 
-            container.Children.Add(count3t3Stack);
+            // container.Children.Add(count3t3Stack);
 
             //container.Children.Add(count3t2);
             //container.Children.Add(count3t3);
@@ -598,8 +686,7 @@ namespace xamarinJKH.Main
             canCount.Text = AppResources.MetersThreeCellCanCount;
             canCount.FontSize = 12;
             canCount.TextDecorations = TextDecorations.Underline;
-            canCount.FontAttributes = FontAttributes.Bold;
-            canCount.TextColor = Color.Black;
+            canCount.TextColor = (Color)Application.Current.Resources["MainColor"];
             canCount.HorizontalTextAlignment = TextAlignment.End;
             canCount.HorizontalOptions = LayoutOptions.CenterAndExpand;
             canCount.HorizontalTextAlignment = TextAlignment.Center;
@@ -623,44 +710,105 @@ namespace xamarinJKH.Main
            Children.Add(frame);
         }
 
-        void SetEditButton(string Period, MeterInfo mInfo)
+        void SetEditButton(string Period, MeterInfo mInfo, List<MeterValueInfo> value, MeterInfo meterInfo)
         {
-            frameBtn.IsVisible = false;
             var stack = frame.Content as StackLayout;
             try
             {
                 int currDay = DateTime.Now.Day;
                 if (mInfo.ValuesCanAdd)
                 {
-                    int indexOf = stack.Children.IndexOf(editLabel);
+                    int indexOf = stack.Children.IndexOf(separator);
                     int index = stack.Children.IndexOf(labelЗPeriod);
-                    int indexframeBtn = stack.Children.IndexOf(frameBtn);
-                    if (indexframeBtn != -1)
-                        stack.Children.RemoveAt(indexframeBtn);
-                    if (indexOf != -1 && index != -1)
+                    
+                    // if (indexOf != -1 && index != -1)
+                    // {
+                    //     stack.Children.RemoveAt(indexOf);
+                    //     stack.Children.RemoveAt(index);
+                    // }
+
+                    FormattedString formattedDateLastValue = new FormattedString();
+                    formattedDateLastValue.Spans.Add(new Span
                     {
-                        stack.Children.RemoveAt(indexOf);
-                        stack.Children.RemoveAt(index);
+                        Text = $"{AppResources.LastPenanse} {Period}: ",
+                        TextColor = Color.Black,
+                        FontAttributes = FontAttributes.None,
+                        FontSize = 14
+                    });
+                    if (meterInfo.TariffNumberInt == 1)
+                    {
+                        formattedDateLastValue.Spans.Add(new Span
+                        {
+                            Text = $"{value[0].Value}",
+                            TextColor = Color.Black,
+                            FontAttributes = FontAttributes.Bold,
+                            FontSize = 14
+                        });
                     }
+                    else if (meterInfo.TariffNumberInt == 2)
+                    {
+                        String tarif1 = string.IsNullOrWhiteSpace(mInfo.Tariff1Name) ? AppResources.tarif1 : mInfo.Tariff1Name;
+                        String tarif2 = string.IsNullOrWhiteSpace(mInfo.Tariff2Name) ? AppResources.tarif2 : mInfo.Tariff2Name;
+                        formattedDateLastValue.Spans.Add(new Span
+                        {
+                            Text = $"\n{tarif1} - {value[0].Value}\n",
+                            TextColor = Color.Black,
+                            FontAttributes = FontAttributes.Bold,
+                            FontSize = 14
+                        }); 
+                        formattedDateLastValue.Spans.Add(new Span
+                        {
+                            Text = $"{tarif2} - {value[0].ValueT2}",
+                            TextColor = Color.Black,
+                            FontAttributes = FontAttributes.Bold,
+                            FontSize = 14
+                        });
+                    }else if (meterInfo.TariffNumberInt == 3)
+                    {
+                        String tarif1 = string.IsNullOrWhiteSpace(mInfo.Tariff1Name) ? AppResources.tarif1 : mInfo.Tariff1Name;
+                        String tarif2 = string.IsNullOrWhiteSpace(mInfo.Tariff2Name) ? AppResources.tarif2 : mInfo.Tariff2Name;
+                        String tarif3 = string.IsNullOrWhiteSpace(mInfo.Tariff3Name) ? AppResources.tarif3 : mInfo.Tariff3Name;
+                        formattedDateLastValue.Spans.Add(new Span
+                        {
+                            Text = $"\n{tarif1} - {value[0].Value}\n",
+                            TextColor = Color.Black,
+                            FontAttributes = FontAttributes.Bold,
+                            FontSize = 14
+                        }); 
+                        formattedDateLastValue.Spans.Add(new Span
+                        {
+                            Text = $"{tarif2} - {value[0].ValueT2}\n",
+                            TextColor = Color.Black,
+                            FontAttributes = FontAttributes.Bold,
+                            FontSize = 14
+                        }); 
+                        formattedDateLastValue.Spans.Add(new Span
+                        {
+                            Text = $"{tarif3} - {value[0].ValueT3}",
+                            TextColor = Color.Black,
+                            FontAttributes = FontAttributes.Bold,
+                            FontSize = 14
+                        });
+                    }
+                    
 
                     labelЗPeriod = new Label()
                     {
-                        Text = $"{AppResources.PenencePassed} {Period}",
+                        FormattedText = formattedDateLastValue,
                         FontSize = 14,
                         VerticalTextAlignment = TextAlignment.Center,
-                        HorizontalTextAlignment = TextAlignment.Center
+                        HorizontalTextAlignment = TextAlignment.Start
                     };
-                    stack.Children.Add(labelЗPeriod);
-                    editLabel = new Label()
+                    stack.Children.Insert(indexOf + 1,labelЗPeriod);
+                    if (value[0].IsCurrentPeriod)
                     {
-                        Text = AppResources.ChangePenance,
-                        FontAttributes = FontAttributes.Bold,
-                        TextColor = (Color)Application.Current.Resources["MainColor"],
-                        VerticalTextAlignment = TextAlignment.Center,
-                        HorizontalTextAlignment = TextAlignment.Center
-                    };
-                    stack.Children.Add(editLabel);
-                    
+                        editStack.IsVisible = true;
+                        frameBtn.IsVisible = false;
+                        canCount.IsVisible = true;
+                        int indexframeBtn = stack.Children.IndexOf(frameBtn);
+                        if (indexframeBtn != -1)
+                            stack.Children.RemoveAt(indexframeBtn);
+                    }
                 }
             }
             catch (Exception e)
@@ -764,166 +912,13 @@ namespace xamarinJKH.Main
                 checkup_date.Text = CheckupDate;
                 recheckup.Text = RecheckInterval + " лет";
                 GetFormat( DecimalPoint);
-
-            if (Values.Count == 1)
-            {
-                counterDate1.Text = Values[0].Period.Equals("01.01.0001")? "-" : Values[0].Period;
-                count1.Text =
-                    String.Format(GetFormat(DecimalPoint), Values[0].Value);
-                                
-                if (Values[0].ValueT2 != null)
+                
+                var meterValues = new TapGestureRecognizer();
+                meterValues.Tapped += async (s, e) =>
                 {
-                    count1t2.Text = String.Format(GetFormat(DecimalPoint), Values[0].ValueT2); count1t2Stack.IsVisible = true;
-                }
-                else
-                {
-                    
-                }
-
-                if (Values[0].ValueT3 != null)
-                {
-                    count1t3.Text = String.Format(GetFormat(DecimalPoint), Values[0].ValueT3);
-                    count1t3Stack.IsVisible = true;
-                }
-                else
-                {
-                    count1t3Stack.IsVisible = false;                    
-                }
-
-                count2Stack.IsVisible = count3Stack.IsVisible = false;
-            }
-            else if (Values.Count == 2)
-            {
-                counterDate1.Text = Values[0].Period.Equals("01.01.0001")? "-" : Values[0].Period;
-                count1.Text =
-                    String.Format(GetFormat(DecimalPoint), Values[0].Value); //.ToString(CultureInfo.InvariantCulture);
-
-                if (Values[0].ValueT2 != null)
-                {
-                    count1t2.Text = String.Format(GetFormat(DecimalPoint), Values[0].ValueT2);
-                    count1t2Stack.IsVisible = true;
-                }
-                else
-                {
-                    count1t2Stack.IsVisible = false;
-                }
-
-                if (Values[0].ValueT3 != null)
-                {
-                    count1t3.Text = String.Format(GetFormat(DecimalPoint), Values[0].ValueT3);
-                    count1t3Stack.IsVisible = true;
-                }
-                else
-                {
-                    count1t3Stack.IsVisible = false;
-                }
-
-                counterDate2.Text = Values[1].Period.Equals("01.01.0001")? "-" : Values[1].Period;
-                count2.Text =
-                    String.Format(GetFormat(DecimalPoint), Values[1].Value); //.ToString(CultureInfo.InvariantCulture);
-
-                if (Values[1].ValueT2 != null)
-                {
-                    count2t2.Text = String.Format(GetFormat(DecimalPoint), Values[1].ValueT2);
-                    count2t2Stack.IsVisible = true;
-                }
-                else
-                {
-                    count2t2Stack.IsVisible = false;
-                }
-
-                if (Values[1].ValueT3 != null)
-                { count2t3.Text = String.Format(GetFormat(DecimalPoint), Values[1].ValueT3);
-                    count2t3Stack.IsVisible = true;
-                }
-                else
-                {
-                    count2t3Stack.IsVisible = false;
-                }
-
-                count3Stack.IsVisible = false;
-            }
-            else if (Values.Count == 3)
-            {
-                counterDate1.Text = Values[0].Period.Equals("01.01.0001")? "-" : Values[0].Period;
-                count1.Text =
-                    String.Format(GetFormat(DecimalPoint), Values[0].Value);
-
-                if (Values[0].ValueT2 != null)
-                {
-                    count1t2.Text = String.Format(GetFormat(DecimalPoint), Values[0].ValueT2);
-                    count1t2Stack.IsVisible = true;
-                }
-                else
-                {
-                    count1t2Stack.IsVisible = false;
-                }
-
-                if (Values[0].ValueT3 != null)
-                {
-                    count1t3.Text = String.Format(GetFormat(DecimalPoint), Values[0].ValueT3);
-                    count1t3Stack.IsVisible = true;
-                }
-                else
-                {
-                    count1t3Stack.IsVisible = false;
-                }
-
-                counterDate2.Text = Values[1].Period.Equals("01.01.0001")? "-" : Values[1].Period;
-                count2.Text =
-                    String.Format(GetFormat(DecimalPoint), Values[1].Value); //.ToString(CultureInfo.InvariantCulture);
-
-                if (Values[1].ValueT2 != null)
-                {
-                    count2t2.Text = String.Format(GetFormat(DecimalPoint), Values[1].ValueT2);
-                    count2t2Stack.IsVisible = true;
-                }
-                else
-                {
-                    count2t2Stack.IsVisible = false;
-                }
-                if (Values[1].ValueT3 != null)
-                {
-                    count2t3.Text = String.Format(GetFormat(DecimalPoint), Values[1].ValueT3);
-                    count2t3Stack.IsVisible = true;
-                }
-                else
-                {
-                    count2t3Stack.IsVisible = false;
-
-                    //count2t3.IsVisible = false;
-                }
-
-                counterDate3.Text = Values[2].Period.Equals("01.01.0001")? "-" : Values[2].Period;
-                count3.Text =
-                    String.Format(GetFormat(DecimalPoint), Values[2].Value); //.ToString(CultureInfo.InvariantCulture);
-
-                if (Values[2].ValueT2 != null)
-                {
-                    count3t2.Text = String.Format(GetFormat(DecimalPoint), Values[2].ValueT2);
-                    count3t2Stack.IsVisible = true;
-                }
-                else
-                {
-                    count3t2Stack.IsVisible = false;
-                }
-
-                if (Values[2].ValueT3 != null)
-                {
-                    count3t3.Text = String.Format(GetFormat(DecimalPoint), Values[2].ValueT3);
-                    count3t3Stack.IsVisible = true;
-                }
-                else
-                {
-                    count3t3Stack.IsVisible = false;
-                }
-            }
-            else if (Values.Count == 0)
-            {
-                count1Stack.IsVisible = count2Stack.IsVisible = count3Stack.IsVisible = false;
-                //count1t2Stack.IsVisible = count1t3Stack.IsVisible = count2t2Stack.IsVisible = count2t3Stack.IsVisible = count3t2Stack.IsVisible = count3t3Stack.IsVisible = false; 
-            }
-
+                    await PopupNavigation.Instance.PushAsync(new MeterValuesDialog(meterInfo,countersPage));
+                };
+                AllPenanseStack.GestureRecognizers.Add(meterValues);
                 if (IsDisabled)
                 {
                     labelDisable.IsVisible = true;
@@ -938,10 +933,11 @@ namespace xamarinJKH.Main
                         Console.WriteLine(e);
                     }
                     
-                }else if (Values.Count > 0 && Values[0].IsCurrentPeriod && !meterInfo.AutoValueGettingOnly)
+                }else if (Values.Count > 0 &&  !meterInfo.AutoValueGettingOnly)
                 {
-                    SetEditButton(Values[0].Period, mInfo);
-                    SetDellValue(MeterID, mInfo);
+                    SetEditButton(Values[0].Period, mInfo, Values, meterInfo);
+                    if(Values[0].IsCurrentPeriod)
+                        SetDellValue(MeterID, mInfo);
                 }
                 else
                 {
@@ -965,7 +961,7 @@ namespace xamarinJKH.Main
                         lines.BackgroundColor = Color.LightGray;
                         lines.VerticalOptions = LayoutOptions.Center;
                         lines.HorizontalOptions = LayoutOptions.FillAndExpand;
-                        count1Stack.Children[1] = lines;
+                        // count1Stack.Children[1] = lines;
                     }
                 }
 
@@ -974,87 +970,31 @@ namespace xamarinJKH.Main
                 {
                     img.Source = ImageSource.FromFile("ic_cold_water");
                 }
-                else if (Resource.ToLower().Contains("горячее") || Resource.ToLower().Contains("гвс") ||
-                         Resource.ToLower().Contains("подог") || Resource.ToLower().Contains("отопл"))
+                else if (Resource.ToLower().Contains("горячее") || Resource.ToLower().Contains("гвс"))
                 {
                     img.Source = ImageSource.FromFile("ic_heat_water");
+                }else if (Resource.ToLower().Contains("подог") || Resource.ToLower().Contains("отопл"))
+                {
+                    img.Source = ImageSource.FromFile("ic_heat_energ");
                 }
                 else if (Resource.ToLower().Contains("эле"))
                 {
                     img.Source = ImageSource.FromFile("ic_electr");
+                }else if (Resource.ToLower().Contains("газ"))
+                {
+                    img.Source = ImageSource.FromFile("ic_gas");
                 }
                 else
                 {
                     img.Source = ImageSource.FromFile("ic_cold_water");
                 }
-
-                string month = AppResources.CountersCurrentMonth;
-                if (mInfo.ValuesEndDay < mInfo.ValuesStartDay)
-                {
-                    month = AppResources.NextMonth;
-                }
-                int currDay = DateTime.Now.Day;
-                // currDay = 16;
                 frameBtn.IsVisible = true;
-                canCount.IsVisible = false;
+                // canCount.IsVisible = false;
                 if (Settings.Person != null)
                     if (Settings.Person.Accounts != null)
                         if (Settings.Person.Accounts.Count > 0)
                         {
-                            FormattedString formattedDate = new FormattedString();
-                            formattedDate.Spans.Add(new Span
-                            {
-                                Text = $"{AppResources.CountersInfo1} ",
-                                TextColor = (Color)Application.Current.Resources["MainColor"],
-                                FontAttributes = FontAttributes.None,
-                                FontSize = 12
-                            });
-                            if (mInfo.ValuesStartDay != null &&
-                                mInfo.ValuesEndDay != null)
-                            {
-                                if (mInfo.ValuesStartDay != 0 &&
-                                    mInfo.ValuesEndDay != 0)
-                                {
-                                    formattedDate.Spans.Add(new Span
-                                    {
-                                        Text = $"{AppResources.From} " + mInfo.ValuesStartDay +
-                                               $" {AppResources.To} " +
-                                               mInfo.ValuesEndDay + " числа ",
-                                        TextColor = (Color)Application.Current.Resources["MainColor"],
-                                        FontAttributes = FontAttributes.Bold,
-                                        FontSize = 12
-                                    });
-                                    formattedDate.Spans.Add(new Span
-                                    {
-                                        Text = month,
-                                        TextColor = (Color)Application.Current.Resources["MainColor"],
-                                        FontAttributes = FontAttributes.None,
-                                        FontSize = 12
-                                    });
-                                }
-                                else
-                                {
-                                    formattedDate.Spans.Add(new Span
-                                    {
-                                        Text = month,
-                                        TextColor = (Color)Application.Current.Resources["MainColor"],
-                                        FontAttributes = FontAttributes.Bold,
-                                        FontSize = 12
-                                    });
-                                }
-                            }
-                            else
-                            {
-                                formattedDate.Spans.Add(new Span
-                                {
-                                    Text = AppResources.CountersCurrentMonth,
-                                    TextColor = (Color)Application.Current.Resources["MainColor"],
-                                    FontAttributes = FontAttributes.Bold,
-                                    FontSize = 12
-                                });
-                            }
-
-                            canCount.FormattedText = formattedDate;
+                            canCount.FormattedText = mInfo.PeriodMessage;
                             if (mInfo.ValuesCanAdd)
                             {
                                 frameBtn.IsVisible = true;
@@ -1090,20 +1030,19 @@ namespace xamarinJKH.Main
             {
                 return;
             }
-            
-            int currentDay = DateTime.Now.Day;
             if (meterInfo.ValuesCanAdd)
             {
-                Label del = new Label();
                 del.TextColor = (Color) Application.Current.Resources["MainColor"];
-                del.Text = "Удалить";
+                del.Text = AppResources.Delete;
+                del.FontSize = 12;
                 del.TextDecorations = TextDecorations.Underline;
                 del.FontAttributes = FontAttributes.Bold;
                 del.VerticalOptions = LayoutOptions.Center;
                 del.VerticalTextAlignment = TextAlignment.Center;
-                del.HorizontalTextAlignment = TextAlignment.Center;
+                del.HorizontalTextAlignment = TextAlignment.Start;
                 del.HorizontalOptions = LayoutOptions.FillAndExpand;
-                count1Stack.Children[1] = del;
+                delStack.IsVisible = true;
+                
                 var dellClick = new TapGestureRecognizer();
                 RestClientMP server = new RestClientMP();
                 dellClick.Tapped += async (s, e) =>

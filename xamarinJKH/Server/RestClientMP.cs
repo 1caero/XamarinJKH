@@ -150,6 +150,7 @@ namespace xamarinJKH.Server
         public const string SAVE_METER_VALUE = "Meters/SaveMeterValue"; // Получить полную инфу по новости
         public const string SET_METER_NAME = "Meters/SetMeterCustomName"; // Смена произвольного имени прибора
         public const string DELETE_METER_VALUE = "Meters/DeleteMeterValue "; // Удаляет значение показаний прибора учета
+        public const string GET_METER_VALUE = "Meters/MeterValues "; // Получить историю показаний по прибору
 
         public const string GET_NEWS_FULL = "News/Content"; // Получить полную инфу по новости
         public const string GET_NEWS_IMAGE = "News/Image"; // Получить полную инфу по новости
@@ -1322,6 +1323,32 @@ namespace xamarinJKH.Server
                 };
             }
 
+            return response.Data;
+        } 
+        
+        /// <summary>
+        /// Получить историю показаний по прибору учета
+        /// </summary>
+        /// <param name="meterUniqueNum">Уникальный id прибора</param>
+        /// <returns>Список показаний</returns>
+        public async Task<ItemsList<MeterValueInfo>> MeterValues(string meterUniqueNum)
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(GET_METER_VALUE, Method.GET);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            restRequest.AddParameter("meterUniqueNum", meterUniqueNum);
+            var response = await restClientMp.ExecuteTaskAsync<ItemsList<MeterValueInfo>>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new ItemsList<MeterValueInfo>()
+                {
+                    Error = $"Ошибка {response.StatusDescription}"
+                };
+            }
             return response.Data;
         }
 

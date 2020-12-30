@@ -36,6 +36,7 @@ namespace xamarinJKH.Main
         private RestClientMP _server = new RestClientMP();
         private bool _isRefreshing = false;
 
+
         public Color hex { get; set; }
 
         public bool IsRefreshing
@@ -215,7 +216,7 @@ namespace xamarinJKH.Main
 
                             foreach (var mi in meters_)
                             {
-                                var mtc = new MetersThreeCell(mi);
+                                var mtc = new MetersThreeCell(mi,this);
                                 TapGestureRecognizer tap = new TapGestureRecognizer();
                                 tap.Tapped += Tap_Tapped;
                                 mtc.GestureRecognizers.Add(tap);
@@ -262,9 +263,14 @@ namespace xamarinJKH.Main
             int currDay = DateTime.Now.Day;
 
             MeterInfo select = ((MetersThreeCell) sender).meterInfo; // as MeterInfo;
-            if (select != null)
+            await OpenMeter(@select);
+        }
+
+        public async Task OpenMeter(MeterInfo @select)
+        {
+            if (@select != null)
             {
-                if (select.IsDisabled || select.AutoValueGettingOnly)
+                if (@select.IsDisabled || @select.AutoValueGettingOnly)
                 {
                     return;
                 }
@@ -272,30 +278,31 @@ namespace xamarinJKH.Main
                 if (Settings.Person != null)
                     if (Settings.Person.Accounts != null)
                         if (Settings.Person.Accounts.Count > 0)
-                            if (select.ValuesCanAdd)
+                            if (@select.ValuesCanAdd)
                             {
-                                if (select.Values!=null && select.Values.Count >= 1 )
+                                if (@select.Values != null && @select.Values.Count >= 1)
                                 {
                                     // int monthCounter;
                                     // var parceMonthOk = int.TryParse(select.Values[0].Period.Split('.')[1], out monthCounter) ;
                                     // if(parceMonthOk)
                                     // {
-                                        if(select.Values[0].IsCurrentPeriod)
-                                        {
-                                            var counterThisMonth = select.Values[0].Value;
-                                            var counterThisMonth2 = select.Values.Count >= 2 ? select.Values[1].Value : 0;
-                                            if (Navigation.NavigationStack.FirstOrDefault(x => x is AddMetersPage) == null)
-                                                await Navigation.PushAsync(new AddMetersPage(select, _meterInfo, this,
+                                    if (@select.Values[0].IsCurrentPeriod)
+                                    {
+                                        var counterThisMonth = @select.Values[0].Value;
+                                        var counterThisMonth2 = @select.Values.Count >= 2 ? @select.Values[1].Value : 0;
+                                        if (Navigation.NavigationStack.FirstOrDefault(x => x is AddMetersPage) == null)
+                                            await Navigation.PushAsync(new AddMetersPage(@select, _meterInfo, this,
                                                 counterThisMonth,
                                                 counterThisMonth2));
-                                        }
-                                        else
-                                        {
-                                            var counterThisMonth =  select.Values[0].Value;
-                                            if (Navigation.NavigationStack.FirstOrDefault(x => x is AddMetersPage) == null)
-                                                await Navigation.PushAsync(new AddMetersPage(select, _meterInfo, this, 0,
+                                    }
+                                    else
+                                    {
+                                        var counterThisMonth = @select.Values[0].Value;
+                                        if (Navigation.NavigationStack.FirstOrDefault(x => x is AddMetersPage) == null)
+                                            await Navigation.PushAsync(new AddMetersPage(@select, _meterInfo, this, 0,
                                                 counterThisMonth));
-                                        }                                        
+                                    }
+
                                     // }
                                     // else
                                     // {
@@ -309,9 +316,10 @@ namespace xamarinJKH.Main
                                 {
                                     //var counterThisMonth =  0;
                                     if (Navigation.NavigationStack.FirstOrDefault(x => x is AddMetersPage) == null)
-                                        await Navigation.PushAsync(new AddMetersPage(select, _meterInfo, this, 0,
-                                        0));
+                                        await Navigation.PushAsync(new AddMetersPage(@select, _meterInfo, this, 0,
+                                            0));
                                 }
+
                                 //if (select.Values.Count >= 1 && int.Parse(select.Values[0].Period.Split('.')[1]) ==
                                 //    DateTime.Now.Month)
                                 //{
@@ -753,7 +761,7 @@ namespace xamarinJKH.Main
 
                         foreach (var mi in newmeters)
                         {
-                            var mtc = new MetersThreeCell(mi);
+                            var mtc = new MetersThreeCell(mi, this);
                             TapGestureRecognizer tap = new TapGestureRecognizer();
                             tap.Tapped += Tap_Tapped;
                             mtc.GestureRecognizers.Add(tap);
@@ -800,7 +808,7 @@ namespace xamarinJKH.Main
 
                 foreach (var mi in _meterInfo)
                 {
-                    baseForCounters.Children.Add(new MetersThreeCell(mi));
+                    baseForCounters.Children.Add(new MetersThreeCell(mi, this));
                 }
             }
             catch (Exception e)
@@ -1037,7 +1045,7 @@ namespace xamarinJKH.Main
                 {
                     foreach (var mi in newmeters)
                     {
-                        var mtc = new MetersThreeCell(mi);
+                        var mtc = new MetersThreeCell(mi, this);
                         TapGestureRecognizer tap = new TapGestureRecognizer();
                         tap.Tapped += Tap_Tapped;
                         mtc.GestureRecognizers.Add(tap);

@@ -235,6 +235,8 @@
     <AndroidResource Include="Resources\drawable\ic_file.png" />
     <AndroidResource Include="Resources\drawable\ic_files_app1.png" />
     <AndroidResource Include="Resources\drawable\ic_file_download.png" />
+    <AndroidResource Include="Resources\drawable\ic_gas.png" />
+    <AndroidResource Include="Resources\drawable\ic_heat_energ.png" />
     <AndroidResource Include="Resources\drawable\ic_heat_water.png" />
     <AndroidResource Include="Resources\drawable\ic_history_pay.png" />
     <AndroidResource Include="Resources\drawable\ic_history_pay_top.png" />

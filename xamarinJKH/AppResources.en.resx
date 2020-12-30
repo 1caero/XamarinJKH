@@ -295,7 +295,7 @@ A bot will call you on your number PHONE and tell an access code</value>
     <value>Log out</value>
   </data>
   <data name="FacNum" xml:space="preserve">
-    <value>Factory #</value>
+    <value>Factory #:</value>
   </data>
   <data name="FailedReq" xml:space="preserve">
     <value>Not completed</value>
@@ -1724,5 +1724,14 @@ A bot will call you on your number PHONE and tell an access code</value>
   </data>
   <data name="EnterTextPush" xml:space="preserve">
     <value>Enter your notification text ...</value>
+  </data>
+  <data name="LastPenanse" xml:space="preserve">
+    <value>Last penance</value>
+  </data>
+  <data name="AllPenance" xml:space="preserve">
+    <value>All penance</value>
+  </data>
+  <data name="Initial" xml:space="preserve">
+    <value>Initial</value>
   </data>
 </root>

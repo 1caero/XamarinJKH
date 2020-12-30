@@ -18,6 +18,9 @@ namespace xamarinJKH.Server.RequestModel
         public int RecheckInterval { get; set; }
         // Ресурс
         public string Resource { get; set; }
+        public decimal? StartValue { get; set; }
+        public decimal? StartValueT2 { get; set; }
+        public decimal? StartValueT3 { get; set; }
         // Адрес
         public string Address { get; set; }
         // Уникальный номер
@@ -64,5 +67,8 @@ namespace xamarinJKH.Server.RequestModel
         public decimal? ValueT2 { get; set; }
         // Значение Т3
         public decimal? ValueT3 { get; set; }
+        
+        public int TariffNumberInt { get; set; }
+        
     }
 }

@@ -521,7 +521,7 @@
     <value>Вийти</value>
   </data>
   <data name="FacNum" xml:space="preserve">
-    <value>Заводський №</value>
+    <value>Заводський №:</value>
   </data>
   <data name="FailedReq" xml:space="preserve">
     <value>Не виконано</value>
@@ -1597,5 +1597,14 @@
   </data>
   <data name="EnterTextPush" xml:space="preserve">
     <value>Введіть текст повідомлення ...</value>
+  </data>
+  <data name="LastPenanse" xml:space="preserve">
+    <value>Останнє свідчення</value>
+  </data>
+  <data name="AllPenance" xml:space="preserve">
+    <value>Всі свідчення</value>
+  </data>
+  <data name="Initial" xml:space="preserve">
+    <value>початкові</value>
   </data>
 </root>

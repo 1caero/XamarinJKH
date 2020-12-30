@@ -19,6 +19,7 @@
     <None Remove="Resources\app_passport.svg" />
     <None Remove="Resources\app_plumber.svg" />
     <None Remove="Resources\edit.svg" />
+    <None Remove="Resources\ic_all_penance.svg" />
     <None Remove="Resources\crossed.svg" />
     <None Remove="Resources\icon_add_app.svg" />
     <None Remove="Resources\ic_accept_app.svg" />
@@ -101,6 +102,9 @@
     <EmbeddedResource Include="Resources\app_accountaint.svg" />
     <EmbeddedResource Include="Resources\app_domophone.svg" />
     <EmbeddedResource Include="Resources\edit.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ic_all_penance.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource> 
     <EmbeddedResource Include="Resources\crossed.svg">

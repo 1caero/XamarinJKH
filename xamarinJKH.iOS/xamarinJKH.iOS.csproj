@@ -109,6 +109,8 @@
   </PropertyGroup>
   <ItemGroup>
     <BundleResource Include="Resources\crossed.png" />
+    <BundleResource Include="Resources\ic_gas.png" />
+    <BundleResource Include="Resources\ic_heat_energ.png" />
     <BundleResource Include="Resources\ic_microphone.png" />
     <BundleResource Include="Resources\telegram.png" />
     <BundleResource Include="Resources\viber.png" />

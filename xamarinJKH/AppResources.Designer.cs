@@ -241,6 +241,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Все показания.
+        /// </summary>
+        internal static string AllPenance {
+            get {
+                return ResourceManager.GetString("AllPenance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  кол-во: .
         /// </summary>
         internal static string Amount {
@@ -646,7 +655,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Изменить показания.
+        ///   Looks up a localized string similar to Изменить.
         /// </summary>
         internal static string ChangePenance {
             get {
@@ -1826,7 +1835,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Заводской №.
+        ///   Looks up a localized string similar to Заводской №:.
         /// </summary>
         internal static string FacNum {
             get {
@@ -2060,6 +2069,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Начальные.
+        /// </summary>
+        internal static string Initial {
+            get {
+                return ResourceManager.GetString("Initial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Страхование 111 руб..
         /// </summary>
         internal static string InsuranceText {
@@ -2110,6 +2128,15 @@ namespace xamarinJKH {
         internal static string LastCheck {
             get {
                 return ResourceManager.GetString("LastCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Последнее показание.
+        /// </summary>
+        internal static string LastPenanse {
+            get {
+                return ResourceManager.GetString("LastPenanse", resourceCulture);
             }
         }
         
