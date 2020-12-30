@@ -95,11 +95,13 @@
                            BackgroundColor="{AppThemeBinding Dark=#494949, Light=White}"
                            Padding="0,0,0,80"
                            BorderColor="{AppThemeBinding Dark=#494949, Light={x:StaticResource MainColor}}">
-                            <StackLayout Padding="20,12,0,10" Spacing="10">
+                            <StackLayout Padding="20,12,20,10" Spacing="10">
                                 <CollectionView ItemsSource="{Binding Accounts}"
                                             SelectedItem="{Binding SelectedAccount}"
                                             SelectionChangedCommand="{Binding SelectAccount}"
                                             SelectionChangedCommandParameter="{Binding Ident}"
+                                            HorizontalScrollBarVisibility="Never"
+                                            VerticalScrollBarVisibility="Never"
                                                     IsVisible="True"
                                             HeightRequest="60"
                                                     SelectionMode="Single" >
@@ -175,7 +177,9 @@
                                             SelectionChangedCommand="{Binding SelectTyp}"
                                             SelectionChangedCommandParameter="{Binding SelectedTyp}"
                                             HeightRequest="60"
-                                            Margin="0,0,20,0"
+                                            HorizontalScrollBarVisibility="Never"
+                                            VerticalScrollBarVisibility="Never"
+                                            Margin="0,0,0,0"
                                             SelectionMode="Single">
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
