@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:local="clr-namespace:xamarinJKH"
+             Padding="50"
+             x:Class="xamarinJKH.DialogViews.LocationNotification">
+    <Frame CornerRadius="30"
+           VerticalOptions="Center"
+           HorizontalOptions="Center">
+        <StackLayout>
+            <Label Text="Для продолжения работы, дайте разрешение на доступ к геолокации"
+                   FontSize="14"
+                   TextColor="Black"/>
+            <Button CornerRadius="30"
+                    BackgroundColor="{x:StaticResource MainColor}"
+                    Text="{x:Static local:AppResources.Confirm}"
+                    TextColor="White"
+                    Clicked="AskPermission"/>
+        </StackLayout>
+    </Frame>
+</popup:PopupPage>

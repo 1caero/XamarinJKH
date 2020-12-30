@@ -99,7 +99,7 @@
                                             SelectionChanged="CollectionView_SelectionChanged"
                                             SelectionMode="Single">
                                     <CollectionView.ItemsLayout>
-                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
+                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5" SnapPointsAlignment="Start"/>
                                     </CollectionView.ItemsLayout>
 
                                     <CollectionView.ItemTemplate>
@@ -157,50 +157,51 @@
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
                                 </CollectionView>
-
-                                <CollectionView ItemsSource="{Binding Streets}"
+                                <Grid HeightRequest="{Binding Path=Height, Source={x:Reference StreetsCollection}}"
+                                      Padding="0">
+                                    <CollectionView ItemsSource="{Binding Streets}"
                                             SelectionChanged="StreetCollectionSelectionChanged"
                                             SelectedItem="{Binding SelectedStreet}"
                                             IsVisible="True"
                                             HeightRequest="50"
                                             x:Name="StreetsCollection"
                                             SelectionMode="Single">
-                                    <CollectionView.ItemsLayout>
-                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
-                                    </CollectionView.ItemsLayout>
+                                        <CollectionView.ItemsLayout>
+                                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5" SnapPointsAlignment="Start"/>
+                                        </CollectionView.ItemsLayout>
 
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackLayout Padding="2">
-                                                <VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name="CommonStates">
-                                                        <VisualState x:Name="Normal">
-                                                            <VisualState.Setters>
-                                                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#8D8D8D}"/>
-                                                            </VisualState.Setters>
-                                                        </VisualState>
-                                                        <VisualState x:Name="Selected">
-                                                            <VisualState.Setters>
-                                                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#8D8D8D}"/>
-                                                            </VisualState.Setters>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateManager.VisualStateGroups>
-                                                <Frame BorderColor="{Binding Selected, Converter={x:StaticResource Border}}"
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout Padding="2">
+                                                    <VisualStateManager.VisualStateGroups>
+                                                        <VisualStateGroup x:Name="CommonStates">
+                                                            <VisualState x:Name="Normal">
+                                                                <VisualState.Setters>
+                                                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#8D8D8D}"/>
+                                                                </VisualState.Setters>
+                                                            </VisualState>
+                                                            <VisualState x:Name="Selected">
+                                                                <VisualState.Setters>
+                                                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#8D8D8D}"/>
+                                                                </VisualState.Setters>
+                                                            </VisualState>
+                                                        </VisualStateGroup>
+                                                    </VisualStateManager.VisualStateGroups>
+                                                    <Frame BorderColor="{Binding Selected, Converter={x:StaticResource Border}}"
                                                        BackgroundColor="{Binding Selected, Converter={x:StaticResource Background}}"
                                                        x:Name="Frame"
                                                HasShadow="False"
                                                        Padding="10"
                                                        CornerRadius="5">
-                                                    <StackLayout VerticalOptions="Start"
+                                                        <StackLayout VerticalOptions="Start"
                                                        Spacing="0">
-                                                        <Label Text="{Binding Address}"
+                                                            <Label Text="{Binding Address}"
                                                                TextColor="{Binding Source={x:Reference Frame}, Path=BorderColor}"
                                                                FontAttributes="Bold"
                                                                FontSize="16"/>
-                                                    </StackLayout>
+                                                        </StackLayout>
 
-                                                    <!--<VisualStateManager.VisualStateGroups>
+                                                        <!--<VisualStateManager.VisualStateGroups>
                                                     <VisualStateGroup x:Name="CommonStates">
                                                         <VisualState x:Name="Normal">
                                                             <VisualState.Setters>
@@ -217,11 +218,20 @@
                                                         </VisualState>
                                                     </VisualStateGroup>
                                                 </VisualStateManager.VisualStateGroups>-->
-                                                </Frame>
-                                            </StackLayout>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
+                                                    </Frame>
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
+                                    <ActivityIndicator IsVisible="{Binding LoadingStreets}"
+                                                       IsEnabled="{Binding LoadingStreets}"
+                                                       IsRunning="{Binding LoadingStreets}"
+                                                       BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
+                                                       Color="{x:StaticResource MainColor}"/>
+                                </Grid>
+
+                                
                             </StackLayout>
                         </Frame>
                     </StackLayout>

@@ -198,8 +198,16 @@ namespace xamarinJKH.MainConst
             ChangeTheme = new Command(async () => { SetAdminName(); });
             MessagingCenter.Subscribe<Object>(this, "ChangeAdminMonitor", (sender) => ChangeTheme.Execute(null));
             BindingContext = this;
-            Device.BeginInvokeOnMainThread(async () => await StartStatistick());
+            MessagingCenter.Subscribe<Object>(this, "StartStatistic", sender =>
+            {
+                if (!loaded)
+                {
+                    Device.BeginInvokeOnMainThread(async () => await StartStatistick());
+                }
+                loaded = true;
+            });
         }
+        bool loaded;
 
         protected async override void OnAppearing()
         {
@@ -245,6 +253,7 @@ namespace xamarinJKH.MainConst
             periodStatses.Add(result.Month);
             setNotDoingApps(result.TotalUnperformedRequestsList);
             int i = 0;
+            LayoutContent.Children.Clear();
             foreach (var each in periodStatses)
             {
                 var container = AddMonitorPeriod(i, each, DateTime.Now);
@@ -1023,11 +1032,12 @@ namespace xamarinJKH.MainConst
                             Streets.Add(group);
                     }
 
-                    SelectedStreet = Streets[0];
-                    StreetsCollection.ScrollTo(SelectedStreet);
+                    //SelectedStreet = Streets[0];
+                    Streets[0].Selected = true;
+                    StreetsCollection.ScrollTo(Streets[0]);
                     string[] param = null;
                     setListHouse(groups, ref param);
-                    var action = SelectedStreet.Address;
+                    var action = Streets[0].Address;
                     if (action != null && !action.Equals(AppResources.Cancel))
                     {
                         LayoutContent.Children.Clear();
@@ -1035,6 +1045,7 @@ namespace xamarinJKH.MainConst
                         //LabelHouse.Text = action;
                         await getMonitorStandart(-1, Int32.Parse(Houses[action]));
                     }
+                    LoadingStreets = false;
                 });
                 return;
                 string[] param = null;
@@ -1414,6 +1425,17 @@ namespace xamarinJKH.MainConst
             public StackLayout _grid { get; set; }
         }
 
+        bool loadingStreets;
+        public bool LoadingStreets
+        {
+            get => loadingStreets;
+            set
+            {
+                loadingStreets = value;
+                OnPropertyChanged("LoadingStreets");
+            }
+        }
+
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -1430,7 +1452,7 @@ namespace xamarinJKH.MainConst
 
                         selection.Selected = true;
                     }
-
+                    LoadingStreets = true;
                     (sender as CollectionView).ScrollTo(selection);
                     await getHouse();
                 });
@@ -1463,6 +1485,7 @@ namespace xamarinJKH.MainConst
 
                         LayoutContent.Children.Clear();
                         MaterialFrameNotDoingContainer.IsVisible = false;
+                        (sender as CollectionView).ScrollTo(selection);
                         //LabelHouse.Text = action;
                         await getMonitorStandart(-1, Int32.Parse(Houses[action]));
                     }

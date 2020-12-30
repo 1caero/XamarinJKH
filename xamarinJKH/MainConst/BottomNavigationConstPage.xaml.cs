@@ -10,6 +10,12 @@ using Xamarin.Forms.Xaml;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
+using Xamarin.Essentials;
+using Plugin.Permissions.Abstractions;
+using Plugin.Permissions;
+using Rg.Plugins.Popup.Services;
+using xamarinJKH.DialogViews;
+using System.Threading;
 
 namespace xamarinJKH.MainConst
 {
@@ -119,6 +125,11 @@ namespace xamarinJKH.MainConst
                 Device.BeginInvokeOnMainThread(() => RequestsAmount = args);
             });
 
+            MessagingCenter.Subscribe<Object>(this, "LocationRequest", sender =>
+            {
+                OnAppearing();
+            });
+
             BindingContext = this;
 
         }
@@ -173,6 +184,10 @@ namespace xamarinJKH.MainConst
             var i = Children.IndexOf(CurrentPage);
             if (i == 0)
                 MessagingCenter.Send<Object>(this, "UpdateAppCons");
+            if (i == 2)
+            {
+                MessagingCenter.Send<Object>(this, "StartStatistic");
+            }
         }
 
         async void RegisterNewDevice()
@@ -184,6 +199,51 @@ namespace xamarinJKH.MainConst
                 await Task.Delay(500);
             }
             var response = await (new RestClientMP()).RegisterDevice(true);
+        }
+
+        public CancellationToken Token { get; set; }
+        public CancellationTokenSource TokenSource { get; set; }
+        Task GeoLocationTask { get; set; }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            TokenSource = new CancellationTokenSource();
+            Token = TokenSource.Token;
+            var Server = new RestClientMP();
+            var location_perm = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.LocationWhenInUse);
+            if (location_perm != PermissionStatus.Granted)
+            {
+                await PopupNavigation.PushAsync(new LocationNotification());
+            }
+            else
+            {
+                if (GeoLocationTask == null)
+                {
+                    GeoLocationTask = new Task(async () =>
+                    {
+                        while (!Token.IsCancellationRequested)
+                        {
+                            try
+                            {
+                                var location = await Geolocation.GetLocationAsync(new GeolocationRequest
+                                {
+                                    DesiredAccuracy = GeolocationAccuracy.Medium,
+                                    Timeout = TimeSpan.FromSeconds(10)
+                                });
+                                if (location != null)
+                                {
+                                    var result = await Server.SendGeolocation(location.Latitude, location.Longitude);
+                                }
+                            }
+                            catch { }
+                            await Task.Delay(TimeSpan.FromMinutes(5));
+                        }
+                    }, Token);
+                    GeoLocationTask.Start();
+                }
+                
+            }
         }
     }
 }
