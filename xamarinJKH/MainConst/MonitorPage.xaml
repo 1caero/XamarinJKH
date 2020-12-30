@@ -96,6 +96,7 @@
                                             SelectedItem="{Binding SelectedArea}"
                                             IsVisible="True"
                                             HeightRequest="50"
+                                                HorizontalScrollBarVisibility="Never"
                                             SelectionChanged="CollectionView_SelectionChanged"
                                             SelectionMode="Single">
                                     <CollectionView.ItemsLayout>
@@ -164,6 +165,7 @@
                                             SelectedItem="{Binding SelectedStreet}"
                                             IsVisible="True"
                                             HeightRequest="50"
+                                            HorizontalScrollBarVisibility="Never"
                                             x:Name="StreetsCollection"
                                             SelectionMode="Single">
                                         <CollectionView.ItemsLayout>

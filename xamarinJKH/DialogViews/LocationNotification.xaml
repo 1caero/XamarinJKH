@@ -15,11 +15,20 @@
             <Label Text="Для продолжения работы, дайте разрешение на доступ к геолокации"
                    FontSize="14"
                    TextColor="Black"/>
-            <Button CornerRadius="30"
+            <Button CornerRadius="20"
+                    HeightRequest="55"
                     BackgroundColor="{x:StaticResource MainColor}"
                     Text="{x:Static local:AppResources.Confirm}"
                     TextColor="White"
                     Clicked="AskPermission"/>
+
+            <Button CornerRadius="20"
+                    IsVisible="{Binding OpenSettingsVisible}"
+                    HeightRequest="55"
+                    BackgroundColor="{x:StaticResource MainColor}"
+                    Text="{x:Static local:AppResources.OpenSettings}"
+                    TextColor="White"
+                    Clicked="OpenSettings"/>
         </StackLayout>
     </Frame>
 </popup:PopupPage>

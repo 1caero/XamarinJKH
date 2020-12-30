@@ -1734,4 +1734,7 @@ A bot will call you on your number PHONE and tell an access code</value>
   <data name="Initial" xml:space="preserve">
     <value>Initial</value>
   </data>
+  <data name="OpenSettings" xml:space="preserve">
+    <value>Open app settings</value>
+  </data>
 </root>

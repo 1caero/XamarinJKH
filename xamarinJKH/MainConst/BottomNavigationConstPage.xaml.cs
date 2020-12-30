@@ -127,7 +127,39 @@ namespace xamarinJKH.MainConst
 
             MessagingCenter.Subscribe<Object>(this, "LocationRequest", sender =>
             {
-                OnAppearing();
+                TokenSource = new CancellationTokenSource();
+                Token = TokenSource.Token;
+                var Server = new RestClientMP();
+                if (GeoLocationTask == null)
+                {
+                    GeoLocationTask = new Task(async () =>
+                    {
+                        while (!Token.IsCancellationRequested)
+                        {
+                            try
+                            {
+                                var location = await Geolocation.GetLocationAsync(new GeolocationRequest
+                                {
+                                    DesiredAccuracy = GeolocationAccuracy.Medium,
+                                    Timeout = TimeSpan.FromSeconds(10)
+                                });
+                                if (location != null)
+                                {
+                                    var result = await Server.SendGeolocation(location.Latitude, location.Longitude);
+                                }
+                            }
+                            catch { }
+                            await Task.Delay(TimeSpan.FromMinutes(5));
+                        }
+                    }, Token);
+                    GeoLocationTask.Start();
+                }
+            });
+
+            MessagingCenter.Subscribe<Object>(this, "ShowAskPermission", async sender =>
+            {
+                await Task.Delay(TimeSpan.FromMilliseconds(500));
+                await PopupNavigation.PushAsync(new LocationNotification(true));
             });
 
             BindingContext = this;

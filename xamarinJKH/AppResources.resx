@@ -1727,4 +1727,7 @@
   <data name="Initial" xml:space="preserve">
     <value>Начальные</value>
   </data>
+  <data name="OpenSettings" xml:space="preserve">
+    <value>Открыть настройки приложения</value>
+  </data>
 </root>
