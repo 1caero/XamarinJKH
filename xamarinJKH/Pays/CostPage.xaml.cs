@@ -47,10 +47,13 @@ namespace xamarinJKH.Pays
                     await Navigation.PushAsync(new ProfilePage());
             };
             IconViewProfile.GestureRecognizers.Add(profile);
-
+            
             var techSend = new TapGestureRecognizer();
             techSend.Tapped += async (s, e) => {    await Navigation.PushAsync(new AppPage());};
             LabelTech.GestureRecognizers.Add(techSend);
+            var pay = new TapGestureRecognizer();
+            pay.Tapped += async (s, e) => Pay(FrameBtnLogin, null);
+            FrameBtnLogin.GestureRecognizers.Add(pay);
             var pickLs = new TapGestureRecognizer();
             pickLs.Tapped += async (s, e) => {  
                 Device.BeginInvokeOnMainThread(() =>
