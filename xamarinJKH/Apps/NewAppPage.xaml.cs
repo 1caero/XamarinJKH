@@ -170,13 +170,14 @@ _appModel = new AddAppModel()
                 if (name.Contains("пропуск"))
                 {
                     SetPassApp();
+                    SaveText = EntryMess.Text;
                     EntryMess.Text = AppResources.NamePassApp;
                     isPassAPP = true;
                 }
                 else
                 {
                     SetDefaultApp();
-                    // EntryMess.Text = "";
+                    EntryMess.Text = SaveText;
                     isPassAPP = false;
                 }
             });
@@ -921,6 +922,8 @@ _appModel = new AddAppModel()
             FrameEntryMess.IsVisible = true;
             LayoutPassApp.IsVisible = false;
         }
+
+        string SaveText { get; set; }
         
         private void pickerType_SelectedIndexChanged(object sender, EventArgs e)
         {
