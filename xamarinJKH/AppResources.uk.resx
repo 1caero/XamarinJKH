@@ -1598,4 +1598,7 @@
   <data name="EnterTextPush" xml:space="preserve">
     <value>Введіть текст повідомлення ...</value>
   </data>
+  <data name="OpenSettings" xml:space="preserve">
+    <value>Відкрити налаштування програми</value>
+  </data>
 </root>

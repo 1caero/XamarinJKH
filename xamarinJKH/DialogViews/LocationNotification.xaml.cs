@@ -18,9 +18,21 @@ namespace xamarinJKH.DialogViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LocationNotification : PopupPage
     {
-        public LocationNotification()
+        bool openSettings;
+        public bool OpenSettingsVisible
+        {
+            get => openSettings;
+            set
+            {
+                openSettings = value;
+                OnPropertyChanged("OpenSettingsVisible");
+            }
+        }
+        public LocationNotification(bool settings = false)
         {
             InitializeComponent();
+            OpenSettingsVisible = settings;
+            BindingContext = this;
         }
 
         public async void AskPermission(object sender, EventArgs args)
@@ -29,12 +41,26 @@ namespace xamarinJKH.DialogViews
             {
                 var result = await CrossPermissions.Current.RequestPermissionsAsync(Permission.LocationWhenInUse);
                 if (result[Permission.LocationWhenInUse] == PermissionStatus.Granted)
-                    await PopupNavigation.PopAllAsync();
-                else
+                {
                     MessagingCenter.Send<Object>(this, "LocationRequest");
+                    await PopupNavigation.PopAllAsync();
+                }
+                else
+                {
+                    throw new Exception("AskPerm");
+                }
             }
-            catch { }
+            catch (Exception e)
+            {
+                MessagingCenter.Send<Object>(this, "ShowAskPermission");
+                await PopupNavigation.PopAllAsync();
+            }
             
+        }
+
+        public void OpenSettings(object sender, EventArgs args)
+        {
+            CrossPermissions.Current.OpenAppSettings();
         }
     }
 }

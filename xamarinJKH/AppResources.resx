@@ -1718,4 +1718,7 @@
   <data name="EnterTextPush" xml:space="preserve">
     <value>Введите текст уведомления...</value>
   </data>
+  <data name="OpenSettings" xml:space="preserve">
+    <value>Открыть настройки приложения</value>
+  </data>
 </root>

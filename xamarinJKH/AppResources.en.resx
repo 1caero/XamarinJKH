@@ -1725,4 +1725,7 @@ A bot will call you on your number PHONE and tell an access code</value>
   <data name="EnterTextPush" xml:space="preserve">
     <value>Enter your notification text ...</value>
   </data>
+  <data name="OpenSettings" xml:space="preserve">
+    <value>Open app settings</value>
+  </data>
 </root>
