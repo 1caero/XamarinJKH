@@ -459,19 +459,19 @@ namespace xamarinJKH.Counters
             //    }
             //}
 
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                if (Device.RuntimePlatform == Device.Android)
-                    await Task.Delay(100);
-                else
-                    await Task.Delay(900);
-                var entry = (Entry)sender;
-                if (!string.IsNullOrWhiteSpace(entry.Text))
-                {
-                    entry.CursorPosition = 0;
-                    entry.SelectionLength = entry.Text.Length;
-                }
-            });
+            // Device.BeginInvokeOnMainThread(async () =>
+            // {
+            //     if (Device.RuntimePlatform == Device.Android)
+            //         await Task.Delay(100);
+            //     else
+            //         await Task.Delay(900);
+            //     var entry = (Entry)sender;
+            //     if (!string.IsNullOrWhiteSpace(entry.Text))
+            //     {
+            //         entry.CursorPosition = 0;
+            //         entry.SelectionLength = entry.Text.Length;
+            //     }
+            // });
         }
 
         private void SetCurrent(decimal counterThisMonth)
