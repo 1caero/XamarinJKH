@@ -191,6 +191,10 @@ namespace xamarinJKH.Main
                 {
                     SaveInfoAccount(EntryFio.Text, EntryEmail.Text);
                 }
+                else
+                {
+                    await DisplayAlert(null, AppResources.CorrectEmail, "OK");
+                }
             }
             else
             {
