@@ -337,7 +337,7 @@ namespace xamarinJKH.AppsConst
 
                 // LabelText.Text = "• " + TextApp;
 
-                LabelText.Text = TextApp;
+                LabelText.Text = TextApp.Trim();
                 LabelAddressApp.Text = AddressApp;
                 if (Status.ToString().Contains("выполнена") || Status.ToString().Contains("закрыл"))
                 {

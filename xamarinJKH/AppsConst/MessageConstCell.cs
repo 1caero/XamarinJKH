@@ -104,11 +104,11 @@ namespace xamarinJKH.AppsConst
             imageA.Source = "ic_file_download";
 
             imageHiden.IsVisible = message.IsHidden;
-            imageHiden.HorizontalOptions = LayoutOptions.Start;
-            imageHiden.VerticalOptions = LayoutOptions.Center;
+            imageHiden.HorizontalOptions = LayoutOptions.End;
+            imageHiden.VerticalOptions = LayoutOptions.End;
             imageHiden.HeightRequest = 20;
             imageHiden.WidthRequest = 20;
-            imageHiden.Margin = new Thickness(-10, -10, 0, 0);
+            imageHiden.Margin = new Thickness(0, -10, -10, 0);
             imageHiden.Foreground = (Color) Application.Current.Resources["MainColor"];
             imageHiden.Source = "ic_close_password";
 
@@ -327,7 +327,7 @@ namespace xamarinJKH.AppsConst
 
             imageHiden.IsVisible = message.IsHidden;
             imageHiden.HorizontalOptions = LayoutOptions.Start;
-            imageHiden.VerticalOptions = LayoutOptions.Center;
+            imageHiden.VerticalOptions = LayoutOptions.End;
             imageHiden.HeightRequest = 20;
             imageHiden.WidthRequest = 20;
             imageHiden.Margin = new Thickness(-10, -10, 0, 0);
@@ -375,9 +375,14 @@ namespace xamarinJKH.AppsConst
             stackLayoutIconB.Orientation = StackOrientation.Horizontal;
             stackLayoutIconB.Spacing = 0;
 
+            Grid grid = new Grid();
+            grid.Children.Add(frameText);
+            grid.Children.Add(imageHiden);
+            
             stackLayoutIconB.Children.Add(frame);
-            stackLayoutIconB.Children.Add(frameText);
-            stackLayoutIconB.Children.Add(imageHiden);
+            stackLayoutIconB.Children.Add(grid);
+
+            // stackLayoutIconB.Children.Add(frameText);
 
 
             frameDate.HorizontalOptions = LayoutOptions.Center;
