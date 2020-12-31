@@ -123,13 +123,15 @@ namespace xamarinJKH.DialogViews
             foreach (var each in meterValueInfo)
             {
                 each.TariffNumberInt = mInfo.TariffNumberInt;
+                each.ValueT2 ??= 0;
+                each.ValueT3 ??= 0;
             }
             meterValueInfo.Add(new MeterValueInfo
             {
                 Period = AppResources.Initial,
                 Value = string.IsNullOrWhiteSpace(mInfo.StartValue.ToString()) ? 0 : mInfo.StartValue.Value,
-                ValueT2 = mInfo.StartValueT2,
-                ValueT3 = mInfo.StartValueT3,
+                ValueT2 = mInfo.StartValueT2 ?? 0,
+                ValueT3 = mInfo.StartValueT3 ?? 0,
                 TariffNumberInt = mInfo.TariffNumberInt
             });
             return meterValueInfo;
@@ -152,8 +154,8 @@ namespace xamarinJKH.DialogViews
                     List<string> valuesT = new List<string>
                     {
                         mInfo.Values[0].Value.ToString(),
-                        mInfo.Values[0].ValueT2.ToString(),
-                        mInfo.Values[0].ValueT3.ToString()
+                        mInfo.Values[0].ValueT2.ToString() ?? "0",
+                        mInfo.Values[0].ValueT3.ToString() ?? "0"
                     };
                     values = "";
                     for (int i = 0; i < mInfo.TariffNumberInt; i++)

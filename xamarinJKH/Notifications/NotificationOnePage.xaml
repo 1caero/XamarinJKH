@@ -9,82 +9,35 @@
              x:Class="xamarinJKH.Notifications.NotificationOnePage">
     <ContentPage.Content>
         <StackLayout>
-             <pancakeView:PancakeView
-                Padding="0"
-                CornerRadius="0,0,25,25"
-                BackgroundColor="{AppThemeBinding Light=White, Dark=#131313}"
-                HorizontalOptions="Fill"
-                IsVisible="False"
-                MinimumHeightRequest="102"
-                BorderThickness="1"
-                VerticalOptions="Start"
-                x:Name="Pancake"
-                IsClippedToBounds="True">
-                <Grid IsClippedToBounds="True">
-                    <StackLayout Orientation="Horizontal"
-                                 VerticalOptions="Fill"
-                                 HorizontalOptions="FillAndExpand">
-                        <StackLayout Padding="10"
-                                     HorizontalOptions="FillAndExpand">
-                            <StackLayout
-                                Spacing="0"
-                                Orientation="Horizontal">
-                                <forms:SvgCachedImage
-                                    x:Name="IconViewLogin"
-                                    Source="resource://xamarinJKH.Resources.ic_phone.svg"
-                                    HeightRequest="15"
-                                    WidthRequest="15"
-                                    Margin="0, 0,5,0"
-                                    HorizontalOptions="Start"
-                                    ReplaceStringMap="{Binding Files, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
-                                    VerticalOptions="Center" />
-                                <Label x:Name="LabelPhone"
-                                       Text="Телефон"
-                                       FontSize="14"
-                                       TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                                       Margin="0, 0, 0, 0"
-                                       VerticalOptions="Center" />
-                            </StackLayout>
-                        </StackLayout>
-                        <pancakeView:PancakeView
-                            BorderColor="Gray"
-                            x:Name="PancakeViewIcon"
-                            BorderThickness="1"
-                            Padding="5"
-                            CornerRadius="25,0,25,25"
-                            BackgroundColor="White"
-                            HorizontalOptions="End"
-                            IsClippedToBounds="True">
-                            <Image x:Name="IconViewNameUk"
-                                   Source="icon_login"
-                                   HeightRequest="70" />
-                        </pancakeView:PancakeView>
-                    </StackLayout>
-                </Grid>
-            </pancakeView:PancakeView>
-            
-            <StackLayout HorizontalOptions="FillAndExpand" x:Name="Pancake2" IsVisible="{OnPlatform iOS=true, Android=false}" 
-                         BackgroundColor="{AppThemeBinding Light=White, Dark=Black}"></StackLayout>
-            
+            <StackLayout HorizontalOptions="FillAndExpand" x:Name="Pancake2"
+                         IsVisible="{OnPlatform iOS=true, Android=false}"
+                         BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" />
+
             <StackLayout
-                Margin="25,0,15,0"
+                Margin="25,10,15,0"
                 Orientation="Horizontal"
-                >
-                <Label x:Name="UkName"
+                x:Name="Pancake">
+                <Label x:Name="UkName" VerticalOptions="Center"
                        Text="Название"
-                       IsVisible="False"
                        FontAttributes="Bold"
                        HorizontalOptions="StartAndExpand"
                        FontSize="15"
                        TextColor="{AppThemeBinding Light=Black, Dark=Black}" />
-               
+                <StackLayout
+                    HorizontalOptions="EndAndExpand"
+                    Orientation="Horizontal">
+                    <!--BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"-->
+                    <xamarinJkh:ButtonSupport x:Name="LabelTech" IsBlack="True"/>
+                    <xamarinJkh:ButtonProfile x:Name="IconViewProfile" IsBlack="True" Margin="2,0,5,0" />
+
+                </StackLayout>
             </StackLayout>
             <StackLayout Margin="0,20,0,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <StackLayout  VerticalOptions="Center"
-                    x:Name="BackStackLayout"
-                    Orientation="Horizontal"
-                    Margin="20, 0, 0, 0"
-                    HorizontalOptions="StartAndExpand">
+                <StackLayout VerticalOptions="Center"
+                             x:Name="BackStackLayout"
+                             Orientation="Horizontal"
+                             Margin="10, 0, 10, 0"
+                             HorizontalOptions="StartAndExpand">
                     <forms:SvgCachedImage
                         Source="resource://xamarinJKH.Resources.ic_arrow_back.svg"
                         HeightRequest="20"
@@ -93,57 +46,21 @@
                         VerticalOptions="Center" />
                     <Label
                         Text="{x:Static xamarinJkh:AppResources.Back}"
-                        FontSize="15"
+                        FontSize="17"
+                        x:Name="LabelTitle"
                         TextColor="Black"
+                        FontAttributes="Bold"
                         VerticalOptions="Center"
                         HorizontalOptions="Start" />
                 </StackLayout>
-                <StackLayout
-                    HorizontalOptions="EndAndExpand"
-                    Margin="0,0,15,0"
-                    Orientation="Horizontal">
-                    <xamarinJkh:ButtonSupport x:Name="LabelTech" IsBlack="True"></xamarinJkh:ButtonSupport>
-                    <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" IsBlack="True" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
-
-                    <!--<forms:SvgCachedImage
-                        x:Name="IconViewTech"
-                        Source="resource://xamarinJKH.Resources.ic_tech.svg"
-                        HeightRequest="25"
-                        WidthRequest="25"
-                        Margin="0, 0,5,0"
-                        HorizontalOptions="Start"
-                        ReplaceStringMap="{Binding Files, Converter={x:StaticResource SvgColor}, ConverterParameter='#000000'}"
-                        VerticalOptions="Center" />
-                    <Label x:Name="LabelTech"
-                           Text="{x:Static xamarinJkh:AppResources.Support}"
-                           FontSize="12"
-                           TextDecorations="Underline"
-                           TextColor="Black"
-                           Margin="-10, 0, 0, 0"
-                           VerticalOptions="Center" />
-                    <forms:SvgCachedImage x:Name="IconViewProfile" Margin="15,0,5,0"
-                                                Source="resource://xamarinJKH.Resources.ic_profile_top.svg"
-                                                HeightRequest="20"
-                                                ReplaceStringMap="{Binding Files, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"                                                
-                                                BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="Center"/>-->
-                </StackLayout>
             </StackLayout>
-
             <ScrollView Orientation="Vertical"
                         Margin="0, 0, 0, 0">
                 <StackLayout
                     VerticalOptions="StartAndExpand">
                     <StackLayout
                         Spacing="0"
-                        Margin="20">
-                        <Label x:Name="LabelTitle"
-                               FontAttributes="Bold"
-                               FontSize="20"
-                               HorizontalOptions="StartAndExpand"
-                               TextColor="Black"
-                               Text="Заголовок" />
+                        Margin="35,0,35,0">
                         <Label x:Name="LabelDate"
                                HorizontalOptions="Start"
                                TextColor="Black"
@@ -160,8 +77,7 @@
                            IsVisible="False"
                            HeightRequest="200"
                            Aspect="Fill"
-                           Source="ic_background_event"
-                    />
+                           Source="ic_background_event" />
                     <Frame CornerRadius="15"
                            BackgroundColor="Red"
                            Margin="40, 10, 40, 0"
@@ -176,11 +92,11 @@
                                 BackgroundColor="Transparent"
                                 Clicked="ButtonClick" />
                     </Frame>
-                    <CollectionView ItemsSource="{Binding Files}" 
+                    <CollectionView ItemsSource="{Binding Files}"
                                     SelectionMode="Single"
                                     SelectionChanged="OnCollectionViewSelectionChanged"
-                                    HorizontalOptions="CenterAndExpand"  x:Name="CollectionViewFiles">
-                        
+                                    HorizontalOptions="CenterAndExpand" x:Name="CollectionViewFiles">
+
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Grid Padding="10" HorizontalOptions="CenterAndExpand">
@@ -191,19 +107,18 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <xamarinJkh:IconView 
-                                           Source="ic_file_download"
-                                           Grid.Row="0"
-                                           Foreground="{x:DynamicResource MainColor}"
-                                           HeightRequest="60"
-                                           HorizontalOptions="CenterAndExpand"
-                                           WidthRequest="60" />
+                                    <xamarinJkh:IconView
+                                        Source="ic_file_download"
+                                        Grid.Row="0"
+                                        Foreground="{x:DynamicResource MainColor}"
+                                        HeightRequest="60"
+                                        HorizontalOptions="CenterAndExpand"
+                                        WidthRequest="60" />
                                     <Label Grid.Column="0"
                                            Grid.Row="1"
                                            HorizontalTextAlignment="Center"
                                            Text="{Binding Description}"
-                                           FontAttributes="Bold"
-                                            />
+                                           FontAttributes="Bold" />
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

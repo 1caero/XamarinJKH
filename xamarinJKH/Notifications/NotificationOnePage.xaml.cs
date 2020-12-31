@@ -18,6 +18,7 @@ using xamarinJKH.Main;
 using xamarinJKH.Questions;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
+using xamarinJKH.Shop;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
 using FileInfo = xamarinJKH.Server.RequestModel.FileInfo;
@@ -80,7 +81,7 @@ namespace xamarinJKH.Notifications
 
             
             };
-            LabelPhone.GestureRecognizers.Add(call);
+            // LabelPhone.GestureRecognizers.Add(call);
             var backClick = new TapGestureRecognizer();
             backClick.Tapped += async (s, e) => { close(); };
             BackStackLayout.GestureRecognizers.Add(backClick);
@@ -99,15 +100,15 @@ namespace xamarinJKH.Notifications
         async void SetText()
         {
             UkName.Text = Settings.MobileSettings.main_name;
-            if (!string.IsNullOrWhiteSpace(Settings.Person.companyPhone))
-            {
-                LabelPhone.Text = "+" + Settings.Person.companyPhone.Replace("+", "");
-            }
-            else
-            {
-                IconViewLogin.IsVisible = false;
-                LabelPhone.IsVisible = false;
-            }
+            // if (!string.IsNullOrWhiteSpace(Settings.Person.companyPhone))
+            // {
+            //     LabelPhone.Text = "+" + Settings.Person.companyPhone.Replace("+", "");
+            // }
+            // else
+            // {
+            //     IconViewLogin.IsVisible = false;
+            //     LabelPhone.IsVisible = false;
+            // }
             LabelTitle.Text = _announcementInfo.Header;
             LabelDate.Text = _announcementInfo.Created;
             LabelText.Text = _announcementInfo.Text;
@@ -126,7 +127,15 @@ namespace xamarinJKH.Notifications
                     var openAdditional = new TapGestureRecognizer();
                     openAdditional.Tapped += async (s, e) =>
                     {
-                        await Navigation.PushAsync(new AdditionalOnePage(_additional));
+                        if (_additional.ShopID == null)
+                        {
+                            await Navigation.PushAsync(new AdditionalOnePage(_additional));
+                        }
+                        else
+                        {
+                            if (Navigation.NavigationStack.FirstOrDefault(x => x is ShopPageNew) == null)
+                                await Navigation.PushAsync(new ShopPageNew(_additional));
+                        }
                     };
                     ImageAdd.GestureRecognizers.Add(openAdditional);
                 }
@@ -139,10 +148,10 @@ namespace xamarinJKH.Notifications
             }
             
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            
-            Pancake.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
-            PancakeViewIcon.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);if (Device.RuntimePlatform == Device.iOS){ if (AppInfo.PackageName == "rom.best.saburovo" || AppInfo.PackageName == "sys_rom.ru.tsg_saburovo"){PancakeViewIcon.Padding = new Thickness(0);}}
+            // IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
+            //
+            // Pancake.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
+            // PancakeViewIcon.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);if (Device.RuntimePlatform == Device.iOS){ if (AppInfo.PackageName == "rom.best.saburovo" || AppInfo.PackageName == "sys_rom.ru.tsg_saburovo"){PancakeViewIcon.Padding = new Thickness(0);}}
             //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.Black);
             //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.Black);
         }
