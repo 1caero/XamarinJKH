@@ -526,6 +526,8 @@
                                                                VerticalOptions="FillAndExpand"
                                                                Text=""
                                                                WidthRequest="300"
+                                                               HeightRequest="60"
+                                                               Keyboard="Chat"
                                                                AutoSize="TextChanges"
                                                                Placeholder="{x:Static xamarinJkh:AppResources.NewAppDescription}"
                                                                TextColor="#A2A2A2"
