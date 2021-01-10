@@ -170,6 +170,17 @@ namespace xamarinJKH.Pays
             SelectedAcc = Accounts[0];
             BindingContext = this;
             additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
+
+            MessagingCenter.Subscribe<Object>(this, "ChangeTheme", (sender) =>
+            {
+                if (Accounts != null)
+                {
+                    foreach (var account in Accounts)
+                        account.Selected = false;
+
+                    Accounts[Accounts.IndexOf(SelectedAcc)].Selected = true;
+                }
+            });
         }
 
 
@@ -235,6 +246,22 @@ namespace xamarinJKH.Pays
 
         private void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
+        }
+
+        private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (var acc in Accounts)
+            {
+                acc.Selected = false;
+            }
+
+            var selection = e.CurrentSelection[0] as AccountAccountingInfo;
+            selection.Selected = true;
+
+            SelectedAcc = selection;
+
+            additionalList.ItemsSource = setPays(selection);
+            Analytics.TrackEvent("Смена лс на " + selection.Ident);
         }
     }
 }
