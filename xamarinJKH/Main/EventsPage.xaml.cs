@@ -447,7 +447,10 @@ namespace xamarinJKH.Main
                         ShowAnnouncements = data.Announcements.Count != 0 && Settings.NotifVisible && isPerson;
                     
                     MobileMenu mobileMenu = Settings.MobileSettings.menu.Find(x => x.name_app == "Web-камеры");
-                    ShowCameras =  mobileMenu != null && mobileMenu.visible != 0 && Settings.Person.Accounts.Count > 0;
+                    if (mobileMenu != null)
+                    {
+                        ShowCameras = mobileMenu != null && mobileMenu.visible != 0 && Settings.Person.Accounts.Count > 0;
+                    }
 
                     if (!RestClientMP.SERVER_ADDR.ToLower().Contains("water"))
                     {
