@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using xamarinJKH.ViewModels;
 
 namespace xamarinJKH.Server.RequestModel
 {
-    public class AccountAccountingInfo
+    public class AccountAccountingInfo:BaseViewModel
     {
         public string Ident { get; set; }
         public string AccountID  { get; set; }
@@ -24,6 +25,16 @@ namespace xamarinJKH.Server.RequestModel
         // Оплаты, не обработанные УО
         public List<PaymentInfo> PendingPayments { get; set; }
         public string Error { get; set; }
+        bool selected;
+        public bool Selected
+        {
+            get => selected;
+            set
+            {
+                selected = value;
+                OnPropertyChanged("Selected");
+            }
+        }
     }
     
     public class BillInfo 
