@@ -314,10 +314,10 @@ namespace xamarinJKH.Main
                                 }
                                 else
                                 {
-                                    //var counterThisMonth =  0;
+                                    var counterThisMonth = select.StartValue ?? 0;
                                     if (Navigation.NavigationStack.FirstOrDefault(x => x is AddMetersPage) == null)
                                         await Navigation.PushAsync(new AddMetersPage(@select, _meterInfo, this, 0,
-                                            0));
+                                            counterThisMonth));
                                 }
 
                                 //if (select.Values.Count >= 1 && int.Parse(select.Values[0].Period.Split('.')[1]) ==

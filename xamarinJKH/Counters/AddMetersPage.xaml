@@ -103,7 +103,9 @@
                         <StackLayout Orientation="Horizontal"
                                      HorizontalOptions="CenterAndExpand">
                             <Image x:Name="img"
-                                WidthRequest="25"/>
+                                   HeightRequest="30"
+                                   VerticalOptions="Center"
+                                   WidthRequest="30"/>
                             <Label x:Name="NameLbl"
                                 Text="{x:Static xamarinJkh:AppResources.Ident}"
                                 HeightRequest="20"
