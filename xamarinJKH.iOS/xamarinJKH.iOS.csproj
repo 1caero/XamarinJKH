@@ -510,11 +510,11 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\ic_close_password.png">
+    <BundleResource Include="Resources\ic_close_password.png">
       <SubType>
       </SubType>
       <Generator>
       </Generator>
-    </AndroidResource>
+    </BundleResource>
   </ItemGroup>
 </Project>
