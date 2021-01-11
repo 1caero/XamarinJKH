@@ -100,12 +100,12 @@
                                             SelectionChanged="CollectionView_SelectionChanged"
                                             SelectionMode="Single">
                                     <CollectionView.ItemsLayout>
-                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5" SnapPointsAlignment="Start"/>
+                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="{OnPlatform Android='5'}" SnapPointsAlignment="Start"/>
                                     </CollectionView.ItemsLayout>
 
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
-                                            <StackLayout Padding="2">
+                                            <StackLayout Padding="{OnPlatform iOS='2,2,10,2' , Android='2'}">
                                                 <VisualStateManager.VisualStateGroups>
                                                     <VisualStateGroup x:Name="CommonStates">
                                                         <VisualState x:Name="Normal">
@@ -169,12 +169,12 @@
                                             x:Name="StreetsCollection"
                                             SelectionMode="Single">
                                         <CollectionView.ItemsLayout>
-                                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5" SnapPointsAlignment="Start"/>
+                                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="{OnPlatform Android='5'}" SnapPointsAlignment="Start"/>
                                         </CollectionView.ItemsLayout>
 
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate>
-                                                <StackLayout Padding="2">
+                                                <StackLayout Padding="{OnPlatform iOS='2,2,10,2' , Android='2'}">
                                                     <VisualStateManager.VisualStateGroups>
                                                         <VisualStateGroup x:Name="CommonStates">
                                                             <VisualState x:Name="Normal">
