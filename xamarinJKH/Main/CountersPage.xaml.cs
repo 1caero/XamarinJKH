@@ -79,18 +79,26 @@ namespace xamarinJKH.Main
 
         public async Task RefreshCountersData()
         {
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            try
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                    await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
-                return;
-            }
+                if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                        await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
+                    return;
+                }
 
-            Device.BeginInvokeOnMainThread( () =>
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    if (!IsRefreshing)
+                        aIndicator.IsVisible = true;
+                });
+            }
+            catch
             {
-                if(!IsRefreshing)
-                aIndicator.IsVisible = true;
-            });
+
+            }
+            
 
             try
             {
@@ -177,9 +185,9 @@ namespace xamarinJKH.Main
                                         SelectedAccount = Accounts[0];
 
                                 }
-                                else if (SelectedAccount.Ident == AppResources.All)
+                                else if (SelectedAccount.Ident == AppResources.All && Accounts.Count > 0)
                                     SelectedAccount = Accounts[0];
-                                else if (!Accounts.Contains(SelectedAccount))
+                                else if (!Accounts.Contains(SelectedAccount) && Accounts.Count > 0)
                                 {
                                     SelectedAccount = Accounts[0];
                                     foreach (var account in Accounts)
@@ -213,6 +221,8 @@ namespace xamarinJKH.Main
                                     HeightRequest = 400
                                 });
                             }
+                            
+                            if (meters_.Count > 0)
 
                             foreach (var mi in meters_)
                             {

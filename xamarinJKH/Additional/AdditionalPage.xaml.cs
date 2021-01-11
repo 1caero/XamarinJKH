@@ -388,15 +388,17 @@ namespace xamarinJKH.Additional
                         Source = service.LogoLink
                     };
                     pic.Content = cachedImage;
-                    
+
                     Label labelText = new Label()
                     {
-                        TextColor=Color.Black,
-                        Text=service.Name.Replace(" ","\n"),
+                        TextColor = Color.Black,
+                        Text = FormatName(service.Name),//.Replace("\\n","\n"),
                         VerticalTextAlignment=TextAlignment.Center,
                         HorizontalOptions=LayoutOptions.Center,
                         FontSize=12,
                         HorizontalTextAlignment=TextAlignment.Center
+                        //LineBreakMode = LineBreakMode.WordWrap,
+                        //WidthRequest = 100
                     };
                     stackLayoutCon.Children.Add(pic);
                     stackLayoutCon.Children.Add(labelText);
@@ -428,7 +430,18 @@ namespace xamarinJKH.Additional
             StackLayoutContainer.Content = containerData;
         }
 
+        string FormatName(string input)
+        {
+            if (input.Contains("\\n"))
+            {
+                return input.Replace("\\n", "\n");
+            }
 
+            else
+            {
+                return input.Replace(" ", "\n");
+            }
+        }
         private async void OnItemTapped(object sender, SelectionChangedEventArgs e)
         {
             AdditionalService select = e.CurrentSelection[0] as AdditionalService;

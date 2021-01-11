@@ -202,17 +202,22 @@ namespace xamarinJKH.Main
             hex = Color.FromHex(!string.IsNullOrEmpty(Settings.MobileSettings.color)
                 ? Settings.MobileSettings.color
                 : "#FF0000");
+            Analytics.TrackEvent("Заявки жителя - определили основной цвет");
             BindingContext = viewModel = new AppsPageViewModel();
-
+            Analytics.TrackEvent("Заявки жителя - создали/прибиндили модель");
             aIndicator.Color = hex;
 
             NavigationPage.SetHasNavigationBar(this, false);
             MessagingCenter.Subscribe<Object>(this, "AutoUpdate", (sender) => { StartAutoUpdate(); });
+            Analytics.TrackEvent("Заявки жителя - подписались на автообновление");
 
             MessagingCenter.Subscribe<Object>(this, "StartRefresh", (sender) => 
             { Device.BeginInvokeOnMainThread(() => aIndicator.IsVisible = true); });
+            Analytics.TrackEvent("Заявки жителя-подписались на обновление");
+
             MessagingCenter.Subscribe<Object>(this, "EndRefresh", (sender) => 
             { Device.BeginInvokeOnMainThread(() => aIndicator.IsVisible = false); });
+            Analytics.TrackEvent("Заявки жителя-подписались на окончание обновления");
 
             var goAddIdent = new TapGestureRecognizer();
             goAddIdent.Tapped += async (s, e) =>
@@ -222,8 +227,8 @@ namespace xamarinJKH.Main
                     await Navigation.PushAsync(new AddIdent((PaysPage) Settings.mainPage));
             };
             StackLayoutIdent.GestureRecognizers.Add(goAddIdent);
+            Analytics.TrackEvent("Заявки жителя-добавили обработку тапа добавления счета");
 
-            
 
             switch (Device.RuntimePlatform)
             {
@@ -251,6 +256,8 @@ namespace xamarinJKH.Main
                     break;
             }
 
+            Analytics.TrackEvent("Заявки жителя-платформозависимый код выполнен");
+
             var profile = new TapGestureRecognizer();
             profile.Tapped += async (s, e) =>
             {
@@ -259,33 +266,43 @@ namespace xamarinJKH.Main
             };
             IconViewProfile.GestureRecognizers.Add(profile);
 
+            Analytics.TrackEvent("Заявки жителя-добавили обработку тапа Профиля");
+
             var techSend = new TapGestureRecognizer();
             techSend.Tapped += async (s, e) => { await Navigation.PushAsync(new Tech.AppPage()); };
             LabelTech.GestureRecognizers.Add(techSend);
-            var call = new TapGestureRecognizer();
-            call.Tapped += async (s, e) =>
-            {
-                if (Settings.Person.Phone != null)
-                {
-                    IPhoneCallTask phoneDialer;
-                    phoneDialer = CrossMessaging.Current.PhoneDialer;
-                    if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone))
-                        phoneDialer.MakePhoneCall(
-                            System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
-                }
-            };
+            Analytics.TrackEvent("Заявки жителя-добавили обработку тапа Техподдержки");
+
+            //var call = new TapGestureRecognizer();
+            //call.Tapped += async (s, e) =>
+            //{
+            //    if (Settings.Person.Phone != null)
+            //    {
+            //        IPhoneCallTask phoneDialer;
+            //        phoneDialer = CrossMessaging.Current.PhoneDialer;
+            //        if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone))
+            //            phoneDialer.MakePhoneCall(
+            //                System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+            //    }
+            //};
+
             var addClick = new TapGestureRecognizer();
             addClick.Tapped += async (s, e) => { startNewApp(FrameBtnAdd, null); };
             FrameBtnAdd.GestureRecognizers.Add(addClick);
+            Analytics.TrackEvent("Заявки жителя-добавление обработки тапа кнопки Новая заявка андроид");
             var addClickIOS = new TapGestureRecognizer();
             addClickIOS.Tapped += async (s, e) => { startNewApp(FrameBtnAddIos, null); };
             FrameBtnAddIos.GestureRecognizers.Add(addClickIOS);
+            Analytics.TrackEvent("Заявки жителя-добавление обработки тапа кнопки Новая заявка иос");
+
             SetText();
+            Analytics.TrackEvent("Заявки жителя-SetText выполнено");
             //getApps();
             additionalList.BackgroundColor = Color.Transparent;
             additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
             this.CancellationTokenSource = new CancellationTokenSource();
             MessagingCenter.Subscribe<Object>(this, "UpdateAppCons", (sender) => RefreshData());
+            Analytics.TrackEvent("Заявки жителя-UpdateAppCons подписались");
             MessagingCenter.Subscribe<Object, int>(this, "CloseAPP", async (sender, args) =>
             {
                 await RefreshData();
@@ -308,11 +325,14 @@ namespace xamarinJKH.Main
                     });
                 }
             });
+            Analytics.TrackEvent("Заявки жителя-CloseAPP подписались");
             viewModel.LoadRequests.Execute(null);
-
+            Analytics.TrackEvent("Заявки жителя-LoadRequests");
             //            PropertyChanged = "change"
 
             SwitchApp.Toggled += SwitchApp_Toggled;
+            Analytics.TrackEvent("Заявки жителя-SwitchApp.Toggled подписались");
+
             MessagingCenter.Subscribe<Object>(this, "ChangeThemeCounter", (sender) =>
             {
                 OSAppTheme currentTheme = Application.Current.RequestedTheme;
@@ -331,6 +351,7 @@ namespace xamarinJKH.Main
 
                 //IconViewTech.ReplaceStringMap = colors;
             });
+            Analytics.TrackEvent("Заявки жителя-ChangeThemeCounter подписались");
 
             MessagingCenter.Subscribe<Object, int>(this, "OpenApp", async (sender, index) =>
             {
@@ -359,6 +380,8 @@ namespace xamarinJKH.Main
                 }
             });
 
+            Analytics.TrackEvent("Заявки жителя-OpenApp подписались");
+
             MessagingCenter.Subscribe<Object, string>(this, "RemoveIdent", (sender, args) =>
            {
                if (args == null)
@@ -366,6 +389,7 @@ namespace xamarinJKH.Main
                    viewModel.Requests.Clear();
                }
            });
+            Analytics.TrackEvent("Заявки жителя-RemoveIdent подписались");
         }
 
         private void SwitchApp_Toggled(object sender, ToggledEventArgs e)
