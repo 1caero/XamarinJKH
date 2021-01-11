@@ -147,7 +147,8 @@ namespace xamarinJKH
 
         void setQuestVisible()
         {
-            Container.Children.Add(_contentQuest[quest]);
+            if(quest >= 0 && _contentQuest.Count > quest)
+                Container.Children.Add(_contentQuest[quest]);
         }
         void setQuest()
         {
