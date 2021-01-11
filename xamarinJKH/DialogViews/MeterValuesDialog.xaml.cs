@@ -134,7 +134,35 @@ namespace xamarinJKH.DialogViews
                 ValueT3 = mInfo.StartValueT3 ?? 0,
                 TariffNumberInt = mInfo.TariffNumberInt
             });
-            return meterValueInfo;
+          
+            return SetSortValues(meterValueInfo);
+        }
+
+        List<MeterValueInfo> SetSortValues(List<MeterValueInfo> meterValueInfo)
+        {
+            List<MeterValueInfo> result = new List<MeterValueInfo>();
+
+            int count = meterValueInfo.Count;
+            if (count > 1)
+            {
+                int center = (count / 2);
+                for (int i = 0; i < center; i++)
+                {
+                    result.Add(meterValueInfo[i]);
+                    result.Add(meterValueInfo[center + i]);
+                }
+
+                if (count % 2 != 0)
+                {
+                    result.Add(meterValueInfo[count-1]);
+                }
+            }
+            else
+            {
+                result = meterValueInfo;
+            }
+
+            return result;
         }
         
         void SetLastPenanse()
