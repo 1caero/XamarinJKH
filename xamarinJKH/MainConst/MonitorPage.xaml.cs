@@ -277,7 +277,7 @@ namespace xamarinJKH.MainConst
             {
                 Orientation = StackOrientation.Horizontal
             };
-            BorderlessDatePicker datePicker = new BorderlessDatePicker
+            BorderlessDatePickerMonitor datePicker = new BorderlessDatePickerMonitor
             {
                 IsVisible = false,
                 Format = "dd.MM.yyyy",
@@ -285,6 +285,8 @@ namespace xamarinJKH.MainConst
                 HorizontalOptions = LayoutOptions.Center,
                 TextColor = hex
             };
+
+            //datePicker.MaximumDate = DateTime.Now;
             Label lableDate = new Label
             {
                 FontSize = 16,
@@ -314,8 +316,10 @@ namespace xamarinJKH.MainConst
                     }; 
                     break;
                 case 1:
-                    DateTime dateMonday = isReplace.AddDays((DateTime.Now.DayOfWeek.GetHashCode() - 1) * -1).Date;
-                    DateTime dateSunday = isReplace.AddDays(7 - DateTime.Now.DayOfWeek.GetHashCode()).Date;
+
+                    var d1 = isReplace.DayOfWeek.GetHashCode()-1;
+                    DateTime dateMonday = isReplace.AddDays(-d1); // isReplace.AddDays((DateTime.Now.DayOfWeek.GetHashCode() - 1) * -1).Date;
+                    DateTime dateSunday = dateMonday.AddDays(6);// isReplace.AddDays(7 - DateTime.Now.DayOfWeek.GetHashCode()).Date;
                     text = dateMonday.ToString("dd.MM") + "-" + dateSunday.ToString("dd.MM.yyyy");
                     datePicker.DateSelected += async (sender, args) =>
                     {
