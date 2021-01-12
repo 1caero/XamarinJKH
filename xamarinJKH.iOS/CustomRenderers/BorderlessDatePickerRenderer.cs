@@ -26,5 +26,30 @@ namespace xamarinJKH.iOS.CustomRenderers
                 Control.BorderStyle = UITextBorderStyle.None;
             }
         }
+        //protected override void OnElementChanged(ElementChangedEventArgs<DatePicker> e)
+        //{
+        //    base.OnElementChanged(e);
+
+        //    if (e.NewElement != null && this.Control != null)
+        //    {
+        //        try
+        //        {
+        //            //if (UIDevice.CurrentDevice.CheckSystemVersion(13, 2))
+        //            //{
+        //            //    UIDatePicker picker = (UIDatePicker)Control.InputView;
+        //            //    picker.PreferredDatePickerStyle = UIDatePickerStyle.Wheels;
+        //            //}
+        //            //else
+        //            //{
+        //                UIDatePicker picker = (UIDatePicker)Control.InputView;
+        //                picker.PreferredDatePickerStyle = UIDatePickerStyle.Compact;
+        //            //}
+        //        }
+        //        catch (Exception)
+        //        {
+        //            // do nothing
+        //        }
+        //    }
+        //}
     }
 }
