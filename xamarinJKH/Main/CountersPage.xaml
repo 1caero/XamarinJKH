@@ -108,7 +108,7 @@
                                         TextColor="{AppThemeBinding Light=Black, Dark=White}"
                                         FontSize="15" />
                                     </StackLayout>
-                                    <StackLayout Orientation="Horizontal"
+                                    <StackLayout Orientation="Horizontal" Margin="0,0,20,0"
                                              x:Name="StackLayoutPicker"
                                              HorizontalOptions="CenterAndExpand">
                                         <CollectionView 

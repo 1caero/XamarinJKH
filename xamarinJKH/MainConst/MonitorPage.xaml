@@ -91,7 +91,7 @@
                        BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
                            BorderColor="{AppThemeBinding Light={x:StaticResource MainColor}, Dark=#8D8D8D}"
                            Padding="0,0,0,80">
-                            <StackLayout Padding="20,10,0,10" Spacing="5">
+                            <StackLayout Padding="20,10,20,10" Spacing="5">
                                 <CollectionView ItemsSource="{Binding Areas}"
                                             SelectedItem="{Binding SelectedArea}"
                                             IsVisible="True"
