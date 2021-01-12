@@ -151,7 +151,7 @@
     <value>Выбора района</value>
   </data>
   <data name="AskForCode" xml:space="preserve">
-    <value>Запросить звонок с кодом</value>
+    <value>Звонок с кодом</value>
   </data>
   <data name="AskForCodeAgain" xml:space="preserve">
     <value>Ожидание звонка... TimerTime сек</value>

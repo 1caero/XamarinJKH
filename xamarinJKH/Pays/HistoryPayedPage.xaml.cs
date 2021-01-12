@@ -22,13 +22,14 @@ using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
 using xamarinJKH.Utils.Compatator;
+using System.Collections.ObjectModel;
 
 namespace xamarinJKH.Pays
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HistoryPayedPage : ContentPage
     {
-        public List<AccountAccountingInfo> Accounts { get; set; }
+        public ObservableCollection<AccountAccountingInfo> Accounts { get; set; }
         public List<PaymentInfo> Payments { get; set; }
         public AccountAccountingInfo SelectedAcc { get; set; }
 
@@ -72,9 +73,30 @@ namespace xamarinJKH.Pays
             ItemsList<AccountAccountingInfo> info = await _server.GetAccountingInfo();
             if (info.Error == null)
             {
-                Accounts = info.Data;
-                additionalList.ItemsSource = null;
-                additionalList.ItemsSource = setPays(Accounts[Picker.SelectedIndex]);
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    var ident = string.Empty;
+                    if (SelectedAcc != null)
+                        ident = SelectedAcc.Ident;
+                    Accounts.Clear();
+                    foreach (var acc in info.Data)
+                    {
+                        Accounts.Add(acc);
+                    }
+                    additionalList.ItemsSource = null;
+                    if (SelectedAcc == null || !string.IsNullOrEmpty(ident))
+                        SelectedAcc = Accounts.FirstOrDefault(x => x.Ident == ident);
+                    if (SelectedAcc == null)
+                        SelectedAcc = Accounts[0];
+                    additionalList.ItemsSource = setPays(Accounts[Accounts.IndexOf(Accounts.First(x => x.Ident == SelectedAcc.Ident))]);
+                    foreach (var account in Accounts)
+                    {
+                        account.Selected = false;
+                    }
+                    SelectedAcc.Selected = true;
+                    Accounts[Accounts.IndexOf(Accounts.First(x => x.Ident == SelectedAcc.Ident))].Selected = true;
+                });
+                
             }
             else
             {
@@ -110,7 +132,12 @@ namespace xamarinJKH.Pays
 
         public HistoryPayedPage(List<AccountAccountingInfo> accounts)
         {
-            this.Accounts = GetIdent(accounts);
+            var accounts_ = GetIdent(accounts);
+            this.Accounts = new ObservableCollection<AccountAccountingInfo>();
+            foreach(var acc in accounts_)
+            {
+                this.Accounts.Add(acc);
+            } 
             InitializeComponent();
             Analytics.TrackEvent("История платежей");
             switch (Device.RuntimePlatform)
@@ -178,8 +205,12 @@ namespace xamarinJKH.Pays
                     foreach (var account in Accounts)
                         account.Selected = false;
 
-                    Accounts[Accounts.IndexOf(SelectedAcc)].Selected = true;
+                    Accounts[Accounts.IndexOf(Accounts.First(x => x.Ident == SelectedAcc.Ident))].Selected = true;
                 }
+                var theme = App.Current.RequestedTheme;
+                var color = theme == OSAppTheme.Light ? ((Color)Application.Current.Resources["MainColor"]).ToHex() : "#FFFFFF";
+                Dictionary<string, string> replace = new Dictionary<string, string> { { "#000000", color } };
+                ArrowBack.ReplaceStringMap = replace;
             });
         }
 
@@ -238,6 +269,7 @@ namespace xamarinJKH.Pays
             // {
             //     Picker.WidthRequest = identLength * 9;
             // }
+            return;
             additionalList.ItemsSource = null;
             AccountAccountingInfo account = Accounts[Picker.SelectedIndex];
             additionalList.ItemsSource = setPays(account);
@@ -256,9 +288,11 @@ namespace xamarinJKH.Pays
             }
 
             var selection = e.CurrentSelection[0] as AccountAccountingInfo;
-            selection.Selected = true;
+            Accounts[Accounts.IndexOf(Accounts.First(x => x.Ident == selection.Ident))].Selected = true;
 
-            SelectedAcc = selection;
+            SelectedAcc = new AccountAccountingInfo();
+            SelectedAcc = Accounts[Accounts.IndexOf(Accounts.First(x => x.Ident == selection.Ident))];
+            SelectedAcc.Selected = true;
 
             additionalList.ItemsSource = setPays(selection);
             Analytics.TrackEvent("Смена лс на " + selection.Ident);

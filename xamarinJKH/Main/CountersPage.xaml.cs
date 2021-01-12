@@ -96,9 +96,8 @@ namespace xamarinJKH.Main
             }
             catch
             {
-
             }
-            
+
 
             try
             {
@@ -114,6 +113,7 @@ namespace xamarinJKH.Main
                     {
                         account = "Все";
                     }
+
                     _meterInfoAll = info.Data;
                     if (account == "Все")
                     {
@@ -136,9 +136,8 @@ namespace xamarinJKH.Main
                     if (info.Data.Count == 0)
                     {
                         baseForCounters.Children.Clear();
-                        if  (Accounts.Count > 1)
+                        if (Accounts.Count > 1)
                         {
-                            
                             baseForCounters.Children.Add(new Label
                             {
                                 VerticalTextAlignment = TextAlignment.Center,
@@ -150,18 +149,16 @@ namespace xamarinJKH.Main
                                 HeightRequest = 400
                             });
                         }
-                        
                     }
                     else
                     {
-                        
                         Device.BeginInvokeOnMainThread(async () =>
                         {
                             await Task.Delay(TimeSpan.FromMilliseconds(100));
                             //var idents = _meterInfo.Select(x => x.Ident);
                             //foreach (var account in Settings.Person.Accounts)
                             //{
-                                
+
                             //    if (!Accounts.Contains(Accounts.FirstOrDefault(x => x.Ident == account.Ident)))
                             //    {
                             //        Accounts.Add(account);
@@ -183,7 +180,6 @@ namespace xamarinJKH.Main
                                     //Accounts.Insert(0, new AccountInfo() { Ident = AppResources.All, Selected = true });
                                     if (Accounts.Count > 0)
                                         SelectedAccount = Accounts[0];
-
                                 }
                                 else if (SelectedAccount.Ident == AppResources.All && Accounts.Count > 0)
                                     SelectedAccount = Accounts[0];
@@ -194,11 +190,14 @@ namespace xamarinJKH.Main
                                     {
                                         account.Selected = false;
                                     }
+
                                     SelectedAccount.Selected = true;
                                 }
                             }
-                            catch { }
-                            
+                            catch
+                            {
+                            }
+
                             //addIdentLbl.IsVisible = false;
 
                             List<MeterInfo> meters_ = new List<MeterInfo>();
@@ -221,23 +220,22 @@ namespace xamarinJKH.Main
                                     HeightRequest = 400
                                 });
                             }
-                            
+
                             if (meters_.Count > 0)
 
-                            foreach (var mi in meters_)
-                            {
-                                var mtc = new MetersThreeCell(mi,this);
-                                TapGestureRecognizer tap = new TapGestureRecognizer();
-                                tap.Tapped += Tap_Tapped;
-                                mtc.GestureRecognizers.Add(tap);
+                                foreach (var mi in meters_)
+                                {
+                                    var mtc = new MetersThreeCell(mi, this);
+                                    TapGestureRecognizer tap = new TapGestureRecognizer();
+                                    tap.Tapped += Tap_Tapped;
+                                    mtc.GestureRecognizers.Add(tap);
 
-                                baseForCounters.Children.Add(mtc);
-                            }
+                                    baseForCounters.Children.Add(mtc);
+                                }
                         });
                     }
-
-                    
                 }
+
                 OSAppTheme currentTheme = Application.Current.RequestedTheme;
                 SetHeader(currentTheme);
 
@@ -246,11 +244,9 @@ namespace xamarinJKH.Main
                     aIndicator.IsVisible = false;
                     IsRefreshing = false;
                 });
-
-        }
+            }
             catch (Exception e)
             {
-
                 Microsoft.AppCenter.Crashes.Crashes.TrackError(e);
             }
             finally
@@ -260,13 +256,12 @@ namespace xamarinJKH.Main
                     aIndicator.IsVisible = false;
                     IsRefreshing = false;
                 });
+            }
+
+
+            //countersList.ItemsSource = null;
+            //countersList.ItemsSource = _meterInfo;
         }
-
-
-
-        //countersList.ItemsSource = null;
-        //countersList.ItemsSource = _meterInfo;
-    }
 
         private async void Tap_Tapped(object sender, EventArgs e)
         {
@@ -290,6 +285,10 @@ namespace xamarinJKH.Main
                         if (Settings.Person.Accounts.Count > 0)
                             if (@select.ValuesCanAdd)
                             {
+                                var x = scrollForCounters.ScrollX;
+                                var y = scrollForCounters.ScrollY;
+                                Preferences.Set("scrollX", x);
+                                Preferences.Set("scrollY", y);
                                 if (@select.Values != null && @select.Values.Count >= 1)
                                 {
                                     // int monthCounter;
@@ -367,7 +366,7 @@ namespace xamarinJKH.Main
                     break;
             }
 
-            hex = (Color)Application.Current.Resources["MainColor"];
+            hex = (Color) Application.Current.Resources["MainColor"];
 
             var profile = new TapGestureRecognizer();
             profile.Tapped += async (s, e) =>
@@ -378,7 +377,7 @@ namespace xamarinJKH.Main
             IconViewProfile.GestureRecognizers.Add(profile);
 
             var techSend = new TapGestureRecognizer();
-            techSend.Tapped += async (s, e) => { await Navigation.PushAsync(new AppPage());};
+            techSend.Tapped += async (s, e) => { await Navigation.PushAsync(new AppPage()); };
             LabelTech.GestureRecognizers.Add(techSend);
             var call = new TapGestureRecognizer();
             call.Tapped += async (s, e) =>
@@ -393,12 +392,7 @@ namespace xamarinJKH.Main
                 }
             };
             var pickLs = new TapGestureRecognizer();
-            pickLs.Tapped += async (s, e) => {  
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    Picker.Focus();
-                });
-            };
+            pickLs.Tapped += async (s, e) => { Device.BeginInvokeOnMainThread(() => { Picker.Focus(); }); };
             //StackLayoutLs.GestureRecognizers.Add(pickLs);
             SetTextAndColor();
             getInfo();
@@ -413,15 +407,15 @@ namespace xamarinJKH.Main
             {
                 /*await Dialog.Instance.ShowAsync<AddAccountDialogView>();*/
                 if (Navigation.NavigationStack.FirstOrDefault(x => x is AddIdent) == null)
-                    await Navigation.PushAsync(new AddIdent((PaysPage)Settings.mainPage));
+                    await Navigation.PushAsync(new AddIdent((PaysPage) Settings.mainPage));
             };
             StackLayoutAddIdent.GestureRecognizers.Add(goAddIdent);
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
             //IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
             //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-          
 
-                //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
+
+            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
             FrameTop.SetAppThemeColor(MaterialFrame.BorderColorProperty, hexColor, Color.FromHex("#494949"));
             ChangeTheme = new Command(async () => { SetTitle(); });
             MessagingCenter.Subscribe<Object>(this, "ChangeThemeCounter", (sender) => ChangeTheme.Execute(null));
@@ -440,14 +434,15 @@ namespace xamarinJKH.Main
                     var all = Accounts.FirstOrDefault(x => x.Ident == AppResources.All);
                     if (all == null)
                     {
-                        Device.BeginInvokeOnMainThread(() => Accounts.Insert(0, new AccountInfo { Ident = AppResources.All, Selected = true }));
+                        Device.BeginInvokeOnMainThread(() =>
+                            Accounts.Insert(0, new AccountInfo {Ident = AppResources.All, Selected = true}));
                     }
-
                 }
+
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     //
-                    
+
                     //OnPropertyChanged("Accounts");
                     //var all = Accounts.FirstOrDefault(x => x.Ident == AppResources.All);
                     //if (all == null)
@@ -462,19 +457,18 @@ namespace xamarinJKH.Main
                     //}
                     //await RefreshCountersData();
                 });
-                
             });
             MessagingCenter.Subscribe<Object, AccountInfo>(this, "RemoveIdent", async (sender, ident) =>
             {
                 if (Device.RuntimePlatform == "iOS")
                     await Task.Delay(TimeSpan.FromMilliseconds(500));
-                Device.BeginInvokeOnMainThread(() => 
+                Device.BeginInvokeOnMainThread(() =>
                 {
                     if (SelectedAccount != null && ident != null)
-                    if (SelectedAccount.Ident == ident.Ident)
-                        SelectedAccount = null;
+                        if (SelectedAccount.Ident == ident.Ident)
+                            SelectedAccount = null;
                     if (ident != null)
-                    Accounts.Remove(Accounts.First(x => x.Ident == ident.Ident));
+                        Accounts.Remove(Accounts.First(x => x.Ident == ident.Ident));
                     if (Accounts.Count == 1)
                     {
                         Accounts.Clear();
@@ -486,15 +480,15 @@ namespace xamarinJKH.Main
                 var all = Accounts.FirstOrDefault(x => x.Ident == AppResources.All);
                 if (all == null && Settings.Person.Accounts.Count > 0)
                 {
-                    Accounts.Insert(0, new AccountInfo { Ident = AppResources.All, Selected = true });
+                    Accounts.Insert(0, new AccountInfo {Ident = AppResources.All, Selected = true});
                 }
-                
+
                 foreach (var account in Settings.Person.Accounts)
                 {
                     Accounts.Add(account);
                 }
             });
-            
+
             Picker.ItemsSource = Accounts;
         }
 
@@ -517,7 +511,7 @@ namespace xamarinJKH.Main
             //IconViewTech.ReplaceStringMap = colors;
             //Arrow.ReplaceStringMap = arrowcolor;
 
-            
+
             //if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
             //    currentTheme = OSAppTheme.Dark;
             SetHeader(currentTheme);
@@ -635,6 +629,7 @@ namespace xamarinJKH.Main
                                 FontSize = 15
                             });
                         }
+
                         PeriodSendLbl.IsVisible = false;
                         PeriodSendLbl.FormattedText = formattedResource;
                         StackLayoutPicker.IsVisible = true;
@@ -666,9 +661,22 @@ namespace xamarinJKH.Main
         {
             base.OnAppearing();
 
-            new Task(SyncSetup).Start(); // This could be an await'd task if need be
-            
-            
+            new Task(SyncSetup).Start();
+            // This could be an await'd task if need be
+
+            try
+            {
+                double x = Preferences.Get("scrollX", 0d);
+                double y = Preferences.Get("scrollY", 0d);
+                scrollForCounters.ScrollToAsync(x, y, false);
+                
+                Preferences.Clear("scrollX");
+                Preferences.Clear("scrollY");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         async void SyncSetup()
@@ -681,43 +689,43 @@ namespace xamarinJKH.Main
         }
 
         private void picker_SelectedIndexChanged(object sender, EventArgs e)
-        { 
-        //{
-        //    try
-        //    {
-        //        var identLength = Settings.Person.Accounts[Picker.SelectedIndex - 1].Ident.Length;
-        //        if (identLength < 6)
-        //        {
-        //            Device.BeginInvokeOnMainThread(() =>
-        //            {
-        //                Picker.WidthRequest = identLength * 10;
-        //                //Picker.MinimumWidthRequest = identLength * 9;
-        //            });
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        if (Picker.SelectedIndex != -1 && Settings.Person.Accounts.Count != 0)
-        //        {
-        //            var account = Settings.Person.Accounts[Picker.SelectedIndex];
-        //            if (account != null)
-        //            {
-        //                if (!string.IsNullOrEmpty(account.Ident))
-        //                {
-        //                    var identLength = account.Ident.Length;
-        //                    if (identLength < 6)
-        //                    {
-        //                        Device.BeginInvokeOnMainThread(() =>
-        //                        {
-        //                            Picker.WidthRequest = identLength * 9;
-        //                            // Picker.MinimumWidthRequest = identLength * 9;
-        //                        });
-        //                    }
-        //                }
-                        
-        //            }
-                    
-        //        }
+        {
+            //{
+            //    try
+            //    {
+            //        var identLength = Settings.Person.Accounts[Picker.SelectedIndex - 1].Ident.Length;
+            //        if (identLength < 6)
+            //        {
+            //            Device.BeginInvokeOnMainThread(() =>
+            //            {
+            //                Picker.WidthRequest = identLength * 10;
+            //                //Picker.MinimumWidthRequest = identLength * 9;
+            //            });
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        if (Picker.SelectedIndex != -1 && Settings.Person.Accounts.Count != 0)
+            //        {
+            //            var account = Settings.Person.Accounts[Picker.SelectedIndex];
+            //            if (account != null)
+            //            {
+            //                if (!string.IsNullOrEmpty(account.Ident))
+            //                {
+            //                    var identLength = account.Ident.Length;
+            //                    if (identLength < 6)
+            //                    {
+            //                        Device.BeginInvokeOnMainThread(() =>
+            //                        {
+            //                            Picker.WidthRequest = identLength * 9;
+            //                            // Picker.MinimumWidthRequest = identLength * 9;
+            //                        });
+            //                    }
+            //                }
+
+            //            }
+
+            //        }
             //}
 
             //if (Accounts != null)
@@ -745,6 +753,7 @@ namespace xamarinJKH.Main
                         {
                             acc.Selected = false;
                         }
+
                         selected.Selected = true;
                         var newmeters = _meterInfoAll.Where(x => x.Ident == selected.Ident).ToList();
 
@@ -779,19 +788,20 @@ namespace xamarinJKH.Main
                             baseForCounters.Children.Add(mtc);
                         }
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 });
             }
-            catch { }
-            
-            
+            catch
+            {
+            }
         }
 
         void SetIdents()
         {
             try
             {
-
                 Picker.SetAppThemeColor(Xamarin.Forms.Picker.TextColorProperty, Color.Black, Color.White);
                 Picker.SetAppThemeColor(Xamarin.Forms.Picker.TitleColorProperty, Color.Black, Color.White);
                 //Picker.Title = account;
@@ -837,9 +847,10 @@ namespace xamarinJKH.Main
         void SetTextAndColor()
         {
             UkName.Text = Settings.MobileSettings.main_name;
-            
         }
+
         AccountInfo selectedAccount;
+
         public AccountInfo SelectedAccount
         {
             get => selectedAccount;
@@ -879,15 +890,13 @@ namespace xamarinJKH.Main
                             HeightRequest = 400
                         });
                     }
-                    
                 }
+
                 if (Accounts.Count == 0)
                 {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        addIdentLbl.IsVisible = true;
-                    });
+                    Device.BeginInvokeOnMainThread(() => { addIdentLbl.IsVisible = true; });
                 }
+
                 if (info.Data.Count > 0)
                 {
                     _meterInfo = info.Data;
@@ -947,7 +956,6 @@ namespace xamarinJKH.Main
             {
                 await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorCountersNoData, "OK");
             }
-
         }
 
         private async void OnItemTapped(object sender, ItemTappedEventArgs e)
@@ -970,18 +978,20 @@ namespace xamarinJKH.Main
                                 var counterThisMonth = (select.Values.Count >= 1) ? select.Values[0].Value : 0;
                                 var counterThisMonth2 = (select.Values.Count >= 2) ? select.Values[1].Value : 0;
                                 if (Navigation.NavigationStack.FirstOrDefault(x => x is AddMetersPage) == null)
-                                    await Navigation.PushAsync(new AddMetersPage(select, _meterInfo, this, counterThisMonth,
-                                    counterThisMonth2));
+                                    await Navigation.PushAsync(new AddMetersPage(select, _meterInfo, this,
+                                        counterThisMonth,
+                                        counterThisMonth2));
                             }
                             else
                             {
                                 var counterThisMonth = (select.Values.Count >= 1) ? select.Values[0].Value : 0;
                                 if (Navigation.NavigationStack.FirstOrDefault(x => x is AddMetersPage) == null)
                                     await Navigation.PushAsync(new AddMetersPage(select, _meterInfo, this, 0,
-                                    counterThisMonth));
+                                        counterThisMonth));
                             }
                         }
         }
+
         private static bool CheckPeriod(int currDay, MeterInfo meterInfo)
         {
 //#if DEBUG
@@ -991,14 +1001,14 @@ namespace xamarinJKH.Main
             {
                 return MetersThreeCell.GetPeriodEnabled() || (meterInfo.ValuesStartDay == 0 &&
                                                               meterInfo.ValuesEndDay == 0);
-
             }
-            
+
             return (meterInfo.ValuesStartDay <= currDay &&
                     meterInfo.ValuesEndDay >= currDay) ||
                    (meterInfo.ValuesStartDay == 0 &&
                     meterInfo.ValuesEndDay == 0);
         }
+
         private async void RefreshView_RefreshingAsync(object sender, EventArgs e)
         {
             IsRefreshing = true;
@@ -1007,9 +1017,9 @@ namespace xamarinJKH.Main
         }
 
         StackLayout lastElementSelected2;
+
         private void FrameIdentGR_Tapped(object sender, EventArgs e)
         {
-            
             //var vm = (BindingContext as CountersPage);
 
             try
@@ -1036,6 +1046,7 @@ namespace xamarinJKH.Main
                 {
                     newmeters = _meterInfoAll;
                 }
+
                 baseForCounters.Children.Clear();
 
                 if (newmeters.Count == 0 && Accounts.Count > 0)
@@ -1063,13 +1074,13 @@ namespace xamarinJKH.Main
                         baseForCounters.Children.Add(mtc);
                     }
                 }
-
-                
             }
-            catch { }
+            catch
+            {
+            }
 
             //vm.SelectedTyp = om;
-            lastElementSelected2 = (StackLayout)sender;
+            lastElementSelected2 = (StackLayout) sender;
         }
     }
 }
