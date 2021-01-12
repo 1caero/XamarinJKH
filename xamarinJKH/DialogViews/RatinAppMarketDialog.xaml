@@ -46,7 +46,7 @@
                        HorizontalOptions="EndAndExpand"
                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
                        x:Name="FrameRate"
-                       Padding="0">
+                       Padding="{OnPlatform Android='0', iOS='20,0'}">
                     <Button x:Name="BtnRate"
                             Text="{x:Static xamarinJkh:AppResources.RateApp}"
                             Clicked="OpenMarket"
@@ -60,7 +60,7 @@
                        HorizontalOptions="StartAndExpand"
                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
                        x:Name="FrameLater"
-                       Padding="0">
+                       Padding="{OnPlatform Android='0', iOS='20,0'}">
                     <Button x:Name="BtnLater"
                             Text="{x:Static xamarinJkh:AppResources.LatteRateApp}"
                             Clicked="BtnLater_OnClicked"
@@ -74,7 +74,7 @@
                        HorizontalOptions="Center"
                        IsVisible="False"
                        x:Name="FrameNot"
-                       Padding="0">
+                       Padding="{OnPlatform Android='0', iOS='20,0'}">
                     <Button x:Name="BtnNot"
                             Text="{x:Static xamarinJkh:AppResources.NotRateApp}"
                             Clicked="BtnNot_OnClicked"

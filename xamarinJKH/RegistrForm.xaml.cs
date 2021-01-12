@@ -110,7 +110,11 @@ namespace xamarinJKH
             ToSmsWhatsApp.GestureRecognizers.Add(sendCheckCodeWhatsApp); 
             var personPolicity = new TapGestureRecognizer();
             personPolicity.Tapped += PersonPolicity;
-            LabelPersonPolicity.GestureRecognizers.Add(personPolicity);
+            LabelPersonPolicity.GestureRecognizers.Add(personPolicity);  
+            
+            var callClick = new TapGestureRecognizer();
+            callClick.Tapped += async (s, e) => { RegCodeRequest(FrameBtnReg, null); };
+            FrameBtnReg.GestureRecognizers.Add(callClick);
 
             var nextReg2 = new TapGestureRecognizer();
             nextReg2.Tapped += async (s, e) =>
@@ -202,7 +206,7 @@ namespace xamarinJKH
                         {
                             Console.WriteLine("Отправлено");
                             TimerStart = true;
-                            FrameBtnReg.IsVisible = false;
+                            SendCode.IsVisible = false;
                             FrameTimer.IsVisible = true;
                             Device.StartTimer(TimeSpan.FromSeconds(1), OnTimerTick);
                             setDisabledSms(true);
@@ -415,7 +419,7 @@ namespace xamarinJKH
                     TimerStart = true;
                     TimerTime = Settings.TimerTime;
                     LabelTimer.Text = AppResources.AskForCodeAgain.Replace("TimerTime", TimerTime.ToString());
-                    FrameBtnReg.IsVisible = false;
+                    SendCode.IsVisible = false;
                     StackLayoutSms.IsVisible = false;
                     FrameTimer.IsVisible = true;
                     Device.StartTimer(TimeSpan.FromSeconds(1), OnTimerTick);
@@ -558,8 +562,8 @@ namespace xamarinJKH
                 isNext = false;
                 if (isSms)
                 {
-                    FrameBtnNextTwo.IsVisible = false;
-                    StackLayoutSms.IsVisible = true;
+                    // FrameBtnNextTwo.IsVisible = false;
+                    StackLayoutSms.IsVisible = false;
                 }
             }
         }
@@ -588,12 +592,12 @@ namespace xamarinJKH
                     if (FrameTimer != null)
                     {
                         FrameTimer.IsVisible = false;
-                        FrameBtnReg.IsVisible = true;
+                        SendCode.IsVisible = true;
                         setDisabledSms(false);
                         if (EntryCode.Text.Equals(""))
                         {
-                            StackLayoutSms.IsVisible = true;
-                            FrameBtnNextTwo.IsVisible = false;
+                            StackLayoutSms.IsVisible = false;
+                            // FrameBtnNextTwo.IsVisible = false;
                         }
                         isSms = true;
                     }
@@ -605,7 +609,7 @@ namespace xamarinJKH
                 if (FrameTimer != null)
                 {
                     FrameTimer.IsVisible = false;
-                    FrameBtnReg.IsVisible = true;
+                    SendCode.IsVisible = true;
                 }
             }
 
@@ -614,9 +618,7 @@ namespace xamarinJKH
 
         private async void RegCodeRequest(object sender, EventArgs e)
         {
-            (sender as Button).IsEnabled = false;
             await RequestCodeTask();
-            (sender as Button).IsEnabled = true;
         }
 
 
@@ -643,7 +645,7 @@ namespace xamarinJKH
                         {
                             Console.WriteLine("Отправлено");
                             TimerStart = true;
-                            FrameBtnReg.IsVisible = false;
+                            SendCode.IsVisible = false;
                             FrameTimer.IsVisible = true;
                             Device.StartTimer(TimeSpan.FromSeconds(1), OnTimerTick);
                             if (Device.RuntimePlatform == Device.iOS)

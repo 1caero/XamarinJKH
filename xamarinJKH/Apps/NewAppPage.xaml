@@ -106,12 +106,12 @@
                                             HeightRequest="60"
                                                     SelectionMode="Single" >
                                     <CollectionView.ItemsLayout>
-                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="{OnPlatform Android='10'}"/>
                                     </CollectionView.ItemsLayout>
 
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
-                                            <StackLayout Padding="{OnPlatform iOS='2'}" VerticalOptions="FillAndExpand">
+                                            <StackLayout Padding="{OnPlatform iOS='2,2,10,2'}"  VerticalOptions="FillAndExpand">
                                                 <StackLayout.GestureRecognizers>
                                                     <TapGestureRecognizer x:Name="FrameIdentGR" Tapped="FrameIdentGR_Tapped_1" ></TapGestureRecognizer>
                                                 </StackLayout.GestureRecognizers>
@@ -182,11 +182,11 @@
                                             Margin="0,0,0,0"
                                             SelectionMode="Single">
                                     <CollectionView.ItemsLayout>
-                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="{OnPlatform Android='10'}"/>
                                     </CollectionView.ItemsLayout>
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
-                                            <StackLayout Padding="2" VerticalOptions="FillAndExpand">
+                                            <StackLayout Padding="{OnPlatform iOS='2,2,10,2' , Android='2'}" VerticalOptions="FillAndExpand">
                                                 <StackLayout.GestureRecognizers>
                                                     <TapGestureRecognizer x:Name="FrameIdentGR2" Tapped="FrameIdentGR_Tapped" ></TapGestureRecognizer>
                                                 </StackLayout.GestureRecognizers>

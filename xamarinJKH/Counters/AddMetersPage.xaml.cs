@@ -941,9 +941,13 @@ namespace xamarinJKH.Counters
                 //if (Xamarin.Essentials.DeviceInfo.Platform == DevicePlatform.iOS)
                     meter.Resource += ", м3";
             }
-            else if (meter.Resource.ToLower().Contains("горячее") || meter.Resource.ToLower().Contains("гвс")|| meter.Resource.ToLower().Contains("подог")|| meter.Resource.ToLower().Contains("отопл"))
+            else if (meter.Resource.ToLower().Contains("горячее") || meter.Resource.ToLower().Contains("гвс"))
             {
                 img.Source = ImageSource.FromFile("ic_heat_water");
+                
+            }else if (meter.Resource.ToLower().Contains("подог") || meter.Resource.ToLower().Contains("отопл"))
+            {
+                img.Source = ImageSource.FromFile("ic_heat_energ");
             }
             else if (meter.Resource.ToLower().Contains("эле"))
             {
@@ -952,6 +956,9 @@ namespace xamarinJKH.Counters
                 //если это э/э и не указаны ед. измерения, в RU локали добавляем их
                 if (!meter.Resource.ToLower().Contains("кВт"))
                     meter.Resource += ", кВт";
+            }else if (meter.Resource.ToLower().Contains("газ"))
+            {
+                img.Source = ImageSource.FromFile("ic_gas");
             }
             else
             {

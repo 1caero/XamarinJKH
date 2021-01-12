@@ -375,31 +375,84 @@
                                                    IsRunning="true"
                                                    IsVisible="False"
                                                    Color="Red" />
-
+                                <StackLayout Orientation="Horizontal" x:Name="SendCode">
                                 <Frame x:Name="FrameBtnReg"
                                        CornerRadius="10"
-                                       BackgroundColor="{x:DynamicResource MainColor}"
-                                       Margin="0, 5, 0, 0"
+                                       HasShadow="False"
+                                       BackgroundColor="White"
+                                       Margin="0, 0, 0, 0"
+                                       BorderColor="{x:DynamicResource MainColor}"
+                                       HorizontalOptions="FillAndExpand"
                                        Padding="0">
-                                    <Button x:Name="BtnRegCode"
+                                    <StackLayout
+                                        HorizontalOptions="CenterAndExpand"
+                                        Spacing="0"
+                                        Margin="0,0,0,0"
+                                        Orientation="Horizontal">
+                                        <forms:SvgCachedImage
+                                            Source="resource://xamarinJKH.Resources.ic_phone.svg"
+                                            HeightRequest="20"
+                                            ReplaceStringMap="{Binding hexWhite, Converter={x:StaticResource SvgColor}}"
+                                            Margin="0, 0,0,0"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center" />
+                                        <Label
                                             Text="{x:Static xamarinJkh:AppResources.AskForCode}"
+                                            Padding="5,0"
+                                            Margin="0"
+                                            TextColor="{x:DynamicResource MainColor}"
                                             FontSize="15"
-                                            TextColor="White"
-                                            FontAttributes="Bold"
-                                            Padding="0"
-                                            Clicked="RegCodeRequest"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
                                             BackgroundColor="Transparent" />
+                                    </StackLayout>
                                 </Frame>
+                                         <customRenderers:MaterialFrame Elevation="0"
+                                                                       x:Name="ToSmsWhatsApp"
+                                                                       CornerRadius="10"
+                                                                       HasShadow="False"
+                                                                       Margin="0,0,0,0"
+                                                                       HorizontalOptions="FillAndExpand"
+                                                                       BorderColor="{x:DynamicResource MainColor}"
+                                                                       HeightRequest="35"
+                                                                       VerticalOptions="Center"
+                                                                       Padding="0,5,0,5">
+                                            <StackLayout
+                                                HorizontalOptions="CenterAndExpand"
+                                                Spacing="0"
+                                                Margin="0,0,0,0"
+                                                Orientation="Horizontal">
+                                                <forms:SvgCachedImage
+                                                    Source="resource://xamarinJKH.Resources.ic_whatsapp.svg"
+                                                    HeightRequest="20"
+                                                    x:Name="ImageWhatsApp"
+                                                    ReplaceStringMap="{Binding hexWhite, Converter={x:StaticResource SvgColor}}"
+                                                    Margin="0, 0,0,0"
+                                                    HorizontalOptions="Center"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    Text="{x:Static xamarinJkh:AppResources.InWhatsApp}"
+                                                    Padding="5,0"
+                                                    Margin="0"
+                                                    x:Name="LabelWhatsApp"
+                                                    TextColor="{x:DynamicResource MainColor}"
+                                                    FontSize="15"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Center"
+                                                    BackgroundColor="Transparent" />
+                                            </StackLayout>
+                                        </customRenderers:MaterialFrame>
+                                    </StackLayout>
                                 <Frame x:Name="FrameTimer"
                                        CornerRadius="10"
                                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
-                                       BackgroundColor="{Binding hexWhite}"
-                                       Margin="0, 5, 0, 0"
-                                       Padding="0, 15, 0, 15">
+                                       BackgroundColor="Transparent"
+                                       Margin="0, 0, 0, 0"
+                                       Padding="0">
                                     <Label x:Name="LabelTimer"
                                            Text=""
                                            FontSize="15"
-                                           TextColor="White"
+                                           TextColor="{x:DynamicResource MainColor}"
                                            FontAttributes="Bold"
                                            HorizontalTextAlignment="Center"
                                            MaxLines="2"
@@ -533,41 +586,7 @@
                                                     BackgroundColor="Transparent" />
                                             </StackLayout>
                                         </customRenderers:MaterialFrame>
-                                        <customRenderers:MaterialFrame Elevation="{AppThemeBinding Light=0, Dark=20}"
-                                                                       x:Name="ToSmsWhatsApp"
-                                                                       CornerRadius="10"
-                                                                       HasShadow="{AppThemeBinding Light=false, Dark=true}"
-                                                                       Margin="0,0,0,0"
-                                                                       HorizontalOptions="FillAndExpand"
-                                                                       BorderColor="{x:DynamicResource MainColor}"
-                                                                       HeightRequest="35"
-                                                                       VerticalOptions="Center"
-                                                                       Padding="0,5,0,5">
-                                            <StackLayout
-                                                HorizontalOptions="CenterAndExpand"
-                                                Spacing="0"
-                                                Margin="0,0,0,0"
-                                                Orientation="Horizontal">
-                                                <forms:SvgCachedImage
-                                                    Source="resource://xamarinJKH.Resources.ic_whatsapp.svg"
-                                                    HeightRequest="20"
-                                                    x:Name="ImageWhatsApp"
-                                                    ReplaceStringMap="{Binding hexWhite, Converter={x:StaticResource SvgColor}}"
-                                                    Margin="0, 0,0,0"
-                                                    HorizontalOptions="Center"
-                                                    VerticalOptions="Center" />
-                                                <Label
-                                                    Text="{x:Static xamarinJkh:AppResources.InWhatsApp}"
-                                                    Padding="5,0"
-                                                    Margin="0"
-                                                    x:Name="LabelWhatsApp"
-                                                    TextColor="{x:DynamicResource MainColor}"
-                                                    FontSize="15"
-                                                    VerticalOptions="Center"
-                                                    HorizontalOptions="Center"
-                                                    BackgroundColor="Transparent" />
-                                            </StackLayout>
-                                        </customRenderers:MaterialFrame>
+                                   
                                     </StackLayout>
                                 </StackLayout>
 
