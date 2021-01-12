@@ -412,7 +412,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Запросить звонок с кодом.
+        ///   Looks up a localized string similar to Звонок с кодом.
         /// </summary>
         internal static string AskForCode {
             get {
