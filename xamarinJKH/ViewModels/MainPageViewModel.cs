@@ -46,7 +46,7 @@ namespace xamarinJKH.ViewModels
                     if (login.Error == null)
                     {
                         Settings.Person = login;
-                        ItemsList<NamedValue> result = isDispatcher ? await Server.GetRequestsTypesConst() : await Server.GetRequestsTypes();
+                        ItemsList<RequestType> result = isDispatcher ? await Server.GetRequestsTypesConst() : await Server.GetRequestsTypes();
                         Settings.TypeApp = result.Data;
                         Preferences.Set(isDispatcher ? "loginConst" : "login", replace);
                         Preferences.Set(isDispatcher ? "passConst" : "pass", pass);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
+using xamarinJKH.Server.RequestModel;
 
 namespace xamarinJKH.AppsConst
 {
@@ -9,6 +10,9 @@ namespace xamarinJKH.AppsConst
     {
         public string Name { get; set; }
         public string Image { get; set; }
+        
+        public bool HasSubTypes { get; set; }
+        public List<NamedValue> SubTypes { get; set; }
         public bool IsVisible { get; set; }
         bool selected;
         public bool Selected
