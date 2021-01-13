@@ -559,7 +559,7 @@ namespace xamarinJKH.AppsConst
 
         public class AddAppConstModel : xamarinJKH.ViewModels.BaseViewModel
         {
-            public List<NamedValue> AllType { get; set; }
+            public List<RequestType> AllType { get; set; }
             public NamedValue SelectedType { get; set; }
 
             public List<FileData> Files { get; set; }

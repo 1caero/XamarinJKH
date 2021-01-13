@@ -509,7 +509,7 @@ namespace xamarinJKH.Server
         /// <param name="typeID">Тип заявки</param>
         /// <param name="Text">Текст заявки</param>
         /// <returns>id новой заявки</returns>
-        public async Task<IDResult> newApp(string ident, string typeID, string Text)
+        public async Task<IDResult> newApp(string ident, string typeID, string Text, int? SubTypeID = null)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             RestRequest restRequest = new RestRequest(NEW_APP, Method.POST);
@@ -522,6 +522,7 @@ namespace xamarinJKH.Server
                 ident,
                 typeID,
                 Text,
+                SubTypeID
             });
             var response = await restClientMp.ExecuteTaskAsync<IDResult>(restRequest);
             // Проверяем статус
@@ -730,7 +731,7 @@ namespace xamarinJKH.Server
         /// Получение типов заявок
         /// </summary>
         /// <returns></returns>
-        public async Task<ItemsList<NamedValue>> GetRequestsTypes()
+        public async Task<ItemsList<RequestType>> GetRequestsTypes()
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             RestRequest restRequest = new RestRequest(GET_TYPE, Method.GET);
@@ -738,11 +739,11 @@ namespace xamarinJKH.Server
             restRequest.AddHeader("client", Device.RuntimePlatform);
             restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             restRequest.AddHeader("acx", Settings.Person.acx);
-            var response = await restClientMp.ExecuteTaskAsync<ItemsList<NamedValue>>(restRequest);
+            var response = await restClientMp.ExecuteTaskAsync<ItemsList<RequestType>>(restRequest);
             // Проверяем статус
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                return new ItemsList<NamedValue>()
+                return new ItemsList<RequestType>()
                 {
                     Error = $"Ошибка {response.StatusDescription}"
                 };
@@ -751,7 +752,7 @@ namespace xamarinJKH.Server
             return response.Data;
         }
 
-        public async Task<ItemsList<NamedValue>> GetRequestsTypesConst()
+        public async Task<ItemsList<RequestType>> GetRequestsTypesConst()
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             RestRequest restRequest = new RestRequest(GET_TYPE_CONST, Method.GET);
@@ -759,11 +760,11 @@ namespace xamarinJKH.Server
             restRequest.AddHeader("client", Device.RuntimePlatform);
             restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             restRequest.AddHeader("acx", Settings.Person.acx);
-            var response = await restClientMp.ExecuteTaskAsync<ItemsList<NamedValue>>(restRequest);
+            var response = await restClientMp.ExecuteTaskAsync<ItemsList<RequestType>>(restRequest);
             // Проверяем статус
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                return new ItemsList<NamedValue>()
+                return new ItemsList<RequestType>()
                 {
                     Error = $"Ошибка {response.StatusDescription}"
                 };

@@ -396,7 +396,7 @@ namespace xamarinJKH.Main
             if (result.Error == null)
             {
                 // Settings.EventBlockData = await server.GetEventBlockData();
-                ItemsList<NamedValue> resultN = await server.GetRequestsTypes();
+                ItemsList<RequestType> resultN = await server.GetRequestsTypes();
                 Settings.TypeApp = resultN.Data;
                 /*viewModel.*/
                 RemoveAccount.Execute(ident); //removeLs(ident);

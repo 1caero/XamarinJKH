@@ -24,4 +24,12 @@ namespace xamarinJKH.Server.RequestModel
             public NamedValue SelectedAcc { get; set; }
         }
     }
+    
+    public class RequestType : NamedValue
+    {
+
+        public List<NamedValue> SubTypes { get; set; }
+        public bool HasSubTypes { get; set; }
+
+    }
 }

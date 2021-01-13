@@ -596,14 +596,25 @@ _appModel = new AddAppModel()
         public class AddAppModel:BaseViewModel
         {
             public List<AccountInfo> AllAcc { get; set; }
-            public List<NamedValue> AllType { get; set; }
+            public List<RequestType> AllType { get; set; }
             public List<string> AllBrand { get; set; }
             public List<string> AllKindPass { get; set; }
             public AccountInfo SelectedAcc { get; set; }
             public NamedValue SelectedType { get; set; }
             public ObservableCollection<AccountInfo> Accounts { get; set; }
             AccountInfo selectedAccount;
+            bool isVisible;
+            public bool IsVisible
+            {
+                get => isVisible;
+                set
+                {
+                    isVisible = value;
+                    OnPropertyChanged("IsVisible");
+                }
+            }
             public ObservableCollection<xamarinJKH.AppsConst.OptionModel> Types { get; set; }
+            public ObservableCollection<TypeModel> PodTypes { get; set; }  
             OptionModel selectedTyp;
             public OptionModel SelectedTyp
             {
@@ -612,6 +623,16 @@ _appModel = new AddAppModel()
                 {
                     selectedTyp = value;
                     OnPropertyChanged("SelectedTyp");
+                }
+            }
+            TypeModel _podTypSelected;
+            public TypeModel PodTypSelected
+            {
+                get => _podTypSelected;
+                set
+                {
+                    _podTypSelected = value;
+                    OnPropertyChanged("PodTypSelected");
                 }
             }
             public AccountInfo SelectedAccount
@@ -627,12 +648,14 @@ _appModel = new AddAppModel()
             public ObservableCollection<FileData> Files { get; set; }
             public Color hex { get; set; }
             public Command SelectTyp { get; set; }
+            public Command PodTypeSelect { get; set; }
             public Command SelectAccount { get; set; }
             public AddAppModel()
             {
                 Accounts = new ObservableCollection<AccountInfo>();
                 AllAcc = Settings.Person.Accounts;
                 Types = new ObservableCollection<OptionModel>();
+                PodTypes = new ObservableCollection<TypeModel>();
                 foreach (var account in AllAcc)
                 {
                     Device.BeginInvokeOnMainThread(() =>
@@ -648,34 +671,41 @@ _appModel = new AddAppModel()
                     {
                         OptionModel type_ = new OptionModel();
                         type_.Name = type.Name;
-                        switch (type.Name.ToLower())
-                        {
-                            case "бухгалтерия": type_.Image = "resource://xamarinJKH.Resources.app_accountaint.svg";
-                                break;
-                            case "паспортный стол": type_.Image = "resource://xamarinJKH.Resources.app_passport.svg"; //vector 3
-                                break;
-                            case "сантехник": type_.Image = "resource://xamarinJKH.Resources.app_plumber.svg"; //vector 1
-                                break;
-                            case "электрик": type_.Image = "resource://xamarinJKH.Resources.app_electritian.svg"; //vector 2
-                                break;
-                            case "другие вопросы": type_.Image = "resource://xamarinJKH.Resources.app_other.svg"; //vector 5
-                                break;
-                            case "домофон": type_.Image = "resource://xamarinJKH.Resources.app_domophone.svg";
-                                break;
-                            case "заявка на пропуск": type_.Image = "resource://xamarinJKH.Resources.app_pass.svg"; //vector 4
-                                break;
-                            
-                        }
-                        string replaceColor = Application.Current.RequestedTheme == OSAppTheme.Dark ? "#FFFFFF" : "#8D8D8D";
-                        type_.ReplaceMap = new Dictionary<string, string> { { "#000000", replaceColor } };
+                        type_.HasSubTypes = type.HasSubTypes;
+                        type_.SubTypes = type.SubTypes;
+                        String image = "";
+                        type_.ReplaceMap = SetIconType(type.Name, ref image);
+                        type_.Image = image;
                         Types.Add(type_);
                         SelectedTyp = Types[0];
                     });
                 }
-
+                
+               
+                
+                PodTypeSelect = new Command<object>(name =>
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        var selected = new TypeModel();
+                        selected = PodTypes.FirstOrDefault(x => x.Name == PodTypSelected?.Name);
+                        if (selected != null)
+                        {
+                            foreach (var typ in PodTypes)
+                            {
+                                typ.Selected = false;
+                                string replaceColor = Application.Current.RequestedTheme == OSAppTheme.Dark ? "#FFFFFF" : "#8D8D8D";
+                                typ.ReplaceMap = new Dictionary<string, string> { { "#000000", replaceColor } };
+                            }
+                            selected.Selected = true;
+                            selected.ReplaceMap = new Dictionary<string, string> { { "#000000", "#" + Settings.MobileSettings.color } };
+                        }
+                    });
+                });
+                
                 SelectTyp = new Command<object>(name =>
                 {
-                    
+
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         var selected = new OptionModel();
@@ -692,12 +722,37 @@ _appModel = new AddAppModel()
                             selected.Selected = true;
                             selected.ReplaceMap = new Dictionary<string, string> { { "#000000", "#" + Settings.MobileSettings.color } };
                             MessagingCenter.Send<Object, string>(this, "SetVisibleLayout", selected.Name);
+                            
+                            IsVisible = selected.HasSubTypes;
+                            if (!IsVisible)
+                            {
+                                PodTypSelected = null;
+                            }
+                            Device.BeginInvokeOnMainThread(() => { PodTypes.Clear(); });
+                            
+                            foreach (var type in selected.SubTypes)
+                            {
+                                Device.BeginInvokeOnMainThread(() =>
+                                {
+                                    TypeModel type_ = new TypeModel();
+                                    type_.Name = type.Name;
+                                    String image = "";
+                                    type_.ReplaceMap = SetIconType(selected.Name, ref image);
+                                    type_.Image = image;
+                                    type_.ID = type.ID;
+                                    PodTypes.Add(type_);
+                                    PodTypSelected = PodTypes[0];
+                                });
+                            }
+                            
                         }
                         
                     });
                     
                 });
 
+                
+                
                 SelectAccount = new Command<string>((name) =>
                 {
                     Device.BeginInvokeOnMainThread(() =>
@@ -712,6 +767,37 @@ _appModel = new AddAppModel()
                         }
                     });
                 });
+            }
+
+            private static Dictionary<string, string> SetIconType(String Name, ref string Image)
+            {
+                switch (Name.ToLower())
+                {
+                    case "бухгалтерия":
+                        Image = "resource://xamarinJKH.Resources.app_accountaint.svg";
+                        break;
+                    case "паспортный стол":
+                        Image = "resource://xamarinJKH.Resources.app_passport.svg"; //vector 3
+                        break;
+                    case "сантехник":
+                        Image = "resource://xamarinJKH.Resources.app_plumber.svg"; //vector 1
+                        break;
+                    case "электрик":
+                        Image = "resource://xamarinJKH.Resources.app_electritian.svg"; //vector 2
+                        break;
+                    case "другие вопросы":
+                        Image = "resource://xamarinJKH.Resources.app_other.svg"; //vector 5
+                        break;
+                    case "домофон":
+                        Image = "resource://xamarinJKH.Resources.app_domophone.svg";
+                        break;
+                    case "заявка на пропуск":
+                        Image = "resource://xamarinJKH.Resources.app_pass.svg"; //vector 4
+                        break;
+                }
+
+                string replaceColor = Application.Current.RequestedTheme == OSAppTheme.Dark ? "#FFFFFF" : "#8D8D8D";
+                return new Dictionary<string, string> {{"#000000", replaceColor}};
             }
         }
 
@@ -735,6 +821,7 @@ _appModel = new AddAppModel()
                     var type_index = vm.Types.IndexOf(vm.SelectedTyp);
                     string ident = Settings.Person.Accounts[index].Ident;
                     string typeId = Settings.TypeApp[type_index].ID.ToString();
+                    int? SubTypeID = _appModel.PodTypSelected?.ID;
                     IDResult result = new IDResult();
                     if (isPassAPP)
                     {
@@ -744,7 +831,7 @@ _appModel = new AddAppModel()
                     }
                     else
                     {
-                        result = await _server.newApp(ident, typeId, text);
+                        result = await _server.newApp(ident, typeId, text,SubTypeID);
 
                     }
                     var update = await _server.GetRequestsUpdates(Settings.UpdateKey, result.ID.ToString());
@@ -1144,6 +1231,28 @@ _appModel = new AddAppModel()
             vm.SelectedTyp = om;
             lastElementSelected2 = (StackLayout)sender;
         }
+        
+        private void FrameIdentGR2_Tapped(object sender, EventArgs e)
+        {
+            if (lastElementSelected2 != null)
+            {
+                VisualStateManager.GoToState(lastElementSelected2.Children[0], "Normal");
+            }
+
+            var el = sender as StackLayout;
+
+            VisualStateManager.GoToState(el.Children[0], "Selected");
+
+            var om = el.BindingContext as TypeModel;
+            foreach (var option in (BindingContext as AddAppModel).PodTypes)
+            {
+                option.Selected = false;
+            }
+            om.Selected = true;
+            var vm = (BindingContext as AddAppModel);
+            vm.PodTypSelected = om;
+            lastElementSelected2 = (StackLayout)sender;
+        }
 
         private void EntryMess_Focused(object sender, FocusEventArgs e)
         {
@@ -1153,6 +1262,11 @@ _appModel = new AddAppModel()
         private void EntryMess_Unfocused(object sender, FocusEventArgs e)
         {
             //Scroll.IsEnabled = true;
+        }
+
+        private void SelectableItemsView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _appModel.PodTypeSelect.Execute(sender);
         }
     }
 }
