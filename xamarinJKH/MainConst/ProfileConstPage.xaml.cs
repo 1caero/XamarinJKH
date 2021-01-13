@@ -324,39 +324,32 @@ namespace xamarinJKH.MainConst
         }
 
         private void RadioButtonAuto_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-            //только темная тема в ios
-            //if (Xamarin.Essentials.DeviceInfo.Platform != DevicePlatform.iOS)
-            //{
-                Application.Current.UserAppTheme = OSAppTheme.Unspecified;
-                Preferences.Set("Theme", 0);
-                MessagingCenter.Send<Object>(this, "ChangeThemeConst");
-                MessagingCenter.Send<Object>(this, "ChangeAdminApp");
-                MessagingCenter.Send<Object>(this, "ChangeAdminMonitor");
-                SetAdminName();
-            //}
-                
+        {            
+            Application.Current.UserAppTheme = OSAppTheme.Unspecified;
+            SetTheme(0);
         }
 
         private void RadioButtonDark_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             Application.Current.UserAppTheme = OSAppTheme.Dark;
-            Preferences.Set("Theme", 1);
+            SetTheme(1);
+        }
+
+        private void RadioButtonLigth_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            Application.Current.UserAppTheme = OSAppTheme.Light;
+            SetTheme(2);
+        }
+
+        void SetTheme(int code)
+        {
+            Preferences.Set("Theme", code);
             MessagingCenter.Send<Object>(this, "ChangeThemeConst");
             MessagingCenter.Send<Object>(this, "ChangeAdminApp");
             MessagingCenter.Send<Object>(this, "ChangeAdminMonitor");
             SetAdminName();
         }
 
-        private void RadioButtonLigth_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-            Application.Current.UserAppTheme = OSAppTheme.Light;
-            Preferences.Set("Theme", 2);
-            MessagingCenter.Send<Object>(this, "ChangeThemeConst");
-            MessagingCenter.Send<Object>(this, "ChangeAdminApp");
-            MessagingCenter.Send<Object>(this, "ChangeAdminMonitor");
-            SetAdminName();
-        }
 
         private async void Russian_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {

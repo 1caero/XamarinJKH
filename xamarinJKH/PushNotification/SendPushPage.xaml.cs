@@ -16,6 +16,7 @@ using Xamarin.Forms.Xaml;
 using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
+using xamarinJKH.MainConst;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
@@ -67,8 +68,8 @@ namespace xamarinJKH.PushNotification
             var profile = new TapGestureRecognizer();
             profile.Tapped += async (s, e) =>
             {
-                if (Navigation.NavigationStack.FirstOrDefault(x => x is ProfilePage) == null)
-                    await Navigation.PushAsync(new ProfilePage());
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is ProfileConstPage) == null)
+                    await Navigation.PushAsync(new ProfileConstPage());
             };
             IconViewProfile.GestureRecognizers.Add(profile);
 
@@ -115,6 +116,10 @@ namespace xamarinJKH.PushNotification
             //     }
             // };
             // StackLayoutOs.GestureRecognizers.Add(takeOS); 
+
+            //MessagingCenter.Subscribe<Object>(this, "ChangeAdminMonitor", (sender) => ChangeTheme.Execute(null));
+
+
             var takeDate = new TapGestureRecognizer();
             takeDate.Tapped += async (s, e) =>
             {
