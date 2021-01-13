@@ -26,9 +26,10 @@
                        Margin="0,0,0,0"
                        Aspect="{OnPlatform Android=Fill, iOS=AspectFill}"
                        HorizontalOptions="FillAndExpand" />
-                <BoxView Margin="0,100,0,0"
-                         VerticalOptions="FillAndExpand"
-                         BackgroundColor="White"/>
+                <BoxView VerticalOptions="FillAndExpand"
+                         Margin="0,200,0,0"
+                         BackgroundColor="White">
+                </BoxView>
                 <StackLayout>
                     <StackLayout
                         Margin="25,10,15,0"
@@ -81,6 +82,7 @@
                             Source="resource://xamarinJKH.Resources.ic_arrow_back.svg"
                             HeightRequest="25"
                             HorizontalOptions="Start"
+                            x:Name="ArrowBack"
                             ReplaceStringMap="{Binding IsRefreshing, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
                             VerticalOptions="Center" />
                         <Label

@@ -73,17 +73,17 @@ namespace xamarinJKH.PushNotification
             IconViewProfile.GestureRecognizers.Add(profile);
 
             UkName.Text = Settings.MobileSettings.main_name;
-            var backClick = new TapGestureRecognizer();
-            backClick.Tapped += async (s, e) =>
-            {
-                try
-                {
-                    _ = await Navigation.PopAsync();
-                }
-                catch
-                {
-                }
-            };
+            //var backClick = new TapGestureRecognizer();
+            //backClick.Tapped += async (s, e) =>
+            //{
+            //    try
+            //    {
+            //        _ = await Navigation.PopAsync();
+            //    }
+            //    catch
+            //    {
+            //    }
+            //};
             var techSend = new TapGestureRecognizer();
             techSend.Tapped += async (s, e) =>
             {
@@ -153,7 +153,7 @@ namespace xamarinJKH.PushNotification
                 }
             };
             StackLayoutKind.GestureRecognizers.Add(kind);
-            BackStackLayout.GestureRecognizers.Add(backClick);
+            //BackStackLayout.GestureRecognizers.Add(backClick);
         }
 
         private void SetKind(string action)

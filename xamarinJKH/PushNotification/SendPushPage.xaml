@@ -65,13 +65,13 @@
                     Spacing="0"
                     Margin="25, 0, 0, 0"
                     HorizontalOptions="Start">
-                    <forms:SvgCachedImage
+                    <!--<forms:SvgCachedImage
                         Source="resource://xamarinJKH.Resources.ic_arrow_back.svg"
                         HeightRequest="25"
                         IsVisible="False"
                         HorizontalOptions="Start"
                         ReplaceStringMap="{Binding isRefresh, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center" />-->
                     <Label
                         Text="{x:Static xamarinJkh:AppResources.CreatePush}"
                         FontSize="23"
@@ -347,7 +347,7 @@
                                                HorizontalOptions="FillAndExpand">
                                             <StackLayout
                                                 Orientation="Horizontal"
-                                                Spacing="0"
+                                                Spacing="{OnPlatform iOS='10' , Android='0'}"
                                                 Margin="18,0,0,0"
                                                 VerticalOptions="CenterAndExpand"
                                                 HorizontalOptions="Center">
@@ -377,7 +377,7 @@
                                                HorizontalOptions="FillAndExpand">
                                             <StackLayout
                                                 Orientation="Horizontal"
-                                                Spacing="0"
+                                                Spacing="{OnPlatform iOS='10' , Android='0'}"
                                                 Margin="18,0,0,0"
                                                 VerticalOptions="CenterAndExpand"
                                                 HorizontalOptions="Center">
@@ -408,7 +408,7 @@
                                                HorizontalOptions="FillAndExpand">
                                             <StackLayout
                                                 Orientation="Horizontal"
-                                                Spacing="0"
+                                                Spacing="{OnPlatform iOS='10' , Android='0'}"
                                                 Margin="18,0,0,0"
                                                 VerticalOptions="CenterAndExpand"
                                                 
@@ -440,7 +440,7 @@
                                                HorizontalOptions="FillAndExpand">
                                             <StackLayout
                                                 Orientation="Horizontal"
-                                                Spacing="0"
+                                                Spacing="{OnPlatform iOS='10' , Android='0'}"
                                                 Margin="18,0,0,0"
                                                 VerticalOptions="CenterAndExpand"
                                                 HorizontalOptions="Center">
