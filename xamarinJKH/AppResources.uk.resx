@@ -262,8 +262,7 @@
     <value>Код перевірки</value>
   </data>
   <data name="CodeInfo" xml:space="preserve">
-    <value>Натисніть «Запросити дзвінок з кодом».
-Вам подзвонить робот на номер PHONE і повідомить код</value>
+    <value>Підтвердіть Ваш № телефону PHONE</value>
   </data>
   <data name="Commision" xml:space="preserve">
     <value>Комісія</value>

@@ -220,8 +220,7 @@
     <value>Закрыть</value>
   </data>
   <data name="CodeInfo" xml:space="preserve">
-    <value>Нажмите «Запросить звонок с кодом». 
-Вам позвонит робот на номер PHONE и сообщит код</value>
+    <value>Подтвердите Ваш № телефона PHONE</value>
   </data>
   <data name="CompleteApp" xml:space="preserve">
     <value>Выполнить</value>

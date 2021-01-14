@@ -215,8 +215,7 @@
     <value>Close</value>
   </data>
   <data name="CodeInfo" xml:space="preserve">
-    <value>Click "Request a call with a code". 
-A bot will call you on your number PHONE and tell an access code</value>
+    <value>Confirm your phone number PHONE</value>
     <comment>To receive an access code, click "Ask for a call with a code". A bot will call you on your number PHONE and tell an access code</comment>
   </data>
   <data name="CompleteApp" xml:space="preserve">

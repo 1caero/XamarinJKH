@@ -763,8 +763,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Нажмите «Запросить звонок с кодом». 
-        ///Вам позвонит робот на номер PHONE и сообщит код.
+        ///   Looks up a localized string similar to Подтвердите Ваш № телефона PHONE.
         /// </summary>
         internal static string CodeInfo {
             get {

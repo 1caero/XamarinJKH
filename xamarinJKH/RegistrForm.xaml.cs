@@ -401,10 +401,10 @@ namespace xamarinJKH
                     Text = EntryPhone.Text,
                     TextColor = Color.Black,
                 });
-                formatted.Spans.Add(new Span
-                {
-                    Text = message[1],
-                });
+                // formatted.Spans.Add(new Span
+                // {
+                //     Text = message[1],
+                // });
 
                 LabelTitleRequestCode.FormattedText = formatted;
                 StepsImage.Source = ImageSource.FromFile("ic_steps_two");
