@@ -334,6 +334,7 @@ namespace xamarinJKH
         {
             RegistrationFrameStep2.IsVisible = true;
             RegistrationFrameStep3.IsVisible = false;
+            tech.IsVisible = true;
             StepsImage.Source = ImageSource.FromFile("ic_steps_two");
             LabelSteps.Text = $"{AppResources.Step} 2";
             step = 1;
