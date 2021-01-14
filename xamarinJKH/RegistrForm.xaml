@@ -323,17 +323,17 @@
                             </StackLayout>
                             <StackLayout
                                 Orientation="Horizontal"
-                                HorizontalOptions="End">
+                                HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                                 <Label Text="{x:Static xamarinJkh:AppResources.TSA}"
                                        FontSize="13"
                                        Margin="5, 15, 5, 15"
-                                       TextColor="Black"
-                                       HorizontalOptions="Center" />
+                                       TextColor="Black" 
+                                       HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
                                 <Switch
                                     OnColor="{x:DynamicResource MainColor}"
                                     ThumbColor="Black"
                                     IsToggled="false"
-                                    x:Name="SwitchConsent" />
+                                    x:Name="SwitchConsent" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
                             </StackLayout>
                             <Label Text="{x:Static xamarinJkh:AppResources.PersonalPolicity}"
                                    FontSize="15"
@@ -491,11 +491,11 @@
                                     </StackLayout>
                                 <Frame x:Name="FrameTimer"
                                        CornerRadius="10"
-                                       HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                       HasShadow="{AppThemeBinding Light=false, Dark=false}"
                                        BackgroundColor="Transparent"
                                        Margin="0, 0, 0, 0"
                                        Padding="0">
-                                    <Label x:Name="LabelTimer"
+                                    <Label x:Name="LabelTimer"                                           
                                            Text=""
                                            FontSize="15"
                                            TextColor="{x:DynamicResource MainColor}"
