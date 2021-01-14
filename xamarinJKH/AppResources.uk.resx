@@ -1469,7 +1469,7 @@
     <value>Чи не надходить дзвінок? Отримайте текстове повідомлення:</value>
   </data>
   <data name="AskForCodeSmsAgain" xml:space="preserve">
-    <value>Очікування смс... TimerTime сек</value>
+    <value>Очікування коду... TimerTime сек</value>
   </data>
   <data name="DatePlaceHolder" xml:space="preserve">
     <value>ДД.ММ.РРРР</value>

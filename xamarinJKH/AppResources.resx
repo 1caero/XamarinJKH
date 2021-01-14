@@ -1472,7 +1472,7 @@
     <value>Не поступает звонок?  Получите текстовое сообщение:</value>
   </data>
   <data name="AskForCodeSmsAgain" xml:space="preserve">
-    <value>Ожидание смс... TimerTime сек</value>
+    <value>Ожидание кода... TimerTime сек</value>
   </data>
   <data name="DatePlaceHolder" xml:space="preserve">
     <value>ДД.ММ.ГГГГ</value>
