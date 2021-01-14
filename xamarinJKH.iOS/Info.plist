@@ -50,6 +50,8 @@
 	<string>Вы можете предоставить доступ к микрофону чтобы записать видео и приложить к заявке</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Предоставьте доступ к геопозиции</string>
+  <key>NSLocationAlwaysUsageDescription</key>
+  <string>Предоставьте доступ к геопозиции</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Предоставьте доступ к календарю и дате</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
