@@ -16,6 +16,7 @@ using Xamarin.Forms.Xaml;
 using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
+using xamarinJKH.MainConst;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
@@ -67,8 +68,8 @@ namespace xamarinJKH.PushNotification
             var profile = new TapGestureRecognizer();
             profile.Tapped += async (s, e) =>
             {
-                if (Navigation.NavigationStack.FirstOrDefault(x => x is ProfilePage) == null)
-                    await Navigation.PushAsync(new ProfilePage());
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is ProfileConstPage) == null)
+                    await Navigation.PushAsync(new ProfileConstPage());
             };
             IconViewProfile.GestureRecognizers.Add(profile);
 
@@ -115,6 +116,10 @@ namespace xamarinJKH.PushNotification
             //     }
             // };
             // StackLayoutOs.GestureRecognizers.Add(takeOS); 
+
+            //MessagingCenter.Subscribe<Object>(this, "ChangeAdminMonitor", (sender) => ChangeTheme.Execute(null));
+
+
             var takeDate = new TapGestureRecognizer();
             takeDate.Tapped += async (s, e) =>
             {
@@ -442,15 +447,15 @@ namespace xamarinJKH.PushNotification
         private void Button_All_OS_Click(object sender, EventArgs e)
         {
             _os = ButtonAll.Text;
-            FrameAll.HasShadow = true;
+            //FrameAll.HasShadow = true;
             FrameAll.BorderColor = hex;
             ButtonAll.TextColor = hex;
 
-            FrameAnd.HasShadow = false;
+            //FrameAnd.HasShadow = false;
             FrameAnd.BorderColor = Color.Gray;
             ButtonAnd.TextColor = Color.Black;
             
-            FrameIos.HasShadow = false;
+            //FrameIos.HasShadow = false;
             FrameIos.BorderColor = Color.Gray;
             ButtonIos.TextColor = Color.Black;
             
@@ -459,7 +464,7 @@ namespace xamarinJKH.PushNotification
         private void Button_Android_OS_Click(object sender, EventArgs e)
         {
             _os = ButtonAnd.Text;
-            FrameAnd.HasShadow = true;
+            //FrameAnd.HasShadow = true;
             FrameAnd.BorderColor = hex;
             ButtonAnd.TextColor = hex;
 
@@ -475,7 +480,7 @@ namespace xamarinJKH.PushNotification
         private void Button_IOS_Clcik(object sender, EventArgs e)
         {
             _os = ButtonIos.Text;
-            FrameIos.HasShadow = true;
+            //FrameIos.HasShadow = true;
             FrameIos.BorderColor = hex;
             ButtonIos.TextColor = hex;
 
@@ -492,7 +497,7 @@ namespace xamarinJKH.PushNotification
         {
             SetKind(ButtonDuty.Text);
             
-            FrameDuty.HasShadow = true;
+            //FrameDuty.HasShadow = true;
             FrameDuty.BorderColor = hex;
             ButtonDuty.TextColor = hex;
             
@@ -522,7 +527,7 @@ namespace xamarinJKH.PushNotification
         {
             SetKind(ButtonIdent.Text);
             
-            FrameIdent.HasShadow = true;
+           //FrameIdent.HasShadow = true;
             FrameIdent.BorderColor = hex;
             ButtonIdent.TextColor = hex;
             
@@ -551,7 +556,7 @@ namespace xamarinJKH.PushNotification
         {
             SetKind(ButtonRyon.Text);
             
-            FrameRyon.HasShadow = true;
+            //FrameRyon.HasShadow = true;
             FrameRyon.BorderColor = hex;
             ButtonRyon.TextColor = hex;
             
@@ -580,7 +585,7 @@ namespace xamarinJKH.PushNotification
         {
             SetKind(ButtonHouse.Text);
             
-            FrameHouse.HasShadow = true;
+            //FrameHouse.HasShadow = true;
             FrameHouse.BorderColor = hex;
             ButtonHouse.TextColor = hex;
             
