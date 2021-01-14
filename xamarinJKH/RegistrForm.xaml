@@ -29,7 +29,7 @@
                    CornerRadius="40"
                    Padding="0"
                    Margin="0,-80,0,-30" >
-                <StackLayout Padding="0,50,0,60"
+                <StackLayout Padding="5,80,5,60"
                             x:Name="tech"
                             IsVisible="False"
                             HorizontalOptions="Center"
