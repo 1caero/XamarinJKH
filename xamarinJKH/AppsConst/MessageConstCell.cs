@@ -389,7 +389,7 @@ namespace xamarinJKH.AppsConst
             frameDate.HorizontalOptions = LayoutOptions.Center;
             frameDate.VerticalOptions = LayoutOptions.Start;
             frameDate.BackgroundColor = Color.FromHex("#E2E2E2");
-            frameDate.Margin = new Thickness(0, 0, 0, 10);
+            frameDate.Margin = new Thickness(0, 2, 0, 10);
             frameDate.Padding = new Thickness(5, 5, 5, 5);
             frameDate.CornerRadius = 15;
             frameDate.SetOnAppTheme(Frame.HasShadowProperty, false, true);
