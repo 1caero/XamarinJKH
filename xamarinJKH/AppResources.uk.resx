@@ -1610,4 +1610,7 @@
   <data name="OpenSettings" xml:space="preserve">
     <value>Відкрити налаштування програми</value>
   </data>
+  <data name="Malfunction" xml:space="preserve">
+    <value>несправність: </value>
+  </data>
 </root>

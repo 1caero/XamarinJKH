@@ -171,13 +171,13 @@ _appModel = new AddAppModel()
                 {
                     SetPassApp();
                     SaveText = EntryMess.Text;
-                    EntryMess.Text = AppResources.NamePassApp;
+                    // EntryMess.Text = AppResources.NamePassApp;
                     isPassAPP = true;
                 }
                 else
                 {
                     SetDefaultApp();
-                    EntryMess.Text = SaveText;
+                    // EntryMess.Text = SaveText;
                     isPassAPP = false;
                 }
             });
@@ -708,37 +708,36 @@ _appModel = new AddAppModel()
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        var selected = new OptionModel();
-                        selected = Types.FirstOrDefault(x => x.Name == (name as OptionModel).Name);
-                        if (selected != null)
+                       
+                        if (SelectedTyp != null)
                         {
-                            foreach (var typ in Types)
-                            {
-                                typ.Selected = false;
-                                string replaceColor = Application.Current.RequestedTheme == OSAppTheme.Dark ? "#FFFFFF" : "#8D8D8D";
-                                typ.ReplaceMap = new Dictionary<string, string> { { "#000000", replaceColor } };
-                            }
-
-                            selected.Selected = true;
-                            selected.ReplaceMap = new Dictionary<string, string> { { "#000000", "#" + Settings.MobileSettings.color } };
-                            MessagingCenter.Send<Object, string>(this, "SetVisibleLayout", selected.Name);
-                            
-                            IsVisible = selected.HasSubTypes;
+                            // foreach (var typ in Types)
+                            // {
+                            //     typ.Selected = false;
+                            //     string replaceColor = Application.Current.RequestedTheme == OSAppTheme.Dark ? "#FFFFFF" : "#8D8D8D";
+                            //     typ.ReplaceMap = new Dictionary<string, string> { { "#000000", replaceColor } };
+                            // }
+                            //
+                            // selected.Selected = true;
+                            // selected.ReplaceMap = new Dictionary<string, string> { { "#000000", "#" + Settings.MobileSettings.color } };
+                            // MessagingCenter.Send<Object, string>(this, "SetVisibleLayout", selected.Name);
+                            //
+                            IsVisible = SelectedTyp.HasSubTypes;
                             if (!IsVisible)
                             {
                                 PodTypSelected = null;
                             }
                             Device.BeginInvokeOnMainThread(() => { PodTypes.Clear(); });
                             
-                            foreach (var type in selected.SubTypes)
+                            foreach (var type in SelectedTyp.SubTypes)
                             {
                                 Device.BeginInvokeOnMainThread(() =>
                                 {
                                     TypeModel type_ = new TypeModel();
                                     type_.Name = type.Name;
                                     String image = "";
-                                    type_.ReplaceMap = SetIconType(selected.Name, ref image);
-                                    type_.Image = image;
+                                    // type_.ReplaceMap = SetIconType(selected.Name, ref image);
+                                    // type_.Image = image;
                                     type_.ID = type.ID;
                                     PodTypes.Add(type_);
                                     PodTypSelected = PodTypes[0];
@@ -822,6 +821,7 @@ _appModel = new AddAppModel()
                     string ident = Settings.Person.Accounts[index].Ident;
                     string typeId = Settings.TypeApp[type_index].ID.ToString();
                     int? SubTypeID = _appModel.PodTypSelected?.ID;
+                    text = _appModel.SelectedTyp.Name.Contains("пропуск") ? AppResources.NamePassApp : text;
                     IDResult result = new IDResult();
                     if (isPassAPP)
                     {
@@ -1014,16 +1014,17 @@ _appModel = new AddAppModel()
         
         private void pickerType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_appModel.SelectedType.Name.Contains("пропуск"))
+            _appModel.SelectTyp.Execute(null);
+            if (_appModel.SelectedTyp.Name.Contains("пропуск"))
             {
                 SetPassApp();
-                EntryMess.Text = AppResources.NamePassApp;
+                // EntryMess.Text = AppResources.NamePassApp;
                 isPassAPP = true;
             }
             else
             {
                 SetDefaultApp();
-                EntryMess.Text = "";
+                // EntryMess.Text = "";
                 isPassAPP = false;
             }
         }
@@ -1263,10 +1264,11 @@ _appModel = new AddAppModel()
         {
             //Scroll.IsEnabled = true;
         }
+        
 
-        private void SelectableItemsView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void PickerPodType_OnSelectedIndexChanged(object sender, EventArgs e)
         {
-            _appModel.PodTypeSelect.Execute(sender);
+            
         }
     }
 }

@@ -1730,4 +1730,7 @@
   <data name="OpenSettings" xml:space="preserve">
     <value>Открыть настройки приложения</value>
   </data>
+  <data name="Malfunction" xml:space="preserve">
+    <value>Неисправность: </value>
+  </data>
 </root>

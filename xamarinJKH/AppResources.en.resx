@@ -1737,4 +1737,7 @@ A bot will call you on your number PHONE and tell an access code</value>
   <data name="OpenSettings" xml:space="preserve">
     <value>Open app settings</value>
   </data>
+  <data name="Malfunction" xml:space="preserve">
+    <value>Malfunction: </value>
+  </data>
 </root>

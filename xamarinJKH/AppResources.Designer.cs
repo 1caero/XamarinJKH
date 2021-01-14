@@ -2213,6 +2213,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Неисправность: .
+        /// </summary>
+        internal static string Malfunction {
+            get {
+                return ResourceManager.GetString("Malfunction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Оценки.
         /// </summary>
         internal static string Marks {
