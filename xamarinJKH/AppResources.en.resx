@@ -1485,7 +1485,7 @@
     <value>Don't get a call? Receive a text message:</value>
   </data>
   <data name="AskForCodeSmsAgain" xml:space="preserve">
-    <value>Sms waiting... TimerTime sec</value>
+    <value>Waiting for code... TimerTime sec</value>
   </data>
   <data name="DatePlaceHolder" xml:space="preserve">
     <value>DD.MM.YYYY</value>

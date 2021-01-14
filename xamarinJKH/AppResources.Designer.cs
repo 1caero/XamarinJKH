@@ -430,7 +430,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ожидание смс... TimerTime сек.
+        ///   Looks up a localized string similar to Ожидание кода... TimerTime сек.
         /// </summary>
         internal static string AskForCodeSmsAgain {
             get {
