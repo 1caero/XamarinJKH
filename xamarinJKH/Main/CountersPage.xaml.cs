@@ -666,12 +666,21 @@ namespace xamarinJKH.Main
 
             try
             {
-                double x = Preferences.Get("scrollX", 0d);
-                double y = Preferences.Get("scrollY", 0d);
-                scrollForCounters.ScrollToAsync(x, y, false);
+               
+                Device.BeginInvokeOnMainThread(async () =>
+               {
+                   if (Device.RuntimePlatform == Device.iOS)
+                       await Task.Delay(300);
+                   double x = Preferences.Get("scrollX", 0d);
+                   double y = Preferences.Get("scrollY", 0d);
+                   await scrollForCounters.ScrollToAsync(x, y, false);
+                   Preferences.Remove("scrollX");
+                   Preferences.Remove("scrollY");
+               }
+
+                );
                 
-                Preferences.Clear("scrollX");
-                Preferences.Clear("scrollY");
+                
             }
             catch (Exception e)
             {
