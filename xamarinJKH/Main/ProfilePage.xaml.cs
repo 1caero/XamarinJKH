@@ -217,6 +217,8 @@ namespace xamarinJKH.Main
                 CommonResult result = await _server.UpdateProfile(email, fio);
                 if (result.Error == null)
                 {
+                    Settings.Person.FIO = fio;
+                    Settings.Person.Email = email;
                     Console.WriteLine(result.ToString());
                     Console.WriteLine("Отправлено");
                     await DisplayAlert("", AppResources.SuccessProfile, "OK");             
