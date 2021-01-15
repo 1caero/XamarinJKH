@@ -1,15 +1,7 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Threading.Tasks;
-using AiForms.Dialogs;
-using AiForms.Dialogs.Abstractions;
-using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using xamarinJKH.CustomRenderers;
-using xamarinJKH.DialogViews;
-using xamarinJKH.InterfacesIntegration;
-using xamarinJKH.Server;
-using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
 
 namespace xamarinJKH.Main
@@ -122,12 +114,10 @@ namespace xamarinJKH.Main
             IconView image = new IconView();
             image.Source = "ic_pays";
             image.Foreground = Color.White;
-            // image.Margin = new Thickness(-45, 0, 0, 0);
             image.HeightRequest = 30;
             image.WidthRequest = 30;
 
             Label btn = new Label();
-            // btn.Margin = new Thickness(-30, 0, 0, 0);
             btn.TextColor = Color.White;
             btn.BackgroundColor = Color.Transparent;
             btn.HorizontalOptions  = LayoutOptions.Center;
@@ -221,7 +211,7 @@ namespace xamarinJKH.Main
 
             if (BindingContext != null)
             {
-                if(Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width<700)
+                if(DeviceDisplay.MainDisplayInfo.Width<700)
                 {
                     fs = 13;
                 }

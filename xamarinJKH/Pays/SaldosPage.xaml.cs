@@ -1,33 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AiForms.Dialogs;
+using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
-using Plugin.Messaging;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.CustomRenderers;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
+using xamarinJKH.Main;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
 using xamarinJKH.Utils.Compatator;
-using System.Threading.Tasks.Sources;
-using AiForms.Dialogs.Abstractions;
-using System.Threading;
-using xamarinJKH.News;
-using xamarinJKH.Main;
-
-//using MediaManager.Forms;
 
 namespace xamarinJKH.Pays
 {
@@ -71,7 +60,7 @@ namespace xamarinJKH.Pays
 
         private async Task RefreshData()
         {
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () =>
                     await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
@@ -84,8 +73,6 @@ namespace xamarinJKH.Pays
                 SetBills(info.Data);
                 isSortDate = !isSortDate;
                 SortDate();
-                // additionalList.ItemsSource = null;
-                // additionalList.ItemsSource = BillInfos;
             }
             else
             {
@@ -116,7 +103,7 @@ namespace xamarinJKH.Pays
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
 
-                    if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 700)
+                    if (DeviceDisplay.MainDisplayInfo.Width < 700)
                     {
                         kvitLabel2.FontSize = 14;
                         LabelDate.FontSize = 12;
@@ -127,7 +114,6 @@ namespace xamarinJKH.Pays
                     //есть баг в xamarin, потому что fillAndExpand не работает(https://github.com/xamarin/Xamarin.Forms/issues/6908)
                     additionalList.HeightRequest = 3000;
 
-                    //BackgroundColor = Color.White;
                     break;
                 default:
                     break;
@@ -294,7 +280,6 @@ namespace xamarinJKH.Pays
         {
             UkName.Text = Settings.MobileSettings.main_name;
 
-            // IconViewSortIdent.Foreground = (Color)Application.Current.Resources["MainColor"];
 
             IconViewSortDate.ReplaceStringMap = new Dictionary<string, string>
             {
@@ -303,9 +288,6 @@ namespace xamarinJKH.Pays
             LabelDate.TextColor = hex;
 
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            // IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
             FrameSaldo.SetAppThemeColor(MaterialFrame.BorderColorProperty, hexColor, Color.White);
         }
 
@@ -316,27 +298,12 @@ namespace xamarinJKH.Pays
             {
                 return;
             }
-            //if (Device.RuntimePlatform == "iOS")
-            //{
-            //    if (select != null)
-            //    {
-
-            //        select.Period = select.Period.ToUpper();
-            //        if (Navigation.NavigationStack.FirstOrDefault(x => x is PayPdf) == null)
-            //            await Navigation.PushAsync(new PayPdf(select));
-            //    }
-            //    return;
-            //}
-
 
             try
             {
                 Analytics.TrackEvent("Открытие квитанции " + select.Period + " " + select.Ident);
                 string filename = @select.Period + select.Ident.Replace("/", "").Replace("\\", "") + ".jpg";
-                // new Task(async () => GetFile(@select.ID.ToString(), filename, select)).Start();
                 await Navigation.PushAsync(new ImageSaldoPage( select));
-                // if (Navigation.NavigationStack.FirstOrDefault(x => x is PdfView) == null)
-                //     await Navigation.PushAsync(new PdfView(filename, select.ID.ToString()));
             }
             catch (Exception exception)
             {
@@ -373,13 +340,6 @@ namespace xamarinJKH.Pays
                                 {
                                   
                                 });
-                                //
-                                // await DependencyService.Get<IFileWorker>().SaveTextAsync(fileName, stream);
-                                // result = true;
-                                // await Launcher.OpenAsync(new OpenFileRequest
-                                // {
-                                //     File = new ReadOnlyFile(DependencyService.Get<IFileWorker>().GetFilePath(fileName))
-                                // });
                             }
                             else
                             {

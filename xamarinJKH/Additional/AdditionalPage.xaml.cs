@@ -2,30 +2,26 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Plugin.Messaging;
+using AiForms.Dialogs;
+using FFImageLoading.Forms;
+using Microsoft.AppCenter.Analytics;
+using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
+using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
+using xamarinJKH.Main;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Shop;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
 using xamarinJKH.ViewModels.Additional;
-using static Akavache.BlobCache;
-using Xamarin.Forms.Maps;
-using AiForms.Dialogs;
-using Rg.Plugins.Popup.Services;
-using xamarinJKH.DialogViews;
-using Xamarin.Essentials;
-using System.Text.RegularExpressions;
-using FFImageLoading.Forms;
-using Microsoft.AppCenter.Analytics;
-using xamarinJKH.Main;
+using Map = Xamarin.Forms.Maps.Map;
 
 namespace xamarinJKH.Additional
 {
@@ -79,7 +75,7 @@ namespace xamarinJKH.Additional
                 {
                     IsRefreshing = true;
 
-                    if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+                    if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                     {
                         Device.BeginInvokeOnMainThread(async () =>
                             await DisplayAlert(AppResources.ErrorTitle, null, "OK"));
@@ -143,7 +139,7 @@ namespace xamarinJKH.Additional
 
         private async Task RefreshData()
         {
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () =>
                     await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
@@ -154,8 +150,6 @@ namespace xamarinJKH.Additional
             if (Settings.EventBlockData.Error == null)
             {
                 SetAdditional();
-                //additionalList.ItemsSource = null;
-                //additionalList.ItemsSource = Additional;
             }
             else
             {
@@ -176,14 +170,6 @@ namespace xamarinJKH.Additional
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
 
-                    //headerImg.HorizontalOptions = LayoutOptions.Center;
-                    //headerImg.Aspect = Aspect.AspectFit;
-
-                    //MenuDelimiter.IsEnabled = false;
-                    //MenuDelimiter.IsVisible = false;
-
-                    //MapMenu.IsEnabled = false;
-                    //MapMenu.IsVisible = false;
                     break;
                 default:
                     break;
@@ -218,17 +204,16 @@ namespace xamarinJKH.Additional
             Additional = new ObservableCollection<AdditionalService>();
             Groups = new ObservableCollection<string>();
             this.BindingContext = this;
-            // CatalogMenu.TextColor = (Color) Application.Current.Resources["MainColor"];
             MessagingCenter.Subscribe<Object>(this, "LoadGoods", async (s) =>
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(500));
                 SetAdditional();
             });
 
-            MessagingCenter.Subscribe<MapPageViewModel, Xamarin.Forms.Maps.Position>(this, "FocusMap",
+            MessagingCenter.Subscribe<MapPageViewModel, Position>(this, "FocusMap",
                 (sender, args) =>
                 {
-                    (Map.Children[0] as Xamarin.Forms.Maps.Map).MoveToRegion(
+                    (Map.Children[0] as Map).MoveToRegion(
                         MapSpan.FromCenterAndRadius(args, Distance.FromKilometers(2)));
                 });
 
@@ -263,7 +248,6 @@ namespace xamarinJKH.Additional
                     arrowcolor.Add("#000000", "#FFFFFF");
                 }
 
-                //IconViewTech.ReplaceStringMap = colors;
             });
         }
 
@@ -271,24 +255,18 @@ namespace xamarinJKH.Additional
         {
             UkName.Text = Settings.MobileSettings.main_name;
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            //IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
             FrameKind.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            //AiForms.Dialogs.Loading.Instance.Show();
             SetText();
-            //SetAdditional();
-            //await RefreshData();
         }
 
         void SetAdditional()
         {
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, null, "OK"));
                 return;
@@ -341,7 +319,6 @@ namespace xamarinJKH.Additional
                 })
             );
 
-            //AiForms.Dialogs.Loading.Instance.Hide();
         }
 
 
@@ -397,8 +374,6 @@ namespace xamarinJKH.Additional
                         HorizontalOptions=LayoutOptions.Center,
                         FontSize=12,
                         HorizontalTextAlignment=TextAlignment.Center
-                        //LineBreakMode = LineBreakMode.WordWrap,
-                        //WidthRequest = 100
                     };
                     stackLayoutCon.Children.Add(pic);
                     stackLayoutCon.Children.Add(labelText);
@@ -475,75 +450,16 @@ namespace xamarinJKH.Additional
             }
         }
 
-        private void SwitchList(object sender, EventArgs args)
-        {
-            // var label = sender as Label;
-            // var mainColor = Application.Current.Resources["MainColor"];
-            // label.TextColor = (Color) mainColor;
-            // if (DevicePlatform.iOS == DevicePlatform.iOS)
-            //     MapMenu.TextColor =
-            //         Application.Current.UserAppTheme == OSAppTheme.Light ||
-            //         Application.Current.UserAppTheme == OSAppTheme.Unspecified
-            //             ? Color.Black
-            //             : Color.White;
-            // else
-            //     MapMenu.TextColor =
-            //         Application.Current.UserAppTheme == OSAppTheme.Dark ||
-            //         Application.Current.UserAppTheme == OSAppTheme.Unspecified
-            //             ? Color.White
-            //             : Color.Black;
-            // Map.IsVisible = false;
-            // SetAdditional();
-        }
-
-        private void SwitchMap(object sender, EventArgs args)
-        {
-            // var label = sender as Label;
-            // var mainColor = Application.Current.Resources["MainColor"];
-            // label.TextColor = (Color) mainColor;
-            //
-            // if (DevicePlatform.iOS == DevicePlatform.iOS)
-            //     CatalogMenu.TextColor =
-            //         Application.Current.UserAppTheme == OSAppTheme.Light ||
-            //         Application.Current.UserAppTheme == OSAppTheme.Unspecified
-            //             ? Color.Black
-            //             : Color.White;
-            // else
-            //     CatalogMenu.TextColor =
-            //         Application.Current.UserAppTheme == OSAppTheme.Dark ||
-            //         Application.Current.UserAppTheme == OSAppTheme.Unspecified
-            //             ? Color.White
-            //             : Color.Black;
-            //
-            // Map.IsVisible = true;
-            // (Map.BindingContext as MapPageViewModel).GetPermission.Execute(Additional);
-            // (Map.BindingContext as MapPageViewModel).LoadPins.Execute(Additional);
-        }
 
         private async void Pin_Clicked(object sender, EventArgs e)
         {
             var shop = Additional.FirstOrDefault(x =>
-                x.ID == Convert.ToInt32((sender as Xamarin.Forms.Maps.Pin).ClassId));
+                x.ID == Convert.ToInt32((sender as Pin).ClassId));
             if (shop != null)
             {
                 await Dialog.Instance.ShowAsync(new MapShopDialogView(shop));
             }
         }
 
-        private void CollectionView_Scrolled(object sender, ItemsViewScrolledEventArgs e)
-        {
-            var index = e.FirstVisibleItemIndex;
-            if (index >= 0)
-            {
-                if (index + 1 <= Groups.Count - 1 && e.HorizontalOffset < 160)
-                {
-                    SelectedGroup = Groups[index];
-                }
-                else
-                {
-                    SelectedGroup = Groups[e.LastVisibleItemIndex];
-                }
-            }
-        }
     }
 }

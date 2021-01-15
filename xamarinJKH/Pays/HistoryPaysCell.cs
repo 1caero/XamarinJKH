@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using Xamarin.Forms;
-using xamarinJKH.Utils;
 
 namespace xamarinJKH.Pays
 {
@@ -107,20 +106,6 @@ namespace xamarinJKH.Pays
                 LabelPeriod.Text = str;
                 
                 FormattedString formattedIdent = new FormattedString();
-                //double sum2 = Double.Parse(SumPay);
-                //formattedIdent.Spans.Add(new Span
-                //{
-                //    Text = $"{sum2:0.00}".Replace(',','.'),
-                //    TextColor = Color.FromHex(Settings.MobileSettings.color),
-                //    FontSize = 15,
-                //    FontAttributes = FontAttributes.Bold
-                //});
-                //formattedIdent.Spans.Add(new Span
-                //{
-                //    Text = $" {AppResources.Currency}",
-                //    TextColor = Color.Gray,
-                //    FontSize = 10
-                //});
                 double sum2;
                 var parseSumpayOk = Double.TryParse(SumPay, NumberStyles.Float, new CultureInfo("ru-RU"), out sum2);
                 if (parseSumpayOk)

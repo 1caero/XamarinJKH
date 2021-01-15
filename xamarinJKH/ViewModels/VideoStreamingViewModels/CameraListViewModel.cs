@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using xamarinJKH.Server.RequestModel;
@@ -30,7 +27,6 @@ namespace xamarinJKH.ViewModels.VideoStreamingViewModels
                     }
                 });
             });
-            //Cameras.Add(new CameraModel() { Name = "Test camera", Url = "https://vs.domru.ru/translation?id=331972335&guid=dc3b372c7e421f19192a&mode=hls" });
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using xamarinJKH.ViewModels;
-using Xamarin.Forms;
+﻿using xamarinJKH.ViewModels;
 
 namespace xamarinJKH.Counters
 {

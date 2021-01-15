@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
+using System.Threading;
+using Microsoft.AppCenter.Analytics;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.PancakeView;
-using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
+using xamarinJKH.PushNotification;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
-using System.Globalization;
-using System.Threading;
-using Microsoft.AppCenter.Analytics;
-using xamarinJKH.PushNotification;
 
 namespace xamarinJKH.MainConst
 {
@@ -43,10 +37,9 @@ namespace xamarinJKH.MainConst
         private async void TechSend(object sender, EventArgs e)
         {
 
-            // await PopupNavigation.Instance.PushAsync(new TechDialog(false));
             if (Settings.Person != null && !string.IsNullOrWhiteSpace(Settings.Person.Phone))
             {
-                await Navigation.PushModalAsync(new Tech.AppPage());
+                await Navigation.PushModalAsync(new AppPage());
             }
             else
             {
@@ -68,7 +61,7 @@ namespace xamarinJKH.MainConst
             };
             FrameBtnExit.GestureRecognizers.Add(exitClick);
             var techSend = new TapGestureRecognizer();
-            techSend.Tapped += TechSend;// async (s, e) => {    await Navigation.PushAsync(new AppPage());};
+            techSend.Tapped += TechSend;
             LabelTech.GestureRecognizers.Add(techSend);
             var saveClick = new TapGestureRecognizer();
             saveClick.Tapped += async (s, e) =>
@@ -151,12 +144,6 @@ namespace xamarinJKH.MainConst
             EntryFio.Text = Settings.Person.FIO;
             EntryEmail.Text = Settings.Person.Email;
 
-// #if DEBUG
-//             FrameOffers.IsVisible = true;
-// #else
-//             FrameOffers.IsVisible = Settings.Person.UserSettings.RightCreateAnnouncements;
-// #endif
-
             MessagingCenter.Subscribe<Object>(this, "ChangeThemeConst", (sender) =>
             {
                 OSAppTheme currentTheme = Application.Current.RequestedTheme;
@@ -181,11 +168,6 @@ namespace xamarinJKH.MainConst
         private async void ButtonClick(object sender, EventArgs e)
         {
             SaveInfoAccount(EntryFio.Text, EntryEmail.Text);
-        }
-
-        public interface ICloseApplication
-        {
-            void closeApplication();
         }
 
         public async void SaveInfoAccount(string fio, string email)
@@ -245,8 +227,6 @@ namespace xamarinJKH.MainConst
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
             UkName.Text = Settings.MobileSettings.main_name;
             SetAdminName();
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
             FrameTop.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
             FrameSettings.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
         }
@@ -255,8 +235,6 @@ namespace xamarinJKH.MainConst
         {
             FormattedString formattedName = new FormattedString();
             OSAppTheme currentTheme = Application.Current.RequestedTheme;
-            //if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
-            //    currentTheme = OSAppTheme.Dark;
             formattedName.Spans.Add(new Span
             {
                 Text = Settings.Person.FIO,
@@ -277,11 +255,6 @@ namespace xamarinJKH.MainConst
         {
             Color hexColor = (Color)Application.Current.Resources["MainColor"];
             UkName.Text = Settings.MobileSettings.main_name;
-            //IconViewSave.Foreground = Color.White;
-            // IconViewNameUk.Foreground = hexColor;
-            //IconViewFio.Foreground = hexColor;
-            //IconViewEmail.Foreground = hexColor;
-            //IconViewExit.Foreground = hexColor;
 
             FrameBtnExit.BackgroundColor = Color.White;
             FrameBtnExit.BorderColor = hexColor;
@@ -299,9 +272,6 @@ namespace xamarinJKH.MainConst
 
             int theme = Preferences.Get("Theme", 1);
 
-            //задание темы для ios
-            //if (Xamarin.Essentials.DeviceInfo.Platform == DevicePlatform.iOS)
-            //    theme = Preferences.Get("Theme", 1);
 
             switch (theme)
             {

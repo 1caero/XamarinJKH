@@ -2,13 +2,9 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:apps="clr-namespace:xamarinJKH.Apps;assembly=xamarinJKH"
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
-             xmlns:dialogViews="clr-namespace:xamarinJKH.DialogViews;assembly=xamarinJKH"
              xmlns:customRenderers="clr-namespace:xamarinJKH.CustomRenderers;assembly=xamarinJKH"
              xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             xmlns:selector="clr-namespace:xamarinJKH.Apps"
-             xmlns:datatypes="clr-namespace:xamarinJKH.Server.RequestModel"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.Apps.AppPage">
     <ContentPage.Content>
@@ -143,31 +139,6 @@
                         <StackLayout x:Name="baseForApp" VerticalOptions="FillAndExpand" />
                     </ScrollView>
                 </RefreshView>
-
-                <!--<ListView x:Name="additionalList"
-                          HasUnevenRows="True"
-                          Margin="0, 0, 0, 0"
-                          SeparatorVisibility="None"
-                          VerticalScrollBarVisibility="Never"                          
-                          SelectionMode="None"
-                          ItemTapped="OnItemTapped"
-                          BackgroundColor="Transparent"
-                          CachingStrategy="RecycleElement"
-                          ItemsSource="{Binding messages}">                    
-                    
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="datatypes:RequestMessage">                            
-                            <apps:MessageCell
-                                Name="{Binding AuthorName}"
-                                
-                                DateApp="{Binding Added}"
-                                TextApp="{Binding Text}"
-                                FileID="{Binding FileID}"
-                                IsSelf="{Binding IsSelf}" />
-                        </DataTemplate>
-
-                    </ListView.ItemTemplate>
-                </ListView>-->
             </customRenderers:MaterialFrame>
             <Frame CornerRadius="30"
                    Margin="15, -30, 15, 5"

@@ -1,19 +1,17 @@
 using System;
-using System.ComponentModel;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
+using FFImageLoading.Svg.Forms;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using xamarinJKH.CustomRenderers;
 using xamarinJKH.DialogViews;
 using xamarinJKH.Server;
-using xamarinJKH.Utils;
 using xamarinJKH.Server.RequestModel;
-using FFImageLoading.Svg.Forms;
-using Xamarin.Forms.Markup;
+using xamarinJKH.Utils;
 
 namespace xamarinJKH.Main
 {
@@ -30,8 +28,6 @@ namespace xamarinJKH.Main
         private StackLayout tarif1Stack = new StackLayout();
         private Label del = new Label();
 
-        //private Label tarif1t2 = new Label();
-        //private Label tarif1t3 = new Label();
 
         private StackLayout count1t2Stack = new StackLayout() { IsVisible = false };
         private StackLayout count1t3Stack = new StackLayout() { IsVisible = false };
@@ -41,18 +37,13 @@ namespace xamarinJKH.Main
         private Label count1t3 = new Label();
         private Label tarif2 = new Label();
         private StackLayout tarif2Stack = new StackLayout();
-        //private Label tarif2t2 = new Label();
-        //private Label tarif2t3 = new Label();
         private StackLayout count2t2Stack = new StackLayout() { IsVisible = false };
         private StackLayout count2t3Stack = new StackLayout() { IsVisible = false };
         private Label counterDate2 = new Label();
         private Label count2 = new Label();
         private Label count2t2 = new Label();
         private Label count2t3 = new Label();
-        //private Label tarif3 = new Label();
         private StackLayout tarif3Stack = new StackLayout();
-        //private Label tarif3t2 = new Label();
-        //private Label tarif3t3 = new Label();
 
         private StackLayout count3t2Stack = new StackLayout() { IsVisible = false };
         private StackLayout count3t3Stack = new StackLayout() { IsVisible = false };
@@ -125,10 +116,6 @@ namespace xamarinJKH.Main
 
             img.WidthRequest = 25;
             img.HeightRequest = 25;
-            // imgEdit.WidthRequest = 20;
-            // imgEdit.HeightRequest = 20;
-            // imgEdit.Source = "edit";
-            // imgEdit.Foreground = (Color)Application.Current.Resources["MainColor"];
 
             Edit = new SvgCachedImage();
             Edit.WidthRequest = 17;
@@ -174,7 +161,6 @@ namespace xamarinJKH.Main
             b.Color = Color.LightGray;
             b.MinimumWidthRequest = 10;
 
-            // grid0.Children.Add(b);
 
             grid.Children.Add(grid0);
 
@@ -185,20 +171,20 @@ namespace xamarinJKH.Main
             adress.HorizontalOptions = LayoutOptions.Fill;
             adress.FontAttributes = FontAttributes.Bold;
             adress.MaxLines = 3;
-            if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 700)
+            if (DeviceDisplay.MainDisplayInfo.Width < 700)
             {
                 adress.WidthRequest = 450;
                 adressLbl.FontSize = 13;
                 adress.FontSize = 13;
             }
-            else if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 800)
+            else if (DeviceDisplay.MainDisplayInfo.Width < 800)
             {
                 adress.WidthRequest = 500;
                 adressLbl.FontSize = 14;
                 adress.FontSize = 14;
             }
             else
-                adress.WidthRequest = Convert.ToInt32(Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width * 0.7);
+                adress.WidthRequest = Convert.ToInt32(DeviceDisplay.MainDisplayInfo.Width * 0.7);
 
 
             grid.Children.Add(adress);
@@ -233,7 +219,6 @@ namespace xamarinJKH.Main
             linesNumb.HorizontalOptions = LayoutOptions.FillAndExpand;
 
             numberStack.Children.Add(numberLbl);
-            // numberStack.Children.Add(linesNumb);
             numberStack.Children.Add(number);
             container.Children.Add(numberStack);
 
@@ -266,7 +251,6 @@ namespace xamarinJKH.Main
             linesPover.HorizontalOptions = LayoutOptions.FillAndExpand;
 
             checkupDateStack.Children.Add(checkupDateLbl);
-            // checkupDateStack.Children.Add(linesPover);
             checkupDateStack.Children.Add(checkup_date);
             container.Children.Add(checkupDateStack);
 
@@ -281,7 +265,6 @@ namespace xamarinJKH.Main
             recheckLbl.HorizontalTextAlignment = TextAlignment.Start;
             recheckLbl.HorizontalOptions = LayoutOptions.Start;
             recheckLbl.MaxLines = 1;
-            // recheckLbl.WidthRequest = 150;
             recheckup.FontSize = 12;
             recheckup.TextColor = Color.Black;
             recheckup.FontAttributes = FontAttributes.Bold;
@@ -299,7 +282,6 @@ namespace xamarinJKH.Main
             linesInterv.HorizontalOptions = LayoutOptions.FillAndExpand;
 
             recheckStack.Children.Add(recheckLbl);
-            // recheckStack.Children.Add(linesInterv);
             recheckStack.Children.Add(recheckup);
             container.Children.Add(recheckStack);
 
@@ -380,29 +362,6 @@ namespace xamarinJKH.Main
             }
             else
                 tarif1.IsVisible = false;
-
-            //tarif1t2.FontSize = 13;
-            //tarif1t2.TextColor = Color.FromHex("#A2A2A2"); //Color.Red;
-            //tarif1t2.HorizontalTextAlignment = TextAlignment.Center;
-
-            //tarif1t3.FontSize = 13;
-            //tarif1t3.TextColor = Color.FromHex("#A2A2A2"); //Color.Red;
-            //tarif1t3.HorizontalTextAlignment = TextAlignment.Center;
-
-
-            //tarif2.FontSize = 13;
-            //tarif2.TextColor = Color.FromHex("#A2A2A2");
-            //tarif2.HorizontalTextAlignment = TextAlignment.Center;
-
-            //tarif2.Text = string.IsNullOrWhiteSpace(mInfo.Tariff2Name) ? AppResources.tarif2 : mInfo.Tariff2Name;
-
-            //tarif3.FontSize = 13;
-            //tarif3.TextColor = Color.FromHex("#A2A2A2");
-            //tarif3.HorizontalTextAlignment = TextAlignment.Center;
-
-            //tarif3.Text = string.IsNullOrWhiteSpace(mInfo.Tariff3Name) ? AppResources.tarif3 : mInfo.Tariff3Name;
-
-           
                         
             counterDate1.FontSize = 15;
             counterDate1.TextColor = Color.FromHex("#A2A2A2");
@@ -425,9 +384,6 @@ namespace xamarinJKH.Main
             count1t2.MaxLines = 1;
 
       
-            //#if DEBUG
-            //            count1t2.Text = "100500.111";
-            //#endif                      
 
             count1t3.FontSize = 15;
             count1t3.TextColor = Color.Black;
@@ -436,22 +392,12 @@ namespace xamarinJKH.Main
             count1t3.VerticalOptions = LayoutOptions.Start;
             count1t3.MaxLines = 1;
 
-            
-            //#if DEBUG
-            //            count1t3.Text = "100502.213";
-            //#endif
-
+        
             BoxView lines = new BoxView();
             lines.HeightRequest = 1;
-            //lines.BackgroundColor = Color.LightGray;
             lines.Color= Color.LightGray;
             lines.VerticalOptions = LayoutOptions.Center;
             lines.HorizontalOptions =  LayoutOptions.FillAndExpand;
-
-            // count1Stack.Children.Add(counterDate1);
-            // count1Stack.Children.Add(lines);
-            // count1Stack.Children.Add(tarif1);
-            // count1Stack.Children.Add(count1);           
 
             container.Children.Add(count1Stack);
 
@@ -464,8 +410,6 @@ namespace xamarinJKH.Main
             count1t2Stack.Children.Add(t21);
             count1t2Stack.Children.Add(count1t2);
                         
-            // container.Children.Add(count1t2Stack);
-
             count1t3Stack.Orientation = StackOrientation.Horizontal;
             count1t3Stack.HorizontalOptions = LayoutOptions.End;
 
@@ -475,8 +419,6 @@ namespace xamarinJKH.Main
             count1t3Stack.Children.Add(t31);
             count1t3Stack.Children.Add(count1t3);
 
-            // container.Children.Add(count1t3Stack);
-
             count2Stack.Orientation = StackOrientation.Horizontal;
             count2Stack.HorizontalOptions = LayoutOptions.FillAndExpand;
             counterDate2.FontSize = 15;
@@ -484,7 +426,6 @@ namespace xamarinJKH.Main
             counterDate2.HorizontalTextAlignment = TextAlignment.Start;
             counterDate2.HorizontalOptions = LayoutOptions.Start;
             counterDate2.MaxLines = 1;
-            // counterDate2.WidthRequest = 150;
             count2.FontSize = 15;
             count2.TextColor = Color.Black;
             count2.HorizontalTextAlignment = TextAlignment.End;
@@ -499,9 +440,6 @@ namespace xamarinJKH.Main
             count2t2.VerticalOptions = LayoutOptions.Start;
             count2t2.MaxLines = 1;
 
-//#if DEBUG
-//            count2t2.Text = "200500.111";
-//#endif                      
 
             count2t3.FontSize = 15;
             count2t3.TextColor = Color.Black;
@@ -509,10 +447,6 @@ namespace xamarinJKH.Main
             count2t3.HorizontalOptions = LayoutOptions.End;
             count2t3.VerticalOptions = LayoutOptions.Start;
             count2t3.MaxLines = 1;
-//#if DEBUG
-//            count2t3.Text = "200502.213";
-//#endif
-
 
             Label lines2 = new Label();
             lines2.HeightRequest = 1;
@@ -523,7 +457,6 @@ namespace xamarinJKH.Main
             count2Stack.Children.Add(counterDate2);
             count2Stack.Children.Add(lines2);
 
-            //count2Stack.Children.Add(tarif1);
             Label t1 = new Label() { FontSize = 13, TextColor = Color.FromHex("#A2A2A2"), HorizontalTextAlignment = TextAlignment.Center};
             if (mInfo.TariffNumberInt > 1)
                 if (!string.IsNullOrWhiteSpace(mInfo.Tariff1Name))
@@ -532,18 +465,8 @@ namespace xamarinJKH.Main
                     t1.IsVisible = false;
             
             count2Stack.Children.Add(t1 );
-            //tarif1.FontSize = 13;
-            //tarif1.TextColor = Color.FromHex("#A2A2A2"); //Color.Red;
-            //tarif1.HorizontalTextAlignment = TextAlignment.Center;
-
-            //if (mInfo.TariffNumberInt > 1)
-            //    if (!string.IsNullOrWhiteSpace(mInfo.Tariff1Name))
-            //        tarif1.Text = string.IsNullOrWhiteSpace(mInfo.Tariff1Name) ? AppResources.tarif1 : mInfo.Tariff1Name;
-            //    else
-            //        tarif1.IsVisible = false;
 
             count2Stack.Children.Add(count2);
-            // container.Children.Add(count2Stack);
 
             count2t2Stack.Orientation = StackOrientation.Horizontal;
             count2t2Stack.HorizontalOptions = LayoutOptions.End;
@@ -554,7 +477,6 @@ namespace xamarinJKH.Main
             count2t2Stack.Children.Add(t22);
             count2t2Stack.Children.Add(count2t2);
 
-            // container.Children.Add(count2t2Stack);
 
             count2t3Stack.Orientation = StackOrientation.Horizontal;
             count2t3Stack.HorizontalOptions = LayoutOptions.End;
@@ -565,7 +487,6 @@ namespace xamarinJKH.Main
             count2t3Stack.Children.Add(t32);
             count2t3Stack.Children.Add(count2t3);
 
-            // container.Children.Add(count2t3Stack);
            
 
             count3Stack.Orientation = StackOrientation.Horizontal;
@@ -575,7 +496,6 @@ namespace xamarinJKH.Main
             counterDate3.HorizontalTextAlignment = TextAlignment.Start;
             counterDate3.HorizontalOptions = LayoutOptions.Start;
             counterDate3.MaxLines = 1;
-            // counterDate3.WidthRequest = 150;
             count3.FontSize = 15;
             count3.TextColor = Color.Black;
             count3.HorizontalTextAlignment = TextAlignment.End;
@@ -589,10 +509,7 @@ namespace xamarinJKH.Main
             count3t2.HorizontalOptions = LayoutOptions.End;
             count3t2.VerticalOptions = LayoutOptions.Start;
             count3t2.MaxLines = 1;
-
-//#if DEBUG
-//            count3t2.Text = "100500.111";
-//#endif                      
+                   
 
             count3t3.FontSize = 15;
             count3t3.TextColor = Color.Black;
@@ -600,9 +517,6 @@ namespace xamarinJKH.Main
             count3t3.HorizontalOptions = LayoutOptions.End;
             count3t3.VerticalOptions = LayoutOptions.Start;
             count3t3.MaxLines = 1;
-//#if DEBUG
-//            count3t3.Text = "100502.213";
-//#endif
 
             Label lines3 = new Label();
             lines3.HeightRequest = 1;
@@ -622,9 +536,7 @@ namespace xamarinJKH.Main
 
             count3Stack.Children.Add(t2);
 
-            //count3Stack.Children.Add(tarif1);
             count3Stack.Children.Add(count3);
-            // container.Children.Add(count3Stack);
 
             count3t2Stack.Orientation = StackOrientation.Horizontal;
             count3t2Stack.HorizontalOptions = LayoutOptions.End;
@@ -636,7 +548,6 @@ namespace xamarinJKH.Main
             count3t2Stack.Children.Add(t23);
             count3t2Stack.Children.Add(count3t2);
 
-            // container.Children.Add(count3t2Stack);
 
             count3t3Stack.Orientation = StackOrientation.Horizontal;
             count3t3Stack.HorizontalOptions = LayoutOptions.End;
@@ -646,11 +557,6 @@ namespace xamarinJKH.Main
 
             count3t3Stack.Children.Add(t33);
             count3t3Stack.Children.Add(count3t3);
-
-            // container.Children.Add(count3t3Stack);
-
-            //container.Children.Add(count3t2);
-            //container.Children.Add(count3t3);
 
             frameBtn.HorizontalOptions = LayoutOptions.FillAndExpand;
             frameBtn.VerticalOptions = LayoutOptions.Start;
@@ -721,12 +627,6 @@ namespace xamarinJKH.Main
                     int indexOf = stack.Children.IndexOf(separator);
                     int index = stack.Children.IndexOf(labelЗPeriod);
                     
-                    // if (indexOf != -1 && index != -1)
-                    // {
-                    //     stack.Children.RemoveAt(indexOf);
-                    //     stack.Children.RemoveAt(index);
-                    // }
-
                     FormattedString formattedDateLastValue = new FormattedString();
                     formattedDateLastValue.Spans.Add(new Span
                     {
@@ -818,13 +718,10 @@ namespace xamarinJKH.Main
 
         private static bool CheckPeriod(int currDay, MeterInfo meterInfo)
         {
-//#if DEBUG
-//            return true;
-//#endif
             if (meterInfo.ValuesEndDay < meterInfo.ValuesStartDay)
             {
-                return MetersThreeCell.GetPeriodEnabled() || (meterInfo.ValuesStartDay == 0 &&
-                                                              meterInfo.ValuesEndDay == 0);
+                return GetPeriodEnabled() || (meterInfo.ValuesStartDay == 0 &&
+                                              meterInfo.ValuesEndDay == 0);
 
             }
             
@@ -955,13 +852,12 @@ namespace xamarinJKH.Main
 
                     stack.Children.Add(frameBtn);
                     if (Values.Count > 0)
-                     {
+                    {
                         Label lines = new Label();
                         lines.HeightRequest = 1;
                         lines.BackgroundColor = Color.LightGray;
                         lines.VerticalOptions = LayoutOptions.Center;
                         lines.HorizontalOptions = LayoutOptions.FillAndExpand;
-                        // count1Stack.Children[1] = lines;
                     }
                 }
 
@@ -989,7 +885,6 @@ namespace xamarinJKH.Main
                     img.Source = ImageSource.FromFile("ic_cold_water");
                 }
                 frameBtn.IsVisible = true;
-                // canCount.IsVisible = false;
                 if (Settings.Person != null)
                     if (Settings.Person.Accounts != null)
                         if (Settings.Person.Accounts.Count > 0)

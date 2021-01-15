@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarinJKH.DialogViews;
+using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
-using Xamarin.Essentials;
-using Plugin.Permissions.Abstractions;
-using Plugin.Permissions;
-using Rg.Plugins.Popup.Services;
-using xamarinJKH.DialogViews;
-using System.Threading;
 
 namespace xamarinJKH.MainConst
 {
@@ -32,22 +28,15 @@ namespace xamarinJKH.MainConst
             SelectedTabColor = hex;
             UnselectedTabColor = Color.Gray;
             OSAppTheme currentTheme = Application.Current.RequestedTheme;
-            //if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
-            //    currentTheme = OSAppTheme.Dark;
+            
             Color unselect = hex.AddLuminosity(0.3);
-            //switch (currentTheme)
-            //{
-            //    case OSAppTheme.Light: UnselectedTabColor = unselect;
-            //        break;
-            //    case OSAppTheme.Dark: UnselectedTabColor = Color.Gray;
-            //        break;
-            //}
+           
 
             switch (currentTheme)
             {
                 case OSAppTheme.Light:
                     if(Device.RuntimePlatform == Device.Android) UnselectedTabColor = unselect;
-                    if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
+                    if (DeviceInfo.Platform == DevicePlatform.iOS)
                     {
                         appNavBar.BarTextColor = Color.Black;
                         monNavBar.BarTextColor = Color.Black;
@@ -56,7 +45,7 @@ namespace xamarinJKH.MainConst
                     break;
                 case OSAppTheme.Dark:
                     if(Device.RuntimePlatform == Device.Android) UnselectedTabColor = Color.Gray;
-                    if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
+                    if (DeviceInfo.Platform == DevicePlatform.iOS)
                     {
                         appNavBar.BarTextColor = Color.White;
                         monNavBar.BarTextColor = Color.White;
@@ -65,7 +54,7 @@ namespace xamarinJKH.MainConst
                     break;
                 case OSAppTheme.Unspecified:
                     if(Device.RuntimePlatform == Device.Android) UnselectedTabColor = Color.Gray;
-                    if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
+                    if (DeviceInfo.Platform == DevicePlatform.iOS)
                     {
                         appNavBar.BarTextColor = Color.Black;
                         monNavBar.BarTextColor = Color.Black;
@@ -84,16 +73,16 @@ namespace xamarinJKH.MainConst
                 {
                     case OSAppTheme.Light: 
                         UnselectedTabColor = unselect;
-                        if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
+                        if (DeviceInfo.Platform == DevicePlatform.iOS)
                         {
                             appNavBar.BarTextColor = Color.Black;
                             monNavBar.BarTextColor = Color.Black;
                             NotifNavBar.BarTextColor = Color.Black;
                         }
-                            break;
+                        break;
                     case OSAppTheme.Dark: 
                         UnselectedTabColor = Color.Gray;
-                        if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
+                        if (DeviceInfo.Platform == DevicePlatform.iOS)
                         {
                             appNavBar.BarTextColor = Color.White;
                             monNavBar.BarTextColor = Color.White;
@@ -101,7 +90,7 @@ namespace xamarinJKH.MainConst
                         }
                         break;
                     case OSAppTheme.Unspecified:
-                        if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
+                        if (DeviceInfo.Platform == DevicePlatform.iOS)
                         {
                             appNavBar.BarTextColor = Color.Black;
                             monNavBar.BarTextColor = Color.Black;
@@ -111,7 +100,6 @@ namespace xamarinJKH.MainConst
                 }
             });
             MessagingCenter.Subscribe<Object>(this, "ChangeThemeConst", (sender) => ChangeTheme.Execute(null));
-            //if (Device.RuntimePlatform == "Android")
                 RegisterNewDevice();
 
             MessagingCenter.Subscribe<Object, int>(this, "SwitchToAppsConst", (sender, args) =>
@@ -124,7 +112,6 @@ namespace xamarinJKH.MainConst
             {
                 Device.BeginInvokeOnMainThread(() => RequestsAmount = args == -1 ? RequestsAmount -= 1 : RequestsAmount = args);
                 await Task.Delay(TimeSpan.FromMilliseconds(200));
-                //Device.BeginInvokeOnMainThread(() => RequestsAmount = args == -1 ? RequestsAmount-- : RequestsAmount = args);
             });
 
             MessagingCenter.Subscribe<Object>(this, "LocationRequest", sender =>
@@ -192,7 +179,7 @@ namespace xamarinJKH.MainConst
                 {
 
                     if (!App.MessageNoInternet)
-                        if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+                        if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                         {
                             Device.BeginInvokeOnMainThread(async () =>
                             {
@@ -227,7 +214,7 @@ namespace xamarinJKH.MainConst
         async void RegisterNewDevice()
         {
             if (Device.RuntimePlatform == "Android")
-                App.token = DependencyService.Get<xamarinJKH.InterfacesIntegration.IFirebaseTokenObtainer>().GetToken();
+                App.token = DependencyService.Get<IFirebaseTokenObtainer>().GetToken();
             else
             {
                 await Task.Delay(500);

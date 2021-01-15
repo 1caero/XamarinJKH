@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.SymbolStore;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
-using Plugin.Messaging;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
 
@@ -47,8 +39,6 @@ namespace xamarinJKH.DialogViews
 
             
             BindingContext = this;
-            // if(code.IsVisible)
-            //     code.IsVisible = !Settings.Person.IsDispatcher;
             
         }
 
@@ -77,13 +67,13 @@ namespace xamarinJKH.DialogViews
             // define clean up process.
         }
 
-        void Handle_OK_Clicked(object sender, System.EventArgs e)
+        void Handle_OK_Clicked(object sender, EventArgs e)
         {
             // send complete notification to the dialog.
             DialogNotifier.Complete();
         }
 
-        void Handle_Cancel_Clicked(object sender, System.EventArgs e)
+        void Handle_Cancel_Clicked(object sender, EventArgs e)
         {
             // send cancel notification to the dialog.
             DialogNotifier.Cancel();

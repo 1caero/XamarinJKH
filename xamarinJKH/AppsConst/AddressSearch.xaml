@@ -116,19 +116,6 @@
                         <TapGestureRecognizer Tapped="ChooseStreet"/>
                     </StackLayout.GestureRecognizers>
                 </StackLayout>
-                <!--<StackLayout x:Name="HouseStack">
-
-                    <Label Text="{x:Static xamarinJkh:AppResources.House}" Style="{x:StaticResource ListLabel}"/>
-                    <Label Text="{Binding House}"
-                                            x:Name="HouseText"/>
-                    <Label BackgroundColor="{x:StaticResource MainColor}"
-                           HeightRequest="2"/>
-
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="ChooseHouse"/>
-                    </StackLayout.GestureRecognizers>
-                    
-                </StackLayout>-->
                 <StackLayout x:Name="FlatStack">
                     <Label Text="{x:Static xamarinJkh:AppResources.Flat}" Style="{x:StaticResource ListLabel}"/>
                     <Label Text="{Binding Flat}"

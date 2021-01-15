@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using AiForms.Dialogs;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Server;
@@ -40,9 +34,6 @@ namespace xamarinJKH.Pays
                 Pancake2.HeightRequest = statusBarHeight; // new Thickness(0, statusBarHeight, 0, 0);
             }
 
-            // var pinchGesture = new PinchGestureRecognizer();
-            // pinchGesture.PinchUpdated += OnPinchUpdated;
-            //Image.GestureRecognizers.Add(pinchGesture);
 
             var backClick = new TapGestureRecognizer();
             backClick.Tapped += async (s, e) => { _ = await Navigation.PopAsync(); };
@@ -94,7 +85,7 @@ namespace xamarinJKH.Pays
                 {
                     await DependencyService.Get<IFileWorker>().SaveTextAsync(_filename, _file);
                     FileBase fileBase = new ReadOnlyFile(DependencyService.Get<IFileWorker>().GetFilePath(_filename));
-                    await Xamarin.Essentials.Share.RequestAsync(new ShareFileRequest(AppResources.ShareBill, fileBase));
+                    await Share.RequestAsync(new ShareFileRequest(AppResources.ShareBill, fileBase));
                 }
                 else
                     await DisplayAlert(null, AppResources.ErrorFileLoading, "OK");
@@ -115,7 +106,7 @@ namespace xamarinJKH.Pays
             try
             {
                 if (_file != null)
-                    DependencyService.Get<xamarinJKH.InterfacesIntegration.IPrintManager>().SendFileToPrint(_file);
+                    DependencyService.Get<IPrintManager>().SendFileToPrint(_file);
                 else
                     await DisplayAlert(null, AppResources.ErrorFileLoading, "OK");
             }

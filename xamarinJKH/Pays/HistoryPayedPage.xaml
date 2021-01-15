@@ -45,7 +45,6 @@
                             HorizontalOptions="EndAndExpand"
                             
                             Orientation="Horizontal">
-                            <!--BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"-->
                             <xamarinJkh:ButtonSupport x:Name="LabelTech"></xamarinJkh:ButtonSupport>
                             <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
                         </StackLayout>
@@ -124,23 +123,6 @@
                                                                FontSize="14"/>
                                                     </StackLayout>
 
-                                                    <!--<VisualStateManager.VisualStateGroups>
-                                                            <VisualStateGroup x:Name="CommonStates">
-                                                                <VisualState x:Name="Normal">
-                                                                    <VisualState.Setters>
-                                                                        <Setter Property="BorderColor" Value="{AppThemeBinding Light=#8D8D8D, Dark=White}"/>
-                                                                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#8D8D8D}"/>
-                                                                    </VisualState.Setters>
-                                                                </VisualState>
-
-                                                                <VisualState x:Name="Selected">
-                                                                    <VisualState.Setters>
-                                                                        <Setter Property="BorderColor" Value="{x:StaticResource MainColor}"/>
-                                                                        <Setter Property="BackgroundColor" Value="White"/>
-                                                                    </VisualState.Setters>
-                                                                </VisualState>
-                                                            </VisualStateGroup>
-                                                        </VisualStateManager.VisualStateGroups>-->
                                                 </Frame>
                                             </StackLayout>
 

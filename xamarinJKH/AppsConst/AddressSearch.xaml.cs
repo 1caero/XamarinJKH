@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using xamarinJKH.ViewModels.AppsConst;
 using dotMorten.Xamarin.Forms;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 using xamarinJKH.DialogViews;
-using xamarinJKH.Server.RequestModel;
 using xamarinJKH.InterfacesIntegration;
+using xamarinJKH.Server.RequestModel;
+using xamarinJKH.ViewModels.AppsConst;
 
 namespace xamarinJKH.AppsConst
 {
@@ -28,11 +24,9 @@ namespace xamarinJKH.AppsConst
             switch (type)
             {
                 case 1: StreetStack.IsVisible = false;
-                    //HouseStack.IsVisible = false;
                     FlatStack.IsVisible = false;
                     break;
                 case 2:
-                    //HouseStack.IsVisible = false;
                     FlatStack.IsVisible = false;
                     break;
             }
@@ -68,17 +62,17 @@ namespace xamarinJKH.AppsConst
             MessagingCenter.Send<Object, Tuple<int?, int?, int?, string>>(this, "SetTypes", new Tuple<int?, int?, int?, string>(viewModel.DistrictID, viewModel.HouseID, viewModel.PremiseID, viewModel.Street));
         }
 
-        private void District_TextChanged(object sender, dotMorten.Xamarin.Forms.AutoSuggestBoxTextChangedEventArgs e)
+        private void District_TextChanged(object sender, AutoSuggestBoxTextChangedEventArgs e)
         {
-            var box = sender as dotMorten.Xamarin.Forms.AutoSuggestBox;
-            if (e.Reason == dotMorten.Xamarin.Forms.AutoSuggestionBoxTextChangeReason.UserInput)
+            var box = sender as AutoSuggestBox;
+            if (e.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
                 box.ItemsSource =
                     viewModel.Districts.Select(x => x.Name).Where(y => y.ToUpper().Contains(box.Text.ToUpper())).ToList();
             }
         }
 
-        private void District_SuggestionChosen(object sender, dotMorten.Xamarin.Forms.AutoSuggestBoxSuggestionChosenEventArgs e)
+        private void District_SuggestionChosen(object sender, AutoSuggestBoxSuggestionChosenEventArgs e)
         {
             var selected = e.SelectedItem;
             var id = viewModel.Districts.Find(x => x.Name == selected).ID;
@@ -86,20 +80,20 @@ namespace xamarinJKH.AppsConst
             (sender as AutoSuggestBox).Unfocus();
         }
 
-        private void House_TextChanged(object sender, dotMorten.Xamarin.Forms.AutoSuggestBoxTextChangedEventArgs e)
+        private void House_TextChanged(object sender, AutoSuggestBoxTextChangedEventArgs e)
         {
-            var box = sender as dotMorten.Xamarin.Forms.AutoSuggestBox;
+            var box = sender as AutoSuggestBox;
             if (viewModel.Houses != null)
                 box.ItemsSource =
                     viewModel.Houses.Select(x => x.Address).ToList();
         }
         private void House_Focused(object sender, FocusEventArgs e)
         {
-            (sender as dotMorten.Xamarin.Forms.AutoSuggestBox).Text = null;
-            (sender as dotMorten.Xamarin.Forms.AutoSuggestBox).Text = " ";
+            (sender as AutoSuggestBox).Text = null;
+            (sender as AutoSuggestBox).Text = " ";
         }
 
-        private void House_SuggestionChosen(object sender, dotMorten.Xamarin.Forms.AutoSuggestBoxSuggestionChosenEventArgs e)
+        private void House_SuggestionChosen(object sender, AutoSuggestBoxSuggestionChosenEventArgs e)
         {
             var selected = e.SelectedItem;
             var id = viewModel.Houses.Find(x => x.Address == selected).ID;

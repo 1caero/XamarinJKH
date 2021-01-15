@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using Xamarin.Forms;
-using Plugin.FilePicker.Abstractions;
+﻿using System.Threading.Tasks;
 using Plugin.FilePicker;
-using Plugin.Media.Abstractions;
 using Plugin.Media;
-using Plugin.Permissions.Abstractions;
-using Plugin.Permissions;
-using System.Threading.Tasks;
+using Plugin.Media.Abstractions;
+using Xamarin.Forms;
 
 namespace xamarinJKH.ViewModels
 {

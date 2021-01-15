@@ -57,19 +57,6 @@ namespace xamarinJKH.Utils
             return TimerStart;
         }
 
-        public static AnnouncementInfo getNotif(String id)
-        {
-            foreach (var each in EventBlockData.Announcements)
-            {
-                if (each.ID.Equals(id))
-                {
-                    return each;
-                }
-            }
-
-            return null;
-        }
-
         public static AdditionalService GetAdditionalService(int id)
         {
             foreach (var each in EventBlockData.AdditionalServices)

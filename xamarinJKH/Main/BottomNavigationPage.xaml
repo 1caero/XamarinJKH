@@ -9,9 +9,6 @@
             BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
             xmlns:resources="clr-namespace:xamarinJKH"
             xmlns:additional="clr-namespace:xamarinJKH.Additional;assembly=xamarinJKH"
-            xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-            xmlns:ff="clr-namespace:FFImageLoading.Forms.Args;assembly=FFImageLoading.Forms"     
-            xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
             xmlns:badge="clr-namespace:Plugin.Badge.Abstractions;assembly=Plugin.Badge.Abstractions"
             xmlns:converters="clr-namespace:xamarinJKH.Converters"
             x:Class="xamarinJKH.Main.BottomNavigationPage">
@@ -27,7 +24,6 @@
     <NavigationPage x:Name="EventsNavPage" HasNavigationBar="False" Title="{x:Static resources:AppResources.Events_NavBar}" IconImageSource="ic_events" BarBackgroundColor="Black" BarTextColor="White" 
                     badge:TabBadge.BadgeText="{Binding EventsAmount}"
                     badge:TabBadge.BadgeColor="{Binding EventsAmount, Converter={x:StaticResource BadgeColor}}">
-    <!--<NavigationPage x:Name="EventsNavPage" HasNavigationBar="False" Title="{x:Static resources:AppResources.Events_NavBar}" IconImageSource="ic_events" BarBackgroundColor="Black" BarTextColor="White">-->
         <x:Arguments>
             <local:EventsPage  Title="{x:Static resources:AppResources.Events_NavBar}" IconImageSource="ic_events" />
         </x:Arguments>
@@ -59,9 +55,4 @@
             <additional:AdditionalPage Title="{x:Static resources:AppResources.Shop_NavBar}" IconImageSource="ic_shop" />
         </x:Arguments>
     </NavigationPage>
-    <!--<NavigationPage x:Name="ProfPage" Title="{x:Static resources:AppResources.Prof}" IconImageSource="ic_profile" BarBackgroundColor="Black" BarTextColor="White">
-        <x:Arguments>
-            <local:ProfilePage Title="{x:Static resources:AppResources.Profile_NavBar}" IconImageSource="ic_profile" />
-        </x:Arguments>
-    </NavigationPage>-->
 </TabbedPage>

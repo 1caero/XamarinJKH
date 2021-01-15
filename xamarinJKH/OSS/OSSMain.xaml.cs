@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.Server;
@@ -51,7 +48,7 @@ namespace xamarinJKH
                     IPhoneCallTask phoneDialer;
                     phoneDialer = CrossMessaging.Current.PhoneDialer;
                     if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone)) 
-                        phoneDialer.MakePhoneCall(System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+                        phoneDialer.MakePhoneCall(Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
                 }
 
             
@@ -66,9 +63,9 @@ namespace xamarinJKH
 
                     //BackgroundColor = Color.White;
                     OSSList.Padding = new Thickness(10,0);
-                    var dw = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width;
+                    var dw = DeviceDisplay.MainDisplayInfo.Width;
                     if(dw>800)
-                    OSSList.Margin = new Thickness(-10, -80, -10, 0);
+                        OSSList.Margin = new Thickness(-10, -80, -10, 0);
                     else
                         OSSList.Margin = new Thickness(-10, -60, -10, 0);
 
@@ -76,7 +73,7 @@ namespace xamarinJKH
                 default:
                     break;
             }
-            var dH = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Height;
+            var dH = DeviceDisplay.MainDisplayInfo.Height;
             if (dH<1400)
             {
                 titleLabel.FontSize = 18;
@@ -104,8 +101,6 @@ namespace xamarinJKH
 
             NavigationPage.SetHasNavigationBar(this, false);
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
             OssTypeFrame.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.FromHex("#8d8d8d"));
             
         }
@@ -154,16 +149,13 @@ namespace xamarinJKH
             ButtonActive.IsEnabled = false;
             ButtonArchive.IsEnabled = false;
 
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                 return false;
             }
             //получаем данные от сервера по ОСС
             var result = await rc.GetOss();
-            //var result1 = await rc.GetOss(1);
-            //var haveP =result.Data.Where(_ => _.HasProtocolFile).ToList();
-
 
             if(result.Error==null)
             {
@@ -443,12 +435,10 @@ namespace xamarinJKH
                                 default: OpenPage(new OSSInfo(result));
                                     return;
                             } 
-                            //await Navigation.PushAsync(new OSSInfo(oss)); 
                         };
                         buttonFrame.GestureRecognizers.Add(buttonFrametapGesture);
 
                         status.Children.Add(buttonFrame);
-                        //Button bFrame = new Button() { ImageSource };
                         
                         
                         additionslData.Children.Add(status);
@@ -484,8 +474,6 @@ namespace xamarinJKH
             {
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    //ButtonActive.IsEnabled = false;                   
-                    //ButtonArchive.IsEnabled = false;
 
                     frames.Clear();
                     arrows.Clear();
@@ -496,8 +484,7 @@ namespace xamarinJKH
                     ((Button)sender).TextColor = colorFromMobileSettings;
                     ButtonArchive.SetAppThemeColor(Button.TextColorProperty, Color.Black, Color.White);
 
-                    //ButtonActive.IsEnabled = true;
-                    //ButtonArchive.IsEnabled = true;
+                   
                 });
             }
             catch(Exception ex)
@@ -513,8 +500,6 @@ namespace xamarinJKH
             {
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    //ButtonActive.IsEnabled = false;
-                    //ButtonArchive.IsEnabled = false;
 
                     frames.Clear();
                     arrows.Clear();
@@ -524,22 +509,12 @@ namespace xamarinJKH
 
                     ((Button)sender).TextColor = colorFromMobileSettings;
                     ButtonActive.SetAppThemeColor(Button.TextColorProperty, Color.Black, Color.White);
-                    //ButtonActive.IsEnabled = true;
-                    //ButtonArchive.IsEnabled = true;
                 });
             }
             catch (Exception ex)
             {
                 await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorOSSMainInfo, "OK");
             }
-            
-            //архивные
-            //GetOssData(0);
-            //Device.BeginInvokeOnMainThread(() =>
-            //{
-            //    ((Button)sender).TextColor = colorFromMobileSettings;
-            //    ButtonActive.TextColor = Color.White;
-            //});
         }
 
         async void OpenPage(Page page)

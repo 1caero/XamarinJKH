@@ -1,18 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!--<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="xamarinJKH.CustomRenderers.ButtonProfile">
-  <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
-</ContentView>-->
 <Frame xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="xamarinJKH.ButtonProfile"
              xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-       xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
              x:Name="btnSup" Padding="5" 
                CornerRadius="10" 
                HasShadow="False"               

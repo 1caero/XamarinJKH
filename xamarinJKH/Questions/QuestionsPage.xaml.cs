@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.Server;
@@ -47,8 +44,7 @@ namespace xamarinJKH.Questions
             {
                 return new Command(async () =>
                 {
-                    // if (IsRefreshing)
-                    //     return;
+                    
 
                     IsRefreshing = true;
 
@@ -63,9 +59,8 @@ namespace xamarinJKH.Questions
         {
             try
             {
-                if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
-                    //Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, null, "OK"));
                     return;
                 }
             }
@@ -120,7 +115,7 @@ namespace xamarinJKH.Questions
                     IPhoneCallTask phoneDialer;
                     phoneDialer = CrossMessaging.Current.PhoneDialer;
                     if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone)) 
-                        phoneDialer.MakePhoneCall(System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+                        phoneDialer.MakePhoneCall(Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
                 }
 
             
@@ -130,7 +125,7 @@ namespace xamarinJKH.Questions
                 case Device.iOS:
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
-                    if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 700)
+                    if (DeviceDisplay.MainDisplayInfo.Width < 700)
                     {
                         labelShowClosed.FontSize = 14;
                         
@@ -153,8 +148,7 @@ namespace xamarinJKH.Questions
             };
             BackStackLayout.GestureRecognizers.Add(backClick);
             SetText();
-            // isComplite();
-            // Quest = QuestNotComlite;
+            
            
             additionalList.BackgroundColor = Color.Transparent;
             additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
@@ -172,7 +166,7 @@ namespace xamarinJKH.Questions
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
                     Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                     return;
@@ -191,47 +185,44 @@ namespace xamarinJKH.Questions
         {
             QuestComlite = new List<PollInfo>();
             QuestNotComlite = new List<PollInfo>();
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                 return;
             }
             if (Settings.EventBlockData.Polls != null)
-            foreach (var each in Settings.EventBlockData.Polls)
-            {
-                bool flag = true;
-                foreach (var quest in each.Questions)
+                foreach (var each in Settings.EventBlockData.Polls)
                 {
-                    if (!quest.IsCompleteByUser)
+                    bool flag = true;
+                    foreach (var quest in each.Questions)
                     {
-                        flag = false;
-                        break;
+                        if (!quest.IsCompleteByUser)
+                        {
+                            flag = false;
+                            break;
+                        }
+                    }
+
+                    if (flag)
+                    {
+                        each.IsComplite = true;
+                        QuestComlite.Add(each);
+                    }
+                    else
+                    {
+                        each.IsComplite = false;
+                        QuestNotComlite.Add(each);
                     }
                 }
-
-                if (flag)
-                {
-                    each.IsComplite = true;
-                    QuestComlite.Add(each);
-                }
-                else
-                {
-                    each.IsComplite = false;
-                    QuestNotComlite.Add(each);
-                }
-            }
         }
 
         void SetText()
         {
             UkName.Text = Settings.MobileSettings.main_name;
             
-            //SwitchQuest.ThumbColor = Color.Black;
             SwitchQuest.OnColor = (Color)Application.Current.Resources["MainColor"];
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
             GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
             additionalList.RefreshControlColor = hexColor;
 
         }

@@ -1,6 +1,7 @@
-﻿using FFImageLoading.Svg.Forms;
-using System;
-using System.Windows.Input;
+﻿using System;
+using System.Collections.Generic;
+using FFImageLoading.Svg.Forms;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using xamarinJKH.CustomRenderers;
 using xamarinJKH.Utils;
@@ -42,23 +43,20 @@ namespace xamarinJKH.AppsConst
             SvgCachedImage arrow = new SvgCachedImage();
             arrow.Source = "resource://xamarinJKH.Resources.ic_arrow_forward.svg";
             Color hex = (Color)Application.Current.Resources["MainColor"];
-            arrow.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", $"#{Settings.MobileSettings.color}" } };
+            arrow.ReplaceStringMap = new Dictionary<string, string> { { "#000000", $"#{Settings.MobileSettings.color}" } };
             arrow.HeightRequest = 25;
             arrow.WidthRequest = 25;
             arrow.Margin = new Thickness(0,0,-5,0);
             arrow.VerticalOptions = LayoutOptions.CenterAndExpand;
             arrow.HorizontalOptions = LayoutOptions.End;
 
-            //LabelDate.TextColor = Color.Black;
-            //LabelDate.FontSize = 15;
-            //LabelDate.Margin = new Thickness(0, -5, 0, 0);
 
             numberAndDate.TextColor = Color.Black;
             numberAndDate.FontSize = 12;
             numberAndDate.VerticalOptions = LayoutOptions.CenterAndExpand;
             numberAndDate.HorizontalOptions = LayoutOptions.Fill;
 
-            ImageStatus.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", $"#{Settings.MobileSettings.color}" } };
+            ImageStatus.ReplaceStringMap = new Dictionary<string, string> { { "#000000", $"#{Settings.MobileSettings.color}" } };
             ImageStatus.Source = "resource://xamarinJKH.Resources.ic_status_new.svg";
             ImageStatus.HeightRequest = 15;
             ImageStatus.VerticalOptions = LayoutOptions.Center;
@@ -70,12 +68,9 @@ namespace xamarinJKH.AppsConst
             LabelStatus.FontSize = 13;
             LabelStatus.VerticalTextAlignment = TextAlignment.Center;
             LabelStatus.VerticalOptions = LayoutOptions.Center;
-            //LabelStatus.LineBreakMode = LineBreakMode.WordWrap;
             LabelStatus.HorizontalOptions = LayoutOptions.End;
 
 
-            // status.Children.Add(ImageStatus);
-            // status.Children.Add(LabelStatus);
 
             LabelText.TextColor = Color.Black;
             LabelText.HorizontalOptions = LayoutOptions.Start;
@@ -89,7 +84,6 @@ namespace xamarinJKH.AppsConst
             LabelAddressApp.FontSize = 10;
             LabelAddressApp.HorizontalTextAlignment = TextAlignment.Start;
             LabelAddressApp.VerticalOptions = LayoutOptions.Start;
-            // LabelAddressApp.MaxLines = 1;
 
             Grid grid = new Grid
             {
@@ -103,16 +97,11 @@ namespace xamarinJKH.AppsConst
                 }
             };
 
-            // status.Children.Add(numberAndDate);
-            // status.Children.Add(LabelText);
-
-            //grid.Children.Add(numberAndDate, 0, 0);
 
             StackLayout stackLayoutStatus = new StackLayout();
             stackLayoutStatus.Orientation = StackOrientation.Horizontal;
             stackLayoutStatus.HorizontalOptions = LayoutOptions.Fill;
             
-            // stackLayoutStatus.Spacing = 0;
             stackLayoutStatus.Children.Add(numberAndDate);
             stackLayoutStatus.Children.Add(ImageStatus);
             stackLayoutStatus.Children.Add(LabelStatus);
@@ -121,7 +110,6 @@ namespace xamarinJKH.AppsConst
             stackLayoutText.Orientation = StackOrientation.Horizontal;
             stackLayoutText.HorizontalOptions = LayoutOptions.FillAndExpand;
             stackLayoutText.Children.Add(LabelText);
-            //containerData.Children.Add(grid);
             containerData.Children.Add(stackLayoutStatus);
             containerData.Children.Add(LabelAddressApp);
             containerData.Children.Add(stackLayoutText);
@@ -157,11 +145,6 @@ namespace xamarinJKH.AppsConst
 
             container.Children.Add(containerData);
             
-            //     <CheckBox
-            //     HorizontalOptions="Center"
-            // x:Name="CheckBoxBonus"
-            // VerticalOptions="Center"
-            // Color="{x:DynamicResource MainColor}" />
 
             checkBox = new CheckBox()
             {
@@ -201,7 +184,6 @@ namespace xamarinJKH.AppsConst
                     ReadIndicator.IsVisible = false;
                 }
             });
-            //View = frame;
         }
 
 
@@ -289,7 +271,7 @@ namespace xamarinJKH.AppsConst
             {
                 var fNum = 17;
                 var fdt = 13;
-                if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 700)
+                if (DeviceDisplay.MainDisplayInfo.Width < 700)
                 {
                     fNum = 11;
                      fdt = 9;
@@ -302,7 +284,7 @@ namespace xamarinJKH.AppsConst
                     }
                 }
                 else
-                if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 800)
+                if (DeviceDisplay.MainDisplayInfo.Width < 800)
                 {
                     fNum = 13;
                     fdt = 11;
@@ -335,7 +317,6 @@ namespace xamarinJKH.AppsConst
                 LabelStatus.FontSize = fdt;
                 
 
-                // LabelText.Text = "• " + TextApp;
 
                 LabelText.Text = TextApp.Trim();
                 LabelAddressApp.Text = AddressApp;
@@ -378,7 +359,6 @@ namespace xamarinJKH.AppsConst
                     Console.WriteLine(e);
                 }
                 checkBox.CheckedChanged += checkBoxOnCheckedChanged;
-                //await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
                 ReadIndicator.IsVisible = !Read;// && StatusID != 6;
             }
         }

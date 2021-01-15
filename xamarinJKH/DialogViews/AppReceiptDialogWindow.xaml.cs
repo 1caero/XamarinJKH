@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-using xamarinJKH.ViewModels.DialogViewModels;
-using AiForms.Dialogs.Abstractions;
+﻿using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
+using Xamarin.Forms.Xaml;
+using xamarinJKH.ViewModels.DialogViewModels;
 
 namespace xamarinJKH.DialogViews
 {

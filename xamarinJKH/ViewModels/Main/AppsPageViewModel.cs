@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using xamarinJKH.Server.RequestModel;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using xamarinJKH.Utils;
-using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace xamarinJKH.ViewModels.Main
 {
@@ -37,7 +34,6 @@ namespace xamarinJKH.ViewModels.Main
         public List<RequestInfo> AllRequests { get; set; }
         public Command LoadRequests { get; set; }
         public Command UpdateRequests { get; set; }
-        //public Color hex { get; set; } = (Color)Application.Current.Resources["MainColor"];
         bool _showClosed;
         public bool ShowClosed
         {
@@ -121,25 +117,7 @@ namespace xamarinJKH.ViewModels.Main
                         MessagingCenter.Send<Object>(this, "EndRefresh");
                         IsRefreshing = false;
                     });
-                    //if (response.Requests != null)
-                    //{
-                    //    MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", response.Requests.Where(x => !x.IsReadedByClient).Count());
-                    //    AllRequests.AddRange(response.Requests);
-                    //    if (Requests == null)
-                    //    {
-                    //        Empty = Requests.Count == 0;
-                    //        Requests = new ObservableCollection<RequestInfo>();
-                    //    }
-                    //    Requests.Clear();
-                    //    foreach (var App in AllRequests.Where(x => x.IsClosed == ShowClosed))
-                    //    {
-                    //        Device.BeginInvokeOnMainThread(() => Requests.Add(App));
-                    //    }
-                    //}
                 }
-
-                //MessagingCenter.Subscribe<Object, string>(this, "AddIdent", (sender, args) => LoadRequests.Execute(null));
-                //MessagingCenter.Send<Object>(this, "EndRefresh");
             });
         }
 

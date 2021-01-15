@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
+using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.InterfacesIntegration;
@@ -17,7 +14,7 @@ using xamarinJKH.Utils;
 namespace xamarinJKH.DialogViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PayAppDialog : Rg.Plugins.Popup.Pages.PopupPage
+    public partial class PayAppDialog : PopupPage
     {
         public Color hex { get; set; }
         public bool isBonusVisible { get; set; }

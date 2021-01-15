@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
 using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
@@ -22,11 +24,7 @@ using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
-using Xamarin.Essentials;
-using System.Collections.ObjectModel;
-using System.Net.Http.Headers;
+using xamarinJKH.ViewModels;
 
 namespace xamarinJKH.AppsConst
 {
@@ -69,7 +67,7 @@ namespace xamarinJKH.AppsConst
             // await PopupNavigation.Instance.PushAsync(new TechDialog(false));
             if (Settings.Person != null && !string.IsNullOrWhiteSpace(Settings.Person.Phone))
             {
-                await Navigation.PushModalAsync(new Tech.AppPage());
+                await Navigation.PushModalAsync(new AppPage());
             }
             else
             {
@@ -94,25 +92,8 @@ namespace xamarinJKH.AppsConst
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
-                    //BackgroundColor = Color.White;
-                    // ImageTop.Margin = new Thickness(0, 0, 0, 0);
-                    // StackLayout.Margin = new Thickness(0, 33, 0, 0);
-                    // IconViewNameUk.Margin = new Thickness(0, 33, 0, 0);
-                    // if (Application.Current.MainPage.Height > 800)
-                    // {
-                    //     ScrollViewContainer.Margin = new Thickness(0, 0, 0, -180);
-                    //     BackStackLayout.Margin = new Thickness(-5, 35, 0, 0);
-                    // }
                     break;
                 case Device.Android:
-                    // ScrollViewContainer.Margin = new Thickness(0, 0, 0, -162);
-                    // double or = Math.Round(((double)App.ScreenWidth / (double)App.ScreenHeight), 2);
-                    // if (Math.Abs(or - 0.5) < 0.02)
-                    // {
-                    //     ScrollViewContainer.Margin = new Thickness(0, 0, 0, -115);
-                    //     BackStackLayout.Margin = new Thickness(-5, 15, 0, 0);
-                    // }
-
                     break;
                 default:
                     break;
@@ -142,7 +123,7 @@ namespace xamarinJKH.AppsConst
             addFile.Tapped += async (s, e) => { AddFile(); };
             StackLayoutAddFile.GestureRecognizers.Add(addFile);
             var techSend = new TapGestureRecognizer();
-            techSend.Tapped += TechSend; //async(s, e) => { await PopupNavigation.Instance.PushAsync(new TechDialog()); };
+            techSend.Tapped += TechSend; 
             LabelTech.GestureRecognizers.Add(techSend);
 
             var delLS = new TapGestureRecognizer();
@@ -242,9 +223,9 @@ namespace xamarinJKH.AppsConst
                 try
                 {
                     var camera_perm =
-                        await Plugin.Permissions.CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+                        await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
                     var storage_perm =
-                        await Plugin.Permissions.CrossPermissions.Current
+                        await CrossPermissions.Current
                             .CheckPermissionStatusAsync(Permission.Storage);
                     if (camera_perm != PermissionStatus.Granted || storage_perm != PermissionStatus.Granted)
                     {
@@ -265,7 +246,7 @@ namespace xamarinJKH.AppsConst
                         var result = await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoPermissions, "OK",
                             AppResources.Cancel);
                         if (result)
-                            Plugin.Permissions.CrossPermissions.Current.OpenAppSettings();
+                            CrossPermissions.Current.OpenAppSettings();
                     });
                     return;
                 }
@@ -291,34 +272,6 @@ namespace xamarinJKH.AppsConst
                 await PickAndShowFile(null);
             }
         }
-
-        private async void PickImage_Clicked(object sender, EventArgs args)
-        {
-            string[] fileTypes = null;
-
-            if (Device.RuntimePlatform == Device.Android)
-            {
-                fileTypes = new string[] { "image/png", "image/jpeg" };
-            }
-
-            if (Device.RuntimePlatform == Device.iOS)
-            {
-                fileTypes = new string[] { "public.image" }; // same as iOS constant UTType.Image
-            }
-
-            if (Device.RuntimePlatform == Device.UWP)
-            {
-                fileTypes = new string[] { ".jpg", ".png" };
-            }
-
-            if (Device.RuntimePlatform == Device.WPF)
-            {
-                fileTypes = new string[] { "JPEG files (*.jpg)|*.jpg", "PNG files (*.png)|*.png" };
-            }
-
-            await PickAndShowFile(fileTypes);
-        }
-
         private async Task PickAndShowFile(string[] fileTypes)
         {
             try
@@ -327,8 +280,6 @@ namespace xamarinJKH.AppsConst
 
                 if (pickedFile != null)
                 {
-                    // UkName.Text = pickedFile.FileName;
-                    // LabelPhone.Text = pickedFile.FilePath;
                     if (pickedFile.DataArray.Length > 10000000)
                     {
                         await DisplayAlert(AppResources.ErrorTitle, AppResources.FileTooBig, "OK");
@@ -341,16 +292,6 @@ namespace xamarinJKH.AppsConst
                     if (ListViewFiles.HeightRequest < 120)
                         ListViewFiles.HeightRequest += 30;
                     setBinding();
-                    // if (pickedFile.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase)
-                    //     || pickedFile.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
-                    // {
-                    //     IconViewNameUk.Source = ImageSource.FromStream(() => pickedFile.GetStream());
-                    //     IconViewNameUk.IsVisible = true;
-                    // }
-                    // else
-                    // {
-                    //     IconViewNameUk.IsVisible = false;
-                    // }
                 }
             }
             catch (Exception ex)
@@ -427,33 +368,6 @@ namespace xamarinJKH.AppsConst
             }
         }
 
-        public async Task startLoadFile(string metod)
-        {
-            // Loading settings
-            Configurations.LoadingConfig = new LoadingConfig
-            {
-                IndicatorColor = (Color)Application.Current.Resources["MainColor"],
-                OverlayColor = Color.Black,
-                Opacity = 0.8,
-                DefaultMessage = AppResources.LoadingFile,
-            };
-
-            await Loading.Instance.StartAsync(async progress =>
-            {
-                switch (metod)
-                {
-                    case CAMERA:
-                        await getCameraFile();
-                        break;
-                    case GALERY:
-                        await GetGalaryFile();
-                        break;
-                    case FILE:
-                        await PickAndShowFile(null);
-                        break;
-                }
-            });
-        }
 
         public static byte[] StreamToByteArray(Stream stream)
         {
@@ -494,7 +408,7 @@ namespace xamarinJKH.AppsConst
             UkName.Text = Settings.MobileSettings.main_name;
             FormattedString formattedName = new FormattedString();
             OSAppTheme currentTheme = Application.Current.RequestedTheme;
-            if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
+            if (DeviceInfo.Platform == DevicePlatform.iOS)
                 currentTheme = OSAppTheme.Dark;
             formattedName.Spans.Add(new Span
             {
@@ -510,19 +424,13 @@ namespace xamarinJKH.AppsConst
                 FontAttributes = FontAttributes.None,
                 FontSize = 16
             });
-            //LabelName.FormattedText = formattedName;
             Color hexColor = (Color)Application.Current.Resources["MainColor"];
-            //IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
             Pancake.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
-            //Pancake.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent); if (Device.RuntimePlatform == Device.iOS) { if (AppInfo.PackageName == "rom.best.saburovo" || AppInfo.PackageName == "sys_rom.ru.tsg_saburovo") { PancakeViewIcon.Padding = new Thickness(0); } }
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
             FrameTop.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
         }
 
         void setBinding()
         {
-            //PikerLsItem = PickerLs.SelectedIndex;
             PikerTypeItem = PickerType.SelectedIndex;
             try
             {
@@ -541,23 +449,7 @@ namespace xamarinJKH.AppsConst
             }
         }
 
-        private void picker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // try
-            // {
-            //     var identLength = Settings.Person.Accounts[PickerLs.SelectedIndex].Ident.Length;
-            //     if (identLength < 6)
-            //     {
-            //         PickerLs.WidthRequest = identLength * 9;
-            //     }
-            // }
-            // catch (Exception ex)
-            // {
-            //     // ignored
-            // }
-        }
-
-        public class AddAppConstModel : xamarinJKH.ViewModels.BaseViewModel
+        public class AddAppConstModel : BaseViewModel
         {
             public List<RequestType> AllType { get; set; }
             public NamedValue SelectedType { get; set; }
@@ -596,7 +488,7 @@ namespace xamarinJKH.AppsConst
             string ident = EntryLS.Text;
 
             
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () =>
                     await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
@@ -741,18 +633,6 @@ namespace xamarinJKH.AppsConst
 
         private void pickerType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // try
-            // {
-            //     var identLength = Settings.TypeApp[PickerType.SelectedIndex].Name.Length;
-            //     if (identLength < 6)
-            //     {
-            //         PickerType.WidthRequest = identLength * 10;
-            //     }
-            // }
-            // catch (Exception ex)
-            // {
-            //     // ignored
-            // }
         }
 
         private void RadioButton_Focused(object sender, FocusEventArgs e)

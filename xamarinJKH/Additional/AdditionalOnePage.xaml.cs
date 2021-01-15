@@ -1,28 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using FFImageLoading.Svg.Forms;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.Apps;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
-using AppPage = xamarinJKH.Apps.AppPage;
 
 namespace xamarinJKH.Additional
 {
@@ -53,7 +44,6 @@ namespace xamarinJKH.Additional
             {
                 case Device.iOS:
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
-                    //Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
                     Pancake2.HeightRequest = statusBarHeight;
                     break;
                 default:
@@ -71,12 +61,11 @@ namespace xamarinJKH.Additional
 
 
             var techSend = new TapGestureRecognizer();
-            techSend.Tapped += async (s, e) => {     await Navigation.PushAsync(new Tech.AppPage()); };
+            techSend.Tapped += async (s, e) => {     await Navigation.PushAsync(new AppPage()); };
             LabelTech.GestureRecognizers.Add(techSend);
             var backClick = new TapGestureRecognizer();
             backClick.Tapped += async (s, e) =>
             {
-                //MessagingCenter.Send<Object>(this, "LoadGoods");
                 try
                 {
                     _ = await Navigation.PopAsync();
@@ -93,7 +82,7 @@ namespace xamarinJKH.Additional
                     IPhoneCallTask phoneDialer;
                     phoneDialer = CrossMessaging.Current.PhoneDialer;
                     if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone))
-                        phoneDialer.MakePhoneCall(System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+                        phoneDialer.MakePhoneCall(Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
                 }
 
             
@@ -103,11 +92,6 @@ namespace xamarinJKH.Additional
             BindingContext = this;
         }
 
-        protected override bool OnBackButtonPressed()
-        {
-            //MessagingCenter.Send<Object>(this, "LoadGoods");
-            return base.OnBackButtonPressed();
-        }
 
         async void SetText()
         {
@@ -160,15 +144,12 @@ namespace xamarinJKH.Additional
             }
             
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            //IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //IconViewTech.SetAppThemeColor(SvgCachedImage.ReplaceStringMapProperty, hexColor, Color.Black);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.Black);
         }
 
 
         private async void ButtonClick(object sender, EventArgs e)
         {
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                 return;
@@ -192,8 +173,8 @@ namespace xamarinJKH.Additional
 
                     await DisplayAlert(AppResources.AlertSuccess, AppResources.OrderSuccess, "OK");
                     RequestInfo requestInfo = new RequestInfo();
-                    requestInfo.ID = result.ID; if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
-                        await Navigation.PushAsync(new AppPage(requestInfo, true));
+                    requestInfo.ID = result.ID; if (Navigation.NavigationStack.FirstOrDefault(x => x is Apps.AppPage) == null)
+                        await Navigation.PushAsync(new Apps.AppPage(requestInfo, true));
                 }
                 else
                 {

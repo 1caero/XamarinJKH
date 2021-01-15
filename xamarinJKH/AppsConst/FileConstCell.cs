@@ -1,6 +1,5 @@
 ﻿using System;
 using Xamarin.Forms;
-using xamarinJKH.Utils;
 
 namespace xamarinJKH.AppsConst
 {
@@ -97,7 +96,6 @@ namespace xamarinJKH.AppsConst
 
                 LabelSize.Text = Math.Round(size, 2).ToString() + " " + sizeType;
 
-                // LabelSize.Text = (FileSize.Length / 1000).ToString() + " КБ";
             }
         }
     }

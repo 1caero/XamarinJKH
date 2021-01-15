@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using xamarinJKH.Server.RequestModel;
 
@@ -21,10 +18,10 @@ namespace xamarinJKH.ViewModels.DialogViewModels
                 if (response.Error == null)
                 {
                     if (response.Data != null)
-                    foreach (var instance in response.Data)
-                    {
-                        Device.BeginInvokeOnMainThread(() => History.Add(instance));
-                    }
+                        foreach (var instance in response.Data)
+                        {
+                            Device.BeginInvokeOnMainThread(() => History.Add(instance));
+                        }
                 }
             });
         }

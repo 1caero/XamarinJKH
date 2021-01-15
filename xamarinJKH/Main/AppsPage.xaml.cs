@@ -2,30 +2,22 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Plugin.Messaging;
+using Microsoft.AppCenter.Analytics;
+using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.Apps;
-using xamarinJKH.Server;
 using xamarinJKH.InterfacesIntegration;
-using xamarinJKH.Server.RequestModel;
-using xamarinJKH.Tech;
-using xamarinJKH.Utils;
-using System.Threading;
-using Rg.Plugins.Popup.Services;
-using Xamarin.Forms.PancakeView;
-using xamarinJKH.DialogViews;
-using xamarinJKH.ViewModels.Main;
-using Xamarin.Essentials;
-using System.Text.RegularExpressions;
-using System.Runtime.CompilerServices;
-using Microsoft.AppCenter.Analytics;
 using xamarinJKH.Pays;
-using AppPage = xamarinJKH.Apps.AppPage;
-using System.Runtime.Serialization;
+using xamarinJKH.Server;
+using xamarinJKH.Server.RequestModel;
+using xamarinJKH.Utils;
+using xamarinJKH.ViewModels.Main;
+using AppPage = xamarinJKH.Tech.AppPage;
 
 namespace xamarinJKH.Main
 {
@@ -92,9 +84,7 @@ namespace xamarinJKH.Main
             UpdateTask = null;
             UpdateTask = new Task(async () =>
             {
-                // while (!this.CancellationToken.IsCancellationRequested)
-                // {
-                    if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+                    if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                     {
                         Device.BeginInvokeOnMainThread(async () =>
                         {
@@ -105,28 +95,14 @@ namespace xamarinJKH.Main
                                 await ShowMessage(AppResources.ErrorNoInternet, AppResources.ErrorTitle, "OK", () =>
                                 {
                                     showNoInetWindow = true;
-                                    //await ShowMessage("OK was pressed", "Message", "OK", null);
                                 });
                             }
-                            //await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK");
 
                             await Task.Delay(TimeSpan.FromSeconds(5));
                         });
                     }
 
                     await viewModel.UpdateTask();
-                    //if (Device.RuntimePlatform == Device.iOS)
-                    //    if (viewModel.Empty)
-                    //    {
-                    //        Device.BeginInvokeOnMainThread(() => additionalList.HeightRequest = -1);
-                    //    }
-                    //    else
-                    //    {
-                    //        Device.BeginInvokeOnMainThread(() => additionalList.HeightRequest = 3000);
-                    //    }
-                    // await Task.Delay(TimeSpan.FromSeconds(5));
-                // }
-
                 return;
             });
             try
@@ -141,16 +117,16 @@ namespace xamarinJKH.Main
         private void CheckAkk()
         {
             if (Settings.Person.Accounts != null)
-            if (Settings.Person.Accounts.Count > 0)
-            {
-                StackLayoutNewApp.IsVisible = true;
-                StackLayoutIdent.IsVisible = false;
-            }
-            else
-            {
-                StackLayoutNewApp.IsVisible = false;
-                StackLayoutIdent.IsVisible = true;
-            }
+                if (Settings.Person.Accounts.Count > 0)
+                {
+                    StackLayoutNewApp.IsVisible = true;
+                    StackLayoutIdent.IsVisible = false;
+                }
+                else
+                {
+                    StackLayoutNewApp.IsVisible = false;
+                    StackLayoutIdent.IsVisible = true;
+                }
         }
 
         static bool inUpdateNow = false;
@@ -169,12 +145,6 @@ namespace xamarinJKH.Main
                 });
 
                 await getAppsAsync();
-                //Device.BeginInvokeOnMainThread(() =>
-                //{
-                //    additionalList.ItemsSource = null;
-                //    additionalList.ItemsSource = RequestInfos;
-                //});
-
                 inUpdateNow = false;
             }
             catch (Exception e)
@@ -240,7 +210,7 @@ namespace xamarinJKH.Main
                     //есть баг в xamarin, потому что fillAndExpand не работает(https://github.com/xamarin/Xamarin.Forms/issues/6908)
                     additionalList.HeightRequest = 3000;
 
-                    if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 700)
+                    if (DeviceDisplay.MainDisplayInfo.Width < 700)
                         LabelSwitch.FontSize = 12;
 
                     FrameBtnAdd.IsVisible = false;
@@ -269,22 +239,10 @@ namespace xamarinJKH.Main
             Analytics.TrackEvent("Заявки жителя-добавили обработку тапа Профиля");
 
             var techSend = new TapGestureRecognizer();
-            techSend.Tapped += async (s, e) => { await Navigation.PushAsync(new Tech.AppPage()); };
+            techSend.Tapped += async (s, e) => { await Navigation.PushAsync(new AppPage()); };
             LabelTech.GestureRecognizers.Add(techSend);
             Analytics.TrackEvent("Заявки жителя-добавили обработку тапа Техподдержки");
 
-            //var call = new TapGestureRecognizer();
-            //call.Tapped += async (s, e) =>
-            //{
-            //    if (Settings.Person.Phone != null)
-            //    {
-            //        IPhoneCallTask phoneDialer;
-            //        phoneDialer = CrossMessaging.Current.PhoneDialer;
-            //        if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone))
-            //            phoneDialer.MakePhoneCall(
-            //                System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
-            //    }
-            //};
 
             var addClick = new TapGestureRecognizer();
             addClick.Tapped += async (s, e) => { startNewApp(FrameBtnAdd, null); };
@@ -320,15 +278,14 @@ namespace xamarinJKH.Main
 
                     Device.BeginInvokeOnMainThread(async () =>
                     {
-                        if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
-                            await Navigation.PushAsync(new AppPage(request));
+                        if (Navigation.NavigationStack.FirstOrDefault(x => x is Apps.AppPage) == null)
+                            await Navigation.PushAsync(new Apps.AppPage(request));
                     });
                 }
             });
             Analytics.TrackEvent("Заявки жителя-CloseAPP подписались");
             viewModel.LoadRequests.Execute(null);
             Analytics.TrackEvent("Заявки жителя-LoadRequests");
-            //            PropertyChanged = "change"
 
             SwitchApp.Toggled += SwitchApp_Toggled;
             Analytics.TrackEvent("Заявки жителя-SwitchApp.Toggled подписались");
@@ -349,22 +306,12 @@ namespace xamarinJKH.Main
                     arrowcolor.Add("#000000", "#FFFFFF");
                 }
 
-                //IconViewTech.ReplaceStringMap = colors;
             });
             Analytics.TrackEvent("Заявки жителя-ChangeThemeCounter подписались");
 
             MessagingCenter.Subscribe<Object, int>(this, "OpenApp", async (sender, index) =>
             {
                 await viewModel.UpdateTask();
-                //if (Device.RuntimePlatform == Device.iOS)
-                //    if (viewModel.Empty)
-                //    {
-                //        Device.BeginInvokeOnMainThread(() => additionalList.HeightRequest = -1);
-                //    }
-                //    else
-                //    {
-                //        Device.BeginInvokeOnMainThread(() => additionalList.HeightRequest = 3000);
-                //    }
                 while (viewModel.AllRequests == null)
                 {
                     await Task.Delay(TimeSpan.FromMilliseconds(50));
@@ -374,8 +321,8 @@ namespace xamarinJKH.Main
                 {
                     Device.BeginInvokeOnMainThread(async () =>
                     {
-                        if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
-                            await Navigation.PushAsync(new AppPage(request[0],false, request[0].IsPaid));
+                        if (Navigation.NavigationStack.FirstOrDefault(x => x is Apps.AppPage) == null)
+                            await Navigation.PushAsync(new Apps.AppPage(request[0],false, request[0].IsPaid));
                     });
                 }
             });
@@ -414,8 +361,8 @@ namespace xamarinJKH.Main
             {
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
-                        await Navigation.PushAsync(new AppPage(request));
+                    if (Navigation.NavigationStack.FirstOrDefault(x => x is Apps.AppPage) == null)
+                        await Navigation.PushAsync(new Apps.AppPage(request));
                 });
             }
         }
@@ -450,24 +397,9 @@ namespace xamarinJKH.Main
                 buttonColor.Add("#000000", "#FFFFFF");
             }
 
-            //IconViewTech.ReplaceStringMap = colors;
             IconViewSaldos.ReplaceStringMap = buttonColor;
             CheckAkk();
             
-        }
-
-        async void SyncSetup()
-        {
-            //Device.BeginInvokeOnMainThread(() =>
-            //{
-            // Assuming this function needs to use Main/UI thread to move to your "Main Menu" Page
-            while (true)
-            {
-                await Task.Delay(TimeSpan.FromSeconds(5));
-                await RefreshData();
-            }
-
-            //});
         }
 
         void SetText()
@@ -476,18 +408,13 @@ namespace xamarinJKH.Main
             
 
             SwitchApp.OnColor = hex;
-            //IconAddApp.Foreground = Color.White;
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            //IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-          
             GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
         }
 
         async Task getAppsAsync()
         {
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () =>
                     await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
@@ -504,21 +431,6 @@ namespace xamarinJKH.Main
                     Settings.UpdateKey = _requestList.UpdateKey;
                     this.BindingContext = this;
                 }
-            }
-            else
-            {
-                await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAppsInfo, "OK");
-            }
-        }
-
-        async void getApps()
-        {
-            _requestList = await _server.GetRequestsList();
-            if (_requestList.Error == null)
-            {
-                setCloses(_requestList.Requests);
-                Settings.UpdateKey = _requestList.UpdateKey;
-                this.BindingContext = this;
             }
             else
             {
@@ -561,8 +473,8 @@ namespace xamarinJKH.Main
         private async void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             RequestInfo select = e.Item as RequestInfo;
-            if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
-                await Navigation.PushAsync(new AppPage(select));
+            if (Navigation.NavigationStack.FirstOrDefault(x => x is Apps.AppPage) == null)
+                await Navigation.PushAsync(new Apps.AppPage(select));
         }
 
         private async void startNewApp(object sender, EventArgs e)
@@ -590,21 +502,6 @@ namespace xamarinJKH.Main
             {
                 Analytics.TrackEvent(ex.Message);
             }
-        }
-
-        private void change(object sender, PropertyChangedEventArgs e)
-        {
-            if (SwitchApp.IsToggled)
-            {
-                RequestInfos = RequestInfosClose;
-            }
-            else
-            {
-                RequestInfos = RequestInfosAlive;
-            }
-
-            additionalList.ItemsSource = null;
-            additionalList.ItemsSource = RequestInfos;
         }
     }
 }

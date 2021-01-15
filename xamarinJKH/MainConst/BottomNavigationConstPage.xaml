@@ -39,9 +39,4 @@
             <mainConst:MonitorPage Title="{x:Static xamarinZkh:AppResources.Monitoring_NavBar}" IconImageSource="ic_monitor" />
         </x:Arguments>
     </NavigationPage>
-    <!--<NavigationPage x:Name="profNavBar" Title="{x:Static xamarinZkh:AppResources.Profile_NavBar}" IconImageSource="ic_profile" BarBackgroundColor="Black" BarTextColor="White">
-        <x:Arguments>
-            <local:ProfileConstPage Title="{x:Static xamarinZkh:AppResources.Profile_NavBar}" IconImageSource="ic_profile" />
-        </x:Arguments>
-    </NavigationPage>-->
 </TabbedPage>

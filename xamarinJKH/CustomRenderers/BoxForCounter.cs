@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
+using xamarinJKH.Utils;
 
 namespace xamarinJKH
 {
     public class BoxForCounter:BoxView
     {
-        public Color CellColor => Color.FromHex(xamarinJKH.Utils.Settings.MobileSettings.color);
+        public Color CellColor => Color.FromHex(Settings.MobileSettings.color);
 
         public BoxForCounter()
         {

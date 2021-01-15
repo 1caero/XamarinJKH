@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
 using Xamarin.Forms;
 using xamarinJKH.Server.RequestModel;
-using xamarinJKH.Server;
 using xamarinJKH.Main;
 using xamarinJKH.MainConst;
 using xamarinJKH.Utils;
 
 using Xamarin.Essentials;
-using System.Text.RegularExpressions;
 
 
 

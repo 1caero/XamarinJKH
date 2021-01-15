@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AppCenter.Analytics;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -65,8 +61,6 @@ namespace xamarinJKH.VideoStreaming
                 {
                     Device.BeginInvokeOnMainThread(async () => await Launcher.OpenAsync(camera.Url));
 
-                    //if (Navigation.ModalStack.FirstOrDefault(x => x is CameraIos) == null)
-                    //    await Navigation.PushModalAsync(new CameraIos(camera.Url));
                 }
                 (sender as CollectionView).SelectedItem = null;
             }

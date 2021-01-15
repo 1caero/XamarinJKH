@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
+using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.Server;
@@ -14,7 +13,7 @@ using xamarinJKH.Server.RequestModel;
 namespace xamarinJKH.DialogViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RatingBarContentView : Rg.Plugins.Popup.Pages.PopupPage
+    public partial class RatingBarContentView : PopupPage
     {
         private RestClientMP server = new RestClientMP();
         public Color HexColor { get; set; }
@@ -30,7 +29,7 @@ namespace xamarinJKH.DialogViews
             if(Device.RuntimePlatform==Device.iOS)
             {
                 commentFrame.BackgroundColor = Color.White;
-                if(Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width<700)
+                if(DeviceDisplay.MainDisplayInfo.Width<700)
                 {
                     //Frame.Margin = new Thickness(15, 80, 15, 15);
                     Frame.Padding = new Thickness(15, 15, 15, 0);
@@ -41,7 +40,7 @@ namespace xamarinJKH.DialogViews
                     BordlessEditor.FontSize = 10;
                     commentFrame.Margin = new Thickness(0, 10, 0, 0);
                 }
-                if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 800)
+                if (DeviceDisplay.MainDisplayInfo.Width < 800)
                 {
                     //Frame.Margin = new Thickness(15, 100, 15, 15);
                     Frame.Padding = new Thickness(15, 20, 15, 0);
@@ -130,7 +129,7 @@ namespace xamarinJKH.DialogViews
 
         private void BordlessEditor_Focused(object sender, FocusEventArgs e)
         {
-            if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 800)
+            if (DeviceDisplay.MainDisplayInfo.Width < 800)
             {
                frameMargin = Frame.Margin;
                Device.BeginInvokeOnMainThread(()=> { Frame.Margin = new Thickness(15, 0, 15, 15); });
@@ -139,7 +138,7 @@ namespace xamarinJKH.DialogViews
 
         private void BordlessEditor_Unfocused(object sender, FocusEventArgs e)
         {
-            if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 800)
+            if (DeviceDisplay.MainDisplayInfo.Width < 800)
             {
                 Device.BeginInvokeOnMainThread(() => { Frame.Margin = frameMargin; }) ;
             }

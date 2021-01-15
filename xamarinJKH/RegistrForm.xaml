@@ -174,9 +174,6 @@
 
                                 <StackLayout
                                     Orientation="Horizontal">
-                                    <!-- <Image Source="ic_separator" -->
-                                    <!--        VerticalOptions="Start" -->
-                                    <!--        HorizontalOptions="FillAndExpand" /> -->
                                     <Label
                                         HeightRequest="2"
                                         IsVisible="False"
@@ -221,9 +218,6 @@
                                 </StackLayout>
                                 <StackLayout
                                     Orientation="Horizontal">
-                                    <!-- <Image Source="ic_separator" -->
-                                    <!--        VerticalOptions="Start" -->
-                                    <!--        HorizontalOptions="FillAndExpand" /> -->
                                     <Label
                                         HeightRequest="2"
                                         IsVisible="False"
@@ -285,28 +279,12 @@
                                             </Entry.Behaviors>
                                         </Entry>
 
-                                        <!-- <Entry x:Name="EntryDate" -->
-                                        <!--        FontSize="15" -->
-                                        <!--        VerticalOptions="End" -->
-                                        <!--        HorizontalTextAlignment="Center" -->
-                                        <!--        TextColor="#A2A2A2" -->
-                                        <!--        Text="" -->
-                                        <!--        Keyboard="Numeric" -->
-                                        <!--        HorizontalOptions="FillAndExpand"> -->
-                                        <!-- -->
-                                        <!--     <Entry.Behaviors> -->
-                                        <!--         <mask:MaskedBehavior Mask="XX.XX.XXXX" /> -->
-                                        <!--     </Entry.Behaviors> -->
-                                        <!-- </Entry> -->
                                     </StackLayout>
                                 </StackLayout>
                                 <StackLayout x:Name="DOBSeparator"
                                              IsVisible="{Binding ShowBirthDay}"
                                              Margin="0,0,0,0"
                                              Orientation="Horizontal">
-                                    <!-- <Image Source="ic_separator" -->
-                                    <!--        VerticalOptions="Start" -->
-                                    <!--        HorizontalOptions="FillAndExpand" /> -->
                                     <Label
                                         HeightRequest="2"
                                         BackgroundColor="#DEDEDE"
@@ -350,12 +328,6 @@
                                    Padding="12"
                                    HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                    >
-                                <!-- <Button x:Name="BtnLogin" -->
-                                <!--         Text="Далее" -->
-                                <!--         TextColor="White" -->
-                                <!--         FontAttributes="Bold" -->
-                                <!--         Clicked="NextReg" -->
-                                <!--         BackgroundColor="Transparent" /> -->
 
                                 <StackLayout
                                     Orientation="Horizontal"
@@ -382,9 +354,6 @@
                         </StackLayout>
                     </pancakeView:PancakeView>
                     <!-- Второй шаг регистрации -->
-                    <!-- <StackLayout  -->
-                    <!--              BackgroundColor="Transparent" -->
-                    <!--              IsVisible="False"> -->
                         <pancakeView:PancakeView Elevation="{AppThemeBinding Light=0, Dark=20}"
                                                  CornerRadius="50"
                                                  IsVisible="False"
@@ -400,22 +369,12 @@
 
                         <StackLayout
                                 Margin="10, 10, 10, 10">
-                                <!-- <Label Text="{x:Static xamarinJkh:AppResources.PhoneConfirm}" -->
-                                <!--        FontAttributes="Bold" -->
-                                <!--        FontSize="18" -->
-                                <!--        TextColor="Black" -->
-                                <!--        HorizontalOptions="Center" /> -->
                                 <Label x:Name="LabelTitleRequestCode"
                                        Text="Чтобы получить код доступа нажмите «Запросить звонок с кодом». Вам позвонит робот на номер +79237173372 и сообщит код"
                                        FontSize="10"
                                        HorizontalTextAlignment="Center"
                                        TextColor="#A2A2A2"
                                        HorizontalOptions="FillAndExpand" />
-                                <!-- <Label Text="" -->
-                                <!--        FontSize="13" -->
-                                <!--        TextColor="#A2A2A2" -->
-                                <!--         -->
-                                <!--        HorizontalOptions="Center" /> -->
 
                                 <ActivityIndicator x:Name="progress"
                                                    IsRunning="true"
@@ -536,9 +495,6 @@
 
                                     <StackLayout
                                         Orientation="Horizontal">
-                                        <!-- <Image Source="ic_separator" -->
-                                        <!--        VerticalOptions="Start" -->
-                                        <!--        HorizontalOptions="FillAndExpand" /> -->
                                         <Label
                                             HeightRequest="2"
                                             BackgroundColor="#DEDEDE"
@@ -562,12 +518,6 @@
                                        VerticalOptions="EndAndExpand"
                                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                        Padding="12">
-                                    <!-- <Button x:Name="BtnNextTwo" -->
-                                    <!--         Text="Далее" -->
-                                    <!--         TextColor="White" -->
-                                    <!--         FontAttributes="Bold" -->
-                                    <!--         Clicked="NextTwoReg" -->
-                                    <!--         BackgroundColor="Transparent" /> -->
 
                                     <StackLayout
                                         Orientation="Horizontal"
@@ -697,9 +647,6 @@
 
                                 <StackLayout
                                     Orientation="Horizontal">
-                                    <!-- <Image Source="ic_separator" -->
-                                    <!--        VerticalOptions="Start" -->
-                                    <!--        HorizontalOptions="FillAndExpand" /> -->
                                     <Label
                                         HeightRequest="2"
                                         IsVisible="False"
@@ -754,9 +701,6 @@
                                 <StackLayout
                                     x:Name="LayoutConfirmLines"
                                     Orientation="Horizontal">
-                                    <!-- <Image Source="ic_separator" -->
-                                    <!--        VerticalOptions="Start" -->
-                                    <!--        HorizontalOptions="FillAndExpand" /> -->
                                     <Label
                                         HeightRequest="2"
                                         IsVisible="False"
@@ -781,12 +725,6 @@
                                    BackgroundColor="{x:DynamicResource MainColor}"
                                    Margin="5, 10, 5, 10"
                                    Padding="0">
-                                <!-- <Button x:Name="BtnRegFinalStep" -->
-                                <!--         Text="Зарегистрироваться" -->
-                                <!--         TextColor="White" -->
-                                <!--         FontAttributes="Bold" -->
-                                <!--         Clicked="ButtonReg" -->
-                                <!--         BackgroundColor="Transparent" /> -->
 
                                 <StackLayout
                                     x:Name="SaveStackLayout"

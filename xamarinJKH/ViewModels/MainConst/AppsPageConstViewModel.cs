@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using xamarinJKH.Server.RequestModel;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using xamarinJKH.Utils;
-using System.Linq;
 
 namespace xamarinJKH.ViewModels.MainConst
 {
@@ -26,7 +23,6 @@ namespace xamarinJKH.ViewModels.MainConst
         public List<RequestInfo> AllRequests { get; set; }
         public Command LoadRequests { get; set; }
         public Command UpdateRequests { get; set; }
-        //public Color hex { get; set; } = (Color)Application.Current.Resources["MainColor"];
         bool _showClosed;
         public bool ShowClosed
         {

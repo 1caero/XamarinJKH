@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using FFImageLoading.Svg.Forms;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using xamarinJKH.Utils;
 
@@ -83,7 +84,7 @@ namespace xamarinJKH.Pays
             if (BindingContext != null)
             {
                 var fs = 15;
-                if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 700)
+                if (DeviceDisplay.MainDisplayInfo.Width < 700)
                     fs = 12;
 
                 FormattedString formattedIdent = new FormattedString();
@@ -91,7 +92,6 @@ namespace xamarinJKH.Pays
 
                 DateTime dtView;
                 string spanTextField;
-                //var dateToView1 = DateTime.ParseExact(DateIdent.Replace("г.", " ").Trim(), "MMMM yyyy", new CultureInfo("ru-RU"));
                 var dateCorrect = DateTime.TryParseExact(DateIdent.Replace("г.", " ").Trim(), "MMMM yyyy", new CultureInfo("ru-RU"), DateTimeStyles.None , out dtView);
                 if (dateCorrect)
                 {
@@ -99,13 +99,9 @@ namespace xamarinJKH.Pays
                 }
                 else
                     spanTextField = DateIdent;
-                //.ToString("MMMM yyyy");
-                //+ (CultureInfo.CurrentCulture.Name.Contains("en") ? string.Empty : " г.").ToString();
-
                 formattedIdent.Spans.Add(new Span
                 {
-                    //Text = DateTime.ParseExact(DateIdent.Replace("г."," ").Trim(), "MMMM yyyy", new CultureInfo("ru-RU")).ToString("MMMM yyyy") + 
-                    //        (CultureInfo.CurrentCulture.Name.Contains("en") ? string.Empty : " г.").ToString(),
+                   
                     Text=spanTextField,
                     TextColor = Color.Black,
                     FontSize = fs

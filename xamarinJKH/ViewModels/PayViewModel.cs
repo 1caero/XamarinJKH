@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using Xamarin.Forms;
 using xamarinJKH.InterfacesIntegration;
-using AiForms.Dialogs.Abstractions;
 using System.Net;
 using Microsoft.AppCenter.Analytics;
 
@@ -50,10 +47,6 @@ namespace xamarinJKH.ViewModels
                         {
                             Analytics.TrackEvent("Сохраняем файл " + filename);
                             await DependencyService.Get<IFileWorker>().SaveTextAsync(filename, stream);
-                            //await Launcher.OpenAsync(new OpenFileRequest
-                            //{
-                            //    File = new ReadOnlyFile(DependencyService.Get<IFileWorker>().GetFilePath(fileName))
-                            //});
                         }
                         else
                         {

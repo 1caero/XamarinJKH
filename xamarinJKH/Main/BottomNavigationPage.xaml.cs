@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using xamarinJKH.Utils;
-using xamarinJKH.Server;
-using System.Runtime.CompilerServices;
-using Akavache;
 using Microsoft.AppCenter.Analytics;
 using Xamarin.Essentials;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+using xamarinJKH.InterfacesIntegration;
+using xamarinJKH.MainConst;
+using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
-using xamarinJKH.Additional;
-using xamarinJKH.Apps;
+using xamarinJKH.Utils;
 
 namespace xamarinJKH.Main
 {
@@ -68,21 +65,20 @@ namespace xamarinJKH.Main
             {
                 case OSAppTheme.Light:
                     if(Device.RuntimePlatform == Device.Android) UnselectedTabColor = unselect;
-                    if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
+                    if (DeviceInfo.Platform == DevicePlatform.iOS)
                     {
                         EventsNavPage.BarTextColor = Color.Black;
                         PayPage.BarTextColor = Color.Black;
                         CounterPage.BarTextColor = Color.Black;
                         AppPage.BarTextColor = Color.Black;
                         ShopNavPage.BarTextColor = Color.Black;
-                        //ProfPage.BarTextColor = Color.Black;
                         ShopNavPage2.BarTextColor = Color.Black;
                     }
 
                     break;
                 case OSAppTheme.Dark:
                     if(Device.RuntimePlatform == Device.Android) UnselectedTabColor = Color.Gray;
-                    if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
+                    if (DeviceInfo.Platform == DevicePlatform.iOS)
                     {
                         EventsNavPage.BarTextColor = Color.White;
                         PayPage.BarTextColor = Color.White;
@@ -95,7 +91,7 @@ namespace xamarinJKH.Main
 
                     break;
                 case OSAppTheme.Unspecified:
-                    if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
+                    if (DeviceInfo.Platform == DevicePlatform.iOS)
                     {
                         switch (Settings.MobileSettings.appTheme)
                         {
@@ -119,14 +115,6 @@ namespace xamarinJKH.Main
                                 ShopNavPage2.BarTextColor = Color.White;
                                 break;
                         }
-                        
-                        //EventsNavPage.BarTextColor = Color.Black;
-                        //PayPage.BarTextColor = Color.Black;
-                        //CounterPage.BarTextColor = Color.Black;
-                        //AppPage.BarTextColor = Color.Black;
-                        //ShopNavPage.BarTextColor = Color.Black;
-                        //ProfPage.BarTextColor = Color.Black;
-                        //ShopNavPage2.BarTextColor = Color.Black;
                     }
 
                     break;
@@ -158,43 +146,38 @@ namespace xamarinJKH.Main
             {
                 OSAppTheme currentTheme = Application.Current.RequestedTheme;
                 //только темная тема в ios
-                //if (Xamarin.Essentials.DeviceInfo.Platform == DevicePlatform.iOS)
-                //    currentTheme = OSAppTheme.Dark;
-
 
                 Color unselect = hex.AddLuminosity(0.3);
                 switch (currentTheme)
                 {
                     case OSAppTheme.Light:
                         UnselectedTabColor = unselect;
-                        if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
+                        if (DeviceInfo.Platform == DevicePlatform.iOS)
                         {
                             EventsNavPage.BarTextColor = Color.Black;
                             PayPage.BarTextColor = Color.Black;
                             CounterPage.BarTextColor = Color.Black;
                             AppPage.BarTextColor = Color.Black;
                             ShopNavPage.BarTextColor = Color.Black;
-                            //ProfPage.BarTextColor = Color.Black;
                             ShopNavPage2.BarTextColor = Color.Black;
                         }
 
                         break;
                     case OSAppTheme.Dark:
                         UnselectedTabColor = Color.Gray;
-                        if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
+                        if (DeviceInfo.Platform == DevicePlatform.iOS)
                         {
                             EventsNavPage.BarTextColor = Color.White;
                             PayPage.BarTextColor = Color.White;
                             CounterPage.BarTextColor = Color.White;
                             AppPage.BarTextColor = Color.White;
                             ShopNavPage.BarTextColor = Color.White;
-                            //ProfPage.BarTextColor = Color.White;
                             ShopNavPage2.BarTextColor = Color.White;
                         }
 
                         break;
                     case OSAppTheme.Unspecified:
-                        if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
+                        if (DeviceInfo.Platform == DevicePlatform.iOS)
                         {
                             EventsNavPage.BarTextColor = Color.Black;
                             PayPage.BarTextColor = Color.Black;
@@ -322,16 +305,16 @@ namespace xamarinJKH.Main
                 if (!pass.Equals("") && !login.Equals(""))
                 {
                     if (!App.MessageNoInternet)
-                    if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
-                    {
-                        Device.BeginInvokeOnMainThread(async () =>
+                        if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                         {
-                            App.MessageNoInternet = true;
-                            await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK");
-                            App.MessageNoInternet = false;
-                        });
-                        return;
-                    }
+                            Device.BeginInvokeOnMainThread(async () =>
+                            {
+                                App.MessageNoInternet = true;
+                                await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK");
+                                App.MessageNoInternet = false;
+                            });
+                            return;
+                        }
 
                     LoginResult loginResult = await server.Login(login, pass);
                     if (loginResult.Error == null)
@@ -353,28 +336,6 @@ namespace xamarinJKH.Main
                     
                     Children.Remove(ShopNavPage2);
                 }
-                //else
-                //{
-                //    Children.Remove(ProfPage);
-                //}
-                
-                
-                //// if (AppInfo.PackageName != "rom.best.UkComfort" && AppInfo.PackageName != "sys_rom.ru.comfort_uk_app")
-                //// {
-                //// if (RestClientMP.SERVER_ADDR.Contains("komfortnew"))
-                //// {
-                //Children.Remove(ShopNavPage);
-                //// }
-                //// else
-                //// {
-                //Children.Remove(ShopNavPage2);
-                //// }
-                //// }
-                //// else
-                //// {
-                ////     Children.Remove(ShopNavPage);
-                ////     Children.Remove(ProfPage);
-                //// }
 
                 foreach (var each in Settings.MobileSettings.menu)
                 {
@@ -453,7 +414,7 @@ namespace xamarinJKH.Main
 
             if (CurrentPage != null)
             {
-                if (CurrentPage is AppsPage || CurrentPage is xamarinJKH.MainConst.AppsConstPage ||
+                if (CurrentPage is AppsPage || CurrentPage is AppsConstPage ||
                     CurrentPage.Title == AppResources.App_NavBar)
                     MessagingCenter.Send<Object>(this, "AutoUpdate");
 
@@ -465,7 +426,7 @@ namespace xamarinJKH.Main
 
         async void RegisterNewDevice()
         {
-            App.token = DependencyService.Get<xamarinJKH.InterfacesIntegration.IFirebaseTokenObtainer>().GetToken();
+            App.token = DependencyService.Get<IFirebaseTokenObtainer>().GetToken();
             var response = await (new RestClientMP()).RegisterDevice();
         }
     }

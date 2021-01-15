@@ -30,31 +30,8 @@
                         <StackLayout
                             HorizontalOptions="EndAndExpand"
                             Orientation="Horizontal">
-                            <!--BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"-->
                             <xamarinJkh:ButtonSupport x:Name="LabelTech"></xamarinJkh:ButtonSupport>
                             <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
-
-                            <!--<forms:SvgCachedImage x:Name="IconViewTech"
-                                                  Source="resource://xamarinJKH.Resources.ic_tech.svg"
-                                                  HeightRequest="20"
-                                                  ReplaceStringMap="{Binding forsvg, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
-                                                  Margin="0, 0,0,0"
-                                                  HorizontalOptions="Start"
-                                                  VerticalOptions="Center" />
-                            <Label x:Name="LabelTech"
-                                   Text="{x:Static xamarinJkh:AppResources.Support}"
-                                   FontSize="12"
-                                   TextDecorations="Underline"
-                                   TextColor="White"
-                                   Margin="0, 0, 0, 0"
-                                   VerticalOptions="Center" />
-                            <forms:SvgCachedImage x:Name="IconViewProfile" Margin="15,0,5,0"
-                                                Source="resource://xamarinJKH.Resources.ic_profile_top.svg"
-                                                HeightRequest="20"
-                                                ReplaceStringMap="{Binding forsvg, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"                                                
-                                                BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="Center"/>-->
                         </StackLayout>
                     </StackLayout>
                     <StackLayout
@@ -62,10 +39,6 @@
                         Orientation="Horizontal"
                         Margin="25, 0, 0, 0"
                         HorizontalOptions="Start">
-                        <!--<xamarinJkh:IconView Source="ic_arrow_back"
-                               HeightRequest="15"
-                               Foreground="{AppThemeBinding Light=Black, Dark=White}"
-                               HorizontalOptions="Center" />-->
                         <forms:SvgCachedImage
                             Source="resource://xamarinJKH.Resources.ic_arrow_back.svg"
                             HeightRequest="25"
@@ -136,42 +109,6 @@
                 </StackLayout>
             </Grid>
 
-            <!--<StackLayout x:Name="ossContent" VerticalOptions="FillAndExpand" Margin="20,10,20,0">
-                <Frame x:Name="OssTypeFrame" HeightRequest="80" MinimumHeightRequest="60" WidthRequest="900" BackgroundColor="Transparent" CornerRadius="40"  
-                       HorizontalOptions="FillAndExpand" VerticalOptions="Start" Margin="0,-40,0,0">                    
-                </Frame>
-                <ScrollView x:Name="OSSList" Margin="0,-80,0,0">
-                    <StackLayout x:Name="OSSListContent" HorizontalOptions="FillAndExpand">
-                    </StackLayout>
-                </ScrollView>                
-            </StackLayout>
-            <yummy:PancakeView  Padding="0" CornerRadius="50,50,0,0"  BackgroundColor="#414141"  >
-                <yummy:PancakeView.Shadow>
-                    <yummy:DropShadow Opacity="0.7" Color="Gray" />
-                </yummy:PancakeView.Shadow>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="20,0,20,0">
-                    <StackLayout HorizontalOptions="FillAndExpand" Margin="0,20" Orientation="Vertical">
-                        <Label Text="Статус собрания:"
-                               TextColor="White"
-                               FontSize="12"
-                               FontAttributes="Bold">
-                        </Label>
-                        <StackLayout Orientation="Horizontal" x:Name="statusLayout">
-                        </StackLayout>
-                    </StackLayout>
-                    <Frame CornerRadius="10"                                                              
-                               x:Name="FrameBtn"
-                               Padding="0"
-                               Margin="0,20">
-                        <Button x:Name="Btn" 
-                                HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand"                                    
-                            TextColor="White"
-                            FontAttributes="Bold"
-                            Text="Принять участие" Clicked="Btn_Clicked"></Button>
-                    </Frame>
-                </StackLayout>
-            </yummy:PancakeView>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

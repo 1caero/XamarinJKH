@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.Utils;
 using xamarinJKH.InterfacesIntegration;
 using Plugin.Messaging;
-using Rg.Plugins.Popup.Services;
-using xamarinJKH.DialogViews;
 using xamarinJKH.Tech;
 
 namespace xamarinJKH
@@ -58,7 +52,6 @@ namespace xamarinJKH
                 case Device.iOS:
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
-                    //BackgroundColor = Color.White;                    
                     break;
                 default:
                     break;

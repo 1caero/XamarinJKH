@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using AiForms.Dialogs.Abstractions;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
-using AiForms.Dialogs.Abstractions;
-using AiForms.Dialogs;
-using Xamarin.Essentials;
+using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
-using xamarinJKH;
-using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Utils;
+using xamarinJKH.ViewModels;
 
 namespace xamarinJKH.DialogViews
 {
@@ -38,7 +31,7 @@ namespace xamarinJKH.DialogViews
         }
     }
 
-    public class AddAccountDialogViewModel : xamarinJKH.ViewModels.BaseViewModel
+    public class AddAccountDialogViewModel : BaseViewModel
     {
         private AddAccountDialogView accountDialogView;
         public AddAccountDialogViewModel(AddAccountDialogView accountDialogView)
@@ -48,7 +41,7 @@ namespace xamarinJKH.DialogViews
 
         public Color ButtonColor
         {
-            get => Color.FromHex(xamarinJKH.Utils.Settings.MobileSettings.color);
+            get => Color.FromHex(Settings.MobileSettings.color);
         }
         bool _progress;
         public bool Progress 
@@ -71,7 +64,7 @@ namespace xamarinJKH.DialogViews
             }
         }
 
-        public Server.RestClientMP _server => new Server.RestClientMP();
+        public RestClientMP _server => new RestClientMP();
         readonly INavigation Navigation;
 
         public Command AddIdent
@@ -149,7 +142,7 @@ namespace xamarinJKH.DialogViews
                     string pass = Preferences.Get("pass", "");
                     if (!pass.Equals("") && !login.Equals(""))
                     {
-                        if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+                        if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                         {
                             Device.BeginInvokeOnMainThread(async () => await Application.Current.MainPage.DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                             return;

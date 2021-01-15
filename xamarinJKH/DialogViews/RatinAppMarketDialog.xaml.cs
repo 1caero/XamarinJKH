@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
+using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.Main;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
 
 namespace xamarinJKH.DialogViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RatingAppMarketDialog  : Rg.Plugins.Popup.Pages.PopupPage
+    public partial class RatingAppMarketDialog  : PopupPage
     {
         public RatingAppMarketDialog()
         {
@@ -34,8 +30,8 @@ namespace xamarinJKH.DialogViews
             {
 
                 string uri = string.Empty;
-                string app_name = Xamarin.Essentials.AppInfo.PackageName;
-                string name = Xamarin.Essentials.AppInfo.Name.ToLower().Trim().Replace(" ", "-");
+                string app_name = AppInfo.PackageName;
+                string name = AppInfo.Name.ToLower().Trim().Replace(" ", "-");
                 if (Device.RuntimePlatform == "Android")
                 {
                     // uri = $"market://details?{app_name}";
@@ -49,7 +45,7 @@ namespace xamarinJKH.DialogViews
 
                 if (!string.IsNullOrEmpty(uri))
                 {
-                    await Xamarin.Essentials.Launcher.OpenAsync(uri);
+                    await Launcher.OpenAsync(uri);
                 }
                 await PopupNavigation.Instance.PopAsync();
             }

@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using AiForms.Dialogs.Abstractions;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
-using xamarinJKH.ViewModels;
-using AiForms.Dialogs.Abstractions;
 using xamarinJKH.Utils;
-using xamarinJKH.InterfacesIntegration;
-using AiForms.Dialogs;
+using xamarinJKH.ViewModels;
 
 namespace xamarinJKH.DialogViews
 {
@@ -33,8 +26,8 @@ namespace xamarinJKH.DialogViews
         async void OpenMarket(object sender, EventArgs args)
         {
             string uri = string.Empty;
-            string app_name = Xamarin.Essentials.AppInfo.PackageName;
-            string name = Xamarin.Essentials.AppInfo.Name.ToLower().Trim().Replace(" ","-");
+            string app_name = AppInfo.PackageName;
+            string name = AppInfo.Name.ToLower().Trim().Replace(" ","-");
             if (Device.RuntimePlatform == "Android")
             {
                 // uri = $"market://details?{app_name}";
@@ -48,7 +41,7 @@ namespace xamarinJKH.DialogViews
 
             if (!string.IsNullOrEmpty(uri))
             {
-                await Xamarin.Essentials.Launcher.OpenAsync(uri);
+                await Launcher.OpenAsync(uri);
             }
         }
     }

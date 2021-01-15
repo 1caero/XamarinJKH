@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AiForms.Dialogs;
-using AiForms.Dialogs.Abstractions;
-using RestSharp;
+using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.Counters;
 using xamarinJKH.Main;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
@@ -19,7 +14,7 @@ using xamarinJKH.Utils;
 namespace xamarinJKH.DialogViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MeterValuesDialog : Rg.Plugins.Popup.Pages.PopupPage
+    public partial class MeterValuesDialog : PopupPage
     {
         private MeterInfo mInfo;
         private RestClientMP server = new RestClientMP();
@@ -73,7 +68,6 @@ namespace xamarinJKH.DialogViews
                                     "OK");
                             }
 
-                            // });
                         });
                     }
                 };

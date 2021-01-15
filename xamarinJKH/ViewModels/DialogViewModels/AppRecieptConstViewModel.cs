@@ -55,10 +55,10 @@ namespace xamarinJKH.ViewModels.DialogViewModels
             ReceiptItems = new ObservableCollection<RequestsReceiptItem>();
             ID = id;
             if (items != null)
-            foreach (var item in items)
-            {
-                ReceiptItems.Add(item);
-            }
+                foreach (var item in items)
+                {
+                    ReceiptItems.Add(item);
+                }
 
             Notifier = dialog;
 
