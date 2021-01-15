@@ -641,7 +641,7 @@ namespace xamarinJKH.Tech
                     Opacity = 0.8,
                     DefaultMessage = AppResources.Loading,
                 };
-
+                await Task.Delay(TimeSpan.FromMilliseconds(300));
                 Device.BeginInvokeOnMainThread(async () =>
                               await Loading.Instance.StartAsync(async progress =>
                               {
