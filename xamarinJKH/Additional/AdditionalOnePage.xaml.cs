@@ -61,7 +61,11 @@ namespace xamarinJKH.Additional
 
 
             var techSend = new TapGestureRecognizer();
-            techSend.Tapped += async (s, e) => {     await Navigation.PushAsync(new AppPage()); };
+            techSend.Tapped += async (s, e) =>
+            {
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
+                    await Navigation.PushAsync(new AppPage());
+            };
             LabelTech.GestureRecognizers.Add(techSend);
             var backClick = new TapGestureRecognizer();
             backClick.Tapped += async (s, e) =>

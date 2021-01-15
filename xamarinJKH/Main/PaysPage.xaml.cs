@@ -123,7 +123,8 @@ namespace xamarinJKH.Main
             var techSend = new TapGestureRecognizer();
             techSend.Tapped += async (s, e) =>
             {
-                await Navigation.PushAsync(new AppPage());
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
+                    await Navigation.PushAsync(new AppPage());
             };
             LabelTech.GestureRecognizers.Add(techSend);
             var call = new TapGestureRecognizer();

@@ -239,7 +239,11 @@ namespace xamarinJKH.Main
             Analytics.TrackEvent("Заявки жителя-добавили обработку тапа Профиля");
 
             var techSend = new TapGestureRecognizer();
-            techSend.Tapped += async (s, e) => { await Navigation.PushAsync(new AppPage()); };
+            techSend.Tapped += async (s, e) => 
+            { 
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
+                    await Navigation.PushAsync(new AppPage()); 
+            };
             LabelTech.GestureRecognizers.Add(techSend);
             Analytics.TrackEvent("Заявки жителя-добавили обработку тапа Техподдержки");
 

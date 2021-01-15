@@ -55,9 +55,8 @@ namespace xamarinJKH.Main
                     int a = 0;
                     int b = 10 / a;
                 }
-
-
-                await Navigation.PushAsync(new AppPage());
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
+                    await Navigation.PushAsync(new AppPage());
             };
             LabelTech.GestureRecognizers.Add(techSend);
 
