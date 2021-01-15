@@ -20,8 +20,6 @@
 	</array>
 	<key>MinimumOSVersion</key>
 	<string>10.0</string>
-	<key>CFBundleIdentifier</key>
-	<string>rom.best.tsnsputnik</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
@@ -50,8 +48,8 @@
 	<string>Вы можете предоставить доступ к микрофону чтобы записать видео и приложить к заявке</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Предоставьте доступ к геопозиции</string>
-  <key>NSLocationAlwaysUsageDescription</key>
-  <string>Предоставьте доступ к геопозиции</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Предоставьте доступ к геопозиции</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Предоставьте доступ к календарю и дате</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
@@ -71,8 +69,6 @@
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 	</dict>
-	<key>CFBundleDisplayName</key>
-	<string>ТСН «Спутник» Ростов-на-Дону</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>whatsapp</string>
@@ -80,5 +76,9 @@
 		<string>viber</string>
 		<string>mailto</string>
 	</array>
+	<key>CFBundleDisplayName</key>
+	<string>УК &quot;ЖилЦентр&quot;</string>
+	<key>CFBundleIdentifier</key>
+	<string>rom.best.uk.jilcentr</string>
 </dict>
 </plist>
