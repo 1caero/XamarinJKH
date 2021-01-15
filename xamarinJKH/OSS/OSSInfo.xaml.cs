@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
-using Rg.Plugins.Popup.Extensions;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.Server;
@@ -36,11 +33,9 @@ namespace xamarinJKH
             if (Convert.ToDateTime(oss.DateStart, new CultureInfo("ru-RU")) < DateTime.Now && Convert.ToDateTime(oss.DateEnd, new CultureInfo("ru-RU")) > DateTime.Now)
             {
                 //статус - идет голосование
-                //if (!oss.Questions.Any(_ => string.IsNullOrWhiteSpace(_.Answer)))
-                //{
+              
                     // Ваш голос учтен - страница личных результатов голосования
                     statusInt = 2;//желтый(стоит сейчас) или какой еще цвет?             
-                //}                
             }
 
             return statusInt;
@@ -77,7 +72,7 @@ namespace xamarinJKH
                     IPhoneCallTask phoneDialer;
                     phoneDialer = CrossMessaging.Current.PhoneDialer;
                     if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone)) 
-                        phoneDialer.MakePhoneCall(System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+                        phoneDialer.MakePhoneCall(Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
                 }
 
             

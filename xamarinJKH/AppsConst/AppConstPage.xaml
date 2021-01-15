@@ -2,9 +2,7 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:apps="clr-namespace:xamarinJKH.AppsConst;assembly=xamarinJKH"
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
-             xmlns:dialogViews="clr-namespace:xamarinJKH.DialogViews;assembly=xamarinJKH"
              xmlns:customRenderers="clr-namespace:xamarinJKH.CustomRenderers;assembly=xamarinJKH"
              xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:converters="clr-namespace:xamarinJKH.Converters"
@@ -25,53 +23,7 @@
                    Aspect="{OnPlatform Android=Fill, iOS=AspectFill}"
                    HorizontalOptions="FillAndExpand" />
             <StackLayout Margin="0,20,0,0" x:Name="mainStack">
-            <!-- <RelativeLayout -->
-            <!--     x:Name="ScrollViewContainer" -->
-            <!--     Margin="0,0,0,-170" -->
-            <!--     VerticalOptions="Start" -->
-            <!--     HorizontalOptions="FillAndExpand"> -->
-            <!--     <Image x:Name="ImageTop" Margin="0, -26, 0 ,0" -->
-            <!--            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, -->
-            <!--                  Property=Width, -->
-            <!--                  Factor=0, -->
-            <!--                  Constant=0}" -->
-            <!--            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, -->
-            <!--                  Property=Height, -->
-            <!--                  Factor=0, -->
-            <!--                  Constant=0}" -->
-            <!--            Source="{AppThemeBinding Light=ic_app_top_light, Dark=ic_app_top_in}" -->
-            <!--            VerticalOptions="Fill" -->
-            <!--            HorizontalOptions="Fill" /> -->
-            <!--     ~1~ <StackLayout x:Name="StackLayout" @1@ -->
-            <!--     ~1~              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, @1@ -->
-            <!--     ~1~              Property=Width, @1@ -->
-            <!--     ~1~              Factor=0, @1@ -->
-            <!--     ~1~              Constant=15}" @1@ -->
-            <!--     ~1~              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, @1@ -->
-            <!--     ~1~              Property=Height, @1@ -->
-            <!--     ~1~              Factor=0, @1@ -->
-            <!--     ~1~              Constant=0}" @1@ -->
-            <!--     ~1~              Orientation="Vertical"> @1@ -->
-            <!--     ~1~     <StackLayout @1@ -->
-            <!--     ~1~         x:Name="BackStackLayout" @1@ -->
-            <!--     ~1~         Orientation="Horizontal" @1@ -->
-            <!--     ~1~         Margin="0, 40, 0, 0" @1@ -->
-            <!--     ~1~         HorizontalOptions="Start"> @1@ -->
-            <!--     ~1~         <Image Source="ic_arrow_back" @1@ -->
-            <!--     ~1~                HeightRequest="15" @1@ -->
-            <!--     ~1~                HorizontalOptions="Center" /> @1@ -->
-            <!--     ~1~         <Label @1@ -->
-            <!--     ~1~             Text="Назад " @1@ -->
-            <!--     ~1~             FontSize="15" @1@ -->
-            <!--     ~1~             TextColor="White" @1@ -->
-            <!--     ~1~             HorizontalOptions="Start" /> @1@ -->
-            <!--     ~1~     </StackLayout> @1@ -->
-            <!--     ~1~     <Label x:Name="LabelNumber" @1@ -->
-            <!--     ~1~            FontSize="20" @1@ -->
-            <!--     ~1~            Margin="10, 15 ,0,0" @1@ -->
-            <!--     ~1~            TextColor="White" /> @1@ -->
-            <!--     ~1~ </StackLayout> @1@ -->
-            <!-- </RelativeLayout> -->
+            
             <StackLayout HorizontalOptions="Fill"
                          Orientation="Horizontal">
                 <StackLayout
@@ -164,17 +116,6 @@
                                        FontAttributes="Bold"
                                        FontSize="10" />
                                             </StackLayout>
-                                            <!-- <StackLayout -->
-                                            <!--     Margin="10,15,0,0" -->
-                                            <!--     VerticalOptions="Center" -->
-                                            <!--     HorizontalOptions="CenterAndExpand"> -->
-                                            <!--     <Image Source="ic_files_app1" -->
-                                            <!--            HeightRequest="25" /> -->
-                                            <!--     <Label Text="Файлы" -->
-                                            <!--            TextColor="White" -->
-                                            <!--            FontAttributes="Bold" -->
-                                            <!--            FontSize="10" /> -->
-                                            <!-- </StackLayout> -->
                                             <StackLayout
                                 Margin="0,5,0,0"
                                 x:Name="StackLayoutAccept"
@@ -314,32 +255,7 @@
                         <StackLayout x:Name="baseForApp" VerticalOptions="FillAndExpand"></StackLayout>
                     </ScrollView>
                 </RefreshView>
-                
-                <!--<ListView x:Name="additionalList"
-                          HasUnevenRows="True"
-                          Margin="0, 5, 0, 0"
-                          SeparatorVisibility="None"
-                          VerticalScrollBarVisibility="Never"
-                          IsPullToRefreshEnabled="True"
-                          RefreshCommand="{Binding RefreshCommand}"
-                          IsRefreshing="{Binding IsRefreshing}"
-                          SelectionMode="None"
-                          ItemTapped="OnItemTapped"                          
-                          ItemsSource="{Binding messages}">
-                
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <apps:MessageConstCell
-                                Name="{Binding AuthorName}"
-                                Time="{Binding Status}"
-                                DateApp="{Binding Added}"
-                                TextApp="{Binding Text}"
-                                FileID="{Binding FileID}"
-                                IsSelf="{Binding IsSelf}" />
-                        </DataTemplate>
-
-                    </ListView.ItemTemplate>
-                </ListView>-->
+               
             </customRenderers:MaterialFrame>
             <Frame CornerRadius="30"
                    Margin="15, -30, 15, 5"

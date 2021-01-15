@@ -9,8 +9,6 @@
              x:Class="xamarinJKH.Tech.AppPage">
     <ContentPage.Content>
          <Grid x:Name="ScrollViewContainer" VerticalOptions="FillAndExpand" >
-            <!--<StackLayout HorizontalOptions="FillAndExpand" x:Name="Pancake22" IsVisible="{OnPlatform iOS=true, Android=false}" 
-                         BackgroundColor="{AppThemeBinding Light=White, Dark=Black}"></StackLayout>-->
             <Image x:Name="ImageFon"
                    Source="{AppThemeBinding Light=ic_app_top_light, Dark=ic_app_top_in}"
                    VerticalOptions="Start"
@@ -51,38 +49,11 @@
                                            Margin="15, 0, 15, -30"
                                            BackgroundColor="White"
                                            Padding="5,0,5,70" VerticalOptions="FillAndExpand">
-                <!-- <RefreshView x:Name="messageRefreshView" -->
-                <!--              IsRefreshing="{Binding IsRefreshing, Mode=OneWay}" VerticalOptions="FillAndExpand"> -->
+             
                     <ScrollView x:Name="scrollFroAppMessages" VerticalScrollBarVisibility="Never"
                                 VerticalOptions="FillAndExpand">
                         <StackLayout x:Name="baseForApp" VerticalOptions="FillAndExpand" />
                     </ScrollView>
-                <!-- </RefreshView> -->
-
-                <!--<ListView x:Name="additionalList"
-                          HasUnevenRows="True"
-                          Margin="0, 0, 0, 0"
-                          SeparatorVisibility="None"
-                          VerticalScrollBarVisibility="Never"                          
-                          SelectionMode="None"
-                          ItemTapped="OnItemTapped"
-                          BackgroundColor="Transparent"
-                          CachingStrategy="RecycleElement"
-                          ItemsSource="{Binding messages}">                    
-                    
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="datatypes:RequestMessage">                            
-                            <apps:MessageCell
-                                Name="{Binding AuthorName}"
-                                
-                                DateApp="{Binding Added}"
-                                TextApp="{Binding Text}"
-                                FileID="{Binding FileID}"
-                                IsSelf="{Binding IsSelf}" />
-                        </DataTemplate>
-
-                    </ListView.ItemTemplate>
-                </ListView>-->
             </customRenderers:MaterialFrame>
             <Frame CornerRadius="30"
                    Margin="15, -30, 15, 5"

@@ -2,13 +2,8 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:xamarinJKH"
-             xmlns:mask="clr-namespace:xamarinJKH.Mask;assembly=xamarinJKH"
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
              xmlns:customRenderers="clr-namespace:xamarinJKH.CustomRenderers;assembly=xamarinJKH"
-             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.MainConst.ProfileConstPage">
@@ -39,37 +34,8 @@
                             BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"
                             Orientation="Horizontal">
                             <xamarinJkh:ButtonSupport x:Name="LabelTech"></xamarinJkh:ButtonSupport>
-
-                            <!--BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"-->
-                            <!--<svg:SvgCachedImage x:Name="IconViewTech"
-                                                Source="resource://xamarinJKH.Resources.ic_tech.svg"
-                                                HeightRequest="20"
-                                                ReplaceStringMap="{Binding svg2, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
-                                                Margin="0, 0,0,0"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="Center" />
-                            <Label x:Name="LabelTech"
-                                   Text="{x:Static xamarinJkh:AppResources.Support}"
-                                   FontSize="12"
-                                   TextDecorations="Underline"
-                                   TextColor="White"
-                                   Margin="0, 0, 0, 0"
-                                   VerticalOptions="Center" />-->
-
                         </StackLayout>
                     </StackLayout>
-                    <!--<StackLayout
-                        x:Name="BackStackLayout"
-                        Orientation="Horizontal"
-                        Margin="25, 0, 0, 0"
-                        HorizontalOptions="Start">
-                        <Label
-                            Text="{x:Static xamarinJkh:AppResources.Profile_NavBar}"
-                            FontSize="23"
-                            TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                            FontAttributes="Bold"
-                            HorizontalOptions="Start" />
-                    </StackLayout>-->
                     <StackLayout
                         x:Name="BackStackLayout"
                         Orientation="Horizontal"
@@ -155,9 +121,6 @@
 
                                         <StackLayout
                                             Orientation="Horizontal">
-                                            <!-- <Image Source="ic_separator" -->
-                                            <!--        VerticalOptions="Start" -->
-                                            <!--        HorizontalOptions="FillAndExpand" /> -->
                                             <Label
                                                 HeightRequest="2"
                                                 IsVisible="False"
@@ -204,9 +167,6 @@
                                         </StackLayout>
                                         <StackLayout
                                             Orientation="Horizontal">
-                                            <!-- <Image Source="ic_separator" -->
-                                            <!--        VerticalOptions="Start" -->
-                                            <!--        HorizontalOptions="FillAndExpand" /> -->
                                             <Label
                                                 HeightRequest="2"
                                                 BackgroundColor="#DEDEDE"

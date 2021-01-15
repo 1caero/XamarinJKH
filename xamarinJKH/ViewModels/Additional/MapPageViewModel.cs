@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Xamarin.Forms;
-using xamarinJKH.Server.RequestModel;
-using Xamarin.Forms.Maps;
-
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
-
 using Xamarin.Essentials;
+using Xamarin.Forms;
+using Xamarin.Forms.Maps;
+using xamarinJKH.Server.RequestModel;
 
 namespace xamarinJKH.ViewModels.Additional
 {
@@ -39,7 +35,7 @@ namespace xamarinJKH.ViewModels.Additional
                     try
                     {
                         if (service.Position.Latitude != 0 && service.Position.Longitude != 0)
-                        Pins.Add(service);
+                            Pins.Add(service);
                     }
                     catch { }
                 }
@@ -60,7 +56,7 @@ namespace xamarinJKH.ViewModels.Additional
                             {
                                 var result = await Application.Current.MainPage.DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoPermissions, "OK", AppResources.Cancel);
                                 if (result)
-                                    Plugin.Permissions.CrossPermissions.Current.OpenAppSettings();
+                                    CrossPermissions.Current.OpenAppSettings();
 
                             });
                             return;

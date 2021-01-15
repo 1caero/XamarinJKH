@@ -3,19 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
-using Plugin.FilePicker.Abstractions;
 using Rg.Plugins.Popup.Services;
 using Syncfusion.SfAutoComplete.XForms;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
-using xamarinJKH.Main;
 using xamarinJKH.MainConst;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
@@ -44,19 +42,11 @@ namespace xamarinJKH.PushNotification
             {
                 case Device.iOS:
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
-                    //if (DeviceDisplay.MainDisplayInfo.Width < 700)
-                    //    mainStack.Padding = new Thickness(0, statusBarHeight * 2, 0, 0);
-                    //else
+                
                         mainStack.Padding = new Thickness(0, statusBarHeight, 0, 0);
 
                     break;
                 case Device.Android:
-                    double or = Math.Round(((double)App.ScreenWidth / (double)App.ScreenHeight), 2);
-                    if (Math.Abs(or - 0.5) < 0.02)
-                    {
-                        //ScrollViewContainer.Margin = new Thickness(0, 0, 0, -150);
-                    }
-
                     break;
                 default:
                     break;
@@ -74,17 +64,6 @@ namespace xamarinJKH.PushNotification
             IconViewProfile.GestureRecognizers.Add(profile);
 
             UkName.Text = Settings.MobileSettings.main_name;
-            //var backClick = new TapGestureRecognizer();
-            //backClick.Tapped += async (s, e) =>
-            //{
-            //    try
-            //    {
-            //        _ = await Navigation.PopAsync();
-            //    }
-            //    catch
-            //    {
-            //    }
-            //};
             var techSend = new TapGestureRecognizer();
             techSend.Tapped += async (s, e) =>
             {
@@ -98,27 +77,6 @@ namespace xamarinJKH.PushNotification
                 }
             };
             LabelTech.GestureRecognizers.Add(techSend);
-
-            Color hexColor = (Color)Application.Current.Resources["MainColor"];
-
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
-
-            // var takeOS = new TapGestureRecognizer();
-            //
-            // takeOS.Tapped += async (s, e) =>
-            // {
-            //     var action = await DisplayActionSheet(AppResources.OsTake, AppResources.Cancel, null,
-            //         "Android", "iOS", AppResources.All);
-            //     if (action != null && !action.Equals(AppResources.Cancel))
-            //     {
-            //         _os = action;
-            //         LabelKindOs.Text = action;
-            //     }
-            // };
-            // StackLayoutOs.GestureRecognizers.Add(takeOS); 
-
-            //MessagingCenter.Subscribe<Object>(this, "ChangeAdminMonitor", (sender) => ChangeTheme.Execute(null));
-
 
             var takeDate = new TapGestureRecognizer();
             takeDate.Tapped += async (s, e) =>
@@ -158,7 +116,6 @@ namespace xamarinJKH.PushNotification
                 }
             };
             StackLayoutKind.GestureRecognizers.Add(kind);
-            //BackStackLayout.GestureRecognizers.Add(backClick);
         }
 
         private void SetKind(string action)
@@ -224,7 +181,7 @@ namespace xamarinJKH.PushNotification
 
         private void BordlessEditor_Focused(object sender, FocusEventArgs e)
         {
-            if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 800)
+            if (DeviceDisplay.MainDisplayInfo.Width < 800)
             {
                 frameMargin = Frame.Margin;
                 Device.BeginInvokeOnMainThread(() => { Frame.Margin = new Thickness(15, 0, 15, 15); });
@@ -248,25 +205,14 @@ namespace xamarinJKH.PushNotification
             BindingContext = this;
         }
 
-        List<HouseProfile> DellNull(List<HouseProfile> profiles)
-        {
-            
-            
-            return profiles;
-        }
-        
-        
         private void BordlessEditor_Unfocused(object sender, FocusEventArgs e)
         {
-            if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 800)
+            if (DeviceDisplay.MainDisplayInfo.Width < 800)
             {
                 Device.BeginInvokeOnMainThread(() => { Frame.Margin = frameMargin; });
             }
         }
 
-        //private void CheckBox_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
-        //{
-        //}
 
         private int _selectedGroupId = -1;
 
@@ -447,15 +393,12 @@ namespace xamarinJKH.PushNotification
         private void Button_All_OS_Click(object sender, EventArgs e)
         {
             _os = ButtonAll.Text;
-            //FrameAll.HasShadow = true;
             FrameAll.BorderColor = hex;
             ButtonAll.TextColor = hex;
 
-            //FrameAnd.HasShadow = false;
             FrameAnd.BorderColor = Color.Gray;
             ButtonAnd.TextColor = Color.Black;
             
-            //FrameIos.HasShadow = false;
             FrameIos.BorderColor = Color.Gray;
             ButtonIos.TextColor = Color.Black;
             
@@ -464,7 +407,6 @@ namespace xamarinJKH.PushNotification
         private void Button_Android_OS_Click(object sender, EventArgs e)
         {
             _os = ButtonAnd.Text;
-            //FrameAnd.HasShadow = true;
             FrameAnd.BorderColor = hex;
             ButtonAnd.TextColor = hex;
 
@@ -480,7 +422,6 @@ namespace xamarinJKH.PushNotification
         private void Button_IOS_Clcik(object sender, EventArgs e)
         {
             _os = ButtonIos.Text;
-            //FrameIos.HasShadow = true;
             FrameIos.BorderColor = hex;
             ButtonIos.TextColor = hex;
 
@@ -497,29 +438,28 @@ namespace xamarinJKH.PushNotification
         {
             SetKind(ButtonDuty.Text);
             
-            //FrameDuty.HasShadow = true;
             FrameDuty.BorderColor = hex;
             ButtonDuty.TextColor = hex;
             
-            ImageDuty.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", hex.ToHex() } };
+            ImageDuty.ReplaceStringMap = new Dictionary<string, string> { { "#000000", hex.ToHex() } };
             
             FrameHouse.HasShadow = false;
             FrameHouse.BorderColor = Color.Gray;
             ButtonHouse.TextColor = Color.Gray;
             
-            ImageHouse.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            ImageHouse.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#777777" } };
            
             FrameRyon.HasShadow = false;
             FrameRyon.BorderColor = Color.Gray;
             ButtonRyon.TextColor = Color.Gray;
             
-            ImageRyon.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            ImageRyon.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#777777" } };
             
             FrameIdent.HasShadow = false;
             FrameIdent.BorderColor = Color.Gray;
             ButtonIdent.TextColor = Color.Gray;
             
-            ImageIdent.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            ImageIdent.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#777777" } };
             
         }
 
@@ -527,87 +467,84 @@ namespace xamarinJKH.PushNotification
         {
             SetKind(ButtonIdent.Text);
             
-           //FrameIdent.HasShadow = true;
             FrameIdent.BorderColor = hex;
             ButtonIdent.TextColor = hex;
             
-            ImageIdent.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", hex.ToHex() } };
+            ImageIdent.ReplaceStringMap = new Dictionary<string, string> { { "#000000", hex.ToHex() } };
             
             FrameHouse.HasShadow = false;
             FrameHouse.BorderColor = Color.Gray;
             ButtonHouse.TextColor = Color.Gray;
             
-            ImageHouse.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            ImageHouse.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#777777" } };
            
             FrameRyon.HasShadow = false;
             FrameRyon.BorderColor = Color.Gray;
             ButtonRyon.TextColor = Color.Gray;
             
-            ImageRyon.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            ImageRyon.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#777777" } };
             
             FrameDuty.HasShadow = false;
             FrameDuty.BorderColor = Color.Gray;
             ButtonDuty.TextColor = Color.Gray;
             
-            ImageDuty.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            ImageDuty.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#777777" } };
         }
 
         private void ButtonRyon_OnClicked(object sender, EventArgs e)
         {
             SetKind(ButtonRyon.Text);
             
-            //FrameRyon.HasShadow = true;
             FrameRyon.BorderColor = hex;
             ButtonRyon.TextColor = hex;
             
-            ImageRyon.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", hex.ToHex() } };
+            ImageRyon.ReplaceStringMap = new Dictionary<string, string> { { "#000000", hex.ToHex() } };
             
             FrameHouse.HasShadow = false;
             FrameHouse.BorderColor = Color.Gray;
             ButtonHouse.TextColor = Color.Gray;
             
-            ImageHouse.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            ImageHouse.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#777777" } };
            
             FrameIdent.HasShadow = false;
             FrameIdent.BorderColor = Color.Gray;
             ButtonIdent.TextColor = Color.Gray;
             
-            ImageIdent.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            ImageIdent.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#777777" } };
             
             FrameDuty.HasShadow = false;
             FrameDuty.BorderColor = Color.Gray;
             ButtonDuty.TextColor = Color.Gray;
             
-            ImageDuty.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            ImageDuty.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#777777" } };
         }
 
         private void ButtonHouse_OnClicked(object sender, EventArgs e)
         {
             SetKind(ButtonHouse.Text);
             
-            //FrameHouse.HasShadow = true;
             FrameHouse.BorderColor = hex;
             ButtonHouse.TextColor = hex;
             
-            ImageHouse.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", hex.ToHex() } };
+            ImageHouse.ReplaceStringMap = new Dictionary<string, string> { { "#000000", hex.ToHex() } };
             
             FrameRyon.HasShadow = false;
             FrameRyon.BorderColor = Color.Gray;
             ButtonRyon.TextColor = Color.Gray;
             
-            ImageRyon.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            ImageRyon.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#777777" } };
            
             FrameIdent.HasShadow = false;
             FrameIdent.BorderColor = Color.Gray;
             ButtonIdent.TextColor = Color.Gray;
             
-            ImageIdent.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            ImageIdent.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#777777" } };
             
             FrameDuty.HasShadow = false;
             FrameDuty.BorderColor = Color.Gray;
             ButtonDuty.TextColor = Color.Gray;
             
-            ImageDuty.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", "#777777" } };
+            ImageDuty.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#777777" } };
         }
     }
 }

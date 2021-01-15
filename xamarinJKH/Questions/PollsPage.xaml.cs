@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.Server;
@@ -45,11 +42,9 @@ namespace xamarinJKH.Questions
             {
                 case Device.iOS:
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
-                    //Pancake2.Padding = new Thickness(0, statusBarHeight, 0, 0);
                     Pancake2.HeightRequest = statusBarHeight;
-                    //BackgroundColor = Color.White;
 
-                    if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width<700)
+                    if (DeviceDisplay.MainDisplayInfo.Width<700)
                     {
                         FrameBack.Padding = new Thickness(15, 12);
                         FrameBtnFinish.Padding = new Thickness(10, 12);
@@ -99,7 +94,7 @@ namespace xamarinJKH.Questions
                     IPhoneCallTask phoneDialer;
                     phoneDialer = CrossMessaging.Current.PhoneDialer;
                     if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone)) 
-                        phoneDialer.MakePhoneCall(System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+                        phoneDialer.MakePhoneCall(Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
                 }
 
             
@@ -126,12 +121,12 @@ namespace xamarinJKH.Questions
 
             BindingContext = this;
             if (!pollInfo.IsReaded)
-            Task.Run(async () =>
-            {
-                var result = await server.SetPollReadFlag(pollInfo.ID);
-                MessagingCenter.Send<Object, int>(this, "SetEventsAmount", -1);
-                MessagingCenter.Send<Object>(this, "ReducePolls");
-            });
+                Task.Run(async () =>
+                {
+                    var result = await server.SetPollReadFlag(pollInfo.ID);
+                    MessagingCenter.Send<Object, int>(this, "SetEventsAmount", -1);
+                    MessagingCenter.Send<Object>(this, "ReducePolls");
+                });
         }
 
         private async void FinishClick()
@@ -207,8 +202,8 @@ namespace xamarinJKH.Questions
             PancakeViewIcon.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);if (Device.RuntimePlatform == Device.iOS){ if (AppInfo.PackageName == "rom.best.saburovo" || AppInfo.PackageName == "sys_rom.ru.tsg_saburovo"){PancakeViewIcon.Padding = new Thickness(0);}}
             //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.Black);
             Color unselect = hexColor.AddLuminosity(0.3);
-            FrameBack.SetAppThemeColor(Frame.BackgroundColorProperty, unselect, Color.FromHex("#4A4A4A"));
-            StackLayoutIndicator.SetAppThemeColor(StackLayout.BackgroundColorProperty, unselect, Color.White);
+            FrameBack.SetAppThemeColor(BackgroundColorProperty, unselect, Color.FromHex("#4A4A4A"));
+            StackLayoutIndicator.SetAppThemeColor(BackgroundColorProperty, unselect, Color.White);
         }
 
         void setQuest()

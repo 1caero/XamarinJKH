@@ -1,22 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.DialogViews;
-using xamarinJKH.Server;
-using xamarinJKH.Main;
 using xamarinJKH.InterfacesIntegration;
+using xamarinJKH.Main;
+using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
-using Xamarin.Essentials;
 
 namespace xamarinJKH.Pays
 {
@@ -61,7 +59,7 @@ namespace xamarinJKH.Pays
                     IPhoneCallTask phoneDialer;
                     phoneDialer = CrossMessaging.Current.PhoneDialer;
                     if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone)) 
-                        phoneDialer.MakePhoneCall(System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+                        phoneDialer.MakePhoneCall(Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
                 }
 
             
@@ -71,8 +69,6 @@ namespace xamarinJKH.Pays
                 case Device.iOS:
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
-
-                    //BackgroundColor = Color.White;
                     break;
                 default:
                     break;
@@ -117,8 +113,6 @@ namespace xamarinJKH.Pays
                 colors.Add("#000000", "#FFFFFF");
                 arrowcolor.Add("#000000", "#FFFFFF");
             }
-
-            //IconViewTech.ReplaceStringMap = colors;
         }
         
         private async void AddButtonClick(object sender, EventArgs e)
@@ -136,9 +130,7 @@ namespace xamarinJKH.Pays
             IconViewFio.Foreground = (Color)Application.Current.Resources["MainColor"];
             
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
-            Frame.SetAppThemeColor(Xamarin.Forms.Frame.BorderColorProperty, hexColor, Color.White);
+            Frame.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
         }
 
         async void AddIdentToList(AccountInfo ident)
@@ -239,7 +231,7 @@ namespace xamarinJKH.Pays
                             string pass = Preferences.Get("pass", "");
                             if (!pass.Equals("") && !login.Equals(""))
                             {
-                                if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+                                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                                 {
                                     Device.BeginInvokeOnMainThread(async () =>
                                         await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));

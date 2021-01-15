@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
+using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.Server;
@@ -15,7 +16,7 @@ using xamarinJKH.Server.RequestModel;
 namespace xamarinJKH.DialogViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MoveDispatcherView : Rg.Plugins.Popup.Pages.PopupPage
+    public partial class MoveDispatcherView : PopupPage
     {
         private RestClientMP server = new RestClientMP();
         public Color HexColor { get; set; }
@@ -121,23 +122,11 @@ namespace xamarinJKH.DialogViews
 
         private void pickerDisp_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // try
-            // {
-            //     var identLength = Settings.TypeApp[PickerType.SelectedIndex].Name.Length;
-            //     if (identLength < 6)
-            //     {
-            //         PickerType.WidthRequest = identLength * 10;
-            //     }
-            // }
-            // catch (Exception ex)
-            // {
-            //     // ignored
-            // }
         }
         Thickness frameMargin = new Thickness();
         private void BordlessEditor_Focused(object sender, FocusEventArgs e)
         {
-            if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 800)
+            if (DeviceDisplay.MainDisplayInfo.Width < 800)
             {
                 frameMargin = Frame.Margin;
                 Device.BeginInvokeOnMainThread(()=> { Frame.Margin = new Thickness(15, 0, 15, 15); });
@@ -146,7 +135,7 @@ namespace xamarinJKH.DialogViews
         
         private void BordlessEditor_Unfocused(object sender, FocusEventArgs e)
         {
-            if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 800)
+            if (DeviceDisplay.MainDisplayInfo.Width < 800)
             {
                 Device.BeginInvokeOnMainThread(() => { Frame.Margin = frameMargin; }) ;
             }

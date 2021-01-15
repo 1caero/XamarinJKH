@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
-using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.Server;
@@ -62,7 +57,7 @@ namespace xamarinJKH
                     IPhoneCallTask phoneDialer;
                     phoneDialer = CrossMessaging.Current.PhoneDialer;
                     if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone)) 
-                        phoneDialer.MakePhoneCall(System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+                        phoneDialer.MakePhoneCall(Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
                 }
 
             
@@ -76,7 +71,6 @@ namespace xamarinJKH
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
 
-                    //BackgroundColor = Color.White;
                     break;
                 default:
                     break;
@@ -88,9 +82,6 @@ namespace xamarinJKH
 
             UkName.Text = Settings.MobileSettings.main_name;
           
-
-            
-            //FrameBack.BackgroundColor = colorFromMobileSettings;
             FrameBtnNext.BackgroundColor = colorFromMobileSettings; 
             FrameBtnFinish.BackgroundColor = colorFromMobileSettings;
 
@@ -98,9 +89,6 @@ namespace xamarinJKH
             var nextClick = new TapGestureRecognizer();
             nextClick.Tapped += async (s, e) => { NextQuest(); };
             FrameBtnNext.GestureRecognizers.Add(nextClick);
-            //var backClickQuest = new TapGestureRecognizer();
-            //backClickQuest.Tapped += async (s, e) => { BackQuest(); };
-            //FrameBack.GestureRecognizers.Add(backClickQuest);
             var finishClick = new TapGestureRecognizer();
             finishClick.Tapped += async (s, e) => { FinishClick(); };
             FrameBtnFinish.GestureRecognizers.Add(finishClick);
@@ -137,10 +125,8 @@ namespace xamarinJKH
             pdf2.Foreground = colorFromMobileSettings;
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
             FramePool.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
             Color unselect = hexColor.AddLuminosity(0.3);
-            StackLayoutIndicator.SetAppThemeColor(StackLayout.BackgroundColorProperty, unselect, Color.White);
+            StackLayoutIndicator.SetAppThemeColor(BackgroundColorProperty, unselect, Color.White);
         }
 
         

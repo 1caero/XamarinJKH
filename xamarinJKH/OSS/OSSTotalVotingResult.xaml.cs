@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
+using System.Collections.Generic;
 
 namespace xamarinJKH
 {
@@ -26,6 +23,7 @@ namespace xamarinJKH
         public OSSTotalVotingResult(OSS oSS)
         {
             InitializeComponent();
+            Closing = false;
             Analytics.TrackEvent("Общие результаты голосования ОСС");
             NavigationPage.SetHasNavigationBar(this, false);
 
@@ -49,7 +47,7 @@ namespace xamarinJKH
                     IPhoneCallTask phoneDialer;
                     phoneDialer = CrossMessaging.Current.PhoneDialer;
                     if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone)) 
-                        phoneDialer.MakePhoneCall(System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+                        phoneDialer.MakePhoneCall(Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
                 }
 
             
@@ -63,13 +61,12 @@ namespace xamarinJKH
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
 
-                    //BackgroundColor = Color.White;
                     break;
                 default:
                     break;
             }
 
-            var dH = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Height;
+            var dH = DeviceDisplay.MainDisplayInfo.Height;
             if (dH < 1400)
             {
                 titleLabel.FontSize = 18;
@@ -85,8 +82,6 @@ namespace xamarinJKH
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
             PancakeBot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
             FrameResult.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
 
             BindingContext = this;
         }
@@ -178,12 +173,6 @@ namespace xamarinJKH
             TotalArea.Text = " " + oSS.VoitingArea.ToString() + $" {AppResources.OSSInfoMeasurmentArea} = 100%";
             Area.Text = " " + oSS.ComplateArea.ToString() + $" {AppResources.OSSInfoMeasurmentArea} = " + oSS.ComplateAreaPercents+ "%";
 
-            //ссылки на документы  - Макс по идее должен сказать откуда взять.
-            //urlBlank.TextColor = colorFromMobileSettings;
-            //urlBlank.GestureRecognizers.Add(new TapGestureRecognizer
-            //{
-            //    Command = new Command(async () => await Launcher.OpenAsync(oSS.AdminstratorSite))
-            //});
 
             ProtokolStackL.IsVisible = oSS.HasProtocolFile;
             if(ProtokolStackL.IsVisible)
@@ -229,16 +218,29 @@ namespace xamarinJKH
             ClosePage();
         }
         public bool IsRefreshing {get; set; }
+        bool Closing;
         async void ClosePage()
         {
-            try
+            if (!Closing)
             {
-                await Navigation.PopAsync();
+                Closing = true;
+
+                var stack = this.Navigation.NavigationStack;
+                var modal = this.Navigation.ModalStack;
+                var pages = new List<Page>();
+                pages.AddRange(modal);
+                pages.AddRange(stack);
+                if (pages.FirstOrDefault(x => x is OSSTotalVotingResult) != null)
+                    try
+                    {
+                        await Navigation.PopAsync();
+                    }
+                    catch (Exception e)
+                    {
+                        await Navigation.PopModalAsync();
+                    }
             }
-            catch (Exception e)
-            {
-                await Navigation.PopModalAsync();
-            }
+            
         }
 
     }

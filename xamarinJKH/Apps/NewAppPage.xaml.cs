@@ -3,36 +3,28 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
+using Microsoft.AppCenter.Analytics;
 using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.Messaging;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarinJKH.AppsConst;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
-using xamarinJKH.Tech;
 using xamarinJKH.Utils;
-
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
-using Rg.Plugins.Popup.Services;
-using Xamarin.Forms.PancakeView;
-using xamarinJKH.DialogViews;
-using Xamarin.Essentials;
-using System.Text.RegularExpressions;
-//using dotMorten.Xamarin.Forms;
-using Microsoft.AppCenter.Analytics;
 using xamarinJKH.ViewModels;
-using xamarinJKH.AppsConst;
 
 namespace xamarinJKH.Apps
 {
@@ -89,13 +81,6 @@ namespace xamarinJKH.Apps
             var techSend = new TapGestureRecognizer();
             techSend.Tapped += async (s, e) => {     await Navigation.PushAsync(new Tech.AppPage());};
             LabelTech.GestureRecognizers.Add(techSend);
-            var pickLs = new TapGestureRecognizer();
-            pickLs.Tapped += async (s, e) => {  Device.BeginInvokeOnMainThread(() =>
-                {
-                    PickerLs.Focus();                 
-                });
-            };
-            StackLayoutLs.GestureRecognizers.Add(pickLs); 
             var pickType = new TapGestureRecognizer();
             pickType.Tapped += async (s, e) => {  
                 Device.BeginInvokeOnMainThread(() =>
@@ -112,7 +97,7 @@ namespace xamarinJKH.Apps
                     IPhoneCallTask phoneDialer;
                     phoneDialer = CrossMessaging.Current.PhoneDialer;
                     if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone)) 
-                        phoneDialer.MakePhoneCall(System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+                        phoneDialer.MakePhoneCall(Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
                 }
 
             
@@ -171,13 +156,11 @@ _appModel = new AddAppModel()
                 {
                     SetPassApp();
                     SaveText = EntryMess.Text;
-                    // EntryMess.Text = AppResources.NamePassApp;
                     isPassAPP = true;
                 }
                 else
                 {
                     SetDefaultApp();
-                    // EntryMess.Text = SaveText;
                     isPassAPP = false;
                 }
             });
@@ -251,7 +234,7 @@ _appModel = new AddAppModel()
                     LayoutAvto.IsVisible = false;
                     return;
                 }
-                    _passApp.idType = _appModel.AllKindPass.IndexOf(listsd) + 1;
+                _passApp.idType = _appModel.AllKindPass.IndexOf(listsd) + 1;
                 // User selected an item from the suggestion list, take an action on it here.
                 if (listsd.Equals(AppResources.PassMan))
                 {
@@ -294,8 +277,8 @@ _appModel = new AddAppModel()
             {
                 try
                 {
-                    var camera_perm = await Plugin.Permissions.CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
-                    var storage_perm = await Plugin.Permissions.CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+                    var camera_perm = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+                    var storage_perm = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
                     if (camera_perm != PermissionStatus.Granted || storage_perm != PermissionStatus.Granted)
                     {
                         var status = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Camera, Permission.Storage);
@@ -311,7 +294,7 @@ _appModel = new AddAppModel()
                     {
                         var result = await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoPermissions, "OK", AppResources.Cancel);
                         if (result)
-                            Plugin.Permissions.CrossPermissions.Current.OpenAppSettings();
+                            CrossPermissions.Current.OpenAppSettings();
 
                     });
                     return;
@@ -390,8 +373,6 @@ _appModel = new AddAppModel()
 
                 if (pickedFile != null)
                 {
-                    // UkName.Text = pickedFile.FileName;
-                    // LabelPhone.Text = pickedFile.FilePath;
                     if (pickedFile.DataArray.Length > 10000000)
                     {
                         await DisplayAlert(AppResources.ErrorTitle,AppResources.FileTooBig, "OK");
@@ -403,19 +384,8 @@ _appModel = new AddAppModel()
                     ListViewFiles.IsVisible = true;
                     if (ListViewFiles.HeightRequest < 120)
                         ListViewFiles.HeightRequest += 30;
-                    // setBinding();
                     _appModel.Files = files;
                     ListViewFiles.ItemsSource = _appModel.Files;
-                    // if (pickedFile.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase)
-                    //     || pickedFile.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
-                    // {
-                    //     IconViewNameUk.Source = ImageSource.FromStream(() => pickedFile.GetStream());
-                    //     IconViewNameUk.IsVisible = true;
-                    // }
-                    // else
-                    // {
-                    //     IconViewNameUk.IsVisible = false;
-                    // }
                 }
             }
             catch (Exception ex)
@@ -450,7 +420,6 @@ _appModel = new AddAppModel()
             ListViewFiles.IsVisible = true;
             if (ListViewFiles.HeightRequest < 120)
                 ListViewFiles.HeightRequest += 30;
-            // setBinding();
             _appModel.Files = files;
             ListViewFiles.ItemsSource = _appModel.Files;
         }
@@ -475,41 +444,10 @@ _appModel = new AddAppModel()
             ListViewFiles.IsVisible = true;
             if (ListViewFiles.HeightRequest < 120)
                 ListViewFiles.HeightRequest += 30;
-            // setBinding();
             _appModel.Files = files;
             ListViewFiles.ItemsSource = _appModel.Files;
-            // PickerLs.SelectedIndex = PikerLsItem;
-            // PickerType.SelectedIndex = PikerTypeItem;
         }
         
-        public async Task startLoadFile(string metod)
-        {
-            // Loading settings
-            Configurations.LoadingConfig = new LoadingConfig
-            {
-                IndicatorColor = (Color)Application.Current.Resources["MainColor"],
-                OverlayColor = Color.Black,
-                Opacity = 0.8,
-                DefaultMessage = AppResources.LoadingFile,
-            };
-
-            await Loading.Instance.StartAsync(async progress =>
-            {
-                switch (metod)
-                {
-                    case CAMERA:
-                        // await getCameraFile();
-                        break;
-                    case GALERY:
-                        // await GetGalaryFile();
-                        break;
-                    case FILE:
-                        // await PickAndShowFile(null);
-                        break;
-                }
-            });
-        }
-
         public static byte[] StreamToByteArray(Stream stream)
         {
             if (stream is MemoryStream)
@@ -549,49 +487,10 @@ _appModel = new AddAppModel()
             UkName.Text = Settings.MobileSettings.main_name;
            
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
             FrameTop.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
         }
 
-        void setBinding()
-        {
-            PikerLsItem = PickerLs.SelectedIndex;
-            PikerTypeItem = PickerType.SelectedIndex;
-            try
-            {
-                BindingContext = null;
-                BindingContext = new AddAppModel()
-                {
-                    AllAcc = Settings.Person.Accounts,
-                    AllType = Settings.TypeApp,
-                    hex = (Color)Application.Current.Resources["MainColor"],
-                    SelectedAcc = Settings.Person.Accounts[PikerLsItem],
-                    SelectedType = Settings.TypeApp[PikerTypeItem],
-                    Files = files
-                };
-            }
-            catch (Exception ex)
-            {
-                // ignored
-            }
-        }
-
-        private void picker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // try
-            // {
-            //     var identLength = Settings.Person.Accounts[PickerLs.SelectedIndex].Ident.Length;
-            //     if (identLength < 6)
-            //     {
-            //         PickerLs.WidthRequest = identLength * 9;
-            //     }
-            // }
-            // catch (Exception ex)
-            // {
-            //     // ignored
-            // }
-        }
+        
 
         public class AddAppModel:BaseViewModel
         {
@@ -613,7 +512,7 @@ _appModel = new AddAppModel()
                     OnPropertyChanged("IsVisible");
                 }
             }
-            public ObservableCollection<xamarinJKH.AppsConst.OptionModel> Types { get; set; }
+            public ObservableCollection<OptionModel> Types { get; set; }
             public ObservableCollection<TypeModel> PodTypes { get; set; }  
             OptionModel selectedTyp;
             public OptionModel SelectedTyp
@@ -711,17 +610,6 @@ _appModel = new AddAppModel()
                        
                         if (SelectedTyp != null)
                         {
-                            // foreach (var typ in Types)
-                            // {
-                            //     typ.Selected = false;
-                            //     string replaceColor = Application.Current.RequestedTheme == OSAppTheme.Dark ? "#FFFFFF" : "#8D8D8D";
-                            //     typ.ReplaceMap = new Dictionary<string, string> { { "#000000", replaceColor } };
-                            // }
-                            //
-                            // selected.Selected = true;
-                            // selected.ReplaceMap = new Dictionary<string, string> { { "#000000", "#" + Settings.MobileSettings.color } };
-                            // MessagingCenter.Send<Object, string>(this, "SetVisibleLayout", selected.Name);
-                            //
                             IsVisible = SelectedTyp.HasSubTypes;
                             if (!IsVisible)
                             {
@@ -736,8 +624,6 @@ _appModel = new AddAppModel()
                                     TypeModel type_ = new TypeModel();
                                     type_.Name = type.Name;
                                     String image = "";
-                                    // type_.ReplaceMap = SetIconType(selected.Name, ref image);
-                                    // type_.Image = image;
                                     type_.ID = type.ID;
                                     PodTypes.Add(type_);
                                     PodTypSelected = PodTypes[0];
@@ -750,8 +636,6 @@ _appModel = new AddAppModel()
                     
                 });
 
-                
-                
                 SelectAccount = new Command<string>((name) =>
                 {
                     Device.BeginInvokeOnMainThread(() =>
@@ -810,7 +694,7 @@ _appModel = new AddAppModel()
             {
                 try
                 {
-                    if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+                    if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                     {
                         Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                         return;
@@ -882,19 +766,6 @@ _appModel = new AddAppModel()
                             return false;
                         }
 
-                        // if (string.IsNullOrWhiteSpace(_passApp.SeriaNumber))
-                        // {
-                        //     DisplayAlert(AppResources.ErrorTitle, AppResources.EnterSeriaAndNumber, "OK");
-                        //     return false;
-                        // }
-                        //
-                        // if (_passApp.SeriaNumber.Length != 11)
-                        // {
-                        //     DisplayAlert(AppResources.ErrorTitle,
-                        //         AppResources.EnterSeriaAndNumber + " " + AppResources.MaskNumberPassport + ":\n" +
-                        //         "1234 567890", "OK");
-                        //     return false;
-                        // }
 
                         return true;
 
@@ -985,7 +856,7 @@ _appModel = new AddAppModel()
         async void sendFiles(string id)
         {
             int i = 0; 
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                 return;
@@ -1018,7 +889,6 @@ _appModel = new AddAppModel()
             if (_appModel.SelectedTyp.Name.Contains("пропуск"))
             {
                 SetPassApp();
-                // EntryMess.Text = AppResources.NamePassApp;
                 isPassAPP = true;
             }
             else
@@ -1029,52 +899,6 @@ _appModel = new AddAppModel()
             }
         }
 
-        //private void AutoSuggestBox_TextChanged(object sender, AutoSuggestBoxTextChangedEventArgs e)
-        //{
-        //    // Only get results when it was a user typing, 
-        //    // otherwise assume the value got filled in by TextMemberPath 
-        //    // or the handler for SuggestionChosen.
-        //    if (e.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
-        //    {
-        //        IEnumerable<string> itemsSource =
-        //            from i in _appModel.AllKindPass where i.ToLower().Contains(AutoSuggestBox.Text) select i;
-        //        List<string> source = new List<string>(itemsSource);
-        //        AutoSuggestBox.ItemsSource = source;
-        //    }
-        //}
-
-        //private void AutoSuggestBox_QuerySubmitted(object sender, AutoSuggestBoxQuerySubmittedEventArgs e)
-        //{
-        //}
-
-        //private void AutoSuggestBox_SuggestionChosen(object sender, AutoSuggestBoxSuggestionChosenEventArgs e)
-        //{
-        //    var eSelectedItem = (string) e.SelectedItem;
-        //    if (eSelectedItem != null)
-        //    {
-        //        _passApp.idType = _appModel.AllKindPass.IndexOf(eSelectedItem) + 1;
-        //        // User selected an item from the suggestion list, take an action on it here.
-        //        if (eSelectedItem.Equals(AppResources.PassMan))
-        //        {
-        //            LayoutPeshehod.IsVisible = true;
-        //            LayoutAvto.IsVisible = false;
-                    
-        //        }
-        //        else
-        //        {
-        //            LayoutPeshehod.IsVisible = false;
-        //            LayoutAvto.IsVisible = true;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        // User hit Enter from the search box. Use args.QueryText to determine what to do.
-        //        _passApp.idType = 0;
-        //    }
-        //}
-        
-
-       
 
         private async void EntryNumber_OnTextChanged(object sender, TextChangedEventArgs e)
         {
@@ -1102,26 +926,6 @@ _appModel = new AddAppModel()
         }
         
 
-        private async void EntryNumber_OnFocusChangeRequested(object sender, FocusRequestArgs e)
-        {
-            if (!e.Focus)
-            {
-               
-            }
-        }
-
-       
-
-        //private void AutoSuggestBoxBrand_OnTextChanged(object sender, AutoSuggestBoxTextChangedEventArgs e)
-        //{
-        //    if (e.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
-        //    {
-        //        IEnumerable<string> itemsSource =
-        //            from i in _appModel.AllBrand where i.ToLower().Contains(AutoSuggestBoxBrand.Text) select i;
-        //        List<string> source = new List<string>(itemsSource);
-        //        AutoSuggestBoxBrand.ItemsSource = source;
-        //    }
-        //}
 
         class PassApp
         {
@@ -1131,19 +935,6 @@ _appModel = new AddAppModel()
             public string Fio { get; set; }
             public string SeriaNumber { get; set; }
         }
-
-        //private void AutoSuggestBoxBrand_OnSuggestionChosen(object sender, AutoSuggestBoxSuggestionChosenEventArgs e)
-        //{
-        //    var eSelectedItem = (string) e.SelectedItem;
-        //    if (eSelectedItem != null)
-        //    {
-        //        _passApp.CarBrand = eSelectedItem;
-        //    }
-        //    else
-        //    {
-        //        _passApp.CarBrand = "";
-        //    }
-        //}
 
         private void TSBrandList_OnItemTapped(Object sender, ItemTappedEventArgs e)
         {

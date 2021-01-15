@@ -1,20 +1,13 @@
-﻿using Rg.Plugins.Popup.Services;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
-using xamarinJKH.Tech;
-using xamarinJKH.Utils;
-using xamarinJKH.ViewModels.Shop;
 using xamarinJKH.Main;
+using xamarinJKH.Tech;
+using xamarinJKH.ViewModels.Shop;
 
 namespace xamarinJKH.Shop
 {
@@ -34,7 +27,6 @@ namespace xamarinJKH.Shop
                 Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
             }
             
-            //BorderColor = "{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=#e7e7e7}"
             hex = (Color)Application.Current.Resources["MainColor"];
             Color hexColor = (Color)Application.Current.Resources["MainColor"];
             GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.White);

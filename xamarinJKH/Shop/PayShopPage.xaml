@@ -44,30 +44,10 @@
                             VerticalOptions="Center"
                             
                             Orientation="Horizontal">
-                            <!--BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"-->
                             <xamarinJkh:ButtonSupport x:Name="LabelTech"></xamarinJkh:ButtonSupport>
                             <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
 
-                            <!--<svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_tech.svg"
-                                                HeightRequest="20"
-                                                ReplaceStringMap="{Binding hex,Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
-                                                HorizontalOptions="Start"
-                                                Margin="10,0,0,0"
-                                                VerticalOptions="Center" />
-                            <Label x:Name="LabelTech"
-                                   Text="{x:Static xamarinJkh:AppResources.Support}"
-                                   FontSize="12"
-                                   TextDecorations="Underline"
-                                   TextColor="White"
-                                   Margin="0, 0, 0, 0"
-                                   VerticalOptions="Center" />
-                            <svg:SvgCachedImage x:Name="IconViewProfile" Margin="15,0,5,0"
-                                                Source="resource://xamarinJKH.Resources.ic_profile_top.svg"
-                                                HeightRequest="20"
-                                                ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"                                                
-                                                BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="Center"/>-->
+                          
                         </StackLayout>
                     </StackLayout>
                     <ScrollView Margin="10,10,10,10">
@@ -266,11 +246,7 @@
                                                    VerticalOptions="Center"
                                                    IsVisible="False"
                                                    Color="{Binding hex}" />
-                                <!--<Frame CornerRadius="20"
-                                       x:Name="FrameBtn"
-                                       HasShadow="False"
-                                       Padding="0"
-                                       Margin="5,20">-->
+                                
                                     <Button x:Name="BtnCheckOut"
                                             Margin="5,20"
                                             BackgroundColor="{Binding hex}" HorizontalOptions="FillAndExpand"
@@ -281,7 +257,6 @@
                                             CornerRadius="10"                                            
                                             Text="{x:Static xamarinJkh:AppResources.Confirm_order}" 
                                             Clicked="BtnCheckOut_Clicked" />
-                                <!--</Frame>-->
                             </StackLayout>
                         </yummy:PancakeView>
                     </ScrollView>

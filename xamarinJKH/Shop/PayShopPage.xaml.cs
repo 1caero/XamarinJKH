@@ -2,23 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.Apps;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
-using AppPage = xamarinJKH.Apps.AppPage;
 
 namespace xamarinJKH.Shop
 {
@@ -86,7 +80,7 @@ namespace xamarinJKH.Shop
             };
             LabelDoc.GestureRecognizers.Add(openUrl);
             var techSend = new TapGestureRecognizer();
-            techSend.Tapped += async (s, e) => { await Navigation.PushAsync(new Tech.AppPage());};
+            techSend.Tapped += async (s, e) => { await Navigation.PushAsync(new AppPage());};
             LabelTech.GestureRecognizers.Add(techSend);
 
             switch (Device.RuntimePlatform)
@@ -129,8 +123,6 @@ namespace xamarinJKH.Shop
 
             hex = (Color)Application.Current.Resources["MainColor"];
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
             GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.White);
             BindingContext = this;
             SetPriceAndWeight();
@@ -189,7 +181,6 @@ namespace xamarinJKH.Shop
 
             stringBuilder.Append($"{AppResources.TotalPrice}: ").Append(LabelPriceBuscket.Text)
                 .Append($"{AppResources.Currency}\n").Append(LabelWeightBuscket.Text != null ? $"{LabelWeightBuscket.Text} {AppResources.Gram}" : string.Empty);
-            // stringBuilder.Append("\nБезналичный расчет.");
 
             return stringBuilder.ToString();
         }
@@ -251,14 +242,10 @@ namespace xamarinJKH.Shop
                             }
 
                             await DisplayAlert(AppResources.AlertSuccess, AppResources.PayShopSuccess, "OK");
-                            // foreach (var ePage in Settings.AppPAge)
-                            // {
-                            //     Navigation.RemovePage(ePage);
-                            // }
-
+                        
                             RequestInfo requestInfo = new RequestInfo();
                             requestInfo.ID = result.ID;
-                            await Navigation.PushAsync(new AppPage(requestInfo, true, true));
+                            await Navigation.PushAsync(new Apps.AppPage(requestInfo, true, true));
                         }
                         else
                         {
@@ -300,7 +287,6 @@ namespace xamarinJKH.Shop
         {
             PaymentDescription0.Text = AppResources.PayText2;
 
-            //под замену на текст для карты. запросить текст для карты.
             PaymentDescription1.Text = AppResources.PayText3;
             btnCardPay.TextColor = hex;
             frameBtnCardPay.BorderColor = hex;
@@ -311,7 +297,6 @@ namespace xamarinJKH.Shop
 
         private void CheckBox_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            //FrameBtn.IsEnabled = CheckBox.IsChecked;
             BtnCheckOut.IsEnabled = CheckBox.IsChecked;
         }
 

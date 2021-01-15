@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms;
+using xamarinJKH.ViewModels;
 
 namespace xamarinJKH.AppsConst
 {
-    public class TypeModel:xamarinJKH.ViewModels.BaseViewModel
+    public class TypeModel:BaseViewModel
     {
         
         public string Name { get; set; }

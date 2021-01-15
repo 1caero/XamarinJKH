@@ -3,26 +3,23 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.AppsConst;
 using xamarinJKH.DialogViews;
-using xamarinJKH.Server;
 using xamarinJKH.InterfacesIntegration;
+using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
-using xamarinJKH.ViewModels;
-using Xamarin.Essentials;
-using System.Runtime.Serialization;
 
 namespace xamarinJKH.MainConst
 {
@@ -111,7 +108,7 @@ namespace xamarinJKH.MainConst
             // await PopupNavigation.Instance.PushAsync(new TechDialog(false));
             if (Settings.Person != null && !string.IsNullOrWhiteSpace(Settings.Person.Phone))
             {
-                await Navigation.PushModalAsync(new Tech.AppPage());
+                await Navigation.PushModalAsync(new AppPage());
             }
             else
             {
@@ -138,26 +135,6 @@ namespace xamarinJKH.MainConst
                     break;
             }
 
-            switch (Device.RuntimePlatform)
-            {
-                case Device.iOS:
-                    //BackgroundColor = Color.White;
-                    // ImageFon.Margin = new Thickness(0, 0, 0, 0);
-                    // StackLayout.Margin = new Thickness(0, 33, 0, 0);
-                    // IconViewNameUk.Margin = new Thickness(0, 33, 0, 0);
-                    break;
-                case Device.Android:
-                    // double or = Math.Round(((double)App.ScreenWidth / (double)App.ScreenHeight), 2);
-                    // if (Math.Abs(or - 0.5) < 0.02)
-                    // {
-                    //     ScrollViewContainer.Margin = new Thickness(0, 0, 0, -125);
-                    //     BackStackLayout.Margin = new Thickness(5, 25, 0, 0);
-                    // }
-
-                    break;
-                default:
-                    break;
-            }
 
             var profile = new TapGestureRecognizer();
             profile.Tapped += async (s, e) =>
@@ -168,7 +145,7 @@ namespace xamarinJKH.MainConst
             IconViewProfile.GestureRecognizers.Add(profile);
 
             var techSend = new TapGestureRecognizer();
-            techSend.Tapped += TechSend; // async(s, e) => {     await Navigation.PushAsync(new AppPage()); };
+            techSend.Tapped += TechSend; 
             LabelTech.GestureRecognizers.Add(techSend);
             
             var addClick = new TapGestureRecognizer();
@@ -328,8 +305,6 @@ namespace xamarinJKH.MainConst
         {
             FormattedString formattedName = new FormattedString();
             OSAppTheme currentTheme = Application.Current.RequestedTheme;
-            //if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
-            //    currentTheme = OSAppTheme.Dark;
             formattedName.Spans.Add(new Span
             {
                 Text = Settings.Person.FIO,
@@ -356,7 +331,6 @@ namespace xamarinJKH.MainConst
 
             if (bottomMenu.VerticalOptions.Alignment != LayoutAlignment.End)
                 Device.BeginInvokeOnMainThread(() => { bottomMenu.VerticalOptions = LayoutOptions.End; });
-            // new Task(SyncSetup).Start(); // This could be an await'd task if need be
         }
 
         async void SyncSetup()
@@ -375,20 +349,16 @@ namespace xamarinJKH.MainConst
             SetAdminName();
             SwitchApp.OnColor = hex;
             FrameBtnAdd.BackgroundColor = hex;
-            //IconAddApp.Foreground = Color.White;
             
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            //IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
             bottomMenu.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
         }
 
 
         async void getApps()
         {
 
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                 return;
@@ -396,7 +366,6 @@ namespace xamarinJKH.MainConst
             _requestList = await _server.GetRequestsListConst();
             if (_requestList.Error == null)
             {
-                // setReaded(_requestList.Requests);
                 SetReaded();
                 Settings.UpdateKey = _requestList.UpdateKey;
                 MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", _requestList.Requests.Where(x => !x.IsReaded).Count());
@@ -405,40 +374,6 @@ namespace xamarinJKH.MainConst
             {
                 await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAppsInfo, "OK");
             }
-        }
-
-        void setReaded(List<RequestInfo> infos)
-        {
-            RequestInfosAlive = new ObservableCollection<RequestInfo>();
-            RequestInfosClose = new ObservableCollection<RequestInfo>();
-            foreach (var each in infos)
-            {
-                if (each.IsReaded)
-                {
-                    RequestInfosClose.Add(each);
-                }
-                else
-                {
-                    RequestInfosAlive.Add(each);
-                }
-            }
-
-            if (SwitchApp.IsToggled)
-            {
-                RequestInfos = RequestInfosClose;
-            }
-            else
-            {
-                RequestInfos = RequestInfosAlive;
-            }
-
-            if (RequestInfos != null)
-            {
-                BindingContext = this;
-                additionalList.ItemsSource = null;
-                additionalList.ItemsSource = RequestInfos;
-            }
-            Empty = RequestInfos.Count == 0;
         }
 
         private async void OnItemTapped(object sender, ItemTappedEventArgs e)

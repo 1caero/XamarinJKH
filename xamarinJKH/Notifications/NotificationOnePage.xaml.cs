@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.Additional;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.Questions;
@@ -46,10 +43,7 @@ namespace xamarinJKH.Notifications
             {
                 case Device.iOS:
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
-                    //Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
                     Pancake2.HeightRequest = statusBarHeight;
-
-                    //BackgroundColor = Color.White;
                     break;
                 default:
                     break;
@@ -76,12 +70,11 @@ namespace xamarinJKH.Notifications
                     IPhoneCallTask phoneDialer;
                     phoneDialer = CrossMessaging.Current.PhoneDialer;
                     if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone)) 
-                        phoneDialer.MakePhoneCall(System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+                        phoneDialer.MakePhoneCall(Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
                 }
 
             
             };
-            // LabelPhone.GestureRecognizers.Add(call);
             var backClick = new TapGestureRecognizer();
             backClick.Tapped += async (s, e) => { close(); };
             BackStackLayout.GestureRecognizers.Add(backClick);
@@ -89,26 +82,18 @@ namespace xamarinJKH.Notifications
             Files = announcementInfo.Files;
             BindingContext = this;
             if (!announcementInfo.IsReaded)
-            Task.Run(async () =>
-            {
-                var result = await _server.SetNotificationReadFlag(announcementInfo.ID);
-                MessagingCenter.Send<Object, int>(this, "SetEventsAmount", -1);
-                MessagingCenter.Send<Object>(this, "ReduceAnnounsements");
-            });
+                Task.Run(async () =>
+                {
+                    var result = await _server.SetNotificationReadFlag(announcementInfo.ID);
+                    MessagingCenter.Send<Object, int>(this, "SetEventsAmount", -1);
+                    MessagingCenter.Send<Object>(this, "ReduceAnnounsements");
+                });
         }
 
         async void SetText()
         {
             UkName.Text = Settings.MobileSettings.main_name;
-            // if (!string.IsNullOrWhiteSpace(Settings.Person.companyPhone))
-            // {
-            //     LabelPhone.Text = "+" + Settings.Person.companyPhone.Replace("+", "");
-            // }
-            // else
-            // {
-            //     IconViewLogin.IsVisible = false;
-            //     LabelPhone.IsVisible = false;
-            // }
+         
             LabelTitle.Text = _announcementInfo.Header;
             LabelDate.Text = _announcementInfo.Created;
             LabelText.Text = _announcementInfo.Text;
@@ -148,12 +133,7 @@ namespace xamarinJKH.Notifications
             }
             
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            // IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //
-            // Pancake.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
-            // PancakeViewIcon.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);if (Device.RuntimePlatform == Device.iOS){ if (AppInfo.PackageName == "rom.best.saburovo" || AppInfo.PackageName == "sys_rom.ru.tsg_saburovo"){PancakeViewIcon.Padding = new Thickness(0);}}
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.Black);
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.Black);
+          
         }
 
         async void open(Page page)

@@ -3,9 +3,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
-             xmlns:main="clr-namespace:xamarinJKH.Main;assembly=xamarinJKH"
-             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:converters="clr-namespace:xamarinJKH.Converters"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.Main.CountersPage">
@@ -40,30 +37,8 @@
                         <StackLayout
                             HorizontalOptions="EndAndExpand"
                             Orientation="Horizontal">                            
-                            <!--BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"-->
                             <xamarinJkh:ButtonSupport x:Name="LabelTech"></xamarinJkh:ButtonSupport>
                             <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
-                            <!--<svg:SvgCachedImage x:Name="IconViewTech"
-                                                Source="resource://xamarinJKH.Resources.ic_tech.svg"
-                                                HeightRequest="20"
-                                                ReplaceStringMap="{Binding IsRefreshing, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
-                                                Margin="0, 0,0,0"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="Center" />
-                            <Label x:Name="LabelTech"
-                                   Text="{x:Static xamarinJkh:AppResources.Support}"
-                                   FontSize="12"
-                                   TextDecorations="Underline"
-                                   TextColor="White"
-                                   Margin="0, 0, 0, 0"
-                                   VerticalOptions="Center" />
-                            <svg:SvgCachedImage x:Name="IconViewProfile" Margin="15,0,5,0"
-                                                Source="resource://xamarinJKH.Resources.ic_profile_top.svg"
-                                                HeightRequest="20"
-                                                ReplaceStringMap="{Binding IsRefreshing, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"                                                
-                                                BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="Center"/>-->
                         </StackLayout>
 
                     </StackLayout>
@@ -162,63 +137,12 @@
                                                                FontSize="14"/>
                                                         </StackLayout>
 
-                                                        <!--<VisualStateManager.VisualStateGroups>
-                                                            <VisualStateGroup x:Name="CommonStates">
-                                                                <VisualState x:Name="Normal">
-                                                                    <VisualState.Setters>
-                                                                        <Setter Property="BorderColor" Value="{AppThemeBinding Light=#8D8D8D, Dark=White}"/>
-                                                                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#8D8D8D}"/>
-                                                                    </VisualState.Setters>
-                                                                </VisualState>
-
-                                                                <VisualState x:Name="Selected">
-                                                                    <VisualState.Setters>
-                                                                        <Setter Property="BorderColor" Value="{x:StaticResource MainColor}"/>
-                                                                        <Setter Property="BackgroundColor" Value="White"/>
-                                                                    </VisualState.Setters>
-                                                                </VisualState>
-                                                            </VisualStateGroup>
-                                                        </VisualStateManager.VisualStateGroups>-->
                                                     </Frame>
                                                 </StackLayout>
                                                 
                                             </DataTemplate>
                                         </CollectionView.ItemTemplate>
                                     </CollectionView>
-                                    <!--<Label
-                                        Text="{x:Static xamarinJkh:AppResources.Ident}"
-                                        HeightRequest="20"
-                                        FontAttributes="Bold"
-                                        VerticalTextAlignment="Center"
-                                        HorizontalOptions="CenterAndExpand"
-                                        TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                                        FontSize="15" />
-                                    <StackLayout Spacing="0">
-                                        <StackLayout
-                                            x:Name="StackLayoutLs"
-                                            Orientation="Horizontal">
-                                            <xamarinJkh:BorderlessPicker
-                                                x:Name="Picker" Title="{x:Static xamarinJkh:AppResources.Choose}"
-                                                TitleColor="{AppThemeBinding Light=Black, Dark=White}"
-                                                TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                                                BackgroundColor="{AppThemeBinding Light=White, Dark=#494949}"
-                                                VerticalOptions="Start"
-                                                SelectedIndexChanged="picker_SelectedIndexChanged" />
-                                            <svg:SvgCachedImage
-                                                Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
-                                                HeightRequest="12"
-                                                WidthRequest="12"
-                                                Rotation="90"
-                                                Margin="0,5,0,0"
-                                                VerticalOptions="Center"
-                                                x:Name="Arrow"
-                                                ReplaceStringMap="{Binding IsRefreshing, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}" />
-                                        </StackLayout>
-                                        <Label
-                                            HeightRequest="1"
-                                            BackgroundColor="White"
-                                            HorizontalOptions="Fill" />
-                                    </StackLayout>-->
                                     </StackLayout>
                                     <Label x:Name="PeriodSendLbl"
                                        Text="Возможность передавать показания доступна с 15 по 25 число текущего месяца!"
@@ -262,71 +186,6 @@
                                 </ScrollView>
                             </RefreshView>
                         </Grid>
-
-                        <!--<RefreshView Command="{Binding RefreshCommand}"
-                          IsRefreshing="{Binding IsRefreshing}">
-                            <CollectionView x:Name="countersList"
-                          Margin="10, 0, 10, 0"
-                          VerticalScrollBarVisibility="Never"
-                          SelectionMode="None"
-                          
-                          BackgroundColor="Transparent"                          
-                          ItemsSource="{Binding _meterInfo}">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <main:MetersThreeCell
-                                Resource="{Binding Resource}"
-                                Address="{Binding Address}"
-                                UniqueNum="{Binding FactoryNumber}"
-                                CheckupDate="{Binding LastCheckupDate}"
-                                RecheckInterval="{Binding RecheckInterval}"
-                                DecimalPoint="{Binding NumberOfDecimalPlaces}"
-                                CustomName = "{Binding CustomName}"
-                                MeterID = "{Binding ID}"
-                                IsDisabled = "{Binding IsDisabled}"
-                                Units = "{Binding Units}"
-                                Values="{Binding Values}" />
-                                    </DataTemplate>
-
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </RefreshView>-->
-
-                        
-
-                        <!--<ListView x:Name="countersList"
-                          HasUnevenRows="False"
-                                  RowHeight="300"
-                          Margin="10, 0, 10, 0"
-                          SeparatorVisibility="None"
-                          VerticalScrollBarVisibility="Never"
-                          SelectionMode="None"
-                          IsPullToRefreshEnabled="True"
-                          RefreshCommand="{Binding RefreshCommand}"
-                          IsRefreshing="{Binding IsRefreshing}"
-                          ItemTapped="OnItemTapped"
-                          BackgroundColor="Transparent"
-                          CachingStrategy="RecycleElement"
-                          ItemsSource="{Binding _meterInfo}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <main:MetersThreeCell
-                                Resource="{Binding Resource}"
-                                Address="{Binding Address}"
-                                UniqueNum="{Binding FactoryNumber}"
-                                CheckupDate="{Binding LastCheckupDate}"
-                                RecheckInterval="{Binding RecheckInterval}"
-                                DecimalPoint="{Binding NumberOfDecimalPlaces}"
-                                CustomName = "{Binding CustomName}"
-                                MeterID = "{Binding ID}"
-                                IsDisabled = "{Binding IsDisabled}"
-                                Units = "{Binding Units}"
-                                Values="{Binding Values}" />
-                        </DataTemplate>
-
-                    </ListView.ItemTemplate>
-                </ListView>-->
-
                     </StackLayout>
                 </StackLayout>
             </Grid>

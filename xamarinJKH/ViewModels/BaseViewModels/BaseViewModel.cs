@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using Xamarin.Forms;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
-using xamarinJKH.Server;
 using AiForms.Dialogs;
-
+using Xamarin.Forms;
+using xamarinJKH.Server;
 using xamarinJKH.Utils;
 
 namespace xamarinJKH.ViewModels
@@ -57,11 +51,6 @@ namespace xamarinJKH.ViewModels
         public string Title
         {
             get => Settings.MobileSettings.main_name;// title;
-            //set
-            //{
-            //    title = value;
-            //    OnPropertyChanged("Title");
-            //}
         }
         string phone;
         public string Phone => Settings.Person.companyPhone;

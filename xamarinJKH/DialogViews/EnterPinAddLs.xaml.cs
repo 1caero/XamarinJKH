@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
+using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,7 +12,7 @@ using xamarinJKH.Server.RequestModel;
 namespace xamarinJKH.DialogViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EnterPinAddLs :Rg.Plugins.Popup.Pages.PopupPage
+    public partial class EnterPinAddLs :PopupPage
     {
         RestClientMP server = new RestClientMP();
         public string Ident { get; set; }

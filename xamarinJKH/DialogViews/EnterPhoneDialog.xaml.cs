@@ -49,10 +49,7 @@ namespace xamarinJKH.DialogViews
                 }
                 else
                 {
-                    //Settings.Person = new LoginResult()
-                    //{
-                    //    Phone = replace
-                    //};
+                   
                     if (Settings.Person == null)
                         Settings.Person = new LoginResult()
                         {

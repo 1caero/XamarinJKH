@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+using Rg.Plugins.Popup.Pages;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
-using Rg.Plugins.Popup.Pages;
-using Xamarin.Essentials;
-using Plugin.Permissions.Abstractions;
-using Plugin.Permissions;
-using Rg.Plugins.Popup.Services;
 
 namespace xamarinJKH.DialogViews
 {

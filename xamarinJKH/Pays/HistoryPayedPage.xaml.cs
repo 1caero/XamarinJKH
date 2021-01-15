@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.AppCenter.Analytics;
-using Plugin.FirebaseCrashlytics;
 using Plugin.Messaging;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.CustomRenderers;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.Server;
@@ -22,7 +18,6 @@ using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
 using xamarinJKH.Utils.Compatator;
-using System.Collections.ObjectModel;
 
 namespace xamarinJKH.Pays
 {
@@ -63,7 +58,7 @@ namespace xamarinJKH.Pays
 
         private async Task RefreshData()
         {
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () =>
                     await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
@@ -145,8 +140,6 @@ namespace xamarinJKH.Pays
                 case Device.iOS:
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
-
-                    //BackgroundColor = Color.White;
                     break;
                 default:
                     break;
@@ -183,7 +176,7 @@ namespace xamarinJKH.Pays
                     phoneDialer = CrossMessaging.Current.PhoneDialer;
                     if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone))
                         phoneDialer.MakePhoneCall(
-                            System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+                            Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
                 }
             };
             var techSend = new TapGestureRecognizer();
@@ -255,25 +248,13 @@ namespace xamarinJKH.Pays
 
 
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            // IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
             FrameSaldo.SetAppThemeColor(MaterialFrame.BorderColorProperty, hexColor, Color.FromHex("#494949"));
             FrameHistory.SetAppThemeColor(MaterialFrame.BorderColorProperty, hexColor, Color.White);
         }
 
         private void picker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // var identLength = Settings.Person.Accounts[Picker.SelectedIndex].Ident.Length;
-            // if (identLength < 6)
-            // {
-            //     Picker.WidthRequest = identLength * 9;
-            // }
             return;
-            additionalList.ItemsSource = null;
-            AccountAccountingInfo account = Accounts[Picker.SelectedIndex];
-            additionalList.ItemsSource = setPays(account);
-            Analytics.TrackEvent("Смена лс на " + account.Ident);
         }
 
         private void OnItemTapped(object sender, ItemTappedEventArgs e)

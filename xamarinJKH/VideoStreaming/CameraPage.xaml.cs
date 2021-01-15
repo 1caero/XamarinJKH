@@ -1,10 +1,4 @@
-﻿//using MediaManager;
-//using MediaManager.Forms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using Microsoft.AppCenter.Analytics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

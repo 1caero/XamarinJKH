@@ -1,18 +1,14 @@
-﻿using Rg.Plugins.Popup.Services;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
-using xamarinJKH.ViewModels.Shop;
-using Microsoft.AppCenter.Crashes;
-using xamarinJKH.Tech;
 using xamarinJKH.Main;
+using xamarinJKH.Server.RequestModel;
+using xamarinJKH.Tech;
+using xamarinJKH.ViewModels.Shop;
 
 namespace xamarinJKH.Shop
 {
@@ -20,7 +16,7 @@ namespace xamarinJKH.Shop
     public partial class ShopPageNew : ContentPage
     {
         ShopViewModel viewModel { get; set; }
-        public ShopPageNew(xamarinJKH.Server.RequestModel.AdditionalService select)
+        public ShopPageNew(AdditionalService select)
         {
             InitializeComponent();
             Analytics.TrackEvent("Магазин " + select.Name);
@@ -80,7 +76,7 @@ namespace xamarinJKH.Shop
                     var id = viewModel.Categories.ToList().IndexOf(" ");
                     Analytics.TrackEvent($"Выбрана ' '(пустая) категория, id={id}");
                     if (id > 0)
-                        (sender as CollectionView).ScrollTo(id - 1);// viewModel.Categories[id - 1];
+                        (sender as CollectionView).ScrollTo(id - 1);
                 }
             }
             catch(Exception ex)

@@ -1,11 +1,7 @@
-﻿using Xamarin.Essentials;
+﻿using System;
 using Xamarin.Forms;
-using xamarinJKH.CustomRenderers;
-using xamarinJKH.Notifications;
-using xamarinJKH.Server.RequestModel;
-using xamarinJKH.Utils;
-using System;
 using Xamarin.Forms.PancakeView;
+using xamarinJKH.Utils;
 
 namespace xamarinJKH
 {
@@ -23,7 +19,6 @@ namespace xamarinJKH
             frame.HasShadow = false;
             frame.BorderThickness = 1;
             frame.SetAppThemeColor(PancakeView.BorderColorProperty, (Color)Application.Current.Resources["MainColor"], Color.White);
-            //frame.Elevation = 20;
             frame.HorizontalOptions = LayoutOptions.FillAndExpand;
             frame.VerticalOptions = LayoutOptions.Start;
             frame.BackgroundColor = Color.White;

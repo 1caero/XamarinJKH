@@ -147,9 +147,6 @@
 
                                         <StackLayout
                                         Orientation="Horizontal">
-                                            <!-- <Image Source="ic_separator" -->
-                                            <!--        VerticalOptions="Start" -->
-                                            <!--        HorizontalOptions="FillAndExpand" /> -->
                                             <Label
                                             HeightRequest="2"
                                             BackgroundColor="#DEDEDE"
@@ -204,9 +201,6 @@
                                         </StackLayout>
                                         <StackLayout
                                         Orientation="Horizontal">
-                                            <!-- <Image Source="ic_separator" -->
-                                            <!--        VerticalOptions="Start" -->
-                                            <!--        HorizontalOptions="FillAndExpand" /> -->
                                             <Label
                                             HeightRequest="2"
                                             BackgroundColor="#DEDEDE"
@@ -232,12 +226,6 @@
                                        x:Name="FrameBtnLogin"
                                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                        Padding="12">
-                                        <!-- <Button x:Name="BtnLogin" -->
-                                        <!--         Text="Войти >" -->
-                                        <!--         TextColor="White" -->
-                                        <!--         FontAttributes="Bold" -->
-                                        <!--         BackgroundColor="Transparent" -->
-                                        <!--         Clicked="ButtonClick" /> -->
 
                                         <StackLayout
                                         Orientation="Horizontal"

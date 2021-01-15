@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using xamarinJKH.Server.RequestModel;
+﻿using xamarinJKH.Server.RequestModel;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -25,7 +21,6 @@ namespace xamarinJKH.ViewModels.Main
                 {
                     PayInfos.Remove(account_to_delete);
 
-                    //OnPropertyChanged("Accounts");
                 }
             });
         }

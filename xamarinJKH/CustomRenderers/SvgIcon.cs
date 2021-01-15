@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
-using FFImageLoading.Svg.Forms;
-using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace xamarinJKH.CustomRenderers
 {

@@ -2,7 +2,6 @@
 using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
 using xamarinJKH.CustomRenderers;
-using xamarinJKH.Utils;
 
 namespace xamarinJKH.Questions
 {
@@ -92,8 +91,7 @@ namespace xamarinJKH.Questions
                 }
             };
 
-            // containerCount.Children.Add(containerOne);
-            // containerCount.Children.Add(containerTwo);
+            
             grid.Children.Add(containerOne, 0, 0);
             grid.Children.Add(containerTwo, 1, 0);
 
@@ -121,18 +119,10 @@ namespace xamarinJKH.Questions
             {
                 {"#000000","#FFFFFF"}
             };
-            // image.Margin = new Thickness(-40, 0, 0, 0);
             image.HeightRequest = 25;
             image.WidthRequest = 25;
 
-            // Label btn = new Label();
-            // btn.Margin = new Thickness(-15, 0, 0, 0);
-            // btn.TextColor = Color.White;
-            // btn.FontAttributes = FontAttributes.Bold;
-            // btn.Text = "Пройти опрос";
-
             
-            // btn.Margin = new Thickness(-30, 0, 0, 0);
             btn.TextColor = Color.White;
             btn.BackgroundColor = Color.Transparent;
             btn.HorizontalOptions = LayoutOptions.Center;

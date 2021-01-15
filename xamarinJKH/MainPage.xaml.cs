@@ -1,38 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Text.RegularExpressions;
 using Xamarin.Essentials;
-using xamarinJKH.Navigation;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Xamarin.Forms.Internals;
 using xamarinJKH.Main;
 using xamarinJKH.MainConst;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
-using XamEffects;
 using NavigationPage = Xamarin.Forms.NavigationPage;
-using AiForms.Dialogs.Abstractions;
 using AiForms.Dialogs;
-using Akavache;
 using xamarinJKH.DialogViews;
 
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
 using Rg.Plugins.Popup.Services;
 using xamarinJKH.CustomRenderers;
 using System.Globalization;
 using System.Threading;
 using Badge.Plugin;
 using Microsoft.AppCenter.Analytics;
-using xamarinJKH.InterfacesIntegration;
 
 namespace xamarinJKH
 {
@@ -141,10 +127,7 @@ namespace xamarinJKH
             EntryLogin.Text = "";
             EntryLoginConst.Text = "";
             EntryPass.Text = "";
-            // Login("79237173372", "123");
-
-            // Login("79261270258", "19871987");
-            // Login("79261937745", "123");
+         
             string login = Preferences.Get("login", "");
             string pass = Preferences.Get("pass", "");
             string loginConst = Preferences.Get("loginConst", "");
@@ -173,11 +156,7 @@ namespace xamarinJKH
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
-                    //headerImg.HorizontalOptions = LayoutOptions.Center;
-                    //headerImg.Aspect = Aspect.AspectFit;
-
-                    
-
+                   
                     if (App.ScreenHeight < 600 || Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width<700)
                     {
                         RegistLabel.FontSize = 12;
@@ -254,17 +233,8 @@ namespace xamarinJKH
                 ImageClosePass.ReplaceStringMap = ColorHex;
                 ic_questions.ReplaceStringMap = ColorHex;
                 BindingContext = this;
-                //IconViewLogin.Foreground = hex;
-                //IconViewPass.Foreground = hex;
-                //ImageClosePass.Foreground = hex;
-
-                //FrameBtnLogin.BackgroundColor = hex;
-                //LabelseparatorPass.BackgroundColor = hex;
-                //LabelseparatorLogin.BackgroundColor = hex;
-                //SwitchLogin.OnColor = hex;
                 SwitchLogin.ThumbColor = Color.White;
-                //RegistLabel.TextColor = hex;
-                //progress.Color = hex;
+             
                 Color.SetAccent(hex);
                 FrameLogin.SetAppThemeColor(MaterialFrame.BorderColorProperty, hex, Color.White);
                 BootomFrame.SetAppThemeColor(Frame.BorderColorProperty, hex, Color.LightGray);
@@ -295,7 +265,6 @@ namespace xamarinJKH
                     await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK");
                     getSettings();
 
-                // BtnLogin.IsEnabled = false;
             }
 
             if (!Settings.MobileSettings.useDispatcherAuth)
@@ -391,11 +360,6 @@ namespace xamarinJKH
             }            
         }
 
-        void permiss()
-        {
-            
-        }
-        
         public async void Login(string loginAuth, string pass)
         {
             Analytics.TrackEvent("Авторизация пользователя");
@@ -422,9 +386,7 @@ namespace xamarinJKH
                 LoginResult login = await server.Login(replace, pass);
                 if (login.Error == null)
                 {
-                    // await DisplayAlert("Успешно", login.ToString(), "OK");
                     Settings.Person = login;
-                    // Settings.EventBlockData = await server.GetEventBlockData();
                     ItemsList<RequestType> result = await server.GetRequestsTypes();
                     Settings.TypeApp = result.Data;
                     Preferences.Set("login", replace);
@@ -465,13 +427,10 @@ namespace xamarinJKH
             {
 
                 LoginResult login = await server.LoginDispatcher(replace, pass);
-                //login.UserSettings.RightCloseRequest = false;
                 if (login.Error == null)
                 {
                     App.isCons = true;
-                    // await DisplayAlert("Успешно", login.ToString(), "OK");
                     Settings.Person = login;
-                    //Settings.EventBlockData = await server.GetEventBlockData();
                     ItemsList<RequestType> result = await server.GetRequestsTypesConst();
                     Settings.TypeApp = result.Data;
                     Preferences.Set("loginConst", replace);

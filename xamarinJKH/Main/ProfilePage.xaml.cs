@@ -1,26 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+using System.Globalization;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using System.Threading;
+using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.PancakeView;
-using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
-using System.Threading;
-using System.Globalization;
-using Microsoft.AppCenter.Analytics;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace xamarinJKH.Main
 {
@@ -44,29 +38,17 @@ namespace xamarinJKH.Main
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            SetTheme();
         }
 
         public ProfilePage()
         {
             InitializeComponent();
             Analytics.TrackEvent("Профиль жителя");
-            // if (AppInfo.PackageName == "rom.best.UkComfort" || AppInfo.PackageName == "sys_rom.ru.comfort_uk_app")
             
-            //if(Settings.MobileSettings.showOurService)
-            // ImageBack.IsVisible = true;
             Convert = true;
             GoodsIsVisible = Settings.GoodsIsVisible;
             isSave = Preferences.Get("isPass", false);
             NavigationPage.SetHasNavigationBar(this, false);
-
-            //var profile = new TapGestureRecognizer();
-            //profile.Tapped += async (s, e) =>
-            //{
-            //    if (Navigation.NavigationStack.FirstOrDefault(x => x is ProfilePage) == null)
-            //        await Navigation.PushAsync(new ProfilePage());
-            //};
-            //IconViewProfile.GestureRecognizers.Add(profile);
 
             var exitClick = new TapGestureRecognizer();
             exitClick.Tapped += async (s, e) =>
@@ -74,7 +56,11 @@ namespace xamarinJKH.Main
                 _ = await Navigation.PopModalAsync();
             };
             var techSend = new TapGestureRecognizer();
-            techSend.Tapped += async (s, e) => {    await Navigation.PushAsync(new AppPage()); };
+            techSend.Tapped += async (s, e) =>
+            {
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
+                    await Navigation.PushAsync(new AppPage());
+            };
             LabelTech.GestureRecognizers.Add(techSend);
             var call = new TapGestureRecognizer();
             call.Tapped += async (s, e) =>
@@ -84,7 +70,7 @@ namespace xamarinJKH.Main
                     IPhoneCallTask phoneDialer;
                     phoneDialer = CrossMessaging.Current.PhoneDialer;
                     if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone)) 
-                        phoneDialer.MakePhoneCall(System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+                        phoneDialer.MakePhoneCall(Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
                 }
 
             
@@ -124,7 +110,7 @@ namespace xamarinJKH.Main
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
 
-                    if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 700)
+                    if (DeviceDisplay.MainDisplayInfo.Width < 700)
                     {
                         EntryEmail.FontSize = 10;                        
                     }
@@ -137,21 +123,8 @@ namespace xamarinJKH.Main
                 case Device.iOS:
                     //BackgroundColor = Color.White;
                     ImageFon.Margin = new Thickness(0, 0, 0, 0);
-
-                    //только темная тема в ios
-                    //themelabel.IsVisible = false;
-                    //ThemeButtonBlock.IsVisible = false;
-                    //ThemeButtonBlock.IsEnabled = false;
-
-
                     break;
                 case Device.Android:
-                    // double or = Math.Round(((double) App.ScreenWidth / (double) App.ScreenHeight), 2);
-                    // if (Math.Abs(or - 0.5) < 0.02)
-                    // {
-                    //     ScrollViewContainer.Margin = new Thickness(10, -150, 10, 0);
-                    //     BackStackLayout.Margin = new Thickness(5, 25, 0, 0);
-                    // }
                     break;
                 default:
                     break;
@@ -200,11 +173,6 @@ namespace xamarinJKH.Main
             {
                  await DisplayAlert(null, AppResources.CorrectEmail, "OK");
             }
-        }
-        
-        public interface ICloseApplication
-        {
-            void closeApplication();
         }
         
         public async void SaveInfoAccount(string fio, string email)
@@ -271,10 +239,6 @@ namespace xamarinJKH.Main
 
             UkName.Text = Settings.MobileSettings.main_name;
             IconViewSave.Foreground = Color.White;
-            // IconViewNameUk.Foreground = hexColor;
-            // IconViewFio.Foreground = hexColor;
-            // IconViewEmail.Foreground = hexColor;
-            // IconViewExit.Foreground = hexColor;
 
             FrameBtnExit.BackgroundColor = Color.White;
             FrameBtnExit.BorderColor = hexColor;
@@ -314,9 +278,6 @@ namespace xamarinJKH.Main
                     break;
             }
             
-            //if (Xamarin.Essentials.DeviceInfo.Platform == DevicePlatform.iOS)
-            //    theme = Preferences.Get("Theme", 1);
-
             switch (theme)
             {
                 case 0:
@@ -329,32 +290,11 @@ namespace xamarinJKH.Main
                     RadioButtonLigth.IsChecked = true;
                     break;
             }
-            
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
             FrameTop.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
             FrameSettings.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
             
         }
 
-        private void SetTheme()
-        {
-            switch (Application.Current.RequestedTheme)
-            {
-                // case OSAppTheme.Dark:
-                //     IconViewLogin.ReplaceStringMap = IconViewTech.ReplaceStringMap = ImageBack.ReplaceStringMap = new Dictionary<string, string>
-                //     {
-                //         {"#000000", "#FFFFFF"}
-                //     };
-                //     break;
-                // case OSAppTheme.Light:
-                //     IconViewLogin.ReplaceStringMap = IconViewTech.ReplaceStringMap = ImageBack.ReplaceStringMap = new Dictionary<string, string>
-                //     {
-                //         {"#000000", $"#{Settings.MobileSettings.color}"}
-                //     };
-                //     break;
-            }
-        }
         
         private void SwitchSavePass_OnPropertyChanged(object sender, ToggledEventArgs toggledEventArgs)
         {
@@ -367,7 +307,6 @@ namespace xamarinJKH.Main
             MessagingCenter.Send<Object>(this, "ChangeTheme");
             MessagingCenter.Send<Object>(this, "ChangeThemeCounter");
             Preferences.Set("Theme", 1);
-            SetTheme();
 
             OSAppTheme currentTheme = Application.Current.RequestedTheme;
             var colors = new Dictionary<string, string>();
@@ -383,7 +322,6 @@ namespace xamarinJKH.Main
                 arrowcolor.Add("#000000", "#FFFFFF");
             }
 
-            //IconViewTech.ReplaceStringMap = colors;
         }
 
         private void RadioButtonAuto_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -395,20 +333,14 @@ namespace xamarinJKH.Main
             {
                 case "":
                     Application.Current.UserAppTheme = OSAppTheme.Unspecified;
-                    //MessagingCenter.Send<Object>(this, "ChangeTheme");
-                    //MessagingCenter.Send<Object>(this, "ChangeThemeCounter");
-                    //Preferences.Set("Theme", 0); 
                     break;
                 case "light": Application.Current.UserAppTheme = OSAppTheme.Light; break;
                 case "dark": Application.Current.UserAppTheme = OSAppTheme.Dark; break;
             }
 
-            //Application.Current.UserAppTheme = OSAppTheme.Unspecified;
             MessagingCenter.Send<Object>(this, "ChangeTheme");
             MessagingCenter.Send<Object>(this, "ChangeThemeCounter");
                 Preferences.Set("Theme", 0);
-            SetTheme();
-            //}                
             OSAppTheme currentTheme = Application.Current.RequestedTheme;
             var colors = new Dictionary<string, string>();
             var arrowcolor = new Dictionary<string, string>();
@@ -423,7 +355,6 @@ namespace xamarinJKH.Main
                 arrowcolor.Add("#000000", "#FFFFFF");
             }
 
-            //IconViewTech.ReplaceStringMap = colors;
 
 
         }
@@ -434,7 +365,6 @@ namespace xamarinJKH.Main
             MessagingCenter.Send<Object>(this, "ChangeTheme");
             MessagingCenter.Send<Object>(this, "ChangeThemeCounter");
             Preferences.Set("Theme", 2);
-            SetTheme();
         }
 
         private async void GoBack(object sender, EventArgs args)

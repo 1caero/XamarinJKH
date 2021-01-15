@@ -1,10 +1,9 @@
-﻿using Xamarin.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using xamarinJKH.Server.RequestModel;
 using System.Linq;
+using Xamarin.Forms;
+using xamarinJKH.Server.RequestModel;
 
 namespace xamarinJKH.ViewModels.DialogViewModels
 {

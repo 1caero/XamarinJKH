@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
+using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.Server;
@@ -15,7 +13,7 @@ using xamarinJKH.Server.RequestModel;
 namespace xamarinJKH.DialogViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EditCounterNameDialog :Rg.Plugins.Popup.Pages.PopupPage
+    public partial class EditCounterNameDialog :PopupPage
     {
         RestClientMP server = new RestClientMP();
         public Color hex { get; set; }
@@ -37,7 +35,7 @@ namespace xamarinJKH.DialogViews
         private async void Button_OnClicked(object sender, EventArgs e)
         {
             string name = EditName.Text; 
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                 return;
@@ -53,8 +51,6 @@ namespace xamarinJKH.DialogViews
 
                 await Loading.Instance.StartAsync(async progress =>
                 {
-                    // Device.BeginInvokeOnMainThread(async () =>
-                    // {
                         CommonResult result = await server.SetMeterCustomName(UniqueNum, name);
                         if (result.Error == null)
                         {
@@ -65,7 +61,6 @@ namespace xamarinJKH.DialogViews
                         {
                             await DisplayAlert(AppResources.Error, result.Error, "OK");
                         }
-                    // });
                 });
             }
             else

@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using Newtonsoft.Json.Converters;
-using Plugin.Messaging;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.Server;
@@ -69,7 +64,7 @@ namespace xamarinJKH.Pays
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
 
-                    if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width < 700)
+                    if (DeviceDisplay.MainDisplayInfo.Width < 700)
                     {
                         LabelHistory.FontSize = 10;
                         LabelSaldos.FontSize = 10;
@@ -83,16 +78,11 @@ namespace xamarinJKH.Pays
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
-                    //BackgroundColor = Color.White;
-                    // ImageTop.Margin = new Thickness(0, 0, 0, 0);
-                    // StackLayout.Margin = new Thickness(0, 33, 0, 0);
-                    // IconViewNameUk.Margin = new Thickness(0, 33, 0, 0);
                     break;
                 case Device.Android:
                     double or = Math.Round(((double) App.ScreenWidth / (double) App.ScreenHeight), 2);
                     if (Math.Abs(or - 0.5) < 0.02)
                     {
-                        // ScrollViewContainer.Margin = new Thickness(0, 0, 0, -120);
                         BackStackLayout.Margin = new Thickness(-5, 15, 0, 0);
                     }
 
@@ -130,7 +120,6 @@ namespace xamarinJKH.Pays
             UkName.Text = Settings.MobileSettings.main_name;
            
             Picker.Title = account.Ident;
-            // IconViewUslugi.Foreground = (Color)Application.Current.Resources["MainColor"];
             Labelseparator.BackgroundColor = (Color)Application.Current.Resources["MainColor"];
             FrameBtnLogin.BackgroundColor = (Color)Application.Current.Resources["MainColor"];
             LabelSaldos.TextColor = (Color)Application.Current.Resources["MainColor"];
@@ -138,10 +127,8 @@ namespace xamarinJKH.Pays
             FrameBtnHistory.BorderColor = (Color)Application.Current.Resources["MainColor"];
             FrameBtnSaldos.BorderColor = (Color)Application.Current.Resources["MainColor"];
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
             GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
-            Frame.SetAppThemeColor(Xamarin.Forms.Frame.BorderColorProperty, hexColor, Color.White);
+            Frame.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
 
             SetPays();
             SwitchInsurance.IsToggled = true;
@@ -213,11 +200,6 @@ namespace xamarinJKH.Pays
 
         private void picker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // var identLength = Settings.Person.Accounts[Picker.SelectedIndex].Ident.Length;
-            // if (identLength < 6)
-            // {
-            //     Picker.WidthRequest = identLength * 9;
-            // }
             account = Accounts[Picker.SelectedIndex];
             Analytics.TrackEvent("Смена лс в оплате на "  + account.Ident);
 
@@ -240,11 +222,10 @@ namespace xamarinJKH.Pays
             {
                 if (e.OldTextValue.Length< e.NewTextValue.Length && e.OldTextValue.Contains(e.NewTextValue.Last()))
                 {
-                    //var d = EntrySum.Text.LastIndexOf(e.NewTextValue.Last());
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         EntrySum.TextChanged -= EntrySum_OnTextChanged;
-                        EntrySum.Text = e.OldTextValue; // EntrySum.Text.Remove(d);// = e.OldTextValue;
+                        EntrySum.Text = e.OldTextValue; 
                         EntrySum.TextChanged += EntrySum_OnTextChanged;
                     }
 );
@@ -259,7 +240,7 @@ namespace xamarinJKH.Pays
         {
             FormattedString formatted = new FormattedString();
             //
-            string sumText = string.IsNullOrEmpty(EntrySum.Text) ? "0" : EntrySum.Text;//.Replace('.',',');
+            string sumText = string.IsNullOrEmpty(EntrySum.Text) ? "0" : EntrySum.Text;
 
 
             decimal totalSum = 0;
@@ -289,12 +270,6 @@ namespace xamarinJKH.Pays
                 }
             }
 
-            // if (isComission)
-            // {
-            if (SwitchInsurance.IsToggled && SwitchInsurance.IsVisible)
-            {
-                //totalSum += account.InsuranceSum;
-            }
             ComissionModel result = await server.GetSumWithComission(totalSum.ToString());
             if (result.Error == null && !result.Comission.Equals("0"))
             {
@@ -307,7 +282,6 @@ namespace xamarinJKH.Pays
                     LabelCommision.Text = AppResources.NotComissions;
                 }
             }
-            // }
 
             await Task.Delay(TimeSpan.FromMilliseconds(100));
             
@@ -379,7 +353,6 @@ namespace xamarinJKH.Pays
                     await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorEnterSumOne, "OK");
                     return;
                 }
-                //decimal sum = Decimal.Parse(sumText);
                 if (sumPay > 0)
                 {
                     if (Navigation.NavigationStack.FirstOrDefault(x => x is PayServicePage) == null)

@@ -368,12 +368,6 @@
     <EmbeddedResource Update="AppsConst\AddressSearch.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Counters\CounterEntryCell.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Counters\CounterEntryView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="CustomControls\ButtonProfile.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -396,9 +390,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="DialogViews\MapShopDialogView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="DialogViews\PaidAppConstListDialogView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="DialogViews\SearchDialogView.xaml">
@@ -455,22 +446,10 @@
       <SubType>Designer</SubType>
       <Generator></Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="OSS\OSSAuth.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="OSS\OSSInfo.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="OSS\OSSMain.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="OSS\OSSRegisterPin.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Pays\PayPdf.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Pays\PdfView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Questions\QuestionsPage.xaml">
@@ -490,10 +469,6 @@
       <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pays\SaldosPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator></Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Pays\TiketPage.xaml">
       <SubType>Designer</SubType>
       <Generator></Generator>
     </EmbeddedResource>
@@ -519,14 +494,6 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Shop\BasketPageNew.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Shop\ShopPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator></Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Shop\BasketPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Shop\PayShopPage.xaml">
       <SubType>Designer</SubType>
@@ -570,10 +537,6 @@
     <EmbeddedResource Update="Syncfusion.SfPdfViewer.XForms.ru-RU.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Syncfusion.SfPdfViewer.XForms.ru-RU.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Tech\TechSendPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="DialogViews\PayAppDialog.xaml">
       <SubType>Designer</SubType>
@@ -648,9 +611,6 @@
     <Compile Update="Pays\SaldosPage.xaml.cs">
       <DependentUpon>SaldosPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pays\TiketPage.xaml.cs">
-      <DependentUpon>TiketPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Apps\AppPage.xaml.cs">
       <DependentUpon>AppPage.xaml</DependentUpon>
     </Compile>
@@ -665,12 +625,6 @@
     </Compile>
     <Compile Update="Pays\HistoryPayedPage.xaml.cs">
       <DependentUpon>HistoryPayedPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Shop\ShopPage.xaml.cs">
-      <DependentUpon>ShopPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Shop\BasketPage.xaml.cs">
-      <DependentUpon>BasketPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Shop\PayShopPage.xaml.cs">
       <DependentUpon>PayShopPage.xaml</DependentUpon>
@@ -718,9 +672,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Syncfusion.SfPdfViewer.XForms.ru-RU.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Tech\TechSendPage.xaml.cs">
-      <DependentUpon>TechSendPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="DialogViews\PayAppDialog.xaml.cs">
       <DependentUpon>PayAppDialog.xaml</DependentUpon>

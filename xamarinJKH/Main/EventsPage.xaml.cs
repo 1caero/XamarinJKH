@@ -1,38 +1,26 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
+using Newtonsoft.Json;
 using Plugin.FirebaseCrashlytics;
 using Plugin.Messaging;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.PancakeView;
-using Xamarin.Forms.PlatformConfiguration;
-using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.Additional;
-using xamarinJKH.Apps;
 using xamarinJKH.CustomRenderers;
-using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.News;
 using xamarinJKH.Questions;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
-using xamarinJKH.Shop;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
 using xamarinJKH.VideoStreaming;
-using Application = Xamarin.Forms.Application;
-using AppPage = xamarinJKH.Tech.AppPage;
-using NavigationPage = Xamarin.Forms.NavigationPage;
-using VisualElement = Xamarin.Forms.VisualElement;
+using xamarinJKH.ViewModels;
 
 namespace xamarinJKH.Main
 {
@@ -45,7 +33,7 @@ namespace xamarinJKH.Main
         {
             InitializeComponent();
             Analytics.TrackEvent("События");
-            Analytics.TrackEvent(Newtonsoft.Json.JsonConvert.SerializeObject(Settings.Person.Accounts));
+            Analytics.TrackEvent(JsonConvert.SerializeObject(Settings.Person.Accounts));
             BindingContext = viewModel = new EventsPageViewModel();
             NavigationPage.SetHasNavigationBar(this, false);
             switch (Device.RuntimePlatform)
@@ -67,15 +55,11 @@ namespace xamarinJKH.Main
                     int a = 0;
                     int b = 10 / a;
                 }
-
-
-                // await PopupNavigation.Instance.PushAsync(new TechDialog());
-                await Navigation.PushAsync(new AppPage());
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
+                    await Navigation.PushAsync(new AppPage());
             };
             LabelTech.GestureRecognizers.Add(techSend);
 
-            //if(Settings.MobileSettings.showOurService)
-            //{ 
                 IconViewProfile.IsVisible = true;
                 var profile = new TapGestureRecognizer();
                 profile.Tapped += async (s, e) =>
@@ -84,7 +68,6 @@ namespace xamarinJKH.Main
                         await Navigation.PushAsync(new ProfilePage());
                 };
                 IconViewProfile.GestureRecognizers.Add(profile);
-            //}
 
             var call = new TapGestureRecognizer();
             call.Tapped += async (s, e) =>
@@ -93,14 +76,11 @@ namespace xamarinJKH.Main
                 {
                     IPhoneCallTask phoneDialer;
                     phoneDialer = CrossMessaging.Current.PhoneDialer;
-#if DEBUG
-                    //Settings.Person.companyPhone = null;
-#endif
                     try
                     {
                         if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone))
                             phoneDialer.MakePhoneCall(
-                                System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]",
+                                Regex.Replace(Settings.Person.companyPhone, "[^+0-9]",
                                     ""));
                     }
                     catch (Exception ex)
@@ -114,7 +94,6 @@ namespace xamarinJKH.Main
             StartNotification();
             StartOffers();
             StartQuestions();
-            // SetVisibleControls();
             StartOSS();
             CrossFirebaseCrashlytics.Current.SetUserIdentifier(Settings.Person.Login);
             CrossFirebaseCrashlytics.Current.SetUserName(Settings.Person.FIO);
@@ -123,7 +102,7 @@ namespace xamarinJKH.Main
             {
                 viewModel.LoadData.Execute(null);
 
-                if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
                     Device.BeginInvokeOnMainThread(async () =>
                         await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
@@ -148,7 +127,6 @@ namespace xamarinJKH.Main
                     arrowcolor.Add("#000000", "#FFFFFF");
                 }
 
-                //IconViewTech.ReplaceStringMap = colors;
             });
 
             MessagingCenter.Subscribe<Object, (string, string)>(this, "OpenNotification", async (sender, args) =>
@@ -166,12 +144,6 @@ namespace xamarinJKH.Main
             base.OnAppearing();
             MessagingCenter.Send<Object>(this, "ChangeThemeCounter");
             
-            //new Task(SyncSetup).Start(); // This could be an await'd task if need be
-        }
-
-        async void SyncSetup()
-        {
-            Device.BeginInvokeOnMainThread(SetVisibleControls);
         }
 
         async void SetVisibleControls()
@@ -252,17 +224,7 @@ namespace xamarinJKH.Main
                 if (Navigation.NavigationStack.FirstOrDefault(x => x is OSSMain) == null)
                     await Navigation.PushAsync(new OSSMain());
             };
-            // startOSSTGR.Tapped += async (s, e) => { await Navigation.PushAsync(new OSSAuth()); };
             FrameOSS.GestureRecognizers.Add(startOSSTGR);
-            // if (!Settings.MobileSettings.enableOSS || !Settings.Person.accessOSS)
-            // {
-            //     FrameOSS.IsVisible = false;
-            // }
-            //
-            // if (RestClientMP.SERVER_ADDR.ToLower().Contains("water") && Settings.Person.Accounts.Count > 0)
-            // {
-            //     FrameOSS.IsVisible = true;
-            // }
         }
 
         private void StartShop()
@@ -271,22 +233,14 @@ namespace xamarinJKH.Main
 
         void SetText()
         {
-            UkName.Text = Settings.MobileSettings.main_name;// +"aaaaaaaaaaaaaaaaaaabbbbbaaaaaaaaaaaaaaaaaaaaaaccccc";
+            UkName.Text = Settings.MobileSettings.main_name;
 
-            //UkName.FormattedText =  Settings.MobileSettings.main_name ;
-            //UkName.LineBreakMode = LineBreakMode.WordWrap;
-
-            // LabelTech.TextColor = (Color)Application.Current.Resources["MainColor"];
-            // IconViewTech.Foreground = (Color)Application.Current.Resources["MainColor"];
         }
 
         void SetColor()
         {
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            //IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
             
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
 
             FrameNews.SetAppThemeColor(MaterialFrame.BorderColorProperty, hexColor, Color.White);
             FrameQuestions.SetAppThemeColor(MaterialFrame.BorderColorProperty, hexColor, Color.White);
@@ -303,7 +257,7 @@ namespace xamarinJKH.Main
         }
     }
 
-    public class EventsPageViewModel : xamarinJKH.ViewModels.BaseViewModel
+    public class EventsPageViewModel : BaseViewModel
     {
         bool _showNews;
 
@@ -374,9 +328,6 @@ namespace xamarinJKH.Main
                 {
                     MobileMenu mobileMenu = Settings.MobileSettings.menu.Find(x => x.name_app == "Web-камеры");
                     return mobileMenu != null && mobileMenu.visible != 0 && Settings.Person.Accounts.Count > 0;
-                        //&&
-                        //   Device.RuntimePlatform == "Android"
-                           ;
                 }
                 catch (Exception e)
                 {
@@ -528,13 +479,11 @@ namespace xamarinJKH.Main
             MessagingCenter.Subscribe<Object>(this, "ReducePolls", sender =>
             {
                 PollsCount--;
-                //MessagingCenter.Send<Object, int>(this, "SetEventsAmount", PollsCount + AnnounsmentsCount);
             });
 
             MessagingCenter.Subscribe<Object>(this, "ReduceAnnounsements", sender =>
             {
                 AnnounsmentsCount--;
-                //MessagingCenter.Send<Object, int>(this, "SetEventsAmount", PollsCount + AnnounsmentsCount);
             });
 
             MessagingCenter.Subscribe<Object>(this, "ReduceNews", sender =>

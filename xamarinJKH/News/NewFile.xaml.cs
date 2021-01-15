@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace xamarinJKH.News
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NewFile : AiForms.Dialogs.Abstractions.DialogView
+    public partial class NewFile : DialogView
     {
         string image;
         public string Image

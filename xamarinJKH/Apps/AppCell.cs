@@ -1,6 +1,6 @@
-﻿using FFImageLoading.Svg.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using FFImageLoading.Svg.Forms;
 using Microsoft.AppCenter.Analytics;
 using Xamarin.Forms;
 using xamarinJKH.CustomRenderers;
@@ -41,7 +41,7 @@ namespace xamarinJKH.Apps
             var arrow = new SvgCachedImage();
             arrow.Source = "resource://xamarinJKH.Resources.ic_arrow_forward.svg";
             Color hex = (Color)Application.Current.Resources["MainColor"];
-            arrow.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", $"#{Settings.MobileSettings.color}" } };
+            arrow.ReplaceStringMap = new Dictionary<string, string> { { "#000000", $"#{Settings.MobileSettings.color}" } };
             arrow.HeightRequest = 25;
             arrow.WidthRequest = 25;
             arrow.VerticalOptions = LayoutOptions.CenterAndExpand;
@@ -59,7 +59,7 @@ namespace xamarinJKH.Apps
             StackLayout status = new StackLayout();
             status.Orientation = StackOrientation.Horizontal;
             status.HorizontalOptions = LayoutOptions.FillAndExpand;
-            arrow.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", $"#{Settings.MobileSettings.color}" } };
+            arrow.ReplaceStringMap = new Dictionary<string, string> { { "#000000", $"#{Settings.MobileSettings.color}" } };
             ImageStatus.Source = "resource://xamarinJKH.Resources.ic_status_new.svg";
             ImageStatus.HeightRequest = 15;
             ImageStatus.VerticalOptions = LayoutOptions.End;
@@ -72,8 +72,6 @@ namespace xamarinJKH.Apps
             LabelStatus.VerticalOptions = LayoutOptions.Center;
 
 
-            // status.Children.Add(ImageStatus);
-            // status.Children.Add(LabelStatus);
 
             LabelText.TextColor = Color.Black;
             LabelText.HorizontalOptions = LayoutOptions.Start;
@@ -94,14 +92,11 @@ namespace xamarinJKH.Apps
                 }
             };
 
-            // status.Children.Add(numberAndDate);
-            // status.Children.Add(LabelText);
 
             grid.Children.Add(numberAndDate, 0, 0);
 
             StackLayout stackLayoutStatus = new StackLayout();
             stackLayoutStatus.Orientation = StackOrientation.Horizontal;
-            // stackLayoutStatus.Spacing = 0;
 
             stackLayoutStatus.Children.Add(ImageStatus);
             stackLayoutStatus.Children.Add(LabelStatus);
@@ -151,7 +146,6 @@ namespace xamarinJKH.Apps
             var stackLMain = new StackLayout() { Margin=new Thickness(0,2)};
             stackLMain.Children.Add(frame);
             View = stackLMain;
-            //View = frame;
 
             MessagingCenter.Subscribe<Object, int>(this, "SetAppRead", (sender, args) =>
             {
@@ -248,7 +242,6 @@ namespace xamarinJKH.Apps
                 });
                 numberAndDate.FormattedText = formatted;
                 LabelStatus.Text = Status;
-                // LabelText.Text = "• " + TextApp;
 
                 LabelDate.Text = DateApp;
                 ImageStatus.ReplaceStringMap = new Dictionary<string, string>

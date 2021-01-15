@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
-using xamarinJKH.Utils;
 
 namespace xamarinJKH.DialogViews
 {

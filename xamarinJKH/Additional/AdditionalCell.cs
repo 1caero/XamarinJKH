@@ -3,56 +3,39 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reactive.Linq;
 using Akavache;
+using FFImageLoading.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
-using xamarinJKH.CustomRenderers;
 using xamarinJKH.Server;
-using FFImageLoading.Forms.Args;
 
 namespace xamarinJKH.Additional
 {
     public class AdditionalCell : ViewCell
     {
         Image image;
-        FFImageLoading.Forms.CachedImage CachedImage;
+        CachedImage CachedImage;
 
-        //MaterialFrame frame;
         PancakeView frame;
         RestClientMP _server = new RestClientMP();
 
         public AdditionalCell()
         {
             image = new Image();
-            CachedImage = new FFImageLoading.Forms.CachedImage();
+            CachedImage = new CachedImage();
             CachedImage.VerticalOptions = LayoutOptions.FillAndExpand;
             CachedImage.HorizontalOptions = LayoutOptions.FillAndExpand;
             CachedImage.Aspect = Aspect.Fill;
             CachedImage.HeightRequest = ImageHeight;
 
 
-            frame = new PancakeView(); // MaterialFrame();
+            frame = new PancakeView(); 
             
-            //frame.Elevation = 20;
             frame.HorizontalOptions = LayoutOptions.FillAndExpand;
             frame.VerticalOptions = LayoutOptions.Start;
-            // frame.BackgroundColor =  Color.White;
             frame.IsClippedToBounds = true;
             frame.Margin = new Thickness(10, 0, 10, 10);
             frame.Padding = new Thickness(0);
             frame.CornerRadius = 40;
-
-            //frame.BackgroundColor = Color.Red;
-
-            //Frame cell = new Frame();
-            //cell.Padding = new Thickness(0);
-            //cell.HorizontalOptions = LayoutOptions.FillAndExpand;
-            //cell.VerticalOptions = LayoutOptions.Start;
-            //cell.BackgroundColor = Color.White;
-            //cell.IsClippedToBounds = true;
-            //cell.CornerRadius = 40;
-            //cell.Content = image;
-            //cell.Children.Add(image);
-
             frame.Content = CachedImage;// image;
 
             View = frame;
@@ -110,37 +93,6 @@ namespace xamarinJKH.Additional
             CachedImage.HeightRequest = ImageHeight;
            
             return;
-
-            if (BindingContext != null)
-            {
-                byte[] imageByte = null;
-                try
-                {
-                    imageByte = await BlobCache.UserAccount.GetObject<byte[]>(LogoFileId);
-                }
-                catch (KeyNotFoundException ex)
-                {
-                }
-
-                if (imageByte == null)
-                {
-                    imageByte = await _server.GetPhotoAdditional(Detail);
-                    await BlobCache.UserAccount.InsertObject(LogoFileId, imageByte);
-                }
-                else
-                {
-                    Stream stream = new MemoryStream(imageByte);
-                    //image = new Image();       
-
-                    image.Source = ImageSource.FromStream(() => { return stream; });
-                    image.VerticalOptions = LayoutOptions.FillAndExpand;
-                    image.Aspect = Aspect.Fill;
-                    image.HorizontalOptions = LayoutOptions.FillAndExpand;
-                    image.HeightRequest = ImageHeight;
-
-                    //frame.Content = image;
-                }
-            }
         }
     }
 }

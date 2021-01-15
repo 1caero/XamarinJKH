@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
@@ -11,10 +7,10 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.DialogViews;
-using xamarinJKH.Server;
-using xamarinJKH.Utils;
-using xamarinJKH.Server.RequestModel;
 using xamarinJKH.InterfacesIntegration;
+using xamarinJKH.Server;
+using xamarinJKH.Server.RequestModel;
+using xamarinJKH.Utils;
 
 namespace xamarinJKH.Pays
 {
@@ -42,14 +38,12 @@ namespace xamarinJKH.Pays
             if (Device.RuntimePlatform == Device.iOS)
             {
                 int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
-                //BackStackLayout.Padding = new Thickness(0, statusBarHeight, 0, 0);
 
                 iosBarSeparator.IsVisible = true;
                 iosBarSeparator.IsEnabled = true;
                 iosBarSeparator.HeightRequest = statusBarHeight;
             }
 
-            SetText();
 
             if (idRequset == null)
             {
@@ -63,7 +57,7 @@ namespace xamarinJKH.Pays
 
         async Task GetPayLink(string ident, decimal sum, bool isInsurance)
         {
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () =>
                     await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
@@ -103,7 +97,7 @@ namespace xamarinJKH.Pays
 
         async Task GetPayLinkRequest(int? id, decimal sum)
         {
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () =>
                     await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
@@ -137,12 +131,6 @@ namespace xamarinJKH.Pays
            
         }
 
-        void SetText()
-        {
-            // UkName.Text = Settings.MobileSettings.main_name;
-            // LabelPhone.Text = "+" + Settings.Person.Phone;
-        }
-
         private void WebView_OnNavigated(object sender, WebNavigatedEventArgs e)
         {
             var eUrl = e.Url;
@@ -165,7 +153,7 @@ namespace xamarinJKH.Pays
         public async Task StartProgressBar(string url)
         {
             bool rate = Preferences.Get("rate", true);
-            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () =>
                     await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));

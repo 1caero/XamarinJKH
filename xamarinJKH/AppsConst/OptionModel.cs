@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Xamarin.Forms;
 using xamarinJKH.Server.RequestModel;
+using xamarinJKH.ViewModels;
 
 namespace xamarinJKH.AppsConst
 {
-    public class OptionModel:xamarinJKH.ViewModels.BaseViewModel
+    public class OptionModel:BaseViewModel
     {
         public string Name { get; set; }
         public string Image { get; set; }
