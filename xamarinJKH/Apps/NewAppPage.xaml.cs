@@ -79,7 +79,11 @@ namespace xamarinJKH.Apps
             };
             BackStackLayout.GestureRecognizers.Add(backClick);
             var techSend = new TapGestureRecognizer();
-            techSend.Tapped += async (s, e) => {     await Navigation.PushAsync(new Tech.AppPage());};
+            techSend.Tapped += async (s, e) => 
+            {
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is Tech.AppPage) == null)
+                    await Navigation.PushAsync(new Tech.AppPage());
+            };
             LabelTech.GestureRecognizers.Add(techSend);
             var pickType = new TapGestureRecognizer();
             pickType.Tapped += async (s, e) => {  
