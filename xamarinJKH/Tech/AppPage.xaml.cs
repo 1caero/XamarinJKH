@@ -455,10 +455,13 @@ namespace xamarinJKH.Tech
             CommonResult commonResult = await _server.AddFileAppsTech(Settings.Person.Phone,
                 getFileName(file.Path), StreamToByteArray(file.GetStream()),
                 file.Path);
-            if (commonResult == null)
+            if (commonResult != null)
             {
-                await ShowToast(AppResources.SuccessFileSent);
-                await RefreshData();
+                if (string.IsNullOrEmpty(commonResult.Error))
+                {
+                    await ShowToast(AppResources.SuccessFileSent);
+                    await RefreshData();
+                }
             }
         }
 

@@ -7,6 +7,7 @@ using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 
@@ -62,14 +63,31 @@ namespace xamarinJKH.DialogViews
             BindingContext = this;
         }
 
+        bool ClosingApp;
         private async void CloseApp(object sender, EventArgs e)
         {
-            await StartProgressBar();
+            if (!ClosingApp)
+            {
+                ClosingApp = true;
+                await StartProgressBar();
+                await Task.Delay(TimeSpan.FromSeconds(5));
+                ClosingApp = false;
+            }
         }
+
+        bool MessageShowing;
 
         public async Task ShowToast(string title)
         {
-            Toast.Instance.Show<ToastDialog>(new {Title = title, Duration = 1500});
+            if (!MessageShowing)
+            {
+                MessageShowing = true;
+                //DependencyService.Get<IMessage>().ShortAlert(title);
+                Toast.Instance.Show<ToastDialog>(new {Title = title, Duration = 1500});
+                await Task.Delay(TimeSpan.FromSeconds(5));
+                MessageShowing = false;
+            }
+
             // Optionally, view model can be passed to the toast view instance.
         }
 
