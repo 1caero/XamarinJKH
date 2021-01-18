@@ -151,6 +151,11 @@ namespace xamarinJKH.MainConst
                 await PopupNavigation.PushAsync(new LocationNotification(true));
             });
 
+            if (!Settings.Person.UserSettings.RightCreateAnnouncements)
+            {
+                Children.Remove(NotifNavBar);
+            }
+            
             BindingContext = this;
 
         }
@@ -203,9 +208,9 @@ namespace xamarinJKH.MainConst
         {
             base.OnCurrentPageChanged();
             var i = Children.IndexOf(CurrentPage);
-            if (i == 0)
+            if (CurrentPage == appNavBar)
                 MessagingCenter.Send<Object>(this, "UpdateAppCons");
-            if (i == 2)
+            if (CurrentPage == monNavBar)
             {
                 MessagingCenter.Send<Object>(this, "StartStatistic");
             }

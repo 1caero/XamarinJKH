@@ -285,9 +285,16 @@ namespace xamarinJKH.MainConst
         }
         private void SetDisableCheck()
         {
-            foreach (var each in RequestInfos)
+            try
             {
-                each.IsCheked = false;
+                foreach (var each in RequestInfos)
+                {
+                    each.IsCheked = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                // ignored
             }
         }
         private void IsVisibleFunction()

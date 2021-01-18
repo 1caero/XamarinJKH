@@ -11,21 +11,21 @@
              x:Class="xamarinJKH.MainConst.MonitorPage">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:AccountSelectedBorderConverter x:Key="Border"/>
-            <converters:AccountSelectedBackgroundConverter x:Key="Background"/>
+            <converters:AccountSelectedBorderConverter x:Key="Border" />
+            <converters:AccountSelectedBackgroundConverter x:Key="Background" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Image x:Name="ImageFon"
-                       Source="{AppThemeBinding Light=ic_monitor_top_light, Dark=ic_monitor_top}"
-                       VerticalOptions="Start"
-					   Margin="0,0,0,0"
-                       Aspect="{OnPlatform Android=Fill, iOS=AspectFill}"
-                       HorizontalOptions="FillAndExpand" />
+                   Source="{AppThemeBinding Light=ic_monitor_top_light, Dark=ic_monitor_top}"
+                   VerticalOptions="Start"
+                   Margin="0,0,0,0"
+                   Aspect="{OnPlatform Android=Fill, iOS=AspectFill}"
+                   HorizontalOptions="FillAndExpand" />
             <StackLayout VerticalOptions="FillAndExpand">
                 <StackLayout
                     Margin="25,10,15,0"
@@ -39,217 +39,118 @@
                            TextColor="{AppThemeBinding Light=Black, Dark=White}" />
                     <StackLayout
                         HorizontalOptions="EndAndExpand"
-                        
+
                         Orientation="Horizontal">
-                        <!--BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"-->
-                        <xamarinJkh:ButtonSupport x:Name="LabelTech"></xamarinJkh:ButtonSupport>
-                        <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
-                        <!--<svg:SvgCachedImage x:Name="IconViewTech"
-                                            Source="resource://xamarinJKH.Resources.ic_tech.svg"
-                                            HeightRequest="20"
-                                            ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
-                                            Margin="0, 0,0,0"
-                                            HorizontalOptions="Start"
-                                            VerticalOptions="Center" />
-                        <Label x:Name="LabelTech"
-                               Text="{x:Static xamarinJkh:AppResources.Support}"
-                               FontSize="12"
-                               TextDecorations="Underline"
-                               TextColor="White"
-                               Margin="0, 0, 0, 0"
-                               VerticalOptions="Center" />
-                        <svg:SvgCachedImage x:Name="IconViewProfile" Margin="15,0,5,0"
-                                                Source="resource://xamarinJKH.Resources.ic_profile_top.svg"
-                                                HeightRequest="20"
-                                                ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"                                                
-                                                BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="Center"/>-->
+                        <xamarinJkh:ButtonSupport x:Name="LabelTech" />
+                        <xamarinJkh:ButtonProfile x:Name="IconViewProfile" Margin="2,0,5,0" />
                     </StackLayout>
                 </StackLayout>
                 <StackLayout
-                        x:Name="BackStackLayout"
-                        Orientation="Horizontal"
-                        Margin="25, 0, 0, 0"
-                        HorizontalOptions="Start">
+                    x:Name="BackStackLayout"
+                    Orientation="Horizontal"
+                    Margin="25, 0, 0, 0"
+                    HorizontalOptions="Start">
                     <Label
-                            Text="{x:Static xamarinJkh:AppResources.Monitoring_NavBar}"
-                            FontSize="23"
-                            TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                            FontAttributes="Bold"
-                            HorizontalOptions="Start" />
+                        Text="{x:Static xamarinJkh:AppResources.Monitoring_NavBar}"
+                        FontSize="23"
+                        TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Start" />
                 </StackLayout>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <StackLayout VerticalOptions="FillAndExpand">
                         <Frame CornerRadius="1"
-                       HasShadow="{AppThemeBinding Light=false, Dark=true}"
-                       BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
-                           BorderColor="{AppThemeBinding Light={x:StaticResource MainColor}, Dark=#8D8D8D}"
-                           Padding="0,0,0,80">
-                            <StackLayout Padding="20,10,20,10" Spacing="5">
-                                <CollectionView ItemsSource="{Binding Areas}"
-                                            SelectedItem="{Binding SelectedArea}"
-                                            IsVisible="True"
-                                            HeightRequest="50"
-                                                HorizontalScrollBarVisibility="Never"
-                                            SelectionChanged="CollectionView_SelectionChanged"
-                                            SelectionMode="Single">
-                                    <CollectionView.ItemsLayout>
-                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="{OnPlatform Android='5'}" SnapPointsAlignment="Start"/>
-                                    </CollectionView.ItemsLayout>
+                               HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                               BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
+                               BorderColor="{AppThemeBinding Light={x:StaticResource MainColor}, Dark=#8D8D8D}"
+                               Padding="0,0,0,80">
+                            <StackLayout Padding="20,10,20,10" Spacing="10">
+                                <StackLayout Spacing="0" Grid.Column="0" HorizontalOptions="StartAndExpand">
+                                    <StackLayout
+                                        Orientation="Horizontal" x:Name="StackLayoutType">
+                                        <xamarinJkh:BorderlessPicker x:Name="PickerType"
+                                                                     Title="{x:Static xamarinJkh:AppResources.Choose}"
+                                                                     TitleColor="{Binding hex}"
+                                                                     TextColor="{Binding hex}"
+                                                                     VerticalOptions="End"
+                                                                     FontSize="15"
+                                                                     FontAttributes="Bold"
+                                                                     HorizontalOptions="Fill"
+                                                                     SelectedIndexChanged="pickerType_SelectedIndexChanged"
+                                                                     ItemsSource="{Binding Areas}"
+                                                                     ItemDisplayBinding="{Binding _Name}"
+                                                                     SelectedItem="{Binding SelectedArea}" />
+                                        <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                             HeightRequest="12"
+                                                             WidthRequest="12"
+                                                             Rotation="90"
+                                                             Margin="0,5,0,0"
+                                                             VerticalOptions="Center"
+                                                             Foreground="{Binding hex}"
+                                                             HorizontalOptions="End" />
+                                    </StackLayout>
+                                    <Label
+                                        HeightRequest="1"
+                                        BackgroundColor="{Binding hex}"
+                                        HorizontalOptions="Fill" />
+                                </StackLayout>
+                                <StackLayout Spacing="0" HorizontalOptions="StartAndExpand" IsVisible="{Binding LoadingStreets , Converter={converters:InverseBoolConverter}}">
+                                    <StackLayout
+                                        Orientation="Horizontal" x:Name="StackLayoutH" HorizontalOptions="Fill">
+                                        <xamarinJkh:BorderlessPicker x:Name="PickerHouse"
+                                                                     Title="{x:Static xamarinJkh:AppResources.Choose}"
+                                                                     TitleColor="{Binding hex}"
+                                                                     TextColor="{Binding hex}"
+                                                                     VerticalOptions="End"
+                                                                     FontSize="15"
+                                                                     FontAttributes="Bold"
+                                                                     HorizontalOptions="Fill"
+                                                                     SelectedIndexChanged="PickerHouse_OnSelectedIndexChanged"
+                                                                     ItemsSource="{Binding Streets}"
+                                                                     ItemDisplayBinding="{Binding Address}"
+                                                                     SelectedItem="{Binding SelectedStreet}" />
+                                        <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                             HeightRequest="12"
+                                                             WidthRequest="12"
+                                                             Rotation="90"
+                                                             Margin="0,5,0,0"
+                                                             VerticalOptions="Center"
+                                                             Foreground="{Binding hex}"
+                                                             HorizontalOptions="End" />
+                                    </StackLayout>
+                                    <Label
+                                        HeightRequest="1"
+                                        BackgroundColor="{Binding hex}"
+                                        HorizontalOptions="Fill" />
+                                </StackLayout>
+                                <ActivityIndicator IsVisible="{Binding LoadingStreets}"
+                                                   IsEnabled="{Binding LoadingStreets}"
+                                                   IsRunning="{Binding LoadingStreets}"
+                                                   BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
+                                                   Color="{x:StaticResource MainColor}" />
 
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackLayout Padding="{OnPlatform iOS='2,2,10,2' , Android='2'}">
-                                                <VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name="CommonStates">
-                                                        <VisualState x:Name="Normal">
-                                                            <VisualState.Setters>
-                                                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#8D8D8D}"/>
-                                                            </VisualState.Setters>
-                                                        </VisualState>
-                                                        <VisualState x:Name="Selected">
-                                                            <VisualState.Setters>
-                                                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#8D8D8D}"/>
-                                                            </VisualState.Setters>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateManager.VisualStateGroups>
-                                                <Frame BorderColor="{Binding Selected, Converter={x:StaticResource Border}}"
-                                                       BackgroundColor="{Binding Selected, Converter={x:StaticResource Background}}"
-                                                       x:Name="Frame"
-                                               HasShadow="False"
-                                                       Padding="10"
-                                                       CornerRadius="5">
-                                                    <StackLayout VerticalOptions="Start"
-                                                       Spacing="0">
-                                                        <Label Text="{Binding Name}"
-                                                               TextColor="{Binding Source={x:Reference Frame}, Path=BorderColor}"
-                                                               VerticalTextAlignment="Center"
-                                                               FontAttributes="Bold"
-                                                               FontSize="16"/>
-                                                    </StackLayout>
-
-                                                    <!--<VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name="CommonStates">
-                                                        <VisualState x:Name="Normal">
-                                                            <VisualState.Setters>
-                                                                <Setter Property="BorderColor" Value="{AppThemeBinding Light=#8D8D8D, Dark=White}"/>
-                                                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#8D8D8D}"/>
-                                                            </VisualState.Setters>
-                                                        </VisualState>
-
-                                                        <VisualState x:Name="Selected">
-                                                            <VisualState.Setters>
-                                                                <Setter Property="BorderColor" Value="{x:StaticResource MainColor}"/>
-                                                                <Setter Property="BackgroundColor" Value="White"/>
-                                                            </VisualState.Setters>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateManager.VisualStateGroups>-->
-                                                </Frame>
-                                            </StackLayout>
-
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                                <Grid HeightRequest="{Binding Path=Height, Source={x:Reference StreetsCollection}}"
-                                      Padding="0">
-                                    <CollectionView ItemsSource="{Binding Streets}"
-                                            SelectionChanged="StreetCollectionSelectionChanged"
-                                            SelectedItem="{Binding SelectedStreet}"
-                                            IsVisible="True"
-                                            HeightRequest="50"
-                                            HorizontalScrollBarVisibility="Never"
-                                            x:Name="StreetsCollection"
-                                            SelectionMode="Single">
-                                        <CollectionView.ItemsLayout>
-                                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="{OnPlatform Android='5'}" SnapPointsAlignment="Start"/>
-                                        </CollectionView.ItemsLayout>
-
-                                        <CollectionView.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackLayout Padding="{OnPlatform iOS='2,2,10,2' , Android='2'}">
-                                                    <VisualStateManager.VisualStateGroups>
-                                                        <VisualStateGroup x:Name="CommonStates">
-                                                            <VisualState x:Name="Normal">
-                                                                <VisualState.Setters>
-                                                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#8D8D8D}"/>
-                                                                </VisualState.Setters>
-                                                            </VisualState>
-                                                            <VisualState x:Name="Selected">
-                                                                <VisualState.Setters>
-                                                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#8D8D8D}"/>
-                                                                </VisualState.Setters>
-                                                            </VisualState>
-                                                        </VisualStateGroup>
-                                                    </VisualStateManager.VisualStateGroups>
-                                                    <Frame BorderColor="{Binding Selected, Converter={x:StaticResource Border}}"
-                                                       BackgroundColor="{Binding Selected, Converter={x:StaticResource Background}}"
-                                                       x:Name="Frame"
-                                               HasShadow="False"
-                                                       Padding="10"
-                                                       CornerRadius="5">
-                                                        <StackLayout VerticalOptions="Start"
-                                                       Spacing="0">
-                                                            <Label Text="{Binding Address}"
-                                                               TextColor="{Binding Source={x:Reference Frame}, Path=BorderColor}"
-                                                               FontAttributes="Bold"
-                                                               FontSize="16"/>
-                                                        </StackLayout>
-
-                                                        <!--<VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name="CommonStates">
-                                                        <VisualState x:Name="Normal">
-                                                            <VisualState.Setters>
-                                                                <Setter Property="BorderColor" Value="{AppThemeBinding Light=#8D8D8D, Dark=White}"/>
-                                                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#8D8D8D}"/>
-                                                            </VisualState.Setters>
-                                                        </VisualState>
-
-                                                        <VisualState x:Name="Selected">
-                                                            <VisualState.Setters>
-                                                                <Setter Property="BorderColor" Value="{x:StaticResource MainColor}"/>
-                                                                <Setter Property="BackgroundColor" Value="White"/>
-                                                            </VisualState.Setters>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateManager.VisualStateGroups>-->
-                                                    </Frame>
-                                                </StackLayout>
-                                            </DataTemplate>
-                                        </CollectionView.ItemTemplate>
-                                    </CollectionView>
-
-                                    <ActivityIndicator IsVisible="{Binding LoadingStreets}"
-                                                       IsEnabled="{Binding LoadingStreets}"
-                                                       IsRunning="{Binding LoadingStreets}"
-                                                       BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
-                                                       Color="{x:StaticResource MainColor}"/>
-                                </Grid>
-
-                                
                             </StackLayout>
                         </Frame>
                     </StackLayout>
                     <StackLayout IsVisible="True"
                                  Grid.Row="1"
-                    VerticalOptions="FillAndExpand">
+                                 VerticalOptions="FillAndExpand">
                         <Frame CornerRadius="40"
-                           IsVisible="False"
-                       Margin="20, 10, 20, -80"
-                       HasShadow="{AppThemeBinding Light=false, Dark=true}"
-                       VerticalOptions="Start"
-                       x:Name="Frame"
-                       BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
-                       Padding="20,20,20,80">
+                               IsVisible="False"
+                               Margin="20, 10, 20, -80"
+                               HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                               VerticalOptions="Start"
+                               x:Name="Frame"
+                               BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
+                               Padding="20,20,20,80">
                             <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand">
-                                <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="10">
+                                <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" RowSpacing="0"
+                                      ColumnSpacing="10">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
@@ -258,81 +159,83 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <StackLayout HorizontalOptions="CenterAndExpand"
-                                         Grid.Row="0"
-                                         Grid.Column="0"
-                                         Padding="0,0,0,10"
-                                         x:Name="StackLayoutGroup"
-                                         Orientation="Vertical"
-                                         VerticalOptions="CenterAndExpand"
-                                         Margin="0,0,0,10"
-                                         Spacing="-2">
-                                        <Grid VerticalOptions="FillAndExpand" >
+                                                 Grid.Row="0"
+                                                 Grid.Column="0"
+                                                 Padding="0,0,0,10"
+                                                 x:Name="StackLayoutGroup"
+                                                 Orientation="Vertical"
+                                                 VerticalOptions="CenterAndExpand"
+                                                 Margin="0,0,0,10"
+                                                 Spacing="-2">
+                                        <Grid VerticalOptions="FillAndExpand">
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto" />
                                             </Grid.RowDefinitions>
 
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="0.1*"/>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="0.1*" />
                                             </Grid.ColumnDefinitions>
                                             <Label Text="{x:Static xamarinJkh:AppResources.AreaChoose}"
-                                           x:Name="LabelGroup"
-                                           FontSize="{Binding fontSize}"
-                                           MaxLines="2"
-                                               VerticalOptions="FillAndExpand"
-                                           FontAttributes="Bold"
-                                           TextColor="{AppThemeBinding Light=Black, Dark=White}" />
-                                            <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
-                                                         HeightRequest="12"
-                                                         WidthRequest="12"
-                                                         Rotation="90"
-                                                         Margin="0,5,0,0"
-                                                         VerticalOptions="Center"
-                                                            Grid.Column="1"
-                                                         ReplaceStringMap="{Binding fontSize, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}" />
+                                                   x:Name="LabelGroup"
+                                                   FontSize="{Binding fontSize}"
+                                                   MaxLines="2"
+                                                   VerticalOptions="FillAndExpand"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                                            <svg:SvgCachedImage
+                                                Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                                HeightRequest="12"
+                                                WidthRequest="12"
+                                                Rotation="90"
+                                                Margin="0,5,0,0"
+                                                VerticalOptions="Center"
+                                                Grid.Column="1"
+                                                ReplaceStringMap="{Binding fontSize, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}" />
                                         </Grid>
                                         <Label
-                                    HeightRequest="1"
-                                    BackgroundColor="{AppThemeBinding Light=Black, Dark=White}"
-                                    HorizontalOptions="Fill" />
+                                            HeightRequest="1"
+                                            BackgroundColor="{AppThemeBinding Light=Black, Dark=White}"
+                                            HorizontalOptions="Fill" />
                                     </StackLayout>
                                     <StackLayout Spacing="-2"
-                                         Grid.Row="0"
-                                         Grid.Column="1"
-                                         x:Name="StackLayoutHouse"
-                                         Margin="0,0,0,10"
-                                         Padding="0,0,0,10"
-                                         HorizontalOptions="CenterAndExpand"
-                                         VerticalOptions="Center">
-                                        <Grid VerticalOptions="FillAndExpand" >
+                                                 Grid.Row="0"
+                                                 Grid.Column="1"
+                                                 x:Name="StackLayoutHouse"
+                                                 Margin="0,0,0,10"
+                                                 Padding="0,0,0,10"
+                                                 HorizontalOptions="CenterAndExpand"
+                                                 VerticalOptions="Center">
+                                        <Grid VerticalOptions="FillAndExpand">
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto" />
                                             </Grid.RowDefinitions>
 
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="0.1*"/>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="0.1*" />
                                             </Grid.ColumnDefinitions>
                                             <Label Text="{x:Static xamarinJkh:AppResources.HomeChoose}"
-                                           x:Name="LabelHouse"
-                                           FontSize="{Binding fontSize}"
-                                           MaxLines="2"
-                                           FontAttributes="Bold"
-                                               VerticalOptions="FillAndExpand"
-                                           TextColor="{AppThemeBinding Light=Black, Dark=White}" />
-                                            <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
-                                                         HeightRequest="12"
-                                                         WidthRequest="12"
-                                                         Rotation="90"
-                                                         Margin="0,5,0,0"
-                                                         VerticalOptions="Center"
-                                                            Grid.Column="1"
-                                                         ReplaceStringMap="{Binding fontSize, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}" />
+                                                   x:Name="LabelHouse"
+                                                   FontSize="{Binding fontSize}"
+                                                   MaxLines="2"
+                                                   FontAttributes="Bold"
+                                                   VerticalOptions="FillAndExpand"
+                                                   TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                                            <svg:SvgCachedImage
+                                                Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                                HeightRequest="12"
+                                                WidthRequest="12"
+                                                Rotation="90"
+                                                Margin="0,5,0,0"
+                                                VerticalOptions="Center"
+                                                Grid.Column="1"
+                                                ReplaceStringMap="{Binding fontSize, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}" />
                                         </Grid>
                                         <Label
-                                    HeightRequest="1"
-                                    BackgroundColor="{AppThemeBinding Light=Black, Dark=White}"
-                                    HorizontalOptions="Fill" />
+                                            HeightRequest="1"
+                                            BackgroundColor="{AppThemeBinding Light=Black, Dark=White}"
+                                            HorizontalOptions="Fill" />
                                     </StackLayout>
                                 </Grid>
 
@@ -342,54 +245,54 @@
                     </StackLayout>
                     <StackLayout Margin="0,-95,0,0" VerticalOptions="StartAndExpand" Grid.Row="2">
                         <Grid>
-                            <ScrollView 
-                            Orientation="Vertical">
+                            <ScrollView
+                                Orientation="Vertical">
                                 <StackLayout Spacing="0">
                                     <StackLayout x:Name="LayoutContent" Spacing="0" />
                                     <customRenderers:MaterialFrame
-                            Elevation="{AppThemeBinding Light=0, Dark=20}"
-                            HasShadow="{AppThemeBinding Light=false, Dark=true}"
-                            x:Name="MaterialFrameNotDoingContainer"
-                            IsVisible="False"
-                            Margin="20,0,20,10"
-                            CornerRadius="35"
-                            BackgroundColor="White"
-                            Padding="0,0,0,25">
+                                        Elevation="{AppThemeBinding Light=0, Dark=20}"
+                                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                        x:Name="MaterialFrameNotDoingContainer"
+                                        IsVisible="False"
+                                        Margin="20,0,20,10"
+                                        CornerRadius="35"
+                                        BackgroundColor="White"
+                                        Padding="0,0,0,25">
                                         <StackLayout Spacing="0">
                                             <customRenderers:MaterialFrame
-                                            Elevation="{AppThemeBinding Light=0, Dark=20}"
-                                    HasShadow="{AppThemeBinding Light=false, Dark=true}"
-                                    CornerRadius="35"
-                                    x:Name="MaterialFrameNotDoing"
-                                    BackgroundColor="White"
-                                    Padding="0, 25, 0, 25">
+                                                Elevation="{AppThemeBinding Light=0, Dark=20}"
+                                                HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                                CornerRadius="35"
+                                                x:Name="MaterialFrameNotDoing"
+                                                BackgroundColor="White"
+                                                Padding="0, 25, 0, 25">
                                                 <StackLayout
-                                        Orientation="Horizontal">
+                                                    Orientation="Horizontal">
                                                     <svg:SvgCachedImage
-                                            Source="resource://xamarinJKH.Resources.ic_dislike.svg"
-                                            ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}}"
-                                            HeightRequest="30"
-                                            Margin="15, 0, 0, 0"
-                                            HorizontalOptions="Start"
-                                            VerticalOptions="Center" />
+                                                        Source="resource://xamarinJKH.Resources.ic_dislike.svg"
+                                                        ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}}"
+                                                        HeightRequest="30"
+                                                        Margin="15, 0, 0, 0"
+                                                        HorizontalOptions="Start"
+                                                        VerticalOptions="Center" />
                                                     <Label
-                                            x:Name="LabelNotDoingCount"
-                                            Text="Невыполненные заявки: 440"
-                                            FontSize="15"
-                                            TextColor="Black"
-                                            FontAttributes="Bold"
-                                            Margin="15, 0, 0, 0"
-                                            HorizontalOptions="FillAndExpand"
-                                            VerticalOptions="Center" />
+                                                        x:Name="LabelNotDoingCount"
+                                                        Text="Невыполненные заявки: 440"
+                                                        FontSize="15"
+                                                        TextColor="Black"
+                                                        FontAttributes="Bold"
+                                                        Margin="15, 0, 0, 0"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        VerticalOptions="Center" />
                                                     <xamarinJkh:IconView
-                                                x:Name="IconViewArrow"
-                                                Source="ic_arrow_down_monitor"
-                                                HeightRequest="25"
-                                                WidthRequest="25"
-                                                Foreground="{Binding hex}"
-                                                Margin="0,0,15,0"
-                                                HorizontalOptions="End"
-                                                VerticalOptions="Center" />
+                                                        x:Name="IconViewArrow"
+                                                        Source="ic_arrow_down_monitor"
+                                                        HeightRequest="25"
+                                                        WidthRequest="25"
+                                                        Foreground="{Binding hex}"
+                                                        Margin="0,0,15,0"
+                                                        HorizontalOptions="End"
+                                                        VerticalOptions="Center" />
                                                 </StackLayout>
                                             </customRenderers:MaterialFrame>
                                             <StackLayout x:Name="LayoutGrid" Margin="20,15,20,0" />
@@ -400,23 +303,18 @@
                             </ScrollView>
 
                             <ActivityIndicator Color="{x:StaticResource MainColor}"
-                                           Margin="120"
-                                           IsRunning="{Binding IsBusy}"
-                                           IsEnabled="{Binding IsBusy}"
-                                           IsVisible="{Binding IsBusy}"/>
+                                               Margin="120"
+                                               IsRunning="{Binding IsBusy}"
+                                               IsEnabled="{Binding IsBusy}"
+                                               IsVisible="{Binding IsBusy}" />
                         </Grid>
 
                     </StackLayout>
                 </Grid>
 
-                
-
-               
-                
-                
 
             </StackLayout>
-            
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>
