@@ -29,19 +29,20 @@
                    CornerRadius="40"
                    Padding="0"
                    Margin="0,-80,0,-30" >
-                <StackLayout Padding="5,80,5,60"
+                <StackLayout Padding="0,80,0,60"
                             x:Name="tech"
                             IsVisible="False"
                             HorizontalOptions="Center"
+                              VerticalOptions="Center"
                             Orientation="Horizontal">
                     <Label Text="{x:Static xamarinJkh:AppResources.TroubleCode}"
                                    FontSize="10"
                                    TextColor="Black"
                                    WidthRequest="180"
-                                   HorizontalOptions="Center" />
-                    <Grid       VerticalOptions="StartAndExpand"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Grid        VerticalOptions="Center"
                                 HorizontalOptions="End"
-                                Margin="20,10,15,0">
+                                Margin="10,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="30"/>
                             <ColumnDefinition Width="*"/>
@@ -55,7 +56,7 @@
                                                       HeightRequest="20"
                                                       ReplaceStringMap="{Binding hexWhite, Converter={x:StaticResource SvgColor}}"
                                                       Margin="10, 0,-10,0"
-                                                      VerticalOptions="Start" />
+                                                      VerticalOptions="Center" />
                         <Button x:Name="BtnTech"
                                 Grid.Column="1"
                                 
@@ -63,7 +64,7 @@
                                         Padding="5,0"
                                         TextColor="{x:DynamicResource MainColor}"
                                         FontSize="10"
-                                        VerticalOptions="Start"
+                                        VerticalOptions="Center"
                                         FontAttributes="Bold"
                                         Clicked="Tech"
                                         BackgroundColor="Transparent" />
@@ -513,7 +514,7 @@
 
                                 <Frame CornerRadius="10"
                                        BackgroundColor="{Binding hexWhite}"
-                                       Margin="5, 5, 5, 10"
+                                       Margin="0, 5, 0, 10"
                                        x:Name="FrameBtnNextTwo"
                                        VerticalOptions="EndAndExpand"
                                        HasShadow="{AppThemeBinding Light=false, Dark=true}"

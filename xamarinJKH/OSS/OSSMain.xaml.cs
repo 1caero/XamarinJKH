@@ -409,13 +409,19 @@ namespace xamarinJKH
                         buttonFrametapGesture.Tapped += async (s, e) =>
                         {
                             OSS result = await rc.GetOssById(oss.ID.ToString());
+                            var stack = this.Navigation.NavigationStack;
+                            var modal = this.Navigation.ModalStack;
+                            var pages = new List<Page>();
+                            pages.AddRange(modal);
+                            pages.AddRange(stack);
                             switch (statusInt){
                                 case 0: 
                                 case 1:
                                    var setAcquintedResult = await rc.SetAcquainted(oss.ID);
                                     if(string.IsNullOrWhiteSpace( setAcquintedResult.Error) )
                                     {
-                                        OpenPage(new OSSInfo(result));
+                                        if (pages.FirstOrDefault(x => x is OSSInfo) == null)
+                                            OpenPage(new OSSInfo(result));
                                     }
                                     else
                                     {
@@ -425,14 +431,18 @@ namespace xamarinJKH
 
                                     break;
                                 case 3: //"Итоги голосования"/"завершено" - открываем форму общих результатов голосования
-                                     OpenPage(new OSSTotalVotingResult(result));
+                                    if (pages.FirstOrDefault(x => x is OSSTotalVotingResult) == null)
+                                        OpenPage(new OSSTotalVotingResult(result));
 
                                     break;
                                 case 2: //"Ваш голос учтен"  - открываем форму личных результатов голосования
-                                     OpenPage(new OSSPersonalVotingResult(result));
+                                    if (pages.FirstOrDefault(x => x is OSSPersonalVotingResult) == null)
+                                        OpenPage(new OSSPersonalVotingResult(result));
 
                                     break;
-                                default: OpenPage(new OSSInfo(result));
+                                default:
+                                    if (pages.FirstOrDefault(x => x is OSSInfo) == null)
+                                        OpenPage(new OSSInfo(result));
                                     return;
                             } 
                         };

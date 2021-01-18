@@ -377,7 +377,11 @@ namespace xamarinJKH.Main
             IconViewProfile.GestureRecognizers.Add(profile);
 
             var techSend = new TapGestureRecognizer();
-            techSend.Tapped += async (s, e) => { await Navigation.PushAsync(new AppPage()); };
+            techSend.Tapped += async (s, e) =>
+            {
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
+                    await Navigation.PushAsync(new AppPage());
+            };
             LabelTech.GestureRecognizers.Add(techSend);
             var call = new TapGestureRecognizer();
             call.Tapped += async (s, e) =>
@@ -670,7 +674,7 @@ namespace xamarinJKH.Main
                 Device.BeginInvokeOnMainThread(async () =>
                {
                    if (Device.RuntimePlatform == Device.iOS)
-                       await Task.Delay(300);
+                       await Task.Delay(500);
                    double x = Preferences.Get("scrollX", 0d);
                    double y = Preferences.Get("scrollY", 0d);
                    await scrollForCounters.ScrollToAsync(x, y, false);

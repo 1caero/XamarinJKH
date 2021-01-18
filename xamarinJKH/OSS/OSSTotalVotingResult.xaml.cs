@@ -12,6 +12,7 @@ using xamarinJKH.Main;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
+using System.Collections.Generic;
 
 namespace xamarinJKH
 {
@@ -22,6 +23,7 @@ namespace xamarinJKH
         public OSSTotalVotingResult(OSS oSS)
         {
             InitializeComponent();
+            Closing = false;
             Analytics.TrackEvent("Общие результаты голосования ОСС");
             NavigationPage.SetHasNavigationBar(this, false);
 
@@ -216,16 +218,29 @@ namespace xamarinJKH
             ClosePage();
         }
         public bool IsRefreshing {get; set; }
+        bool Closing;
         async void ClosePage()
         {
-            try
+            if (!Closing)
             {
-                await Navigation.PopAsync();
+                Closing = true;
+
+                var stack = this.Navigation.NavigationStack;
+                var modal = this.Navigation.ModalStack;
+                var pages = new List<Page>();
+                pages.AddRange(modal);
+                pages.AddRange(stack);
+                if (pages.FirstOrDefault(x => x is OSSTotalVotingResult) != null)
+                    try
+                    {
+                        await Navigation.PopAsync();
+                    }
+                    catch (Exception e)
+                    {
+                        await Navigation.PopModalAsync();
+                    }
             }
-            catch (Exception e)
-            {
-                await Navigation.PopModalAsync();
-            }
+            
         }
 
     }

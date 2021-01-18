@@ -13,6 +13,8 @@ using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace xamarinJKH.Main
 {
@@ -54,7 +56,11 @@ namespace xamarinJKH.Main
                 _ = await Navigation.PopModalAsync();
             };
             var techSend = new TapGestureRecognizer();
-            techSend.Tapped += async (s, e) => {    await Navigation.PushAsync(new AppPage()); };
+            techSend.Tapped += async (s, e) =>
+            {
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
+                    await Navigation.PushAsync(new AppPage());
+            };
             LabelTech.GestureRecognizers.Add(techSend);
             var call = new TapGestureRecognizer();
             call.Tapped += async (s, e) =>

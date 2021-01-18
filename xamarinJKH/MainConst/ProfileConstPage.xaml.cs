@@ -13,6 +13,7 @@ using xamarinJKH.PushNotification;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
+using System.Linq;
 using xamarinJKH.Utils;
 
 namespace xamarinJKH.MainConst
@@ -36,14 +37,15 @@ namespace xamarinJKH.MainConst
 
         private async void TechSend(object sender, EventArgs e)
         {
-
             if (Settings.Person != null && !string.IsNullOrWhiteSpace(Settings.Person.Phone))
             {
-                await Navigation.PushModalAsync(new AppPage());
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
+                    await Navigation.PushModalAsync(new AppPage());
             }
             else
             {
-                await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog());
+                if (PopupNavigation.Instance.PopupStack.FirstOrDefault(x => x is EnterPhoneDialog) == null)
+                    await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog());
             }
         }
 
