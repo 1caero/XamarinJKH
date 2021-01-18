@@ -1612,4 +1612,7 @@
   <data name="Malfunction" xml:space="preserve">
     <value>несправність: </value>
   </data>
+  <data name="ErrorUnexpected" xml:space="preserve">
+    <value>Виникла невідома помилка, спробуйте ще раз пізніше</value>
+  </data>
 </root>

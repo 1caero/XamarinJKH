@@ -68,9 +68,21 @@ namespace xamarinJKH.DialogViews
             }
         }
 
+        bool ClosingApp;
         private async void CloseApp(object sender, EventArgs e)
         {
-            await StartProgressBar();
+            try
+            {
+                if (!ClosingApp)
+                {
+                    ClosingApp = true;
+                    await StartProgressBar();
+                    await Task.Delay(TimeSpan.FromSeconds(2));
+                    ClosingApp = false;
+                }
+            }
+            catch { }
+            
         }
 
         public async Task ShowToast(string title)
@@ -93,30 +105,47 @@ namespace xamarinJKH.DialogViews
                  title = AppResources.MoveDispatcherStatus;
             Configurations.LoadingConfig = new LoadingConfig
             {
-                IndicatorColor = HexColor,
+                IndicatorColor = HexColor == null ? (Color)App.Current.Resources["MainColor"] : HexColor,
                 OverlayColor = Color.Black,
                 Opacity = opacity,
                 DefaultMessage = title,
             };
 
+            
             await Loading.Instance.StartAsync(async progress =>
             {
-                string dispId = dispList[PickerDisp.SelectedIndex].ID.ToString();
-                CommonResult result = await server.ChangeDispatcherConst(_Request.ID.ToString(), dispId);
-                if (result.Error == null)
+                if (PickerDisp.SelectedIndex < dispList.Count)
                 {
-                    if (!string.IsNullOrWhiteSpace(BordlessEditor.Text))
+                    var disp = dispList[PickerDisp.SelectedIndex];
+                    if (disp != null)
                     {
-                       result = await server.AddMessageConst(BordlessEditor.Text, _Request.ID.ToString(), true);
+                        string dispId = disp.ID.ToString();
+                        CommonResult result = await server.ChangeDispatcherConst(_Request.ID.ToString(), dispId);
+                        if (result != null)
+                        {
+                            if (result.Error == null)
+                            {
+                                if (!string.IsNullOrWhiteSpace(BordlessEditor.Text))
+                                {
+                                    result = await server.AddMessageConst(BordlessEditor.Text, _Request.ID.ToString(), true);
+                                }
+                                await ShowToast(AppResources.MoveDispatcherSuccess);
+                                MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                                await PopupNavigation.Instance.PopAsync();
+                            }
+                            else
+                            {
+                                await ShowToast(result.Error);
+                            }
+                        }
+                        else
+                        {
+                            await ShowToast(AppResources.ErrorUnknown);
+                        }
                     }
-                    await ShowToast(AppResources.MoveDispatcherSuccess);
-                    MessagingCenter.Send<Object>(this, "UpdateAppCons");
-                    await PopupNavigation.Instance.PopAsync();
+                    
                 }
-                else
-                {
-                    await ShowToast(result.Error);
-                }
+                
             });
         }
 

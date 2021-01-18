@@ -1739,4 +1739,7 @@
   <data name="Malfunction" xml:space="preserve">
     <value>Malfunction: </value>
   </data>
+  <data name="ErrorUnexpected" xml:space="preserve">
+    <value>Unexpected error occured. Try again later</value>
+  </data>
 </root>

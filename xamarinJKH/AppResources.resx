@@ -1732,4 +1732,7 @@
   <data name="Malfunction" xml:space="preserve">
     <value>Неисправность: </value>
   </data>
+  <data name="ErrorUnexpected" xml:space="preserve">
+    <value>Произошла неизвестная ошибка, повторите попытку позже</value>
+  </data>
 </root>
