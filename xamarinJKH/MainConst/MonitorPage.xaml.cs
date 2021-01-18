@@ -1036,9 +1036,9 @@ namespace xamarinJKH.MainConst
                             Streets.Add(group);
                     }
 
-                    //SelectedStreet = Streets[0];
+                    SelectedStreet = Streets[0];
                     Streets[0].Selected = true;
-                    StreetsCollection.ScrollTo(Streets[0]);
+                    // StreetsCollection.ScrollTo(Streets[0]);
                     string[] param = null;
                     setListHouse(groups, ref param);
                     var action = Streets[0].Address;
@@ -1490,6 +1490,64 @@ namespace xamarinJKH.MainConst
                         LayoutContent.Children.Clear();
                         MaterialFrameNotDoingContainer.IsVisible = false;
                         (sender as CollectionView).ScrollTo(selection);
+                        //LabelHouse.Text = action;
+                        await getMonitorStandart(-1, Int32.Parse(Houses[action]));
+                    }
+                });
+            }
+            catch
+            {
+            }
+        }
+
+        private void pickerType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    if (SelectedArea != null)
+                    {
+                        foreach (var area in Areas)
+                        {
+                            area.Selected = false;
+                        }
+
+                        SelectedArea.Selected = true;
+                    }
+                    LoadingStreets = true;
+                    // (sender as CollectionView).ScrollTo(SelectedArea);
+                    await getHouse();
+                });
+            }
+            catch
+            {
+            }
+        }
+
+        private void PickerHouse_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await Task.Delay(TimeSpan.FromMilliseconds(500));
+                    var action = SelectedStreet.Address;
+                    if (action != null && !action.Equals(AppResources.Cancel))
+                    {
+                        if (SelectedStreet != null)
+                        {
+                            foreach (var street in Streets)
+                            {
+                                street.Selected = false;
+                            }
+
+                            SelectedStreet.Selected = true;
+                        }
+
+                        LayoutContent.Children.Clear();
+                        MaterialFrameNotDoingContainer.IsVisible = false;
+                        // (sender as CollectionView).ScrollTo(selection);
                         //LabelHouse.Text = action;
                         await getMonitorStandart(-1, Int32.Parse(Houses[action]));
                     }

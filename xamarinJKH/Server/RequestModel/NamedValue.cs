@@ -7,6 +7,12 @@ namespace xamarinJKH.Server.RequestModel
     {
         public int ID { get; set; }
         public string Name { get; set; }
+
+        public string _Name
+        {
+            get => Name.Length > 40 ? Name.Substring(0, 40) + "..." : Name;
+            set => Name = value;
+        }
         bool selected;
         public bool Selected
         {
