@@ -154,7 +154,7 @@
     <value>Звонок с кодом</value>
   </data>
   <data name="AskForCodeAgain" xml:space="preserve">
-    <value>Ожидание звонка... TimerTime сек</value>
+    <value>Ожидайте звонка, робот сообщит Вам код регистрации... TimerTime сек</value>
   </data>
   <data name="AttachmentChooseFile" xml:space="preserve">
     <value>Выбрать файл</value>
@@ -1734,5 +1734,11 @@
   </data>
   <data name="ErrorUnexpected" xml:space="preserve">
     <value>Произошла неизвестная ошибка, повторите попытку позже</value>
+  </data>
+  <data name="Executor" xml:space="preserve">
+    <value>Исполнитель </value>
+  </data>
+  <data name="ASource" xml:space="preserve">
+    <value>Источник</value>
   </data>
 </root>
