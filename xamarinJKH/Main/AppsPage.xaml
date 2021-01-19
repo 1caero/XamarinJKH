@@ -78,7 +78,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>-->
-                        <ActivityIndicator  x:Name="aIndicator" Color="{Binding hex}" Scale="2"   Margin="20"                                        
+                        <ActivityIndicator  x:Name="aIndicator" Color="{x:DynamicResource MainColor}" Scale="2"   Margin="20"                                        
                                           IsRunning="True" IsEnabled="True" IsVisible="false" 
                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></ActivityIndicator>
                         <Label  Text="Нет заявок"
@@ -121,6 +121,7 @@
 
                     <!--<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Blue">-->
                     <pancakeView:PancakeView x:Name="GoodsLayot" CornerRadius="50,50,0,0" BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
+                                            BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=#8D8D8D}"
                                          Padding="0,10,0,2"
                                          BorderThickness="1"
                                          Margin="0"

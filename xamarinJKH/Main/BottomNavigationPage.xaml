@@ -6,6 +6,7 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
             android:TabbedPage.IsSwipePagingEnabled="False"
+            SelectedTabColor="{x:DynamicResource MainColor}"
             BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
             xmlns:resources="clr-namespace:xamarinJKH"
             xmlns:additional="clr-namespace:xamarinJKH.Additional;assembly=xamarinJKH"
