@@ -154,7 +154,7 @@
     <value>Звонок с кодом</value>
   </data>
   <data name="AskForCodeAgain" xml:space="preserve">
-    <value>Ожидание звонка... TimerTime сек</value>
+    <value>Ожидайте звонка, робот сообщит Вам код регистрации... TimerTime сек</value>
   </data>
   <data name="AttachmentChooseFile" xml:space="preserve">
     <value>Выбрать файл</value>

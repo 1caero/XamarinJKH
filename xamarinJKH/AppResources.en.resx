@@ -154,7 +154,7 @@
     <value>Request a call with a code</value>
   </data>
   <data name="AskForCodeAgain" xml:space="preserve">
-    <value>Call waiting... TimerTime sec</value>
+    <value>Wait for a call, the robot will tell you the registration code... TimerTime sec</value>
     <comment>YOU CAN REQUEST A CALL AGAIN IN TimerTime SECONDS</comment>
   </data>
   <data name="AttachmentChooseFile" xml:space="preserve">

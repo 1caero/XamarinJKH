@@ -187,7 +187,7 @@
     <value>Запросити дзвінок з кодом</value>
   </data>
   <data name="AskForCodeAgain" xml:space="preserve">
-    <value>Очікування дзвінка... TimerTime сек</value>
+    <value>Чекайте дзвінка, робот повідомить Вам код реєстрації... TimerTime сек</value>
   </data>
   <data name="AttachmentChooseFile" xml:space="preserve">
     <value>Вибрати файл</value>
