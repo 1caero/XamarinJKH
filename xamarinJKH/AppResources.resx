@@ -1735,4 +1735,10 @@
   <data name="ErrorUnexpected" xml:space="preserve">
     <value>Произошла неизвестная ошибка, повторите попытку позже</value>
   </data>
+  <data name="Executor" xml:space="preserve">
+    <value>Исполнитель </value>
+  </data>
+  <data name="ASource" xml:space="preserve">
+    <value>Источник</value>
+  </data>
 </root>

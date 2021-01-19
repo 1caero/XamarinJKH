@@ -439,6 +439,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Источник.
+        /// </summary>
+        internal static string ASource {
+            get {
+                return ResourceManager.GetString("ASource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to от суммы.
         /// </summary>
         internal static string AtSumm {
@@ -1830,6 +1839,15 @@ namespace xamarinJKH {
         internal static string EventsCam {
             get {
                 return ResourceManager.GetString("EventsCam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Исполнитель .
+        /// </summary>
+        internal static string Executor {
+            get {
+                return ResourceManager.GetString("Executor", resourceCulture);
             }
         }
         

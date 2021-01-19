@@ -1615,4 +1615,10 @@
   <data name="ErrorUnexpected" xml:space="preserve">
     <value>Виникла невідома помилка, спробуйте ще раз пізніше</value>
   </data>
+  <data name="Executor" xml:space="preserve">
+    <value>Виконавець </value>
+  </data>
+  <data name="ASource" xml:space="preserve">
+    <value>Джерело</value>
+  </data>
 </root>

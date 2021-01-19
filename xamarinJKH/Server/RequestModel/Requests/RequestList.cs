@@ -32,6 +32,13 @@ namespace xamarinJKH.Server.RequestModel
         // Флаг "Прочитана сотрудником"
         public bool IsReaded { get; set; }
         public bool IsReadedByClient { get; set; }
+        
+        // источник заявки
+        public string SourceType { get; set; }
+        // тип неисправности
+        public string MalfunctionType { get; set; }
+        // исполнитель
+        public string PerofmerName { get; set; }
 
         //public override string ToString()
         //{

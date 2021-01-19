@@ -10,7 +10,6 @@
                          xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH"
                          xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
                          x:Class="xamarinJKH.DialogViews.InfoAppDialog">
-
     <Frame CornerRadius="30"
            x:Name="Frame"
            HorizontalOptions="FillAndExpand"
@@ -48,6 +47,33 @@
                               FontSize="15" />
                         <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
                         <Span Text=" {Binding _Request.TypeName}" FontSize="15" />
+                        <Span Text=" {Binding _Request.MalfunctionType}" FontSize="15" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label
+                TextColor="Black"
+                IsVisible="{Binding _Request.PerofmerName, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.PerofmerName }"
+                HorizontalOptions="Start">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{x:Static xamarinJkh:AppResources.Executor}" TextColor="Black" FontAttributes="Bold"
+                              FontSize="15" />
+                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                        <Span Text=" {Binding _Request.PerofmerName}" FontSize="15" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label
+                TextColor="Black"
+                IsVisible="{Binding _Request.SourceType, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
+                HorizontalOptions="Start">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{x:Static xamarinJkh:AppResources.ASource}" TextColor="Black" FontAttributes="Bold"
+                              FontSize="15" />
+                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                        <Span Text=" {Binding _Request.SourceType}" FontSize="15" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
