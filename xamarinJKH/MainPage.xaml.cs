@@ -133,7 +133,17 @@ namespace xamarinJKH
             string loginConst = Preferences.Get("loginConst", "");
             string passConst = Preferences.Get("passConst", "");
             bool isSave = Preferences.Get("isPass", false);
-            Settings.ConstAuth = Preferences.Get("constAuth", false);
+            if (Settings.MobileSettings.blockUserAuth)
+            {
+                Settings.ConstAuth = true;
+                LabelSotr.IsVisible = false;
+            }
+            else
+            {
+                if (!Settings.MobileSettings.useDispatcherAuth)
+                    LabelSotr.IsVisible = false;
+                Settings.ConstAuth = Preferences.Get("constAuth", false);
+            }
             if (Settings.ConstAuth && Settings.IsFirsStart && !passConst.Equals("") && !loginConst.Equals("") && !isSave)
             {
                 LoginDispatcher(loginConst, passConst);
@@ -267,8 +277,7 @@ namespace xamarinJKH
 
             }
 
-            if (!Settings.MobileSettings.useDispatcherAuth)
-                LabelSotr.IsVisible = false;
+            
             if (Settings.ConstAuth)
             {
                 Settings.ConstAuth = true;
