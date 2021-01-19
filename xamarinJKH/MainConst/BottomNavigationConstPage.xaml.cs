@@ -237,6 +237,10 @@ namespace xamarinJKH.MainConst
             TokenSource = new CancellationTokenSource();
             Token = TokenSource.Token;
             var Server = new RestClientMP();
+            if (Settings.Person.UserSettings.disableGeolocation)
+            {
+                return;
+            }
             var location_perm = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.LocationWhenInUse);
             if (location_perm != PermissionStatus.Granted)
             {
