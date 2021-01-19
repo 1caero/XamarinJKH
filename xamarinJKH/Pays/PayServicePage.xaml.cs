@@ -184,6 +184,8 @@ namespace xamarinJKH.Pays
                 }
                 else
                 {
+                    if(Device.RuntimePlatform==  Device.iOS)
+                        Loading.Instance.Hide();
                     await Navigation.PopToRootAsync();
 
                     await DisplayAlert(AppResources.AlertSuccess, result.message, "OK");
