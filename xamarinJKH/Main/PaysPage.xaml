@@ -53,6 +53,7 @@
                                CornerRadius="40"
                                Margin="20, 10, 20, -40"
                                VerticalOptions="Start"
+                               BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=#494949}"
                                BackgroundColor="{AppThemeBinding Light=White, Dark=#494949}"
                                Padding="20,20,20,50">
                             <StackLayout>
@@ -105,6 +106,7 @@
                                                      BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
                                                      Padding="0,20,0,10"
                                                      BorderThickness="1"
+                                                     BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=#8D8D8D}"
                                                      HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                                      VerticalOptions="FillAndExpand">
                                 <Grid HorizontalOptions="FillAndExpand"
@@ -119,6 +121,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Frame CornerRadius="10"
                                            x:Name="FrameBtnHistory"
+                                           BorderColor="{x:DynamicResource MainColor}"
                                            HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                            Padding="0"
                                            Grid.Column="0" Grid.Row="0">
@@ -129,12 +132,12 @@
                                             HorizontalOptions="Center">
                                             <xamarinJkh:IconView
                                                 Source="ic_history_pay"
-                                                Foreground="{Binding hex}"
+                                                Foreground="{x:DynamicResource MainColor}"
                                                 HeightRequest="24"
                                                 WidthRequest="20" />
                                             <Button x:Name="LabelHistory"
                                                     Text="{x:Static xamarinJkh:AppResources.PayHistory}"
-                                                    TextColor="White"
+                                                    TextColor="{x:DynamicResource MainColor}"
                                                     Padding="0"
                                                     FontAttributes="Bold"
                                                     Clicked="OpenHistory"
@@ -146,6 +149,7 @@
                                     <Frame CornerRadius="10"
                                            x:Name="FrameBtnSaldos"
                                            Padding="0"
+                                           BorderColor="{x:DynamicResource MainColor}"
                                            HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                            Grid.Column="1" Grid.Row="0"
                                            IsVisible="{x:DynamicResource Saldo}"
@@ -158,7 +162,7 @@
                                             HorizontalOptions="Center">
                                             <xamarinJkh:IconView
                                                 Source="ic_saldos"
-                                                Foreground="{Binding hex}"
+                                                Foreground="{x:DynamicResource MainColor}"
                                                 x:Name="IconViewSaldos"
                                                 HeightRequest="24"
                                                 WidthRequest="20" />
@@ -167,7 +171,7 @@
                                                     FontSize="12"
                                                     Padding="0"
                                                     FontAttributes="Bold"
-                                                    TextColor="White"
+                                                    TextColor="{x:DynamicResource MainColor}"
                                                     Clicked="openSaldo"
                                                     BackgroundColor="Transparent" />
                                         </StackLayout>

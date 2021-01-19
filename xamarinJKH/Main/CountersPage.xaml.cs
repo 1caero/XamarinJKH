@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Plugin.Messaging;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
@@ -371,32 +372,74 @@ namespace xamarinJKH.Main
             var profile = new TapGestureRecognizer();
             profile.Tapped += async (s, e) =>
             {
-                if (Navigation.NavigationStack.FirstOrDefault(x => x is ProfilePage) == null)
-                    await Navigation.PushAsync(new ProfilePage());
+                try
+                {
+                    Analytics.TrackEvent("Показания, попытка перейти в Профиль");
+                    if (Navigation.NavigationStack.FirstOrDefault(x => x is ProfilePage) == null)
+                        await Navigation.PushAsync(new ProfilePage());
+                }
+                catch(Exception ex)
+                {
+                    Crashes.TrackError(ex);
+                    throw;
+                }
+
             };
             IconViewProfile.GestureRecognizers.Add(profile);
 
             var techSend = new TapGestureRecognizer();
             techSend.Tapped += async (s, e) =>
             {
-                if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
-                    await Navigation.PushAsync(new AppPage());
+                try
+                {
+                    Analytics.TrackEvent("Показания, попытка перейти в Техподдержку");
+                    if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
+                        await Navigation.PushAsync(new AppPage());
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex);
+                    throw;
+                }
+              
             };
             LabelTech.GestureRecognizers.Add(techSend);
             var call = new TapGestureRecognizer();
             call.Tapped += async (s, e) =>
             {
-                if (Settings.Person.Phone != null)
+                try
                 {
-                    IPhoneCallTask phoneDialer;
-                    phoneDialer = CrossMessaging.Current.PhoneDialer;
-                    if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone))
-                        phoneDialer.MakePhoneCall(
-                            System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+                    Analytics.TrackEvent("Показания, попытка перейти в Звонок");
+                    if (Settings.Person.Phone != null)
+                    {
+                        IPhoneCallTask phoneDialer;
+                        phoneDialer = CrossMessaging.Current.PhoneDialer;
+                        if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone))
+                            phoneDialer.MakePhoneCall(
+                                System.Text.RegularExpressions.Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
+                    }
                 }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex);
+                    throw;
+                }
+
+               
             };
             var pickLs = new TapGestureRecognizer();
-            pickLs.Tapped += async (s, e) => { Device.BeginInvokeOnMainThread(() => { Picker.Focus(); }); };
+            pickLs.Tapped += (s, e) => { try
+                {
+                    Analytics.TrackEvent("Показания, нажатие pickLs");
+
+                    Device.BeginInvokeOnMainThread(() => { Picker.Focus(); });
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex);
+                    throw;
+                }
+                };
             //StackLayoutLs.GestureRecognizers.Add(pickLs);
             SetTextAndColor();
             getInfo();
@@ -409,9 +452,19 @@ namespace xamarinJKH.Main
             var goAddIdent = new TapGestureRecognizer();
             goAddIdent.Tapped += async (s, e) =>
             {
-                /*await Dialog.Instance.ShowAsync<AddAccountDialogView>();*/
-                if (Navigation.NavigationStack.FirstOrDefault(x => x is AddIdent) == null)
-                    await Navigation.PushAsync(new AddIdent((PaysPage) Settings.mainPage));
+                try
+                {
+                    Analytics.TrackEvent("Показания, нажатие goAddIdent");
+
+                    /*await Dialog.Instance.ShowAsync<AddAccountDialogView>();*/
+                    if (Navigation.NavigationStack.FirstOrDefault(x => x is AddIdent) == null)
+                        await Navigation.PushAsync(new AddIdent((PaysPage)Settings.mainPage));
+                }
+                catch(Exception ex)
+                {
+                    Crashes.TrackError(ex);
+                    throw;
+                }                
             };
             StackLayoutAddIdent.GestureRecognizers.Add(goAddIdent);
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
@@ -421,7 +474,7 @@ namespace xamarinJKH.Main
 
             //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
             FrameTop.SetAppThemeColor(MaterialFrame.BorderColorProperty, hexColor, Color.FromHex("#494949"));
-            ChangeTheme = new Command(async () => { SetTitle(); });
+            ChangeTheme = new Command(() => { SetTitle(); });
             MessagingCenter.Subscribe<Object>(this, "ChangeThemeCounter", (sender) => ChangeTheme.Execute(null));
             //MessagingCenter.Subscribe<Object>(this, "UpdateCounters", (sender) => RefreshCommand.Execute(null));
             MessagingCenter.Subscribe<Object>(this, "UpdateCounters", async (sender) => await RefreshCountersData());

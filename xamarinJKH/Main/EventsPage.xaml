@@ -69,6 +69,7 @@
                                                            VerticalOptions="Start"
                                                            BackgroundColor="White"
                                                            Padding="0"
+                                                           BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=Transparent}"
                                                            Margin="10,0,10,10">
 
                                 <Grid>
@@ -144,6 +145,7 @@
                             <customRenderers:MaterialFrame Elevation="{AppThemeBinding Light=0, Dark=20}" x:Name="FrameNews"
                                                            IsVisible="{Binding ShowNews}"
                                                            CornerRadius="30"
+                                                           BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=Transparent}"
                                                            Padding="0"
                                                            HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                                            HorizontalOptions="FillAndExpand"
@@ -224,6 +226,7 @@
                                                            CornerRadius="30"
                                                            HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                                            Margin="10, 0, 10, 10"
+                                                           BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=Transparent}"
                                                            HorizontalOptions="FillAndExpand"
                                                            VerticalOptions="Start"
                                                            Padding="0"
@@ -302,6 +305,7 @@
                                                            CornerRadius="30"
                                                            HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                                            Margin="10, 0, 10, 10"
+                                                           BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=Transparent}"
                                                            HorizontalOptions="FillAndExpand"
                                                            VerticalOptions="Start"
                                                            BackgroundColor="White"
@@ -346,6 +350,7 @@
                                                            IsVisible="{Binding ShowOss}"
                                                            Margin="10, 0, 10, 10"
                                                            HorizontalOptions="FillAndExpand"
+                                                           BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=Transparent}"
                                                            VerticalOptions="Start"
                                                            BackgroundColor="White"
                                                            Padding="0">
@@ -391,6 +396,7 @@
                                    IsVisible="False"
                                    HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                    HorizontalOptions="FillAndExpand"
+                                   BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=Transparent}"
                                    VerticalOptions="Start"
                                    BackgroundColor="White"
                                    Padding="0, 25, 0, 25">
@@ -433,6 +439,7 @@
                                                            IsVisible="{Binding ShowCameras}"
                                                            Margin="10, 0, 10, 10"
                                                            HorizontalOptions="FillAndExpand"
+                                                           BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=Transparent}"
                                                            VerticalOptions="Start"
                                                            BackgroundColor="White"
                                                            Padding="0, 25, 0, 25">
