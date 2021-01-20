@@ -7,6 +7,7 @@
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:converters="clr-namespace:xamarinJKH.Converters"
+             xmlns:sync="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.MainConst.MonitorPage">
     <ContentPage.Resources>
@@ -70,8 +71,61 @@
                                BorderColor="{AppThemeBinding Light={x:StaticResource MainColor}, Dark=#8D8D8D}"
                                Padding="0,0,0,80">
                             <StackLayout Padding="20,10,20,10" Spacing="10">
-                                <StackLayout Spacing="0" Grid.Column="0" HorizontalOptions="StartAndExpand">
+                                <sync:SfAutoComplete MultiSelectMode="Token"
+                                                         ShowSuggestionsOnFocus="True"
+                                                         DataSource="{Binding Groups}"
+                                                         FocusChanged="AutoCompleteHouses_OnFocusChanged"
+                                                         VerticalOptions="Start"
+                                                         SuggestionMode="Contains"
+                                                     DisplayMemberPath="Name"
+                                                           Watermark="{x:Static xamarinJkh:AppResources.AreaGroup}"
+                                                         BorderColor="{x:StaticResource MainColor}"
+                                                           EnableAutoSize="True"
+                                                           HighlightedTextColor="{x:StaticResource MainColor}"
+                                                         SuggestionBoxPlacement="Bottom"
+                                                           DropDownItemHeight="50"
+                                                     x:Name="AreaGroups"
+                                                         DropDownBorderColor="{x:StaticResource MainColor}"/>
+                                <sync:SfAutoComplete MultiSelectMode="Token"
+                                                         ShowSuggestionsOnFocus="True"
+                                                         DataSource="{Binding Areas}"
+                                                     DisplayMemberPath="Name"
+                                                         VerticalOptions="Start"
+                                                         SuggestionMode="Contains"
+                                                           Watermark="{x:Static xamarinJkh:AppResources.HouseGroup}"
+                                                         BorderColor="{x:StaticResource MainColor}"
+                                                           EnableAutoSize="True"
+                                                           HighlightedTextColor="{x:StaticResource MainColor}"
+                                                         SuggestionBoxPlacement="Bottom"
+                                                           DropDownItemHeight="50"
+                                                     x:Name="HouseGroups"
+                                                     SelectionChanged="HouseGroups_SelectionChanged"
+                                                         DropDownBorderColor="{x:StaticResource MainColor}"/>
+                                <sync:SfAutoComplete MultiSelectMode="Token"
+                                                         ShowSuggestionsOnFocus="True"
+                                                         DataSource="{Binding Streets}"
+                                                     DisplayMemberPath="Address"
+                                                         VerticalOptions="Start"
+                                                         SuggestionMode="Contains"
+                                                           Watermark="{x:Static xamarinJkh:AppResources.StreetGroup}"
+                                                         BorderColor="{x:StaticResource MainColor}"
+                                                           EnableAutoSize="True"
+                                                           HighlightedTextColor="{x:StaticResource MainColor}"
+                                                         SuggestionBoxPlacement="Bottom"
+                                                           DropDownItemHeight="50"
+                                                     x:Name="HousesList"
+                                                     SelectionChanged="Houses_SelectionChanged"
+                                                         DropDownBorderColor="{x:StaticResource MainColor}"/>
+                                <Button BackgroundColor="{x:DynamicResource MainColor}"
+                                        Text="Показать"
+                                        TextColor="White"
+                                        Clicked="Button_Clicked"
+                                        CornerRadius="20"
+                                        HorizontalOptions="FillAndExpand"/>
+                                <StackLayout Spacing="0" Grid.Column="0" HorizontalOptions="StartAndExpand" IsVisible="False">
+                                    
                                     <StackLayout
+                                        IsVisible="False"
                                         Orientation="Horizontal" x:Name="StackLayoutType">
                                         <xamarinJkh:BorderlessPicker x:Name="PickerType"
                                                                      Title="{x:Static xamarinJkh:AppResources.Choose}"
@@ -99,7 +153,7 @@
                                         BackgroundColor="{Binding hex}"
                                         HorizontalOptions="Fill" />
                                 </StackLayout>
-                                <StackLayout Spacing="0" HorizontalOptions="StartAndExpand" IsVisible="{Binding LoadingStreets , Converter={converters:InverseBoolConverter}}">
+                                <StackLayout Spacing="0" HorizontalOptions="StartAndExpand" IsVisible="False">
                                     <StackLayout
                                         Orientation="Horizontal" x:Name="StackLayoutH" HorizontalOptions="Fill">
                                         <xamarinJkh:BorderlessPicker x:Name="PickerHouse"
