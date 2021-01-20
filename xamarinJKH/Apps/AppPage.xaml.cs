@@ -760,10 +760,6 @@ namespace xamarinJKH.Apps
 
                     bool IsPass = request.PassInfo != null;
                     bool isMan = false;
-                    if (!string.IsNullOrWhiteSpace(request.MalfunctionType))
-                    {
-                        request.MalfunctionType = " (" + request.MalfunctionType + ")";
-                    }
                     if (IsPass)
                     {
                         isMan = request.PassInfo.CategoryId == 1;
