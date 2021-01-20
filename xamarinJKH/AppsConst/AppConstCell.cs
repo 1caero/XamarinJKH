@@ -29,7 +29,7 @@ namespace xamarinJKH.AppsConst
             frame.VerticalOptions = LayoutOptions.Start;
             frame.BackgroundColor = Color.White;
             frame.Margin = new Thickness(10, 0, 10, 14);
-            frame.Padding = new Thickness(20, 15, 20, 20);
+            frame.Padding = new Thickness(20, 15, 20, 15);
             frame.CornerRadius = 40;
 
             StackLayout container = new StackLayout();
@@ -115,7 +115,7 @@ namespace xamarinJKH.AppsConst
             containerData.Children.Add(stackLayoutText);
 
             containerData.Children.Add(grid);
-            containerData.Children.Add(LabelDate);
+            // containerData.Children.Add(LabelDate);
             containerData.Children.Add(stackLayoutStatus);
 
             Frame readindicator = new Frame
@@ -171,7 +171,15 @@ namespace xamarinJKH.AppsConst
             };
             ReadIndicator.SetBinding(View.IsVisibleProperty, "Read", BindingMode.TwoWay);
             containerMain.Children.Add(ReadIndicator, 1, 0);
-            frame.Content = containerMain;
+            LabelDate.HorizontalOptions = LayoutOptions.EndAndExpand;
+            
+            StackLayout stackLayoutFull = new StackLayout();
+            stackLayoutFull.Spacing = 0;
+            
+            stackLayoutFull.Children.Add(containerMain);
+            stackLayoutFull.Children.Add(LabelDate);
+            
+            frame.Content = stackLayoutFull;
 
             var stackLMain = new StackLayout() { Margin = new Thickness(0, 2) };
             stackLMain.Children.Add(frame);
@@ -305,13 +313,14 @@ namespace xamarinJKH.AppsConst
                     FontAttributes = FontAttributes.Bold,
                     FontSize = fNum
                 });
-                formatted.Spans.Add(new Span
-                {
-                    Text = "• " + DateApp + " •",
-                    TextColor = Color.Black,
-                    FontSize = fdt
-                });
+                // formatted.Spans.Add(new Span
+                // {
+                //     Text = "• " + DateApp + " •",
+                //     TextColor = Color.Black,
+                //     FontSize = fdt
+                // });
                 numberAndDate.FormattedText = formatted;
+                LabelDate.Text = DateApp;
                 numberAndDate.MaxLines = 1;
                 LabelStatus.Text = Status;
                 LabelStatus.FontSize = fdt;
