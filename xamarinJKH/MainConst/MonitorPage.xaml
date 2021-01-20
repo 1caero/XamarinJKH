@@ -7,12 +7,14 @@
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:converters="clr-namespace:xamarinJKH.Converters"
+             xmlns:sync="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.MainConst.MonitorPage">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:AccountSelectedBorderConverter x:Key="Border" />
             <converters:AccountSelectedBackgroundConverter x:Key="Background" />
+            <converters:InverseBoolConverter x:Key="Invert"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -70,8 +72,125 @@
                                BorderColor="{AppThemeBinding Light={x:StaticResource MainColor}, Dark=#8D8D8D}"
                                Padding="0,0,0,80">
                             <StackLayout Padding="20,10,20,10" Spacing="10">
-                                <StackLayout Spacing="0" Grid.Column="0" HorizontalOptions="StartAndExpand">
+                                <StackLayout Orientation="Horizontal">
+                                    <svg:SvgCachedImage
+                                                Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                                HeightRequest="12"
+                                                WidthRequest="12"
+                                                Rotation="90"
+                                                Margin="0,5,0,0"
+                                                VerticalOptions="Center"
+                                                Grid.Column="1"
+                                                ReplaceStringMap="{Binding fontSize, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}" />
+                                    <Label Text="{x:Static xamarinJkh:AppResources.AreaGroup}"
+                                           FontSize="16"
+                                           IsVisible="{Binding GroupVisible}"
+                                           TextColor="{x:StaticResource MainColor}">
+                                    </Label>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="FoldAreaGroup"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>                                           
+                                <sync:SfAutoComplete MultiSelectMode="Token"
+                                                     IsVisible="False"
+                                                         ShowSuggestionsOnFocus="True"
+                                                     WatermarkColor="{AppThemeBinding Dark=White,Light=Default}"
+                                                         DataSource="{Binding Groups}"
+                                                         FocusChanged="AutoCompleteHouses_OnFocusChanged"
+                                                         VerticalOptions="Start"
+                                                         SuggestionMode="Contains"
+                                                     DisplayMemberPath="Name"
+                                                           Watermark="{x:Static xamarinJkh:AppResources.AreaGroup}"
+                                                         BorderColor="{x:StaticResource MainColor}"
+                                                           EnableAutoSize="True"
+                                                           HighlightedTextColor="{x:StaticResource MainColor}"
+                                                         SuggestionBoxPlacement="Bottom"
+                                                           DropDownItemHeight="50"
+                                                     x:Name="AreaGroups"
+                                                         DropDownBorderColor="{x:StaticResource MainColor}"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <svg:SvgCachedImage
+                                                Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                                HeightRequest="12"
+                                                WidthRequest="12"
+                                                Rotation="90"
+                                                Margin="0,5,0,0"
+                                                VerticalOptions="Center"
+                                                Grid.Column="1"
+                                                ReplaceStringMap="{Binding fontSize, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}" />
+                                    <Label Text="{x:Static xamarinJkh:AppResources.HouseGroup}"
+                                           FontSize="16"
+                                           IsVisible="{Binding AreasVisible}"
+                                           TextColor="{x:StaticResource MainColor}">
+                                    </Label>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="FoldAreas"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <sync:SfAutoComplete MultiSelectMode="Token"
+                                                         ShowSuggestionsOnFocus="True"
+                                           IsVisible="{Binding AreasVisible, Converter={x:StaticResource Invert}}"
+                                                     WatermarkColor="{AppThemeBinding Dark=White,Light=Default}"
+                                                         DataSource="{Binding Areas}"
+                                                     DisplayMemberPath="Name"
+                                                         VerticalOptions="Start"
+                                                         SuggestionMode="Contains"
+                                                           Watermark="{x:Static xamarinJkh:AppResources.HouseGroup}"
+                                                         BorderColor="{x:StaticResource MainColor}"
+                                                           EnableAutoSize="True"
+                                                           HighlightedTextColor="{x:StaticResource MainColor}"
+                                                         SuggestionBoxPlacement="Bottom"
+                                                           DropDownItemHeight="50"
+                                                     x:Name="HouseGroups"
+                                                     SelectionChanged="HouseGroups_SelectionChanged"
+                                                         DropDownBorderColor="{x:StaticResource MainColor}"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <svg:SvgCachedImage
+                                                Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                                HeightRequest="12"
+                                                WidthRequest="12"
+                                                Rotation="90"
+                                                Margin="0,5,0,0"
+                                                VerticalOptions="Center"
+                                                Grid.Column="1"
+                                                ReplaceStringMap="{Binding fontSize, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}" />
+                                    <Label Text="{x:Static xamarinJkh:AppResources.StreetGroup}"
+                                           FontSize="16"
+                                           IsVisible="{Binding StreetsVisible}"
+                                           TextColor="{x:StaticResource MainColor}">
+                                    </Label>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="FoldStreets"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <sync:SfAutoComplete MultiSelectMode="Token"
+                                           IsVisible="{Binding StreetsVisible, Converter={x:StaticResource Invert}}"
+                                                         ShowSuggestionsOnFocus="True"
+                                                     WatermarkColor="{AppThemeBinding Dark=White,Light=Default}"
+                                                         DataSource="{Binding Streets}"
+                                                     DisplayMemberPath="Address"
+                                                         VerticalOptions="Start"
+                                                         SuggestionMode="Contains"
+                                                           Watermark="{x:Static xamarinJkh:AppResources.StreetGroup}"
+                                                         BorderColor="{x:StaticResource MainColor}"
+                                                           EnableAutoSize="True"
+                                                           HighlightedTextColor="{x:StaticResource MainColor}"
+                                                         SuggestionBoxPlacement="Bottom"
+                                                           DropDownItemHeight="50"
+                                                     x:Name="HousesList"
+                                                     SelectionChanged="Houses_SelectionChanged"
+                                                         DropDownBorderColor="{x:StaticResource MainColor}"/>
+                                <Button BackgroundColor="{x:DynamicResource MainColor}"
+                                        Text="Показать"
+                                        TextColor="White"
+                                        Clicked="Button_Clicked"
+                                        FontSize="Medium"
+                                        CornerRadius="20"
+                                        HorizontalOptions="FillAndExpand"/>
+                                <StackLayout Spacing="0" Grid.Column="0" HorizontalOptions="StartAndExpand" IsVisible="False">
+                                    
                                     <StackLayout
+                                        IsVisible="False"
                                         Orientation="Horizontal" x:Name="StackLayoutType">
                                         <xamarinJkh:BorderlessPicker x:Name="PickerType"
                                                                      Title="{x:Static xamarinJkh:AppResources.Choose}"
@@ -99,7 +218,7 @@
                                         BackgroundColor="{Binding hex}"
                                         HorizontalOptions="Fill" />
                                 </StackLayout>
-                                <StackLayout Spacing="0" HorizontalOptions="StartAndExpand" IsVisible="{Binding LoadingStreets , Converter={converters:InverseBoolConverter}}">
+                                <StackLayout Spacing="0" HorizontalOptions="StartAndExpand" IsVisible="False">
                                     <StackLayout
                                         Orientation="Horizontal" x:Name="StackLayoutH" HorizontalOptions="Fill">
                                         <xamarinJkh:BorderlessPicker x:Name="PickerHouse"

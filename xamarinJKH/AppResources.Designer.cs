@@ -19,7 +19,7 @@ namespace xamarinJKH {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class AppResources {
@@ -408,6 +408,15 @@ namespace xamarinJKH {
         internal static string AreaChoose {
             get {
                 return ResourceManager.GetString("AreaChoose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Группа районов.
+        /// </summary>
+        internal static string AreaGroup {
+            get {
+                return ResourceManager.GetString("AreaGroup", resourceCulture);
             }
         }
         
@@ -2037,6 +2046,15 @@ namespace xamarinJKH {
         internal static string House {
             get {
                 return ResourceManager.GetString("House", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Район.
+        /// </summary>
+        internal static string HouseGroup {
+            get {
+                return ResourceManager.GetString("HouseGroup", resourceCulture);
             }
         }
         
@@ -4399,6 +4417,15 @@ namespace xamarinJKH {
         internal static string Street {
             get {
                 return ResourceManager.GetString("Street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Дома.
+        /// </summary>
+        internal static string StreetGroup {
+            get {
+                return ResourceManager.GetString("StreetGroup", resourceCulture);
             }
         }
         
