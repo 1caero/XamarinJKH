@@ -1720,6 +1720,8 @@ namespace xamarinJKH.MainConst
 
             HouseIDs.Clear();
 
+
+
             foreach (var house in (IEnumerable<Object>)e.Value)
             {
                 HouseIDs.Add(((HouseProfile)house).ID);
@@ -1771,6 +1773,33 @@ namespace xamarinJKH.MainConst
         private void FoldStreets(object sender, EventArgs args)
         {
             StreetsVisible = !StreetsVisible;
+        }
+
+        private void AreaGroups_SelectionChanged(object sender, Syncfusion.SfAutoComplete.XForms.SelectionChangedEventArgs e)
+        {
+            return;
+            var list = (IEnumerable<Object>)e.Value;
+            var names = new List<string>();
+            foreach (NamedValue element in list)
+            {
+                names.Add(element.Name);
+            }
+
+            var added = e.AddedItems as NamedValue;
+            var doubles = list.Where(x => (x as NamedValue).Name == added.Name).ToArray();
+            if (doubles != null)
+            if (doubles.Count() > 1 && list.Count() > 1)
+            {
+                    var enumer = ((sender as SfAutoComplete).SelectedItem as IEnumerable<Object>);
+                    var vals = enumer.ToList();
+                    vals.Remove(vals.First(x => (x as NamedValue).Name == added.Name));
+            }
+
+        }
+
+        private void HouseGroups_SelectionChanged_1(object sender, Syncfusion.SfAutoComplete.XForms.SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

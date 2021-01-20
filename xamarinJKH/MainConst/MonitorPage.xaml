@@ -92,11 +92,13 @@
                                     </StackLayout.GestureRecognizers>
                                 </StackLayout>                                           
                                 <sync:SfAutoComplete MultiSelectMode="Token"
+                                                     ShowClearButton="False"
                                                      IsVisible="False"
                                                          ShowSuggestionsOnFocus="True"
                                                      WatermarkColor="{AppThemeBinding Dark=White,Light=Default}"
                                                          DataSource="{Binding Groups}"
                                                          FocusChanged="AutoCompleteHouses_OnFocusChanged"
+                                                     SelectionChanged="AreaGroups_SelectionChanged"
                                                          VerticalOptions="Start"
                                                          SuggestionMode="Contains"
                                                      DisplayMemberPath="Name"
@@ -129,6 +131,7 @@
                                 </StackLayout>
                                 <sync:SfAutoComplete MultiSelectMode="Token"
                                                          ShowSuggestionsOnFocus="True"
+                                                     ShowClearButton="False"
                                            IsVisible="{Binding AreasVisible, Converter={x:StaticResource Invert}}"
                                                      WatermarkColor="{AppThemeBinding Dark=White,Light=Default}"
                                                          DataSource="{Binding Areas}"
@@ -165,6 +168,7 @@
                                 </StackLayout>
                                 <sync:SfAutoComplete MultiSelectMode="Token"
                                            IsVisible="{Binding StreetsVisible, Converter={x:StaticResource Invert}}"
+                                                     ShowClearButton="False"
                                                          ShowSuggestionsOnFocus="True"
                                                      WatermarkColor="{AppThemeBinding Dark=White,Light=Default}"
                                                          DataSource="{Binding Streets}"
