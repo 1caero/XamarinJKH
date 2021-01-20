@@ -1741,4 +1741,13 @@
   <data name="ASource" xml:space="preserve">
     <value>Источник</value>
   </data>
+  <data name="AreaGroup" xml:space="preserve">
+    <value>Группа районов</value>
+  </data>
+  <data name="HouseGroup" xml:space="preserve">
+    <value>Район</value>
+  </data>
+  <data name="StreetGroup" xml:space="preserve">
+    <value>Дома</value>
+  </data>
 </root>
