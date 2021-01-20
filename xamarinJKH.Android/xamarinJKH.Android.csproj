@@ -225,7 +225,6 @@
     <AndroidResource Include="Resources\drawable\ic_background_quest_light.png" />
     <AndroidResource Include="Resources\drawable\ic_calendar.png" />
     <AndroidResource Include="Resources\drawable\ic_call_app.png" />
-    <AndroidResource Include="Resources\drawable\ic_card_pay_black.png" />
     <AndroidResource Include="Resources\drawable\ic_check_unchecked.xml" />
     <AndroidResource Include="Resources\drawable\ic_close.png" />
     <AndroidResource Include="Resources\drawable\ic_close_app1.png" />
@@ -233,48 +232,36 @@
     <AndroidResource Include="Resources\drawable\ic_date.png" />
     <AndroidResource Include="Resources\drawable\ic_dislike.png" />
     <AndroidResource Include="Resources\drawable\ic_electr.png" />
-    <AndroidResource Include="Resources\drawable\ic_file.png" />
-    <AndroidResource Include="Resources\drawable\ic_files_app1.png" />
     <AndroidResource Include="Resources\drawable\ic_file_download.png" />
     <AndroidResource Include="Resources\drawable\ic_gas.png" />
     <AndroidResource Include="Resources\drawable\ic_heat_energ.png" />
     <AndroidResource Include="Resources\drawable\ic_heat_water.png" />
     <AndroidResource Include="Resources\drawable\ic_history_pay.png" />
     <AndroidResource Include="Resources\drawable\ic_history_pay_top.png" />
-    <AndroidResource Include="Resources\drawable\ic_home.png" />
     <AndroidResource Include="Resources\drawable\ic_info_app1.png" />
     <AndroidResource Include="Resources\drawable\ic_in_way.png" />
-    <AndroidResource Include="Resources\drawable\ic_microphone.png" />
-    <AndroidResource Include="Resources\drawable\ic_minus.png" />
     <AndroidResource Include="Resources\drawable\ic_monitor.png" />
     <AndroidResource Include="Resources\drawable\ic_monitor_top.png" />
     <AndroidResource Include="Resources\drawable\ic_monitor_top_light.png" />
     <AndroidResource Include="Resources\drawable\ic_news_top.png" />
     <AndroidResource Include="Resources\drawable\ic_news_top_light.png" />
-    <AndroidResource Include="Resources\drawable\ic_new_app_top.png" />
     <AndroidResource Include="Resources\drawable\ic_next_disp.png" />
     <AndroidResource Include="Resources\drawable\ic_notification_top.png" />
     <AndroidResource Include="Resources\drawable\ic_notification_top_light.png" />
     <AndroidResource Include="Resources\drawable\ic_not_author.png" />
     <AndroidResource Include="Resources\drawable\ic_no_photo.png" />
-    <AndroidResource Include="Resources\drawable\ic_payed_ident.png" />
     <AndroidResource Include="Resources\drawable\ic_pays_top.png" />
     <AndroidResource Include="Resources\drawable\ic_pays_top_light.png" />
     <AndroidResource Include="Resources\drawable\ic_phone.png" />
-    <AndroidResource Include="Resources\drawable\ic_plus.png" />
-    <AndroidResource Include="Resources\drawable\ic_profile_top.png" />
     <AndroidResource Include="Resources\drawable\ic_questions_top.png" />
     <AndroidResource Include="Resources\drawable\ic_saldos.png" />
-    <AndroidResource Include="Resources\drawable\ic_saldos_top.png" />
     <AndroidResource Include="Resources\drawable\ic_send_mess.png" />
     <AndroidResource Include="Resources\drawable\ic_shop.png" />
-    <AndroidResource Include="Resources\drawable\ic_shop_top.png" />
     <AndroidResource Include="Resources\drawable\ic_star.png" />
     <AndroidResource Include="Resources\drawable\ic_status_done.png" />
     <AndroidResource Include="Resources\drawable\ic_status_new.png" />
     <AndroidResource Include="Resources\drawable\ic_status_wait.png" />
     <AndroidResource Include="Resources\drawable\ic_time.png" />
-    <AndroidResource Include="Resources\drawable\ic_top_event_back.png" />
     <AndroidResource Include="Resources\drawable\ic_web_cams_top.png" />
     <AndroidResource Include="Resources\drawable\ic_web_cams_top_light.png" />
     <AndroidResource Include="Resources\drawable\kb_separator_line.xml" />
@@ -282,12 +269,8 @@
     <AndroidResource Include="Resources\drawable\normal.xml" />
     <AndroidResource Include="Resources\drawable\pay.png" />
     <AndroidResource Include="Resources\drawable\pressed.xml" />
-    <AndroidResource Include="Resources\drawable\telegram.png" />
     <AndroidResource Include="Resources\drawable\top_fon_login_light.png" />
-    <AndroidResource Include="Resources\drawable\triangle.png" />
     <AndroidResource Include="Resources\drawable\up_arrow.png" />
-    <AndroidResource Include="Resources\drawable\viber.png" />
-    <AndroidResource Include="Resources\drawable\whatsapp.png" />
     <AndroidResource Include="Resources\layout\customkeyboard.xml" />
     <AndroidResource Include="Resources\layout\Tabbar.xml" />
     <AndroidResource Include="Resources\layout\Toolbar.xml" />
@@ -313,12 +296,6 @@
       <Generator>
       </Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_arrow_tech.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable\ic_close_password.png">
       <SubType>
       </SubType>
@@ -331,31 +308,7 @@
       <Generator>
       </Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_password_login.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable\ic_phone_login.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_questions.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_reg_separrator.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_separator.png">
       <SubType>
       </SubType>
       <Generator>
@@ -397,19 +350,7 @@
       <Generator>
       </Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_diskont.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable\ic_events.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_news.png">
       <SubType>
       </SubType>
       <Generator>
@@ -427,18 +368,6 @@
       <Generator>
       </Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_profile.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_questions2.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable\ic_tech.png">
       <SubType>
       </SubType>
@@ -446,24 +375,6 @@
       </Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\ic_check_mark.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_exit.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_profile_email.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_background_addCounter.png">
       <SubType>
       </SubType>
       <Generator>
@@ -483,24 +394,6 @@
     </AndroidResource>
     <AndroidResource Include="Resources\xml\apply.xml" />
     <AndroidResource Include="Resources\xml\file_paths.xml" />
-    <AndroidResource Include="Resources\drawable\icon_add_app.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_execute.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_move_disp.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\xml\special_keyboard.xml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
@@ -511,9 +404,6 @@
       <Project>{DD0A8A0D-15EA-4EC1-BCAC-D0BEE24EB249}</Project>
       <Name>xamarinJKH</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_top_event.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_shop_minus.png">
@@ -529,9 +419,6 @@
     <AndroidResource Include="Resources\drawable\ic_basket_top.png">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_counter.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_background_OSS.png">
@@ -992,9 +879,6 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\top_fon_login_light.png">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_flip.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

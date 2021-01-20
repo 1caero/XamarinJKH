@@ -21,6 +21,7 @@ using xamarinJKH.Utils;
 using xamarinJKH.ViewModels;
 using Xamarin.Forms.PancakeView;
 using xamarinJKH.DialogViews;
+using Microsoft.AppCenter.Crashes;
 
 namespace xamarinJKH
 {
@@ -683,44 +684,58 @@ namespace xamarinJKH
                 }
         }
 
-        private async void ButtonReg(object sender, EventArgs e)
-        {
-            FinalRegg();
-        }
+        //private async void ButtonReg(object sender, EventArgs e)
+        //{
+        //    FinalRegg();
+        //}
 
         private async void FinalRegg()
         {
-            Analytics.TrackEvent("Финальный шаг регистрации");
-            string pass = EntryPassNew.Text;
-            string passConfirm = EntryPassCommit.Text;
-            if (pass.Equals(""))
-            {
-                await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorRegisterFillPassword, "OK");
-            }
-            else if (EntryPassNew.IsPassword && passConfirm.Equals(""))
-            {
-                await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorRegisterFillPasswordConfirm, "OK");
-            }
-            else if (EntryPassNew.IsPassword && !pass.Equals(passConfirm))
-            {
-                await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorRegisterPassword, "OK");
-            }
-            else
-            {
-                CommonResult result =
-                    await _server.RegisterByPhone(Person.FIO, Person.Phone, pass, Person.Code, Person.Birthday);
-                if (result.Error == null)
+            try {
+                FrameBtnRegFinal.IsEnabled = false;
+
+                Analytics.TrackEvent("Финальный шаг регистрации");
+                string pass = EntryPassNew.Text;
+                string passConfirm = EntryPassCommit.Text;
+                if (pass.Equals(""))
                 {
-                    LoginAuth = "79237173372";
-                    passAuth = "qw";
-                    await Navigation.PopModalAsync();
-                    _mainPage.Login(Person.Phone, pass);
+                    await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorRegisterFillPassword, "OK");
+                }
+                else if (EntryPassNew.IsPassword && passConfirm.Equals(""))
+                {
+                    await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorRegisterFillPasswordConfirm, "OK");
+                }
+                else if (EntryPassNew.IsPassword && !pass.Equals(passConfirm))
+                {
+                    await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorRegisterPassword, "OK");
                 }
                 else
                 {
-                    await DisplayAlert(AppResources.ErrorTitle, result.Error, "OK");
+                    CommonResult result =
+                        await _server.RegisterByPhone(Person.FIO, Person.Phone, pass, Person.Code, Person.Birthday);
+                    if (result.Error == null)
+                    {
+                        if (Navigation.ModalStack.Count > 0)
+                            await Navigation.PopModalAsync();
+                        _mainPage.Login(Person.Phone, pass);
+                    }
+                    else
+                    {
+                        await DisplayAlert(AppResources.ErrorTitle, result.Error, "OK");
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                throw;
+            }
+            finally
+            {
+                FrameBtnRegFinal.IsEnabled = true;
+            }
+
+          
         }
 
         private void datePicker_DateSelected(object sender, DateChangedEventArgs e)
