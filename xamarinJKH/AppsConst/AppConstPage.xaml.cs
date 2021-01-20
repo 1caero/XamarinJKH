@@ -1004,10 +1004,6 @@ namespace xamarinJKH.AppsConst
                     {
                         isMan = request.PassInfo.CategoryId == 1;
                     }
-                    if (!string.IsNullOrWhiteSpace(request.MalfunctionType))
-                    {
-                        request.MalfunctionType = " (" + request.MalfunctionType + ")";
-                    }
                     var ret = await Dialog.Instance.ShowAsync<InfoAppDialog>(new
                     {
                         _Request = request,

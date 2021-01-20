@@ -47,7 +47,7 @@
                               FontSize="15" />
                         <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
                         <Span Text=" {Binding _Request.TypeName}" FontSize="15" />
-                        <Span Text=" {Binding _Request.MalfunctionType}" FontSize="15" />
+                        <Span Text=" {Binding _Request._MalfunctionType}" FontSize="15" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>

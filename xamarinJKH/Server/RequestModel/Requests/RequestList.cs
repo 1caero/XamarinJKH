@@ -37,6 +37,12 @@ namespace xamarinJKH.Server.RequestModel
         public string SourceType { get; set; }
         // тип неисправности
         public string MalfunctionType { get; set; }
+
+        public string _MalfunctionType
+        {
+            get => string.IsNullOrWhiteSpace(MalfunctionType)? "" :  " (" + MalfunctionType + ")";
+            set => MalfunctionType = value;
+        }
         // исполнитель
         public string PerofmerName { get; set; }
 
