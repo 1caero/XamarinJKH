@@ -116,7 +116,10 @@ namespace xamarinJKH.Server
         public const string SET_READED_APP = "RequestsDispatcher/SetReadedFlag"; // Метод, который устанавливает что заявка прочитана сотрудником
         public const string CREATE_PUSH = "Dispatcher/NewAnnouncement"; //создание уведомления
         public const string SEND_PUSH = "Dispatcher/SendAnnouncement"; //создание уведомления
-        
+        public const string GET_AREA_GROUPS = "RequestsDispatcher/GroupsOfDistrincts"; //Получение групп районов
+        public const string REQUEST_MULTIPLE = "RequestsDispatcher/RequestStatsMultiple"; //Запрос по нескольким ID
+
+
 
         public const string
             GET_REQUESTS_STATS = "RequestsDispatcher/RequestStats"; // Возвращает статистику по заявкам.  
@@ -198,7 +201,7 @@ namespace xamarinJKH.Server
         public const string READ_NOTIFICATION = "Announcements/SetReadedFlag"; //Установка флага прочтения объявления
         public const string READ_POLL = "Polls/SetReadedFlag";//Установка флага прочтения опроса
         public const string READ_NEW = "Common/SetNewsReadedFlag";//Установка флага прочтения новости
-        
+
         // Тех.Поддержка
         public const string GET_TECH_MESSAGE = "https://help.1caero.ru/MobileAPI/TechSupport/RequestDetails.ashx";//скрипт, который отдает переписку по заявке 
         public const string ADD_TECH_MESSAGE = "https://help.1caero.ru/MobileAPI/TechSupport/AddMessage.ashx";// Скрипт, который сохранит коммент от пользователя и отдаст его специалисту поддержки в ксп 
@@ -431,8 +434,8 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
-        
-        public async Task<string> MobilePersonalDataPolicy ()
+
+        public async Task<string> MobilePersonalDataPolicy()
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             RestRequest restRequest = new RestRequest(GET_PERSONAL_POLICY, Method.GET);
@@ -538,7 +541,7 @@ namespace xamarinJKH.Server
         }
         public async Task<IDResult> newAppPass(string ident, string typeID, string Text,
             int PassCategoryId, string? PassFIO, string? PassPassportData,
-            string? PassVehicleMark, string? PassVehicleNumber )
+            string? PassVehicleMark, string? PassVehicleNumber)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             RestRequest restRequest = new RestRequest(NEW_APP, Method.POST);
@@ -818,7 +821,7 @@ namespace xamarinJKH.Server
             }
 
             return response.Data;
-        } 
+        }
         public async Task<RequestContent> GetRequestsDetailListTech(string phone, string messageId = null)
         {
             RestClient restClientMp = new RestClient(GET_TECH_MESSAGE);
@@ -837,8 +840,8 @@ namespace xamarinJKH.Server
             // appVersion - версия МП
             // info - доп инфо
 
-            Analytics.TrackEvent("Запрос:\n" +"messageId: " +  messageId +
-                                 "database: " + SERVER_ADDR.Split("/")[3] + 
+            Analytics.TrackEvent("Запрос:\n" + "messageId: " + messageId +
+                                 "database: " + SERVER_ADDR.Split("/")[3] +
                                  "phone: " + phone);
             var response = await restClientMp.ExecuteTaskAsync<RequestContent>(restRequest);
             Analytics.TrackEvent("Ответ: " + response.ErrorMessage + "\n" +
@@ -1088,7 +1091,7 @@ namespace xamarinJKH.Server
             return response.Data;
         }
 
-        
+
         public async Task<CommonResult> SetNewReadFlag(int ID)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
@@ -1115,8 +1118,8 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
-        
-        
+
+
         public async Task<CommonResult> AddFileAppsConst(string requestId, string name, byte[] source, string path)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
@@ -1157,7 +1160,7 @@ namespace xamarinJKH.Server
             }
 
             return response.RawBytes;
-        }public async Task<byte[]> GetFileAPP_Tech(string id)
+        } public async Task<byte[]> GetFileAPP_Tech(string id)
         {
             RestClient restClientMp = new RestClient(GET_TECH_FILE);
             RestRequest restRequest = new RestRequest("", Method.GET);
@@ -1240,7 +1243,7 @@ namespace xamarinJKH.Server
             }
 
             return response.RawBytes;
-        } 
+        }
         public async Task<byte[]> GetPhotoAdditionalDop(string id)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
@@ -1282,7 +1285,7 @@ namespace xamarinJKH.Server
             return new MemoryStream(response.RawBytes);
         }
 
-        public async Task<byte[]> DownloadFileAsync(string id, int  inJpg = 0)
+        public async Task<byte[]> DownloadFileAsync(string id, int inJpg = 0)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             RestRequest restRequest = new RestRequest(GET_FILE_BILLS + "/" + id, Method.GET);
@@ -1325,8 +1328,8 @@ namespace xamarinJKH.Server
             }
 
             return response.Data;
-        } 
-        
+        }
+
         /// <summary>
         /// Получить историю показаний по прибору учета
         /// </summary>
@@ -1925,7 +1928,7 @@ namespace xamarinJKH.Server
                 await Task.Delay(500);
 
             string Version = Device.RuntimePlatform == Device.Android ? App.version : Xamarin.Essentials.DeviceInfo.VersionString;
-            string Model = Device.RuntimePlatform==Device.Android? App.model : Xamarin.Essentials.DeviceInfo.Model;
+            string Model = Device.RuntimePlatform == Device.Android ? App.model : Xamarin.Essentials.DeviceInfo.Model;
             string DeviceId = App.token;
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             string url = isCons ? REGISTR_DISPATCHER_DEVICE : REGISTR_DEVICE;
@@ -1954,12 +1957,12 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
-        public async Task<CommonResult> RegisterDeviceNotAvtorization(string Phone )
+        public async Task<CommonResult> RegisterDeviceNotAvtorization(string Phone)
         {
             string OS = Device.RuntimePlatform;
             if (OS.ToLower() == "ios")
                 await Task.Delay(500);
-    
+
             string Version = App.version;
             string Model = App.model;
             string DeviceId = App.token;
@@ -2131,7 +2134,7 @@ namespace xamarinJKH.Server
             });
             var response = await restClientMp.ExecuteTaskAsync<CommonResult>(restRequest);
             // Проверяем статус
-             if (response.StatusCode != HttpStatusCode.OK)
+            if (response.StatusCode != HttpStatusCode.OK)
             {
                 return new CommonResult()
                 {
@@ -2197,7 +2200,7 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
-        
+
         /// <summary>
         /// Отправка пин-кода в SMS по платной заявке после онлайн оплаты
         ///  Отправка пин-кода в SMS по платной заявке после онлайн оплаты
@@ -2512,7 +2515,7 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
-        
+
         public async Task<ItemsList<string>> VehicleMarks()
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
@@ -2533,7 +2536,7 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
-/// <summary>
+        /// <summary>
         /// Закрытие списка заявки.
         /// </summary>
         /// <param name="Requests">Список id заявок для закрытия</param>
@@ -2562,8 +2565,8 @@ namespace xamarinJKH.Server
             }
 
             return response.Data;
-        } 
-        
+        }
+
         /// <summary>
         /// Выполнение списка заявок.
         /// </summary>
@@ -2600,7 +2603,7 @@ namespace xamarinJKH.Server
         /// <param name="districtId">ид района</param>
         /// <param name="houseId">ид дома</param>
         /// <returns>объект со статистикой</returns>
-        public async Task<ItemsList<RequestStats>> RequestStats(int? districtId = null, int? houseId = -1, string customPeriodStart =null,
+        public async Task<ItemsList<RequestStats>> RequestStats(int? districtId = null, int? houseId = -1, string customPeriodStart = null,
             string customPeriodEnd = null)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
@@ -2721,7 +2724,7 @@ namespace xamarinJKH.Server
             var response = await client.ExecuteTaskAsync<ItemsList<CameraModel>>(restRequest);
             return response.Data;
         }
-        
+
         public async Task<ItemsList<BonusCashFlow>> GetBonusHistory(string id = "0001")
         {
             RestClient client = new RestClient(SERVER_ADDR);
@@ -2734,13 +2737,13 @@ namespace xamarinJKH.Server
             var response = await client.ExecuteTaskAsync<ItemsList<BonusCashFlow>>(restRequest);
             return response.Data;
         }
-        
+
         /// <summary>
         /// Метод, который устанавливает что заявка прочитана сотрудником
         /// </summary>
         /// <param name="RequestId"> ID заявки</param>
         /// <returns>CommonResult</returns>
-        public async Task<CommonResult> SetReadedFlag (int RequestId, bool isDispatcher = true)
+        public async Task<CommonResult> SetReadedFlag(int RequestId, bool isDispatcher = true)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             RestRequest restRequest = new RestRequest(isDispatcher ? SET_READED_APP : READ_REQUEST, Method.POST);
@@ -2777,7 +2780,7 @@ namespace xamarinJKH.Server
             restRequest.AddHeader("acx", Settings.Person.acx);
             restRequest.AddBody(new
             {
-               ID
+                ID
             });
 
             var response = await restClientMp.ExecuteTaskAsync<CommonResult>(restRequest);
@@ -2820,7 +2823,7 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
-        
+
         public async Task<List<NewsInfo>> AllNews()
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
@@ -2842,7 +2845,7 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
-        
+
         public async Task<IDResult> NewAnnouncement(AnnouncementArguments announcementArguments)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
@@ -2878,9 +2881,9 @@ namespace xamarinJKH.Server
             }
 
             return response.Data;
-        } 
-        
-        public async Task<CommonResult> SendAnnouncement (int ID)
+        }
+
+        public async Task<CommonResult> SendAnnouncement(int ID)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             RestRequest restRequest = new RestRequest(SEND_PUSH, Method.POST);
@@ -2930,6 +2933,38 @@ namespace xamarinJKH.Server
                     Error = $"Ошибка {response.StatusDescription}"
                 };
             }
+
+            return response.Data;
+        }
+
+        public async Task<ItemsList<NamedValue>> GetAreaGroups()
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(GET_AREA_GROUPS, Method.GET);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+
+            var response = await restClientMp.ExecuteAsync<ItemsList<NamedValue>>(restRequest);
+
+            return response.Data;
+        }
+
+        public async Task<ItemsList<RequestStats>> GetMultipleStats(List<xamarinJKH.Server.RequestModel.Monitor.RequestStatsQuerySettings> Queries)
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(REQUEST_MULTIPLE, Method.POST);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            restRequest.AddBody(new
+            {
+                Queries
+            });
+
+            var response = await restClientMp.ExecuteAsync<ItemsList<RequestStats>>(restRequest);
 
             return response.Data;
         }
