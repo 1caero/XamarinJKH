@@ -211,6 +211,9 @@ namespace xamarinJKH.MainConst
                 }
                 loaded = true;
             });
+            AreasVisible = true;
+            GroupVisible = true;
+            StreetsVisible = true;
         }
         bool loaded;
 
@@ -1076,30 +1079,35 @@ namespace xamarinJKH.MainConst
 
             if (groups.Error == null)
             {
-                Device.BeginInvokeOnMainThread(async () =>
+                try
                 {
-                    Streets.Clear();
-                    foreach (var group in groups.Data)
+                    Device.BeginInvokeOnMainThread(async () =>
                     {
-                        if (!string.IsNullOrEmpty(group.Address))
-                            Streets.Add(group);
-                    }
+                        Streets.Clear();
+                        foreach (var group in groups.Data)
+                        {
+                            if (!string.IsNullOrEmpty(group.Address))
+                                Streets.Add(group);
+                        }
 
-                    SelectedStreet = Streets[0];
-                    Streets[0].Selected = true;
-                    // StreetsCollection.ScrollTo(Streets[0]);
-                    string[] param = null;
-                    setListHouse(groups, ref param);
-                    var action = Streets[0].Address;
-                    if (action != null && !action.Equals(AppResources.Cancel))
-                    {
-                        LayoutContent.Children.Clear();
-                        MaterialFrameNotDoingContainer.IsVisible = false;
-                        //LabelHouse.Text = action;
-                        await getMonitorStandart(-1, Int32.Parse(Houses[action]));
-                    }
-                    LoadingStreets = false;
-                });
+                        SelectedStreet = Streets[0];
+                        Streets[0].Selected = true;
+                        // StreetsCollection.ScrollTo(Streets[0]);
+                        string[] param = null;
+                        setListHouse(groups, ref param);
+                        var action = Streets[0].Address;
+                        if (action != null && !action.Equals(AppResources.Cancel))
+                        {
+                            LayoutContent.Children.Clear();
+                            MaterialFrameNotDoingContainer.IsVisible = false;
+                            //LabelHouse.Text = action;
+                            await getMonitorStandart(-1, Int32.Parse(Houses[action]));
+                        }
+                        LoadingStreets = false;
+                    });
+                }
+                catch { }
+                
                 return;
                 string[] param = null;
                 setListHouse(groups, ref param);
@@ -1612,7 +1620,8 @@ namespace xamarinJKH.MainConst
         private async void Button_Clicked(object sender, EventArgs e)
         {
             var queries = new List<RequestStatsQuerySettings>();
-            for (int i = 0; i < AreaIDs.Count(); i++)
+            if (HouseIDs != null)
+            for (int i = 0; i < HouseIDs.Count(); i++)
             {
                 try
                 {
@@ -1626,6 +1635,24 @@ namespace xamarinJKH.MainConst
                 catch (Exception ex)
                 { }
             }
+            if (AreaIDs != null)
+            {
+                for (int i = 0; i < AreaIDs.Count(); i++)
+                {
+                    try
+                    {
+                        queries.Add(
+                            new RequestStatsQuerySettings
+                            {
+                                DistrictId = AreaIDs[i],
+                                HouseId = -1// HouseIDs[i],
+                            });
+                    }
+                    catch (Exception ex)
+                    { }
+                }
+            }
+
             Loading.Instance.StartAsync(async progress => {
                 var result = await _server.GetMultipleStats(queries);
                 if (result.Error == null)
@@ -1697,6 +1724,53 @@ namespace xamarinJKH.MainConst
             {
                 HouseIDs.Add(((HouseProfile)house).ID);
             }
+        }
+        bool groupvisible;
+        public bool GroupVisible
+        {
+            get => groupvisible;
+            set
+            {
+                groupvisible = value;
+                OnPropertyChanged("GroupVisible");
+            }
+        }
+
+        bool areasvisible;
+        public bool AreasVisible
+        {
+            get => areasvisible;
+            set
+            {
+                areasvisible = value;
+                OnPropertyChanged("AreasVisible");
+            }
+        }
+
+        bool streetsvisible;
+        public bool StreetsVisible
+        {
+            get => streetsvisible;
+            set
+            {
+                streetsvisible = value;
+                OnPropertyChanged("StreetsVisible");
+            }
+        }
+        private void FoldAreaGroup(object sender, EventArgs args)
+        {
+            GroupVisible = !GroupVisible;
+            AreaGroups.IsVisible = !GroupVisible;
+        }
+
+        private void FoldAreas(object sender, EventArgs args)
+        {
+            AreasVisible = !AreasVisible;
+        }
+
+        private void FoldStreets(object sender, EventArgs args)
+        {
+            StreetsVisible = !StreetsVisible;
         }
     }
 }
