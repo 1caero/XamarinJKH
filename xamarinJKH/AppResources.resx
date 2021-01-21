@@ -745,7 +745,7 @@
     <value> по </value>
   </data>
   <data name="TodayPeriod" xml:space="preserve">
-    <value>Сегодня</value>
+    <value>На дату</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Итого</value>
@@ -1749,5 +1749,14 @@
   </data>
   <data name="StreetGroup" xml:space="preserve">
     <value>Дома</value>
+  </data>
+  <data name="SelectMonth" xml:space="preserve">
+    <value>Выберите месяц</value>
+  </data>
+  <data name="SelectWeek" xml:space="preserve">
+    <value>Выберите неделю</value>
+  </data>
+  <data name="SelectDay" xml:space="preserve">
+    <value>Выберите день</value>
   </data>
 </root>

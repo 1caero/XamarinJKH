@@ -340,6 +340,7 @@
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.3" />
     <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="18.3.0.51" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.3.0.53" />
     <PackageReference Include="Syncfusion.Xamarin.SfPdfViewer" Version="18.3.0.50" />
     <PackageReference Include="Xam.Plugin.Badge" Version="1.0.0" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
@@ -381,6 +382,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="DialogViews\BonusHistoryDialogView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="DialogViews\CalendarWeekDialog.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="DialogViews\EnterCodeDialogView.xaml">
@@ -567,6 +571,12 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="DialogViews\CalendarMonthDialog.xaml.cs">
+      <DependentUpon>CalendarMonthDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="DialogViews\CalendarDayDialog.xaml.cs">
+      <DependentUpon>CalendarDayDialog.xaml</DependentUpon>
     </Compile>
     <Compile Update="Main\BottomNavigationPage.xaml.cs">
       <DependentUpon>BottomNavigationPage.xaml</DependentUpon>
