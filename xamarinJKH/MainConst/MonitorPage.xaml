@@ -144,6 +144,7 @@
                                                            HighlightedTextColor="{x:StaticResource MainColor}"
                                                          SuggestionBoxPlacement="Bottom"
                                                            DropDownItemHeight="50"
+                                                     FocusChanged="HouseGroups_FocusChanged"
                                                      x:Name="HouseGroups"
                                                      SelectionChanged="HouseGroups_SelectionChanged"
                                                          DropDownBorderColor="{x:StaticResource MainColor}"/>
@@ -183,6 +184,7 @@
                                                            DropDownItemHeight="50"
                                                      x:Name="HousesList"
                                                      SelectionChanged="Houses_SelectionChanged"
+                                                     FocusChanged="HousesList_FocusChanged"
                                                          DropDownBorderColor="{x:StaticResource MainColor}"/>
                                 <Button BackgroundColor="{x:DynamicResource MainColor}"
                                         Text="Показать"

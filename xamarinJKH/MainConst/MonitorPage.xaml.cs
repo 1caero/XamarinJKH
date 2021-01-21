@@ -1055,8 +1055,24 @@ namespace xamarinJKH.MainConst
 
         private void AutoCompleteHouses_OnFocusChanged(object sender, FocusChangedEventArgs e)
         {
-            //(sender as SfAutoComplete).Text = SelectedGroup[0].ToString();
+            (sender as SfAutoComplete).Unfocus();
+            try
+            {
+                var result = new List<NamedValue>();
+                var selected = AreaGroups.SelectedItem as IEnumerable<Object>;
+                var selected_indecies = selected.Select(x => (x as NamedValue).ID).ToList();
+                if (selected != null || selected_indecies.Count > 0)
+                {
+                    result.AddRange(Groups.Where(x => !selected_indecies.Contains(x.ID)));
+                    AreaGroups.DataSource = result;
+                }
+            }
+            catch
+            {
+
+            }
             
+
         }
         public async Task StartStatistick(bool isGroup = true)
         {
@@ -1823,30 +1839,48 @@ namespace xamarinJKH.MainConst
 
         private void HouseGroups_SelectionChanged(object sender, Syncfusion.SfAutoComplete.XForms.SelectionChangedEventArgs e)
         {
-            if (AreaIDs == null)
-                AreaIDs = new List<int>();
-
-            AreaIDs.Clear();
-
-            foreach (var area in (IEnumerable<Object>)e.Value)
+            try
             {
-                AreaIDs.Add(((NamedValue)area).ID);
+                if (AreaIDs == null)
+                    AreaIDs = new List<int>();
+
+                AreaIDs.Clear();
+
+                foreach (var area in (IEnumerable<Object>)e.Value)
+                {
+                    AreaIDs.Add(((NamedValue)area).ID);
+                }
+
             }
+            catch
+            {
+
+            }
+           
+
         }
 
         private void Houses_SelectionChanged(object sender, Syncfusion.SfAutoComplete.XForms.SelectionChangedEventArgs e)
         {
-            if (HouseIDs == null)
-                HouseIDs = new List<int>();
-
-            HouseIDs.Clear();
-
-
-
-            foreach (var house in (IEnumerable<Object>)e.Value)
+            try
             {
-                HouseIDs.Add(((HouseProfile)house).ID);
+                if (HouseIDs == null)
+                    HouseIDs = new List<int>();
+
+                HouseIDs.Clear();
+
+
+
+                foreach (var house in (IEnumerable<Object>)e.Value)
+                {
+                    HouseIDs.Add(((HouseProfile)house).ID);
+                }
             }
+            catch
+            {
+
+            }
+            
         }
         bool groupvisible;
         public bool GroupVisible
@@ -1921,6 +1955,69 @@ namespace xamarinJKH.MainConst
         private void HouseGroups_SelectionChanged_1(object sender, Syncfusion.SfAutoComplete.XForms.SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void HouseGroups_FocusChanged(object sender, FocusChangedEventArgs e)
+        {
+            (sender as SfAutoComplete).Unfocus();
+            try
+            {
+                if (Groups.Count > 0)
+                {
+                    if (AreaGroups.DataSource.Count() > 0)
+                    {
+                        var result = new List<NamedValue>();
+                        if ((AreaGroups.SelectedItem as IEnumerable<Object>).Count() > 0)
+                        {
+                            var indecies = (AreaGroups.SelectedItem as IEnumerable<Object>).Select(x => (x as NamedValue).ID).ToList();
+                            result.AddRange(Areas.Where(x => indecies.Contains(x.Value)));
+                        }
+                        else
+                        {
+                            result.AddRange(Areas.Where(x => x.Value > 0));
+                        }
+                        var selected = HouseGroups.SelectedItem as IEnumerable<Object>;
+                        if (selected != null)
+                        {
+                            var selected_indecies = selected.Select(x => (x as NamedValue).ID);
+                            if (selected_indecies != null)
+                            {
+                                result = result.Where(x => !selected_indecies.Contains(x.ID)).ToList();
+                            }
+                        }
+                        HouseGroups.DataSource = null;
+                        HouseGroups.DataSource = result;
+                    }
+
+                }
+            }
+            catch
+            {
+
+            }
+            
+        }
+
+        private void HousesList_FocusChanged(object sender, FocusChangedEventArgs e)
+        {
+            (sender as SfAutoComplete).Unfocus();
+            try
+            {
+                var selected = HousesList.SelectedItem as IEnumerable<Object>;
+                if (selected != null)
+                {
+                    var selected_indecies = selected.Select(x => (x as HouseProfile).ID).ToList();
+                    var result = new List<HouseProfile>();
+
+                    HousesList.DataSource = null;
+                    HousesList.DataSource = Streets.Where(x => !selected_indecies.Contains(x.ID));
+                }
+            }
+            catch
+            {
+
+            }
+            
         }
     }
 }
