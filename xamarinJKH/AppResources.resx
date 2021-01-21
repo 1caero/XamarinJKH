@@ -1750,4 +1750,10 @@
   <data name="StreetGroup" xml:space="preserve">
     <value>Дома</value>
   </data>
+  <data name="SelectMonth" xml:space="preserve">
+    <value>Выберите месяц</value>
+  </data>
+  <data name="SelectWeek" xml:space="preserve">
+    <value>Выберите неделю</value>
+  </data>
 </root>

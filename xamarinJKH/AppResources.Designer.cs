@@ -3890,6 +3890,24 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите месяц.
+        /// </summary>
+        internal static string SelectMonth {
+            get {
+                return ResourceManager.GetString("SelectMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите неделю.
+        /// </summary>
+        internal static string SelectWeek {
+            get {
+                return ResourceManager.GetString("SelectWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отправить.
         /// </summary>
         internal static string Send {

@@ -1630,4 +1630,10 @@
   <data name="StreetGroup" xml:space="preserve">
     <value>Будинки</value>
   </data>
+  <data name="SelectMonth" xml:space="preserve">
+    <value>Оберiть мiсяц</value>
+  </data>
+  <data name="SelectWeek" xml:space="preserve">
+    <value>Оберiть тиждень</value>
+  </data>
 </root>

@@ -23,6 +23,7 @@ using xamarinJKH.Tech;
 using xamarinJKH.Utils;
 using Syncfusion.SfAutoComplete.XForms;
 using xamarinJKH.Server.RequestModel.Monitor;
+using Syncfusion.SfCalendar.XForms;
 
 namespace xamarinJKH.MainConst
 {
@@ -273,27 +274,27 @@ namespace xamarinJKH.MainConst
             }
         }
 
-        void setMonitoringMultiple(List<RequestStats> result)
-        {
+        //void setMonitoringMultiple(List<RequestStats> result)
+        //{
 
-            LayoutContent.Children.Clear();
-            foreach (var res in result)
-            {
-                List<PeriodStats> periodStatses = new List<PeriodStats>();
-                periodStatses.Add(res.Today);
-                periodStatses.Add(res.Week);
-                periodStatses.Add(res.Month);
-                setNotDoingApps(res.TotalUnperformedRequestsList);
-                int i = 0;
-                foreach (var each in periodStatses)
-                {
-                    var container = AddMonitorPeriod(i, each, DateTime.Now);
+        //    LayoutContent.Children.Clear();
+        //    foreach (var res in result)
+        //    {
+        //        List<PeriodStats> periodStatses = new List<PeriodStats>();
+        //        periodStatses.Add(res.Today);
+        //        periodStatses.Add(res.Week);
+        //        periodStatses.Add(res.Month);
+        //        setNotDoingApps(res.TotalUnperformedRequestsList);
+        //        int i = 0;
+        //        foreach (var each in periodStatses)
+        //        {
+        //            var container = AddMonitorPeriod(i, each, DateTime.Now);
 
-                    i++;
-                    LayoutContent.Children.Add(container);
-                }
-            }
-        }
+        //            i++;
+        //            LayoutContent.Children.Add(container);
+        //        }
+        //    }
+        //}
 
         private StackLayout AddCalendar(int period, DateTime isReplace)
         {
@@ -327,10 +328,15 @@ namespace xamarinJKH.MainConst
                 TextColor = hex
             };
             string text = isReplace.ToString("dd.MM.yyyy");
+
+            var openPicker = new TapGestureRecognizer();
+
             switch (period)
             {
                 case 0:
+                    openPicker.Tapped += (s, e) => { Device.BeginInvokeOnMainThread( () =>  datePicker.Focus()); };
                     datePicker.MaximumDate = DateTime.Now;
+
                     datePicker.DateSelected += async (sender, args) =>
                     {
                         // lableDate.Text = datePicker.Date.ToString("dd.MM.yyyy");
@@ -345,52 +351,129 @@ namespace xamarinJKH.MainConst
                             colapseAll(this.period[0]);
                         }
 
-                    }; 
+                    };
+
+                    dateCont.Children.Add(datePicker);
+
                     break;
                 case 1:
-
+                    openPicker.Tapped += (s, e) => {
+                        Device.BeginInvokeOnMainThread(async () =>                          
+                          {
+                              Configurations.LoadingConfig = new LoadingConfig
+                              {
+                                  IndicatorColor = Color.Transparent,
+                                  OverlayColor = Color.Black,
+                                  Opacity = 0.8,
+                                  DefaultMessage = "",
+                              };
+                              await Loading.Instance.StartAsync(async progress =>
+                              {                                  
+                                  var ret = await Dialog.Instance.ShowAsync<CalendarWeekDialog>(new
+                                  {
+                                      HexColor = hex
+                                  });
+                              });
+                          }                          
+                        );
+                    };
                     var d1 = isReplace.DayOfWeek.GetHashCode()-1;
                     DateTime dateMonday = isReplace.AddDays(-d1); // isReplace.AddDays((DateTime.Now.DayOfWeek.GetHashCode() - 1) * -1).Date;
                     DateTime dateSunday = dateMonday.AddDays(6);// isReplace.AddDays(7 - DateTime.Now.DayOfWeek.GetHashCode()).Date;
                     text = dateMonday.ToString("dd.MM") + "-" + dateSunday.ToString("dd.MM.yyyy");
-                    datePicker.DateSelected += async (sender, args) =>
-                    {
-                        DateTime dateMonday = datePicker.Date.AddDays((datePicker.Date.DayOfWeek.GetHashCode() - 1) * -1).Date;
-                        DateTime dateSunday = datePicker.Date.AddDays(7 - datePicker.Date.DayOfWeek.GetHashCode()).Date;
-                        // lableDate.Text = dateMonday.ToString("dd.MM") + "-" + dateSunday.ToString("dd.MM.yyyy");
-                        ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID, 
-                            dateMonday.ToString("dd.MM.yyyy"),dateSunday.ToString("dd.MM.yyyy"));
+
+                    //подписаться на событие изменение даты через MessagingCenter, типа
+                    MessagingCenter.Subscribe<Object, SelectionRange>(this, "MonitorDateStart", async (sender, dt) => {
+                    DateTime dateMonday = dt.StartDate.Date;
+                        DateTime dateSunday = dt.EndDate.Date;
+                        ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID,
+                            dateMonday.ToString("dd.MM.yyyy"), dateSunday.ToString("dd.MM.yyyy"));
                         if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
                         {
-                            var container = AddMonitorPeriod(1, result.Data[0].CustomPeriod, datePicker.Date);
+                            var container = AddMonitorPeriod(1, result.Data[0].CustomPeriod, dt.StartDate.Date);
                             if (LayoutContent != null && LayoutContent.Children.Count > 0)
                                 LayoutContent.Children[1] = container;
                             colapseAllByName(this.period[1]);
                             colapseAll(this.period[1]);
                         }
-                    }; 
+                    });
+
+
+                    //datePicker.DateSelected += async (sender, args) =>
+                    //{
+                    //    DateTime dateMonday = datePicker.Date.AddDays((datePicker.Date.DayOfWeek.GetHashCode() - 1) * -1).Date;
+                    //    DateTime dateSunday = datePicker.Date.AddDays(7 - datePicker.Date.DayOfWeek.GetHashCode()).Date;
+                    //    // lableDate.Text = dateMonday.ToString("dd.MM") + "-" + dateSunday.ToString("dd.MM.yyyy");
+                    //    ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID, 
+                    //        dateMonday.ToString("dd.MM.yyyy"),dateSunday.ToString("dd.MM.yyyy"));
+                    //    if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
+                    //    {
+                    //        var container = AddMonitorPeriod(1, result.Data[0].CustomPeriod, datePicker.Date);
+                    //        if (LayoutContent != null && LayoutContent.Children.Count > 0)
+                    //            LayoutContent.Children[1] = container;
+                    //        colapseAllByName(this.period[1]);
+                    //        colapseAll(this.period[1]);
+                    //    }
+                    //}; 
                     break;
                 case 2:
                     string s = isReplace.ToString("MMMM yyyy");
                     text = FirstLetterToUpper(s);
-                    datePicker.MaximumDate = DateTime.Now;
-                    datePicker.DateSelected += async (sender, args) =>
-                    {
-                        // lableDate.Text = datePicker.Date.ToString("MMMM yyyy");
-                        DateTime now = datePicker.Date;
+
+                    openPicker.Tapped += (s, e) => {
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            Configurations.LoadingConfig = new LoadingConfig
+                            {
+                                IndicatorColor = Color.Transparent,
+                                OverlayColor = Color.Black,
+                                Opacity = 0.8,
+                                DefaultMessage = "",
+                            };
+                            await Loading.Instance.StartAsync(async progress =>
+                            {
+                                var ret = await Dialog.Instance.ShowAsync<CalendarMonthDialog>(new
+                                {
+                                    HexColor = hex
+                                });
+                            });
+                        }
+                        );
+                    };
+
+                    MessagingCenter.Subscribe<Object, DateTime>(this, "MonitorMonth", async (sender, dt) => {
+                        DateTime now = dt.Date;
                         var startDate = new DateTime(now.Year, now.Month, 1);
                         var endDate = startDate.AddMonths(1).AddDays(-1);
-                        ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID, 
-                            startDate.ToString("dd.MM.yyyy"),endDate.ToString("dd.MM.yyyy"));
+                        ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID,
+                            startDate.ToString("dd.MM.yyyy"), endDate.ToString("dd.MM.yyyy"));
                         if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
                         {
-                            var container = AddMonitorPeriod(2, result.Data[0].CustomPeriod, datePicker.Date);
+                            var container = AddMonitorPeriod(2, result.Data[0].CustomPeriod, dt.Date);
                             if (LayoutContent != null && LayoutContent.Children.Count > 0)
                                 LayoutContent.Children[2] = container;
                             colapseAllByName(this.period[2]);
                             colapseAll(this.period[2]);
                         }
-                    }; 
+                    });
+
+
+                    //datePicker.DateSelected += async (sender, args) =>
+                    //{
+                    //    DateTime now = datePicker.Date;
+                    //    var startDate = new DateTime(now.Year, now.Month, 1);
+                    //    var endDate = startDate.AddMonths(1).AddDays(-1);
+                    //    ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID, 
+                    //        startDate.ToString("dd.MM.yyyy"),endDate.ToString("dd.MM.yyyy"));
+                    //    if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
+                    //    {
+                    //        var container = AddMonitorPeriod(2, result.Data[0].CustomPeriod, datePicker.Date);
+                    //        if (LayoutContent != null && LayoutContent.Children.Count > 0)
+                    //            LayoutContent.Children[2] = container;
+                    //        colapseAllByName(this.period[2]);
+                    //        colapseAll(this.period[2]);
+                    //    }
+                    //}; 
                     break;
             }
             lableDate.Text = text;
@@ -414,11 +497,11 @@ namespace xamarinJKH.MainConst
                 HorizontalOptions = LayoutOptions.Fill
             };
 
-            var openPicker = new TapGestureRecognizer();
-            openPicker.Tapped += async (s, e) => { Device.BeginInvokeOnMainThread(async () => datePicker.Focus()); };
+            //var openPicker = new TapGestureRecognizer();
+            //openPicker.Tapped += (s, e) => { Device.BeginInvokeOnMainThread(async () => datePicker.Focus()); };
             container.GestureRecognizers.Add(openPicker);
 
-            dateCont.Children.Add(datePicker);
+            
             dateCont.Children.Add(lableDate);
             dateCont.Children.Add(arrow);
 
@@ -511,20 +594,25 @@ namespace xamarinJKH.MainConst
             };
 
             var colapse = new TapGestureRecognizer();
-            colapse.Tapped += async (s, e) =>
+            colapse.Tapped += (s, e) =>
             {
-                stackLayoutBot.IsVisible = !stackLayoutBot.IsVisible;
-                if (stackLayoutBot.IsVisible)
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    iconViewArrow.Source = "ic_arrow_up_monitorpng";
-                    container.Padding = new Thickness(0, 0, 0, 25);
-                    colapseAll(labelTitleTop.Text);
-                }
-                else
-                {
-                    iconViewArrow.Source = "ic_arrow_down_monitor";
-                    container.Padding = 0;
-                }
+
+
+                    stackLayoutBot.IsVisible = !stackLayoutBot.IsVisible;
+                    if (stackLayoutBot.IsVisible)
+                    {
+                        iconViewArrow.Source = "ic_arrow_up_monitorpng";
+                        container.Padding = new Thickness(0, 0, 0, 25);
+                        colapseAll(labelTitleTop.Text);
+                    }
+                    else
+                    {
+                        iconViewArrow.Source = "ic_arrow_down_monitor";
+                        container.Padding = 0;
+                    }
+                });
             };
 
             if (i > 0)

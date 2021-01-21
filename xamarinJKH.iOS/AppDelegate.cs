@@ -6,6 +6,7 @@ using Foundation;
 //using MediaManager;
 //using KeyboardOverlap.Forms.Plugin.iOSUnified;
 using Plugin.FirebasePushNotification;
+using Syncfusion.SfCalendar.XForms.iOS;
 using UIKit;
 
 namespace xamarinJKH.iOS
@@ -54,6 +55,9 @@ namespace xamarinJKH.iOS
             FirebasePushNotificationManager.Initialize(options, true);
             App.ScreenWidth2 = UIScreen.MainScreen.Bounds.Width;
             App.ScreenHeight2 = UIScreen.MainScreen.Bounds.Height;
+
+            SfCalendarRenderer.Init();
+
 
             return base.FinishedLaunching(app, options);
         }
