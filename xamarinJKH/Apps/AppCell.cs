@@ -147,13 +147,7 @@ namespace xamarinJKH.Apps
             stackLMain.Children.Add(frame);
             View = stackLMain;
 
-            MessagingCenter.Subscribe<Object, int>(this, "SetAppRead", (sender, args) =>
-            {
-                if (this.ID == args)
-                {
-                    ReadIndicator.IsVisible = false;
-                }
-            });
+          
         }
 
 

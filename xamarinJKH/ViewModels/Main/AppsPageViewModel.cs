@@ -12,6 +12,9 @@ namespace xamarinJKH.ViewModels.Main
     public class AppsPageViewModel : BaseViewModel
     {
         ObservableCollection<RequestInfo> _requests;
+        
+        public RequestInfo SelectedRequest { get; set; }
+        
         public ObservableCollection<RequestInfo> Requests
         {
             get => _requests;
@@ -34,6 +37,7 @@ namespace xamarinJKH.ViewModels.Main
         public List<RequestInfo> AllRequests { get; set; }
         public Command LoadRequests { get; set; }
         public Command UpdateRequests { get; set; }
+        public Command OpenApp { get; set; }
         bool _showClosed;
         public bool ShowClosed
         {
@@ -82,9 +86,31 @@ namespace xamarinJKH.ViewModels.Main
         public AppsPageViewModel()
         {
             Requests = new ObservableCollection<RequestInfo>();
-            LoadRequests = new Command(async () =>
+            MessagingCenter.Subscribe<Object, int>(this, "SetAppRead", (sender, args) =>
             {
-                IsRefreshing = true;
+                IEnumerable<RequestInfo> requestInfos = _requests.Where(x => x.ID == args);
+                foreach (var each in requestInfos)
+                {
+                    each.IsReadedByClient = false;
+                }
+            });
+            OpenApp = new Command(async () =>
+            {
+                if (SelectedRequest != null)
+                {
+                    MessagingCenter.Send<Object, int>(this, "OpenApp", SelectedRequest.ID);
+                }
+            });
+            LoadRequests = new Command(async (isRef) =>
+            {
+                if (isRef != null)
+                {
+                    IsRefreshing = false;
+                }
+                else
+                {
+                    IsRefreshing = true;
+                }
                 var response = await Server.GetRequestsList();
                 AllRequests = new List<RequestInfo>();
                 if (response.Error != null)
