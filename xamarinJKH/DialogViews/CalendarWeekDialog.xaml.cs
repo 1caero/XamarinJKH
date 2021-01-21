@@ -83,22 +83,10 @@ namespace xamarinJKH.DialogViews
             }
             else
             {
-                ObservableCollection<DateTime> dates = new ObservableCollection<DateTime>();
                 var startDayOfWeek = DayOfWeek.Monday - startDateRange.DayOfWeek;
                 var startDate = startDateRange.AddDays(startDayOfWeek);
 
-                var endDayOfWeek = DayOfWeek.Sunday - endDateRange?.DayOfWeek;
-                var endDate = endDateRange?.AddDays((int)endDayOfWeek);
-
-                var difference = (endDate - startDate);
-
-                for (var i = 0; i < ((TimeSpan)difference).Days + 1; i++)
-                {
-                    dates.Add(startDate.Date);
-                    startDate = startDate.AddDays(1);
-                }
-
-                return new SelectionRange(dates[0], dates[dates.Count - 1]);
+                return new SelectionRange(startDate, startDate.AddDays(6));
             }
         }
 

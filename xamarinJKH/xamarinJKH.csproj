@@ -575,6 +575,9 @@
     <Compile Update="DialogViews\CalendarMonthDialog.xaml.cs">
       <DependentUpon>CalendarMonthDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Update="DialogViews\CalendarDayDialog.xaml.cs">
+      <DependentUpon>CalendarDayDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Main\BottomNavigationPage.xaml.cs">
       <DependentUpon>BottomNavigationPage.xaml</DependentUpon>
     </Compile>

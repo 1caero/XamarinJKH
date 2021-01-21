@@ -741,7 +741,7 @@
     <value> to </value>
   </data>
   <data name="TodayPeriod" xml:space="preserve">
-    <value>Today</value>
+    <value>For date</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>
@@ -1762,5 +1762,8 @@
   </data>
   <data name="SelectWeek" xml:space="preserve">
     <value>Select week</value>
+  </data>
+  <data name="SelectDay" xml:space="preserve">
+    <value>Select day</value>
   </data>
 </root>
