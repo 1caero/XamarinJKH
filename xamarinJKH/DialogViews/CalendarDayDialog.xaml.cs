@@ -32,9 +32,11 @@ namespace xamarinJKH.DialogViews
             calendar.MonthViewSettings.DateSelectionColor = (Color)Application.Current.Resources["MainColor"]; 
             calendar.MonthViewSettings.TodaySelectionBackgroundColor= (Color)Application.Current.Resources["MainColor"];
 
+            calendar.Locale = new System.Globalization.CultureInfo(Application.Current.Properties["Culture"].ToString());
+
         }
 
-       
+
 
         private void BtnConf_Clicked(object sender, EventArgs e)
         {

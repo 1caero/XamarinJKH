@@ -31,7 +31,9 @@ namespace xamarinJKH.DialogViews
             IconViewClose.GestureRecognizers.Add(close);
 
             calendarYear.MaxDate = DateTime.Now;
-        }       
+            calendarYear.Locale = new System.Globalization.CultureInfo(Application.Current.Properties["Culture"].ToString());
+
+        }
 
 
         private void calendarYear_MonthChanged(object sender, MonthChangedEventArgs e)

@@ -6,7 +6,6 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -32,6 +31,7 @@ namespace xamarinJKH.DialogViews
             calendar.MonthViewSettings.DateSelectionColor = (Color)Application.Current.Resources["MainColor"]; 
 
             calendar.SelectionChanged += Calendar_SelectionChanged;
+            calendar.Locale = new System.Globalization.CultureInfo(Application.Current.Properties["Culture"].ToString());
         }
 
         private void Calendar_SelectionChanged(object sender, Syncfusion.SfCalendar.XForms.SelectionChangedEventArgs e)
