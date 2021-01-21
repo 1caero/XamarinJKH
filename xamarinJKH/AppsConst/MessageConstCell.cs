@@ -6,6 +6,7 @@ using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
+using FFImageLoading.Svg.Forms;
 
 namespace xamarinJKH.AppsConst
 {
@@ -19,9 +20,9 @@ namespace xamarinJKH.AppsConst
         private Label LabelTextA = new Label();
         private Label LabelDateA = new Label();
         Frame frameDateA = new Frame();
-        IconView imageA = new IconView();
+        SvgCachedImage imageA = new SvgCachedImage();
         IconView imageHiden = new IconView();
-        IconView imageHiden2 = new IconView();
+        //IconView imageHiden2 = new IconView();
         Frame frameA = new Frame();
 
         public MessageCellAuthor(RequestMessage message, Page p, string DateUniq, out string newDate)
@@ -89,8 +90,8 @@ namespace xamarinJKH.AppsConst
             imageA.HorizontalOptions = LayoutOptions.CenterAndExpand;
             imageA.HeightRequest = 40;
             imageA.WidthRequest = 40;
-            imageA.Foreground = Color.White;
-            imageA.Source = "ic_file_download";
+            imageA.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", $"#FFFFFF" } };
+            imageA.Source = "resource://xamarinJKH.Resources.ic_file_download.svg";
 
             imageHiden.IsVisible = message.IsHidden;
             imageHiden.HorizontalOptions = LayoutOptions.End;
@@ -98,8 +99,23 @@ namespace xamarinJKH.AppsConst
             imageHiden.HeightRequest = 20;
             imageHiden.WidthRequest = 20;
             imageHiden.Margin = new Thickness(0, -10, -10, 0);
-            imageHiden.Foreground = (Color) Application.Current.Resources["MainColor"];
+            imageHiden.Foreground = (Color)Application.Current.Resources["MainColor"];
             imageHiden.Source = "ic_close_password";
+
+            //imageHiden.IsVisible = true;// message.IsHidden;
+            //imageHiden.Source = "resource://xamarinJKH.Resources.ic_close_password.svg";
+            //imageHiden.HorizontalOptions = LayoutOptions.End;
+            //imageHiden.VerticalOptions = LayoutOptions.End;
+            //imageHiden.HeightRequest = 20;
+            //imageHiden.WidthRequest = 20;
+            //imageHiden.Margin = new Thickness(0, -10, -10, 0);
+            //imageA.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> 
+            //{ 
+            //    { 
+            //        "#000000",
+            //        "#FF0000"
+            //    } 
+            //};
 
             ActivityIndicator indicator = new ActivityIndicator();
             indicator.WidthRequest = 40;
@@ -233,7 +249,7 @@ namespace xamarinJKH.AppsConst
         private Label LabelText = new Label();
         private Label LabelDate = new Label();
         Frame frameDate = new Frame();
-        IconView image = new IconView();
+        SvgCachedImage image = new SvgCachedImage();
         IconView imageHiden = new IconView();
         Frame frame = new Frame();
 
@@ -301,12 +317,19 @@ namespace xamarinJKH.AppsConst
             }
             StackLayout stackLayoutContent = new StackLayout();
 
+            //image.IsVisible = message.FileID != -1;
+            //image.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            //image.HeightRequest = 40;
+            //image.WidthRequest = 40;
+            //image.Foreground = Color.White;
+            //image.Source = "ic_file_download";
+
             image.IsVisible = message.FileID != -1;
             image.HorizontalOptions = LayoutOptions.CenterAndExpand;
             image.HeightRequest = 40;
             image.WidthRequest = 40;
-            image.Foreground = Color.White;
-            image.Source = "ic_file_download";
+            image.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", $"#FFFFFF" } };
+            image.Source = "resource://xamarinJKH.Resources.ic_file_download.svg";
 
             imageHiden.IsVisible = message.IsHidden;
             imageHiden.HorizontalOptions = LayoutOptions.Start;
