@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using Xamarin.Forms;
 using xamarinJKH.Utils;
 
 namespace xamarinJKH.Server.RequestModel
@@ -14,8 +15,18 @@ namespace xamarinJKH.Server.RequestModel
     public class RequestInfo
     {
         public int ID { get; set; }
+        
+       
         public string RequestNumber { get; set; }
         public string Added { get; set; }
+
+        public string _Added
+        {
+            get => Added.Trim();
+            set => Added = value;
+        }
+        
+        
         public string Name { get; set; }
         public string Status { get; set; }
         public int StatusID { get; set; }
@@ -32,7 +43,19 @@ namespace xamarinJKH.Server.RequestModel
         // Флаг "Прочитана сотрудником"
         public bool IsReaded { get; set; }
         public bool IsReadedByClient { get; set; }
+
+        public bool _IsReadedByClient
+        {
+            get=>!IsReadedByClient && StatusID != 6;
+            set=> s = value;
+        }
+
+        private bool s;
         
+        private string _resource { get; set; }
+
+        public string Resource => "resource://xamarinJKH.Resources." + Settings.GetStatusIcon(StatusID) + ".svg";
+
         // источник заявки
         public string SourceType { get; set; }
         // тип неисправности

@@ -8,9 +8,16 @@
              xmlns:apps="clr-namespace:xamarinJKH.Apps;assembly=xamarinJKH"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:customRenderers="clr-namespace:xamarinJKH.CustomRenderers;assembly=xamarinJKH"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.Main.AppsPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="hexColor">#FF0000</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
+        
         <StackLayout VerticalOptions="FillAndExpand" >
             <Grid VerticalOptions="FillAndExpand" >
                 <Image x:Name="ImageFon"
@@ -35,27 +42,7 @@
                             Orientation="Horizontal">
                             <xamarinJkh:ButtonSupport x:Name="LabelTech"></xamarinJkh:ButtonSupport>
                             <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
-                            <!--<svg:SvgCachedImage x:Name="IconViewTech"
-                                                Source="resource://xamarinJKH.Resources.ic_tech.svg"
-                                                HeightRequest="20"
-                                                ReplaceStringMap="{Binding ShowAnnouncements, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
-                                                Margin="0, 0,0,0"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="Center" />
-                            <Label x:Name="LabelTech"
-                                   Text="{x:Static xamarinJkh:AppResources.Support}"
-                                   FontSize="12"
-                                   TextDecorations="Underline"
-                                   TextColor="White"
-                                   Margin="0, 0, 0, 0"
-                                   VerticalOptions="Center" />
-                            <svg:SvgCachedImage x:Name="IconViewProfile" Margin="15,0,5,0"
-                                                Source="resource://xamarinJKH.Resources.ic_profile_top.svg"
-                                                HeightRequest="20"
-                                                ReplaceStringMap="{Binding IsRefreshing, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"                                                
-                                                BackgroundColor="{AppThemeBinding Light=White, Dark=Transparent}"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="Center"/>-->
+                            
                         </StackLayout>
                     </StackLayout>
                     <StackLayout
@@ -87,34 +74,126 @@
                                    VerticalTextAlignment="Center"
                                    HorizontalTextAlignment="Center"                                
                                    IsVisible="{Binding Empty}"/>
-                        <ListView 
-                                x:Name="additionalList"
-                             HasUnevenRows="True"
+                        <RefreshView x:Name="messageRefreshView" Command="{Binding LoadRequests}" IsRefreshing="{Binding IsRefreshing}">
+                        <CollectionView 
+                             x:Name="additionalList"
+                             HorizontalScrollBarVisibility="Never"
                              Margin="10, 10, 10, 0"
-                             SelectionMode="None"
-                             SeparatorVisibility="None"
+                             SelectionMode="Single"
                              VerticalScrollBarVisibility="Never"
-                             ItemTapped="OnItemTapped"
-                             CachingStrategy="RecycleElement"
-                                IsPullToRefreshEnabled="True"
-                                RefreshCommand="{Binding LoadRequests}"
-                                IsRefreshing="{Binding IsRefreshing}"
+                             SelectedItem="{Binding SelectedRequest}"
+                             SelectionChanged="AdditionalList_OnSelectionChanged"
                              ItemsSource="{Binding Requests, Mode=TwoWay}"
                              VerticalOptions="FillAndExpand">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <apps:AppCell
-                                        Number="{Binding RequestNumber}"
-                                        Status="{Binding Status}"
-                                        DateApp="{Binding Added}"
-                                        StatusID="{Binding StatusID}"
-                                        Read="{Binding IsReadedByClient}"
-                                        ID="{Binding ID}"
-                                        TextApp="{Binding Name}" />
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical"
+                                                 VerticalItemSpacing="14"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate >
+                            <!--         <apps:AppCell -->
+                            <!--             Number="{Binding RequestNumber}" -->
+                            <!--             Status="{Binding Status}" -->
+                            <!--             DateApp="{Binding Added}" -->
+                            <!--             StatusID="{Binding StatusID}" -->
+                            <!--             Read="{Binding IsReadedByClient}" -->
+                            <!--             ID="{Binding ID}" -->
+                            <!--             TextApp="{Binding Name}" /> -->
+                            <StackLayout>
+                                <Label IsVisible="False" Text="{Binding ID}"></Label>
+                                <pancakeView:PancakeView VerticalOptions="Start"
+                                                         BorderColor="{AppThemeBinding Light={StaticResource  hexColor}, Dark=Transparent}"
+                                                         BackgroundColor="White"
+                                                         BorderThickness="1"
+                                                         HorizontalOptions="FillAndExpand"
+                                                         HasShadow="False"
+                                                         Padding="25, 15, 25, 20"
+                                                         Margin="0,0,0,0"
+                                                         CornerRadius="40" >
+                                
+                                <Grid Padding="0" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="5"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <StackLayout x:Name="container" Orientation="Horizontal" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                                        <StackLayout x:Name="containerData"
+                                                     HorizontalOptions="FillAndExpand">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Label x:Name="numberAndDate"
+                                                       TextColor="Black"
+                                                       FontSize="12"
+                                                       Grid.Column="0"
+                                                       Grid.Row="0"
+                                                       VerticalOptions="StartAndExpand"
+                                                       HorizontalOptions="StartAndExpand"
+                                                       >
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="№" TextColor="Black" 
+                                                                  FontSize="13" />
+                                                            <Span Text="{Binding RequestNumber}" TextColor="Black" FontSize="13" />
+                                                            <Span Text=" • " FontSize="17" TextColor="Black" FontAttributes="Bold" />
+                                                            <Span Text=" {Binding Name}" FontSize="17" TextColor="Black" FontAttributes="Bold" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </Grid>
+                                            <Label x:Name="LabelDate"
+                                                   TextColor="Black"
+                                                   FontSize="15"
+                                                   Margin="0, -5, 0, 0"
+                                                   Text="{Binding _Added}"
+                                                   ></Label>
+                                            <StackLayout x:Name="stackLayoutStatus" Orientation="Horizontal">
+                                                <svg:SvgCachedImage
+                                                    x:Name="ImageStatus"
+                                                    Source="{Binding Resource}"
+                                                    HeightRequest="15"
+                                                    WidthRequest="15"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Start"
+                                                    Margin="0"
+                                                    ReplaceStringMap="{Binding _Added, Converter={x:StaticResource SvgColor}}"/>
+                                                <Label x:Name="LabelStatus"
+                                                       FontSize="15"
+                                                       Text="{Binding Status}"
+                                                       TextColor="Black"
+                                                       VerticalTextAlignment="Center"
+                                                       VerticalOptions="Center"
+                                                       ></Label>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <svg:SvgCachedImage
+                                            Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                            HeightRequest="25"
+                                            WidthRequest="25"
+                                            VerticalOptions="CenterAndExpand"
+                                            HorizontalOptions="End"
+                                            Margin="0"
+                                            ReplaceStringMap="{Binding _Added, Converter={x:StaticResource SvgColor}}"/>
+                                    </StackLayout>
+                                    <Frame CornerRadius="5"
+                                           BackgroundColor="Red"
+                                           Grid.Column="1"
+                                           Grid.Row="0"
+                                           IsVisible="{Binding _IsReadedByClient, Mode=TwoWay}"
+                                    ></Frame>
+                                </Grid>
+                            </pancakeView:PancakeView>
+                            </StackLayout>
                                 </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                        
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                            
+                        </RefreshView>
                         <!--</Grid>-->
                     </Grid>
 

@@ -167,6 +167,7 @@ namespace xamarinJKH.Main
         public AppsPage()
         {
             InitializeComponent();
+            Resources["hexColor"] = (Color)Application.Current.Resources["MainColor"];
             Analytics.TrackEvent("Заявки жителя");
             //Settings.MobileSettings.color = null;
             hex = Color.FromHex(!string.IsNullOrEmpty(Settings.MobileSettings.color)
@@ -260,8 +261,8 @@ namespace xamarinJKH.Main
             SetText();
             Analytics.TrackEvent("Заявки жителя-SetText выполнено");
             //getApps();
-            additionalList.BackgroundColor = Color.Transparent;
-            additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
+            // additionalList.BackgroundColor = Color.Transparent;
+            // additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
             this.CancellationTokenSource = new CancellationTokenSource();
             MessagingCenter.Subscribe<Object>(this, "UpdateAppCons", (sender) => RefreshData());
             Analytics.TrackEvent("Заявки жителя-UpdateAppCons подписались");
@@ -402,6 +403,7 @@ namespace xamarinJKH.Main
             }
 
             IconViewSaldos.ReplaceStringMap = buttonColor;
+            // viewModel.LoadRequests.Execute(false);
             CheckAkk();
             
         }
@@ -506,6 +508,44 @@ namespace xamarinJKH.Main
             {
                 Analytics.TrackEvent(ex.Message);
             }
+        }
+
+        private async void AdditionalList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RequestInfo select = viewModel.SelectedRequest;
+            if (select != null)
+            {
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is Apps.AppPage) == null)
+                {
+                    await Navigation.PushAsync(new Apps.AppPage(select, false, select.IsPaid));
+                    try
+                    {
+                        CollectionView container = (CollectionView) sender;
+                        IEnumerable<Element> enumerable = container.LogicalChildren.Where(x =>
+                            ((Label) (((StackLayout) x).Children[0])).Text == @select.ID.ToString());
+
+                        foreach (var element in enumerable)
+                        {
+                            StackLayout stackLayout = (StackLayout) element;
+                            PancakeView pancakeView = (PancakeView) stackLayout.Children[1];
+                            Grid grid = (Grid) pancakeView.Content;
+                            grid.Children[1].IsVisible = false;
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(exception);
+                    }
+                   
+                }
+            }
+        }
+
+        private async void FrameIdentGR_Tapped_1(object sender, EventArgs e)
+        {
+            Task.Delay(500);
+            Grid grid = (Grid) sender; 
+            grid.Children[1].IsVisible = false;
         }
     }
 }
