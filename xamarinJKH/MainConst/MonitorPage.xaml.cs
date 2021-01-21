@@ -310,14 +310,14 @@ namespace xamarinJKH.MainConst
             {
                 Orientation = StackOrientation.Horizontal
             };
-            BorderlessDatePickerMonitor datePicker = new BorderlessDatePickerMonitor
-            {
-                IsVisible = false,
-                Format = "dd.MM.yyyy",
-                FontSize = 16,
-                HorizontalOptions = LayoutOptions.Center,
-                TextColor = hex
-            };
+            //BorderlessDatePickerMonitor datePicker = new BorderlessDatePickerMonitor
+            //{
+            //    IsVisible = false,
+            //    Format = "dd.MM.yyyy",
+            //    FontSize = 16,
+            //    HorizontalOptions = LayoutOptions.Center,
+            //    TextColor = hex
+            //};
 
             //datePicker.MaximumDate = DateTime.Now;
             Label lableDate = new Label
@@ -334,26 +334,59 @@ namespace xamarinJKH.MainConst
             switch (period)
             {
                 case 0:
-                    openPicker.Tapped += (s, e) => { Device.BeginInvokeOnMainThread( () =>  datePicker.Focus()); };
-                    datePicker.MaximumDate = DateTime.Now;
+                    //openPicker.Tapped += (s, e) => { Device.BeginInvokeOnMainThread( () =>  datePicker.Focus()); };
+                    //datePicker.MaximumDate = DateTime.Now;
 
-                    datePicker.DateSelected += async (sender, args) =>
-                    {
-                        // lableDate.Text = datePicker.Date.ToString("dd.MM.yyyy");
-                        ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID, 
-                            datePicker.Date.ToString("dd.MM.yyyy"),datePicker.Date.ToString("dd.MM.yyyy"));
+                    openPicker.Tapped += (s, e) => {
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            Configurations.LoadingConfig = new LoadingConfig
+                            {
+                                IndicatorColor = Color.Transparent,
+                                OverlayColor = Color.Black,
+                                Opacity = 0.8,
+                                DefaultMessage = "",
+                            };
+                            await Loading.Instance.StartAsync(async progress =>
+                            {
+                                var ret = await Dialog.Instance.ShowAsync<CalendarDayDialog>(new
+                                {
+                                    HexColor = hex
+                                });
+                            });
+                        }
+                        );
+                    };
+
+                    //datePicker.DateSelected += async (sender, args) =>
+                    //{
+                    //    ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID, 
+                    //        datePicker.Date.ToString("dd.MM.yyyy"),datePicker.Date.ToString("dd.MM.yyyy"));
+                    //    if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
+                    //    {
+                    //        var container = AddMonitorPeriod(0, result.Data[0].CustomPeriod, datePicker.Date);
+                    //        if (LayoutContent != null && LayoutContent.Children.Count > 0)
+                    //            LayoutContent.Children[0] = container;
+                    //        colapseAllByName(this.period[0]);
+                    //        colapseAll(this.period[0]);
+                    //    }
+
+                    //};
+
+                    MessagingCenter.Subscribe<Object, DateTime>(this, "MonitorDay", async (sender, dt) => {
+                        ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID,
+                           dt.Date.ToString("dd.MM.yyyy"), dt.Date.ToString("dd.MM.yyyy"));
                         if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
                         {
-                            var container = AddMonitorPeriod(0, result.Data[0].CustomPeriod, datePicker.Date);
+                            var container = AddMonitorPeriod(0, result.Data[0].CustomPeriod, dt.Date);
                             if (LayoutContent != null && LayoutContent.Children.Count > 0)
                                 LayoutContent.Children[0] = container;
                             colapseAllByName(this.period[0]);
                             colapseAll(this.period[0]);
                         }
+                    });
 
-                    };
-
-                    dateCont.Children.Add(datePicker);
+                    //dateCont.Children.Add(datePicker);
 
                     break;
                 case 1:
@@ -378,11 +411,11 @@ namespace xamarinJKH.MainConst
                         );
                     };
                     var d1 = isReplace.DayOfWeek.GetHashCode()-1;
-                    DateTime dateMonday = isReplace.AddDays(-d1); // isReplace.AddDays((DateTime.Now.DayOfWeek.GetHashCode() - 1) * -1).Date;
-                    DateTime dateSunday = dateMonday.AddDays(6);// isReplace.AddDays(7 - DateTime.Now.DayOfWeek.GetHashCode()).Date;
+                    DateTime dateMonday = isReplace.AddDays(-d1); 
+                    DateTime dateSunday = dateMonday.AddDays(6);
                     text = dateMonday.ToString("dd.MM") + "-" + dateSunday.ToString("dd.MM.yyyy");
 
-                    //подписаться на событие изменение даты через MessagingCenter, типа
+                    
                     MessagingCenter.Subscribe<Object, SelectionRange>(this, "MonitorDateStart", async (sender, dt) => {
                     DateTime dateMonday = dt.StartDate.Date;
                         DateTime dateSunday = dt.EndDate.Date;

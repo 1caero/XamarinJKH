@@ -6,7 +6,6 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -32,6 +31,7 @@ namespace xamarinJKH.DialogViews
             calendar.MonthViewSettings.DateSelectionColor = (Color)Application.Current.Resources["MainColor"]; 
 
             calendar.SelectionChanged += Calendar_SelectionChanged;
+            calendar.Locale = new System.Globalization.CultureInfo(Application.Current.Properties["Culture"].ToString());
         }
 
         private void Calendar_SelectionChanged(object sender, Syncfusion.SfCalendar.XForms.SelectionChangedEventArgs e)
@@ -83,22 +83,10 @@ namespace xamarinJKH.DialogViews
             }
             else
             {
-                ObservableCollection<DateTime> dates = new ObservableCollection<DateTime>();
                 var startDayOfWeek = DayOfWeek.Monday - startDateRange.DayOfWeek;
                 var startDate = startDateRange.AddDays(startDayOfWeek);
 
-                var endDayOfWeek = DayOfWeek.Sunday - endDateRange?.DayOfWeek;
-                var endDate = endDateRange?.AddDays((int)endDayOfWeek);
-
-                var difference = (endDate - startDate);
-
-                for (var i = 0; i < ((TimeSpan)difference).Days + 1; i++)
-                {
-                    dates.Add(startDate.Date);
-                    startDate = startDate.AddDays(1);
-                }
-
-                return new SelectionRange(dates[0], dates[dates.Count - 1]);
+                return new SelectionRange(startDate, startDate.AddDays(6));
             }
         }
 

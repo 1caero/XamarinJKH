@@ -1163,7 +1163,7 @@
     <value> по </value>
   </data>
   <data name="TodayPeriod" xml:space="preserve">
-    <value>Сьогодні</value>
+    <value>На день</value>
   </data>
   <data name="ToGetSignature" xml:space="preserve">
     <value>Для отримання електронного підпису введіть одноразовий пароль</value>
@@ -1635,5 +1635,8 @@
   </data>
   <data name="SelectWeek" xml:space="preserve">
     <value>Оберiть тиждень</value>
+  </data>
+  <data name="SelectDay" xml:space="preserve">
+    <value>Оберiть день</value>
   </data>
 </root>

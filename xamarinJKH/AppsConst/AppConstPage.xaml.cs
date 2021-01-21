@@ -930,7 +930,7 @@ namespace xamarinJKH.AppsConst
             }
             else
             {
-                await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAppAccept, "OK");
+                await DisplayAlert(AppResources.ErrorTitle, request.Error, "OK");
             }
 
             progress.IsVisible = false;
@@ -948,7 +948,7 @@ namespace xamarinJKH.AppsConst
             }
             else
             {
-                await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAppComplete, "OK");
+                await DisplayAlert(AppResources.ErrorTitle, request.Error, "OK");
             }
 
             progress.IsVisible = false;

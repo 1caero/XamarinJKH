@@ -15,11 +15,11 @@ using xamarinJKH.Utils;
 namespace xamarinJKH.DialogViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CalendarMonthDialog :  DialogView
+    public partial class CalendarDayDialog :  DialogView
     {
         public Color HexColor { get; set; }
 
-        public CalendarMonthDialog()
+        public CalendarDayDialog()
         {
             InitializeComponent();
 
@@ -29,20 +29,22 @@ namespace xamarinJKH.DialogViews
                 DialogNotifier.Cancel();
             };
             IconViewClose.GestureRecognizers.Add(close);
+            calendar.MonthViewSettings.DateSelectionColor = (Color)Application.Current.Resources["MainColor"]; 
+            calendar.MonthViewSettings.TodaySelectionBackgroundColor= (Color)Application.Current.Resources["MainColor"];
 
-            calendarYear.MaxDate = DateTime.Now;
-            calendarYear.Locale = new System.Globalization.CultureInfo(Application.Current.Properties["Culture"].ToString());
+            calendar.Locale = new System.Globalization.CultureInfo(Application.Current.Properties["Culture"].ToString());
 
         }
 
 
-        private void calendarYear_MonthChanged(object sender, MonthChangedEventArgs e)
-        {
-            if (calendarYear.DisplayDate != null)
-            {
-                MessagingCenter.Send<object, DateTime>(this, "MonitorMonth", (DateTime)calendarYear.DisplayDate);
-            }
 
+        private void BtnConf_Clicked(object sender, EventArgs e)
+        {
+            if (calendar.SelectedDate != null)
+            {
+                MessagingCenter.Send<object, DateTime>(this, "MonitorDay", (DateTime)calendar.SelectedDate);
+            }
+            
             DialogNotifier.Cancel();
         }
     }
