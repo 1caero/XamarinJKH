@@ -74,14 +74,15 @@
                                                      HorizontalOptions="StartAndExpand"
                                                      Margin="0,5,0,0">
                                                 <svg:SvgCachedImage Source="{Binding Image}"
-                                                                IsVisible="False"
-                                                                ReplaceStringMap="{Binding Image, Converter={x:StaticResource Color},ConverterParameter='#FFFFFF|#000000'}"
+                                                                IsVisible="True"
+                                                                ReplaceStringMap="{Binding ReplaceMap}"
                                                                 WidthRequest="35"
                                                                 HeightRequest="35"/>
-                                                <xamarinJkh:IconView Source="{Binding Image}"
+                                                <!--<xamarinJkh:IconView Source="{Binding Image}"
+                                                                     IsVisible="False"
                                                      Foreground="{AppThemeBinding Light=Black, Dark=White}"
                                                      WidthRequest="25"
-                                                     HeightRequest="25" />
+                                                     HeightRequest="25" />-->
                                                 <Label Text="{Binding Name}"
                                        TextColor="{AppThemeBinding Light=Black, Dark=White}"
                                        FontAttributes="Bold"
@@ -284,13 +285,16 @@
                                        IsVisible="False"
                                        HorizontalOptions="StartAndExpand"
                                        Color="{Binding hex}" />
-                            <xamarinJkh:IconView
-                        x:Name="IconViewAddFile"
+                            <!--<xamarinJkh:IconView
                                 Grid.Column="0"
+                                IsVisible="False"
                         Source="ic_add_file"
                         Foreground="{Binding hex}"
                         HeightRequest="20"
-                        WidthRequest="20" />
+                        WidthRequest="20" />-->
+                            <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_add_file.svg"
+                                                x:Name="IconViewAddFile"
+                                                ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}}"/>
                             <xamarinJkh:BordlessEditor x:Name="EntryMess"
                                                        Grid.Column="1"
                                                FontSize="18"
@@ -300,13 +304,16 @@
                                                TextColor="Black"
                                                HorizontalOptions="FillAndExpand" 
                                                AutoSize="TextChanges"/>
-                            <xamarinJkh:IconView
-                        x:Name="IconViewSend"
+                            <!--<xamarinJkh:IconView
                                 Grid.Column="2"
                         Source="ic_send_mess"
                         Foreground="{Binding hex}"
                         HeightRequest="20"
-                        WidthRequest="20" />
+                        WidthRequest="20" />-->
+                            <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_send_mess.svg"
+                                                Grid.Column="2"
+                                                x:Name="IconViewSend"
+                                                ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}}"/>
                             <ActivityIndicator x:Name="progress"
                                                Grid.Column="2"
                                        IsRunning="true"

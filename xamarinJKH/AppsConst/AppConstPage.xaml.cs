@@ -275,6 +275,9 @@ namespace xamarinJKH.AppsConst
             InitializeComponent();
             Analytics.TrackEvent("Заявка сотрудника №" + requestInfo.RequestNumber);
             IsRequestPaid = requestInfo.IsPaid;
+            var theme = Application.Current.RequestedTheme;
+            var color = theme == OSAppTheme.Dark ? "#FFFFFF" : "#000000";
+            Dictionary<string, string> replace = new Dictionary<string, string> { { "#000000", color } };
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
@@ -298,17 +301,19 @@ namespace xamarinJKH.AppsConst
             SetReadedApp();
             Options.Add(new OptionModel
             {
-                Name = AppResources.InfoApp, Image = "ic_info_app1", Command = new Command(() => ShowInfo()),
-                IsVisible = true
+                Name = AppResources.InfoApp, Image = "resource://xamarinJKH.Resources.ic_info_app1.svg", Command = new Command(() => ShowInfo()),
+                IsVisible = true,
+                ReplaceMap = replace
             });
             Options.Add(new OptionModel
             {
-                Name = AppResources.AcceptApp, Image = "ic_accept_app", Command = new Command(() => acceptApp()),
-                IsVisible = true
+                Name = AppResources.AcceptApp, Image = "resource://xamarinJKH.Resources.ic_accept_app.svg", Command = new Command(() => acceptApp()),
+                IsVisible = true,
+                ReplaceMap = replace
             });
             Options.Add(new OptionModel
             {
-                Name = AppResources.Rejection_App, Image = "crossed", Command = new Command(async () =>
+                Name = AppResources.Rejection_App, Image = "resource://xamarinJKH.Resources.crossed.svg", Command = new Command(async () =>
                 {
                     var result2 = await DisplayAlert("", AppResources.UserRejectionApp, AppResources.Yes,
                         AppResources.No);
@@ -331,17 +336,19 @@ namespace xamarinJKH.AppsConst
                         }
                     }
                 }),
-                IsVisible = true
+                IsVisible = true,
+                ReplaceMap = replace
             });
             Options.Add(new OptionModel
             {
-                Name = AppResources.CompleteApp, Image = "ic_check_mark", Command = new Command(() => performApp()),
-                IsVisible = CanComplete
+                Name = AppResources.CompleteApp, Image = "resource://xamarinJKH.Resources.ic_check_mark.svg", Command = new Command(() => performApp()),
+                IsVisible = CanComplete,
+                ReplaceMap = replace
             });
             Options.Add(new OptionModel
             {
                 Name = AppResources.PassApp,
-                Image = "ic_next_disp",
+                Image = "resource://xamarinJKH.Resources.ic_next_disp.svg",
                 Command = new Command(() =>
                 {
                     Device.BeginInvokeOnMainThread(async () =>
@@ -350,12 +357,13 @@ namespace xamarinJKH.AppsConst
                         await RefreshData();
                     });
                 }),
-                IsVisible = true
+                IsVisible = true,
+                ReplaceMap = replace
             });
             Options.Add(new OptionModel
             {
                 Name = AppResources.Transit,
-                Image = "ic_in_way",
+                Image = "resource://xamarinJKH.Resources.ic_in_way.svg",
                 Command = new Command(async () =>
                 {
                     progress.IsVisible = true;
@@ -372,20 +380,22 @@ namespace xamarinJKH.AppsConst
 
                     progress.IsVisible = false;
                 }),
-                IsVisible = IsRequestPaid
+                IsVisible = IsRequestPaid,
+                ReplaceMap = replace
             });
             Options.Add(new OptionModel
             {
-                Name = AppResources.SendCodeApp, Image = "ic_send_code",
+                Name = AppResources.SendCodeApp, Image = "resource://xamarinJKH.Resources.ic_send_code.svg",
                 Command = new Command(async () =>
                     await Dialog.Instance.ShowAsync(
                         new EnterCodeDialogView(this._requestInfo.ID.ToString()))),
-                IsVisible = IsRequestPaid
+                IsVisible = IsRequestPaid,
+                ReplaceMap = replace
             });
             Options.Add(new OptionModel
             {
                 Name = AppResources.Receipt,
-                Image = "ic_receipt",
+                Image = "resource://xamarinJKH.Resources.ic_receipt.svg",
                 Command = new Command(async () =>
                 {
                     List<RequestsReceiptItem> Items = new List<RequestsReceiptItem>();
@@ -396,12 +406,13 @@ namespace xamarinJKH.AppsConst
 
                     await Dialog.Instance.ShowAsync(new AppConstDialogWindow(Items, request.ID, request.ShopId));
                 }),
-                IsVisible = IsRequestPaid
+                IsVisible = IsRequestPaid,
+                ReplaceMap = replace
             });
             Options.Add(new OptionModel
             {
                 Name = AppResources.CloseApp,
-                Image = "ic_close_app1",
+                Image = "resource://xamarinJKH.Resources.ic_close_app1.svg",
                 Command = new Command(async () =>
                 {
 
@@ -421,7 +432,8 @@ namespace xamarinJKH.AppsConst
                         await ShowToast(result.Error);
                     }
                 }),
-                IsVisible = CanClose
+                IsVisible = CanClose,
+                ReplaceMap = replace
             });
             NavigationPage.SetHasNavigationBar(this, false);
             var backClick = new TapGestureRecognizer();
