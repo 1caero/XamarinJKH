@@ -55,6 +55,7 @@
     <None Remove="Resources\ic_minus.svg" />
     <None Remove="Resources\ic_monitor.svg" />
     <None Remove="Resources\ic_news.svg" />
+    <None Remove="Resources\ic_next_disp.svg" />
     <None Remove="Resources\ic_notification.svg" />
     <None Remove="Resources\ic_no_photo.svg" />
     <None Remove="Resources\ic_OssCircleStatus.svg" />
@@ -109,7 +110,8 @@
     </EmbeddedResource> 
     <EmbeddedResource Include="Resources\crossed.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </EmbeddedResource> 
+    <EmbeddedResource Include="Resources\ic_next_disp.svg" />
     <EmbeddedResource Include="Resources\oss_event.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
