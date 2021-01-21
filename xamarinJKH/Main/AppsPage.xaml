@@ -99,8 +99,25 @@
                             <!--             Read="{Binding IsReadedByClient}" -->
                             <!--             ID="{Binding ID}" -->
                             <!--             TextApp="{Binding Name}" /> -->
-                            <StackLayout>
-                                <Label IsVisible="False" Text="{Binding ID}"></Label>
+                                        <StackLayout Padding="{OnPlatform iOS='2'}">
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Normal">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="BackgroundColor"
+                                                                        Value="{AppThemeBinding Light=White, Dark=#494949}" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Selected">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="BackgroundColor"
+                                                                        Value="{AppThemeBinding Light=White, Dark=#494949}" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
+                                
+                                            <Label IsVisible="False" Text="{Binding ID}"></Label>
                                 <pancakeView:PancakeView VerticalOptions="Start"
                                                          BorderColor="{AppThemeBinding Light={StaticResource  hexColor}, Dark=Transparent}"
                                                          BackgroundColor="White"
