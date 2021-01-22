@@ -1196,6 +1196,8 @@ namespace xamarinJKH.MainConst
                         //LabelGroup.Text = action;
                         street = SelectedArea.Name;
                     }
+
+                    HouseGroups.IsVisible = Areas.Count > 0;
                     
                     //await getMonitorStandart(Int32.Parse(HousesGroup[SelectedArea.Name]));
                 });
