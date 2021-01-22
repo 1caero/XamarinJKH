@@ -79,9 +79,9 @@
                              x:Name="additionalList"
                              HorizontalScrollBarVisibility="Never"
                              Margin="10, 10, 10, 0"
-                             SelectionMode="Single"
+                             SelectionMode="None"
                              VerticalScrollBarVisibility="Never"
-                             SelectedItem="{Binding SelectedRequest}"
+                             SelectedItem="{Binding SelectedRequest}"                            
                              SelectionChanged="AdditionalList_OnSelectionChanged"
                              ItemsSource="{Binding Requests, Mode=TwoWay}"
                              VerticalOptions="FillAndExpand">
@@ -100,18 +100,21 @@
                             <!--             ID="{Binding ID}" -->
                             <!--             TextApp="{Binding Name}" /> -->
                                         <StackLayout Padding="{OnPlatform iOS='2'}">
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                                            </StackLayout.GestureRecognizers>
                                             <VisualStateManager.VisualStateGroups>
                                                 <VisualStateGroup x:Name="CommonStates">
                                                     <VisualState x:Name="Normal">
                                                         <VisualState.Setters>
                                                             <Setter Property="BackgroundColor"
-                                                                        Value="{AppThemeBinding Light=White, Dark=#494949}" />
+                                                                        Value="{AppThemeBinding Light=Transparent, Dark=Transparent}" />
                                                         </VisualState.Setters>
                                                     </VisualState>
                                                     <VisualState x:Name="Selected">
                                                         <VisualState.Setters>
                                                             <Setter Property="BackgroundColor"
-                                                                        Value="{AppThemeBinding Light=White, Dark=#494949}" />
+                                                                        Value="{AppThemeBinding Light=Transparent, Dark=Transparent}" />
                                                         </VisualState.Setters>
                                                     </VisualState>
                                                 </VisualStateGroup>
