@@ -58,7 +58,7 @@ namespace xamarinJKH.AppsConst
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            MessagingCenter.Send<Object, Tuple<NamedValue, NamedValue, NamedValue>>(this, "SetNames", new Tuple<NamedValue, NamedValue, NamedValue>(this.viewModel.DistrictObject, this.viewModel.HouseObject, this.viewModel.FlatObject));
+            MessagingCenter.Send<Object, Tuple<NamedValue, NamedValue, NamedValue, int>>(this, "SetNames", new Tuple<NamedValue, NamedValue, NamedValue, int>(this.viewModel.DistrictObject, this.viewModel.HouseObject, this.viewModel.FlatObject, this.Type));
             MessagingCenter.Send<Object, Tuple<int?, int?, int?, string>>(this, "SetTypes", new Tuple<int?, int?, int?, string>(viewModel.DistrictID, viewModel.HouseID, viewModel.PremiseID, viewModel.Street));
         }
 
@@ -138,7 +138,7 @@ namespace xamarinJKH.AppsConst
 
         async void Confirm(object sender, EventArgs args)
         {
-            MessagingCenter.Send<Object, Tuple<int?, int?, int?, string>>(this, "SetTypes", new Tuple<int?, int?, int?, string>(viewModel.DistrictID, viewModel.HouseID, viewModel.PremiseID, viewModel.Street));
+            MessagingCenter.Send<Object, Tuple<int?, int?, int?, string, int>>(this, "SetTypes", new Tuple<int?, int?, int?, string, int>(viewModel.DistrictID, viewModel.HouseID, viewModel.PremiseID, viewModel.Street, this.Type));
             await Navigation.PopAsync();
         }
 
@@ -149,7 +149,7 @@ namespace xamarinJKH.AppsConst
         }
         private async void ChooseStreet(object sender, EventArgs e)
         {
-            await PopupNavigation.PushAsync(new SearchDialogView((int)SearchType.STREET));
+            await PopupNavigation.PushAsync(new SearchDialogView((int)SearchType.STREET, viewModel.DistrictID));
         }
 
         private async void ChooseHouse(object sender, EventArgs e)

@@ -233,6 +233,7 @@ namespace xamarinJKH.MainConst
         private int HouseID = -1;
         async Task getMonitorStandart(int id, int houseID = -1)
         {
+            return;
             if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () =>
@@ -648,7 +649,7 @@ namespace xamarinJKH.MainConst
                 });
             };
 
-            if (i > 0)
+            if (i > 0 || 1 == 1)
             {
                 stackLayoutBot.IsVisible = false;
                 iconViewArrow.Source = "ic_arrow_down_monitor";
@@ -1085,14 +1086,14 @@ namespace xamarinJKH.MainConst
                 DefaultMessage = AppResources.MonitorStats,
             };
 
-            await Loading.Instance.StartAsync(async progress =>
+            await Task.Run(async () =>
             {
                 var area_groups = await _server.GetAreaGroups();
                 if (area_groups.Error == null)
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        foreach(var area in area_groups.Data)
+                        foreach (var area in area_groups.Data)
                         {
                             Groups.Add(area);
                         }
@@ -1109,7 +1110,19 @@ namespace xamarinJKH.MainConst
                 {
                     await getHouse();
                 }
+            }).ContinueWith(async (obj) =>
+            {
+                await getHouse();
+            }).ContinueWith(async (res) =>
+            {
+                await Task.Delay(1500);
+                Button_Clicked(null, null);
             });
+            //await Loading.Instance.StartAsync(async progress =>
+            //{
+                
+            //});
+            
         }
 
         void colapseAll(string name)
@@ -1162,25 +1175,31 @@ namespace xamarinJKH.MainConst
 
             IsBusy = true;
             ItemsList<NamedValue> groups = await _server.GetHouseGroups();
-            IsBusy = false;
+            //IsBusy = false;
             if (groups.Error == null)
             {
                 string[] param = null;
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    foreach (var group in groups.Data)
+                    if (groups.Data.Count > 0)
                     {
-                        Areas.Add(group);
+                        foreach (var group in groups.Data)
+                        {
+                            Areas.Add(group);
+                        }
+
+                        SelectedArea = Areas[0];
+
+                        setListGroups(groups, ref param);
+                        LayoutContent.Children.Clear();
+                        MaterialFrameNotDoingContainer.IsVisible = false;
+                        //LabelGroup.Text = action;
+                        street = SelectedArea.Name;
                     }
 
-                    SelectedArea = Areas[0];
-
-                    setListGroups(groups, ref param);
-                    LayoutContent.Children.Clear();
-                    MaterialFrameNotDoingContainer.IsVisible = false;
-                    //LabelGroup.Text = action;
-                    street = SelectedArea.Name;
-                    await getMonitorStandart(Int32.Parse(HousesGroup[SelectedArea.Name]));
+                    HouseGroups.IsVisible = Areas.Count > 0;
+                    
+                    //await getMonitorStandart(Int32.Parse(HousesGroup[SelectedArea.Name]));
                 });
 
 
@@ -1212,7 +1231,7 @@ namespace xamarinJKH.MainConst
 
             IsBusy = true;
             ItemsList<HouseProfile> groups = await _server.GetHouse();
-            IsBusy = false;
+            //IsBusy = false;
 
             if (groups.Error == null)
             {
@@ -1227,18 +1246,19 @@ namespace xamarinJKH.MainConst
                                 Streets.Add(group);
                         }
 
-                        SelectedStreet = Streets[0];
-                        Streets[0].Selected = true;
+                        HousesList.IsVisible = Streets.Count > 0;
+                        //SelectedStreet = Streets[0];
+                        //Streets[0].Selected = true;
                         // StreetsCollection.ScrollTo(Streets[0]);
                         string[] param = null;
                         setListHouse(groups, ref param);
-                        var action = Streets[0].Address;
+                        var action = "";// Streets[0].Address;
                         if (action != null && !action.Equals(AppResources.Cancel))
                         {
-                            LayoutContent.Children.Clear();
-                            MaterialFrameNotDoingContainer.IsVisible = false;
+                            //LayoutContent.Children.Clear();
+                            //MaterialFrameNotDoingContainer.IsVisible = false;
                             //LabelHouse.Text = action;
-                            await getMonitorStandart(-1, Int32.Parse(Houses[action]));
+                            //await getMonitorStandart(-1, Int32.Parse(Houses[action]));
                         }
                         LoadingStreets = false;
                     });
@@ -1754,10 +1774,17 @@ namespace xamarinJKH.MainConst
 
         private List<int> AreaIDs { get; set; }
         private List<int> HouseIDs { get; set; }
+        private List<int> GroupIDs { get; set; }
         private async void Button_Clicked(object sender, EventArgs e)
         {
             var queries = new List<RequestStatsQuerySettings>();
-            if (HouseIDs != null)
+            if (HouseIDs == null)
+                HouseIDs = new List<int>();
+            if (AreaIDs == null)
+                AreaIDs = new List<int>();
+            if (GroupIDs == null)
+                GroupIDs = new List<int>();
+            if (HouseIDs.Count > 0)
             for (int i = 0; i < HouseIDs.Count(); i++)
             {
                 try
@@ -1766,13 +1793,14 @@ namespace xamarinJKH.MainConst
                         new RequestStatsQuerySettings
                         {
                             DistrictId = -1,//AreaIDs[i],
+                            GroupOfDistrictId = -1,
                             HouseId = HouseIDs[i],
                         });
                 }
                 catch (Exception ex)
                 { }
             }
-            if (AreaIDs != null)
+            else if (AreaIDs.Count > 0)
             {
                 for (int i = 0; i < AreaIDs.Count(); i++)
                 {
@@ -1782,58 +1810,101 @@ namespace xamarinJKH.MainConst
                             new RequestStatsQuerySettings
                             {
                                 DistrictId = AreaIDs[i],
-                                HouseId = -1// HouseIDs[i],
+                                HouseId = -1,// HouseIDs[i],
+                                GroupOfDistrictId = -1
                             });
                     }
                     catch (Exception ex)
                     { }
                 }
             }
-
-            Loading.Instance.StartAsync(async progress => {
-                var result = await _server.GetMultipleStats(queries);
-                if (result.Error == null)
+            else if (GroupIDs.Count > 0)
+            {
+                for (int i = 0; i < GroupIDs.Count(); i++)
                 {
-                    if (result.Data.Count > 0)
+                    try
                     {
-                        RequestStats sum = new RequestStats();
-                        sum.TotalUnperformedRequestsList = new List<Requests>();
-                        sum.Today = new PeriodStats();
-                        sum.Today.OverdueRequestsList = new List<Requests>();
-                        sum.Today.UnperformedRequestsList = new List<Requests>();
-                        sum.Week = new PeriodStats();
-                        sum.Week.OverdueRequestsList = new List<Requests>();
-                        sum.Week.UnperformedRequestsList = new List<Requests>();
-                        sum.Month = new PeriodStats();
-                        sum.Month.OverdueRequestsList = new List<Requests>();
-                        sum.Month.UnperformedRequestsList = new List<Requests>();
-                        foreach (var monitor in result.Data)
-                        {
-                            sum.CustomPeriod = monitor.CustomPeriod;
-                           
-
-                            sum.TotalUnperformedRequestsList.AddRange(monitor.TotalUnperformedRequestsList);
-                            sum.Today.OverdueRequestsList.AddRange(monitor.Today.OverdueRequestsList);
-                            sum.Today.RequestsCount += monitor.Today.RequestsCount;
-                            sum.Today.UnperformedRequestsList.AddRange(monitor.Today.UnperformedRequestsList);
-
-                            sum.Week.OverdueRequestsList.AddRange(monitor.Week.OverdueRequestsList);
-                            sum.Week.RequestsCount += monitor.Week.RequestsCount;
-                            sum.Week.UnperformedRequestsList.AddRange(monitor.Week.UnperformedRequestsList);
-
-                            sum.Month.RequestsCount += monitor.Month.RequestsCount;
-                            sum.Month.OverdueRequestsList.AddRange(monitor.Month.OverdueRequestsList);
-                            sum.Month.UnperformedRequestsList.AddRange(monitor.Month.UnperformedRequestsList);
-                        }
-
-                        setMonitoring(sum);
+                        queries.Add(
+                            new RequestStatsQuerySettings
+                            {
+                                DistrictId = -1,
+                                HouseId = -1,// HouseIDs[i],
+                                GroupOfDistrictId = GroupIDs[i]
+                            });
                     }
+                    catch (Exception ex)
+                    { }
                 }
-                else
+            }
+            else if (queries.Count == 0)
+            {
+                queries.Add(new RequestStatsQuerySettings
                 {
-                    await DisplayAlert(AppResources.ErrorTitle, result.Error, "OK");
-                }
+                    DistrictId = -1,
+                    HouseId = -1,
+                    GroupOfDistrictId = -1
+                });
+            }
+
+            if (queries.Count == 0)
+            {
+                queries.Add(new RequestStatsQuerySettings
+                {
+                    DistrictId = -1,
+                    HouseId = -1,
+                    GroupOfDistrictId = -1
+                });
+            }
+                IsBusy = false;
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await Loading.Instance.StartAsync(async progress =>
+                {
+                    var result = await _server.GetMultipleStats(queries);
+                    if (result.Error == null)
+                    {
+                        if (result.Data.Count > 0)
+                        {
+                            RequestStats sum = new RequestStats();
+                            sum.TotalUnperformedRequestsList = new List<Requests>();
+                            sum.Today = new PeriodStats();
+                            sum.Today.OverdueRequestsList = new List<Requests>();
+                            sum.Today.UnperformedRequestsList = new List<Requests>();
+                            sum.Week = new PeriodStats();
+                            sum.Week.OverdueRequestsList = new List<Requests>();
+                            sum.Week.UnperformedRequestsList = new List<Requests>();
+                            sum.Month = new PeriodStats();
+                            sum.Month.OverdueRequestsList = new List<Requests>();
+                            sum.Month.UnperformedRequestsList = new List<Requests>();
+                            foreach (var monitor in result.Data)
+                            {
+                                sum.CustomPeriod = monitor.CustomPeriod;
+
+
+                                sum.TotalUnperformedRequestsList.AddRange(monitor.TotalUnperformedRequestsList);
+                                sum.Today.OverdueRequestsList.AddRange(monitor.Today.OverdueRequestsList);
+                                sum.Today.RequestsCount += monitor.Today.RequestsCount;
+                                sum.Today.UnperformedRequestsList.AddRange(monitor.Today.UnperformedRequestsList);
+
+                                sum.Week.OverdueRequestsList.AddRange(monitor.Week.OverdueRequestsList);
+                                sum.Week.RequestsCount += monitor.Week.RequestsCount;
+                                sum.Week.UnperformedRequestsList.AddRange(monitor.Week.UnperformedRequestsList);
+
+                                sum.Month.RequestsCount += monitor.Month.RequestsCount;
+                                sum.Month.OverdueRequestsList.AddRange(monitor.Month.OverdueRequestsList);
+                                sum.Month.UnperformedRequestsList.AddRange(monitor.Month.UnperformedRequestsList);
+                            }
+
+                            setMonitoring(sum);
+                        }
+                    }
+                    else
+                    {
+                        await DisplayAlert(AppResources.ErrorTitle, result.Error, "OK");
+                    }
+                });
             });
+           
             
         }
 
@@ -1932,24 +2003,13 @@ namespace xamarinJKH.MainConst
 
         private void AreaGroups_SelectionChanged(object sender, Syncfusion.SfAutoComplete.XForms.SelectionChangedEventArgs e)
         {
-            return;
-            var list = (IEnumerable<Object>)e.Value;
-            var names = new List<string>();
-            foreach (NamedValue element in list)
-            {
-                names.Add(element.Name);
-            }
+            if (GroupIDs == null)
+                GroupIDs = new List<int>();
 
-            var added = e.AddedItems as NamedValue;
-            var doubles = list.Where(x => (x as NamedValue).Name == added.Name).ToArray();
-            if (doubles != null)
-            if (doubles.Count() > 1 && list.Count() > 1)
-            {
-                    var enumer = ((sender as SfAutoComplete).SelectedItem as IEnumerable<Object>);
-                    var vals = enumer.ToList();
-                    vals.Remove(vals.First(x => (x as NamedValue).Name == added.Name));
-            }
-
+            var select = (sender as SfAutoComplete).SelectedItem as IEnumerable<Object>;
+            var selected_ids = select.Select(x => (x as NamedValue).ID).ToArray();
+            GroupIDs.Clear();
+            GroupIDs.AddRange(selected_ids);
         }
 
         private void HouseGroups_SelectionChanged_1(object sender, Syncfusion.SfAutoComplete.XForms.SelectionChangedEventArgs e)
@@ -1964,31 +2024,75 @@ namespace xamarinJKH.MainConst
             {
                 if (Groups.Count > 0)
                 {
-                    if (AreaGroups.DataSource.Count() > 0)
+                    var result = new List<NamedValue>();
+                    if ((AreaGroups.SelectedItem != null))
                     {
-                        var result = new List<NamedValue>();
                         if ((AreaGroups.SelectedItem as IEnumerable<Object>).Count() > 0)
                         {
-                            var indecies = (AreaGroups.SelectedItem as IEnumerable<Object>).Select(x => (x as NamedValue).ID).ToList();
-                            result.AddRange(Areas.Where(x => indecies.Contains(x.Value)));
+                            if (AreaGroups.SelectedItem != null)
+                            {
+                                if ((AreaGroups.SelectedItem as IEnumerable<Object>).Count() > 0)
+                                {
+                                    var indecies = (AreaGroups.SelectedItem as IEnumerable<Object>).Select(x => (x as NamedValue).ID).ToList();
+                                    result.AddRange(Areas.Where(x => indecies.Contains(x.Value)));
+                                }
+                                else
+                                {
+                                    result.AddRange(Areas);
+                                }
+                            }
+                            else
+                            {
+                                result.AddRange(Areas);
+                            }
+
+                            var selected = HouseGroups.SelectedItem as IEnumerable<Object>;
+                            if (selected != null)
+                            {
+                                var selected_indecies = selected.Select(x => (x as NamedValue).ID).ToList();
+                                if (selected_indecies != null)
+                                {
+                                    result = result.Where(x => !selected_indecies.Contains(x.ID)).ToList();
+                                }
+                            }
+
+                            HouseGroups.DataSource = null;
+                            HouseGroups.DataSource = result;
                         }
                         else
                         {
-                            result.AddRange(Areas.Where(x => x.Value > 0));
+                            result.AddRange(Areas);
+                            var selected = HouseGroups.SelectedItem as IEnumerable<Object>;
+                            if (selected != null)
+                            {
+                                var selected_indecies = selected.Select(x => (x as NamedValue).ID).ToList();
+                                if (selected_indecies != null)
+                                {
+                                    result = result.Where(x => !selected_indecies.Contains(x.ID)).ToList();
+                                }
+                            }
+
+                            HouseGroups.DataSource = null;
+                            HouseGroups.DataSource = result;
                         }
+                    }
+                    
+                    else
+                    {
+                        result.AddRange(Areas);
                         var selected = HouseGroups.SelectedItem as IEnumerable<Object>;
                         if (selected != null)
                         {
-                            var selected_indecies = selected.Select(x => (x as NamedValue).ID);
+                            var selected_indecies = selected.Select(x => (x as NamedValue).ID).ToList();
                             if (selected_indecies != null)
                             {
                                 result = result.Where(x => !selected_indecies.Contains(x.ID)).ToList();
                             }
                         }
+
                         HouseGroups.DataSource = null;
                         HouseGroups.DataSource = result;
                     }
-
                 }
             }
             catch
@@ -2011,6 +2115,11 @@ namespace xamarinJKH.MainConst
 
                     HousesList.DataSource = null;
                     HousesList.DataSource = Streets.Where(x => !selected_indecies.Contains(x.ID));
+                }
+                else
+                {
+                    HousesList.DataSource = null;
+                    HousesList.DataSource = Streets;
                 }
             }
             catch

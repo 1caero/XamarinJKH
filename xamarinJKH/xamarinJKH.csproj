@@ -55,6 +55,7 @@
     <None Remove="Resources\ic_minus.svg" />
     <None Remove="Resources\ic_monitor.svg" />
     <None Remove="Resources\ic_news.svg" />
+    <None Remove="Resources\ic_more_app.svg" />
     <None Remove="Resources\ic_next_disp.svg" />
     <None Remove="Resources\ic_notification.svg" />
     <None Remove="Resources\ic_no_photo.svg" />
@@ -223,6 +224,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ic_monitor.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource> 
+    <EmbeddedResource Include="Resources\ic_more_app.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ic_news.svg" />

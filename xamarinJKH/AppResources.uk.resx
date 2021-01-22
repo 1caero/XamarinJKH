@@ -1100,7 +1100,7 @@
     <value>Показати закриті</value>
   </data>
   <data name="ShowReadApps" xml:space="preserve">
-    <value>Показати прочитані</value>
+    <value>показати в т.ч. прочитання</value>
   </data>
   <data name="SortByAcc" xml:space="preserve">
     <value>За о / рах</value>
@@ -1647,5 +1647,8 @@
   </data>
   <data name="LettersLimit" xml:space="preserve">
     <value>Введіть не менше {0} символів</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Фільтри</value>
   </data>
 </root>

@@ -162,7 +162,7 @@ namespace xamarinJKH.AppsConst
             }
             else
             {
-                BindingContext = new AddAppConstModel()
+                BindingContext = _model = new AddAppConstModel()
                 {
                     AllType = Settings.TypeApp,
                     hex = (Color)Application.Current.Resources["MainColor"],
@@ -185,13 +185,29 @@ namespace xamarinJKH.AppsConst
                 this.House = data.Item2;
                 this.Flat = data.Item3;
                 this.Street = data.Item4;
+                
             });
 
-            MessagingCenter.Subscribe<Object, Tuple<NamedValue, NamedValue, NamedValue>>(this, "SetNames", (sender, data) =>
+            MessagingCenter.Subscribe<Object, Tuple<NamedValue, NamedValue, NamedValue,int>>(this, "SetNames", (sender, data) =>
             {
                 selectedDistrict = data.Item1;
                 selectedHouse = data.Item2;
                 selectedFlat = data.Item3;
+                switch (data.Item4)
+                {
+                    case 1:
+                        LayoutKind.IsVisible = selectedDistrict != null;
+                        LabelKind.Text = selectedDistrict?.Name;
+                        break;
+                    case 2:
+                        LayoutKind.IsVisible = selectedHouse != null;
+                        LabelKind.Text = selectedHouse?.Name;
+                        break;
+                    case 3:
+                        LayoutKind.IsVisible = selectedHouse != null && selectedFlat != null;
+                        LabelKind.Text = selectedHouse?.Name + ", " + selectedFlat?.Name;
+                        break;
+                }
             });
 
             ((TypeStack.Children[0] as StackLayout).Children[0] as RadioButton).IsChecked = true;
@@ -428,14 +444,14 @@ namespace xamarinJKH.AppsConst
             Pancake.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
             FrameTop.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
         }
-
+        public AddAppConstModel _model = new AddAppConstModel();
         void setBinding()
         {
             PikerTypeItem = PickerType.SelectedIndex;
             try
             {
                 BindingContext = null;
-                BindingContext = new AddAppConstModel()
+                BindingContext = _model = new AddAppConstModel()
                 {
                     AllType = Settings.TypeApp,
                     hex = (Color)Application.Current.Resources["MainColor"],
@@ -452,11 +468,12 @@ namespace xamarinJKH.AppsConst
         public class AddAppConstModel : BaseViewModel
         {
             public List<RequestType> AllType { get; set; }
-            public NamedValue SelectedType { get; set; }
+            public RequestType SelectedType { get; set; }
 
             public List<FileData> Files { get; set; }
             public Color hex { get; set; }
             public ObservableCollection<NamedValue> CreateTypes { get; set; }
+            public ObservableCollection<NamedValue> PodTypes { get; set; } = new ObservableCollection<NamedValue>();
             public AddAppConstModel()
             {
                 Ident = true;
@@ -476,6 +493,27 @@ namespace xamarinJKH.AppsConst
                 {
                     _ident = value;
                     OnPropertyChanged("Ident");
+                }
+            }
+            bool _isVisible;
+            public bool IsVisible
+            {
+                get => _isVisible;
+                set
+                {
+                    _isVisible = value;
+                    OnPropertyChanged("IsVisible");
+                }
+            }
+            
+            NamedValue _podTypSelected;
+            public NamedValue PodTypSelected
+            {
+                get => _podTypSelected;
+                set
+                {
+                    _podTypSelected = value;
+                    OnPropertyChanged("PodTypSelected");
                 }
             }
         }
@@ -519,7 +557,8 @@ namespace xamarinJKH.AppsConst
                             House = null;
                             break;
                     }
-                    IDResult result = await _server.newAppConst(null, typeId, text, "", this.District, this.House, this.Flat, this.Street);
+                    int? SubTypeID = _model.PodTypSelected?.ID;
+                    IDResult result = await _server.newAppConst(null, typeId, text, "", this.District, this.House, this.Flat, this.Street, SubTypeID);
                     await _server.SetReadedFlag(result.ID, true);
 
                     if (result.Error == null)
@@ -633,6 +672,24 @@ namespace xamarinJKH.AppsConst
 
         private void pickerType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            RequestType modelSelectedType = _model.SelectedType;
+            if (modelSelectedType != null)
+            {
+                PodTypeLayout.IsVisible = modelSelectedType.HasSubTypes;
+                if (!modelSelectedType.HasSubTypes)
+                {
+                    _model.PodTypSelected = null;
+                }
+                Device.BeginInvokeOnMainThread(() => {  _model.PodTypes.Clear(); });
+                foreach (var type in modelSelectedType.SubTypes)
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        _model.PodTypes.Add(type);
+                        _model.PodTypSelected = _model.PodTypes[0];
+                    });
+                }
+            }
         }
 
         private void RadioButton_Focused(object sender, FocusEventArgs e)
@@ -661,5 +718,9 @@ namespace xamarinJKH.AppsConst
             }
         }
 
+        private void PickerPodType_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

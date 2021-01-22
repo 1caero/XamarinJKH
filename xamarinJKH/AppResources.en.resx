@@ -870,7 +870,7 @@
     <value>Add an account</value>
   </data>
   <data name="ShowReadApps" xml:space="preserve">
-    <value>Show read</value>
+    <value>show incl. read </value>
   </data>
   <data name="AddApp" xml:space="preserve">
     <value>Add</value>
@@ -1774,5 +1774,8 @@
   </data>
   <data name="LettersLimit" xml:space="preserve">
     <value>Please enter at least {0} characters</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filters</value>
   </data>
 </root>
