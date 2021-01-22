@@ -1181,18 +1181,22 @@ namespace xamarinJKH.MainConst
                 string[] param = null;
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    foreach (var group in groups.Data)
+                    if (groups.Data.Count > 0)
                     {
-                        Areas.Add(group);
+                        foreach (var group in groups.Data)
+                        {
+                            Areas.Add(group);
+                        }
+
+                        SelectedArea = Areas[0];
+
+                        setListGroups(groups, ref param);
+                        LayoutContent.Children.Clear();
+                        MaterialFrameNotDoingContainer.IsVisible = false;
+                        //LabelGroup.Text = action;
+                        street = SelectedArea.Name;
                     }
-
-                    SelectedArea = Areas[0];
-
-                    setListGroups(groups, ref param);
-                    LayoutContent.Children.Clear();
-                    MaterialFrameNotDoingContainer.IsVisible = false;
-                    //LabelGroup.Text = action;
-                    street = SelectedArea.Name;
+                    
                     //await getMonitorStandart(Int32.Parse(HousesGroup[SelectedArea.Name]));
                 });
 
