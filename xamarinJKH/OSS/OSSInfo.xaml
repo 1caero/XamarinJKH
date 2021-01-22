@@ -93,7 +93,8 @@
                                 </StackLayout>
                                 <Frame CornerRadius="10"                                                              
                                x:Name="FrameBtn"
-                               Padding="0"
+                               BackgroundColor="{x:DynamicResource MainColor}"
+                               Padding="5,0,5,0"
                                Margin="0,20">
                                     <Button x:Name="Btn" 
                                 HorizontalOptions="FillAndExpand"
