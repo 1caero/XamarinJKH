@@ -1639,4 +1639,7 @@
   <data name="SelectDay" xml:space="preserve">
     <value>Оберiть день</value>
   </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Фільтри</value>
+  </data>
 </root>

@@ -1766,4 +1766,7 @@
   <data name="SelectDay" xml:space="preserve">
     <value>Select day</value>
   </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filters</value>
+  </data>
 </root>

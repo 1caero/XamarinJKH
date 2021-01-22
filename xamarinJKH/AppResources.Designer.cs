@@ -1915,6 +1915,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Фильтры.
+        /// </summary>
+        internal static string Filters {
+            get {
+                return ResourceManager.GetString("Filters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Завершить.
         /// </summary>
         internal static string Finish {
