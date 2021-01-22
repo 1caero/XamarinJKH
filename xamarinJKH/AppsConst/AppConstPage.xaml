@@ -275,19 +275,18 @@
                    HasShadow="{AppThemeBinding Light=false, Dark=true}"
                    BorderColor="{Binding hex}"
                    IsVisible="{Binding isNotRead}"
-                   Padding="15">
-                <StackLayout
-                    Spacing="10"
+                   Padding="5">
+                <!--<StackLayout
+                    
                     MinimumHeightRequest="50"
-                    Orientation="Horizontal">
-                        <Grid Padding="0">
+                    Orientation="Horizontal" >-->
+                        <Grid Padding="0"  Margin="0" HeightRequest="60" MinimumHeightRequest="50">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.06*" />
                                 <ColumnDefinition Width="0.72*" />
                                 <ColumnDefinition Width="0.06*" />
                                 <ColumnDefinition Width="0.16*" />                                
                             </Grid.ColumnDefinitions>
-
                             <ActivityIndicator x:Name="progressFile"
                                                Grid.Column="0"
                                        IsRunning="true"
@@ -295,14 +294,7 @@
                                        WidthRequest="25"
                                        IsVisible="False"
                                        HorizontalOptions="StartAndExpand"
-                                       Color="{Binding hex}" />
-                            <!--<xamarinJkh:IconView
-                                Grid.Column="0"
-                                IsVisible="False"
-                        Source="ic_add_file"
-                        Foreground="{Binding hex}"
-                        HeightRequest="20"
-                        WidthRequest="20" />-->
+                                       Color="{Binding hex}" />                            
                             <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_add_file.svg"
                                                 x:Name="IconViewAddFile"
                                                 ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}}"/>
@@ -315,12 +307,6 @@
                                                TextColor="Black"
                                                HorizontalOptions="FillAndExpand" 
                                                AutoSize="TextChanges"/>
-                            <!--<xamarinJkh:IconView
-                                Grid.Column="2"
-                        Source="ic_send_mess"
-                        Foreground="{Binding hex}"
-                        HeightRequest="20"
-                        WidthRequest="20" />-->
                             <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_send_mess.svg"
                                                 Grid.Column="2"
                                                 x:Name="IconViewSend"
@@ -332,7 +318,7 @@
                                        WidthRequest="20"
                                        IsVisible="False"
                                        Color="{Binding hex}" />
-                            <StackLayout Grid.Column="3" Spacing="-10" VerticalOptions="Center">                                
+                            <StackLayout Grid.Column="3" Spacing="-10" VerticalOptions="Center" >                                
                                     <CheckBox
                                     x:Name="CheckBoxHidden"
                             HorizontalOptions="Center"
@@ -345,7 +331,7 @@
                             </StackLayout>
                         </Grid>
 
-                    </StackLayout>
+                    <!--</StackLayout>-->
             </Frame>
         </StackLayout>
         </Grid>
