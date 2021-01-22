@@ -700,7 +700,7 @@
     <value>Показать закрытые</value>
   </data>
   <data name="ShowReadApps" xml:space="preserve">
-    <value>Показать прочитанные</value>
+    <value>Показать в т.ч. прочитанные</value>
   </data>
   <data name="SortByAcc" xml:space="preserve">
     <value>По л/сч</value>

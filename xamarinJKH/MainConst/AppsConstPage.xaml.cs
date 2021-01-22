@@ -427,8 +427,7 @@ namespace xamarinJKH.MainConst
                 else
                 {
                     RequestInfos =
-                        new ObservableCollection<RequestInfo>(
-                            from i in _requestList.Requests where !i.IsReaded select i);
+                        new ObservableCollection<RequestInfo>(_requestList.Requests);
                 }
 
                 BindingContext = this;
