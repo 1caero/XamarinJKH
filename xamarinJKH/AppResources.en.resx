@@ -870,7 +870,7 @@
     <value>Add an account</value>
   </data>
   <data name="ShowReadApps" xml:space="preserve">
-    <value>Show read</value>
+    <value>show incl. read </value>
   </data>
   <data name="AddApp" xml:space="preserve">
     <value>Add</value>

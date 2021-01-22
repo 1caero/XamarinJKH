@@ -1,8 +1,8 @@
-﻿using Xamarin.Forms;
+﻿//using Xamarin.Forms;
 
-namespace xamarinJKH
-{
-    public class BorderlessDatePickerMonitor : DatePicker
-    {
-    }
-}
+//namespace xamarinJKH
+//{
+//    public class BorderlessDatePickerMonitor : DatePicker
+//    {
+//    }
+//}

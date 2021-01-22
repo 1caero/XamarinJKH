@@ -58,14 +58,16 @@
                        BackgroundColor="{AppThemeBinding Light=White, Dark=#B5B5B5}"
                        Padding="5,0,5,80">
                         <StackLayout Padding="20, 20, 20,-10" WidthRequest="160">
-                            <ScrollView Orientation="Horizontal"
-                                        HorizontalScrollBarVisibility="Never"
-                                        HeightRequest="90"
-                                WidthRequest="160">
+                            <StackLayout Orientation="Horizontal" Spacing="0" BackgroundColor="Transparent">
+                                <ScrollView Orientation="Horizontal"
+                                            HorizontalScrollBarVisibility="Never"
+                                            VerticalScrollBarVisibility="Never"
+                                            HeightRequest="90"
+                                            WidthRequest="160">
                                 <StackLayout Orientation="Horizontal"
-                                             
+                                             Margin="0,-3,0,0"
                                              BindableLayout.ItemsSource="{Binding Options}"
-                                             >
+                                >
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate>
                                             <StackLayout IsVisible="{Binding IsVisible}"
@@ -95,7 +97,16 @@
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>
                                 </StackLayout>
+                                   
                             </ScrollView>
+                            <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_more_app.svg"
+                                                HeightRequest="25"
+                                                WidthRequest="25"
+                                                BackgroundColor="Transparent"
+                                                Margin="0,15,-25,0"
+                                                VerticalOptions="StartAndExpand"
+                                                HorizontalOptions="End" />
+                        </StackLayout>
                             
                                     <ScrollView Orientation="Horizontal"
                                                 IsVisible="False">

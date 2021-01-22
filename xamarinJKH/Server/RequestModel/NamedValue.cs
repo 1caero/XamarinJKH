@@ -13,7 +13,16 @@ namespace xamarinJKH.Server.RequestModel
         {
             get => Name.Length > 40 ? Name.Substring(0, 40) + "..." : Name;
             set => Name = value;
+        } 
+        public string _NamePicker
+        {
+            get
+            {
+                return Name.Length > 35 ? Name.Substring(0, 30) + "..." : Name;
+            }
+            set => Name = value;
         }
+
         bool selected;
         public bool Selected
         {
