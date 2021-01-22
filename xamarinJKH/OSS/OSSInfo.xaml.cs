@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using FFImageLoading.Svg.Forms;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
 using Xamarin.Essentials;
@@ -411,6 +412,42 @@ namespace xamarinJKH
                 var docName = detailLabel($"{AppResources.OSSInfoQuestionNumber} {i}: ", q.Text);
                 i++;
                 additionslData.Children.Add(docName);
+                if (q.HasFile)
+                {
+                    StackLayout stackLayoutFile = new StackLayout
+                    {
+                        Orientation = StackOrientation.Vertical,
+                    };
+                    var image = new SvgCachedImage();
+                    image.Source = "resource://xamarinJKH.Resources.ic_export_pdf.svg";
+                    Color hex = (Color)Application.Current.Resources["MainColor"];
+                    image.ReplaceStringMap = new Dictionary<string, string> { { "#000000", $"#{Settings.MobileSettings.color}" } };
+                    image.HeightRequest = 30;
+                    image.WidthRequest = 30;
+                    image.HorizontalOptions = LayoutOptions.Start;
+                    Label titleFile = new Label
+                    {
+                        TextColor = Color.Black,
+                        FontSize = 14,
+                        Text = "Файл для обсуждения.PDF",
+                    };
+                    Label downloadFile = new Label
+                    {
+                        TextColor = hex,
+                        FontSize = 14,
+                        TextDecorations = TextDecorations.Underline,
+                        Text = AppResources.Download,
+                    };
+                    
+                    stackLayoutFile.Children.Add(image);
+                    stackLayoutFile.Children.Add(titleFile);
+                    stackLayoutFile.Children.Add(downloadFile);
+                    stackLayoutFile.GestureRecognizers.Add(new TapGestureRecognizer
+                    {
+                        Command = new Command(async () => await Launcher.OpenAsync(q.FileLink))
+                    });
+                    additionslData.Children.Add(stackLayoutFile);
+                }
             }           
 
             rootStack.Children.Add(additionslData);
