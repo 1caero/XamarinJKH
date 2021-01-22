@@ -82,18 +82,20 @@
                                                 VerticalOptions="Center"
                                                 Grid.Column="1"
                                                 ReplaceStringMap="{Binding fontSize, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}" />
-                                    <Label Text="{x:Static xamarinJkh:AppResources.AreaGroup}"
+                                    <Label Text="{x:Static xamarinJkh:AppResources.Filters}"
                                            FontSize="16"
-                                           IsVisible="{Binding GroupVisible}"
+                                           
                                            TextColor="{x:StaticResource MainColor}">
+                                        <!--IsVisible="{Binding GroupVisible}"-->
                                     </Label>
                                     <StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="FoldAreaGroup"/>
                                     </StackLayout.GestureRecognizers>
-                                </StackLayout>                                           
-                                <sync:SfAutoComplete MultiSelectMode="Token"
-                                                     ShowClearButton="False"
-                                                     IsVisible="False"
+                                </StackLayout>
+                                <StackLayout IsVisible="{Binding GroupVisible, Converter={x:StaticResource Invert}}">
+                                    <sync:SfAutoComplete MultiSelectMode="Token"
+                                                     HeightRequest="40"
+                                                         ShowClearButton="False"
                                                          ShowSuggestionsOnFocus="True"
                                                      WatermarkColor="{AppThemeBinding Dark=White,Light=Default}"
                                                          DataSource="{Binding Groups}"
@@ -110,7 +112,7 @@
                                                            DropDownItemHeight="50"
                                                      x:Name="AreaGroups"
                                                          DropDownBorderColor="{x:StaticResource MainColor}"/>
-                                <StackLayout Orientation="Horizontal">
+                                    <!--<StackLayout Orientation="Horizontal">
                                     <svg:SvgCachedImage
                                                 Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
                                                 HeightRequest="12"
@@ -128,11 +130,12 @@
                                     <StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="FoldAreas"/>
                                     </StackLayout.GestureRecognizers>
-                                </StackLayout>
-                                <sync:SfAutoComplete MultiSelectMode="Token"
+                                </StackLayout>-->
+                                    <sync:SfAutoComplete MultiSelectMode="Token"
                                                          ShowSuggestionsOnFocus="True"
+                                                     HeightRequest="40"
                                                      ShowClearButton="False"
-                                           IsVisible="{Binding AreasVisible, Converter={x:StaticResource Invert}}"
+                                           IsVisible="{Binding GroupVisible, Converter={x:StaticResource Invert}}"
                                                      WatermarkColor="{AppThemeBinding Dark=White,Light=Default}"
                                                          DataSource="{Binding Areas}"
                                                      DisplayMemberPath="Name"
@@ -148,7 +151,7 @@
                                                      x:Name="HouseGroups"
                                                      SelectionChanged="HouseGroups_SelectionChanged"
                                                          DropDownBorderColor="{x:StaticResource MainColor}"/>
-                                <StackLayout Orientation="Horizontal">
+                                    <!--<StackLayout Orientation="Horizontal">
                                     <svg:SvgCachedImage
                                                 Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
                                                 HeightRequest="12"
@@ -166,11 +169,12 @@
                                     <StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="FoldStreets"/>
                                     </StackLayout.GestureRecognizers>
-                                </StackLayout>
-                                <sync:SfAutoComplete MultiSelectMode="Token"
-                                           IsVisible="{Binding StreetsVisible, Converter={x:StaticResource Invert}}"
+                                </StackLayout>-->
+                                    <sync:SfAutoComplete MultiSelectMode="Token"
+                                           IsVisible="{Binding GroupVisible, Converter={x:StaticResource Invert}}"
                                                      ShowClearButton="False"
                                                          ShowSuggestionsOnFocus="True"
+                                                     HeightRequest="40"
                                                      WatermarkColor="{AppThemeBinding Dark=White,Light=Default}"
                                                          DataSource="{Binding Streets}"
                                                      DisplayMemberPath="Address"
@@ -186,6 +190,8 @@
                                                      SelectionChanged="Houses_SelectionChanged"
                                                      FocusChanged="HousesList_FocusChanged"
                                                          DropDownBorderColor="{x:StaticResource MainColor}"/>
+                                </StackLayout>
+                                
                                 <Button BackgroundColor="{x:DynamicResource MainColor}"
                                         Text="Показать"
                                         TextColor="White"
@@ -373,7 +379,6 @@
                             <ScrollView
                                 Orientation="Vertical">
                                 <StackLayout Spacing="0">
-                                    <StackLayout x:Name="LayoutContent" Spacing="0" />
                                     <customRenderers:MaterialFrame
                                         Elevation="{AppThemeBinding Light=0, Dark=20}"
                                         HasShadow="{AppThemeBinding Light=false, Dark=true}"
@@ -423,6 +428,7 @@
                                             <StackLayout x:Name="LayoutGrid" Margin="20,15,20,0" />
                                         </StackLayout>
                                     </customRenderers:MaterialFrame>
+                                    <StackLayout x:Name="LayoutContent" Spacing="0" />
 
                                 </StackLayout>
                             </ScrollView>
