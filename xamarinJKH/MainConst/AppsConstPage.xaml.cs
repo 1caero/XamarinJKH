@@ -420,14 +420,15 @@ namespace xamarinJKH.MainConst
                 if (SwitchApp.IsToggled)
                 {
                     RequestInfos =
-                        new ObservableCollection<RequestInfo>(from i in _requestList.Requests
-                            where i.IsReaded
-                            select i);
+                        new ObservableCollection<RequestInfo>(_requestList.Requests);
+                   
                 }
                 else
                 {
                     RequestInfos =
-                        new ObservableCollection<RequestInfo>(_requestList.Requests);
+                        new ObservableCollection<RequestInfo>(from i in _requestList.Requests
+                            where !i.IsReaded
+                            select i);
                 }
 
                 BindingContext = this;
