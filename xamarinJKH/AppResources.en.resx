@@ -1766,4 +1766,13 @@
   <data name="SelectDay" xml:space="preserve">
     <value>Select day</value>
   </data>
+  <data name="CompleteAppHeader" xml:space="preserve">
+    <value>Application execution</value>
+  </data>
+  <data name="CompleteAppInfo" xml:space="preserve">
+    <value>Scope of work, remarks, violations</value>
+  </data>
+  <data name="LettersLimit" xml:space="preserve">
+    <value>Please enter at least {0} characters</value>
+  </data>
 </root>

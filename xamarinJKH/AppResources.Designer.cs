@@ -808,6 +808,24 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выполнение заявки.
+        /// </summary>
+        internal static string CompleteAppHeader {
+            get {
+                return ResourceManager.GetString("CompleteAppHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Состав работы, замечания, нарушения.
+        /// </summary>
+        internal static string CompleteAppInfo {
+            get {
+                return ResourceManager.GetString("CompleteAppInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Подтвердить.
         /// </summary>
         internal static string Confirm {
@@ -2190,6 +2208,15 @@ namespace xamarinJKH {
         internal static string LatteRateApp {
             get {
                 return ResourceManager.GetString("LatteRateApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите не менее {0} символов.
+        /// </summary>
+        internal static string LettersLimit {
+            get {
+                return ResourceManager.GetString("LettersLimit", resourceCulture);
             }
         }
         
