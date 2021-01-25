@@ -442,6 +442,18 @@ namespace xamarinJKH.AppsConst
                 IsVisible = CanClose,
                 ReplaceMap = replace
             });
+
+            MessagingCenter.Subscribe<Object>(this, "ClosePage", async (sender) =>
+            {
+                try
+                {
+                    await Navigation.PopAsync();
+                }
+                catch
+                {
+
+                }
+            });
             NavigationPage.SetHasNavigationBar(this, false);
             var backClick = new TapGestureRecognizer();
             backClick.Tapped += async (s, e) => { await ClosePage(); };

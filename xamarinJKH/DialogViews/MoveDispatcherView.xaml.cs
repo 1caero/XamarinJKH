@@ -77,6 +77,7 @@ namespace xamarinJKH.DialogViews
                 {
                     ClosingApp = true;
                     await StartProgressBar();
+                    MessagingCenter.Send<Object>(this, "ClosePage");
                     await Task.Delay(TimeSpan.FromSeconds(2));
                     ClosingApp = false;
                 }
