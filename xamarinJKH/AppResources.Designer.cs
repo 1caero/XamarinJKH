@@ -2176,6 +2176,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Тип перевода.
+        /// </summary>
+        internal static string KindMove {
+            get {
+                return ResourceManager.GetString("KindMove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Русский.
         /// </summary>
         internal static string Lang {
@@ -2410,7 +2419,25 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Укажите сотрудника:.
+        ///   Looks up a localized string similar to Сотруднику.
+        /// </summary>
+        internal static string MoveConsultant {
+            get {
+                return ResourceManager.GetString("MoveConsultant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подразделению.
+        /// </summary>
+        internal static string MoveDepartsment {
+            get {
+                return ResourceManager.GetString("MoveDepartsment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите сотрудника:.
         /// </summary>
         internal static string MoveDispatcher {
             get {
@@ -2451,6 +2478,15 @@ namespace xamarinJKH {
         internal static string MoveDispatcherSuccess {
             get {
                 return ResourceManager.GetString("MoveDispatcherSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to По пулу заявок.
+        /// </summary>
+        internal static string MovePool {
+            get {
+                return ResourceManager.GetString("MovePool", resourceCulture);
             }
         }
         
@@ -2622,6 +2658,15 @@ namespace xamarinJKH {
         internal static string NotComissions {
             get {
                 return ResourceManager.GetString("NotComissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подразделение не указано.
+        /// </summary>
+        internal static string NotDepartsment {
+            get {
+                return ResourceManager.GetString("NotDepartsment", resourceCulture);
             }
         }
         
@@ -3985,6 +4030,24 @@ namespace xamarinJKH {
         internal static string SendingPush {
             get {
                 return ResourceManager.GetString("SendingPush", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите подразделение.
+        /// </summary>
+        internal static string SetMoveDepartsment {
+            get {
+                return ResourceManager.GetString("SetMoveDepartsment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите пул заявок.
+        /// </summary>
+        internal static string SetPoolApp {
+            get {
+                return ResourceManager.GetString("SetPoolApp", resourceCulture);
             }
         }
         

@@ -39,109 +39,252 @@
                                  Foreground="{x:DynamicResource MainColor}"
                                  HorizontalOptions="End"
                                  VerticalOptions="Center" />
-            <Label
-                x:Name="LabelDate"
-                TextColor="Black"
-                FontSize="20"
-                Margin="0,-20,0,0"
-                FontAttributes="Bold"
-                HorizontalOptions="Start"
-                Text="{x:Static xamarinJkh:AppResources.MoveDispatcher}" />
-
-            <!-- <Label -->
-            <!--     Text="{x:Static xamarinJkh:AppResources.MoveDispatcherChoose}" -->
-            <!--     TextColor="Black" -->
-            <!--     FontAttributes="Bold" -->
-            <!--     Margin="0,10,0,0" -->
-            <!--     HorizontalOptions="FillAndExpand" -->
-            <!--     HorizontalTextAlignment="Center"> -->
-            <!-- </Label> -->
-            <StackLayout Spacing="0">
-                <StackLayout
-                    Margin="0,10,0,10"
-                    HorizontalOptions="FillAndExpand"
-                    x:Name="Layout"
-                    Orientation="Horizontal">
-                    <xamarinJkh:IconView x:Name="IconViewLogin"
-                                         Source="ic_fio_reg"
-                                         HeightRequest="25"
-                                         Foreground="{x:DynamicResource MainColor}"
-                                         HorizontalOptions="StartAndExpand"
-                                         VerticalOptions="Center" />
-                    <xamarinJkh:BorderlessPicker x:Name="PickerDisp" Title="Выбор"
-                                                 TitleColor="{x:DynamicResource MainColor}"
-                                                 TextColor="{x:DynamicResource MainColor}"
-                                                 VerticalOptions="End"
-                                                 HorizontalOptions="CenterAndExpand"
-                                                 SelectedIndexChanged="pickerDisp_SelectedIndexChanged"
-                                                 ItemsSource="{Binding AllDisp}"
-                                                 ItemDisplayBinding="{Binding Name}"
-                                                 SelectedItem="{Binding SelectedDisp}" />
-                    <xamarinJkh:IconView Source="ic_arrow_forward"
-                                         HeightRequest="12"
-                                         WidthRequest="12"
-                                         Rotation="90"
-                                         Margin="0,5,0,0"
-                                         VerticalOptions="Center"
-                                         Foreground="{x:DynamicResource MainColor}"
-                                         HorizontalOptions="EndAndExpand" />
-                </StackLayout>
-                <StackLayout
-                    Orientation="Horizontal"
-                    Margin="0,0,0,0">
+            <ScrollView VerticalScrollBarVisibility="Never" Margin="0,-10,0,0">
+                <StackLayout>
                     <Label
-                        HeightRequest="2"
-                        BackgroundColor="#DEDEDE"
-                        WidthRequest="50" />
-                    <Label
-                        x:Name="Labelseparator"
-                        HeightRequest="2"
-                        Margin="-10, 0, 0, 0"
-                        BackgroundColor="{x:DynamicResource MainColor}"
-                        HorizontalOptions="FillAndExpand" />
+                        TextColor="Black"
+                        FontSize="15"
+                        Margin="0,0,0,0"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Start"
+                        Text="{x:Static xamarinJkh:AppResources.KindMove}" />
+                    <StackLayout Spacing="0">
+                        <StackLayout
+                            Margin="0,0,0,10"
+                            HorizontalOptions="FillAndExpand"
+                            Orientation="Horizontal">
+                            <xamarinJkh:BorderlessPicker x:Name="PickerDispKind" Title="Выбор"
+                                                         TitleColor="{x:DynamicResource MainColor}"
+                                                         TextColor="{x:DynamicResource MainColor}"
+                                                         VerticalOptions="End"
+                                                         FontSize="15"
+                                                         HorizontalTextAlignment="Start"
+                                                         HorizontalOptions="FillAndExpand"
+                                                         SelectedIndexChanged="PickerDispKind_OnSelectedIndexChanged"
+                                                         ItemsSource="{Binding Kind}"
+                                                         ItemDisplayBinding="{Binding .}"
+                                                         SelectedItem="{Binding SelectedKind}" />
+                            <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                 HeightRequest="12"
+                                                 WidthRequest="12"
+                                                 Rotation="90"
+                                                 Margin="0,5,0,0"
+                                                 VerticalOptions="Center"
+                                                 Foreground="{x:DynamicResource MainColor}"
+                                                 HorizontalOptions="EndAndExpand" />
+                        </StackLayout>
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Margin="0,0,0,0">
+                            <Label
+                                HeightRequest="2"
+                                BackgroundColor="#DEDEDE"
+                                IsVisible="False"
+                                WidthRequest="50" />
+                            <Label
+                                HeightRequest="2"
+                                Margin="-10, 0, 0, 0"
+                                BackgroundColor="{x:DynamicResource MainColor}"
+                                HorizontalOptions="FillAndExpand" />
 
+                        </StackLayout>
+                    </StackLayout>
+                    <Label
+                        TextColor="Black"
+                        FontSize="15"
+                        Margin="0,10,0,0"
+                        FontAttributes="Bold"
+                        IsVisible="{Binding IsVisibleDepart}"
+                        HorizontalOptions="Start"
+                        Text="{x:Static xamarinJkh:AppResources.SetMoveDepartsment}" />
+                    <StackLayout Spacing="0" IsVisible="{Binding IsVisibleDepart}">
+                        <StackLayout
+                            Margin="0,0,0,10"
+                            HorizontalOptions="FillAndExpand"
+                            Orientation="Horizontal">
+                            <xamarinJkh:BorderlessPicker x:Name="PickerDispDepart" Title="Выбор"
+                                                         TitleColor="{x:DynamicResource MainColor}"
+                                                         TextColor="{x:DynamicResource MainColor}"
+                                                         VerticalOptions="End"
+                                                         FontSize="15"
+                                                         HorizontalTextAlignment="Start"
+                                                         HorizontalOptions="FillAndExpand"
+                                                         SelectedIndexChanged="PickerDispDepart_OnSelectedIndexChanged"
+                                                         ItemsSource="{Binding AllDepartments}"
+                                                         ItemDisplayBinding="{Binding Name}"
+                                                         SelectedItem="{Binding SelectedDepartments}" />
+                            <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                 HeightRequest="12"
+                                                 WidthRequest="12"
+                                                 Rotation="90"
+                                                 Margin="0,5,0,0"
+                                                 VerticalOptions="Center"
+                                                 Foreground="{x:DynamicResource MainColor}"
+                                                 HorizontalOptions="EndAndExpand" />
+                        </StackLayout>
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Margin="0,0,0,0">
+                            <Label
+                                HeightRequest="2"
+                                BackgroundColor="#DEDEDE"
+                                IsVisible="False"
+                                WidthRequest="50" />
+                            <Label
+                                HeightRequest="2"
+                                Margin="-10, 0, 0, 0"
+                                BackgroundColor="{x:DynamicResource MainColor}"
+                                HorizontalOptions="FillAndExpand" />
+
+                        </StackLayout>
+                    </StackLayout>
+                    <Label
+                        x:Name="LabelDate"
+                        TextColor="Black"
+                        FontSize="15"
+                        IsVisible="{Binding IsVisibleDisp}"
+                        Margin="0,10,0,0"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Start"
+                        Text="{x:Static xamarinJkh:AppResources.MoveDispatcher}" />
+                    <StackLayout Spacing="0"  IsVisible="{Binding IsVisibleDisp}">
+                        <StackLayout
+                            Margin="0,0,0,10"
+                            HorizontalOptions="FillAndExpand"
+                            x:Name="Layout"
+                            Orientation="Horizontal">
+                            <xamarinJkh:IconView x:Name="IconViewLogin"
+                                                 Source="ic_fio_reg"
+                                                 HeightRequest="25"
+                                                 IsVisible="False"
+                                                 Foreground="{x:DynamicResource MainColor}"
+                                                 HorizontalOptions="StartAndExpand"
+                                                 VerticalOptions="Center" />
+                            <xamarinJkh:BorderlessPicker x:Name="PickerDisp" Title="Выбор"
+                                                         TitleColor="{x:DynamicResource MainColor}"
+                                                         TextColor="{x:DynamicResource MainColor}"
+                                                         VerticalOptions="End"
+                                                         FontSize="15"
+                                                         HorizontalTextAlignment="Start"
+                                                         HorizontalOptions="FillAndExpand"
+                                                         SelectedIndexChanged="pickerDisp_SelectedIndexChanged"
+                                                         ItemsSource="{Binding AllDisp}"
+                                                         ItemDisplayBinding="{Binding Name}"
+                                                         SelectedItem="{Binding SelectedDisp}" />
+                            <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                 HeightRequest="12"
+                                                 WidthRequest="12"
+                                                 Rotation="90"
+                                                 Margin="0,5,0,0"
+                                                 VerticalOptions="Center"
+                                                 Foreground="{x:DynamicResource MainColor}"
+                                                 HorizontalOptions="EndAndExpand" />
+                        </StackLayout>
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Margin="0,0,0,0">
+                            <Label
+                                HeightRequest="2"
+                                BackgroundColor="#DEDEDE"
+                                IsVisible="False"
+                                WidthRequest="50" />
+                            <Label
+                                x:Name="Labelseparator"
+                                HeightRequest="2"
+                                Margin="-10, 0, 0, 0"
+                                BackgroundColor="{x:DynamicResource MainColor}"
+                                HorizontalOptions="FillAndExpand" />
+
+                        </StackLayout>
+                    </StackLayout>  
+                    <Label
+                        TextColor="Black"
+                        FontSize="15"
+                        IsVisible="{Binding IsVisiblePool}"
+                        Margin="0,10,0,0"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Start"
+                        Text="{x:Static xamarinJkh:AppResources.MovePool}" />
+                    <StackLayout Spacing="0" IsVisible="{Binding IsVisiblePool}">
+                        <StackLayout
+                            Margin="0,0,0,10"
+                            HorizontalOptions="FillAndExpand"
+                            Orientation="Horizontal">
+                           
+                            <xamarinJkh:BorderlessPicker x:Name="PickerDispPool" Title="Выбор"
+                                                         TitleColor="{x:DynamicResource MainColor}"
+                                                         TextColor="{x:DynamicResource MainColor}"
+                                                         VerticalOptions="End"
+                                                         FontSize="15"
+                                                         HorizontalTextAlignment="Start"
+                                                         HorizontalOptions="FillAndExpand"
+                                                         SelectedIndexChanged="PickerDispPool_OnSelectedIndexChanged"
+                                                         ItemsSource="{Binding AllPool}"
+                                                         ItemDisplayBinding="{Binding Name}"
+                                                         SelectedItem="{Binding SelectedPool}" />
+                            <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                 HeightRequest="12"
+                                                 WidthRequest="12"
+                                                 Rotation="90"
+                                                 Margin="0,5,0,0"
+                                                 VerticalOptions="Center"
+                                                 Foreground="{x:DynamicResource MainColor}"
+                                                 HorizontalOptions="EndAndExpand" />
+                        </StackLayout>
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Margin="0,0,0,0">
+                            <Label
+                                HeightRequest="2"
+                                Margin="-10, 0, 0, 0"
+                                BackgroundColor="{x:DynamicResource MainColor}"
+                                HorizontalOptions="FillAndExpand" />
+
+                        </StackLayout>
+                    </StackLayout>
+                    <Frame CornerRadius="15" x:Name="commentFrame"
+                           BackgroundColor="Transparent"
+                           BorderColor="{x:DynamicResource MainColor}"
+                           Margin="0, 25, 0, 0"
+                           Padding="10,10,10,10"
+                           HasShadow="False">
+                        <xamarinJkh:BordlessEditor x:Name="BordlessEditor"
+                                                   FontSize="18"
+                                                   VerticalOptions="FillAndExpand"
+                                                   Text=""
+                                                   WidthRequest="100"
+                                                   IsSpellCheckEnabled="True"
+                                                   Placeholder="{x:Static xamarinJkh:AppResources.AddCommentToMove}"
+                                                   TextColor="#A2A2A2"
+                                                   HorizontalOptions="FillAndExpand" Focused="BordlessEditor_Focused"
+                                                   Unfocused="BordlessEditor_Unfocused" />
+                    </Frame>
+                    <Frame CornerRadius="15"
+                           BackgroundColor="{x:DynamicResource MainColor}"
+                           Margin="0, 10, 0, 20"
+                           x:Name="FrameBtnAdd"
+                           Padding="0" HasShadow="{AppThemeBinding Light=false, Dark=true}">
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Spacing="0"
+                            Margin="0"
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="Center">
+                            <xamarinJkh:IconView
+                                Source="ic_next_disp"
+                                Foreground="White"
+                                WidthRequest="25"
+                                HeightRequest="25" />
+                            <Button x:Name="BtnAdd"
+                                    Text="{x:Static xamarinJkh:AppResources.MoveDispatcherConfirm}"
+                                    TextColor="White"
+                                    Clicked="CloseApp"
+                                    FontAttributes="Bold"
+                                    BackgroundColor="Transparent" />
+                        </StackLayout>
+                    </Frame>
                 </StackLayout>
-            </StackLayout>
-            <Frame CornerRadius="15" x:Name="commentFrame"
-                   BackgroundColor="Transparent"
-                   BorderColor="{x:DynamicResource MainColor}"
-                   Margin="0, 25, 0, 0"
-                   Padding="10,10,10,10" 
-                   HasShadow="False">
-                <xamarinJkh:BordlessEditor x:Name="BordlessEditor"
-                                           FontSize="18"
-                                           VerticalOptions="FillAndExpand"
-                                           Text=""
-                                           WidthRequest="100"
-                                           IsSpellCheckEnabled="True"
-                                           Placeholder="{x:Static xamarinJkh:AppResources.AddCommentToMove}"
-                                           TextColor="#A2A2A2"
-                                           HorizontalOptions="FillAndExpand" Focused="BordlessEditor_Focused" Unfocused="BordlessEditor_Unfocused"/>
-            </Frame>
-            <Frame CornerRadius="15"
-                   BackgroundColor="{x:DynamicResource MainColor}"
-                   Margin="0, 10, 0, 20"
-                   x:Name="FrameBtnAdd"
-                   Padding="0" HasShadow="{AppThemeBinding Light=false, Dark=true}">
-                <StackLayout
-                    Orientation="Horizontal"
-                    Spacing="0"
-                    Margin="0"
-                    VerticalOptions="CenterAndExpand"
-                    HorizontalOptions="Center">
-                    <xamarinJkh:IconView
-                        Source="ic_next_disp"
-                        Foreground="White"
-                        WidthRequest="25"
-                        HeightRequest="25" />
-                    <Button x:Name="BtnAdd"
-                            Text="{x:Static xamarinJkh:AppResources.MoveDispatcherConfirm}"
-                            TextColor="White"
-                            Clicked="CloseApp"
-                            FontAttributes="Bold"
-                            BackgroundColor="Transparent" />
-                </StackLayout>
-            </Frame>
+            </ScrollView>
         </StackLayout>
     </Frame>
 </pages:PopupPage>

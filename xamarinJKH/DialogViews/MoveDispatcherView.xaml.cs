@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using AiForms.Dialogs;
@@ -12,6 +13,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
+using xamarinJKH.ViewModels;
 
 namespace xamarinJKH.DialogViews
 {
@@ -23,7 +25,7 @@ namespace xamarinJKH.DialogViews
         public RequestInfo _Request { get; set; }
         bool IsConst = false;
         public int PikerDispItem = 0;
-        List<NamedValue> dispList { get; set; }
+        List<ConsultantInfo> dispList { get; set; }
 
         public MoveDispatcherView(Color hexColor, RequestInfo request, bool isConst)
         {
@@ -38,29 +40,47 @@ namespace xamarinJKH.DialogViews
             close.Tapped += async (s, e) => { await PopupNavigation.Instance.PopAsync(); };
             IconViewClose.GestureRecognizers.Add(close);
             var pickerOpen = new TapGestureRecognizer();
-            pickerOpen.Tapped += async (s, e) => {  Device.BeginInvokeOnMainThread(() =>
-            {
-                PickerDisp.Focus();                 
-            }); };
+            pickerOpen.Tapped += async (s, e) => { Device.BeginInvokeOnMainThread(() => { PickerDisp.Focus(); }); };
             Layout.GestureRecognizers.Add(pickerOpen);
-            
         }
-        
+
+        public DispListModel _dispListModel = null;
 
         async void getDispatcherList()
         {
             try
             {
-                ItemsList<NamedValue> result = await server.GetDispatcherList();
-                dispList = new List<NamedValue>(result.Data.Where(x=>x.Name != null));
+                List<ConsultantInfo> result = await server.GetConsultants();
+                List<NamedValue> resultDepartsment = await server.GetDepartments();
+                List<NamedValue> resultPools = await server.GetRequestPools();
+                dispList = new List<ConsultantInfo>(result.Where(x => x.Name != null));
                 BindingContext = null;
-                BindingContext = new DispListModel()
+                if (resultDepartsment != null)
                 {
-                    AllDisp = dispList,
+                    resultDepartsment.Insert(0, new NamedValue
+                    {
+                        ID = -999,
+                        Name = AppResources.NotDepartsment,
+                        Value = -999
+                    });
+                }
+
+                BindingContext = _dispListModel = new DispListModel()
+                {
+                    AllDisp = new ObservableCollection<ConsultantInfo>(dispList),
+                    AllDispMain = new List<ConsultantInfo>(dispList),
+                    AllPool = new ObservableCollection<NamedValue>(resultPools),
+                    Kind = new ObservableCollection<string>
+                    {
+                        AppResources.MoveConsultant, AppResources.MovePool, AppResources.MoveDepartsment
+                    },
+                    AllDepartments = new ObservableCollection<NamedValue>(resultDepartsment),
                     hex = HexColor,
-                    SelectedDisp = dispList[0]
+                    SelectedDisp = dispList[0],
+                    SelectedKind = AppResources.MoveConsultant,
+                    SelectedDepartments = resultDepartsment[0],
+                    SelectedPool = resultPools[0]
                 };
-                await ShowToast("Загружено");
             }
             catch (Exception e)
             {
@@ -69,6 +89,7 @@ namespace xamarinJKH.DialogViews
         }
 
         bool ClosingApp;
+
         private async void CloseApp(object sender, EventArgs e)
         {
             try
@@ -81,93 +102,239 @@ namespace xamarinJKH.DialogViews
                     ClosingApp = false;
                 }
             }
-            catch { }
-            
+            catch
+            {
+            }
         }
 
         public async Task ShowToast(string title)
         {
-            Toast.Instance.Show<ToastDialog>(new { Title = title, Duration = 1500 });
+            Toast.Instance.Show<ToastDialog>(new {Title = title, Duration = 1500});
             // Optionally, view model can be passed to the toast view instance.
         }
 
-        public class DispListModel
+        public class DispListModel : BaseViewModel
         {
-            public List<NamedValue> AllDisp { get; set; }
-            public NamedValue SelectedDisp { get; set; }
+            public ObservableCollection<ConsultantInfo> AllDisp { get; set; }
+            public List<ConsultantInfo> AllDispMain { get; set; }
+            public ObservableCollection<NamedValue> AllPool { get; set; }
+            public ObservableCollection<NamedValue> AllDepartments { get; set; }
+            public ObservableCollection<string> Kind { get; set; }
+            ConsultantInfo _selectedDisp;
+
+            public ConsultantInfo SelectedDisp
+            {
+                get => _selectedDisp;
+                set
+                {
+                    _selectedDisp = value;
+                    OnPropertyChanged("SelectedDisp");
+                }
+            }
+
+            bool isVisiblePool;
+
+            public bool IsVisiblePool
+            {
+                get => isVisiblePool;
+                set
+                {
+                    isVisiblePool = value;
+                    OnPropertyChanged("IsVisiblePool");
+                }
+            }
+
+            bool isVisibleDisp;
+
+            public bool IsVisibleDisp
+            {
+                get => isVisibleDisp;
+                set
+                {
+                    isVisibleDisp = value;
+                    OnPropertyChanged("IsVisibleDisp");
+                }
+            }
+
+            bool isVisibleDepart;
+
+            public bool IsVisibleDepart
+            {
+                get => isVisibleDepart;
+                set
+                {
+                    isVisibleDepart = value;
+                    OnPropertyChanged("IsVisibleDepart");
+                }
+            }
+
+            public NamedValue SelectedPool { get; set; }
+            public NamedValue SelectedDepartments { get; set; }
             public Color hex { get; set; }
+
+            public Command SelectKind { get; set; }
+
+            public string _SelectedKind { get; set; }
+
+            public string SelectedKind
+            {
+                get => _SelectedKind;
+                set
+                {
+                    _SelectedKind = value;
+                    OnPropertyChanged("SelectedKind");
+                }
+            }
+
+            public Command SelectDepartsment { get; set; }
+
+            public DispListModel()
+            {
+                SelectKind = new Command<object>(name =>
+                {
+                    if (SelectedKind.Equals(AppResources.MoveConsultant))
+                    {
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            IsVisiblePool = false;
+                            IsVisibleDisp = true;
+                            IsVisibleDepart = true;
+
+                            SelectedPool = null;
+                        });
+                    }
+                    else if (SelectedKind.Equals(AppResources.MovePool))
+                    {
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            IsVisiblePool = true;
+                            IsVisibleDisp = false;
+                            IsVisibleDepart = false;
+
+                            SelectedDisp = null;
+                            SelectedDepartments = null;
+                        });
+                    }
+                    else if (SelectedKind.Equals(AppResources.MoveDepartsment))
+                    {
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            IsVisiblePool = false;
+                            IsVisibleDisp = false;
+                            IsVisibleDepart = true;
+
+                            SelectedDisp = null;
+                            SelectedPool = null;
+                        });
+                    }
+                });
+                SelectDepartsment = new Command<object>(name =>
+                {
+                    if (SelectedDepartments != null && !SelectedKind.Equals(AppResources.MoveDepartsment))
+                    {
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            AllDisp.Clear();
+                            SelectedDisp = null;
+                            foreach (var each in AllDispMain.Where(x =>
+                                SelectedDepartments.ID == -999 || x.DivisionID == SelectedDepartments.ID))
+                            {
+                                AllDisp.Add(each);
+                                SelectedDisp = AllDisp[0];
+                            }
+                        });
+                    }
+                });
+            }
         }
 
         public async Task StartProgressBar(string title = "", double opacity = 0.6)
         {
             // Loading settings
             if (string.IsNullOrEmpty(title))
-                 title = AppResources.MoveDispatcherStatus;
+                title = AppResources.MoveDispatcherStatus;
             Configurations.LoadingConfig = new LoadingConfig
             {
-                IndicatorColor = HexColor == null ? (Color)App.Current.Resources["MainColor"] : HexColor,
+                IndicatorColor = HexColor == null ? (Color) App.Current.Resources["MainColor"] : HexColor,
                 OverlayColor = Color.Black,
                 Opacity = opacity,
                 DefaultMessage = title,
             };
 
-            
+
             await Loading.Instance.StartAsync(async progress =>
             {
-                if (PickerDisp.SelectedIndex < dispList.Count)
+                long? dispId = _dispListModel.SelectedDisp?.ID;
+                int? departId = _dispListModel.SelectedDepartments?.ID;
+                int? poolId = _dispListModel.SelectedPool?.ID;
+
+                if (departId == -999 && dispId == null && poolId == null)
                 {
-                    var disp = dispList[PickerDisp.SelectedIndex];
-                    if (disp != null)
-                    {
-                        string dispId = disp.ID.ToString();
-                        CommonResult result = await server.ChangeDispatcherConst(_Request.ID.ToString(), dispId);
-                        if (result != null)
-                        {
-                            if (result.Error == null)
-                            {
-                                if (!string.IsNullOrWhiteSpace(BordlessEditor.Text))
-                                {
-                                    result = await server.AddMessageConst(BordlessEditor.Text, _Request.ID.ToString(), true);
-                                }
-                                await ShowToast(AppResources.MoveDispatcherSuccess);
-                                MessagingCenter.Send<Object>(this, "UpdateAppCons");
-                                await PopupNavigation.Instance.PopAsync();
-                            }
-                            else
-                            {
-                                await ShowToast(result.Error);
-                            }
-                        }
-                        else
-                        {
-                            await ShowToast(AppResources.ErrorUnknown);
-                        }
-                    }
-                    
+                    await ShowToast(AppResources.SetMoveDepartsment);
+                    return;
                 }
-                
+
+                CommonResult result = await server.ChangeConsultant(_Request.ID, dispId, poolId, departId==-999 ? null : departId);
+                if (result != null)
+                {
+                    if (result.Error == null)
+                    {
+                        if (!string.IsNullOrWhiteSpace(BordlessEditor.Text))
+                        {
+                            result = await server.AddMessageConst(BordlessEditor.Text, _Request.ID.ToString(), true);
+                        }
+
+                        await ShowToast(AppResources.MoveDispatcherSuccess);
+                        MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                        await PopupNavigation.Instance.PopAsync();
+                    }
+                    else
+                    {
+                        await ShowToast(result.Error);
+                    }
+                }
+                else
+                {
+                    await ShowToast(AppResources.ErrorUnknown);
+                }
             });
         }
 
         private void pickerDisp_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
+
         Thickness frameMargin = new Thickness();
+
         private void BordlessEditor_Focused(object sender, FocusEventArgs e)
         {
             if (DeviceDisplay.MainDisplayInfo.Width < 800)
             {
                 frameMargin = Frame.Margin;
-                Device.BeginInvokeOnMainThread(()=> { Frame.Margin = new Thickness(15, 0, 15, 15); });
+                Device.BeginInvokeOnMainThread(() => { Frame.Margin = new Thickness(15, 0, 15, 15); });
             }
         }
-        
+
         private void BordlessEditor_Unfocused(object sender, FocusEventArgs e)
         {
             if (DeviceDisplay.MainDisplayInfo.Width < 800)
             {
-                Device.BeginInvokeOnMainThread(() => { Frame.Margin = frameMargin; }) ;
+                Device.BeginInvokeOnMainThread(() => { Frame.Margin = frameMargin; });
             }
+        }
+
+        private void PickerDispKind_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            _dispListModel.SelectKind.Execute(null);
+        }
+
+        private void PickerDispDepart_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            _dispListModel.SelectDepartsment.Execute(null);
+        }
+
+        private void PickerDispPool_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
         }
     }
 }

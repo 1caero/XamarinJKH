@@ -1778,4 +1778,25 @@
   <data name="Filters" xml:space="preserve">
     <value>Filters</value>
   </data>
+  <data name="MoveDepartsment" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="MovePool" xml:space="preserve">
+    <value>By pool of applications</value>
+  </data>
+  <data name="MoveConsultant" xml:space="preserve">
+    <value>To the employee</value>
+  </data>
+  <data name="KindMove" xml:space="preserve">
+    <value>Translation type</value>
+  </data>
+  <data name="SetMoveDepartsment" xml:space="preserve">
+    <value>Select department</value>
+  </data>
+  <data name="SetPoolApp" xml:space="preserve">
+    <value>Select the application pool</value>
+  </data>
+  <data name="NotDepartsment" xml:space="preserve">
+    <value>Subdivision not specified</value>
+  </data>
 </root>

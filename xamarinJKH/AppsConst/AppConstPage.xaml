@@ -50,7 +50,7 @@
                            TextColor="{AppThemeBinding Light=Black, Dark=White}" />
                 </StackLayout>
                 <Frame CornerRadius="40"
-                       Margin="0, 0, 15, -95"
+                       Margin="0, 0, 15, -92"
                        x:Name="FrameKeys"
                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
                        HorizontalOptions="End"
