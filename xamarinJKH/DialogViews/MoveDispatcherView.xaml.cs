@@ -98,6 +98,7 @@ namespace xamarinJKH.DialogViews
                 {
                     ClosingApp = true;
                     await StartProgressBar();
+                    await Navigation.PopAsync();
                     await Task.Delay(TimeSpan.FromSeconds(2));
                     ClosingApp = false;
                 }
