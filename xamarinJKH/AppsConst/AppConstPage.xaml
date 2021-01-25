@@ -50,7 +50,7 @@
                            TextColor="{AppThemeBinding Light=Black, Dark=White}" />
                 </StackLayout>
                 <Frame CornerRadius="40"
-                       Margin="0, 0, 15, -95"
+                       Margin="0, 0, 15, -92"
                        x:Name="FrameKeys"
                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
                        HorizontalOptions="End"
@@ -280,7 +280,7 @@
                     
                     MinimumHeightRequest="50"
                     Orientation="Horizontal" >-->
-                        <Grid Padding="0"  Margin="0" HeightRequest="60" MinimumHeightRequest="50">
+                        <Grid Padding="0"  Margin="0" HeightRequest="60" x:Name="Grid" MinimumHeightRequest="50">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.06*" />
                                 <ColumnDefinition Width="0.72*" />
@@ -309,6 +309,10 @@
                                                AutoSize="TextChanges"/>
                             <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_send_mess.svg"
                                                 Grid.Column="2"
+                                                WidthRequest="25"
+                                                HeightRequest="25"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
                                                 x:Name="IconViewSend"
                                                 ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}}"/>
                             <ActivityIndicator x:Name="progress"
@@ -318,7 +322,7 @@
                                        WidthRequest="20"
                                        IsVisible="False"
                                        Color="{Binding hex}" />
-                            <StackLayout Grid.Column="3" Spacing="-10" VerticalOptions="Center" >                                
+                            <StackLayout Grid.Column="3" Spacing="-10" VerticalOptions="Center" x:Name="hiddenComent" >                                
                                     <CheckBox
                                     x:Name="CheckBoxHidden"
                             HorizontalOptions="Center"
