@@ -6,10 +6,11 @@
                  KeyboardOffset="Infinity"
                  HasKeyboardOffset="False"
                  xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
+                 xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
                  x:Class="xamarinJKH.DialogViews.MoveDispatcherView">
-    <pages:PopupPage.Animation>
+    <!--<pages:PopupPage.Animation>
         <animations:ScaleAnimation DurationIn="500"
                                    DurationOut="700"
                                    EasingIn="Linear"
@@ -19,7 +20,7 @@
                                    PositionOut="Center"
                                    ScaleIn="1.2"
                                    ScaleOut="0.8" />
-    </pages:PopupPage.Animation>
+    </pages:PopupPage.Animation>-->
 
     <Frame CornerRadius="30"
            x:Name="Frame"
@@ -32,13 +33,19 @@
         <StackLayout
             VerticalOptions="Start"
             HorizontalOptions="FillAndExpand">
-            <xamarinJkh:IconView x:Name="IconViewClose"
+            <!--<xamarinJkh:IconView x:Name="IconViewClose"
                                  Source="ic_close"
                                  HeightRequest="15"
                                  WidthRequest="15"
                                  Foreground="{x:DynamicResource MainColor}"
                                  HorizontalOptions="End"
-                                 VerticalOptions="Center" />
+                                 VerticalOptions="Center" />-->
+            <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_close.svg"
+                                x:Name="IconViewClose"
+                                HeightRequest="15"
+                                HorizontalOptions="End"
+                                ReplaceStringMap="{Binding .,Converter={x:StaticResource SvgColor}}"
+                                WidthRequest="15"/>
             <Label
                 x:Name="LabelDate"
                 TextColor="Black"
@@ -62,12 +69,18 @@
                     HorizontalOptions="FillAndExpand"
                     x:Name="Layout"
                     Orientation="Horizontal">
-                    <xamarinJkh:IconView x:Name="IconViewLogin"
+                    <!--<xamarinJkh:IconView x:Name="IconViewLogin"
                                          Source="ic_fio_reg"
                                          HeightRequest="25"
                                          Foreground="{x:DynamicResource MainColor}"
                                          HorizontalOptions="StartAndExpand"
-                                         VerticalOptions="Center" />
+                                         VerticalOptions="Center" />-->
+                    <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_fio_reg.svg"
+                                        HeightRequest="25"
+                                        x:Name="IconViewLogin"
+                                         HorizontalOptions="StartAndExpand"
+                                         VerticalOptions="Center"
+                                        ReplaceStringMap="{Binding .,Converter={x:StaticResource SvgColor}}"/>
                     <xamarinJkh:BorderlessPicker x:Name="PickerDisp" Title="Выбор"
                                                  TitleColor="{x:DynamicResource MainColor}"
                                                  TextColor="{x:DynamicResource MainColor}"
@@ -77,14 +90,21 @@
                                                  ItemsSource="{Binding AllDisp}"
                                                  ItemDisplayBinding="{Binding Name}"
                                                  SelectedItem="{Binding SelectedDisp}" />
-                    <xamarinJkh:IconView Source="ic_arrow_forward"
+                    <!--<xamarinJkh:IconView Source="ic_arrow_forward"
                                          HeightRequest="12"
                                          WidthRequest="12"
                                          Rotation="90"
                                          Margin="0,5,0,0"
                                          VerticalOptions="Center"
                                          Foreground="{x:DynamicResource MainColor}"
-                                         HorizontalOptions="EndAndExpand" />
+                                         HorizontalOptions="EndAndExpand" />-->
+                    <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_arrow_back.svg"
+                                        HeightRequest="12"
+                                        WidthRequest="12"
+                                        Rotation="270"
+                                         HorizontalOptions="EndAndExpand"
+                                         VerticalOptions="Center"
+                                        ReplaceStringMap="{Binding .,Converter={x:StaticResource SvgColor}}"/>
                 </StackLayout>
                 <StackLayout
                     Orientation="Horizontal"
@@ -128,9 +148,14 @@
                     Margin="18,0,0,0"
                     VerticalOptions="CenterAndExpand"
                     HorizontalOptions="Center">
-                    <xamarinJkh:IconView
+                    <!--<xamarinJkh:IconView
                         Source="ic_next_disp"
                         Foreground="White"
+                        WidthRequest="25"
+                        HeightRequest="25" />-->
+                    <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_next_disp.svg"
+                                        ReplaceStringMap="{Binding .,Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
+                                        
                         WidthRequest="25"
                         HeightRequest="25" />
                     <Button x:Name="BtnAdd"
