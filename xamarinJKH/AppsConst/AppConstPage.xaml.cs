@@ -349,13 +349,13 @@ namespace xamarinJKH.AppsConst
             {
                 Name = AppResources.PassApp,
                 Image = "resource://xamarinJKH.Resources.ic_next_disp.svg",
-                Command = new Command(() =>
+                Command = new Command(async () =>
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
+                    //Device.BeginInvokeOnMainThread(async () =>
+                    //{
                         await PopupNavigation.Instance.PushAsync(new MoveDispatcherView(hex, _requestInfo, true));
                         await RefreshData();
-                    });
+                    //});
                 }),
                 IsVisible = true,
                 ReplaceMap = replace
