@@ -1092,33 +1092,38 @@ namespace xamarinJKH.MainConst
                 DefaultMessage = AppResources.MonitorStats,
             };
 
-            await Task.Run(async () =>
+            Device.BeginInvokeOnMainThread(async () =>
             {
-                Device.BeginInvokeOnMainThread(async () =>
+                await Task.Run(async () =>
+            {
+                //Device.BeginInvokeOnMainThread(async () =>
+                //{
+                var area_groups = await _server.GetAreaGroups();
+                if (area_groups.Error == null)
                 {
-                    var area_groups = await _server.GetAreaGroups();
-                    if (area_groups.Error == null)
+                    //Device.BeginInvokeOnMainThread(() =>
+                    //{
+                    foreach (var area in area_groups.Data)
                     {
-                        //Device.BeginInvokeOnMainThread(() =>
-                        //{
-                        foreach (var area in area_groups.Data)
-                        {
-                            Groups.Add(area);
-                        }
-                        //});
-                        if (AreaGroups.DataSource == null)
-                        {
-                            AreaGroups.DataSource = Groups;
-                        }
-                        AreaGroups.IsVisible = Groups.Count() == 0;
+                        Groups.Add(area);
                     }
-                    if (isGroup)
-                        await getHouseGroups();
-                    else
+                    //});
+                    if (AreaGroups.DataSource == null)
                     {
-                        await getHouse();
+                        AreaGroups.DataSource = Groups;
                     }
-                });
+                    AreaGroups.IsVisible = Groups.Count() == 0;
+                }
+                //if (isGroup)
+                //    await getHouseGroups();
+                //else
+                //{
+                //    await getHouse();
+                //}
+                //});
+            }).ContinueWith(async(obj)=> {
+                if (isGroup)
+                    await getHouseGroups();
             }).ContinueWith(async (obj) =>
             {
                 await getHouse();
@@ -1127,11 +1132,9 @@ namespace xamarinJKH.MainConst
                 await Task.Delay(1500);
                 Button_Clicked(null, null);
             });
-            //await Loading.Instance.StartAsync(async progress =>
-            //{
-                
-            //});
-            
+
+            });
+
         }
 
         void colapseAll(string name)
