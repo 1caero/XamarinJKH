@@ -1,15 +1,12 @@
 ﻿using AiForms.Dialogs.Abstractions;
 using Syncfusion.SfCalendar.XForms;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using xamarinJKH.Utils;
+using xamarinJKH.InterfacesIntegration;
 
 namespace xamarinJKH.DialogViews
 {
@@ -21,6 +18,19 @@ namespace xamarinJKH.DialogViews
         public CalendarWeekDialog()
         {
             InitializeComponent();
+
+            switch (Device.RuntimePlatform)
+            {
+                case Device.iOS:
+                    int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
+                    if (DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Width > 2)
+                        Frame.Margin = new Thickness(15, statusBarHeight * 2, 15, statusBarHeight * 2);
+                    else
+                        Frame.Margin = new Thickness(15, statusBarHeight, 15, statusBarHeight);
+                    break;
+                default:
+                    break;
+            }
 
             var close = new TapGestureRecognizer();
             close.Tapped += async (s, e) =>

@@ -1759,6 +1759,15 @@
   <data name="SelectDay" xml:space="preserve">
     <value>Выберите день</value>
   </data>
+  <data name="CompleteAppHeader" xml:space="preserve">
+    <value>Выполнение заявки</value>
+  </data>
+  <data name="CompleteAppInfo" xml:space="preserve">
+    <value>Состав работы, замечания, нарушения</value>
+  </data>
+  <data name="LettersLimit" xml:space="preserve">
+    <value>Введите не менее {0} символов</value>
+  </data>
   <data name="Filters" xml:space="preserve">
     <value>Фильтры</value>
   </data>

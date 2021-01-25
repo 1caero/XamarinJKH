@@ -51,7 +51,8 @@
                    BackgroundColor="{Binding HexColor}"
                    Margin="10, 20"
                    x:Name="FrameBtn"
-                   Padding="0">
+                   Padding="0"
+                       HasShadow="{AppThemeBinding Light=false, Dark=true}">
                     <Button x:Name="BtnConf"
                         Text="{x:Static xamarinJkh:AppResources.Confirm}"
                         TextColor="White"

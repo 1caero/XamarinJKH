@@ -341,7 +341,7 @@ namespace xamarinJKH.AppsConst
             });
             Options.Add(new OptionModel
             {
-                Name = AppResources.CompleteApp, Image = "resource://xamarinJKH.Resources.ic_check_mark.svg", Command = new Command(() => performApp()),
+                Name = AppResources.CompleteApp, Image = "resource://xamarinJKH.Resources.ic_check_mark.svg", Command = new Command(() => ComplicationRun()  /*performApp()*/),
                 IsVisible = CanComplete,
                 ReplaceMap = replace
             });
@@ -452,7 +452,19 @@ namespace xamarinJKH.AppsConst
             acceptAp.Tapped += async (s, e) => { acceptApp(); };
             StackLayoutAccept.GestureRecognizers.Add(acceptAp);
             var performAp = new TapGestureRecognizer();
-            performAp.Tapped += async (s, e) => { performApp(); };
+            performAp.Tapped += (s, e) =>
+            {
+                ComplicationRun();
+
+                //performApp();
+            };
+
+            MessagingCenter.Subscribe<Object, KeyValuePair<int, string>>(this, "performApp", (sender, kvp) => {
+                EntryMess.Text = kvp.Value;
+                performApp(); 
+            });
+
+
             StackLayoutExecute.GestureRecognizers.Add(performAp);
             var moveDisp = new TapGestureRecognizer();
             moveDisp.Tapped += async (s, e) =>
@@ -528,6 +540,29 @@ namespace xamarinJKH.AppsConst
                     requestInfo.IsReaded = true;
                 });
             }
+        }
+
+        private void ComplicationRun()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                Configurations.LoadingConfig = new LoadingConfig
+                {
+                    IndicatorColor = Color.Transparent,
+                    OverlayColor = Color.Black,
+                    Opacity = 0.8,
+                    DefaultMessage = "",
+                };
+                await Loading.Instance.StartAsync(async progress =>
+                {
+                    var ret = await Dialog.Instance.ShowAsync<AppCompliteDialog>(new
+                    {
+                        HexColor = hex,
+                        Id = _requestInfo.ID
+                    });
+                });
+            }
+                                   );
         }
 
         async void getFile(string id, string fileName)
@@ -938,6 +973,7 @@ namespace xamarinJKH.AppsConst
 
         async void performApp()
         {
+            sendMessage();
             progress.IsVisible = true;
             var request = await _server.PerformAppConst(_requestInfo.ID.ToString());
             if (request.Error == null)
