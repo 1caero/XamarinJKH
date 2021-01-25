@@ -120,6 +120,12 @@ namespace xamarinJKH.MainConst
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
 
+                    if (DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Width > 2)
+                        AreaGroups.MaximumDropDownHeight = 250;
+                    else
+                        AreaGroups.MaximumDropDownHeight = 150;
+
+
                     break;
                 default:
                     break;
@@ -1088,28 +1094,31 @@ namespace xamarinJKH.MainConst
 
             await Task.Run(async () =>
             {
-                var area_groups = await _server.GetAreaGroups();
-                if (area_groups.Error == null)
+                Device.BeginInvokeOnMainThread(async () =>
                 {
-                    Device.BeginInvokeOnMainThread(() =>
+                    var area_groups = await _server.GetAreaGroups();
+                    if (area_groups.Error == null)
                     {
+                        //Device.BeginInvokeOnMainThread(() =>
+                        //{
                         foreach (var area in area_groups.Data)
                         {
                             Groups.Add(area);
                         }
-                    });
-                    if (AreaGroups.DataSource == null)
-                    {
-                        AreaGroups.DataSource = Groups;
+                        //});
+                        if (AreaGroups.DataSource == null)
+                        {
+                            AreaGroups.DataSource = Groups;
+                        }
+                        AreaGroups.IsVisible = Groups.Count() == 0;
                     }
-                    AreaGroups.IsVisible = Groups.Count() == 0;
-                }
-                if (isGroup)
-                    await getHouseGroups();
-                else
-                {
-                    await getHouse();
-                }
+                    if (isGroup)
+                        await getHouseGroups();
+                    else
+                    {
+                        await getHouse();
+                    }
+                });
             }).ContinueWith(async (obj) =>
             {
                 await getHouse();
