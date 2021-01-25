@@ -19,6 +19,7 @@ using Plugin.Permissions.Abstractions;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Markup;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
@@ -547,6 +548,12 @@ namespace xamarinJKH.AppsConst
                     requestInfo.IsReaded = true;
                 });
             }
+
+            hiddenComent.IsVisible = !Settings.Person.UserSettings.AlwaysPostHiddenMessage;
+            if (Settings.Person.UserSettings.AlwaysPostHiddenMessage)
+            {
+                IconViewSend.Column(3);
+            }
         }
 
         private void ComplicationRun()
@@ -904,8 +911,15 @@ namespace xamarinJKH.AppsConst
             {
                 progress.IsVisible = true;
                 IconViewSend.IsVisible = false;
+
+                bool hidden = CheckBoxHidden.IsChecked;
+                if (Settings.Person.UserSettings.AlwaysPostHiddenMessage)
+                {
+                    hidden = true;
+                }
+                
                 CommonResult result =
-                    await _server.AddMessageConst(message, _requestInfo.ID.ToString(), CheckBoxHidden.IsChecked);
+                    await _server.AddMessageConst(message, _requestInfo.ID.ToString(), hidden);
                 if (result.Error == null)
                 {
                     EntryMess.Text = "";

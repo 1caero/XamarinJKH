@@ -35,6 +35,7 @@ namespace xamarinJKH.Server.RequestModel
         public bool RightCreateAnnouncements { get; set; }
         
         public bool disableGeolocation { get; set; }
+        public bool AlwaysPostHiddenMessage { get; set; }
     }
 
     public class AccountInfo:BaseViewModel
