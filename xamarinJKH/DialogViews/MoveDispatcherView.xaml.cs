@@ -40,8 +40,42 @@ namespace xamarinJKH.DialogViews
             close.Tapped += async (s, e) => { await PopupNavigation.Instance.PopAsync(); };
             IconViewClose.GestureRecognizers.Add(close);
             var pickerOpen = new TapGestureRecognizer();
-            pickerOpen.Tapped += async (s, e) => { Device.BeginInvokeOnMainThread(() => { PickerDisp.Focus(); }); };
+            pickerOpen.Tapped += (s, e) => { Device.BeginInvokeOnMainThread(() => { PickerDisp.Focus(); }); };
             Layout.GestureRecognizers.Add(pickerOpen);
+
+            var PickerDispDepartOpen = new TapGestureRecognizer();
+            PickerDispDepartOpen.Tapped += (s, e) => { Device.BeginInvokeOnMainThread(() => { PickerDispDepart.Focus(); }); };
+            PickerDispDepartStack.GestureRecognizers.Add(PickerDispDepartOpen);
+
+            var PickerDispKindOpen = new TapGestureRecognizer();
+            PickerDispKindOpen.Tapped += (s, e) => { Device.BeginInvokeOnMainThread(() => { PickerDispKind.Focus(); }); };
+            PickerDispKindStack.GestureRecognizers.Add(PickerDispKindOpen);
+
+            var CloseAppButtonTgr = new TapGestureRecognizer();
+            CloseAppButtonTgr.Tapped += (s, e) => { Device.BeginInvokeOnMainThread(async () => {
+                try
+                {
+                    if (!ClosingApp)
+                    {
+                        ClosingApp = true;
+                        await StartProgressBar();
+                        await Navigation.PopAsync();
+                        await Task.Delay(TimeSpan.FromSeconds(2));
+                        ClosingApp = false;
+                    }
+                }
+                catch
+                {
+                }
+                finally
+                {
+                    ClosingApp = false;
+                }
+            }); };
+            CloseAppButton.GestureRecognizers.Add(CloseAppButtonTgr);
+
+
+            
         }
 
         public DispListModel _dispListModel = null;
@@ -90,23 +124,27 @@ namespace xamarinJKH.DialogViews
 
         bool ClosingApp;
 
-        private async void CloseApp(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!ClosingApp)
-                {
-                    ClosingApp = true;
-                    await StartProgressBar();
-                    await Navigation.PopAsync();
-                    await Task.Delay(TimeSpan.FromSeconds(2));
-                    ClosingApp = false;
-                }
-            }
-            catch
-            {
-            }
-        }
+        //private async void CloseApp(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (!ClosingApp)
+        //        {
+        //            ClosingApp = true;
+        //            await StartProgressBar();
+        //            await Navigation.PopAsync();
+        //            await Task.Delay(TimeSpan.FromSeconds(2));
+        //            ClosingApp = false;
+        //        }
+        //    }
+        //    catch
+        //    {
+        //    }
+        //    finally
+        //    {
+        //        ClosingApp = false;
+        //    }
+        //}
 
         public async Task ShowToast(string title)
         {
