@@ -111,6 +111,8 @@ namespace xamarinJKH.AppsConst
                             {
 
                                 request = update.CurrentRequestUpdates;
+                                if (request.Messages != null)
+                                if (request.Messages.Count() > 0)
                                 foreach (var each in update.CurrentRequestUpdates.Messages)
                                 {
                                     if (!messages.Contains(each))
@@ -197,7 +199,10 @@ namespace xamarinJKH.AppsConst
                 if (requestsUpdate.CurrentRequestUpdates != null)
                 {
                     request = requestsUpdate.CurrentRequestUpdates;
-                    foreach (var each in requestsUpdate.CurrentRequestUpdates.Messages)
+
+                    if (request.Messages != null)
+                        if (request.Messages.Count() > 0)
+                            foreach (var each in requestsUpdate.CurrentRequestUpdates.Messages)
                     {
                         if (!messages.Contains(each))
                         {
@@ -349,13 +354,13 @@ namespace xamarinJKH.AppsConst
             {
                 Name = AppResources.PassApp,
                 Image = "resource://xamarinJKH.Resources.ic_next_disp.svg",
-                Command = new Command(() =>
+                Command = new Command(async () =>
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
+                    //Device.BeginInvokeOnMainThread(async () =>
+                    //{
                         await PopupNavigation.Instance.PushAsync(new MoveDispatcherView(hex, _requestInfo, true));
                         await RefreshData();
-                    });
+                    //});
                 }),
                 IsVisible = true,
                 ReplaceMap = replace
@@ -399,6 +404,8 @@ namespace xamarinJKH.AppsConst
                 Command = new Command(async () =>
                 {
                     List<RequestsReceiptItem> Items = new List<RequestsReceiptItem>();
+                    if (request.ReceiptItems != null)
+                        if (request.ReceiptItems.Count() > 0)
                     foreach (var item in request.ReceiptItems)
                     {
                         Items.Add(item.Copy());
@@ -933,7 +940,10 @@ namespace xamarinJKH.AppsConst
             if (request.Error == null)
             {
                 Settings.DateUniq = "";
-                foreach (var message in request.Messages)
+
+                if (request.Messages != null)
+                    if (request.Messages.Count() > 0)
+                        foreach (var message in request.Messages)
                 {
                     messages.Add(message);
                     Device.BeginInvokeOnMainThread(() =>
@@ -1088,7 +1098,10 @@ namespace xamarinJKH.AppsConst
         private async void ReceiptEdit(object sender, EventArgs e)
         {
             List<RequestsReceiptItem> Items = new List<RequestsReceiptItem>();
-            foreach (var item in request.ReceiptItems)
+
+            if (request.ReceiptItems != null)
+                if (request.ReceiptItems.Count() > 0)
+                    foreach (var item in request.ReceiptItems)
             {
                 Items.Add(item.Copy());
             }

@@ -1181,6 +1181,7 @@ namespace xamarinJKH.MainConst
                 string[] param = null;
                 Device.BeginInvokeOnMainThread(async () =>
                 {
+                    if (groups.Data != null)
                     if (groups.Data.Count > 0)
                     {
                         foreach (var group in groups.Data)
