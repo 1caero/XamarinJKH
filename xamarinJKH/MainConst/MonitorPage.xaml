@@ -95,6 +95,7 @@
                                 <StackLayout IsVisible="{Binding GroupVisible, Converter={x:StaticResource Invert}}">
                                     <sync:SfAutoComplete MultiSelectMode="Token"
                                                      HeightRequest="40"
+                                                         MaximumDropDownHeight="300"
                                                          ShowClearButton="False"
                                                          ShowSuggestionsOnFocus="True"
                                                      WatermarkColor="{AppThemeBinding Dark=White,Light=Black}"
@@ -134,6 +135,7 @@
                                     <sync:SfAutoComplete MultiSelectMode="Token"
                                                          ShowSuggestionsOnFocus="True"
                                                      HeightRequest="40"
+                                                         MaximumDropDownHeight="250"
                                                      ShowClearButton="False"
                                            IsVisible="{Binding GroupVisible, Converter={x:StaticResource Invert}}"
                                                      WatermarkColor="{AppThemeBinding Dark=White,Light=Black}"
@@ -175,6 +177,7 @@
                                                      ShowClearButton="False"
                                                          ShowSuggestionsOnFocus="True"
                                                      HeightRequest="40"
+                                                         MaximumDropDownHeight="200"
                                                      WatermarkColor="{AppThemeBinding Dark=White,Light=Black}"
                                                          DataSource="{Binding Streets}"
                                                      DisplayMemberPath="Address"

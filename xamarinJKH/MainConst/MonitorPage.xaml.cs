@@ -120,6 +120,12 @@ namespace xamarinJKH.MainConst
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
 
+                    if (DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Width > 2)
+                        AreaGroups.MaximumDropDownHeight = 250;
+                    else
+                        AreaGroups.MaximumDropDownHeight = 150;
+
+
                     break;
                 default:
                     break;
@@ -1086,30 +1092,38 @@ namespace xamarinJKH.MainConst
                 DefaultMessage = AppResources.MonitorStats,
             };
 
-            await Task.Run(async () =>
+            Device.BeginInvokeOnMainThread(async () =>
             {
+                await Task.Run(async () =>
+            {
+                //Device.BeginInvokeOnMainThread(async () =>
+                //{
                 var area_groups = await _server.GetAreaGroups();
                 if (area_groups.Error == null)
                 {
-                    Device.BeginInvokeOnMainThread(() =>
+                    //Device.BeginInvokeOnMainThread(() =>
+                    //{
+                    foreach (var area in area_groups.Data)
                     {
-                        foreach (var area in area_groups.Data)
-                        {
-                            Groups.Add(area);
-                        }
-                    });
+                        Groups.Add(area);
+                    }
+                    //});
                     if (AreaGroups.DataSource == null)
                     {
                         AreaGroups.DataSource = Groups;
                     }
                     AreaGroups.IsVisible = Groups.Count() == 0;
                 }
+                //if (isGroup)
+                //    await getHouseGroups();
+                //else
+                //{
+                //    await getHouse();
+                //}
+                //});
+            }).ContinueWith(async(obj)=> {
                 if (isGroup)
                     await getHouseGroups();
-                else
-                {
-                    await getHouse();
-                }
             }).ContinueWith(async (obj) =>
             {
                 await getHouse();
@@ -1118,11 +1132,9 @@ namespace xamarinJKH.MainConst
                 await Task.Delay(1500);
                 Button_Clicked(null, null);
             });
-            //await Loading.Instance.StartAsync(async progress =>
-            //{
-                
-            //});
-            
+
+            });
+
         }
 
         void colapseAll(string name)
