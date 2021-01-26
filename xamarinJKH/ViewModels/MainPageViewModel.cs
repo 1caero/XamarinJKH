@@ -56,7 +56,7 @@ namespace xamarinJKH.ViewModels
                     {
                         if (login.Error.ToLower().Contains("unauthorized"))
                         {
-                            this.ShowError("Пользователь не найден");
+                            this.ShowError(AppResources.unauthorized);
                         }
                         else
                         {

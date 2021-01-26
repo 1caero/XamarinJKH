@@ -1802,4 +1802,7 @@
   <data name="OpenLink" xml:space="preserve">
     <value>Open link </value>
   </data>
+  <data name="unauthorized" xml:space="preserve">
+    <value>Password entered incorrectly </value>
+  </data>
 </root>

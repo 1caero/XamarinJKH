@@ -4961,6 +4961,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Неверно введен пароль.
+        /// </summary>
+        internal static string unauthorized {
+            get {
+                return ResourceManager.GetString("unauthorized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Продолжить работу в текущей версии.
         /// </summary>
         internal static string UpdateDialogKeepWorking {

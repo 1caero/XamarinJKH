@@ -1795,4 +1795,7 @@
   <data name="OpenLink" xml:space="preserve">
     <value>Открыть ссылку</value>
   </data>
+  <data name="unauthorized" xml:space="preserve">
+    <value>Неверно введен пароль</value>
+  </data>
 </root>
