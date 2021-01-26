@@ -60,7 +60,7 @@
                         HasShadow="{AppThemeBinding Light=false, Dark=true}"
                         Margin="10, 15, 10, 15"
                         Padding="15,20">
-                        <ScrollView
+                        <ScrollView x:Name="scrollCont"
                             HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
                             <StackLayout Spacing="2">
                                 <Entry x:Name="EntryTitle"
@@ -440,6 +440,7 @@
                                     HorizontalOptions="Start"
                                     Padding="0">
                                     <xForms:SfAutoComplete x:Name="autoComplete"
+                                                           Focused="autoComplete_Focused"
                                                            DisplayMemberPath="Name"
                                                            SelectionChanged="AutoComplete_OnSelectionChanged"
                                                            DropDownItemHeight="50"
@@ -465,7 +466,8 @@
                                     <xForms:SfAutoComplete x:Name="autoCompleteHouses"
                                                            DisplayMemberPath="Address"
                                                            MultiSelectMode="Token"
-                                                           TokensWrapMode="Wrap"
+                                                           Focused="autoCompleteHouses_Focused"
+                                                           TokensWrapMode="Wrap"                                                           
                                                            IsSelectedItemsVisibleInDropDown="False"
                                                            MaximumDropDownHeight="150"
                                                            BorderColor="{x:StaticResource MainColor}"

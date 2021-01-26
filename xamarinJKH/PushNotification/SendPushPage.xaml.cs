@@ -263,6 +263,8 @@ namespace xamarinJKH.PushNotification
             // autoCompleteHouses.HeightRequest =  GetHeight(e.HasFocus);
         }
 
+        
+
         private async void AddPush(object sender, EventArgs e)
         {
             string title = EntryTitle.Text;
@@ -545,6 +547,21 @@ namespace xamarinJKH.PushNotification
             ButtonDuty.TextColor = Color.Gray;
             
             ImageDuty.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#777777" } };
+        }
+
+        private void autoCompleteHouses_Focused(object sender, FocusEventArgs e)
+        {
+            var ypos = autoCompleteHouses.Y + 250;
+            Device.BeginInvokeOnMainThread(() => scrollCont.ScrollToAsync(autoCompleteHouses.X, ypos, false));
+
+            //;
+        }
+
+        private void autoComplete_Focused(object sender, FocusEventArgs e)
+        {
+            
+                var ypos = autoComplete.Y + 250;
+            Device.BeginInvokeOnMainThread(() => scrollCont.ScrollToAsync(autoComplete.X, ypos, false));
         }
     }
 }
