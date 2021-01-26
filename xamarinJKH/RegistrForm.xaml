@@ -76,9 +76,9 @@
                    Grid.Row="0"
                    Margin="0,-20,0,0"
                    Aspect="{OnPlatform Android=Fill, iOS=AspectFill}" />
-            <StackLayout Grid.Row="0" Padding="10">
+            <StackLayout Grid.Row="0" Padding="10" x:Name="BackStackLayout">
                 <StackLayout
-                    x:Name="BackStackLayout"
+                    
                     Orientation="Horizontal"
                     Margin="10, 0, 0, 0"
                     Spacing="0"
