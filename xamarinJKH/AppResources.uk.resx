@@ -1666,4 +1666,7 @@
   <data name="NotDepartsment" xml:space="preserve">
     <value>Підрозділ не вказано</value>
   </data>
+  <data name="OpenLink" xml:space="preserve">
+    <value>Відкрити посилання </value>
+  </data>
 </root>

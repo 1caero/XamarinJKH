@@ -2725,6 +2725,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Открыть ссылку.
+        /// </summary>
+        internal static string OpenLink {
+            get {
+                return ResourceManager.GetString("OpenLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Открыть настройки приложения.
         /// </summary>
         internal static string OpenSettings {

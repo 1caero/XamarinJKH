@@ -1799,4 +1799,7 @@
   <data name="NotDepartsment" xml:space="preserve">
     <value>Subdivision not specified</value>
   </data>
+  <data name="OpenLink" xml:space="preserve">
+    <value>Open link </value>
+  </data>
 </root>

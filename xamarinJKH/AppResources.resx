@@ -1792,4 +1792,7 @@
   <data name="NotDepartsment" xml:space="preserve">
     <value>Подразделение не указано</value>
   </data>
+  <data name="OpenLink" xml:space="preserve">
+    <value>Открыть ссылку</value>
+  </data>
 </root>

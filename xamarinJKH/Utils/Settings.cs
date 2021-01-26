@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
+using Microsoft.AppCenter.Analytics;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using xamarinJKH.DialogViews;
 using xamarinJKH.Main;
@@ -137,5 +140,68 @@ namespace xamarinJKH.Utils
                 default: return "ic_status_wait";
             }
         }
+        
+        public static List<string> ParsingLink(String source)
+        {
+            List<string> links = new List<string>();
+            Regex regExHttpLinks = new Regex(@"(?<=\()\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\))|(?<=(?<wrap>[=~|_#]))\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\k<wrap>)|\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            if (String.IsNullOrEmpty(source))
+                return links;
+            var periodReplacement = "[[[replace:period]]]";
+            source = Regex.Replace(source, @"(?<=\d)\.(?=\d)", periodReplacement);
+            var linkMatches = regExHttpLinks.Matches(source);
+            foreach (Match match in linkMatches)
+            {
+                var m = match.ToString();
+                links.Add(m);
+                Console.WriteLine("Т1: " + match);
+            }
+            return links;
+        }
+        
+        public static String FormatedLink(String source)
+        {
+            Regex regExHttpLinks = new Regex(@"(?<=\()\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\))|(?<=(?<wrap>[=~|_#]))\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\k<wrap>)|\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            if (String.IsNullOrEmpty(source))
+                return source;
+            var periodReplacement = "[[[replace:period]]]";
+            source = Regex.Replace(source, @"(?<=\d)\.(?=\d)", periodReplacement);
+            var linkMatches = regExHttpLinks.Matches(source);
+            FormattedString formattedString = new FormattedString();
+            foreach (Match match in linkMatches)
+            {
+                var m = match.ToString();
+                String s = (m.Contains("://")) ? m : "http://" + m;
+                source = source.Replace(m,"<u>" + m + "</u>");
+            }
+            source = source.Replace(periodReplacement, ".");
+            return source;
+        }
+
+        public static async Task OpenLinksMessage(RequestMessage message, Page p)
+        {
+            try
+            {
+                List<string> links = ParsingLink(message.Text);
+                if (links.Count > 0)
+                {
+                    Analytics.TrackEvent($"Поиск ссылок {links.ToString()}");
+                    var action = await p.DisplayActionSheet(AppResources.OpenLink, AppResources.Cancel, null, links.ToArray());
+                    Analytics.TrackEvent($"Открытие ссылки {action}");
+                    await Launcher.OpenAsync(action);
+                }
+                else
+                {
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Analytics.TrackEvent($"Открытие ссылки {e.Message}");
+            }
+            
+        }
+        
     }
 }

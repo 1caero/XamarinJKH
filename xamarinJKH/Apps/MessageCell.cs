@@ -2,11 +2,14 @@
 using FFImageLoading.Svg.Forms;
 using Microsoft.AppCenter.Analytics;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AiForms.Dialogs.Abstractions;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using xamarinJKH;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
@@ -14,7 +17,7 @@ using xamarinJKH.Utils;
 
 namespace xamarinJKH.Apps
 {
-    public class MessageCellAuthor:StackLayout
+    public class MessageCellAuthor : StackLayout
     {
         private StackLayout ConteinerA = new StackLayout();
         private Image ImagePersonA = new Image();
@@ -25,7 +28,8 @@ namespace xamarinJKH.Apps
         SvgCachedImage imageA = new SvgCachedImage();
         Frame frameA = new Frame();
 
-        public MessageCellAuthor(RequestMessage message, Page p, string DateUniq, out string newDate, bool isTech = false)
+        public MessageCellAuthor(RequestMessage message, Page p, string DateUniq, out string newDate,
+            bool isTech = false)
         {
             frameA.HorizontalOptions = LayoutOptions.Start;
             frameA.VerticalOptions = LayoutOptions.Start;
@@ -59,7 +63,7 @@ namespace xamarinJKH.Apps
             Frame frameTextA = new Frame();
             frameTextA.HorizontalOptions = LayoutOptions.End;
             frameTextA.VerticalOptions = LayoutOptions.StartAndExpand;
-            frameTextA.BackgroundColor = (Color)Application.Current.Resources["MainColor"];
+            frameTextA.BackgroundColor = (Color) Application.Current.Resources["MainColor"];
             frameTextA.Margin = new Thickness(0, 0, 0, 10);
             frameTextA.Padding = new Thickness(15, 15, 15, 15);
             frameTextA.CornerRadius = 20;
@@ -70,6 +74,7 @@ namespace xamarinJKH.Apps
 
             LabelTextA.TextColor = Color.White;
             LabelTextA.FontSize = 15;
+            LabelTextA.TextType = TextType.Html;
 
             LabelTextA.HorizontalOptions = LayoutOptions.Center;
             stackLayoutContentA.Children.Add(LabelTextA);
@@ -78,10 +83,12 @@ namespace xamarinJKH.Apps
             imageA.HorizontalOptions = LayoutOptions.CenterAndExpand;
             imageA.HeightRequest = 40;
             imageA.WidthRequest = 40;
-            imageA.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", $"#FFFFFF" } };
+            imageA.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string>
+                {{"#000000", $"#FFFFFF"}};
             imageA.Source = "resource://xamarinJKH.Resources.ic_file_download.svg";
 
-            
+
+
             if (message.FileID != -1)
             {
                 var tgr = new TapGestureRecognizer();
@@ -89,8 +96,8 @@ namespace xamarinJKH.Apps
                 tgr.Tapped += async (s, e) =>
                 {
                     string fileName = message.Text.Replace("Отправлен новый файл: ", "")
-                .Replace("\"", "")
-                .Replace("\"", ""); 
+                        .Replace("\"", "")
+                        .Replace("\"", "");
                     if (await DependencyService.Get<IFileWorker>().ExistsAsync(fileName))
                     {
                         await Launcher.OpenAsync(new OpenFileRequest
@@ -109,7 +116,8 @@ namespace xamarinJKH.Apps
                                 Opacity = 0.8,
                                 DefaultMessage = AppResources.Loading,
                             };
-                            Device.BeginInvokeOnMainThread(async () => {
+                            Device.BeginInvokeOnMainThread(async () =>
+                            {
                                 await Loading.Instance.StartAsync(async progress =>
                                 {
                                     byte[] memoryStream = null;
@@ -144,12 +152,12 @@ namespace xamarinJKH.Apps
                         LoadFileTask.Start();
                     }
                 };
-                imageA.GestureRecognizers.Add(tgr); 
+                imageA.GestureRecognizers.Add(tgr);
             }
-            
+
 
             stackLayoutContentA.Children.Add(imageA);
-           
+
 
             StackLayout stackLayoutIcon = new StackLayout();
             stackLayoutIcon.Orientation = StackOrientation.Horizontal;
@@ -205,19 +213,21 @@ namespace xamarinJKH.Apps
 
             LabelDateA.Text = dateMess;
             //LabelNameA.Text = Name;
-            LabelTextA.Text = message.Text;
+            LabelTextA.Text = Settings.FormatedLink(message.Text);
+            var link = new TapGestureRecognizer();
+            link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
+            LabelTextA.GestureRecognizers.Add(link);
 
             LabeltimeA.Text = message.TimeAdd;
-            
 
-           Children.Add(ConteinerA);            
+            Children.Add(ConteinerA);
         }
 
         private RestClientMP _server = new RestClientMP();
 
     }
 
-
+    
     public class MessageCellService : StackLayout
     {       
 
@@ -365,7 +375,8 @@ namespace xamarinJKH.Apps
 
             LabelText.TextColor = Color.Black;
             LabelText.FontSize = 15;
-            LabelText.HorizontalTextAlignment = TextAlignment.Start;            
+            LabelText.HorizontalTextAlignment = TextAlignment.Start;
+            LabelText.TextType = TextType.Html;
             LabelText.HorizontalOptions = LayoutOptions.Start;
 
             stackLayoutContent.Children.Add(LabelText);
@@ -444,7 +455,10 @@ namespace xamarinJKH.Apps
 
             LabelDate.Text = dateMess;
             LabelName.Text = message.AuthorName;
-            LabelText.Text = message.Text;
+            var link = new TapGestureRecognizer();
+            link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
+            LabelText.GestureRecognizers.Add(link);
+            LabelText.Text = Settings.FormatedLink(message.Text);
             Labeltime.Text = message.TimeAdd;
 
             
