@@ -285,7 +285,7 @@ namespace xamarinJKH.MainConst
             {
                 foreach (var each in RequestInfos)
                 {
-                    each.IsCheked = false;
+                    Device.BeginInvokeOnMainThread(async () =>each.IsCheked = false);
                 }
             }
             catch (Exception ex)

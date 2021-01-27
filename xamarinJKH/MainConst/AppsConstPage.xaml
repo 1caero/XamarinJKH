@@ -224,6 +224,7 @@
                                             ReplaceStringMap="{Binding _Added, Converter={x:StaticResource SvgColor}}"/>
                                         <CheckBox HorizontalOptions="End"
                                                   VerticalOptions="Center"
+                                                  IsChecked="{Binding IsCheked}"
                                                   CheckedChanged="CheckBox_OnCheckedChanged"
                                                   Color="{x:DynamicResource MainColor}"
                                                    Margin="0, 0, 0, 0">
