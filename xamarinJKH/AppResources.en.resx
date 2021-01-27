@@ -683,12 +683,6 @@
   <data name="Step1" xml:space="preserve">
     <value>Step 1</value>
   </data>
-  <data name="String" xml:space="preserve">
-    <value>собственников жилья!</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value />
-  </data>
   <data name="Sum" xml:space="preserve">
     <value>Sum</value>
   </data>
@@ -985,9 +979,6 @@
   </data>
   <data name="MetersThreeCellCanCount" xml:space="preserve">
     <value>The ability to transfer readings is available from the 15th to the 25th of the current month!</value>
-  </data>
-  <data name="String11" xml:space="preserve">
-    <value />
   </data>
   <data name="SuccessProfile" xml:space="preserve">
     <value>Your data is updated successfully</value>
@@ -1804,5 +1795,8 @@
   </data>
   <data name="unauthorized" xml:space="preserve">
     <value>Password entered incorrectly </value>
+  </data>
+  <data name="AppTypeNotSelected" xml:space="preserve">
+    <value>Order type not selected</value>
   </data>
 </root>

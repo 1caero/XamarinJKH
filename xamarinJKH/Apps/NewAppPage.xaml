@@ -258,7 +258,7 @@
                                                     HorizontalOptions="Fill" />
                                             </StackLayout>
                                         </StackLayout>
-                                        <StackLayout x:Name="LayoutPassApp"
+                                        <StackLayout x:Name="LayoutPassApp" IsVisible="false"
                                                      Margin="10, 5, 10, 0">
                                             <StackLayout
                                                 Spacing="0"

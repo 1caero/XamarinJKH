@@ -1798,4 +1798,7 @@
   <data name="unauthorized" xml:space="preserve">
     <value>Неверно введен пароль</value>
   </data>
+  <data name="AppTypeNotSelected" xml:space="preserve">
+    <value>Не выбран тип заявки</value>
+  </data>
 </root>
