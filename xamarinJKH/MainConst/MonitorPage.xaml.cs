@@ -1062,7 +1062,7 @@ namespace xamarinJKH.MainConst
 
         private void AutoCompleteHouses_OnFocusChanged(object sender, FocusChangedEventArgs e)
         {
-            (sender as SfAutoComplete).Unfocus();
+            // (sender as SfAutoComplete).Unfocus();
             try
             {
                 var result = new List<NamedValue>();
@@ -2032,7 +2032,7 @@ namespace xamarinJKH.MainConst
 
         private void HouseGroups_FocusChanged(object sender, FocusChangedEventArgs e)
         {
-            (sender as SfAutoComplete).Unfocus();
+            // (sender as SfAutoComplete).Unfocus();
             try
             {
                 if (Groups.Count > 0)
@@ -2117,7 +2117,7 @@ namespace xamarinJKH.MainConst
 
         private void HousesList_FocusChanged(object sender, FocusChangedEventArgs e)
         {
-            (sender as SfAutoComplete).Unfocus();
+            // (sender as SfAutoComplete).Unfocus();
             try
             {
                 var selected = HousesList.SelectedItem as IEnumerable<Object>;

@@ -44,7 +44,7 @@ namespace xamarinJKH.Droid
                     voiceIntent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
 
 
-                    voiceIntent.PutExtra(RecognizerIntent.ExtraPrompt, "Speak now");
+                    voiceIntent.PutExtra(RecognizerIntent.ExtraPrompt, "Говорите");
 
                     voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputCompleteSilenceLengthMillis, 1500);
                     voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 1500);
