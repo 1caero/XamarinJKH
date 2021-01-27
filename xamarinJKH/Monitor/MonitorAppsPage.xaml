@@ -10,6 +10,11 @@
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.Monitor.MonitorAppsPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="hexColor">#FF0000</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <Grid>
@@ -56,33 +61,187 @@
                             HorizontalOptions="Start" />
                     </StackLayout>
                     <StackLayout VerticalOptions="FillAndExpand">
-                        <ListView x:Name="additionalList"
-                                  HasUnevenRows="True"
-                                  Margin="10, 10, 10, 0"
-                                  SeparatorVisibility="None"
-                                  VerticalScrollBarVisibility="Never"
-                                  SelectionMode="None"
-                                  ItemTapped="OnItemTapped"
-                                  ItemsSource="{Binding RequestInfos}"
-                                  CachingStrategy="RecycleElement">
-                            <ListView.Header>
-
-                            </ListView.Header>
-                            <ListView.ItemTemplate>
-
-                                <DataTemplate>
-                                    <appsConst:AppConstCell
-                                        Number="{Binding RequestNumber}"
-                                        Status="{Binding Status}"
-                                        DateApp="{Binding Added}"
-                                        AddressApp = "{Binding Address}"
-                                        CheckCommand = "False"
-                                        Read="True"
-                                        TextApp="{Binding Name}" />
+                        <!-- <ListView  -->
+                        <!--           HasUnevenRows="True" -->
+                        <!--           Margin="10, 10, 10, 0" -->
+                        <!--           SeparatorVisibility="None" -->
+                        <!--           VerticalScrollBarVisibility="Never" -->
+                        <!--           SelectionMode="None" -->
+                        <!--           ItemTapped="OnItemTapped" -->
+                        <!--           ItemsSource="{Binding RequestInfos}" -->
+                        <!--           CachingStrategy="RecycleElement"> -->
+                        <!--     <ListView.Header> -->
+                        <!-- -->
+                        <!--     </ListView.Header> -->
+                        <!--     <ListView.ItemTemplate> -->
+                        <!-- -->
+                        <!--         <DataTemplate> -->
+                        <!--             <appsConst:AppConstCell -->
+                        <!--                 Number="{Binding RequestNumber}" -->
+                        <!--                 Status="{Binding Status}" -->
+                        <!--                 DateApp="{Binding Added}" -->
+                        <!--                 AddressApp = "{Binding Address}" -->
+                        <!--                 CheckCommand = "False" -->
+                        <!--                 Read="True" -->
+                        <!--                 TextApp="{Binding Name}" /> -->
+                        <!--         </DataTemplate> -->
+                        <!-- -->
+                        <!--     </ListView.ItemTemplate> -->
+                        <!-- </ListView> -->
+                           <CollectionView 
+                             x:Name="additionalList"
+                             HorizontalScrollBarVisibility="Never"
+                             Margin="10, 10, 10, 10"
+                             SelectionMode="None"
+                             VerticalScrollBarVisibility="Never"
+                             SelectedItem="{Binding SelectedRequest}"                            
+                             SelectionChanged="AdditionalList_OnSelectionChanged"
+                             ItemsSource="{Binding RequestInfos, Mode=TwoWay}"
+                             VerticalOptions="FillAndExpand">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical"
+                                                 VerticalItemSpacing="14"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate >
+                            <!--         <apps:AppCell -->
+                            <!--             Number="{Binding RequestNumber}" -->
+                            <!--             Status="{Binding Status}" -->
+                            <!--             DateApp="{Binding Added}" -->
+                            <!--             StatusID="{Binding StatusID}" -->
+                            <!--             Read="{Binding IsReadedByClient}" -->
+                            <!--             ID="{Binding ID}" -->
+                            <!--             TextApp="{Binding Name}" /> -->
+                                        <StackLayout Padding="{OnPlatform iOS='2'}">
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                                            </StackLayout.GestureRecognizers>
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Normal">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="BackgroundColor"
+                                                                        Value="{AppThemeBinding Light=Transparent, Dark=Transparent}" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Selected">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="BackgroundColor"
+                                                                        Value="{AppThemeBinding Light=Transparent, Dark=Transparent}" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
+                                
+                                            <Label IsVisible="False" Text="{Binding Number}"></Label>
+                                <pancakeView:PancakeView VerticalOptions="Start"
+                                                         BorderColor="{AppThemeBinding Light={StaticResource  hexColor}, Dark=Transparent}"
+                                                         BackgroundColor="White"
+                                                         BorderThickness="1"
+                                                         HorizontalOptions="FillAndExpand"
+                                                         HasShadow="False"
+                                                         Padding="25, 15, 25, 20"
+                                                         Margin="0,0,0,0"
+                                                         CornerRadius="40" >
+                                <StackLayout>
+                                <Grid Padding="0" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="5"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <StackLayout x:Name="container" Orientation="Horizontal" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                                        <StackLayout x:Name="containerData"
+                                                     HorizontalOptions="FillAndExpand">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <StackLayout Orientation="Horizontal" Grid.Column="0"
+                                                             Grid.Row="0">
+                                                <Label x:Name="numberAndDate"
+                                                       TextColor="Black"
+                                                       FontSize="12"
+                                                       VerticalOptions="StartAndExpand"
+                                                       HorizontalOptions="Start"
+                                                       >
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="№" FontSize="17" TextColor="Black" FontAttributes="Bold" />
+                                                            <Span Text="{Binding RequestNumber}" FontSize="17"  TextColor="Black" FontAttributes="Bold" />
+                                                            <!-- <Span Text=" {Binding Name}" FontSize="17" TextColor="Black" FontAttributes="Bold" /> -->
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                    <StackLayout x:Name="stackLayoutStatus" HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+                                                        <forms:SvgCachedImage
+                                                            x:Name="ImageStatus"
+                                                            Source="{Binding Resource}"
+                                                            HeightRequest="15"
+                                                            WidthRequest="15"
+                                                            VerticalOptions="Center"
+                                                            HorizontalOptions="Start"
+                                                            Margin="0"
+                                                            ReplaceStringMap="{Binding Added, Converter={x:StaticResource SvgColor}}"/>
+                                                        <Label x:Name="LabelStatus"
+                                                               FontSize="15"
+                                                               Text="{Binding Status}"
+                                                               TextColor="Black"
+                                                               VerticalTextAlignment="Center"
+                                                               VerticalOptions="Center"
+                                                        ></Label>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Grid>
+                                            <Label x:Name="LabelAdres"
+                                                   TextColor="Black"
+                                                   FontSize="10"
+                                                   HorizontalOptions="Start"
+                                                   Margin="0, -5, 0, 0"
+                                                   Text="{Binding Address}"
+                                                   ></Label>
+                                            <Label x:Name="LabelName"
+                                                   TextColor="Black"
+                                                   FontSize="15"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="Start"
+                                                   MaxLines="2"
+                                                   Margin="0, -5, 0, 0"
+                                                   Text="{Binding Name}"
+                                            ></Label>
+                                            
+                                        </StackLayout>
+                                        <forms:SvgCachedImage
+                                            Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                            HeightRequest="25"
+                                            WidthRequest="25"
+                                            VerticalOptions="CenterAndExpand"
+                                            HorizontalOptions="End"
+                                            Margin="0"
+                                            ReplaceStringMap="{Binding Added, Converter={x:StaticResource SvgColor}}"/>
+                                    </StackLayout>
+                                    <Frame CornerRadius="5"
+                                           BackgroundColor="Red"
+                                           Grid.Column="1"
+                                           Grid.Row="0"
+                                           IsVisible="False"
+                                    ></Frame>
+                                </Grid>
+                                    <Label x:Name="LabelDate"
+                                           FontSize="15"
+                                           HorizontalOptions="End"
+                                           Margin="0, -5, 0, 0"
+                                           Text="{Binding Added}"
+                                    ></Label>
+                                    </StackLayout>
+                            </pancakeView:PancakeView>
+                            </StackLayout>
                                 </DataTemplate>
-
-                            </ListView.ItemTemplate>
-                        </ListView>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </StackLayout>
                 </StackLayout>
 

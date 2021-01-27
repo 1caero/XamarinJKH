@@ -1,4 +1,5 @@
 ﻿using System;
+using xamarinJKH.Utils;
 
 namespace xamarinJKH.Server.RequestModel
 {
@@ -17,5 +18,7 @@ namespace xamarinJKH.Server.RequestModel
         public string Name { get; set; }
         public string Performer { get; set; }
         public string RequestNumber { get; set; }
+        public string Resource => "resource://xamarinJKH.Resources." + Settings.GetStatusIcon(id_Status) + ".svg";
+        
     }
 }

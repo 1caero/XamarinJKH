@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace xamarinJKH.Monitor
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MonitorAppsPage : ContentPage
     {
-        public List<Requests> RequestInfos { get; set; }
+        public ObservableCollection<Requests> RequestInfos { get; set; }
         private RequestList _requestList;
         private RestClientMP _server = new RestClientMP();
         private bool _isRefreshing = false;
@@ -51,6 +52,7 @@ namespace xamarinJKH.Monitor
         public MonitorAppsPage(List<Requests> requestInfos)
         {
             InitializeComponent();
+            Resources["hexColor"] = (Color)Application.Current.Resources["MainColor"];
             Analytics.TrackEvent("Заявки мониторинга");
             NavigationPage.SetHasNavigationBar(this, false);
             switch (Device.RuntimePlatform)
@@ -106,9 +108,9 @@ namespace xamarinJKH.Monitor
             BackStackLayout.GestureRecognizers.Add(backClick);
             hex = (Color)Application.Current.Resources["MainColor"];
             SetText();
-            RequestInfos = requestInfos;
-            additionalList.BackgroundColor = Color.Transparent;
-            additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
+            RequestInfos = new ObservableCollection<Requests>(requestInfos);
+            // additionalList.BackgroundColor = Color.Transparent;
+            // additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
             BindingContext = this;
         }
         
@@ -161,6 +163,32 @@ namespace xamarinJKH.Monitor
                 await Navigation.PushAsync(new AppConstPage(requestInfo));
 
         }
-        
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            var s = (StackLayout)sender;
+            var id = Convert.ToInt32(((Label)s.Children[0]).Text);
+            Requests select = RequestInfos.First(_=>_.Number==id);
+            if (select != null)
+            {
+                RequestInfo requestInfo = new RequestInfo()
+                {
+                    ID = select.Number,
+                    RequestNumber = select.RequestNumber,
+                    Added = select.Added.ToString(),
+                    Name = select.Name,
+                    Status = select.Status,
+                    StatusID = select.id_Status,
+                    IsClosed = !select.IsActive,
+                    IsPerformed = true
+                };
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is AppConstPage) == null)
+                    await Navigation.PushAsync(new AppConstPage(requestInfo));
+            }
+        }
+
+        private void AdditionalList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
     }
 }

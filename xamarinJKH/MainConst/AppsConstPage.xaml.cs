@@ -47,7 +47,7 @@ namespace xamarinJKH.MainConst
 
             }
         }
-        public ObservableCollection<RequestInfo> RequestInfos { get; set; }
+        public ObservableCollection<RequestInfo> RequestInfos { get; set; } = new ObservableCollection<RequestInfo>();
         public ObservableCollection<RequestInfo> RequestInfosAlive { get; set; }
         public ObservableCollection<RequestInfo> RequestInfosClose { get; set; }
         private RequestList _requestList;
@@ -66,7 +66,7 @@ namespace xamarinJKH.MainConst
                 OnPropertyChanged(nameof(IsRefreshing));
             }
         }
-
+        public Command Checked { get; set; }
         public ICommand RefreshCommand
         {
             get
@@ -85,18 +85,13 @@ namespace xamarinJKH.MainConst
         
         public async Task RefreshData()
         {
-            if (RequestInfos == null)
-            {
-                RequestInfos = new ObservableCollection<RequestInfo>();
-            }
             SetDisableCheck();
             CheckRequestInfos.Clear();
             getApps();
             IsVisibleFunction();
-            additionalList.ItemsSource = null;
-            additionalList.ItemsSource = RequestInfos;
+            // additionalList.ItemsSource = null;
+            // additionalList.ItemsSource = RequestInfos;
             MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", RequestInfos.Where(x => !x.IsReaded).Count());
-            Empty = RequestInfos.Count == 0;
         }
 
         public bool CanComplete => Settings.Person.UserSettings.RightPerformRequest;
@@ -122,9 +117,9 @@ namespace xamarinJKH.MainConst
         public AppsConstPage()
         {
             InitializeComponent();
+            Resources["hexColor"] = (Color)Application.Current.Resources["MainColor"];
             Analytics.TrackEvent("Заявки сотрудника " + Settings.Person.Login);
             NavigationPage.SetHasNavigationBar(this, false);
-            this.BindingContext = this;
 
             switch (Device.RuntimePlatform)
             {
@@ -162,8 +157,8 @@ namespace xamarinJKH.MainConst
             closeApps.Tapped += async (s, e) => { await CloseApps(); };
             StackLayoutClose.GestureRecognizers.Add(closeApps);
             SetText();
-            additionalList.BackgroundColor = Color.Transparent;
-            additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
+            // additionalList.BackgroundColor = Color.Transparent;
+            // additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
             MessagingCenter.Subscribe<Object>(this, "UpdateAppCons", (sender) => RefreshData());
             // Assuming this function needs to use Main/UI thread to move to your "Main Menu" Page
             getApps();
@@ -172,29 +167,6 @@ namespace xamarinJKH.MainConst
                 SetAdminName();
             });
             MessagingCenter.Subscribe<Object>(this, "ChangeAdminApp", (sender) => ChangeTheme.Execute(null));
-            MessagingCenter.Subscribe<Object, string>(this, "ChechApp", async (sender, args) =>
-            {
-                RequestInfo requestInfo = getRequestInfo(args);
-                if (requestInfo != null)
-                {
-                    requestInfo.IsCheked = true;
-                    CheckRequestInfos.Add(requestInfo);
-                }
-
-                IsVisibleFunction();
-            });  
-            MessagingCenter.Subscribe<Object, string>(this, "ChechDownApp", async (sender, args) =>
-            {
-                RequestInfo requestInfo = getRequestInfo(args);
-                if (requestInfo != null)
-                {
-                    requestInfo.IsCheked = false;
-                    CheckRequestInfos.Remove(requestInfo);
-                }
-
-                IsVisibleFunction();
-            });
-
             MessagingCenter.Subscribe<Object, int>(this, "OpenAppConst", async (sender, args) =>
             {
                 while (RequestInfos == null)
@@ -216,8 +188,32 @@ namespace xamarinJKH.MainConst
                 }
                 
             });
-
         }
+
+        private void CheckDown(string args)
+        {
+            RequestInfo requestInfo = getRequestInfo(args);
+            if (requestInfo != null)
+            {
+                requestInfo.IsCheked = false;
+                CheckRequestInfos.Remove(requestInfo);
+            }
+
+            IsVisibleFunction();
+        }
+
+        private void CheckApp(string args)
+        {
+            RequestInfo requestInfo = getRequestInfo(args);
+            if (requestInfo != null)
+            {
+                requestInfo.IsCheked = true;
+                CheckRequestInfos.Add(requestInfo);
+            }
+
+            IsVisibleFunction();
+        }
+
         private async Task CloseApps()
         {
             // Loading settings
@@ -419,21 +415,41 @@ namespace xamarinJKH.MainConst
 
                 if (SwitchApp.IsToggled)
                 {
-                    RequestInfos =
-                        new ObservableCollection<RequestInfo>(_requestList.Requests);
-                   
+                    
+                    // RequestInfos =
+                    //     new ObservableCollection<RequestInfo>(_requestList.Requests);
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        RequestInfos.Clear();
+                        foreach (var each in new ObservableCollection<RequestInfo>(_requestList.Requests).OrderBy(o => o.ID).Reverse())
+                        {
+                            RequestInfos.Add(each);
+                        }
+                    });
+
                 }
                 else
                 {
-                    RequestInfos =
-                        new ObservableCollection<RequestInfo>(from i in _requestList.Requests
+                    // RequestInfos =
+                    //     new ObservableCollection<RequestInfo>(from i in _requestList.Requests
+                    //         where !i.IsReaded
+                    //         select i);
+                    
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        RequestInfos.Clear();
+                        foreach (var each in new ObservableCollection<RequestInfo>(from i in _requestList.Requests
                             where !i.IsReaded
-                            select i);
+                            select i).OrderBy(o => o.ID).Reverse())
+                        {
+                            RequestInfos.Add(each);
+                        }
+                    });
+                    
                 }
-
-                BindingContext = this;
-                additionalList.ItemsSource = null;
-                additionalList.ItemsSource = RequestInfos.OrderBy(o => o.ID).Reverse();
+                // BindingContext = this;
+                // additionalList.ItemsSource = null;
+                // additionalList.ItemsSource = RequestInfos.OrderBy(o => o.ID).Reverse();
             }
             catch (Exception ex)
             {
@@ -441,11 +457,53 @@ namespace xamarinJKH.MainConst
 
             try
             {
-                Empty = RequestInfos.Count == 0;
+                Device.BeginInvokeOnMainThread(async () =>Empty = RequestInfos.Count == 0);
             }
             catch
             {
-                Empty = RequestInfos == null;
+                Device.BeginInvokeOnMainThread(async () => Empty = RequestInfos == null);
+            }
+            this.BindingContext = this;
+
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            var s = (StackLayout)sender;
+            var id = Convert.ToInt32(((Label)s.Children[0]).Text);
+            RequestInfo select = RequestInfos.First(_=>_.ID==id);
+            if (select != null)
+            {
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is AppConstPage) == null)
+                    await Navigation.PushAsync(new AppConstPage(select));
+
+                await Task.Delay(TimeSpan.FromSeconds(1));
+
+                MessagingCenter.Send<Object, int>(this, "SetAppReadConst", select.ID);
+            }
+        }
+
+        private void CheckBox_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            try
+            {
+                CheckBox checkBox = (CheckBox) sender;
+                if (checkBox != null)
+                {
+                    RequestInfo r = (RequestInfo) checkBox.BindingContext;
+                    if (checkBox.IsChecked)
+                    {
+                        CheckApp(r?.RequestNumber);
+                    }
+                    else
+                    {
+                        CheckDown(r?.RequestNumber);
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
             }
         }
     }
