@@ -168,13 +168,30 @@ namespace xamarinJKH.Utils
             source = Regex.Replace(source, @"(?<=\d)\.(?=\d)", periodReplacement);
             var linkMatches = regExHttpLinks.Matches(source);
             FormattedString formattedString = new FormattedString();
+           
             foreach (Match match in linkMatches)
             {
                 var m = match.ToString();
                 String s = (m.Contains("://")) ? m : "http://" + m;
-                source = source.Replace(m,"<u>" + m + "</u>");
+
+                if (Device.RuntimePlatform == Device.Android)
+                    source = source.Replace(m,"<u>" + m + "</u>");
             }
             source = source.Replace(periodReplacement, ".");
+
+            //var rep = source.Split("<u>");
+
+            //foreach (string s in rep)
+            //{
+            //    if (s.Contains("https://") || s.Contains("http://") || s.Contains("www."))
+            //    {
+            //        formattedString.Spans.Add(new Span() { Text = s, FontSize = 15, TextColor = Color.Blue, TextDecorations = TextDecorations.Underline });
+            //    }
+            //    else
+            //    {
+            //        formattedString.Spans.Add(new Span() { Text = s, FontSize = 15, TextColor = Color.Black });
+            //    }
+            //}
             return source;
         }
 
