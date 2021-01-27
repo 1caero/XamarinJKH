@@ -216,8 +216,9 @@ namespace xamarinJKH.Apps
             //LabelTextA.Text = message.Text;
 
             LabelTextA.Text = Settings.FormatedLink(message.Text);
-            
-            //LabelTextA.TextType = TextType.Html;
+
+            if (Device.RuntimePlatform == Device.Android)
+                LabelTextA.TextType = TextType.Html;
             
             var link = new TapGestureRecognizer();
             link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
@@ -462,8 +463,8 @@ namespace xamarinJKH.Apps
             LabelName.Text = message.AuthorName;
 
             //LabelText.Text = message.Text;
-
-            //LabelText.TextType = TextType.Html;
+            if(Device.RuntimePlatform==Device.Android)
+            LabelText.TextType = TextType.Html;
             var link = new TapGestureRecognizer();
             link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
             LabelText.GestureRecognizers.Add(link);

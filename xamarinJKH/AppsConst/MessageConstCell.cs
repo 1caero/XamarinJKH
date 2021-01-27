@@ -49,7 +49,9 @@ namespace xamarinJKH.AppsConst
             LabeltimeA.Margin = new Thickness(0, margin, 5, 0);
 
             LabelTextA.HorizontalTextAlignment = TextAlignment.Start;
-            //LabelTextA.TextType = TextType.Html;
+
+            if (Device.RuntimePlatform == Device.Android)
+                LabelTextA.TextType = TextType.Html;
 
 
             StackLayout containerDateA = new StackLayout();
@@ -376,7 +378,9 @@ namespace xamarinJKH.AppsConst
             LabelText.FontSize = 15;
             LabelText.HorizontalTextAlignment = TextAlignment.Start;
             LabelText.HorizontalOptions = LayoutOptions.Start;
-            //LabelText.TextType = TextType.Html;
+
+            if (Device.RuntimePlatform == Device.Android) 
+                LabelText.TextType = TextType.Html;
 
             stackLayoutContent.Children.Add(LabelText);
             stackLayoutContent.Children.Add(image);
