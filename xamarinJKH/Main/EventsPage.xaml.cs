@@ -411,20 +411,13 @@ namespace xamarinJKH.Main
                         }
                         else
                         {
-                            ShowOss = Settings.Person.Accounts.Count > 0;
+                            ShowOss = true;
                         }
                     }
                     else
                     {
-
-                        if (Settings.Person.Accounts.Count > 0)
-                        {
+                        
                             ShowOss = true;
-                        }
-                        else
-                        {
-                            ShowOss = false;
-                        }
                     }
                 }
                 ShowAdditionalServices = false;
