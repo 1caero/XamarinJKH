@@ -49,7 +49,9 @@ namespace xamarinJKH.AppsConst
             LabeltimeA.Margin = new Thickness(0, margin, 5, 0);
 
             LabelTextA.HorizontalTextAlignment = TextAlignment.Start;
-            LabelTextA.TextType = TextType.Html;
+
+            //if (Device.RuntimePlatform == Device.Android)
+            //    LabelTextA.TextType = TextType.Html;
 
 
             StackLayout containerDateA = new StackLayout();
@@ -231,7 +233,7 @@ namespace xamarinJKH.AppsConst
             newDate = dateMess;
 
             LabelDateA.Text = dateMess;
-            LabelTextA.Text = Settings.FormatedLink(message.Text);
+            LabelTextA.FormattedText = Settings.FormatedLink(message.Text);
             var link = new TapGestureRecognizer();
             link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
             LabelTextA.GestureRecognizers.Add(link);
@@ -376,7 +378,9 @@ namespace xamarinJKH.AppsConst
             LabelText.FontSize = 15;
             LabelText.HorizontalTextAlignment = TextAlignment.Start;
             LabelText.HorizontalOptions = LayoutOptions.Start;
-            LabelText.TextType = TextType.Html;
+
+            //if (Device.RuntimePlatform == Device.Android) 
+            //    LabelText.TextType = TextType.Html;
 
             stackLayoutContent.Children.Add(LabelText);
             stackLayoutContent.Children.Add(image);
@@ -459,7 +463,7 @@ namespace xamarinJKH.AppsConst
 
             LabelDate.Text = dateMess;
             LabelName.Text = message.AuthorName;
-            LabelText.Text = Settings.FormatedLink(message.Text);
+            LabelText.FormattedText = Settings.FormatedLink(message.Text);
             var link = new TapGestureRecognizer();
             link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
             LabelText.GestureRecognizers.Add(link);

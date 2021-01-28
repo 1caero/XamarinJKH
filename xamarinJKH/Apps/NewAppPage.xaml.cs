@@ -123,7 +123,7 @@ namespace xamarinJKH.Apps
                 AllBrand = new List<string>() {"Suzuki", "Kavasaki", "Lada", "Opel", "Volkswagen", "Запорожец" }, /*Settings.BrandCar,*/
                 hex = (Color)Application.Current.Resources["MainColor"],
                 SelectedAcc = Settings.Person.Accounts[0],
-                SelectedType = Settings.TypeApp[0],
+                SelectedType = null /*Settings.TypeApp[0]*/,
                 Files = files
             };
 #else
@@ -136,11 +136,11 @@ _appModel = new AddAppModel()
                 AllBrand = Settings.BrandCar,
                 hex = (Color)Application.Current.Resources["MainColor"],
                 SelectedAcc = Settings.Person.Accounts[0],
-                SelectedType = Settings.TypeApp[0],
+                SelectedType = null /*Settings.TypeApp[0]*/,
                 Files = files
             };
 #endif
-            
+
 
             BindingContext = _appModel;
             ListViewFiles.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
@@ -580,7 +580,7 @@ _appModel = new AddAppModel()
                         type_.ReplaceMap = SetIconType(type.Name, ref image);
                         type_.Image = image;
                         Types.Add(type_);
-                        SelectedTyp = Types[0];
+                        SelectedTyp = null /*Types[0]*/;
                     });
                 }
                 
@@ -703,7 +703,16 @@ _appModel = new AddAppModel()
                         Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                         return;
                     }
+                    
+
                     var vm = (BindingContext as AddAppModel);
+
+                    if (vm.SelectedTyp == null)
+                    {
+                        Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.AppTypeNotSelected, "OK"));
+                        return;
+                    }
+
                     var index = vm.Accounts.IndexOf(vm.SelectedAccount);
                     var type_index = vm.Types.IndexOf(vm.SelectedTyp);
                     string ident = Settings.Person.Accounts[index].Ident;

@@ -159,7 +159,7 @@ namespace xamarinJKH.Utils
             return links;
         }
         
-        public static String FormatedLink(String source)
+        public static FormattedString FormatedLink(String source)
         {
             Regex regExHttpLinks = new Regex(@"(?<=\()\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\))|(?<=(?<wrap>[=~|_#]))\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\k<wrap>)|\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             if (String.IsNullOrEmpty(source))
@@ -168,14 +168,31 @@ namespace xamarinJKH.Utils
             source = Regex.Replace(source, @"(?<=\d)\.(?=\d)", periodReplacement);
             var linkMatches = regExHttpLinks.Matches(source);
             FormattedString formattedString = new FormattedString();
+           
             foreach (Match match in linkMatches)
             {
                 var m = match.ToString();
                 String s = (m.Contains("://")) ? m : "http://" + m;
-                source = source.Replace(m,"<u>" + m + "</u>");
+
+                //if (Device.RuntimePlatform == Device.Android)
+                    source = source.Replace(m,"<u>" + m + "<u>");
             }
             source = source.Replace(periodReplacement, ".");
-            return source;
+
+            var rep = source.Split("<u>");
+
+            foreach (string s in rep)
+            {
+                if (s.Contains("https://") || s.Contains("http://") || s.Contains("www."))
+                {
+                    formattedString.Spans.Add(new Span() { Text = s, FontSize = 15, TextColor = Color.Blue, TextDecorations = TextDecorations.Underline });
+                }
+                else
+                {
+                    formattedString.Spans.Add(new Span() { Text = s, FontSize = 15, TextColor = Color.Black });
+                }
+            }
+            return formattedString;
         }
 
         public static async Task OpenLinksMessage(RequestMessage message, Page p)

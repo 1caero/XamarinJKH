@@ -74,7 +74,7 @@ namespace xamarinJKH.Apps
 
             LabelTextA.TextColor = Color.White;
             LabelTextA.FontSize = 15;
-            LabelTextA.TextType = TextType.Html;
+            
 
             LabelTextA.HorizontalOptions = LayoutOptions.Center;
             stackLayoutContentA.Children.Add(LabelTextA);
@@ -213,7 +213,13 @@ namespace xamarinJKH.Apps
 
             LabelDateA.Text = dateMess;
             //LabelNameA.Text = Name;
-            LabelTextA.Text = Settings.FormatedLink(message.Text);
+            //LabelTextA.Text = message.Text;
+
+            LabelTextA.FormattedText = Settings.FormatedLink(message.Text);
+
+            //if (Device.RuntimePlatform == Device.Android)
+            //    LabelTextA.TextType = TextType.Html;
+            
             var link = new TapGestureRecognizer();
             link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
             LabelTextA.GestureRecognizers.Add(link);
@@ -376,7 +382,7 @@ namespace xamarinJKH.Apps
             LabelText.TextColor = Color.Black;
             LabelText.FontSize = 15;
             LabelText.HorizontalTextAlignment = TextAlignment.Start;
-            LabelText.TextType = TextType.Html;
+            
             LabelText.HorizontalOptions = LayoutOptions.Start;
 
             stackLayoutContent.Children.Add(LabelText);
@@ -455,10 +461,15 @@ namespace xamarinJKH.Apps
 
             LabelDate.Text = dateMess;
             LabelName.Text = message.AuthorName;
+
+            //LabelText.Text = message.Text;
+            //if(Device.RuntimePlatform==Device.Android)
+            //LabelText.TextType = TextType.Html;
             var link = new TapGestureRecognizer();
             link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
             LabelText.GestureRecognizers.Add(link);
-            LabelText.Text = Settings.FormatedLink(message.Text);
+            LabelText.FormattedText = Settings.FormatedLink(message.Text);
+
             Labeltime.Text = message.TimeAdd;
 
             
