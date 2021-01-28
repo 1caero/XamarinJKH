@@ -7,17 +7,6 @@
                  xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
                  xmlns:mask="clr-namespace:xamarinJKH.Mask;assembly=xamarinJKH"
                  x:Class="xamarinJKH.DialogViews.EnterPhoneDialog">
-    <pages:PopupPage.Animation>
-        <animations:ScaleAnimation DurationIn="500"
-                                   DurationOut="700"
-                                   EasingIn="Linear"
-                                   EasingOut="Linear"
-                                   HasBackgroundAnimation="True"
-                                   PositionIn="Center"
-                                   PositionOut="Center"
-                                   ScaleIn="1.2"
-                                   ScaleOut="0.8" />
-    </pages:PopupPage.Animation>
     <Frame CornerRadius="30"
            x:Name="Frame"
            HorizontalOptions="FillAndExpand"

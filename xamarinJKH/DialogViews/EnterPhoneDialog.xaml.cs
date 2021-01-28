@@ -18,9 +18,10 @@ namespace xamarinJKH.DialogViews
     {
         private RestClientMP _server = new RestClientMP();
 
-        public EnterPhoneDialog()
+        public EnterPhoneDialog(bool isVisible = true)
         {
             InitializeComponent();
+            Frame.IsVisible = isVisible;
             var close = new TapGestureRecognizer();
             close.Tapped += async (s, e) => { await PopupNavigation.Instance.PopAsync(); };
             IconViewClose.GestureRecognizers.Add(close);

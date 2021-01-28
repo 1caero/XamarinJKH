@@ -1129,8 +1129,18 @@ namespace xamarinJKH.MainConst
                 await getHouse();
             }).ContinueWith(async (res) =>
             {
-                await Task.Delay(1500);
+                await Task.Delay(500);
                 Button_Clicked(null, null);
+                try
+                {
+                    await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog(false));
+                    await PopupNavigation.Instance.PopAsync();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+               
             });
 
             });
