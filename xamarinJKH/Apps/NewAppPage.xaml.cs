@@ -753,6 +753,11 @@ _appModel = new AddAppModel()
                 {
                     // ignored
                 }
+                finally
+                {
+                    FrameBtnAdd.IsVisible = true;
+                    progress.IsVisible = false;
+                }
             }
 
             FrameBtnAdd.IsVisible = true;
