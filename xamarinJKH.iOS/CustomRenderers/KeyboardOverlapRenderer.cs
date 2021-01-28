@@ -1,21 +1,16 @@
-﻿using System;
-using Xamarin.Forms.Platform.iOS;
-using Foundation;
+﻿using Foundation;
+using System;
+using System.Diagnostics;
 using UIKit;
 using Xamarin.Forms;
-using CoreGraphics;
-using System.Diagnostics;
-using xamarinJKH.iOS.CustomRenderers;
-using xamarinJKH.iOS.Extensions;
-using xamarinJKH.Counters;
-
+using Xamarin.Forms.Platform.iOS;
 using xamarinJKH.Apps;
 using xamarinJKH.AppsConst;
+using xamarinJKH.iOS.CustomRenderers;
+using xamarinJKH.iOS.Extensions;
 
-//[assembly: ExportRenderer(typeof(AddMetersPage), typeof(KeyboardOverlapRenderer))]
 [assembly: ExportRenderer(typeof(AppPage), typeof(KeyboardOverlapRenderer))]
 [assembly: ExportRenderer(typeof(AppConstPage), typeof(KeyboardOverlapRenderer))]
-//[assembly: ExportRenderer(typeof(xamarinJKH.Tech.AppPage), typeof(KeyboardOverlapRenderer))]
 namespace xamarinJKH.iOS.CustomRenderers
 {
     [Preserve(AllMembers = true)]
