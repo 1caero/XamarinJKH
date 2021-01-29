@@ -1,17 +1,12 @@
-﻿using System;
-using Xamarin.Forms.Platform.iOS;
-using Foundation;
+﻿using Foundation;
+using System;
+using System.Diagnostics;
 using UIKit;
 using Xamarin.Forms;
-using CoreGraphics;
-using System.Diagnostics;
+using Xamarin.Forms.Platform.iOS;
 using xamarinJKH.iOS.CustomRenderers;
 using xamarinJKH.iOS.Extensions;
-using xamarinJKH.Counters;
-
-using xamarinJKH.Apps;
-using xamarinJKH.AppsConst;
-
+using xamarinJKH.Utils;
 
 [assembly: ExportRenderer(typeof(xamarinJKH.Tech.AppPage), typeof(KeyboardOverlapRendererTechAppPage))]
 namespace xamarinJKH.iOS.CustomRenderers
@@ -144,9 +139,14 @@ namespace xamarinJKH.iOS.CustomRenderers
         }
 
         private double CalculateShiftByAmount(double pageHeight, nfloat keyboardHeight, double activeViewBottom)
-        {
-
-            return (pageHeight - activeViewBottom) - keyboardHeight;// + (int)UIApplication.SharedApplication.StatusBarFrame.Height; 
+        {            
+            double r;
+            
+            if (App.isStart)
+                r = (pageHeight - activeViewBottom) - keyboardHeight + (int)UIApplication.SharedApplication.StatusBarFrame.Height;
+            else
+                r = (pageHeight - activeViewBottom) - keyboardHeight - 50;
+            return r;
         }
     }
 }

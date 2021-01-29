@@ -53,6 +53,7 @@ namespace xamarinJKH.Main
             var exitClick = new TapGestureRecognizer();
             exitClick.Tapped += async (s, e) =>
             {
+                App.isStart = false;
                 _ = await Navigation.PopModalAsync();
             };
             var techSend = new TapGestureRecognizer();
