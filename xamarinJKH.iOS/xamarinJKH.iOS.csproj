@@ -124,6 +124,7 @@
     <Compile Include="CustomRenderers\BorderlessPickerRenderer.cs" />
     <Compile Include="CustomRenderers\BordlessEditorRender.cs" />
     <Compile Include="CustomRenderers\CounterEntryNewRenderer.cs" />
+    <Compile Include="CustomRenderers\iOSMicrophoneService.cs" />
     <Compile Include="CustomRenderers\KeyboardOverlapRendererTechAppPage.cs" />
     <Compile Include="CustomRenderers\KeyboardOverlapRenderer.cs" />
     <Compile Include="CustomRenderers\ListViewHighlightEffect.cs" />
@@ -279,6 +280,7 @@
     <PackageReference Include="Messier16.Forms.Controls" Version="2.2.0" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="3.3.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="3.3.0" />
+    <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.15.0" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
     <PackageReference Include="PCLStorage" Version="1.0.2" />
     <PackageReference Include="Plugin.FirebaseCrashlytics">

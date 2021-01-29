@@ -8,6 +8,7 @@ using System.Windows.Input;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
+using Microsoft.CognitiveServices.Speech;
 using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
 using Plugin.Media;
@@ -219,7 +220,9 @@ namespace xamarinJKH.Apps
         public bool isPayd { get; set; }
 
         public bool close = false;
-
+        SpeechRecognizer recognizer;
+        IMicrophoneService micService;
+        bool isTranscribing = false;
         public AppPage(RequestInfo requestInfo, bool closeAll = false, bool paid = false)
         {
             close = closeAll;
@@ -230,6 +233,7 @@ namespace xamarinJKH.Apps
             }
             _requestInfo = requestInfo;
             InitializeComponent();
+            micService = DependencyService.Resolve<IMicrophoneService>();
             Analytics.TrackEvent("Заявка жителя №" + requestInfo.RequestNumber);
             MessagingCenter.Subscribe<Object>(this, "AutoUpdateComments",  (sender) => {  Device.BeginInvokeOnMainThread(async () =>  await RefreshData()); });
 
@@ -314,11 +318,14 @@ namespace xamarinJKH.Apps
             };
             BackStackLayout.GestureRecognizers.Add(backClick);
             var sendMess = new TapGestureRecognizer();
-            sendMess.Tapped += async (s, e) => { sendMessage(); };
+            sendMess.Tapped += async (s, e) =>
+            {
+                sendMessage();
+            };
             IconViewSend.GestureRecognizers.Add(sendMess);
             var recordmic = new TapGestureRecognizer();
             recordmic.Tapped += async (s, e) => { RecordMic(); };
-            IconViewMic.GestureRecognizers.Add(recordmic);
+            // IconViewMic.GestureRecognizers.Add(recordmic);
             var addFile = new TapGestureRecognizer();
             addFile.Tapped += async (s, e) => { addFileApp(); };
             IconViewAddFile.GestureRecognizers.Add(addFile);
@@ -352,28 +359,124 @@ namespace xamarinJKH.Apps
                 });
             }
         }
+        
+    async void TranscribeClicked(object sender, EventArgs e)
+        {
+            bool isMicEnabled = await micService.GetPermissionAsync();
 
+            // EARLY OUT: make sure mic is accessible
+            if (!isMicEnabled)
+            {
+                // UpdateTranscription("Please grant access to the microphone!");
+                ShowToast("Пожалуйста, предоставьте доступ к микрофону!");
+                return;
+            }
+
+            // initialize speech recognizer 
+            if (recognizer == null)
+            {
+                var autoDetectSourceLanguageConfig = AutoDetectSourceLanguageConfig.FromLanguages(
+                        new string[] { "en-US", "ru-RU" });
+                var config = SpeechConfig.FromSubscription(Constants.CognitiveServicesApiKey, Constants.CognitiveServicesRegion);
+                recognizer = new SpeechRecognizer(config, autoDetectSourceLanguageConfig);
+             
+                recognizer.Recognized += (obj, args) =>
+                {
+                    UpdateTranscription(args.Result.Text);
+                };
+            }
+
+            // if already transcribing, stop speech recognizer
+            if (isTranscribing)
+            {
+                try
+                {
+                    await recognizer.StopContinuousRecognitionAsync();
+                }
+                catch (Exception ex)
+                {
+                    UpdateTranscription(ex.Message);
+                }
+                isTranscribing = false;
+            }
+
+            // if not transcribing, start speech recognizer
+            else
+            {
+                // Device.BeginInvokeOnMainThread(() =>
+                // {
+                //     InsertDateTimeRecord();
+                // });
+                try
+                {
+                    await recognizer.StartContinuousRecognitionAsync();
+                }
+                catch (Exception ex)
+                {
+                    UpdateTranscription(ex.Message);
+                }
+                isTranscribing = true;
+            }
+            UpdateDisplayState();
+        }
+
+        void UpdateTranscription(string newText)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                if (!string.IsNullOrWhiteSpace(newText))
+                {
+                    EntryMess.Text += $"{newText} ";
+                }
+            });
+        }
+
+        void InsertDateTimeRecord()
+        {
+            var msg = $"=================\n{DateTime.Now.ToString()}\n=================";
+            UpdateTranscription(msg);
+        }
+
+        void UpdateDisplayState()
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                if (isTranscribing)
+                {
+                    // transcribeButton.Text = "Stop";
+                    // IconViewMic.BackgroundColor = Color.Red;
+                    progressRecognition.IsVisible = true;
+                }
+                else
+                {
+                    // transcribeButton.Text = "Transcribe";
+                    // IconViewMic.BackgroundColor = Color.Green;
+                    progressRecognition.IsVisible = false;
+                }
+            });
+        }
 
         private async void RecordMic()
         {
-            try
-            {
-                _speechRecongnitionInstance.StartSpeechToText();
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                EntryMess.Text = ex.Message;
-#endif
-            }
-
-            if (Device.RuntimePlatform == Device.iOS)
-            {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    IconViewMic.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#A2A2A2" } };
-                });                
-            }
+            TranscribeClicked(this, null);
+//             try
+//             {
+//                 _speechRecongnitionInstance.StartSpeechToText();
+//             }
+//             catch (Exception ex)
+//             {
+// #if DEBUG
+//                 EntryMess.Text = ex.Message;
+// #endif
+//             }
+//
+//             if (Device.RuntimePlatform == Device.iOS)
+//             {
+//                 Device.BeginInvokeOnMainThread(() =>
+//                 {
+//                     IconViewMic.ReplaceStringMap = new Dictionary<string, string> { { "#000000", "#A2A2A2" } };
+//                 });                
+//             }
         }
 
         private void SpeechToTextFinalResultRecieved(string args)
@@ -789,5 +892,14 @@ namespace xamarinJKH.Apps
             await Dialog.Instance.ShowAsync(new AppReceiptDialogWindow(new AppRecieptViewModel(request.ReceiptItems)));
         }
 
+        private void ImageButton_OnPressed(object sender, EventArgs e)
+        {
+            TranscribeClicked(sender, e);
+        }
+
+        private void ImageButton_OnReleased(object sender, EventArgs e)
+        {
+            TranscribeClicked(sender, e);
+        }
     }
 }

@@ -339,6 +339,7 @@
     <PackageReference Include="Messier16.Forms.Controls" Version="2.2.0" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="3.3.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="3.3.0" />
+    <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.15.0" />
     <PackageReference Include="PCLStorage" Version="1.0.2" />
     <PackageReference Include="Plugin.Badge" Version="2.3.0" />
     <PackageReference Include="Plugin.FirebaseCrashlytics" Version="2.0.0" />

@@ -22,20 +22,23 @@ using xamarinJKH.Droid.CustomReader;
 using xamarinJKH.InterfacesIntegration;
 
 using Android.Speech;
+using xamarinJKH.Droid.CustomRenderers;
 
 namespace xamarinJKH.Droid
 {
     [Activity(Label = "Тихая Гавань", Icon = "@drawable/icon_login", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait, LaunchMode = LaunchMode.SingleTop)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IMessageSender
     {
+        IMicrophoneService micService;
+        internal static MainActivity Instance { get; private set; }
         protected override async void OnCreate(Bundle savedInstanceState)
         {
+            Instance = this;
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
             base.OnCreate(savedInstanceState);
-            
+          
         
-            
             global::Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental", "AppTheme_Experimental", "Markup_Experimental");
             XamEffects.Droid.Effects.Init();
             AiForms.Dialogs.Dialogs.Init(this);
@@ -64,12 +67,19 @@ namespace xamarinJKH.Droid
             App.ScreenWidth2 = (width - 0.5f) / density;
             App.ScreenHeight2 = (height - 0.5f) / density;
             LoadApplication(new App());
+            micService = DependencyService.Resolve<IMicrophoneService>();
 
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            switch (requestCode)
+            {
+                case AndroidMicrophoneService.RecordAudioPermissionCode:
+                    micService.OnRequestPermissionResult(grantResults?.Length > 0 && grantResults?[0] == Permission.Granted);
+                    break;
+            }
         }
 
         void CreateNotificationChannel()

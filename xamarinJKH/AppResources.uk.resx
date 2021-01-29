@@ -1675,4 +1675,7 @@
   <data name="AppTypeNotSelected" xml:space="preserve">
     <value>Не вибрано тип заявки</value>
   </data>
+  <data name="TalkMic" xml:space="preserve">
+    <value>Говоріть ... </value>
+  </data>
 </root>

@@ -159,7 +159,7 @@ namespace xamarinJKH.Utils
             return links;
         }
         
-        public static FormattedString FormatedLink(String source)
+        public static FormattedString FormatedLink(String source, Color color )
         {
             Regex regExHttpLinks = new Regex(@"(?<=\()\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\))|(?<=(?<wrap>[=~|_#]))\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\k<wrap>)|\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             if (String.IsNullOrEmpty(source))
@@ -189,7 +189,7 @@ namespace xamarinJKH.Utils
                 }
                 else
                 {
-                    formattedString.Spans.Add(new Span() { Text = s, FontSize = 15, TextColor = Color.Black });
+                    formattedString.Spans.Add(new Span() { Text = s, FontSize = 15, TextColor = color });
                 }
             }
             return formattedString;

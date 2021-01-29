@@ -1799,4 +1799,7 @@
   <data name="AppTypeNotSelected" xml:space="preserve">
     <value>Order type not selected</value>
   </data>
+  <data name="TalkMic" xml:space="preserve">
+    <value>Speak ... </value>
+  </data>
 </root>
