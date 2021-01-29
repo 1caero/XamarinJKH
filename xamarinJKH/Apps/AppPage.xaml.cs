@@ -237,37 +237,37 @@ namespace xamarinJKH.Apps
             Analytics.TrackEvent("Заявка жителя №" + requestInfo.RequestNumber);
             MessagingCenter.Subscribe<Object>(this, "AutoUpdateComments",  (sender) => {  Device.BeginInvokeOnMainThread(async () =>  await RefreshData()); });
 
-            try
-            {
-                _speechRecongnitionInstance = DependencyService.Get<ISpeechToText>();
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                //ошибку выводить в сообщение для дебага
-                EntryMess.Text = ex.Message;
-#endif
-                throw ex;
-            }
+//            try
+//            {
+//                _speechRecongnitionInstance = DependencyService.Get<ISpeechToText>();
+//            }
+//            catch (Exception ex)
+//            {
+//#if DEBUG
+//                //ошибку выводить в сообщение для дебага
+//                EntryMess.Text = ex.Message;
+//#endif
+//                throw ex;
+//            }
 
-            MessagingCenter.Subscribe<ISpeechToText, string>(this, "STT", (sender, args) =>
-            {
-                SpeechToTextFinalResultRecieved(args);
-            });
+//            MessagingCenter.Subscribe<ISpeechToText, string>(this, "STT", (sender, args) =>
+//            {
+//                SpeechToTextFinalResultRecieved(args);
+//            });
 
-            MessagingCenter.Subscribe<ISpeechToText>(this, "Final", (sender) =>
-            {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    new PopupPage();
-                    IconViewMic.ReplaceStringMap = new Dictionary<string, string> { { "#000000", hex.ToHex() } };
-                });                
-            });
+//            MessagingCenter.Subscribe<ISpeechToText>(this, "Final", (sender) =>
+//            {
+//                Device.BeginInvokeOnMainThread(() =>
+//                {
+//                    new PopupPage();
+//                    IconViewMic.ReplaceStringMap = new Dictionary<string, string> { { "#000000", hex.ToHex() } };
+//                });                
+//            });
 
-            MessagingCenter.Subscribe<IMessageSender, string>(this, "STT", (sender, args) =>
-            {
-                SpeechToTextFinalResultRecieved(args);
-            });
+//            MessagingCenter.Subscribe<IMessageSender, string>(this, "STT", (sender, args) =>
+//            {
+//                SpeechToTextFinalResultRecieved(args);
+//            });
 
 
             if (!isPayd)
@@ -395,7 +395,10 @@ namespace xamarinJKH.Apps
                 }
                 catch (Exception ex)
                 {
+#if DEBUG
                     UpdateTranscription(ex.Message);
+#endif
+                    Analytics.TrackEvent("ошибка при остановке распознавании речи " + ex.Message);
                 }
                 isTranscribing = false;
             }
@@ -413,7 +416,10 @@ namespace xamarinJKH.Apps
                 }
                 catch (Exception ex)
                 {
+#if DEBUG
                     UpdateTranscription(ex.Message);
+#endif
+                    Analytics.TrackEvent("ошибка при старте распознавании речи " + ex.Message);
                 }
                 isTranscribing = true;
             }
@@ -485,7 +491,7 @@ namespace xamarinJKH.Apps
                 EntryMess.Text += " " + args;            
         }
 
-        private ISpeechToText _speechRecongnitionInstance;
+        //private ISpeechToText _speechRecongnitionInstance;
         
         protected override bool OnBackButtonPressed()
         {

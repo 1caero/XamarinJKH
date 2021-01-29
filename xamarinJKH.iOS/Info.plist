@@ -45,7 +45,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Вы можете приложить фото к заявке</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Вы можете предоставить доступ к микрофону чтобы записать видео и приложить к заявке</string>
+	<string>Предоставить доступ к микрофону чтобы разрешить голосовой ввод коментария к заявке</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Предоставьте доступ к геопозиции</string>
 	<key>NSLocationAlwaysUsageDescription</key>

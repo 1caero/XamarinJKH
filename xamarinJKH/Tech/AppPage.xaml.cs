@@ -226,18 +226,18 @@ namespace xamarinJKH.Tech
             InitializeComponent();
             micService = DependencyService.Resolve<IMicrophoneService>();
             Analytics.TrackEvent("Диалог с техподдержкой ");
-            try
-            {
-                _speechRecongnitionInstance = DependencyService.Get<ISpeechToText>();
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                //ошибку выводить в сообщение для дебага
-                EntryMess.Text = ex.Message;
-#endif
-                throw ex;
-            }
+//            try
+//            {
+//                _speechRecongnitionInstance = DependencyService.Get<ISpeechToText>();
+//            }
+//            catch (Exception ex)
+//            {
+//#if DEBUG
+//                //ошибку выводить в сообщение для дебага
+//                EntryMess.Text = ex.Message;
+//#endif
+//                throw ex;
+//            }
 
             MessagingCenter.Subscribe<ISpeechToText, string>(this, "STT",
                 (sender, args) => { SpeechToTextFinalResultRecieved(args); });
@@ -309,27 +309,27 @@ namespace xamarinJKH.Tech
         }
 
 
-        private async void RecordMic()
-        {
-            try
-            {
-                _speechRecongnitionInstance.StartSpeechToText();
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                EntryMess.Text = ex.Message;
-#endif
-            }
+//        private async void RecordMic()
+//        {
+//            try
+//            {
+//                _speechRecongnitionInstance.StartSpeechToText();
+//            }
+//            catch (Exception ex)
+//            {
+//#if DEBUG
+//                EntryMess.Text = ex.Message;
+//#endif
+//            }
 
-            if (Device.RuntimePlatform == Device.iOS)
-            {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    IconViewMic.ReplaceStringMap = new Dictionary<string, string> {{"#000000", "#A2A2A2"}};
-                });
-            }
-        }
+//            if (Device.RuntimePlatform == Device.iOS)
+//            {
+//                Device.BeginInvokeOnMainThread(() =>
+//                {
+//                    IconViewMic.ReplaceStringMap = new Dictionary<string, string> {{"#000000", "#A2A2A2"}};
+//                });
+//            }
+//        }
 
         private void SpeechToTextFinalResultRecieved(string args)
         {
@@ -337,7 +337,7 @@ namespace xamarinJKH.Tech
                 EntryMess.Text += " " + args;
         }
 
-        private ISpeechToText _speechRecongnitionInstance;
+        //private ISpeechToText _speechRecongnitionInstance;
 
         protected override bool OnBackButtonPressed()
         {
