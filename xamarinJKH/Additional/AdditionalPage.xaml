@@ -98,22 +98,6 @@
                         </pancakeView:PancakeView>
                         
                     </Grid>
-                    
-                    <pancakeView:PancakeView CornerRadius="40"
-                                             x:Name="Map"
-                                             IsVisible="False"
-                                             IsClippedToBounds="True"
-                                             Padding="0"
-                                             Margin="20,10,-40,-40">
-                        <map:Map Margin="0,0,40,40" ItemsSource="{Binding Pins}" IsShowingUser="{Binding ShowUser}">
-                            <map:Map.ItemTemplate>
-                                <DataTemplate>
-                                    <map:Pin Position="{Binding Position}" Label="{Binding Name}"
-                                             MarkerClicked="Pin_Clicked" ClassId="{Binding ID}" />
-                                </DataTemplate>
-                            </map:Map.ItemTemplate>
-                        </map:Map>
-                    </pancakeView:PancakeView>
                 </StackLayout>
               
             </Grid>

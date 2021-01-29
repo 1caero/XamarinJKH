@@ -13,6 +13,9 @@ namespace xamarinJKH.Server.RequestModel
         public List<NewsInfo> News { get; set; }
         // Доп. услуги
         public List<AdditionalService> AdditionalServices { get; set; }
+        
+        // Доп. услуги c группировкой и сортировкой
+        public Dictionary<string, List<AdditionalService>> AdditionalServicesByGroups { get; set; }
         public string Error { get; set; }
     }
 

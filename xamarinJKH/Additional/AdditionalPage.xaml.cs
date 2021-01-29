@@ -83,40 +83,10 @@ namespace xamarinJKH.Additional
                     }
                     else
                     {
-                        if (Settings.EventBlockData.AdditionalServices != null)
+                        Settings.EventBlockData = await server.GetEventBlockData();
+                        if (Settings.EventBlockData.AdditionalServicesByGroups != null)
                         {
-                            var l = Settings.EventBlockData.AdditionalServices.Where(x =>
-                                x.HasLogo && x.ShowInAdBlock != null &&
-                                !x.ShowInAdBlock.ToLower().Equals("не отображать"));
-                            var groups = l.GroupBy(x => x.Group).Select(x => x.First())
-                                .Select(y => y.Group).ToList();
-
-                            var groups1 = Settings.EventBlockData.AdditionalServices.GroupBy(x => x.Group)
-                                .Select(x => x.First())
-                                .Select(y => y.Group).ToList();
-                            Additional.Clear();
-
-                            foreach (var each in Settings.EventBlockData.AdditionalServices)
-                            {
-                                //try
-                                //{
-                                if (each.HasLogo)
-                                    if (each.ShowInAdBlock != null)
-                                        if (!each.ShowInAdBlock.ToLower().Equals("не отображать"))
-                                        {
-                                            if (SelectedGroup != null)
-                                            {
-                                                if (each.Group == SelectedGroup)
-                                                {
-                                                    Device.BeginInvokeOnMainThread(() => Additional.Add(each));
-                                                }
-                                            }
-                                            else
-                                            {
-                                                Device.BeginInvokeOnMainThread(() => Additional.Add(each));
-                                            }
-                                        }
-                            }
+                            SetGrupAdditional();
                         }
                     }
 
@@ -136,33 +106,12 @@ namespace xamarinJKH.Additional
                 OnPropertyChanged("IsBusy");
             }
         }
-
-        private async Task RefreshData()
-        {
-            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
-            {
-                Device.BeginInvokeOnMainThread(async () =>
-                    await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
-                return;
-            }
-
-            Settings.EventBlockData = await server.GetEventBlockData();
-            if (Settings.EventBlockData.Error == null)
-            {
-                SetAdditional();
-            }
-            else
-            {
-                await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAdditional, "OK");
-            }
-        }
-
         public AdditionalPage()
         {
             InitializeComponent();
             Analytics.TrackEvent("Доп услуги");
             NavigationPage.SetHasNavigationBar(this, false);
-            Map.BindingContext = new MapPageViewModel();
+            // Map.BindingContext = new MapPageViewModel();
 
             switch (Device.RuntimePlatform)
             {
@@ -214,12 +163,12 @@ namespace xamarinJKH.Additional
                 SetAdditional();
             });
 
-            MessagingCenter.Subscribe<MapPageViewModel, Position>(this, "FocusMap",
-                (sender, args) =>
-                {
-                    (Map.Children[0] as Map).MoveToRegion(
-                        MapSpan.FromCenterAndRadius(args, Distance.FromKilometers(2)));
-                });
+            // MessagingCenter.Subscribe<MapPageViewModel, Position>(this, "FocusMap",
+            //     (sender, args) =>
+            //     {
+            //         (Map.Children[0] as Map).MoveToRegion(
+            //             MapSpan.FromCenterAndRadius(args, Distance.FromKilometers(2)));
+            //     });
 
             MessagingCenter.Subscribe<Object, AdditionalService>(this, "OpenService", async (sender, args) =>
             {
@@ -282,43 +231,15 @@ namespace xamarinJKH.Additional
             Device.BeginInvokeOnMainThread(() =>
                 Task.Run(() =>
                 {
-                    if (Settings.EventBlockData.AdditionalServices != null)
+                    if (Settings.EventBlockData.AdditionalServicesByGroups != null)
                     {
-                        var l = Settings.EventBlockData.AdditionalServices.Where(x =>
-                            x.HasLogo && x.ShowInAdBlock != null && !x.ShowInAdBlock.ToLower().Equals("не отображать"));
-                        var groups = l.GroupBy(x => x.Group).Select(x => x.First())
-                            .Select(y => y.Group).ToList();
-
-                        var groups1 = Settings.EventBlockData.AdditionalServices.GroupBy(x => x.Group)
-                            .Select(x => x.First())
-                            .Select(y => y.Group).ToList();
-
-                        foreach (var group in groups)
-                        {
-                            Groups.Add(group);
-                        }
-
-                        foreach (var each in Settings.EventBlockData.AdditionalServices)
-                        {
-                            //try
-                            //{
-                            if (each.HasLogo)
-                                if (each.ShowInAdBlock != null)
-                                    if (!each.ShowInAdBlock.ToLower().Equals("не отображать"))
-                                    {
-                                        Additional.Add(each);
-                                    }
-                        }
-
-
+                        List<string> groups = new List<string>(Settings.EventBlockData.AdditionalServicesByGroups.Keys);
                         if (groups.Count > 0)
                         {
                             SelectedGroup = null;
                         }
                     }
-
                     Device.BeginInvokeOnMainThread(SetGrupAdditional);
-
                     IsBusy = false;
                 })
             );
@@ -328,10 +249,11 @@ namespace xamarinJKH.Additional
 
         void SetGrupAdditional()
         {
+            StackLayoutContainer.Content = null;
             StackLayout containerData = new StackLayout();
             containerData.HorizontalOptions = LayoutOptions.FillAndExpand;
             containerData.VerticalOptions = LayoutOptions.Start;
-            foreach (var group in Groups)
+            foreach (var group in Settings.EventBlockData.AdditionalServicesByGroups.Keys)
             {
                 
                 Label titleLable = new Label();
@@ -348,7 +270,7 @@ namespace xamarinJKH.Additional
                 StackLayout containerAdd = new StackLayout();
                 containerAdd.HorizontalOptions = LayoutOptions.FillAndExpand;
                 containerAdd.Orientation = StackOrientation.Horizontal;
-                foreach (var service in Settings.EventBlockData.AdditionalServices.Where(x => x.Group == group))
+                foreach (var service in Settings.EventBlockData.AdditionalServicesByGroups[group].Where(x => !x.ShowInAdBlock.ToLower().Equals("не отображать")))
                 {
                    
                     StackLayout stackLayoutCon = new StackLayout()
@@ -421,49 +343,5 @@ namespace xamarinJKH.Additional
                 return input.Replace(" ", "\n");
             }
         }
-        private async void OnItemTapped(object sender, SelectionChangedEventArgs e)
-        {
-            AdditionalService select = e.CurrentSelection[0] as AdditionalService;
-            if (select.ShopID == null)
-            {
-                if (Navigation.NavigationStack.FirstOrDefault(x => x is AdditionalOnePage) == null)
-                    await Navigation.PushAsync(new AdditionalOnePage(select));
-            }
-            else
-            {
-                if (Navigation.NavigationStack.FirstOrDefault(x => x is ShopPageNew) == null)
-                    await Navigation.PushAsync(new ShopPageNew(select));
-            }
-        }
-
-        private void GroupChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                string group = e.CurrentSelection[0] as string;
-                Additional.Clear();
-                foreach (var service in Settings.EventBlockData.AdditionalServices.Where(x => x.Group == group))
-                {
-                    if (service.HasLogo && service.ShowInAdBlock != null)
-                        if (!service.ShowInAdBlock.ToLower().Equals("не отображать"))
-                            Additional.Add(service);
-                }
-            }
-            catch
-            {
-            }
-        }
-
-
-        private async void Pin_Clicked(object sender, EventArgs e)
-        {
-            var shop = Additional.FirstOrDefault(x =>
-                x.ID == Convert.ToInt32((sender as Pin).ClassId));
-            if (shop != null)
-            {
-                await Dialog.Instance.ShowAsync(new MapShopDialogView(shop));
-            }
-        }
-
     }
 }
