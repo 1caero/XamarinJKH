@@ -523,4 +523,7 @@
       </Generator>
     </BundleResource>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_apps.png" />
+  </ItemGroup>
 </Project>

@@ -1679,15 +1679,21 @@
     <value>Говоріть ... </value>
   </data>
   <data name="CallTech" xml:space="preserve">
-    <value>Звернутися в тех.підтримку </value>
+    <value>напишіть в тех.підтримку</value>
   </data>
   <data name="CallTechText" xml:space="preserve">
-    <value>З питань роботи в додатку звертайтеся в тех. підтримку додатка </value>
+    <value>Якщо у вас питання</value>
   </data>
   <data name="CallUkText" xml:space="preserve">
-    <value>Якщо є питання в КК - оформите заявку </value>
+    <value> до УК - </value>
   </data>
   <data name="CallUk" xml:space="preserve">
-    <value>Звернутися в КК </value>
+    <value>оформіть заявку</value>
+  </data>
+  <data name="CallTechText1" xml:space="preserve">
+    <value>по роботі додатка</value>
+  </data>
+  <data name="CallUkText1" xml:space="preserve">
+    <value>Якщо у вас питання</value>
   </data>
 </root>

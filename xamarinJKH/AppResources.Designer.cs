@@ -19,7 +19,7 @@ namespace xamarinJKH {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class AppResources {
@@ -637,7 +637,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Обратиться в тех.поддержку.
+        ///   Looks up a localized string similar to напишите в тех.поддержку.
         /// </summary>
         internal static string CallTech {
             get {
@@ -646,7 +646,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to По вопросам работы в приложении обращайтесь в тех.поддержку приложения.
+        ///   Looks up a localized string similar to Если у вас вопрос.
         /// </summary>
         internal static string CallTechText {
             get {
@@ -655,7 +655,16 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Обратиться в УК.
+        ///   Looks up a localized string similar to по работе приложения.
+        /// </summary>
+        internal static string CallTechText1 {
+            get {
+                return ResourceManager.GetString("CallTechText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to оформите заявку.
         /// </summary>
         internal static string CallUk {
             get {
@@ -664,11 +673,20 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Если есть вопрос в УК - оформите заявку .
+        ///   Looks up a localized string similar to  в УК - .
         /// </summary>
         internal static string CallUkText {
             get {
                 return ResourceManager.GetString("CallUkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Если у вас вопрос.
+        /// </summary>
+        internal static string CallUkText1 {
+            get {
+                return ResourceManager.GetString("CallUkText1", resourceCulture);
             }
         }
         

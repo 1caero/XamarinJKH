@@ -1803,15 +1803,21 @@
     <value>Speak ... </value>
   </data>
   <data name="CallTech" xml:space="preserve">
-    <value>Contact technical support </value>
+    <value>write to tech support</value>
   </data>
   <data name="CallTechText" xml:space="preserve">
-    <value>For questions about working in the application, please contact those. application support </value>
+    <value>If you have a question</value>
   </data>
   <data name="CallUkText" xml:space="preserve">
-    <value>If you have a question in the УК - fill out an application </value>
+    <value> in the УК - </value>
   </data>
   <data name="CallUk" xml:space="preserve">
-    <value>Apply to the УК</value>
+    <value>make a request</value>
+  </data>
+  <data name="CallTechText1" xml:space="preserve">
+    <value>on application work</value>
+  </data>
+  <data name="CallUkText1" xml:space="preserve">
+    <value>If you have a question</value>
   </data>
 </root>

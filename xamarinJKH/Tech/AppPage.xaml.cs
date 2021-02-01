@@ -19,6 +19,7 @@ using Plugin.Permissions.Abstractions;
 using Rg.Plugins.Popup.Pages;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.Apps;
 using xamarinJKH.DialogViews;
@@ -224,11 +225,13 @@ namespace xamarinJKH.Tech
         public AppPage()
         {
             InitializeComponent();
-           
-            LabelUk.IsVisible = LabelUKLink.IsVisible = App.isStart && Settings.AppIsVisible;
+
+            Resources["hexColor"] = (Color)Application.Current.Resources["MainColor"];
+
+            LabelUkP.IsVisible = LabelUKLink.IsVisible = App.isStart && Settings.AppIsVisible;
             
             LabelUk.Text = LabelUk.Text.Replace("УК", Settings.MobileSettings.main_name);
-            LabelUKLink.Text = LabelUKLink.Text.Replace("УК", Settings.MobileSettings.main_name);
+            //LabelUKLink.Text = LabelUKLink.Text.Replace("УК", Settings.MobileSettings.main_name);
             micService = DependencyService.Resolve<IMicrophoneService>();
             Analytics.TrackEvent("Диалог с техподдержкой ");
 //            try
@@ -758,7 +761,7 @@ namespace xamarinJKH.Tech
         {
             await CrossMedia.Current.Initialize();
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            FrameMessage.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
+            FrameMessage.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.White);
         }
 
         private async void ShowInfo()

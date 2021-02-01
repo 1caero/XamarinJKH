@@ -5,6 +5,7 @@
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:customRenderers="clr-namespace:xamarinJKH.CustomRenderers;assembly=xamarinJKH"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.Tech.AppPage">
     <ContentPage.Content>
@@ -42,32 +43,59 @@
                 </StackLayout>
             </StackLayout>
 
-            <customRenderers:MaterialFrame Elevation="{AppThemeBinding Light=0, Dark=20}"
+                <pancakeView:PancakeView CornerRadius="30, 30,0,0" Margin="15, 0, 15, -6" Padding="20,10"  BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=Black}" 
+                                                     BorderThickness="1" HasShadow="False" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
+                    <StackLayout Spacing="0" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" Orientation="Horizontal" >                       
+                        <xamarinJkh:IconView   x:Name="IconSupport"
+                                                           HeightRequest="40"
+                                                           HorizontalOptions="Start"
+                                                           Source="ic_apps"
+                                                           Margin="0,0,10,0"
+                                                           Foreground="{Binding hex}"
+                                                           VerticalOptions="Center">
+                        </xamarinJkh:IconView>
+                        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="0" >
+                            <Label 
+                                            x:Name="LabelUkP"
+                                    HorizontalOptions="FillAndExpand"
+                                    HorizontalTextAlignment="Start"      
+                                            VerticalOptions="Center"
+                                            VerticalTextAlignment="Center"
+                                    Text="">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span FontAttributes="Bold" FontSize="12" Text="{x:Static xamarinJkh:AppResources.CallUkText1}" TextColor="{AppThemeBinding Dark=White, Light=Black}">
+                                        </Span>
+                                        <Span Text=" "></Span>
+                                        <Span FontSize="12" x:Name="LabelUk" Text="{x:Static xamarinJkh:AppResources.CallUkText}" TextColor="{AppThemeBinding Dark=White, Light=Black}">
+                                        </Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label 
+                                    FontSize="12"
+                                    HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="Center"
+                                            VerticalTextAlignment="Center"
+                                    TextDecorations="Underline"
+                                    x:Name="LabelUKLink"
+                                    HorizontalTextAlignment="Start"
+                                    TextColor="{x:DynamicResource MainColor}"
+                                    Text="{x:Static xamarinJkh:AppResources.CallUk}"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                </pancakeView:PancakeView>
+                <pancakeView:PancakeView Elevation="{AppThemeBinding Light=0, Dark=20}"
                                            x:Name="FrameMessage"
-                                           CornerRadius="30"
+                                           CornerRadius="0,0,30,30"
                                            HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                            Margin="15, 0, 15, -30"
                                            BackgroundColor="White"
                                            Padding="5,0,5,70" VerticalOptions="FillAndExpand">
                     <Grid>
                         <StackLayout Margin="0,15,0,0">
-                            <Label
-                                FontSize="13"
-                                TextColor="Black"
-                                HorizontalOptions="FillAndExpand"
-                                Margin="10,0,10,0"
-                                x:Name="LabelUk"
-                                HorizontalTextAlignment="Center"
-                                Text="{x:Static xamarinJkh:AppResources.CallUkText}"></Label>
-                            <Label
-                                FontSize="13"
-                                HorizontalOptions="FillAndExpand"
-                                TextDecorations="Underline"
-                                x:Name="LabelUKLink"
-                                Margin="10,0,10,0"
-                                HorizontalTextAlignment="Center"
-                                TextColor="{x:DynamicResource MainColor}"
-                                Text="{x:Static xamarinJkh:AppResources.CallUk}"></Label>
+                            
+                           
                             <ScrollView x:Name="scrollFroAppMessages" VerticalScrollBarVisibility="Never"
                                         VerticalOptions="FillAndExpand">
                         <StackLayout x:Name="baseForApp" VerticalOptions="FillAndExpand" />
@@ -99,7 +127,7 @@
                             </StackLayout>
                         </Frame>
                     </Grid>
-            </customRenderers:MaterialFrame>
+            </pancakeView:PancakeView>
             <Frame CornerRadius="30"
                    Margin="15, -30, 15, 5"
                    BackgroundColor="White"

@@ -6,7 +6,7 @@
              xmlns:apps="clr-namespace:xamarinJKH.Apps;assembly=xamarinJKH"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             xmlns:converters="clr-namespace:xamarinJKH.Converters"
+             xmlns:converters="clr-namespace:xamarinJKH.Converters" xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.Apps.NewAppPage">
     <ContentPage.Resources>
@@ -63,15 +63,59 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Frame CornerRadius="1"
+                        
+                        <StackLayout Orientation="Vertical" Spacing="0">
+                            <BoxView BackgroundColor="{x:DynamicResource MainColor}" IsVisible="{AppThemeBinding Dark=false, Light=true}" HeightRequest="{AppThemeBinding Dark=0, Light=1}"></BoxView>
+                            <StackLayout Orientation="Horizontal" BackgroundColor="{AppThemeBinding Dark=Black, Light=White}"  Padding="20,10" VerticalOptions="Center">
+                                <svg:SvgCachedImage x:Name="IconTech"
+                                        Source="resource://xamarinJKH.Resources.ic_tech.svg"
+                                        HeightRequest="40"
+                                        ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
+                                        Margin="0,0,10,0"
+                                        HorizontalOptions="Start"
+                                        VerticalOptions="Center" />
+                                <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="0" >
+                                    <Label                                 
+                                    HorizontalOptions="FillAndExpand"
+                                    HorizontalTextAlignment="Start"      
+                                            VerticalOptions="Center"
+                                            VerticalTextAlignment="Center"
+                                    Text="">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span FontAttributes="Bold" FontSize="12" Text="{x:Static xamarinJkh:AppResources.CallTechText}" TextColor="{AppThemeBinding Dark=White, Light=Black}">
+                                                </Span>
+                                                <Span Text=" "></Span>
+                                                <Span FontSize="12" Text="{x:Static xamarinJkh:AppResources.CallTechText1}" TextColor="{AppThemeBinding Dark=White, Light=Black}">
+                                                </Span>
+                                                <Span Text=" -"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label 
+                                    FontSize="12"
+                                    HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="Center"
+                                            VerticalTextAlignment="Center"
+                                    TextDecorations="Underline"
+                                    x:Name="LabelTechOne"
+                                    HorizontalTextAlignment="Start"
+                                    TextColor="{x:DynamicResource MainColor}"
+                                    Text="{x:Static xamarinJkh:AppResources.CallTech}"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                            <!--<BoxView BackgroundColor="{x:DynamicResource MainColor}"  IsVisible="{AppThemeBinding Dark=false, Light=true}" HeightRequest="1"></BoxView>-->
+                            <Frame CornerRadius="1"
                                HasShadow="False"
                                BackgroundColor="{AppThemeBinding Dark=#494949, Light=White}"
                                Padding="0,0,0,80"
                                BorderColor="{AppThemeBinding Dark=#494949, Light={x:StaticResource MainColor}}">
-                            <StackLayout Padding="20,12,20,10" Spacing="10">
-                                <CollectionView ItemsSource="{Binding Accounts}"
+                                <StackLayout Padding="20,12,20,10" Spacing="10">
+
+                                    <CollectionView ItemsSource="{Binding Accounts}"
                                                 SelectedItem="{Binding SelectedAccount}"
                                                 SelectionChangedCommand="{Binding SelectAccount}"
                                                 SelectionChangedCommandParameter="{Binding Ident}"
@@ -80,36 +124,36 @@
                                                 IsVisible="True"
                                                 HeightRequest="60"
                                                 SelectionMode="Single">
-                                    <CollectionView.ItemsLayout>
-                                        <LinearItemsLayout Orientation="Horizontal"
+                                        <CollectionView.ItemsLayout>
+                                            <LinearItemsLayout Orientation="Horizontal"
                                                            ItemSpacing="{OnPlatform Android='10'}" />
-                                    </CollectionView.ItemsLayout>
+                                        </CollectionView.ItemsLayout>
 
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackLayout Padding="{OnPlatform iOS='2,2,10,2'}"
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout Padding="{OnPlatform iOS='2,2,10,2'}"
                                                          VerticalOptions="FillAndExpand">
-                                                <StackLayout.GestureRecognizers>
-                                                    <TapGestureRecognizer x:Name="FrameIdentGR"
+                                                    <StackLayout.GestureRecognizers>
+                                                        <TapGestureRecognizer x:Name="FrameIdentGR"
                                                                           Tapped="FrameIdentGR_Tapped_1" />
-                                                </StackLayout.GestureRecognizers>
-                                                <VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name="CommonStates">
-                                                        <VisualState x:Name="Normal">
-                                                            <VisualState.Setters>
-                                                                <Setter Property="BackgroundColor"
+                                                    </StackLayout.GestureRecognizers>
+                                                    <VisualStateManager.VisualStateGroups>
+                                                        <VisualStateGroup x:Name="CommonStates">
+                                                            <VisualState x:Name="Normal">
+                                                                <VisualState.Setters>
+                                                                    <Setter Property="BackgroundColor"
                                                                         Value="{AppThemeBinding Light=White, Dark=#494949}" />
-                                                            </VisualState.Setters>
-                                                        </VisualState>
-                                                        <VisualState x:Name="Selected">
-                                                            <VisualState.Setters>
-                                                                <Setter Property="BackgroundColor"
+                                                                </VisualState.Setters>
+                                                            </VisualState>
+                                                            <VisualState x:Name="Selected">
+                                                                <VisualState.Setters>
+                                                                    <Setter Property="BackgroundColor"
                                                                         Value="{AppThemeBinding Light=White, Dark=#494949}" />
-                                                            </VisualState.Setters>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateManager.VisualStateGroups>
-                                                <Frame VerticalOptions="FillAndExpand"
+                                                                </VisualState.Setters>
+                                                            </VisualState>
+                                                        </VisualStateGroup>
+                                                    </VisualStateManager.VisualStateGroups>
+                                                    <Frame VerticalOptions="FillAndExpand"
 
                                                        BorderColor="{Binding Selected, Converter={x:StaticResource Border}}"
                                                        BackgroundColor="{Binding Selected, Converter={x:StaticResource Background}}"
@@ -117,40 +161,29 @@
                                                        HasShadow="False"
                                                        Padding="10"
                                                        CornerRadius="5">
-                                                    <StackLayout VerticalOptions="Start"
+                                                        <StackLayout VerticalOptions="Start"
                                                                  Spacing="0">
-                                                        <Label Text="{Binding Ident}"
+                                                            <Label Text="{Binding Ident}"
                                                                TextColor="{Binding Source={x:Reference FrameIdent}, Path=BorderColor}"
                                                                FontAttributes="Bold"
                                                                FontSize="16" />
-                                                        <Label Text="{Binding Address}"
+                                                            <Label Text="{Binding Address}"
                                                                TextColor="{Binding Source={x:Reference FrameIdent}, Path=BorderColor}"
                                                                FontSize="14" />
-                                                    </StackLayout>
+                                                        </StackLayout>
 
 
-                                                </Frame>
-                                            </StackLayout>
+                                                    </Frame>
+                                                </StackLayout>
 
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                                <Label
-                                    FontSize="13"
-                                    TextColor="Black"
-                                    HorizontalOptions="FillAndExpand"
-                                    HorizontalTextAlignment="Center"
-                                    Text="{x:Static xamarinJkh:AppResources.CallTechText}"></Label>
-                                <Label
-                                    FontSize="13"
-                                    HorizontalOptions="FillAndExpand"
-                                    TextDecorations="Underline"
-                                    x:Name="LabelTechOne"
-                                    HorizontalTextAlignment="Center"
-                                    TextColor="{x:DynamicResource MainColor}"
-                                    Text="{x:Static xamarinJkh:AppResources.CallTech}"></Label>
-                            </StackLayout>
-                        </Frame>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                       
                         
 
                         <ScrollView VerticalOptions="Start"
