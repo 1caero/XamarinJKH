@@ -381,7 +381,7 @@ namespace xamarinJKH.Main
         {
             LoadData = new Command(async () =>
             {
-                bool isPerson = Settings.Person.Accounts.Count > 0;
+                bool isPerson = Settings.Person?.Accounts?.Count > 0;
                 var server = new RestClientMP();
                 var data = Settings.EventBlockData;
                 data = await server.GetEventBlockData();
@@ -400,12 +400,12 @@ namespace xamarinJKH.Main
                     MobileMenu mobileMenu = Settings.MobileSettings.menu.Find(x => x.name_app == "Web-камеры");
                     if (mobileMenu != null)
                     {
-                        ShowCameras = mobileMenu != null && mobileMenu.visible != 0 && Settings.Person.Accounts.Count > 0;
+                        ShowCameras = mobileMenu.visible != 0 && Settings.Person?.Accounts?.Count > 0;
                     }
 
                     if (!RestClientMP.SERVER_ADDR.ToLower().Contains("water"))
                     {
-                        if((!Settings.MobileSettings.enableOSS && !Settings.Person.accessOSS))
+                        if(Settings.Person != null && (!Settings.MobileSettings.enableOSS && !Settings.Person.accessOSS))
                         {
                             ShowOss = false;
                         }
@@ -427,8 +427,8 @@ namespace xamarinJKH.Main
             {
                 try
                 {
-                    if (Settings.EventBlockData.Announcements != null)
-                        AnnounsmentsCount = Settings.EventBlockData.Announcements.Where(x => !x.IsReaded).Count();
+                    if (Settings.EventBlockData?.Announcements != null)
+                        AnnounsmentsCount = Settings.EventBlockData.Announcements.Count(x => !x.IsReaded);
                     else
                         Analytics.TrackEvent($"Announcements is null");
                 }
@@ -440,8 +440,8 @@ namespace xamarinJKH.Main
 
                 try
                 {
-                    if (Settings.EventBlockData.Polls != null)
-                        PollsCount = Settings.EventBlockData.Polls.Where(x => !x.IsReaded).Count();
+                    if (Settings.EventBlockData?.Polls != null)
+                        PollsCount = Settings.EventBlockData.Polls.Count(x => !x.IsReaded);
                     else
                         Analytics.TrackEvent($"Polls is null");
                 }
@@ -453,9 +453,9 @@ namespace xamarinJKH.Main
 
                 try
                 {
-                    if (Settings.EventBlockData.News != null)
-                        if(Settings.Person.Accounts.Count > 0)
-                            NewsCount = Settings.EventBlockData.News.Where(x => !x.IsReaded).Count();
+                    if (Settings.EventBlockData?.News != null)
+                        if(Settings.Person?.Accounts?.Count > 0)
+                            NewsCount = Settings.EventBlockData.News.Count(x => !x.IsReaded);
                         else
                         {
                             NewsCount = 0;
