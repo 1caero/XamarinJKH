@@ -239,20 +239,20 @@ namespace xamarinJKH.Tech
 //                throw ex;
 //            }
 
-            MessagingCenter.Subscribe<ISpeechToText, string>(this, "STT",
-                (sender, args) => { SpeechToTextFinalResultRecieved(args); });
+            //MessagingCenter.Subscribe<ISpeechToText, string>(this, "STT",
+            //    (sender, args) => { SpeechToTextFinalResultRecieved(args); });
 
-            MessagingCenter.Subscribe<ISpeechToText>(this, "Final", (sender) =>
-            {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    new PopupPage();
-                    IconViewMic.ReplaceStringMap = new Dictionary<string, string> {{"#000000", hex.ToHex()}};
-                });
-            });
+            //MessagingCenter.Subscribe<ISpeechToText>(this, "Final", (sender) =>
+            //{
+            //    Device.BeginInvokeOnMainThread(() =>
+            //    {
+            //        new PopupPage();
+            //        IconViewMic.ReplaceStringMap = new Dictionary<string, string> {{"#000000", hex.ToHex()}};
+            //    });
+            //});
 
-            MessagingCenter.Subscribe<IMessageSender, string>(this, "STT",
-                (sender, args) => { SpeechToTextFinalResultRecieved(args); });
+            //MessagingCenter.Subscribe<IMessageSender, string>(this, "STT",
+            //    (sender, args) => { SpeechToTextFinalResultRecieved(args); });
 
 
             messages =
@@ -296,13 +296,13 @@ namespace xamarinJKH.Tech
             };
             BackStackLayout.GestureRecognizers.Add(backClick);
             var sendMess = new TapGestureRecognizer();
-            sendMess.Tapped += async (s, e) => { sendMessage(); };
+            sendMess.Tapped += (s, e) => { sendMessage(); };
             IconViewSend.GestureRecognizers.Add(sendMess);
             // var recordmic = new TapGestureRecognizer();
             // recordmic.Tapped += async (s, e) => { RecordMic(); };
             // IconViewMic.GestureRecognizers.Add(recordmic);
             var addFile = new TapGestureRecognizer();
-            addFile.Tapped += async (s, e) => { addFileApp(); };
+            addFile.Tapped += (s, e) => { addFileApp(); };
             IconViewAddFile.GestureRecognizers.Add(addFile);
 
             setText();
@@ -597,29 +597,42 @@ namespace xamarinJKH.Tech
                 anim.Start();
                 if (!string.IsNullOrWhiteSpace(message))
                 {
-                    // progress.IsVisible = true;
+                    // progress.IsVisible = true;                   
                     IconViewSend.IsEnabled = false;
+                    IconViewMic.IsEnabled = false;
                     IsSucceed result = await _server.AddMessageTech(message, Settings.Person.Phone);
                     if (result.isSucceed)
+                        Device.BeginInvokeOnMainThread(() =>
                     {
-                        EntryMess.Text = "";
 
-                        var lastChild = baseForApp.Children.LastOrDefault();
-                        if (lastChild != null)
-                            Device.BeginInvokeOnMainThread(async () =>
-                                await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, true));
+                        {
+                            EntryMess.Text = "";
+
+                            var lastChild = baseForApp.Children.LastOrDefault();
+                            if (lastChild != null)
+                                Device.BeginInvokeOnMainThread(async () =>
+                                    await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, true));
+                        }
                     }
+                    );
+
+                    
                 }
                 else
                 {
                     await ShowToast(AppResources.ErrorMessageEmpty);
                 }
-                IconViewSend.IsEnabled = true;
+                //IconViewSend.IsEnabled = true;
             }
             catch (Exception e)
             {
                 await ShowToast(AppResources.MessageNotSent);
-                IconViewSend.IsEnabled = true;
+                //IconViewSend.IsEnabled = true;
+            }
+            finally
+            {
+                Device.BeginInvokeOnMainThread(() => { IconViewSend.IsEnabled = true; IconViewMic.IsEnabled = true; });
+                //IconViewSend.IsEnabled = true;
             }
         }
 
@@ -851,7 +864,10 @@ namespace xamarinJKH.Tech
                 }
                 catch (Exception ex)
                 {
+#if DEBUG
                     UpdateTranscription(ex.Message);
+#endif
+                    Analytics.TrackEvent("ошибка при остановке распознавании речи: " + ex.Message);                    
                 }
                 isTranscribing = false;
             }
@@ -859,17 +875,16 @@ namespace xamarinJKH.Tech
             // if not transcribing, start speech recognizer
             else
             {
-                // Device.BeginInvokeOnMainThread(() =>
-                // {
-                //     InsertDateTimeRecord();
-                // });
                 try
                 {
                     await recognizer.StartContinuousRecognitionAsync();
                 }
                 catch (Exception ex)
                 {
+#if DEBUG
                     UpdateTranscription(ex.Message);
+#endif
+                    Analytics.TrackEvent("ошибка при старте распознавании речи: " + ex.Message);
                 }
                 isTranscribing = true;
             }

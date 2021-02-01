@@ -90,8 +90,8 @@
                 <StackLayout
                     Spacing="10"
                     MinimumHeightRequest="50"
-                    Orientation="Horizontal">
-                    <Grid Padding="0">
+                    Orientation="Horizontal" >
+                    <Grid Padding="0" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.06*" />
                             <ColumnDefinition Width="0.8*" />
@@ -116,7 +116,7 @@
                                            Grid.Column="0"
                                            HorizontalOptions="StartAndExpand"
                                            Color="{Binding hex}" />
-                        <xamarinJkh:BordlessEditor x:Name="EntryMess"
+                        <xamarinJkh:BordlessEditor x:Name="EntryMess" 
                                                    FontSize="18"
                                                    VerticalOptions="Center"
                                                    Text=""
