@@ -579,7 +579,7 @@ namespace xamarinJKH.Server
             return response.Data;
         }
 
-        public async Task<IDResult> newAppConst(string ident, string typeID, string Text,
+        public async Task<IDResult> newAppConst(string ident, string typeID, string Text, string Phone = "",
             string AutoLockDisptacherId = "", int? DistrictId = null, int? HouseId = null,
             int? PremiseId = null, string HouseStreet = null, int? SubTypeID = null)
         {
@@ -599,7 +599,8 @@ namespace xamarinJKH.Server
                 HouseId,
                 PremiseId,
                 HouseStreet,
-                SubTypeID
+                SubTypeID,
+                Phone
             });
             var response = await restClientMp.ExecuteTaskAsync<IDResult>(restRequest);
             // Проверяем статус
