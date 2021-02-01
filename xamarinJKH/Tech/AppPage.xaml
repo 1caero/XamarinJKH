@@ -43,8 +43,8 @@
                 </StackLayout>
             </StackLayout>
 
-                <pancakeView:PancakeView CornerRadius="30, 30,0,0" Margin="15, 0, 15, -6" Padding="20,10"  BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=Black}" 
-                                                     BorderThickness="1" HasShadow="False" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
+                <pancakeView:PancakeView CornerRadius="30, 30,0,0" Margin="15, 0, 15, -6" Padding="20,10"  BorderColor="{x:DynamicResource MainColor}" 
+                                                     BorderThickness="{AppThemeBinding Light=1, Dark=0}" HasShadow="False" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
                     <StackLayout Spacing="0" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" Orientation="Horizontal" >                       
                         <xamarinJkh:IconView   x:Name="IconSupport"
                                                            HeightRequest="40"
@@ -85,7 +85,7 @@
                         </StackLayout>
                     </StackLayout>
                 </pancakeView:PancakeView>
-                <pancakeView:PancakeView Elevation="{AppThemeBinding Light=0, Dark=20}"
+                <pancakeView:PancakeView Elevation="{AppThemeBinding Light=0, Dark=20}" BorderColor="{x:DynamicResource MainColor}" BorderThickness="{AppThemeBinding Light=1, Dark=0}"
                                            x:Name="FrameMessage"
                                            CornerRadius="0,0,30,30"
                                            HasShadow="{AppThemeBinding Light=false, Dark=true}"
