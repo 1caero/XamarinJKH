@@ -89,6 +89,9 @@ namespace xamarinJKH
             var nextClick = new TapGestureRecognizer();
             nextClick.Tapped += async (s, e) => { NextQuest(); };
             FrameBtnNext.GestureRecognizers.Add(nextClick);
+            var prevClick = new TapGestureRecognizer();
+            prevClick.Tapped += async (s, e) => { PrevQuest(); };
+            FrameBtnPrev.GestureRecognizers.Add(prevClick);
             var finishClick = new TapGestureRecognizer();
             finishClick.Tapped += async (s, e) => { FinishClick(); };
             FrameBtnFinish.GestureRecognizers.Add(finishClick);
@@ -144,11 +147,11 @@ namespace xamarinJKH
             {                               
                 StackLayout containerPolss = new StackLayout();
 
-                StackLayout radio = new StackLayout();                
+                StackLayout radio = new StackLayout();
 
-                radio.Children.Add(GetButton(AppResources.OSSPersonalFor, false));
-                radio.Children.Add(GetButton(AppResources.OSSPersonalAgainst, false));
-                radio.Children.Add(GetButton(AppResources.OSSPersonalNeutral, false));
+                radio.Children.Add(GetButton(AppResources.OSSPersonalFor, each.AnswerText.Equals(AppResources.OSSPersonalFor),i));
+                radio.Children.Add(GetButton(AppResources.OSSPersonalAgainst, each.AnswerText.Equals(AppResources.OSSPersonalAgainst),i));
+                radio.Children.Add(GetButton(AppResources.OSSPersonalNeutral, each.AnswerText.Equals(AppResources.OSSPersonalNeutral),i));
 
                 containerPolss.Children.Add(radio);
 
@@ -157,7 +160,7 @@ namespace xamarinJKH
             }
         }
 
-        StackLayout GetButton(string text, bool isChecked)
+        StackLayout GetButton(string text, bool isChecked, int i )
         {
             StackLayout horizont = new StackLayout()
             {
@@ -166,9 +169,9 @@ namespace xamarinJKH
             
             RadioButton radioButton = new RadioButton
             {
-                GroupName = "ossGroup",
+                GroupName = "ossGroup " + i,
                 IsChecked = isChecked,
-                BackgroundColor = Color.Transparent
+                BackgroundColor = Color.Transparent,
             };
             Label textRadio = new Label()
             {
@@ -286,6 +289,23 @@ namespace xamarinJKH
                     setVisibleButton();
                 });
             }
+        }  
+        private async void PrevQuest()
+        {
+            //отправка результата на сервер
+          
+                quest--;
+                Device.BeginInvokeOnMainThread(() => {
+                    visibleIndicator(quest, false);
+                    Container.Children.Clear();
+                    Container.Children.Add(_contentQuest[quest]);
+
+                    SetQuestion(quest);
+
+                    ChechQuestions();
+                    isCheched = false;
+                    setVisibleButton();
+                });
         }
 
 
@@ -329,11 +349,18 @@ namespace xamarinJKH
             {
                 FrameBtnNext.IsVisible = false;
                 FrameBtnFinish.IsVisible = true;               
+                FrameBtnPrev.IsVisible = true;               
             }
             else
             {
                 FrameBtnNext.IsVisible = true;
+                FrameBtnPrev.IsVisible = true;  
                 FrameBtnFinish.IsVisible = false;
+            }
+
+            if (quest == 0)
+            {
+                FrameBtnPrev.IsVisible = false;  
             }
         }
 

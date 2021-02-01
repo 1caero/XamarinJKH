@@ -90,7 +90,38 @@
                                         </StackLayout>
                                     </ScrollView>
                                     <StackLayout Orientation="Horizontal"
-                                                 Margin="40, 0, 40, 10">
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Margin="10, 0, 10, 10">
+                                        <Frame CornerRadius="10"
+                                               BackgroundColor="{x:DynamicResource MainColor}"
+                                               HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                               HorizontalOptions="StartAndExpand"
+                                               Margin="0, 10, 0, 0"
+                                               x:Name="FrameBtnPrev"
+                                               Padding="15,12,15,12">
+                                            <StackLayout
+                                                Orientation="Horizontal"
+                                                Spacing="0"
+                                                HorizontalOptions="Center">
+                                                <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                                     HeightRequest="10"
+                                                                     WidthRequest="10"
+                                                                     Margin="0,0,0,-3"
+                                                                     Foreground="White"
+                                                                     Rotation="180"
+                                                                     VerticalOptions="Center"
+                                                                     HorizontalOptions="Center" />
+                                                <Label
+                                                    x:Name="LabelPrev"
+                                                    Text="{x:Static xamarinJkh:AppResources.Back}"
+                                                    FontSize="15"
+                                                    TextColor="White"
+                                                    FontAttributes="Bold"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Center" />
+                                               
+                                            </StackLayout>
+                                        </Frame>
                                         <Frame CornerRadius="10"
                                                BackgroundColor="Red"
                                                HasShadow="{AppThemeBinding Light=false, Dark=true}"
@@ -98,7 +129,7 @@
                                                Margin="0, 10, 0, 0"
                                                IsVisible="False"
                                                x:Name="FrameBtnNext"
-                                               Padding="40,12,40,12">
+                                               Padding="15,12,15,12">
                                             <StackLayout
                                                 Orientation="Horizontal"
                                                 Spacing="0"
@@ -127,7 +158,7 @@
                                                IsVisible="False"
                                                HorizontalOptions="EndAndExpand"
                                                x:Name="FrameBtnFinish"
-                                               Padding="30,12,30,12">
+                                               Padding="15,12,15,12">
                                             <StackLayout
                                                 Orientation="Horizontal"
                                                 Spacing="0"
