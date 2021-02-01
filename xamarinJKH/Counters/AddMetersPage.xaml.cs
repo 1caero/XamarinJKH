@@ -649,6 +649,18 @@ namespace xamarinJKH.Counters
             FrameMeterReading.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
         }
 
+        string checkDouble(string val)
+        {
+            string ds="";
+            double d;
+            var db = Double.TryParse(val.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out d);
+            if (db)
+            {
+                ds = d.ToString(CultureInfo.InvariantCulture);
+            }
+            return ds;
+        }
+
         public async void SaveInfoAccount()
         {
             Analytics.TrackEvent("Передача показаний на сервер");
@@ -661,10 +673,40 @@ namespace xamarinJKH.Counters
             }
             if (!string.IsNullOrEmpty(value1))
             {
-                var d1 = Double.Parse(value1.Replace(',', '.'), CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture);
+                //string d1 = Double.Parse(value1.Replace(',', '.'), CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture);
+                //var d2 = value2 != "" ? Double.Parse(value2.Replace(',', '.'), CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture) : "";
+                //var d3 = value3 != "" ? Double.Parse(value3.Replace(',', '.'), CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture) : "";
 
-                var d2 = value2 != "" ? Double.Parse(value2.Replace(',', '.'), CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture) : "";
-                var d3 = value3 != "" ? Double.Parse(value3.Replace(',', '.'), CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture) : "";
+                var d1 = checkDouble(value1);
+                if (string.IsNullOrWhiteSpace(d1))
+                {
+                    Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.AddMetersNotNumber, "OK"));
+                    return;
+                }
+
+                var d2 = "";
+                if (value2 != "")
+                {
+                    d2 = checkDouble(value2);
+                    if (string.IsNullOrWhiteSpace(d2))
+                    {
+                        Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.AddMetersNotNumber, "OK"));
+                        return;
+                    } 
+                }
+
+                var d3 = "";
+                if (value3 != "")
+                {
+                    d3 = checkDouble(value3);
+                    if (string.IsNullOrWhiteSpace(d3))
+                    {
+                        Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.AddMetersNotNumber, "OK"));
+                        return;
+                    }
+                }
+
+
 
                 progress.IsVisible = true;
                 FrameBtnLogin.IsVisible = false;
