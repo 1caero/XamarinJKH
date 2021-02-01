@@ -88,7 +88,7 @@
                             <!-- -->
                             <!--     </ListView.ItemTemplate> -->
                             <!-- </ListView> -->
-                            
+                            <RefreshView x:Name="messageRefreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
                              <CollectionView 
                              x:Name="additionalList"
                              HorizontalScrollBarVisibility="Never"
@@ -249,7 +249,7 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-                            
+                            </RefreshView>
                             
                             <Label Text="Нет заявок"
                                    VerticalTextAlignment="Center"
