@@ -23,7 +23,9 @@ using Badge.Plugin;
 using Syncfusion.SfPdfViewer.XForms;
 using System.Resources;
 using System.Reflection;
+using Rg.Plugins.Popup.Services;
 using xamarinJKH.AppsConst;
+using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 
 namespace xamarinJKH
@@ -264,6 +266,7 @@ namespace xamarinJKH
                 System.Diagnostics.Debug.WriteLine("Opened");
                 if (rea != null)
                     if (rea.Data != null)
+                        
                         if (rea.Data.ContainsKey("type_push") || rea.Data.ContainsKey("gcm.notification.type_push"))
                         {
                             string o = "";
@@ -326,7 +329,7 @@ namespace xamarinJKH
                                     }
                                 });
                             }
-
+                            
                             if (o.ToLower().Equals("осс"))
                             {
                                 Device.BeginInvokeOnMainThread(async () =>
@@ -344,7 +347,7 @@ namespace xamarinJKH
                                     }
                                 });
                             }
-
+                            
                             if (o.ToLower().Equals("comment"))
                             {
                                 if (rea.Data.ContainsKey("id_request"))
@@ -352,7 +355,7 @@ namespace xamarinJKH
                                     var id = int.Parse(rea.Data["id_request"].ToString());
                                     Analytics.TrackEvent("ключ id_request=" + id);
                                     Analytics.TrackEvent("isCons=" + isCons);
-
+                            
                                     string login = Preferences.Get("login", "");
                                     string pass = Preferences.Get("pass", "");
                                     string loginConst = Preferences.Get("loginConst", "");
@@ -388,7 +391,27 @@ namespace xamarinJKH
                                 {
                                     Analytics.TrackEvent("ключ id_request не найден");
                                 }
-                       
+                            
+                            }
+                            
+                            if (o.ToLower().Equals("support"))
+                            {
+                                
+                                string login = Preferences.Get("login", "");
+                                string pass = Preferences.Get("pass", "");
+                                string loginConst = Preferences.Get("loginConst", "");
+                                string passConst = Preferences.Get("passConst", "");
+                                
+                                LoginResult loginResult = isCons ? await server.LoginDispatcher(loginConst, passConst) : await server.Login(login, pass);
+                                if (!string.IsNullOrWhiteSpace(loginResult.Phone))
+                                {
+                                    await server.RegisterDeviceNotAvtorization(Settings.Person.Phone);
+                                    await MainPage.Navigation.PushModalAsync(new Tech.AppPage());
+                                }
+                                else
+                                {
+                                    await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog());
+                                }                                
                             }
                         }
             };
