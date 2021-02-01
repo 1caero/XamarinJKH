@@ -463,7 +463,7 @@ namespace xamarinJKH.AppsConst
 
             LabelDate.Text = dateMess;
             LabelName.Text = message.AuthorName;
-            LabelText.FormattedText = Settings.FormatedLink(message.Text, Color.Black);
+            LabelText.FormattedText = Settings.FormatedLink(message.Text, Color.White);
             var link = new TapGestureRecognizer();
             link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
             LabelText.GestureRecognizers.Add(link);

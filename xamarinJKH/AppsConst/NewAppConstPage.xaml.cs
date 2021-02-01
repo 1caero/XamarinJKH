@@ -558,7 +558,13 @@ namespace xamarinJKH.AppsConst
                             break;
                     }
                     int? SubTypeID = _model.PodTypSelected?.ID;
-                    IDResult result = await _server.newAppConst(null, typeId, text, "", this.District, this.House, this.Flat, this.Street, SubTypeID);
+                    string phone =  !string.IsNullOrEmpty(EntryPhone.Text) ? EntryPhone.Text
+                        .Replace("+", "")
+                        .Replace(" ", "")
+                        .Replace("(", "")
+                        .Replace(")", "")
+                        .Replace("-", "") : null;;
+                    IDResult result = await _server.newAppConst(null, typeId, text, phone, "", this.District, this.House, this.Flat, this.Street, SubTypeID);
                     await _server.SetReadedFlag(result.ID, true);
 
                     if (result.Error == null)
@@ -600,8 +606,14 @@ namespace xamarinJKH.AppsConst
             {
                 try
                 {
+                    string phone =  !string.IsNullOrEmpty(EntryPhone.Text) ? EntryPhone.Text
+                        .Replace("+", "")
+                        .Replace(" ", "")
+                        .Replace("(", "")
+                        .Replace(")", "")
+                        .Replace("-", "") : null;;
                     string typeId = Convert.ToInt32(Settings.TypeApp[PickerType.SelectedIndex].ID).ToString();
-                    IDResult result = await _server.newAppConst(ident, typeId, text);
+                    IDResult result = await _server.newAppConst(ident, typeId, text, phone);
                     await _server.SetReadedFlag(result.ID, true);
 
                     if (result.Error == null)

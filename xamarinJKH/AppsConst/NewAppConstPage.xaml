@@ -231,6 +231,7 @@
                                         VerticalOptions="End"
                                         HorizontalTextAlignment="Center"
                                         TextColor="#A2A2A2"
+                                        Text=""
                                         HorizontalOptions="FillAndExpand"
                                         Placeholder="+7 (900) 000-0000"
                                         Keyboard="Numeric">
