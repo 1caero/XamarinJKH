@@ -200,15 +200,15 @@ namespace xamarinJKH.DialogViews
 
         void SetImage()
         {
-            if (mInfo.Resource.ToLower().Contains("холодное") || mInfo.Resource.ToLower().Contains("хвс"))
+            if (mInfo.Resource.ToLower().Contains("холод") || mInfo.Resource.ToLower().Contains("хвс"))
             {
                 IconViewImage.Source = ImageSource.FromFile("ic_cold_water");
             }
-            else if (mInfo.Resource.ToLower().Contains("горячее") || mInfo.Resource.ToLower().Contains("гвс"))
+            else if (mInfo.Resource.ToLower().Contains("горяч") || mInfo.Resource.ToLower().Contains("гвс"))
             {
                 IconViewImage.Source = ImageSource.FromFile("ic_heat_water");
             }
-            else if (mInfo.Resource.ToLower().Contains("подог") || mInfo.Resource.ToLower().Contains("отопл"))
+            else if (mInfo.Resource.ToLower().Contains("подог") || mInfo.Resource.ToLower().Contains("отопл")|| mInfo.Resource.ToLower().Contains("тепл"))
             {
                 IconViewImage.Source = ImageSource.FromFile("ic_heat_energ");
             }

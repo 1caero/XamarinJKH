@@ -862,14 +862,14 @@ namespace xamarinJKH.Main
                 }
 
 
-                if (Resource.ToLower().Contains("холодное") || Resource.ToLower().Contains("хвс"))
+                if (Resource.ToLower().Contains("холод") || Resource.ToLower().Contains("хвс"))
                 {
                     img.Source = ImageSource.FromFile("ic_cold_water");
                 }
-                else if (Resource.ToLower().Contains("горячее") || Resource.ToLower().Contains("гвс"))
+                else if (Resource.ToLower().Contains("горяч") || Resource.ToLower().Contains("гвс"))
                 {
                     img.Source = ImageSource.FromFile("ic_heat_water");
-                }else if (Resource.ToLower().Contains("подог") || Resource.ToLower().Contains("отопл"))
+                }else if (Resource.ToLower().Contains("подог") || Resource.ToLower().Contains("отопл")|| Resource.ToLower().Contains("тепл"))
                 {
                     img.Source = ImageSource.FromFile("ic_heat_energ");
                 }

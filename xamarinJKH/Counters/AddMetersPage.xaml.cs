@@ -534,16 +534,16 @@ namespace xamarinJKH.Counters
         void SetTextAndColor()
         {
             OSAppTheme currentTheme = Application.Current.RequestedTheme;
-            if (meter.Resource.ToLower().Contains("холодное") || meter.Resource.ToLower().Contains("хвс"))
+            if (meter.Resource.ToLower().Contains("холод") || meter.Resource.ToLower().Contains("хвс"))
             {
                 img.Source = ImageSource.FromFile("ic_cold_water");
                     meter.Resource += ", м3";
             }
-            else if (meter.Resource.ToLower().Contains("горячее") || meter.Resource.ToLower().Contains("гвс"))
+            else if (meter.Resource.ToLower().Contains("горяч") || meter.Resource.ToLower().Contains("гвс"))
             {
                 img.Source = ImageSource.FromFile("ic_heat_water");
                 
-            }else if (meter.Resource.ToLower().Contains("подог") || meter.Resource.ToLower().Contains("отопл"))
+            }else if (meter.Resource.ToLower().Contains("подог") || meter.Resource.ToLower().Contains("отопл")|| meter.Resource.ToLower().Contains("тепл"))
             {
                 img.Source = ImageSource.FromFile("ic_heat_energ");
             }
