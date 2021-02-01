@@ -1171,7 +1171,7 @@
     <value>Неверный код доступа</value>
   </data>
   <data name="ErrorUserNotFound" xml:space="preserve">
-    <value>Пользователь не найден</value>
+    <value>Неверно введен пароль</value>
   </data>
   <data name="MoveDispatcher" xml:space="preserve">
     <value>Выберите сотрудника:</value>
@@ -1803,5 +1803,17 @@
   </data>
   <data name="TalkMic" xml:space="preserve">
     <value>Говорите...</value>
+  </data>
+  <data name="CallTech" xml:space="preserve">
+    <value>Обратиться в тех.поддержку</value>
+  </data>
+  <data name="CallTechText" xml:space="preserve">
+    <value>По вопросам работы в приложении обращайтесь в тех.поддержку приложения</value>
+  </data>
+  <data name="CallUkText" xml:space="preserve">
+    <value>Если есть вопрос в УК - оформите заявку </value>
+  </data>
+  <data name="CallUk" xml:space="preserve">
+    <value>Обратиться в УК</value>
   </data>
 </root>

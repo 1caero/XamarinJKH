@@ -50,10 +50,30 @@
                                            BackgroundColor="White"
                                            Padding="5,0,5,70" VerticalOptions="FillAndExpand">
                     <Grid>
-                    <ScrollView x:Name="scrollFroAppMessages" VerticalScrollBarVisibility="Never"
-                                VerticalOptions="FillAndExpand">
+                        <StackLayout Margin="0,15,0,0">
+                            <Label
+                                FontSize="13"
+                                TextColor="Black"
+                                HorizontalOptions="FillAndExpand"
+                                Margin="10,0,10,0"
+                                x:Name="LabelUk"
+                                HorizontalTextAlignment="Center"
+                                Text="{x:Static xamarinJkh:AppResources.CallUkText}"></Label>
+                            <Label
+                                FontSize="13"
+                                HorizontalOptions="FillAndExpand"
+                                TextDecorations="Underline"
+                                x:Name="LabelUKLink"
+                                Margin="10,0,10,0"
+                                HorizontalTextAlignment="Center"
+                                TextColor="{x:DynamicResource MainColor}"
+                                Text="{x:Static xamarinJkh:AppResources.CallUk}"></Label>
+                            <ScrollView x:Name="scrollFroAppMessages" VerticalScrollBarVisibility="Never"
+                                        VerticalOptions="FillAndExpand">
                         <StackLayout x:Name="baseForApp" VerticalOptions="FillAndExpand" />
+                       
                     </ScrollView>
+                            </StackLayout>
                         <Frame CornerRadius="10"
                                BackgroundColor="White"
                                IsVisible="False"

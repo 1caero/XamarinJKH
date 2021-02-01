@@ -224,6 +224,11 @@ namespace xamarinJKH.Tech
         public AppPage()
         {
             InitializeComponent();
+           
+            LabelUk.IsVisible = LabelUKLink.IsVisible = App.isStart && Settings.AppIsVisible;
+            
+            LabelUk.Text = LabelUk.Text.Replace("УК", Settings.MobileSettings.main_name);
+            LabelUKLink.Text = LabelUKLink.Text.Replace("УК", Settings.MobileSettings.main_name);
             micService = DependencyService.Resolve<IMicrophoneService>();
             Analytics.TrackEvent("Диалог с техподдержкой ");
 //            try
@@ -298,6 +303,25 @@ namespace xamarinJKH.Tech
             var sendMess = new TapGestureRecognizer();
             sendMess.Tapped += (s, e) => { sendMessage(); };
             IconViewSend.GestureRecognizers.Add(sendMess);
+            
+            var addApp = new TapGestureRecognizer();
+            addApp.Tapped += async (s, e) =>
+            {
+                try
+                {
+                    if (Navigation.NavigationStack.FirstOrDefault(x => x is NewAppPage) == null)
+                    {
+                        await Navigation.PushAsync(new NewAppPage());
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception);
+                }
+                
+                
+            };
+            LabelUKLink.GestureRecognizers.Add(addApp);
             // var recordmic = new TapGestureRecognizer();
             // recordmic.Tapped += async (s, e) => { RecordMic(); };
             // IconViewMic.GestureRecognizers.Add(recordmic);

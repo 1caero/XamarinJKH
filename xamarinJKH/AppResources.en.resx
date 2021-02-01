@@ -1802,4 +1802,16 @@
   <data name="TalkMic" xml:space="preserve">
     <value>Speak ... </value>
   </data>
+  <data name="CallTech" xml:space="preserve">
+    <value>Contact technical support </value>
+  </data>
+  <data name="CallTechText" xml:space="preserve">
+    <value>For questions about working in the application, please contact those. application support </value>
+  </data>
+  <data name="CallUkText" xml:space="preserve">
+    <value>If you have a question in the УК - fill out an application </value>
+  </data>
+  <data name="CallUk" xml:space="preserve">
+    <value>Apply to the УК</value>
+  </data>
 </root>

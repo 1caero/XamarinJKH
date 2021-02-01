@@ -135,10 +135,23 @@
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
                                 </CollectionView>
-
+                                <Label
+                                    FontSize="13"
+                                    TextColor="Black"
+                                    HorizontalOptions="FillAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{x:Static xamarinJkh:AppResources.CallTechText}"></Label>
+                                <Label
+                                    FontSize="13"
+                                    HorizontalOptions="FillAndExpand"
+                                    TextDecorations="Underline"
+                                    x:Name="LabelTechOne"
+                                    HorizontalTextAlignment="Center"
+                                    TextColor="{x:DynamicResource MainColor}"
+                                    Text="{x:Static xamarinJkh:AppResources.CallTech}"></Label>
                             </StackLayout>
                         </Frame>
-
+                        
 
                         <ScrollView VerticalOptions="Start"
                                     x:Name="Scroll"
@@ -158,7 +171,6 @@
 
                                     <StackLayout
                                         Margin="10, 10, 10, 10">
-                                        
                                         <StackLayout
                                             IsVisible="False"
                                             Spacing="0"

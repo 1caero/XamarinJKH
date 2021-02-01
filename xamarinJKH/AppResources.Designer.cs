@@ -637,6 +637,42 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Обратиться в тех.поддержку.
+        /// </summary>
+        internal static string CallTech {
+            get {
+                return ResourceManager.GetString("CallTech", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to По вопросам работы в приложении обращайтесь в тех.поддержку приложения.
+        /// </summary>
+        internal static string CallTechText {
+            get {
+                return ResourceManager.GetString("CallTechText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Обратиться в УК.
+        /// </summary>
+        internal static string CallUk {
+            get {
+                return ResourceManager.GetString("CallUk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Если есть вопрос в УК - оформите заявку .
+        /// </summary>
+        internal static string CallUkText {
+            get {
+                return ResourceManager.GetString("CallUkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отмена.
         /// </summary>
         internal static string Cancel {
@@ -1852,7 +1888,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пользователь не найден.
+        ///   Looks up a localized string similar to Неверно введен пароль.
         /// </summary>
         internal static string ErrorUserNotFound {
             get {

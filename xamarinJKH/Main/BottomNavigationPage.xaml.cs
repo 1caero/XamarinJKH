@@ -224,6 +224,12 @@ namespace xamarinJKH.Main
             });
         }
 
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            App.isStart = false;
+        }
+
         void StartUpdateToken()
         {
             Device.StartTimer(TimeSpan.FromMinutes(5), OnTimerTick);

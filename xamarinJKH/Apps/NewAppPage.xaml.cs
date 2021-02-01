@@ -85,6 +85,7 @@ namespace xamarinJKH.Apps
                     await Navigation.PushAsync(new Tech.AppPage());
             };
             LabelTech.GestureRecognizers.Add(techSend);
+            LabelTechOne.GestureRecognizers.Add(techSend);
             var pickType = new TapGestureRecognizer();
             pickType.Tapped += async (s, e) => {  
                 Device.BeginInvokeOnMainThread(() =>

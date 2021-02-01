@@ -1678,4 +1678,16 @@
   <data name="TalkMic" xml:space="preserve">
     <value>Говоріть ... </value>
   </data>
+  <data name="CallTech" xml:space="preserve">
+    <value>Звернутися в тех.підтримку </value>
+  </data>
+  <data name="CallTechText" xml:space="preserve">
+    <value>З питань роботи в додатку звертайтеся в тех. підтримку додатка </value>
+  </data>
+  <data name="CallUkText" xml:space="preserve">
+    <value>Якщо є питання в КК - оформите заявку </value>
+  </data>
+  <data name="CallUk" xml:space="preserve">
+    <value>Звернутися в КК </value>
+  </data>
 </root>
