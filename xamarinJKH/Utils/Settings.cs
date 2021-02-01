@@ -219,6 +219,16 @@ namespace xamarinJKH.Utils
             }
             
         }
+        public static void SetPhoneTech(string phone)
+        {
+            if (Person == null)
+                Person = new LoginResult()
+                {
+                    Phone = phone
+                };
+            else
+                Person.Phone = phone;
+        }
         
     }
 }

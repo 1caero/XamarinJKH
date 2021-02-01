@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.Server;
@@ -58,6 +59,7 @@ namespace xamarinJKH.DialogViews
                         };
                     else
                         Settings.Person.Phone = replace;
+                    Preferences.Set("techPhone", replace);
                     await _server.RegisterDeviceNotAvtorization(Settings.Person.Phone);
                     await Navigation.PushModalAsync(new AppPage());
                     await PopupNavigation.Instance.PopAsync();

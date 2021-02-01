@@ -630,7 +630,7 @@ _appModel = new AddAppModel()
                                     String image = "";
                                     type_.ID = type.ID;
                                     PodTypes.Add(type_);
-                                    PodTypSelected = PodTypes[0];
+                                    PodTypSelected = null;
                                 });
                             }
                             

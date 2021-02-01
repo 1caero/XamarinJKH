@@ -102,8 +102,10 @@ namespace xamarinJKH.MainConst
                 
 
             // await PopupNavigation.Instance.PushAsync(new TechDialog(false));
-            if (Settings.Person != null && !string.IsNullOrWhiteSpace(Settings.Person.Phone))
+            string phone = Preferences.Get("techPhone", Settings.Person.Phone);
+            if (Settings.Person != null && !string.IsNullOrWhiteSpace(phone))
             {
+                Settings.SetPhoneTech(phone);
                 if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
                     await Navigation.PushModalAsync(new AppPage());
             }
@@ -127,7 +129,6 @@ namespace xamarinJKH.MainConst
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
                     additionalList.HeightRequest = 3000;
-
                     break;
                 default:
                     break;

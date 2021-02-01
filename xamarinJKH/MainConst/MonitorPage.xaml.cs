@@ -87,8 +87,10 @@ namespace xamarinJKH.MainConst
         private async void TechSend(object sender, EventArgs e)
         {
             // await PopupNavigation.Instance.PushAsync(new TechDialog(false));
-            if (Settings.Person != null && !string.IsNullOrWhiteSpace(Settings.Person.Phone))
+            string phone = Preferences.Get("techPhone", Settings.Person.Phone);
+            if (Settings.Person != null && !string.IsNullOrWhiteSpace(phone))
             {
+                Settings.SetPhoneTech(phone);
                 if (Navigation.NavigationStack.FirstOrDefault(x => x is AppPage) == null)
                     await Navigation.PushModalAsync(new AppPage());
             }

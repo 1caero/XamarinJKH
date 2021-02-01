@@ -24,6 +24,8 @@
                 </svg:SvgCachedImage.GestureRecognizers>
             </svg:SvgCachedImage>
             <CollectionView SelectionMode="None"
+                            VerticalScrollBarVisibility="Never"
+                            HorizontalScrollBarVisibility="Never"
                             ItemsSource="{Binding History}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical"/>

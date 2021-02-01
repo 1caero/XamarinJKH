@@ -67,8 +67,10 @@ namespace xamarinJKH.PushNotification
             var techSend = new TapGestureRecognizer();
             techSend.Tapped += async (s, e) =>
             {
-                if (Settings.Person != null && !string.IsNullOrWhiteSpace(Settings.Person.Phone))
+                string phone = Preferences.Get("techPhone", Settings.Person.Phone);
+                if (Settings.Person != null && !string.IsNullOrWhiteSpace(phone))
                 {
+                    Settings.SetPhoneTech(phone);
                     await Navigation.PushModalAsync(new AppPage());
                 }
                 else

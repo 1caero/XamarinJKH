@@ -403,13 +403,17 @@ namespace xamarinJKH
                                 string passConst = Preferences.Get("passConst", "");
                                 
                                 LoginResult loginResult = isCons ? await server.LoginDispatcher(loginConst, passConst) : await server.Login(login, pass);
-                                if (!string.IsNullOrWhiteSpace(loginResult.Phone))
+                                string phone = Preferences.Get("techPhone", loginResult.Phone);
+                                if (!string.IsNullOrWhiteSpace(phone))
                                 {
-                                    await server.RegisterDeviceNotAvtorization(Settings.Person.Phone);
-                                    await MainPage.Navigation.PushModalAsync(new Tech.AppPage());
+                                    Settings.SetPhoneTech(phone);
+                                    await server.RegisterDeviceNotAvtorization(Settings.Person?.Phone);
+                                    if (MainPage.Navigation.NavigationStack.FirstOrDefault(x => x is Tech.AppPage) == null)
+                                        await MainPage.Navigation.PushModalAsync(new Tech.AppPage());
                                 }
                                 else
                                 {
+                                    
                                     await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog());
                                 }                                
                             }
@@ -429,6 +433,8 @@ namespace xamarinJKH
                 }
             };
         }
+
+      
 
         async void pExec(FirebasePushNotificationResponseEventArgs p)
         {

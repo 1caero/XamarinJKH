@@ -37,8 +37,10 @@ namespace xamarinJKH.Monitor
         {
 
             // await PopupNavigation.Instance.PushAsync(new TechDialog(false));
-            if (Settings.Person != null && !string.IsNullOrWhiteSpace(Settings.Person.Phone))
+            string phone = Preferences.Get("techPhone", Settings.Person.Phone);
+            if (Settings.Person != null && !string.IsNullOrWhiteSpace(phone))
             {
+                Settings.SetPhoneTech(phone);
                 if (Navigation.NavigationStack.FirstOrDefault(x => x is Tech.AppPage) == null)
                     await Navigation.PushModalAsync(new Tech.AppPage());
             }

@@ -303,8 +303,10 @@ namespace xamarinJKH
         private async void Tech(object sender, EventArgs e)
         {
             // await PopupNavigation.Instance.PushAsync(new TechDialog(false));
-            if (Settings.Person != null && !string.IsNullOrWhiteSpace(Settings.Person.Phone))
+            string phone = Preferences.Get("techPhone", Settings.Person.Phone);
+            if (Settings.Person != null && !string.IsNullOrWhiteSpace(phone))
             {
+                Settings.SetPhoneTech(phone);
                 await _server.RegisterDeviceNotAvtorization(Settings.Person.Phone);
                 await Navigation.PushModalAsync(new AppPage());
             }
