@@ -14,6 +14,7 @@ using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using System.Linq;
+using System.Text.RegularExpressions;
 using xamarinJKH.Utils;
 
 namespace xamarinJKH.MainConst
@@ -174,11 +175,20 @@ namespace xamarinJKH.MainConst
 
         public async void SaveInfoAccount(string fio, string email)
         {
+            Regex regex = new Regex(@"^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-zA-Z0-9А-Яа-я]+(\.[a-zA-Z0-9А-Яа-я]+)*\.[a-zA-ZА-Яа-я]{2,6}$");
             if (fio != "" && email != "")
             {
                 progress.IsVisible = true;
                 FrameBtnLogin.IsVisible = false;
                 progress.IsVisible = true;
+                if (!regex.IsMatch(email))
+                {
+                    await DisplayAlert(null, AppResources.CorrectEmail, "OK");
+                    progress.IsVisible = false;
+                    FrameBtnLogin.IsVisible = true;
+                    return;
+                }
+
                 CommonResult result = await _server.UpdateProfileConst(email, fio);
                 if (result.Error == null)
                 {
