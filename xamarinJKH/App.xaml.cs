@@ -408,7 +408,7 @@ namespace xamarinJKH
                                 {
                                     Settings.SetPhoneTech(phone);
                                     await server.RegisterDeviceNotAvtorization(Settings.Person?.Phone);
-                                    if (MainPage.Navigation.NavigationStack.FirstOrDefault(x => x is Tech.AppPage) == null)
+                                    if (MainPage.Navigation.NavigationStack==null || MainPage.Navigation.NavigationStack.FirstOrDefault(x => x is Tech.AppPage) == null)
                                         await MainPage.Navigation.PushModalAsync(new Tech.AppPage());
                                 }
                                 else
