@@ -35,6 +35,7 @@ namespace xamarinJKH.MainConst
         public int fontSize2 { get; set; }
         public int fontSize3 { get; set; }
         public int StarSize { get; set; }
+        public bool isRunning = false;
 
         private List<string> period = new List<string>()
             {AppResources.TodayPeriod, AppResources.WeekPeriod, AppResources.MonthPeriod};
@@ -231,10 +232,15 @@ namespace xamarinJKH.MainConst
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-
+            isRunning = true;
             //await StartStatistick();
         }
 
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            isRunning = false;
+        }
 
         public RestClientMP _server = new RestClientMP();
         private int Ryon = -1;
@@ -267,6 +273,8 @@ namespace xamarinJKH.MainConst
 
         void setMonitoring(RequestStats result)
         {
+            if(!isRunning)
+                return;
             List<PeriodStats> periodStatses = new List<PeriodStats>();
             periodStatses.Add(result.Today);
             periodStatses.Add(result.Week);
@@ -282,28 +290,7 @@ namespace xamarinJKH.MainConst
                 LayoutContent.Children.Add(container);
             }
         }
-
-        //void setMonitoringMultiple(List<RequestStats> result)
-        //{
-
-        //    LayoutContent.Children.Clear();
-        //    foreach (var res in result)
-        //    {
-        //        List<PeriodStats> periodStatses = new List<PeriodStats>();
-        //        periodStatses.Add(res.Today);
-        //        periodStatses.Add(res.Week);
-        //        periodStatses.Add(res.Month);
-        //        setNotDoingApps(res.TotalUnperformedRequestsList);
-        //        int i = 0;
-        //        foreach (var each in periodStatses)
-        //        {
-        //            var container = AddMonitorPeriod(i, each, DateTime.Now);
-
-        //            i++;
-        //            LayoutContent.Children.Add(container);
-        //        }
-        //    }
-        //}
+        
 
         private StackLayout AddCalendar(int period, DateTime isReplace)
         {
@@ -388,7 +375,7 @@ namespace xamarinJKH.MainConst
                         if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
                         {
                             var container = AddMonitorPeriod(0, result.Data[0].CustomPeriod, dt.Date);
-                            if (LayoutContent != null && LayoutContent.Children.Count > 0)
+                            if (LayoutContent != null && LayoutContent?.Children?.Count > 0)
                                 LayoutContent.Children[0] = container;
                             colapseAllByName(this.period[0]);
                             colapseAll(this.period[0]);
@@ -433,7 +420,7 @@ namespace xamarinJKH.MainConst
                         if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
                         {
                             var container = AddMonitorPeriod(1, result.Data[0].CustomPeriod, dt.StartDate.Date);
-                            if (LayoutContent != null && LayoutContent.Children.Count > 0)
+                            if (LayoutContent != null && LayoutContent?.Children?.Count > 0)
                                 LayoutContent.Children[1] = container;
                             colapseAllByName(this.period[1]);
                             colapseAll(this.period[1]);
@@ -492,7 +479,7 @@ namespace xamarinJKH.MainConst
                         if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
                         {
                             var container = AddMonitorPeriod(2, result.Data[0].CustomPeriod, dt.Date);
-                            if (LayoutContent != null && LayoutContent.Children.Count > 0)
+                            if (LayoutContent != null && LayoutContent?.Children?.Count > 0)
                                 LayoutContent.Children[2] = container;
                             colapseAllByName(this.period[2]);
                             colapseAll(this.period[2]);
@@ -763,7 +750,7 @@ namespace xamarinJKH.MainConst
 
             Label labelCountNotDoing = new Label()
             {
-                Text = each.UnperformedRequestsList.Count.ToString(),
+                Text = each.UnperformedRequestsList?.Count.ToString(),
                 TextColor = hex,
                 FontSize = fontSize,
                 FontAttributes = FontAttributes.Bold
@@ -772,7 +759,7 @@ namespace xamarinJKH.MainConst
             var forwardAppsNot = new TapGestureRecognizer();
             forwardAppsNot.Tapped += async (s, e) =>
             {
-                if (each.UnperformedRequestsList.Count > 0)
+                if (each.UnperformedRequestsList?.Count > 0)
                 {
                     if (Navigation.NavigationStack.FirstOrDefault(x => x is MonitorAppsPage) == null)
                         await Navigation.PushAsync(new MonitorAppsPage(each.UnperformedRequestsList));
@@ -858,7 +845,7 @@ namespace xamarinJKH.MainConst
 
             Label labelCountUnperformed = new Label()
             {
-                Text = each.OverdueRequestsList.Count.ToString(),
+                Text = each.OverdueRequestsList?.Count.ToString(),
                 TextColor = hex,
                 FontSize = fontSize,
                 FontAttributes = FontAttributes.Bold
@@ -877,7 +864,7 @@ namespace xamarinJKH.MainConst
             var forwardAppsUnper = new TapGestureRecognizer();
             forwardAppsUnper.Tapped += async (s, e) =>
             {
-                if (each.OverdueRequestsList.Count > 0)
+                if (each.OverdueRequestsList?.Count > 0)
 
                     if (Navigation.NavigationStack.FirstOrDefault(x => x is MonitorAppsPage) == null)
                         await Navigation.PushAsync(new MonitorAppsPage(each.OverdueRequestsList));
@@ -964,7 +951,7 @@ namespace xamarinJKH.MainConst
                 List<Requests> requests = getRequestsStar(each, j);
                 forwardStar.Tapped += async (s, e) =>
                 {
-                    if (requests.Count > 0)
+                    if (requests?.Count > 0)
                     {
                         if (Navigation.NavigationStack.FirstOrDefault(x => x is MonitorAppsPage) == null)
                             await Navigation.PushAsync(new MonitorAppsPage(requests));
@@ -1065,12 +1052,14 @@ namespace xamarinJKH.MainConst
         private void AutoCompleteHouses_OnFocusChanged(object sender, FocusChangedEventArgs e)
         {
             // (sender as SfAutoComplete).Unfocus();
+            if(!isRunning)
+                return;
             try
             {
                 var result = new List<NamedValue>();
                 var selected = AreaGroups.SelectedItem as IEnumerable<Object>;
                 var selected_indecies = selected.Select(x => (x as NamedValue).ID).ToList();
-                if (selected != null || selected_indecies.Count > 0)
+                if (selected != null || selected_indecies?.Count > 0)
                 {
                     result.AddRange(Groups.Where(x => !selected_indecies.Contains(x.ID)));
                     AreaGroups.DataSource = result;
@@ -1085,6 +1074,8 @@ namespace xamarinJKH.MainConst
         }
         public async Task StartStatistick(bool isGroup = true)
         {
+            if(!isRunning)
+                return;
             // Loading settings
             Configurations.LoadingConfig = new LoadingConfig
             {
@@ -1114,7 +1105,7 @@ namespace xamarinJKH.MainConst
                     {
                         AreaGroups.DataSource = Groups;
                     }
-                    AreaGroups.IsVisible = Groups.Count() == 0;
+                    AreaGroups.IsVisible = Groups?.Count() == 0;
                 }
                 //if (isGroup)
                 //    await getHouseGroups();
@@ -1151,6 +1142,8 @@ namespace xamarinJKH.MainConst
 
         void colapseAll(string name)
         {
+            if(!isRunning)
+                return;
             try
             {
                 if (_visibleModels != null)
@@ -1170,6 +1163,8 @@ namespace xamarinJKH.MainConst
         }
         void colapseAllByName(string name)
         {
+            if(!isRunning)
+                return;
             try
             {
                 if (_visibleModels != null)
@@ -1190,6 +1185,8 @@ namespace xamarinJKH.MainConst
 
         async Task getHouseGroups()
         {
+            if(!isRunning)
+                return;
             if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () =>
@@ -1205,8 +1202,8 @@ namespace xamarinJKH.MainConst
                 string[] param = null;
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    if (groups.Data != null)
-                    if (groups.Data.Count > 0)
+                    if (groups?.Data != null)
+                    if (groups?.Data?.Count > 0)
                     {
                         foreach (var group in groups.Data)
                         {
@@ -1222,7 +1219,7 @@ namespace xamarinJKH.MainConst
                         street = SelectedArea.Name;
                     }
 
-                    HouseGroups.IsVisible = Areas.Count > 0;
+                    HouseGroups.IsVisible = Areas?.Count > 0;
                     
                     //await getMonitorStandart(Int32.Parse(HousesGroup[SelectedArea.Name]));
                 });
@@ -1247,6 +1244,8 @@ namespace xamarinJKH.MainConst
 
         async Task getHouse()
         {
+            if(!isRunning)
+                return;
             if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () =>
@@ -1271,7 +1270,7 @@ namespace xamarinJKH.MainConst
                                 Streets.Add(group);
                         }
 
-                        HousesList.IsVisible = Streets.Count > 0;
+                        HousesList.IsVisible = Streets?.Count > 0;
                         //SelectedStreet = Streets[0];
                         //Streets[0].Selected = true;
                         // StreetsCollection.ScrollTo(Streets[0]);
@@ -1310,43 +1309,58 @@ namespace xamarinJKH.MainConst
 
         void setListGroups(ItemsList<NamedValue> groups, ref string[] param)
         {
+            if(!isRunning)
+                return;
             HousesGroup = new Dictionary<string, string>();
-            param = new string [groups.Data.Count];
-            int i = 0;
-            foreach (var each in groups.Data)
+            if (groups != null)
             {
-                HousesGroup.Add(each.Name, each.ID.ToString());
-                param[i] = each.Name;
-                i++;
+                if (groups.Data != null)
+                {
+                    param = new string [groups.Data.Count];
+                    int i = 0;
+                    foreach (var each in groups.Data)
+                    {
+                        HousesGroup.Add(each.Name, each.ID.ToString());
+                        param[i] = each.Name;
+                        i++;
+                    }
+                }
             }
         }
 
         void setListHouse(ItemsList<HouseProfile> groups, ref string[] param)
         {
+            if(!isRunning)
+                return;
             Houses = new Dictionary<string, string>();
-            param = new string [groups.Data.Count];
-            int i = 0;
-            foreach (var each in groups.Data)
+            if (groups?.Data != null)
             {
-                try
+                param = new string [groups.Data.Count];
+                int i = 0;
+                foreach (var each in groups.Data)
                 {
-                    if (each.Address != null)
+                    try
                     {
-                        Houses.Add(each.Address, each.ID.ToString());
-                        param[i] = each.Address;
+                        if (each.Address != null)
+                        {
+                            Houses.Add(each.Address, each.ID.ToString());
+                            param[i] = each.Address;
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
 
-                i++;
+                    i++;
+                }
             }
         }
 
         void setCustumerXaml(ref Grid grid, PeriodStats periodStats)
         {
+            if(!isRunning)
+                return;
             Dictionary<string, int> UnperformedMap = setPerformer(periodStats.UnperformedRequestsList);
             Dictionary<string, int> Overdue = setPerformer(periodStats.OverdueRequestsList);
 
@@ -1375,6 +1389,8 @@ namespace xamarinJKH.MainConst
         private void VisiblePerformers(Grid grid, Dictionary<string, int> UnperformedMap, int position,
             List<Requests> requestses, bool space = true)
         {
+            if(!isRunning)
+                return;
             int j = space ? 1 : 0;
 
             foreach (var each in UnperformedMap)
@@ -1435,7 +1451,7 @@ namespace xamarinJKH.MainConst
                 List<Requests> requests = getRequests(each.Key, requestses);
                 forwardAppsNot.Tapped += async (s, e) =>
                 {
-                    if (requests.Count > 0)
+                    if (requests?.Count > 0)
                     {
                         if (Navigation.NavigationStack.FirstOrDefault(x => x is MonitorAppsPage) == null)
                             await Navigation.PushAsync(new MonitorAppsPage(requests));
@@ -1491,6 +1507,8 @@ namespace xamarinJKH.MainConst
 
         void setNotDoingApps(List<Requests> requestses)
         {
+            if(!isRunning)
+                return;
             MaterialFrameNotDoingContainer.IsVisible = true;
             LayoutGrid.Children.Clear();
             Grid grid = new Grid
@@ -1610,6 +1628,8 @@ namespace xamarinJKH.MainConst
 
         private void SetAdminName()
         {
+            if(!isRunning)
+                return;
             FormattedString formatted = new FormattedString();
             OSAppTheme currentTheme = Application.Current.RequestedTheme;
             //if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.iOS)
@@ -1741,6 +1761,8 @@ namespace xamarinJKH.MainConst
 
         private void pickerType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(!isRunning)
+                return;
             try
             {
                 Device.BeginInvokeOnMainThread(async () =>
@@ -1766,6 +1788,8 @@ namespace xamarinJKH.MainConst
 
         private void PickerHouse_OnSelectedIndexChanged(object sender, EventArgs e)
         {
+            if(!isRunning)
+                return;
             try
             {
                 Device.BeginInvokeOnMainThread(async () =>
@@ -1802,6 +1826,8 @@ namespace xamarinJKH.MainConst
         private List<int> GroupIDs { get; set; }
         private async void Button_Clicked(object sender, EventArgs e)
         {
+            if(!isRunning)
+                return;
             var queries = new List<RequestStatsQuerySettings>();
             if (HouseIDs == null)
                 HouseIDs = new List<int>();
@@ -1809,7 +1835,7 @@ namespace xamarinJKH.MainConst
                 AreaIDs = new List<int>();
             if (GroupIDs == null)
                 GroupIDs = new List<int>();
-            if (HouseIDs.Count > 0)
+            if (HouseIDs?.Count > 0)
             for (int i = 0; i < HouseIDs.Count(); i++)
             {
                 try
@@ -1825,9 +1851,9 @@ namespace xamarinJKH.MainConst
                 catch (Exception ex)
                 { }
             }
-            else if (AreaIDs.Count > 0)
+            else if (AreaIDs?.Count > 0)
             {
-                for (int i = 0; i < AreaIDs.Count(); i++)
+                for (int i = 0; i < AreaIDs?.Count(); i++)
                 {
                     try
                     {
@@ -1843,9 +1869,9 @@ namespace xamarinJKH.MainConst
                     { }
                 }
             }
-            else if (GroupIDs.Count > 0)
+            else if (GroupIDs?.Count > 0)
             {
-                for (int i = 0; i < GroupIDs.Count(); i++)
+                for (int i = 0; i < GroupIDs?.Count(); i++)
                 {
                     try
                     {
@@ -1861,7 +1887,7 @@ namespace xamarinJKH.MainConst
                     { }
                 }
             }
-            else if (queries.Count == 0)
+            else if (queries?.Count == 0)
             {
                 queries.Add(new RequestStatsQuerySettings
                 {
@@ -1871,7 +1897,7 @@ namespace xamarinJKH.MainConst
                 });
             }
 
-            if (queries.Count == 0)
+            if (queries?.Count == 0)
             {
                 queries.Add(new RequestStatsQuerySettings
                 {
@@ -1935,6 +1961,8 @@ namespace xamarinJKH.MainConst
 
         private void HouseGroups_SelectionChanged(object sender, Syncfusion.SfAutoComplete.XForms.SelectionChangedEventArgs e)
         {
+            if(!isRunning)
+                return;
             try
             {
                 if (AreaIDs == null)
@@ -1958,6 +1986,8 @@ namespace xamarinJKH.MainConst
 
         private void Houses_SelectionChanged(object sender, Syncfusion.SfAutoComplete.XForms.SelectionChangedEventArgs e)
         {
+            if(!isRunning)
+                return;
             try
             {
                 if (HouseIDs == null)
@@ -2012,6 +2042,8 @@ namespace xamarinJKH.MainConst
         }
         private void FoldAreaGroup(object sender, EventArgs args)
         {
+            if(!isRunning)
+                return;
             GroupVisible = !GroupVisible;
             AreaGroups.IsVisible = !GroupVisible;
         }
@@ -2028,6 +2060,8 @@ namespace xamarinJKH.MainConst
 
         private void AreaGroups_SelectionChanged(object sender, Syncfusion.SfAutoComplete.XForms.SelectionChangedEventArgs e)
         {
+            if(!isRunning)
+                return;
             if (GroupIDs == null)
                 GroupIDs = new List<int>();
 
@@ -2045,6 +2079,8 @@ namespace xamarinJKH.MainConst
         private void HouseGroups_FocusChanged(object sender, FocusChangedEventArgs e)
         {
             // (sender as SfAutoComplete).Unfocus();
+            if(!isRunning)
+                return;
             try
             {
                 if (Groups.Count > 0)
@@ -2052,11 +2088,11 @@ namespace xamarinJKH.MainConst
                     var result = new List<NamedValue>();
                     if ((AreaGroups.SelectedItem != null))
                     {
-                        if ((AreaGroups.SelectedItem as IEnumerable<Object>).Count() > 0)
+                        if ((AreaGroups.SelectedItem as IEnumerable<Object>)?.Count() > 0)
                         {
                             if (AreaGroups.SelectedItem != null)
                             {
-                                if ((AreaGroups.SelectedItem as IEnumerable<Object>).Count() > 0)
+                                if ((AreaGroups.SelectedItem as IEnumerable<Object>)?.Count() > 0)
                                 {
                                     var indecies = (AreaGroups.SelectedItem as IEnumerable<Object>).Select(x => (x as NamedValue).ID).ToList();
                                     result.AddRange(Areas.Where(x => indecies.Contains(x.Value)));
@@ -2130,6 +2166,8 @@ namespace xamarinJKH.MainConst
         private void HousesList_FocusChanged(object sender, FocusChangedEventArgs e)
         {
             // (sender as SfAutoComplete).Unfocus();
+            if(!isRunning)
+                return;
             try
             {
                 var selected = HousesList.SelectedItem as IEnumerable<Object>;

@@ -233,7 +233,14 @@ namespace xamarinJKH.AppsConst
             newDate = dateMess;
 
             LabelDateA.Text = dateMess;
-            LabelTextA.FormattedText = Settings.FormatedLink(message.Text, Color.White);
+            if (message.IsHidden)
+            {
+                LabelTextA.FormattedText = Settings.FormatedLink(message.Text, Color.Black);
+            }
+            else
+            {
+                LabelTextA.FormattedText = Settings.FormatedLink(message.Text, Color.White);
+            }
             var link = new TapGestureRecognizer();
             link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
             LabelTextA.GestureRecognizers.Add(link);
@@ -463,7 +470,12 @@ namespace xamarinJKH.AppsConst
 
             LabelDate.Text = dateMess;
             LabelName.Text = message.AuthorName;
-            LabelText.FormattedText = Settings.FormatedLink(message.Text, Color.White);
+            if(message.IsHidden)
+                LabelText.FormattedText = Settings.FormatedLink(message.Text, Color.Black);
+            else
+            {
+                LabelText.FormattedText = Settings.FormatedLink(message.Text, Color.White);  
+            }
             var link = new TapGestureRecognizer();
             link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
             LabelText.GestureRecognizers.Add(link);
