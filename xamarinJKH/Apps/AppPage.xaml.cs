@@ -318,9 +318,10 @@ namespace xamarinJKH.Apps
             };
             BackStackLayout.GestureRecognizers.Add(backClick);
             var sendMess = new TapGestureRecognizer();
-            sendMess.Tapped += async (s, e) =>
+            sendMess.Tapped += (s, e) =>
             {
-                sendMessage();
+                // sendMessage();
+                Device.BeginInvokeOnMainThread(() => sendMessage());
             };
             IconViewSend.GestureRecognizers.Add(sendMess);
             var recordmic = new TapGestureRecognizer();

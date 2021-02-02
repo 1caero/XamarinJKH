@@ -460,7 +460,10 @@ namespace xamarinJKH.AppsConst
             backClick.Tapped += async (s, e) => { await ClosePage(); };
             BackStackLayout.GestureRecognizers.Add(backClick);
             var sendMess = new TapGestureRecognizer();
-            sendMess.Tapped += async (s, e) => { sendMessage(); };
+            sendMess.Tapped += (s, e) => {
+                //sendMessage(); 
+                Device.BeginInvokeOnMainThread(() => sendMessage());
+            };
             IconViewSend.GestureRecognizers.Add(sendMess);
             var addFile = new TapGestureRecognizer();
             addFile.Tapped += async (s, e) => { addFileApp(); };
@@ -480,8 +483,12 @@ namespace xamarinJKH.AppsConst
             };
 
             MessagingCenter.Subscribe<Object, KeyValuePair<int, string>>(this, "performApp", (sender, kvp) => {
-                EntryMess.Text = kvp.Value;
-                performApp(); 
+                Device.BeginInvokeOnMainThread(() => {
+                    EntryMess.Text = kvp.Value;
+                    performApp();
+                });
+                //EntryMess.Text = kvp.Value;
+                //performApp(); 
             });
 
 
@@ -915,14 +922,21 @@ namespace xamarinJKH.AppsConst
             progressFile.IsVisible = false;
         }
 
+        DateTime checkBot = DateTime.Now.AddMinutes(-1);
         async void sendMessage()
         {
+            //чаще 1 раза в секунду отправлять не давать. спам. 
+            if (checkBot > DateTime.Now.AddSeconds(-1))
+                return;
+            checkBot = DateTime.Now;
+
             string message = EntryMess.Text;
 
             if (!string.IsNullOrWhiteSpace(message))
             {
                 progress.IsVisible = true;
                 IconViewSend.IsVisible = false;
+                await Task.Delay(300);
 
                 bool hidden = CheckBoxHidden.IsChecked;
                 if (Settings.Person.UserSettings.AlwaysPostHiddenMessage)
