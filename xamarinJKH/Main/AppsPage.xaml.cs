@@ -264,8 +264,8 @@ namespace xamarinJKH.Main
             // additionalList.BackgroundColor = Color.Transparent;
             // additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
             this.CancellationTokenSource = new CancellationTokenSource();
-            MessagingCenter.Subscribe<Object>(this, "UpdateAppCons", (sender) => RefreshData());
-            Analytics.TrackEvent("Заявки жителя-UpdateAppCons подписались");
+            //MessagingCenter.Subscribe<Object>(this, "UpdateAppCons", (sender) => RefreshData()); зачем тут обновлять заявки, при изменении заявок у "сотрудника"?
+            //Analytics.TrackEvent("Заявки жителя-UpdateAppCons подписались");
             MessagingCenter.Subscribe<Object, int>(this, "CloseAPP", async (sender, args) =>
             {
                 await RefreshData();

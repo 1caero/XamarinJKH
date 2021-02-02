@@ -55,6 +55,7 @@ namespace xamarinJKH.DialogViews
             CloseAppButtonTgr.Tapped += (s, e) => { Device.BeginInvokeOnMainThread(async () => {
                 try
                 {
+                    CloseAppButton.IsEnabled = false;
                     if (!ClosingApp)
                     {
                         ClosingApp = true;
@@ -70,6 +71,7 @@ namespace xamarinJKH.DialogViews
                 finally
                 {
                     ClosingApp = false;
+                    CloseAppButton.IsEnabled = true;
                 }
             }); };
             CloseAppButton.GestureRecognizers.Add(CloseAppButtonTgr);
