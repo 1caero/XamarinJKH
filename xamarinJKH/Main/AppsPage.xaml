@@ -66,7 +66,7 @@
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>-->
                         <ActivityIndicator  x:Name="aIndicator" Color="{x:DynamicResource MainColor}" Scale="2"   Margin="20"                                        
-                                          IsRunning="True" IsEnabled="True" IsVisible="false" 
+                                          IsRunning="True" IsEnabled="True" IsVisible="{Binding IsRefreshing}" 
                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></ActivityIndicator>
                         <Label  Text="Нет заявок"
                                 VerticalOptions="Center"
@@ -83,7 +83,7 @@
                              VerticalScrollBarVisibility="Never"
                              SelectedItem="{Binding SelectedRequest}"                            
                              SelectionChanged="AdditionalList_OnSelectionChanged"
-                             ItemsSource="{Binding Requests, Mode=TwoWay}"
+                             ItemsSource="{Binding Requests, Mode=TwoWay}"                            
                              VerticalOptions="FillAndExpand">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Vertical"

@@ -173,7 +173,9 @@ namespace xamarinJKH.AppsConst
         {
             try
             {
-                TokenSource.Cancel();
+                MessagingCenter.Unsubscribe<Object, KeyValuePair<int, string>>(this, "performApp");
+
+                    TokenSource.Cancel();
                 TokenSource.Dispose();
             }
             catch
@@ -653,6 +655,7 @@ namespace xamarinJKH.AppsConst
 
         private async Task ClosePage()
         {
+            MessagingCenter.Unsubscribe<Object, KeyValuePair<int, string>>(this, "performApp");
             MessagingCenter.Send<Object>(this, "UpdateAppCons");
             if (close)
             {
