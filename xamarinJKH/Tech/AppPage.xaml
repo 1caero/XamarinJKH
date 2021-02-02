@@ -45,7 +45,7 @@
 
                 <pancakeView:PancakeView CornerRadius="30, 30,0,0" Margin="15, 0, 15, -6" Padding="20,10"  BorderColor="{x:DynamicResource MainColor}" 
                                                      BorderThickness="{AppThemeBinding Light=1, Dark=0}" HasShadow="False" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
-                    <StackLayout Spacing="0" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" Orientation="Horizontal" >                       
+                    <StackLayout Spacing="0" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" Orientation="Horizontal" x:Name="LabelUKLinkStack" >                       
                         <xamarinJkh:IconView   x:Name="IconSupport"
                                                            HeightRequest="40"
                                                            HorizontalOptions="Start"
@@ -65,8 +65,7 @@
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span FontAttributes="Bold" FontSize="12" Text="{x:Static xamarinJkh:AppResources.CallUkText1}" TextColor="{AppThemeBinding Dark=White, Light=Black}">
-                                        </Span>
-                                        <Span Text=" "></Span>
+                                        </Span>                                        
                                         <Span FontSize="12" x:Name="LabelUk" Text="{x:Static xamarinJkh:AppResources.CallUkText}" TextColor="{AppThemeBinding Dark=White, Light=Black}">
                                         </Span>
                                     </FormattedString>

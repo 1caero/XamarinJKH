@@ -324,7 +324,8 @@ namespace xamarinJKH.Tech
                 
                 
             };
-            LabelUKLink.GestureRecognizers.Add(addApp);
+            //LabelUKLink.GestureRecognizers.Add(addApp);
+            LabelUKLinkStack.GestureRecognizers.Add(addApp);
             // var recordmic = new TapGestureRecognizer();
             // recordmic.Tapped += async (s, e) => { RecordMic(); };
             // IconViewMic.GestureRecognizers.Add(recordmic);
