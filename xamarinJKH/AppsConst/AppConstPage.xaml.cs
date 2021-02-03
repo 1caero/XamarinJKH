@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -103,8 +104,22 @@ namespace xamarinJKH.AppsConst
                 {
                    
                         await Task.Delay(TimeSpan.FromSeconds(2));
+#if DEBUG
+                    Console.WriteLine($"UpdateTask autoUpdateRun={autoUpdateRun} {DateTime.Now.ToString("F.fffff")}");
+#endif
+                    if (autoUpdateRun)
+                        return;
+
+#if DEBUG
+                    Console.WriteLine($"автообновление выполняется UpdateTask {DateTime.Now}");
+#endif
+
+                    //Device.BeginInvokeOnMainThread(() => autoUpdateRun = true);
                     autoUpdateRun = true;
-                        var update =
+#if DEBUG
+                    Console.WriteLine($"UpdateTask autoUpdateRun={autoUpdateRun} {DateTime.Now.ToString("F.fffff")}");
+#endif
+                    var update =
                             await _server.GetRequestsUpdatesConst(Settings.UpdateKey, _requestInfo.ID.ToString());
                         if (update.Error == null)
                         {
@@ -117,13 +132,18 @@ namespace xamarinJKH.AppsConst
                                 if (request.Messages.Count() > 0)
                                 foreach (var each in update.CurrentRequestUpdates.Messages)
                                 {
-                                    if (!messages.Contains(each))
-                                        Device.BeginInvokeOnMainThread(async () =>
+                                    if (!messages.Contains(each) && !messages.Any(_ => _.ID == each.ID))
                                         {
-                                            addAppMessage(each,
-                                                messages.Count > 1 ? messages[messages.Count - 2].AuthorName : null);
-                                        });
-                                }
+                                            messages.Add(each);
+                                            Device.BeginInvokeOnMainThread(() =>
+                                            {
+                                                //messages.Add(each);
+                                                addAppMessage(each,
+                                                    messages.Count > 1 ? messages[messages.Count - 2].AuthorName : null);
+                                            });
+                                        }
+
+                                    }
                                 Device.BeginInvokeOnMainThread(async () =>
                                 {
                                     var lastChild = baseForApp.Children.LastOrDefault();
@@ -141,11 +161,19 @@ namespace xamarinJKH.AppsConst
 
                             }
                         }
+                    //Device.BeginInvokeOnMainThread(() => autoUpdateRun = false);
                     autoUpdateRun = false;
+#if DEBUG
+                    Console.WriteLine($"UpdateTask autoUpdateRun={autoUpdateRun} {DateTime.Now.ToString("F.fffff")}");
+#endif
                 }
                 catch (Exception e)
                 {
+                    //Device.BeginInvokeOnMainThread(() => autoUpdateRun = false);
                     autoUpdateRun = false;
+#if DEBUG
+                    Console.WriteLine($"UpdateTask exc autoUpdateRun={autoUpdateRun} {DateTime.Now.ToString("F.fffff")}");
+#endif
                 }
             });
             try
@@ -190,62 +218,104 @@ namespace xamarinJKH.AppsConst
             base.OnDisappearing();
         }
 
-        private async Task RefreshData()
+        private async Task RefreshData([CallerMemberName] string cmn="")
         {
-            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+            try
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                    await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
-                return;
-            }
-
-            RequestsUpdate requestsUpdate =
-                await _server.GetRequestsUpdatesConst(updatekey, _requestInfo.ID.ToString());
-            if (requestsUpdate.Error == null)
-            {
-                updatekey= requestsUpdate.NewUpdateKey;
-                if (requestsUpdate.CurrentRequestUpdates != null)
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
-                    request = requestsUpdate.CurrentRequestUpdates;
-
-                    if (request.Messages != null)
-                        if (request.Messages.Count() > 0)
-                            foreach (var each in requestsUpdate.CurrentRequestUpdates.Messages)
-                    {
-                        if (!messages.Contains(each))
-                        {
-                            Device.BeginInvokeOnMainThread(async () =>
-                            {
-                                addAppMessage(each, messages.Count > 1 ? messages[messages.Count - 2].AuthorName : null);
-                            });
-                        }                        
-                        
-                    }
-
                     Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        if(DeviceInfo.Platform==DevicePlatform.iOS)
-                        {
-                            await Task.Delay(500);
-                        }
-                        var lastChild = baseForApp.Children.LastOrDefault();
-                        if (FrameMessage.Height < baseForApp.Height)
-                        {
-                            if (lastChild != null)
-                            {
-                                if (baseForApp.Height < lastChild.Y)
-                                    await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, false);
-                                else
-                                    await scrollFroAppMessages.ScrollToAsync(lastChild.X, lastChild.Y + 30, false);
-                            }
-                        }
-                    });
+                        await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
+                    return;
                 }
+
+#if DEBUG
+                Console.WriteLine($"RefreshData cmn={cmn} autoUpdateRun={autoUpdateRun} {DateTime.Now.ToString("F.fffff")}");
+#endif
+
+                if (autoUpdateRun)
+                {
+                    return;
+
+
+
+                }
+
+#if DEBUG
+                Console.WriteLine($"автообновление выполняется RefreshData {DateTime.Now}");
+#endif
+                //Device.BeginInvokeOnMainThread(() => autoUpdateRun = true);
+                autoUpdateRun = true;
+                Console.WriteLine($"RefreshData autoUpdateRun={autoUpdateRun} {DateTime.Now.ToString("F.fffff")}");
+
+                RequestsUpdate requestsUpdate =
+                    await _server.GetRequestsUpdatesConst(updatekey, _requestInfo.ID.ToString());
+                if (requestsUpdate.Error == null)
+                {
+                    updatekey = requestsUpdate.NewUpdateKey;
+                    if (requestsUpdate.CurrentRequestUpdates != null)
+                    {
+                        request = requestsUpdate.CurrentRequestUpdates;
+
+                        if (request.Messages != null)
+                            if (request.Messages.Count() > 0)
+                                foreach (var each in requestsUpdate.CurrentRequestUpdates.Messages)
+                                {
+                                    if (!messages.Contains(each) && !messages.Any(_=>_.ID==each.ID))
+                                    {
+                                        messages.Add(each);
+                                        Device.BeginInvokeOnMainThread( () =>
+                                        {
+                                            //messages.Add(each);
+                                            addAppMessage(each, messages.Count > 1 ? messages[messages.Count - 2].AuthorName : null);
+                                        });
+                                    }
+
+                                }
+
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            if (DeviceInfo.Platform == DevicePlatform.iOS)
+                            {
+                                await Task.Delay(500);
+                            }
+                            var lastChild = baseForApp.Children.LastOrDefault();
+                            if (FrameMessage.Height < baseForApp.Height)
+                            {
+                                if (lastChild != null)
+                                {
+                                    if (baseForApp.Height < lastChild.Y)
+                                        await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, false);
+                                    else
+                                        await scrollFroAppMessages.ScrollToAsync(lastChild.X, lastChild.Y + 30, false);
+                                }
+                            }
+                        });
+                    }
+                }
+                else
+                {
+                    await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorComments, "OK");
+                }
+
+                //Device.BeginInvokeOnMainThread(() => autoUpdateRun = false);
+                autoUpdateRun = false;
+#if DEBUG
+                Console.WriteLine($"RefreshData autoUpdateRun={autoUpdateRun} {DateTime.Now.ToString("F.fffff")}");
+#endif
             }
-            else
+            catch (Exception ex)
             {
-                await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorComments, "OK");
+                //Device.BeginInvokeOnMainThread(() => autoUpdateRun = false);
+                autoUpdateRun = false;
+
+#if DEBUG
+                Console.WriteLine($"RefreshData exc autoUpdateRun={autoUpdateRun} {DateTime.Now.ToString("F.fffff")}");
+#endif
+                throw;
             }
+           
+
         }
 
         public string DateUniq = "";
@@ -268,7 +338,7 @@ namespace xamarinJKH.AppsConst
 
             DateUniq = newDate;
             baseForApp.Children.Add(data);
-            messages.Add(message);
+            //messages.Add(message);
         }
 
 
@@ -1019,8 +1089,17 @@ namespace xamarinJKH.AppsConst
             if (request.Error == null)
             {
                 await ShowToast(AppResources.AppAccepted);
-                if(!autoUpdateRun)
+//                if (!autoUpdateRun)
+//                {
+//#if DEBUG
+//                    Console.WriteLine($"автообновление выполняется acceptApp {DateTime.Now}");
+//#endif
+//                    Device.BeginInvokeOnMainThread(()=> autoUpdateRun = true);
+//                    await RefreshData();
+//                    Device.BeginInvokeOnMainThread(() => autoUpdateRun = false);
+//                }
                 await RefreshData();
+
             }
             else
             {

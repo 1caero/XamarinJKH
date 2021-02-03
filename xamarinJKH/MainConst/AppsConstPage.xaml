@@ -170,8 +170,8 @@
                                                        >
                                                     <Label.FormattedText>
                                                         <FormattedString>
-                                                            <Span Text="№" FontSize="17" TextColor="Black" FontAttributes="Bold" />
-                                                            <Span Text="{Binding RequestNumber}" FontSize="17"  TextColor="Black" FontAttributes="Bold" />
+                                                            <Span Text="№" FontSize="14" TextColor="Black" FontAttributes="Bold" />
+                                                            <Span Text="{Binding RequestNumber}" FontSize="14"  TextColor="Black" FontAttributes="Bold" />
                                                             <!-- <Span Text=" {Binding Name}" FontSize="17" TextColor="Black" FontAttributes="Bold" /> -->
                                                         </FormattedString>
                                                     </Label.FormattedText>
