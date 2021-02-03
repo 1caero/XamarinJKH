@@ -317,7 +317,7 @@
                                         Orientation="Horizontal">
                                         <svg:SvgCachedImage
                                             x:Name="IconViewOffers"
-                                            Source="resource://xamarinJKH.Resources.ic_diskont.svg"
+                                            Source="resource://xamarinJKH.Resources.ic_discont.svg"
                                             ReplaceStringMap="{Binding ShowAnnouncements, Converter={x:StaticResource SvgColor}}"
                                             HeightRequest="40"
                                             Margin="15,0,30,0"

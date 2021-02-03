@@ -70,7 +70,8 @@
                                   IsRefreshing="{Binding IsRefreshing}"
                                   ItemTapped="OnItemTapped"
                                   ItemsSource="{Binding Notifications}"
-                                  VerticalOptions="FillAndExpand">
+                                  VerticalOptions="FillAndExpand"
+                                  RefreshControlColor="{x:DynamicResource MainColor}">
                             <ListView.ItemTemplate>
 
                                 <DataTemplate>

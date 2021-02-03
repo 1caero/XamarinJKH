@@ -120,7 +120,8 @@
                                   RefreshCommand="{Binding RefreshCommand}"
                                   IsRefreshing="{Binding IsRefreshing}"
                                   ItemTapped="OnItemTapped"
-                                  ItemsSource="{Binding NewsInfos}">
+                                  ItemsSource="{Binding NewsInfos}"
+                                  RefreshControlColor="{x:DynamicResource MainColor}">
                             <ListView.ItemTemplate>
 
                                 <DataTemplate >
