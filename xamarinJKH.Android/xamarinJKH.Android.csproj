@@ -207,6 +207,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_web_cams_top_light.png" />
     <AndroidResource Include="Resources\drawable\crossed.png" />
     <AndroidResource Include="Resources\drawable\icon_login.png" />
+    <AndroidResource Include="Resources\drawable\icon_login_sys_rom_preobrazhenskiy.png" />
     <AndroidResource Include="Resources\drawable\ic_accept_app.png" />
     <AndroidResource Include="Resources\drawable\ic_additional_top.png" />
     <AndroidResource Include="Resources\drawable\ic_additional_top_Light.png" />

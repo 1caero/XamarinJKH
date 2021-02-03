@@ -216,10 +216,11 @@ namespace xamarinJKH
         private async void getSettings()
         {
             Analytics.TrackEvent("Запрос настроек");
-            Version.Text = "ver " + Xamarin.Essentials.AppInfo.VersionString;
+            string versionString = Xamarin.Essentials.AppInfo.VersionString;
+            Version.Text = "ver " + versionString;
 
 
-            Settings.MobileSettings = await server.MobileAppSettings("4.02", "0");
+            Settings.MobileSettings = await server.MobileAppSettings(versionString, "0");
             if (Settings.MobileSettings.Error == null)
             {
                 
