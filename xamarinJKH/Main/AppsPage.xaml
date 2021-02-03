@@ -74,7 +74,7 @@
                                    VerticalTextAlignment="Center"
                                    HorizontalTextAlignment="Center"                                
                                    IsVisible="{Binding Empty}"/>
-                        <RefreshView x:Name="messageRefreshView" Command="{Binding LoadRequests}" IsRefreshing="{Binding IsRefreshing}">
+                        <RefreshView x:Name="messageRefreshView" Command="{Binding LoadRequests}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="{x:DynamicResource MainColor}" >
                         <CollectionView 
                              x:Name="additionalList"
                              HorizontalScrollBarVisibility="Never"
