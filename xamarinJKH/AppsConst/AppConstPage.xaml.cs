@@ -103,6 +103,7 @@ namespace xamarinJKH.AppsConst
                 {
                    
                         await Task.Delay(TimeSpan.FromSeconds(2));
+                    autoUpdateRun = true;
                         var update =
                             await _server.GetRequestsUpdatesConst(Settings.UpdateKey, _requestInfo.ID.ToString());
                         if (update.Error == null)
@@ -140,9 +141,11 @@ namespace xamarinJKH.AppsConst
 
                             }
                         }
+                    autoUpdateRun = false;
                 }
                 catch (Exception e)
                 {
+                    autoUpdateRun = false;
                 }
             });
             try
@@ -153,6 +156,8 @@ namespace xamarinJKH.AppsConst
             {
             }
         }
+
+        static bool autoUpdateRun = false;
 
         async void SetReadedApp()
         {
@@ -1014,6 +1019,7 @@ namespace xamarinJKH.AppsConst
             if (request.Error == null)
             {
                 await ShowToast(AppResources.AppAccepted);
+                if(!autoUpdateRun)
                 await RefreshData();
             }
             else
