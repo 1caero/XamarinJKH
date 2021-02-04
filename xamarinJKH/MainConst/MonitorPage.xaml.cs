@@ -105,6 +105,11 @@ namespace xamarinJKH.MainConst
         public MonitorPage()
         {
             InitializeComponent();
+
+            Device.BeginInvokeOnMainThread(() =>
+            isRunning = true
+            );
+
             Analytics.TrackEvent("Мониторинг");
             Areas = new ObservableCollection<NamedValue>();
             Streets = new ObservableCollection<HouseProfile>();
@@ -232,14 +237,16 @@ namespace xamarinJKH.MainConst
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            isRunning = true;
+            Device.BeginInvokeOnMainThread(()=> isRunning = true);
+            //isRunning = false;
             //await StartStatistick();
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            isRunning = false;
+            Device.BeginInvokeOnMainThread(() => isRunning = false);
+            //isRunning = false;
         }
 
         public RestClientMP _server = new RestClientMP();
