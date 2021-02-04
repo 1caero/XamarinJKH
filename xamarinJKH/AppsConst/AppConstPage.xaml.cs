@@ -1111,17 +1111,18 @@ namespace xamarinJKH.AppsConst
 
         async void performApp()
         {
-            sendMessage();
             progress.IsVisible = true;
             var request = await _server.PerformAppConst(_requestInfo.ID.ToString());
             if (request.Error == null)
             {
+                sendMessage();
                 await ClosePage();
                 await ShowToast(AppResources.AppCompleted);
                 await RefreshData();
             }
             else
             {
+                 EntryMess.Text = "";
                 await DisplayAlert(AppResources.ErrorTitle, request.Error, "OK");
             }
 
