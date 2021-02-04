@@ -173,6 +173,7 @@
                                      Grid.Row="1"
                                      Margin="0,-30,0,0"
                                      VerticalOptions="FillAndExpand"
+                                         RefreshColor="{x:DynamicResource MainColor}"
                                      IsRefreshing="{Binding IsRefreshing}">
                                 <ScrollView x:Name="scrollForCounters" VerticalScrollBarVisibility="Never"
                                         VerticalOptions="FillAndExpand">

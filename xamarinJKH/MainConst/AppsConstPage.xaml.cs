@@ -116,9 +116,13 @@ namespace xamarinJKH.MainConst
             }
         }
 
+        public bool CanDoMassOps = false;
         public AppsConstPage()
         {
             InitializeComponent();
+
+            //CanDoMassOps = CanComplete && CanClose;
+
             Resources["hexColor"] = (Color)Application.Current.Resources["MainColor"];
             Analytics.TrackEvent("Заявки сотрудника " + Settings.Person.Login);
             NavigationPage.SetHasNavigationBar(this, false);

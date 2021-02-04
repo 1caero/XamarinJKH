@@ -88,7 +88,7 @@
                             <!-- -->
                             <!--     </ListView.ItemTemplate> -->
                             <!-- </ListView> -->
-                            <RefreshView x:Name="messageRefreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+                            <RefreshView x:Name="messageRefreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="{Binding hex}">
                              <CollectionView 
                              x:Name="additionalList"
                              HorizontalScrollBarVisibility="Never"
@@ -225,6 +225,7 @@
                                         <CheckBox HorizontalOptions="End"
                                                   VerticalOptions="Center"
                                                   IsChecked="{Binding IsCheked}"
+                                                  IsVisible="false"
                                                   CheckedChanged="CheckBox_OnCheckedChanged"
                                                   Color="{x:DynamicResource MainColor}"
                                                    Margin="0, 0, 0, 0">
@@ -262,7 +263,8 @@
                                                  Padding="0,10,0,2"
                                                  BorderThickness="1"
                                                  Margin="0"
-                                                 VerticalOptions="End">
+                                                 VerticalOptions="End"
+                                                 >
                             <StackLayout>
                                 <StackLayout Orientation="Horizontal"
                                              IsVisible="False"

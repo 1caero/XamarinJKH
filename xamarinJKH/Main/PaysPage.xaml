@@ -95,7 +95,7 @@
                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
 
                         <RefreshView x:Name="paysRefreshView" Margin="10, 0, 10, 0" Command="{Binding RefreshCommand}"
-                                     IsRefreshing="{Binding IsRefreshing, Mode=OneWay}" VerticalOptions="FillAndExpand">
+                                     IsRefreshing="{Binding IsRefreshing, Mode=OneWay}" VerticalOptions="FillAndExpand" RefreshColor="{Binding hex}">
                             <ScrollView x:Name="scrollForPays" VerticalScrollBarVisibility="Never"
                                         VerticalOptions="FillAndExpand">
                                 <StackLayout x:Name="baseForPays" VerticalOptions="FillAndExpand" />
