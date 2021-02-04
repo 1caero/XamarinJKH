@@ -167,6 +167,7 @@ namespace xamarinJKH.MainConst
             {
                 SetAdminName();
             });
+            MessagingCenter.Unsubscribe<Object>(this, "ChangeAdminApp");
             MessagingCenter.Subscribe<Object>(this, "ChangeAdminApp", (sender) => ChangeTheme.Execute(null));
             MessagingCenter.Subscribe<Object, int>(this, "OpenAppConst", async (sender, args) =>
             {

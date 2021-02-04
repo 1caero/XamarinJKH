@@ -215,9 +215,11 @@ namespace xamarinJKH.MainConst
             });
             SetText();
             ChangeTheme = new Command(async () => { SetAdminName(); });
+            MessagingCenter.Unsubscribe<Object>(this, "ChangeAdminMonitor");
             MessagingCenter.Subscribe<Object>(this, "ChangeAdminMonitor", (sender) => ChangeTheme.Execute(null));
             BindingContext = this;
             Groups = new ObservableCollection<NamedValue>();
+            MessagingCenter.Unsubscribe<Object>(this, "StartStatistic");
             MessagingCenter.Subscribe<Object>(this, "StartStatistic", sender =>
             {
                 if (!loaded)
@@ -280,22 +282,25 @@ namespace xamarinJKH.MainConst
 
         void setMonitoring(RequestStats result)
         {
-            if(!isRunning)
-                return;
-            List<PeriodStats> periodStatses = new List<PeriodStats>();
-            periodStatses.Add(result.Today);
-            periodStatses.Add(result.Week);
-            periodStatses.Add(result.Month);
-            setNotDoingApps(result.TotalUnperformedRequestsList);
-            int i = 0;
-            LayoutContent.Children.Clear();
-            foreach (var each in periodStatses)
+            Device.BeginInvokeOnMainThread(() =>
             {
-                var container = AddMonitorPeriod(i, each, DateTime.Now);
+                if (!isRunning)
+                    return;
+                List<PeriodStats> periodStatses = new List<PeriodStats>();
+                periodStatses.Add(result.Today);
+                periodStatses.Add(result.Week);
+                periodStatses.Add(result.Month);
+                setNotDoingApps(result.TotalUnperformedRequestsList);
+                int i = 0;
+                LayoutContent.Children.Clear();
+                foreach (var each in periodStatses)
+                {
+                    var container = AddMonitorPeriod(i, each, DateTime.Now);
 
-                i++;
-                LayoutContent.Children.Add(container);
-            }
+                    i++;
+                    LayoutContent.Children.Add(container);
+                }
+            });
         }
         
 
@@ -313,16 +318,6 @@ namespace xamarinJKH.MainConst
             {
                 Orientation = StackOrientation.Horizontal
             };
-            //BorderlessDatePickerMonitor datePicker = new BorderlessDatePickerMonitor
-            //{
-            //    IsVisible = false,
-            //    Format = "dd.MM.yyyy",
-            //    FontSize = 16,
-            //    HorizontalOptions = LayoutOptions.Center,
-            //    TextColor = hex
-            //};
-
-            //datePicker.MaximumDate = DateTime.Now;
             Label lableDate = new Label
             {
                 FontSize = 16,
@@ -337,9 +332,6 @@ namespace xamarinJKH.MainConst
             switch (period)
             {
                 case 0:
-                    //openPicker.Tapped += (s, e) => { Device.BeginInvokeOnMainThread( () =>  datePicker.Focus()); };
-                    //datePicker.MaximumDate = DateTime.Now;
-
                     openPicker.Tapped += (s, e) => {
                         Device.BeginInvokeOnMainThread(async () =>
                         {
@@ -360,32 +352,20 @@ namespace xamarinJKH.MainConst
                         }
                         );
                     };
-
-                    //datePicker.DateSelected += async (sender, args) =>
-                    //{
-                    //    ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID, 
-                    //        datePicker.Date.ToString("dd.MM.yyyy"),datePicker.Date.ToString("dd.MM.yyyy"));
-                    //    if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
-                    //    {
-                    //        var container = AddMonitorPeriod(0, result.Data[0].CustomPeriod, datePicker.Date);
-                    //        if (LayoutContent != null && LayoutContent.Children.Count > 0)
-                    //            LayoutContent.Children[0] = container;
-                    //        colapseAllByName(this.period[0]);
-                    //        colapseAll(this.period[0]);
-                    //    }
-
-                    //};
-
+                    MessagingCenter.Unsubscribe<Object, DateTime>(this, "MonitorDay");
                     MessagingCenter.Subscribe<Object, DateTime>(this, "MonitorDay", async (sender, dt) => {
                         ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID,
                            dt.Date.ToString("dd.MM.yyyy"), dt.Date.ToString("dd.MM.yyyy"));
                         if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
                         {
-                            var container = AddMonitorPeriod(0, result.Data[0].CustomPeriod, dt.Date);
-                            if (LayoutContent != null && LayoutContent?.Children?.Count > 0)
-                                LayoutContent.Children[0] = container;
-                            colapseAllByName(this.period[0]);
-                            colapseAll(this.period[0]);
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                var container = AddMonitorPeriod(0, result.Data[0].CustomPeriod, dt.Date);
+                                if (LayoutContent != null && LayoutContent?.Children?.Count > 0)
+                                    LayoutContent.Children[0] = container;
+                                colapseAllByName(this.period[0]);
+                                colapseAll(this.period[0]);
+                            });
                         }
                     });
 
@@ -418,7 +398,7 @@ namespace xamarinJKH.MainConst
                     DateTime dateSunday = dateMonday.AddDays(6);
                     text = dateMonday.ToString("dd.MM") + "-" + dateSunday.ToString("dd.MM.yyyy");
 
-                    
+                    MessagingCenter.Unsubscribe<Object, DateTime>(this, "MonitorDateStart");
                     MessagingCenter.Subscribe<Object, SelectionRange>(this, "MonitorDateStart", async (sender, dt) => {
                     DateTime dateMonday = dt.StartDate.Date;
                         DateTime dateSunday = dt.EndDate.Date;
@@ -426,31 +406,17 @@ namespace xamarinJKH.MainConst
                             dateMonday.ToString("dd.MM.yyyy"), dateSunday.ToString("dd.MM.yyyy"));
                         if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
                         {
-                            var container = AddMonitorPeriod(1, result.Data[0].CustomPeriod, dt.StartDate.Date);
-                            if (LayoutContent != null && LayoutContent?.Children?.Count > 0)
-                                LayoutContent.Children[1] = container;
-                            colapseAllByName(this.period[1]);
-                            colapseAll(this.period[1]);
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                var container = AddMonitorPeriod(1, result.Data[0].CustomPeriod, dt.StartDate.Date);
+                                if (LayoutContent != null && LayoutContent?.Children?.Count > 0)
+                                    LayoutContent.Children[1] = container;
+                                colapseAllByName(this.period[1]);
+                                colapseAll(this.period[1]);
+                            });
                         }
                     });
-
-
-                    //datePicker.DateSelected += async (sender, args) =>
-                    //{
-                    //    DateTime dateMonday = datePicker.Date.AddDays((datePicker.Date.DayOfWeek.GetHashCode() - 1) * -1).Date;
-                    //    DateTime dateSunday = datePicker.Date.AddDays(7 - datePicker.Date.DayOfWeek.GetHashCode()).Date;
-                    //    // lableDate.Text = dateMonday.ToString("dd.MM") + "-" + dateSunday.ToString("dd.MM.yyyy");
-                    //    ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID, 
-                    //        dateMonday.ToString("dd.MM.yyyy"),dateSunday.ToString("dd.MM.yyyy"));
-                    //    if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
-                    //    {
-                    //        var container = AddMonitorPeriod(1, result.Data[0].CustomPeriod, datePicker.Date);
-                    //        if (LayoutContent != null && LayoutContent.Children.Count > 0)
-                    //            LayoutContent.Children[1] = container;
-                    //        colapseAllByName(this.period[1]);
-                    //        colapseAll(this.period[1]);
-                    //    }
-                    //}; 
+                    
                     break;
                 case 2:
                     string s = isReplace.ToString("MMMM yyyy");
@@ -476,7 +442,7 @@ namespace xamarinJKH.MainConst
                         }
                         );
                     };
-
+                    MessagingCenter.Unsubscribe<Object, DateTime>(this, "MonitorMonth");
                     MessagingCenter.Subscribe<Object, DateTime>(this, "MonitorMonth", async (sender, dt) => {
                         DateTime now = dt.Date;
                         var startDate = new DateTime(now.Year, now.Month, 1);
@@ -485,31 +451,19 @@ namespace xamarinJKH.MainConst
                             startDate.ToString("dd.MM.yyyy"), endDate.ToString("dd.MM.yyyy"));
                         if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
                         {
-                            var container = AddMonitorPeriod(2, result.Data[0].CustomPeriod, dt.Date);
-                            if (LayoutContent != null && LayoutContent?.Children?.Count > 0)
-                                LayoutContent.Children[2] = container;
-                            colapseAllByName(this.period[2]);
-                            colapseAll(this.period[2]);
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                var container = AddMonitorPeriod(2, result.Data[0].CustomPeriod, dt.Date);
+                                if (LayoutContent != null && LayoutContent?.Children?.Count > 0)
+                                    LayoutContent.Children[2] = container;
+                                colapseAllByName(this.period[2]);
+                                colapseAll(this.period[2]);
+                            });
                         }
                     });
 
 
-                    //datePicker.DateSelected += async (sender, args) =>
-                    //{
-                    //    DateTime now = datePicker.Date;
-                    //    var startDate = new DateTime(now.Year, now.Month, 1);
-                    //    var endDate = startDate.AddMonths(1).AddDays(-1);
-                    //    ItemsList<RequestStats> result = await _server.RequestStats(Ryon, HouseID, 
-                    //        startDate.ToString("dd.MM.yyyy"),endDate.ToString("dd.MM.yyyy"));
-                    //    if (result.Error == null && result.Data[0] != null && result.Data[0].CustomPeriod != null)
-                    //    {
-                    //        var container = AddMonitorPeriod(2, result.Data[0].CustomPeriod, datePicker.Date);
-                    //        if (LayoutContent != null && LayoutContent.Children.Count > 0)
-                    //            LayoutContent.Children[2] = container;
-                    //        colapseAllByName(this.period[2]);
-                    //        colapseAll(this.period[2]);
-                    //    }
-                    //}; 
+                   
                     break;
             }
             lableDate.Text = text;
@@ -1081,113 +1035,122 @@ namespace xamarinJKH.MainConst
         }
         public async Task StartStatistick(bool isGroup = true)
         {
-            if(!isRunning)
-                return;
-            // Loading settings
-            Configurations.LoadingConfig = new LoadingConfig
+            Device.BeginInvokeOnMainThread(() =>
             {
-                IndicatorColor = hex,
-                OverlayColor = Color.Black,
-                Opacity = 0.8,
-                DefaultMessage = AppResources.MonitorStats,
-            };
+                if (!isRunning)
+                    return;
+                // Loading settings
+                Configurations.LoadingConfig = new LoadingConfig
+                {
+                    IndicatorColor = hex,
+                    OverlayColor = Color.Black,
+                    Opacity = 0.8,
+                    DefaultMessage = AppResources.MonitorStats,
+                };
 
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                await Task.Run(async () =>
-            {
-                //Device.BeginInvokeOnMainThread(async () =>
-                //{
-                var area_groups = await _server.GetAreaGroups();
-                if (area_groups.Error == null)
+                Device.BeginInvokeOnMainThread(async () =>
                 {
-                    //Device.BeginInvokeOnMainThread(() =>
-                    //{
-                    foreach (var area in area_groups.Data)
+                    await Task.Run(async () =>
                     {
-                        Groups.Add(area);
-                    }
-                    //});
-                    if (AreaGroups.DataSource == null)
-                    {
-                        AreaGroups.DataSource = Groups;
-                    }
-                    AreaGroups.IsVisible = Groups?.Count() == 0;
-                }
-                //if (isGroup)
-                //    await getHouseGroups();
-                //else
-                //{
-                //    await getHouse();
-                //}
-                //});
-            }).ContinueWith(async(obj)=> {
-                if (isGroup)
-                    await getHouseGroups();
-            }).ContinueWith(async (obj) =>
-            {
-                await getHouse();
-            }).ContinueWith(async (res) =>
-            {
-                await Task.Delay(500);
-                Button_Clicked(null, null);
-                try
-                {
-                    await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog(false));
-                    await PopupNavigation.Instance.PopAsync();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
-               
-            });
+                        //Device.BeginInvokeOnMainThread(async () =>
+                        //{
+                        var area_groups = await _server.GetAreaGroups();
+                        if (area_groups.Error == null)
+                        {
+                            //Device.BeginInvokeOnMainThread(() =>
+                            //{
+                            foreach (var area in area_groups.Data)
+                            {
+                                Groups.Add(area);
+                            }
 
+                            //});
+                            if (AreaGroups.DataSource == null)
+                            {
+                                AreaGroups.DataSource = Groups;
+                            }
+
+                            AreaGroups.IsVisible = Groups?.Count() == 0;
+                        }
+
+                        //if (isGroup)
+                        //    await getHouseGroups();
+                        //else
+                        //{
+                        //    await getHouse();
+                        //}
+                        //});
+                    }).ContinueWith(async (obj) =>
+                    {
+                        if (isGroup)
+                            await getHouseGroups();
+                    }).ContinueWith(async (obj) => { await getHouse(); }).ContinueWith(async (res) =>
+                    {
+                        await Task.Delay(500);
+                        Button_Clicked(null, null);
+                        try
+                        {
+                            await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog(false));
+                            await PopupNavigation.Instance.PopAsync();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                        }
+
+                    });
+                });
             });
 
         }
 
         void colapseAll(string name)
         {
-            if(!isRunning)
-                return;
-            try
+            Device.BeginInvokeOnMainThread(() =>
             {
-                if (_visibleModels != null)
-                    foreach (var each in _visibleModels
-                        .Where(each => !string.IsNullOrEmpty(each.Key) && each.Value != null)
-                        .Where(each => !each.Key.Equals(name) && each.Value._grid.IsVisible))
-                    {
-                        each.Value._grid.IsVisible = false;
-                        each.Value._materialFrame.Padding = 0;
-                        each.Value.IconView.Source = "ic_arrow_down_monitor";
-                    }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+                if (!isRunning)
+                    return;
+                try
+                {
+                    if (_visibleModels != null)
+                        foreach (var each in _visibleModels
+                            .Where(each => !string.IsNullOrEmpty(each.Key) && each.Value != null)
+                            .Where(each => !each.Key.Equals(name) && each.Value._grid.IsVisible))
+                        {
+                            each.Value._grid.IsVisible = false;
+                            each.Value._materialFrame.Padding = 0;
+                            each.Value.IconView.Source = "ic_arrow_down_monitor";
+                        }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            });
         }
         void colapseAllByName(string name)
         {
-            if(!isRunning)
-                return;
-            try
+            Device.BeginInvokeOnMainThread(() =>
             {
-                if (_visibleModels != null)
-                    foreach (var each in _visibleModels
-                        .Where(each => !string.IsNullOrEmpty(each.Key) && each.Value != null)
-                        .Where(each => each.Key.Equals(name)))
-                    {
-                        each.Value._grid.IsVisible = true;
-                        each.Value._materialFrame.Padding = new Thickness(0,0,0,10);
-                        each.Value.IconView.Source = "ic_arrow_forward";
-                    }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+                if (!isRunning)
+                    return;
+                try
+                {
+                    if (_visibleModels != null)
+                        foreach (var each in _visibleModels
+                            .Where(each => !string.IsNullOrEmpty(each.Key) && each.Value != null)
+                            .Where(each => each.Key.Equals(name)))
+                        {
+                            each.Value._grid.IsVisible = true;
+                            each.Value._materialFrame.Padding = new Thickness(0, 0, 0, 10);
+                            each.Value.IconView.Source = "ic_arrow_forward";
+                        }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            });
         }
 
         async Task getHouseGroups()
@@ -1316,8 +1279,8 @@ namespace xamarinJKH.MainConst
 
         void setListGroups(ItemsList<NamedValue> groups, ref string[] param)
         {
-            if(!isRunning)
-                return;
+            if (!isRunning)
+                    return;
             HousesGroup = new Dictionary<string, string>();
             if (groups != null)
             {
@@ -1337,37 +1300,38 @@ namespace xamarinJKH.MainConst
 
         void setListHouse(ItemsList<HouseProfile> groups, ref string[] param)
         {
-            if(!isRunning)
-                return;
-            Houses = new Dictionary<string, string>();
-            if (groups?.Data != null)
-            {
-                param = new string [groups.Data.Count];
-                int i = 0;
-                foreach (var each in groups.Data)
+           
+                if (!isRunning)
+                    return;
+                Houses = new Dictionary<string, string>();
+                if (groups?.Data != null)
                 {
-                    try
+                    param = new string [groups.Data.Count];
+                    int i = 0;
+                    foreach (var each in groups.Data)
                     {
-                        if (each.Address != null)
+                        try
                         {
-                            Houses.Add(each.Address, each.ID.ToString());
-                            param[i] = each.Address;
+                            if (each.Address != null)
+                            {
+                                Houses.Add(each.Address, each.ID.ToString());
+                                param[i] = each.Address;
+                            }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
 
-                    i++;
+                        i++;
+                    }
                 }
-            }
         }
 
         void setCustumerXaml(ref Grid grid, PeriodStats periodStats)
         {
-            if(!isRunning)
-                return;
+            if (!isRunning)
+                    return;
             Dictionary<string, int> UnperformedMap = setPerformer(periodStats.UnperformedRequestsList);
             Dictionary<string, int> Overdue = setPerformer(periodStats.OverdueRequestsList);
 
@@ -1391,102 +1355,105 @@ namespace xamarinJKH.MainConst
             int j;
             VisiblePerformers(grid, UnperformedMap, 0, periodStats.UnperformedRequestsList);
             VisiblePerformers(grid, Overdue, 2, periodStats.OverdueRequestsList);
-        }
+            }
 
         private void VisiblePerformers(Grid grid, Dictionary<string, int> UnperformedMap, int position,
             List<Requests> requestses, bool space = true)
         {
-            if(!isRunning)
-                return;
-            int j = space ? 1 : 0;
-
-            foreach (var each in UnperformedMap)
+            Device.BeginInvokeOnMainThread(() =>
             {
-                StackLayout stackLayoutNotDoing = new StackLayout()
-                {
-                    Orientation = StackOrientation.Horizontal
-                };
+                if (!isRunning)
+                    return;
+                int j = space ? 1 : 0;
 
-                if (j == 1)
+                foreach (var each in UnperformedMap)
                 {
-                    stackLayoutNotDoing.Margin = new Thickness(0, 5, 0, 0);
-                }
-
-
-                Label labelNotDoing = new Label()
-                {
-                    Text = each.Key.Split()[0],
-                    FontSize = fontSize3,
-                    TextColor = Color.Black,
-                    VerticalOptions = LayoutOptions.Center,
-                    HorizontalOptions = LayoutOptions.Fill
-                };
-
-                StackLayout stackLayoutnotDoingCount = new StackLayout()
-                {
-                    Spacing = 0,
-                    HorizontalOptions = LayoutOptions.End,
-                    VerticalOptions = LayoutOptions.Center
-                };
-
-                StackLayout stackLayoutNotDoingContent = new StackLayout()
-                {
-                    Orientation = StackOrientation.Horizontal,
-                    Spacing = 0
-                };
-
-                Label labelCountNotDoing = new Label()
-                {
-                    Text = each.Value.ToString(),
-                    TextColor = hex,
-                    FontSize = fontSize,
-                    FontAttributes = FontAttributes.Bold,
-                    HorizontalOptions = LayoutOptions.FillAndExpand
-                };
-                IconView iconViewArrowForward = new IconView()
-                {
-                    Source = "ic_arrow_forward",
-                    HeightRequest = IconViewNotCompliteHeightRequest,
-                    WidthRequest = IconViewNotCompliteHeightRequest,
-                    Margin = IconViewNotComplite,
-                    VerticalOptions = LayoutOptions.Center,
-                    Foreground = hex,
-                    HorizontalOptions = LayoutOptions.Center
-                };
-
-                var forwardAppsNot = new TapGestureRecognizer();
-                List<Requests> requests = getRequests(each.Key, requestses);
-                forwardAppsNot.Tapped += async (s, e) =>
-                {
-                    if (requests?.Count > 0)
+                    StackLayout stackLayoutNotDoing = new StackLayout()
                     {
-                        if (Navigation.NavigationStack.FirstOrDefault(x => x is MonitorAppsPage) == null)
-                            await Navigation.PushAsync(new MonitorAppsPage(requests));
+                        Orientation = StackOrientation.Horizontal
+                    };
+
+                    if (j == 1)
+                    {
+                        stackLayoutNotDoing.Margin = new Thickness(0, 5, 0, 0);
                     }
-                };
-
-                stackLayoutNotDoingContent.GestureRecognizers.Add(forwardAppsNot);
-
-                stackLayoutNotDoingContent.Children.Add(labelCountNotDoing);
-                stackLayoutNotDoingContent.Children.Add(iconViewArrowForward);
-
-                Label labelSeparatorNotDoing = new Label()
-                {
-                    HeightRequest = 1,
-                    BackgroundColor = hex,
-                    HorizontalOptions = LayoutOptions.Fill
-                };
-
-                stackLayoutnotDoingCount.Children.Add(stackLayoutNotDoingContent);
-                stackLayoutnotDoingCount.Children.Add(labelSeparatorNotDoing);
 
 
-                stackLayoutNotDoing.Children.Add(labelNotDoing);
-                stackLayoutNotDoing.Children.Add(stackLayoutnotDoingCount);
+                    Label labelNotDoing = new Label()
+                    {
+                        Text = each.Key.Split()[0],
+                        FontSize = fontSize3,
+                        TextColor = Color.Black,
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.Fill
+                    };
 
-                grid.Children.Add(stackLayoutNotDoing, position, j);
-                j++;
-            }
+                    StackLayout stackLayoutnotDoingCount = new StackLayout()
+                    {
+                        Spacing = 0,
+                        HorizontalOptions = LayoutOptions.End,
+                        VerticalOptions = LayoutOptions.Center
+                    };
+
+                    StackLayout stackLayoutNotDoingContent = new StackLayout()
+                    {
+                        Orientation = StackOrientation.Horizontal,
+                        Spacing = 0
+                    };
+
+                    Label labelCountNotDoing = new Label()
+                    {
+                        Text = each.Value.ToString(),
+                        TextColor = hex,
+                        FontSize = fontSize,
+                        FontAttributes = FontAttributes.Bold,
+                        HorizontalOptions = LayoutOptions.FillAndExpand
+                    };
+                    IconView iconViewArrowForward = new IconView()
+                    {
+                        Source = "ic_arrow_forward",
+                        HeightRequest = IconViewNotCompliteHeightRequest,
+                        WidthRequest = IconViewNotCompliteHeightRequest,
+                        Margin = IconViewNotComplite,
+                        VerticalOptions = LayoutOptions.Center,
+                        Foreground = hex,
+                        HorizontalOptions = LayoutOptions.Center
+                    };
+
+                    var forwardAppsNot = new TapGestureRecognizer();
+                    List<Requests> requests = getRequests(each.Key, requestses);
+                    forwardAppsNot.Tapped += async (s, e) =>
+                    {
+                        if (requests?.Count > 0)
+                        {
+                            if (Navigation.NavigationStack.FirstOrDefault(x => x is MonitorAppsPage) == null)
+                                await Navigation.PushAsync(new MonitorAppsPage(requests));
+                        }
+                    };
+
+                    stackLayoutNotDoingContent.GestureRecognizers.Add(forwardAppsNot);
+
+                    stackLayoutNotDoingContent.Children.Add(labelCountNotDoing);
+                    stackLayoutNotDoingContent.Children.Add(iconViewArrowForward);
+
+                    Label labelSeparatorNotDoing = new Label()
+                    {
+                        HeightRequest = 1,
+                        BackgroundColor = hex,
+                        HorizontalOptions = LayoutOptions.Fill
+                    };
+
+                    stackLayoutnotDoingCount.Children.Add(stackLayoutNotDoingContent);
+                    stackLayoutnotDoingCount.Children.Add(labelSeparatorNotDoing);
+
+
+                    stackLayoutNotDoing.Children.Add(labelNotDoing);
+                    stackLayoutNotDoing.Children.Add(stackLayoutnotDoingCount);
+
+                    grid.Children.Add(stackLayoutNotDoing, position, j);
+                    j++;
+                }
+            });
         }
 
         List<Requests> getRequests(string name, List<Requests> result)
@@ -1514,76 +1481,79 @@ namespace xamarinJKH.MainConst
 
         void setNotDoingApps(List<Requests> requestses)
         {
-            if(!isRunning)
-                return;
-            MaterialFrameNotDoingContainer.IsVisible = true;
-            LayoutGrid.Children.Clear();
-            Grid grid = new Grid
+            Device.BeginInvokeOnMainThread(() =>
             {
-                RowSpacing = 0,
-                ColumnDefinitions =
+                if (!isRunning)
+                    return;
+                MaterialFrameNotDoingContainer.IsVisible = true;
+                LayoutGrid.Children.Clear();
+                Grid grid = new Grid
                 {
-                    new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)},
-                    new ColumnDefinition {Width = new GridLength(1, GridUnitType.Absolute)},
-                    new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)},
+                    RowSpacing = 0,
+                    ColumnDefinitions =
+                    {
+                        new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)},
+                        new ColumnDefinition {Width = new GridLength(1, GridUnitType.Absolute)},
+                        new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)},
+                    }
+                };
+
+                LayoutGrid.Children.Add(grid);
+                FormattedString formatted = new FormattedString();
+                IconViewArrow.Source = "ic_arrow_down_monitor";
+                MaterialFrameNotDoingContainer.Padding = 0;
+                LayoutGrid.IsVisible = false;
+                formatted.Spans.Add(new Span
+                {
+                    Text = $"{AppResources.FailedRequests}: ",
+                    TextColor = Color.Black
+                });
+                formatted.Spans.Add(new Span
+                {
+                    Text = requestses.Count.ToString(),
+                    TextColor = hex,
+                    FontAttributes = FontAttributes.Bold
+                });
+                LabelNotDoingCount.FormattedText = formatted;
+
+                Dictionary<string, int> dictionary = setPerformer(requestses);
+                Dictionary<string, int> dictionaryFirst = new Dictionary<string, int>();
+                Dictionary<string, int> dictionarySecond = new Dictionary<string, int>();
+                int half = dictionary.Count / 2;
+
+                int i = 0;
+                foreach (var each in dictionary)
+                {
+                    if (i <= half)
+                        dictionaryFirst.Add(each.Key, each.Value);
+                    else
+                        dictionarySecond.Add(each.Key, each.Value);
+                    ;
+                    i++;
                 }
-            };
-
-            LayoutGrid.Children.Add(grid);
-            FormattedString formatted = new FormattedString();
-            IconViewArrow.Source = "ic_arrow_down_monitor";
-            MaterialFrameNotDoingContainer.Padding = 0;
-            LayoutGrid.IsVisible = false;
-            formatted.Spans.Add(new Span
-            {
-                Text = $"{AppResources.FailedRequests}: ",
-                TextColor = Color.Black
-            });
-            formatted.Spans.Add(new Span
-            {
-                Text = requestses.Count.ToString(),
-                TextColor = hex,
-                FontAttributes = FontAttributes.Bold
-            });
-            LabelNotDoingCount.FormattedText = formatted;
-
-            Dictionary<string, int> dictionary = setPerformer(requestses);
-            Dictionary<string, int> dictionaryFirst = new Dictionary<string, int>();
-            Dictionary<string, int> dictionarySecond = new Dictionary<string, int>();
-            int half = dictionary.Count / 2;
-
-            int i = 0;
-            foreach (var each in dictionary)
-            {
-                if (i <= half)
-                    dictionaryFirst.Add(each.Key, each.Value);
-                else
-                    dictionarySecond.Add(each.Key, each.Value);
-                ;
-                i++;
-            }
 
 
-            int max = Math.Max(dictionaryFirst.Count, dictionarySecond.Count);
-            for (int j = 0; j < max; j++)
-            {
-                RowDefinition rowDefinition = new RowDefinition()
+                int max = Math.Max(dictionaryFirst.Count, dictionarySecond.Count);
+                for (int j = 0; j < max; j++)
                 {
-                    Height = new GridLength(1, GridUnitType.Star)
-                };
-                grid.RowDefinitions.Add(rowDefinition);
-                Label labelSeparatorUnperformed = new Label()
-                {
-                    MinimumWidthRequest = 1,
-                    BackgroundColor = Color.FromHex("#878787"),
-                    VerticalOptions = LayoutOptions.Fill
-                };
-                grid.Children.Add(labelSeparatorUnperformed, 1, j);
-            }
+                    RowDefinition rowDefinition = new RowDefinition()
+                    {
+                        Height = new GridLength(1, GridUnitType.Star)
+                    };
+                    grid.RowDefinitions.Add(rowDefinition);
+                    Label labelSeparatorUnperformed = new Label()
+                    {
+                        MinimumWidthRequest = 1,
+                        BackgroundColor = Color.FromHex("#878787"),
+                        VerticalOptions = LayoutOptions.Fill
+                    };
+                    grid.Children.Add(labelSeparatorUnperformed, 1, j);
+                }
 
 
-            VisiblePerformers(grid, dictionaryFirst, 0, requestses, false);
-            VisiblePerformers(grid, dictionarySecond, 2, requestses, false);
+                VisiblePerformers(grid, dictionaryFirst, 0, requestses, false);
+                VisiblePerformers(grid, dictionarySecond, 2, requestses, false);
+            });
         }
 
 

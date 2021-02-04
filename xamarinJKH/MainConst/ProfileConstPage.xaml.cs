@@ -247,21 +247,24 @@ namespace xamarinJKH.MainConst
 
         private void SetAdminName()
         {
-            FormattedString formattedName = new FormattedString();
-            OSAppTheme currentTheme = Application.Current.RequestedTheme;
-            formattedName.Spans.Add(new Span
+            Device.BeginInvokeOnMainThread(async () =>
             {
-                Text = Settings.Person.FIO,
-                TextColor = currentTheme.Equals(OSAppTheme.Dark) ? Color.White : Color.Black,
-                FontAttributes = FontAttributes.Bold,
-                FontSize = 16
-            });
-            formattedName.Spans.Add(new Span
-            {
-                Text = AppResources.GoodDay,
-                TextColor = currentTheme.Equals(OSAppTheme.Dark) ? Color.White : Color.Black,
-                FontAttributes = FontAttributes.None,
-                FontSize = 16
+                FormattedString formattedName = new FormattedString();
+                OSAppTheme currentTheme = Application.Current.RequestedTheme;
+                formattedName.Spans.Add(new Span
+                {
+                    Text = Settings.Person.FIO,
+                    TextColor = currentTheme.Equals(OSAppTheme.Dark) ? Color.White : Color.Black,
+                    FontAttributes = FontAttributes.Bold,
+                    FontSize = 16
+                });
+                formattedName.Spans.Add(new Span
+                {
+                    Text = AppResources.GoodDay,
+                    TextColor = currentTheme.Equals(OSAppTheme.Dark) ? Color.White : Color.Black,
+                    FontAttributes = FontAttributes.None,
+                    FontSize = 16
+                });
             });
         }
 
@@ -327,6 +330,7 @@ namespace xamarinJKH.MainConst
 
         void SetTheme(int code)
         {
+            Analytics.TrackEvent("Смена темы на формах сотрудника");
             Preferences.Set("Theme", code);
             MessagingCenter.Send<Object>(this, "ChangeThemeConst");
             MessagingCenter.Send<Object>(this, "ChangeAdminApp");

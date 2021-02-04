@@ -99,9 +99,10 @@ namespace xamarinJKH.MainConst
                         break;
                 }
             });
+            MessagingCenter.Unsubscribe<Object>(this, "ChangeThemeConst");
             MessagingCenter.Subscribe<Object>(this, "ChangeThemeConst", (sender) => ChangeTheme.Execute(null));
                 RegisterNewDevice();
-
+            
             MessagingCenter.Subscribe<Object, int>(this, "SwitchToAppsConst", (sender, args) =>
             {
                 this.CurrentPage = this.Children[0];
