@@ -365,24 +365,43 @@ namespace xamarinJKH
                                     if (loginResult.Error == null)
                                     {
                                         if (isCons)
-                                        {
+                                        {                                            
                                             RequestList requestList = await server.GetRequestsListConst();
-                                            if (requestList != null)
+                                            Analytics.TrackEvent("получен requestList");
+                                            if (requestList != null )
                                             {
-                                                var request = requestList.Requests.FirstOrDefault(x => x.ID == id);
-                                                if (request != null)
-                                                    await MainPage.Navigation.PushModalAsync(new AppConstPage(request));
+                                                if(requestList.Requests != null)
+                                                {
+                                                    Analytics.TrackEvent("список Requests не null");
+                                                    var request = requestList.Requests.FirstOrDefault(x => x.ID == id);
+                                                    if (request != null)
+                                                        await MainPage.Navigation.PushModalAsync(new AppConstPage(request));
+                                                    else
+                                                    {
+                                                        Analytics.TrackEvent("в списке Requests нет id="+ id);
+                                                    }
+                                                }
+                                                
                                             }
                                         }
                                         else
                                         {
                                             RequestList requestsList = await server.GetRequestsList();
+                                            Analytics.TrackEvent("получен requestsList");
                                             if (requestsList != null)
                                             {
-                                                var request = requestsList.Requests.FirstOrDefault(x => x.ID == id);
-                                                if (request != null)
-                                                    await MainPage.Navigation.PushModalAsync(new AppPage(request, false,
-                                                        request.IsPaid));
+                                                if (requestsList.Requests != null)
+                                                {
+                                                    Analytics.TrackEvent("список Requests не null");
+                                                    var request = requestsList.Requests.FirstOrDefault(x => x.ID == id);
+                                                    if (request != null)
+                                                        await MainPage.Navigation.PushModalAsync(new AppPage(request, false,
+                                                            request.IsPaid));
+                                                    else
+                                                    {
+                                                        Analytics.TrackEvent("в списке Requests нет id=" + id);
+                                                    }
+                                                }
                                             }
                                         }
                                     }

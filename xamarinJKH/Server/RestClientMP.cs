@@ -708,6 +708,7 @@ namespace xamarinJKH.Server
             // Проверяем статус
             if (response.StatusCode != HttpStatusCode.OK)
             {
+                Analytics.TrackEvent("GetRequestsList Error=" + response.StatusDescription);
                 return new RequestList()
                 {
                     Error = $"Ошибка {response.StatusDescription}"
@@ -730,6 +731,8 @@ namespace xamarinJKH.Server
             // Проверяем статус
             if (response.StatusCode != HttpStatusCode.OK)
             {
+                Analytics.TrackEvent("GetRequestsListConst Error="+ response.StatusDescription);
+
                 return new RequestList()
                 {
                     Error = $"Ошибка {response.StatusDescription}"
