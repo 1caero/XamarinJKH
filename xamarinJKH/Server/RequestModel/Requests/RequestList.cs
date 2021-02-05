@@ -25,8 +25,11 @@ namespace xamarinJKH.Server.RequestModel
             get => Added.Trim();
             set => Added = value;
         }
-        
-        
+
+        public bool isEnableMass
+        {
+            get => !Settings.MobileSettings.disableBulkRequestsClosing;
+        }
         public string Name { get; set; }
         public string Status { get; set; }
         public int StatusID { get; set; }

@@ -1708,4 +1708,10 @@
   <data name="Floor" xml:space="preserve">
     <value>Поверх </value>
   </data>
+  <data name="ForPass" xml:space="preserve">
+    <value>На пропуск</value>
+  </data>
+  <data name="EnterEntranceNumber" xml:space="preserve">
+    <value>Введіть номер під'їзду </value>
+  </data>
 </root>

@@ -63,6 +63,7 @@
     <None Remove="Resources\ic_ossEnd.svg" />
     <None Remove="Resources\ic_phone.svg" />
     <None Remove="Resources\ic_phone_login.svg" />
+    <None Remove="Resources\ic_pass.svg" />
     <None Remove="Resources\ic_plus.svg" />
     <None Remove="Resources\ic_print.svg" />
     <None Remove="Resources\ic_profile_email.svg" />
@@ -244,6 +245,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ic_phone_login.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource> 
+    <EmbeddedResource Include="Resources\ic_pass.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ic_plus.svg">

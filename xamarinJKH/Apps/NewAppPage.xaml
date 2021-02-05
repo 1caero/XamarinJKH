@@ -58,6 +58,7 @@
                         <Label
                             Text="{x:Static xamarinJkh:AppResources.App_NavBar}"
                             FontSize="18"
+                            x:Name="LabelTitle"
                             TextColor="{AppThemeBinding Light=Black, Dark=White}"
                             FontAttributes="Bold"
                             HorizontalOptions="Start" />
@@ -223,6 +224,7 @@
                                         <StackLayout
                                             Margin="0,0,0,0"
                                             Spacing="0"
+                                            x:Name="LayoutSetType"
                                             HorizontalOptions="Center"
                                             Orientation="Horizontal">
 
@@ -305,7 +307,7 @@
                                                     HorizontalOptions="Fill" />
                                             </StackLayout>
                                         </StackLayout>
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                        <StackLayout x:Name="LayoutFloor" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                             <Frame CornerRadius="15"
                                                    x:Name="FrameFlat"
                                                    BackgroundColor="White"

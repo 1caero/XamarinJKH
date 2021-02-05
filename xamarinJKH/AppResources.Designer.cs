@@ -1303,11 +1303,29 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Введите номер подъезда.
+        /// </summary>
+        internal static string EnterEntranceNumber {
+            get {
+                return ResourceManager.GetString("EnterEntranceNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Введите ФИО.
         /// </summary>
         internal static string EnterFIO {
             get {
                 return ResourceManager.GetString("EnterFIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите номер этажа.
+        /// </summary>
+        internal static string EnterFloorNumber {
+            get {
+                return ResourceManager.GetString("EnterFloorNumber", resourceCulture);
             }
         }
         
@@ -2091,6 +2109,15 @@ namespace xamarinJKH {
         internal static string ForgotPass {
             get {
                 return ResourceManager.GetString("ForgotPass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to На пропуск.
+        /// </summary>
+        internal static string ForPass {
+            get {
+                return ResourceManager.GetString("ForPass", resourceCulture);
             }
         }
         

@@ -1834,4 +1834,13 @@
   <data name="Floor" xml:space="preserve">
     <value>Этаж</value>
   </data>
+  <data name="ForPass" xml:space="preserve">
+    <value>На пропуск</value>
+  </data>
+  <data name="EnterFloorNumber" xml:space="preserve">
+    <value>Введите номер этажа</value>
+  </data>
+  <data name="EnterEntranceNumber" xml:space="preserve">
+    <value>Введите номер подъезда</value>
+  </data>
 </root>
