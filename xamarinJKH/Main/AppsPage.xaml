@@ -65,7 +65,7 @@
                                HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                BorderColor="{x:DynamicResource MainColor}"
                                Margin="10, 0, 10, 0"
-                               Padding="10,10,10,10">
+                               Padding="7">
                             <StackLayout
                                 Orientation="Horizontal">
                                 <Switch
@@ -311,6 +311,24 @@
                                     </StackLayout>
                                 </Frame>
 
+                                <StackLayout
+                                    x:Name="LayoutSwitch"
+                                    Orientation="Horizontal">
+                                    <Switch
+                                        OnColor="{x:DynamicResource MainColor}"
+                                        IsToggled="{Binding ShowClosed, Mode=TwoWay}"
+                                        x:Name="SwitchApp2"
+                                        VerticalOptions="Center"  />
+
+                                    <Label Text="{x:Static xamarinJkh:AppResources.ShowClosedApps}"
+                                           x:Name="LabelSwitch2"
+                                           FontAttributes="Bold"
+                                           FontSize="15"
+                                           TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                                           VerticalOptions="CenterAndExpand"
+                                           HorizontalOptions="Center" />
+                                </StackLayout>
+                                
                                 <Frame CornerRadius="10"
                                        x:Name="FrameBtnAddPass"
                                        Padding="0,0,10,0"

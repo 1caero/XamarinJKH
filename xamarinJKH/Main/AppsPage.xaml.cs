@@ -214,12 +214,15 @@ namespace xamarinJKH.Main
                     additionalList.HeightRequest = 3000;
 
                     if (DeviceDisplay.MainDisplayInfo.Width < 700)
+                    {
                         LabelSwitch.FontSize = 12;
+                        LabelSwitch2.FontSize = 12;
+                    }
 
                     FrameBtnAdd.IsVisible = false;
                     FrameBtnAddPass.IsVisible = false;
-                    FrameBtnAddIos.IsVisible = Settings.MobileSettings.enableCreationPassRequests;
-                    FrameBtnAddPassIos.IsVisible = true;
+                    FrameBtnAddIos.IsVisible = true;
+                    FrameBtnAddPassIos.IsVisible = Settings.MobileSettings.enableCreationPassRequests;
 
                     break;
                 case Device.Android:
@@ -232,8 +235,10 @@ namespace xamarinJKH.Main
                 default:
                     break;
             }
-            
-            
+
+            FrameSwitch.IsVisible = Settings.MobileSettings.enableCreationPassRequests;
+            LayoutSwitch.IsVisible = !Settings.MobileSettings.enableCreationPassRequests;
+        
             Analytics.TrackEvent("Заявки жителя-платформозависимый код выполнен");
 
             var profile = new TapGestureRecognizer();
@@ -304,6 +309,7 @@ namespace xamarinJKH.Main
             Analytics.TrackEvent("Заявки жителя-LoadRequests");
 
             SwitchApp.Toggled += SwitchApp_Toggled;
+            SwitchApp2.Toggled += SwitchApp_Toggled;
             Analytics.TrackEvent("Заявки жителя-SwitchApp.Toggled подписались");
 
             MessagingCenter.Subscribe<Object>(this, "ChangeThemeCounter", (sender) =>
