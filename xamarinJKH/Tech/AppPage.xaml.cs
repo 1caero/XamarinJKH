@@ -222,9 +222,17 @@ namespace xamarinJKH.Tech
         SpeechRecognizer recognizer;
         IMicrophoneService micService;
         bool isTranscribing = false;
+
+        public bool isUser { get; set; }
         public AppPage()
         {
             InitializeComponent();
+
+            isUser = !Settings.ConstAuth;
+            if(!isUser)
+            {
+                FrameMessage.CornerRadius = new CornerRadius(30);
+                    }
 
             Resources["hexColor"] = (Color)Application.Current.Resources["MainColor"];
 
