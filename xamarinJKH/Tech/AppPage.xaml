@@ -43,7 +43,7 @@
                 </StackLayout>
             </StackLayout>
 
-                <pancakeView:PancakeView CornerRadius="30, 30,0,0" Margin="15, 0, 15, -6" Padding="20,10"  BorderColor="{x:DynamicResource MainColor}" 
+                <pancakeView:PancakeView CornerRadius="30, 30,0,0" Margin="15, 0, 15, -6" Padding="20,10"  BorderColor="{x:DynamicResource MainColor}"  IsVisible="{Binding isUser}"
                                                      BorderThickness="{AppThemeBinding Light=1, Dark=0}" HasShadow="False" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
                     <StackLayout Spacing="0" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" Orientation="Horizontal" x:Name="LabelUKLinkStack" >                       
                         <xamarinJkh:IconView   x:Name="IconSupport"
