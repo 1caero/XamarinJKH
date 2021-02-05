@@ -1696,4 +1696,22 @@
   <data name="CallUkText1" xml:space="preserve">
     <value>Якщо у вас питання</value>
   </data>
+  <data name="EntranceNumber" xml:space="preserve">
+    <value>Під'їзд  № XXXXX</value>
+  </data>
+  <data name="FlatNumber" xml:space="preserve">
+    <value>Поверх  № XXXXX</value>
+  </data>
+  <data name="Entrance" xml:space="preserve">
+    <value>Під'їзд </value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Поверх </value>
+  </data>
+  <data name="ForPass" xml:space="preserve">
+    <value>На пропуск</value>
+  </data>
+  <data name="EnterEntranceNumber" xml:space="preserve">
+    <value>Введіть номер під'їзду </value>
+  </data>
 </root>

@@ -19,7 +19,7 @@ namespace xamarinJKH {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class AppResources {
@@ -1303,11 +1303,29 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Введите номер подъезда.
+        /// </summary>
+        internal static string EnterEntranceNumber {
+            get {
+                return ResourceManager.GetString("EnterEntranceNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Введите ФИО.
         /// </summary>
         internal static string EnterFIO {
             get {
                 return ResourceManager.GetString("EnterFIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите номер этажа.
+        /// </summary>
+        internal static string EnterFloorNumber {
+            get {
+                return ResourceManager.GetString("EnterFloorNumber", resourceCulture);
             }
         }
         
@@ -1425,6 +1443,24 @@ namespace xamarinJKH {
         internal static string Entity {
             get {
                 return ResourceManager.GetString("Entity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подъезд.
+        /// </summary>
+        internal static string Entrance {
+            get {
+                return ResourceManager.GetString("Entrance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подъезд № XXXXX.
+        /// </summary>
+        internal static string EntranceNumber {
+            get {
+                return ResourceManager.GetString("EntranceNumber", resourceCulture);
             }
         }
         
@@ -2041,6 +2077,24 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Этаж № XXXXX.
+        /// </summary>
+        internal static string FlatNumber {
+            get {
+                return ResourceManager.GetString("FlatNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Этаж.
+        /// </summary>
+        internal static string Floor {
+            get {
+                return ResourceManager.GetString("Floor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Иностранный номер.
         /// </summary>
         internal static string ForeignNumber {
@@ -2055,6 +2109,15 @@ namespace xamarinJKH {
         internal static string ForgotPass {
             get {
                 return ResourceManager.GetString("ForgotPass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to На пропуск.
+        /// </summary>
+        internal static string ForPass {
+            get {
+                return ResourceManager.GetString("ForPass", resourceCulture);
             }
         }
         

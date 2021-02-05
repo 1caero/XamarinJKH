@@ -6,6 +6,8 @@ namespace xamarinJKH.Server.RequestModel
     {
         public string showAds { get; set; }
         public int adsType { get; set; }
+        // Id заявки на пропуск
+        public int requestTypeForPassRequest { get; set; }
         public string adsCodeIOS { get; set; }
         public string adsCodeAndroid { get; set; }
         public string bonusOfertaFile { get; set; }
@@ -14,7 +16,17 @@ namespace xamarinJKH.Server.RequestModel
         public bool enableOSS { get; set; }    
         public bool blockUserAuth { get; set; }    
         
+        // Возможноть выбора подъезда
+        public bool isRequiredEntrance { get; set; } 
+        
+        // Возможность выбора квартиры
+        public bool isRequiredFloor { get; set; }    
+        // Возможность создавать заявку на проауск
+        public bool enableCreationPassRequests { get; set; }    
+        
         public bool useAccountPinCode { get; set; }    
+        // Отключение массового выполнени закрытия
+        public bool disableBulkRequestsClosing { get; set; }    
         
         public bool chooseIdentByHouse { get; set; }    
         public bool disableCommentingRequests { get; set; }    

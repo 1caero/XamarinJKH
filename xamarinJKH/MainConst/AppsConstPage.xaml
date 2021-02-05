@@ -165,6 +165,7 @@
                                                 <Label x:Name="numberAndDate"
                                                        TextColor="Black"
                                                        FontSize="12"
+                                                       MinimumWidthRequest="60"
                                                        VerticalOptions="StartAndExpand"
                                                        HorizontalOptions="Start"
                                                        >
@@ -225,7 +226,7 @@
                                         <CheckBox HorizontalOptions="End"
                                                   VerticalOptions="Center"
                                                   IsChecked="{Binding IsCheked}"
-                                                  IsVisible="false"
+                                                  IsVisible="{Binding isEnableMass}"
                                                   CheckedChanged="CheckBox_OnCheckedChanged"
                                                   Color="{x:DynamicResource MainColor}"
                                                    Margin="0, 0, 0, 0">

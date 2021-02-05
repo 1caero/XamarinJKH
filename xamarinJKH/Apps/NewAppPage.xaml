@@ -7,6 +7,8 @@
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:converters="clr-namespace:xamarinJKH.Converters" xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:customRenderers="clr-namespace:xamarinJKH.CustomRenderers;assembly=xamarinJKH"
+             xmlns:mask="clr-namespace:xamarinJKH.Mask;assembly=xamarinJKH"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.Apps.NewAppPage">
     <ContentPage.Resources>
@@ -56,6 +58,7 @@
                         <Label
                             Text="{x:Static xamarinJkh:AppResources.App_NavBar}"
                             FontSize="18"
+                            x:Name="LabelTitle"
                             TextColor="{AppThemeBinding Light=Black, Dark=White}"
                             FontAttributes="Bold"
                             HorizontalOptions="Start" />
@@ -221,6 +224,7 @@
                                         <StackLayout
                                             Margin="0,0,0,0"
                                             Spacing="0"
+                                            x:Name="LayoutSetType"
                                             HorizontalOptions="Center"
                                             Orientation="Horizontal">
 
@@ -302,6 +306,54 @@
                                                     BackgroundColor="{Binding hex}"
                                                     HorizontalOptions="Fill" />
                                             </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout x:Name="LayoutFloor" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                            <Frame CornerRadius="15"
+                                                   x:Name="FrameFlat"
+                                                   BackgroundColor="White"
+                                                   HorizontalOptions="FillAndExpand"
+                                                   HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                                   BorderColor="{Binding hex}"
+                                                   Margin="10, 10, 10, 0"
+                                                   Padding="10,10,10,10">
+                                            <Entry x:Name="EntryFloor"
+                                                   FontSize="15"
+                                                   VerticalOptions="End"
+                                                   HorizontalTextAlignment="Center"
+                                                   TextColor="#A2A2A2"
+                                                   PlaceholderColor="#A2A2A2"
+                                                   Text=""
+                                                   Placeholder="{x:Static xamarinJkh:AppResources.Floor}"
+                                                   Keyboard="Numeric"
+                                                   HorizontalOptions="FillAndExpand">
+                                                <Entry.Behaviors>
+                                                    <mask:MaskedBehavior Mask="{x:Static xamarinJkh:AppResources.FlatNumber}" />
+                                                </Entry.Behaviors>
+                                            </Entry>
+                                            </Frame>
+                                            <Frame CornerRadius="15"
+                                                   x:Name="FrameEntrance"
+                                                   BackgroundColor="White"
+                                                   HorizontalOptions="FillAndExpand"
+                                                   HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                                   BorderColor="{Binding hex}"
+                                                   Margin="10, 10, 10, 0"
+                                                   Padding="10,10,10,10">
+                                            <Entry x:Name="EntryEntrance"
+                                                   FontSize="15"
+                                                   VerticalOptions="End"
+                                                   HorizontalTextAlignment="Center"
+                                                   TextColor="#A2A2A2"
+                                                   PlaceholderColor="#A2A2A2"
+                                                   Text=""
+                                                   Placeholder="{x:Static xamarinJkh:AppResources.Entrance}"
+                                                   Keyboard="Numeric"
+                                                   HorizontalOptions="FillAndExpand">
+                                                <Entry.Behaviors>
+                                                    <mask:MaskedBehavior Mask="{x:Static xamarinJkh:AppResources.EntranceNumber}" />
+                                                </Entry.Behaviors>
+                                            </Entry>
+                                            </Frame>
                                         </StackLayout>
                                         <StackLayout x:Name="LayoutPassApp" IsVisible="false"
                                                      Margin="10, 5, 10, 0">

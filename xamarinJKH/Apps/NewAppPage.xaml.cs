@@ -46,11 +46,14 @@ namespace xamarinJKH.Apps
         private AddAppModel _appModel;
         private bool isPassAPP = false;
         PassApp _passApp = new PassApp();
-        public NewAppPage()
+        public NewAppPage(bool isPassApp = false)
         {
+            isPassAPP = isPassApp;
             InitializeComponent();
+           
             Analytics.TrackEvent("Создание заявки");
-            
+            FrameFlat.IsVisible = Settings.MobileSettings.isRequiredFloor;
+            FrameEntrance.IsVisible = Settings.MobileSettings.isRequiredEntrance;
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
@@ -157,18 +160,22 @@ _appModel = new AddAppModel()
             PassType.GestureRecognizers.Add(call);
             MessagingCenter.Subscribe<Object, string>(this, "SetVisibleLayout", (sender,name) =>
             {
-                if (name.Contains("пропуск"))
-                {
-                    SetPassApp();
-                    SaveText = EntryMess.Text;
-                    isPassAPP = true;
-                }
-                else
-                {
-                    SetDefaultApp();
-                    isPassAPP = false;
-                }
+                // if (name.Contains("пропуск"))
+                // {
+                //     SetPassApp();
+                //     SaveText = EntryMess.Text;
+                //     isPassAPP = true;
+                // }
+                // else
+                // {
+                //     SetDefaultApp();
+                //     isPassAPP = false;
+                // }
             });
+            if (isPassAPP)
+            {
+                SetPassApp();
+            }
         }
 
         
@@ -708,7 +715,7 @@ _appModel = new AddAppModel()
 
                     var vm = (BindingContext as AddAppModel);
 
-                    if (vm.SelectedTyp == null)
+                    if (vm.SelectedTyp == null && !isPassAPP)
                     {
                         Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.AppTypeNotSelected, "OK"));
                         return;
@@ -717,9 +724,28 @@ _appModel = new AddAppModel()
                     var index = vm.Accounts.IndexOf(vm.SelectedAccount);
                     var type_index = vm.Types.IndexOf(vm.SelectedTyp);
                     string ident = Settings.Person.Accounts[index].Ident;
-                    string typeId = Settings.TypeApp[type_index].ID.ToString();
+                    string typeId = isPassAPP ? Settings.MobileSettings.requestTypeForPassRequest.ToString() : Settings.TypeApp[type_index].ID.ToString();
                     int? SubTypeID = _appModel.PodTypSelected?.ID;
-                    text = _appModel.SelectedTyp.Name.Contains("пропуск") ? AppResources.NamePassApp : text;
+                    string floor = Settings.MobileSettings.isRequiredFloor ? EntryFloor.Text.Replace(AppResources.Floor + " № ", "") :null;
+                    string entrance = Settings.MobileSettings.isRequiredEntrance ? EntryEntrance.Text.Replace(AppResources.Entrance + " № ", "") :null;
+                    text = isPassAPP ? AppResources.NamePassApp : text;
+                    if (Settings.MobileSettings.isRequiredFloor && !isPassAPP)
+                    {
+                        if (string.IsNullOrWhiteSpace(floor))
+                        {
+                            await DisplayAlert(AppResources.ErrorTitle, AppResources.EnterFloorNumber, "OK");
+                            return;
+                        }
+                    }
+
+                    if (Settings.MobileSettings.isRequiredEntrance && !isPassAPP)
+                    {
+                        if (string.IsNullOrWhiteSpace(entrance))
+                        {
+                            await DisplayAlert(AppResources.ErrorTitle, AppResources.EnterEntranceNumber, "OK");
+                            return;
+                        }
+                    }
                     IDResult result = new IDResult();
                     if (isPassAPP)
                     {
@@ -729,7 +755,8 @@ _appModel = new AddAppModel()
                     }
                     else
                     {
-                        result = await _server.newApp(ident, typeId, text,SubTypeID);
+                        
+                        result = await _server.newApp(ident, typeId, text,SubTypeID, floor, entrance);
 
                     }
                     var update = await _server.GetRequestsUpdates(Settings.UpdateKey, result.ID.ToString());
@@ -892,6 +919,9 @@ _appModel = new AddAppModel()
         {
             FrameEntryMess.IsVisible = false;
             LayoutPassApp.IsVisible = true;
+            LayoutFloor.IsVisible = false;
+            LayoutSetType.IsVisible = false;
+            LabelTitle.Text = AppResources.NamePassApp;
         }
         
         void SetDefaultApp()
@@ -905,17 +935,17 @@ _appModel = new AddAppModel()
         private void pickerType_SelectedIndexChanged(object sender, EventArgs e)
         {
             _appModel.SelectTyp.Execute(null);
-            if (_appModel.SelectedTyp.Name.Contains("пропуск"))
-            {
-                SetPassApp();
-                isPassAPP = true;
-            }
-            else
-            {
-                SetDefaultApp();
-                // EntryMess.Text = "";
-                isPassAPP = false;
-            }
+            // if (_appModel.SelectedTyp.Name.Contains("пропуск"))
+            // {
+            //    
+            //     isPassAPP = true;
+            // }
+            // else
+            // {
+            //     SetDefaultApp();
+            //     // EntryMess.Text = "";
+            //     isPassAPP = false;
+            // }
         }
 
 

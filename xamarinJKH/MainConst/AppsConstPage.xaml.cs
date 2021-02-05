@@ -121,7 +121,7 @@ namespace xamarinJKH.MainConst
         {
             InitializeComponent();
 
-            //CanDoMassOps = CanComplete && CanClose;
+            CanDoMassOps = !Settings.MobileSettings.disableBulkRequestsClosing;
 
             Resources["hexColor"] = (Color)Application.Current.Resources["MainColor"];
             Analytics.TrackEvent("Заявки сотрудника " + Settings.Person.Login);

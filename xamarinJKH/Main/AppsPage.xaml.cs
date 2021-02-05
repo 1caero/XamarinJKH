@@ -167,6 +167,8 @@ namespace xamarinJKH.Main
         public AppsPage()
         {
             InitializeComponent();
+            FrameSwitch.BackgroundColor =
+                System.Drawing.Color.FromArgb(200, System.Drawing.Color.White);
             Resources["hexColor"] = (Color)Application.Current.Resources["MainColor"];
             Analytics.TrackEvent("Заявки жителя");
             //Settings.MobileSettings.color = null;
@@ -215,18 +217,23 @@ namespace xamarinJKH.Main
                         LabelSwitch.FontSize = 12;
 
                     FrameBtnAdd.IsVisible = false;
-                    FrameBtnAddIos.IsVisible = true;
+                    FrameBtnAddPass.IsVisible = false;
+                    FrameBtnAddIos.IsVisible = Settings.MobileSettings.enableCreationPassRequests;
+                    FrameBtnAddPassIos.IsVisible = true;
 
                     break;
                 case Device.Android:
                     FrameBtnAdd.IsVisible = true;
+                    FrameBtnAddPass.IsVisible = Settings.MobileSettings.enableCreationPassRequests;
                     FrameBtnAddIos.IsVisible = false;
+                    FrameBtnAddPassIos.IsVisible = false;
 
                     break;
                 default:
                     break;
             }
-
+            
+            
             Analytics.TrackEvent("Заявки жителя-платформозависимый код выполнен");
 
             var profile = new TapGestureRecognizer();
@@ -256,6 +263,10 @@ namespace xamarinJKH.Main
             var addClickIOS = new TapGestureRecognizer();
             addClickIOS.Tapped += async (s, e) => { startNewApp(FrameBtnAddIos, null); };
             FrameBtnAddIos.GestureRecognizers.Add(addClickIOS);
+            var addIosPassClick = new TapGestureRecognizer();
+            addIosPassClick.Tapped += async (s, e) => { StartNewPass(FrameBtnAddPass, null); };
+            FrameBtnAddPass.GestureRecognizers.Add(addIosPassClick);
+            // FrameBtnAddPassIos.GestureRecognizers.Add(addIosPassClick);
             Analytics.TrackEvent("Заявки жителя-добавление обработки тапа кнопки Новая заявка иос");
 
             SetText();
@@ -403,6 +414,7 @@ namespace xamarinJKH.Main
             }
 
             IconViewSaldos.ReplaceStringMap = buttonColor;
+            
             // viewModel.LoadRequests.Execute(false);
             CheckAkk();
             
@@ -580,6 +592,33 @@ namespace xamarinJKH.Main
                     }
 
                 }
+            }
+        }
+
+        private async void StartNewPass(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Settings.Person.Accounts.Count > 0)
+                {
+                    if (Settings.TypeApp.Count > 0)
+                    {
+                        if (Navigation.NavigationStack.FirstOrDefault(x => x is NewAppPage) == null)
+                            await Navigation.PushAsync(new NewAppPage(true));
+                    }
+                    else
+                    {
+                        await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAppsNoTypes, "OK");
+                    }
+                }
+                else
+                {
+                    await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAppsNoIdent, "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                Analytics.TrackEvent(ex.Message);
             }
         }
     }

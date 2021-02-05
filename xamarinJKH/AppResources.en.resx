@@ -1820,4 +1820,25 @@
   <data name="CallUkText1" xml:space="preserve">
     <value>If you have a question</value>
   </data>
+  <data name="FlatNumber" xml:space="preserve">
+    <value>Floor № XXXXX</value>
+  </data>
+  <data name="EntranceNumber" xml:space="preserve">
+    <value>Entrance  № XXXXX</value>
+  </data>
+  <data name="Entrance" xml:space="preserve">
+    <value>Entrance</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Floor</value>
+  </data>
+  <data name="ForPass" xml:space="preserve">
+    <value>For pass </value>
+  </data>
+  <data name="EnterFloorNumber" xml:space="preserve">
+    <value>Enter the floor number </value>
+  </data>
+  <data name="EnterEntranceNumber" xml:space="preserve">
+    <value>Enter the entrance number </value>
+  </data>
 </root>
