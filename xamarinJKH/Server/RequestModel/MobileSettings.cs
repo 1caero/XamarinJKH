@@ -14,6 +14,12 @@ namespace xamarinJKH.Server.RequestModel
         public bool enableOSS { get; set; }    
         public bool blockUserAuth { get; set; }    
         
+        // Возможноть выбора подъезда
+        public bool isRequiredEntrance { get; set; } 
+        
+        // Возможность выбора квартиры
+        public bool isRequiredFloor { get; set; }    
+        
         public bool useAccountPinCode { get; set; }    
         
         public bool chooseIdentByHouse { get; set; }    

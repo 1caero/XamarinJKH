@@ -50,7 +50,8 @@ namespace xamarinJKH.Apps
         {
             InitializeComponent();
             Analytics.TrackEvent("Создание заявки");
-            
+            FrameFlat.IsVisible = Settings.MobileSettings.isRequiredFloor;
+            FrameEntrance.IsVisible = Settings.MobileSettings.isRequiredEntrance;
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
@@ -719,6 +720,8 @@ _appModel = new AddAppModel()
                     string ident = Settings.Person.Accounts[index].Ident;
                     string typeId = Settings.TypeApp[type_index].ID.ToString();
                     int? SubTypeID = _appModel.PodTypSelected?.ID;
+                    string floor = Settings.MobileSettings.isRequiredFloor ? EntryFloor.Text.Replace(AppResources.Floor + " № ", "") :null;
+                    string entrance = Settings.MobileSettings.isRequiredEntrance ? EntryEntrance.Text.Replace(AppResources.Entrance + " № ", "") :null;
                     text = _appModel.SelectedTyp.Name.Contains("пропуск") ? AppResources.NamePassApp : text;
                     IDResult result = new IDResult();
                     if (isPassAPP)
@@ -729,7 +732,8 @@ _appModel = new AddAppModel()
                     }
                     else
                     {
-                        result = await _server.newApp(ident, typeId, text,SubTypeID);
+                        
+                        result = await _server.newApp(ident, typeId, text,SubTypeID, floor, entrance);
 
                     }
                     var update = await _server.GetRequestsUpdates(Settings.UpdateKey, result.ID.ToString());

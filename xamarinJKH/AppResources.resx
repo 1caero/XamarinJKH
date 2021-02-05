@@ -1822,4 +1822,16 @@
   <data name="CallUkText1" xml:space="preserve">
     <value>Если у вас вопрос</value>
   </data>
+  <data name="FlatNumber" xml:space="preserve">
+    <value>Этаж № XXXXX</value>
+  </data>
+  <data name="EntranceNumber" xml:space="preserve">
+    <value>Подъезд № XXXXX</value>
+  </data>
+  <data name="Entrance" xml:space="preserve">
+    <value>Подъезд</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Этаж</value>
+  </data>
 </root>

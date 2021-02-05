@@ -19,7 +19,7 @@ namespace xamarinJKH.Server
     {
         // public const string SERVER_ADDR = "https://api.sm-center.ru/test_erc_udm"; // ОСС
         // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
-        public const string SERVER_ADDR = "https://api.sm-center.ru/water2"; // Тихая гавань water/ water2 - тихая гавань - 2 
+        public const string SERVER_ADDR = "https://api.sm-center.ru/water"; // Тихая гавань water/ water2 - тихая гавань - 2 
         //public const string SERVER_ADDR = "https://api.sm-center.ru/newjkh"; // Еще одна тестовая база
         //public const string SERVER_ADDR = "https://api.sm-center.ru/dgservicnew"; // Домжил (дом24)
         // public const string SERVER_ADDR = "https://api.sm-center.ru/UKUpravdom"; //Управдом Чебоксары
@@ -518,7 +518,7 @@ namespace xamarinJKH.Server
         /// <param name="typeID">Тип заявки</param>
         /// <param name="Text">Текст заявки</param>
         /// <returns>id новой заявки</returns>
-        public async Task<IDResult> newApp(string ident, string typeID, string Text, int? SubTypeID = null)
+        public async Task<IDResult> newApp(string ident, string typeID, string Text, int? SubTypeID = null, string Floor = null, string Entrance = null)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             RestRequest restRequest = new RestRequest(NEW_APP, Method.POST);
@@ -531,7 +531,9 @@ namespace xamarinJKH.Server
                 ident,
                 typeID,
                 Text,
-                SubTypeID
+                SubTypeID,
+                Floor,
+                Entrance
             });
             var response = await restClientMp.ExecuteTaskAsync<IDResult>(restRequest);
             // Проверяем статус

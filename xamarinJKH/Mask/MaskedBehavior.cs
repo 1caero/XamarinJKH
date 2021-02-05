@@ -61,6 +61,12 @@ namespace xamarinJKH.Mask
                 return;
             }
 
+            if (text.Contains(","))
+            {
+                entry.Text = text.Remove(text.Length - 1);
+                return;
+            }
+
             foreach (var position in _positions)
                 if (text.Length >= position.Key + 1)
                 {
