@@ -200,7 +200,7 @@ namespace xamarinJKH.DialogViews
 
         void SetImage()
         {
-            if (mInfo.Resource.ToLower().Contains("холод") || mInfo.Resource.ToLower().Contains("хвс"))
+            if ((mInfo.Resource.ToLower().Contains("холод")  && !mInfo.Resource.ToLower().Contains("гвс"))|| (mInfo.Resource.ToLower().Contains("хвс") && !mInfo.Resource.ToLower().Contains("гвс")))
             {
                 IconViewImage.Source = ImageSource.FromFile("ic_cold_water");
             }

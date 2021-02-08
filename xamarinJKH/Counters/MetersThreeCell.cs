@@ -862,7 +862,7 @@ namespace xamarinJKH.Main
                 }
 
 
-                if (Resource.ToLower().Contains("холод") || Resource.ToLower().Contains("хвс"))
+                if ((Resource.ToLower().Contains("холод") &&  !Resource.ToLower().Contains("гвс")) || (Resource.ToLower().Contains("хвс") &&  !Resource.ToLower().Contains("гвс") ))
                 {
                     img.Source = ImageSource.FromFile("ic_cold_water");
                 }

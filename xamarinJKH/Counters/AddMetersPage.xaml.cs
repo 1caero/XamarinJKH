@@ -534,7 +534,7 @@ namespace xamarinJKH.Counters
         void SetTextAndColor()
         {
             OSAppTheme currentTheme = Application.Current.RequestedTheme;
-            if (meter.Resource.ToLower().Contains("холод") || meter.Resource.ToLower().Contains("хвс"))
+            if ((meter.Resource.ToLower().Contains("холод") && !meter.Resource.ToLower().Contains("гвс")) || (meter.Resource.ToLower().Contains("хвс") && !meter.Resource.ToLower().Contains("гвс") ))
             {
                 img.Source = ImageSource.FromFile("ic_cold_water");
                     meter.Resource += ", м3";
