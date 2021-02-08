@@ -60,7 +60,7 @@
                                                  BorderColor="{Binding hex}" 
                                                  BackgroundColor="Transparent" 
                                                  BorderThickness="1" 
-                                                 Padding="5" 
+                                                 Padding="0" 
                                                  Margin="10,0" 
                                                  CornerRadius="10" 
                                                  WidthRequest="200" 
@@ -68,15 +68,17 @@
                                                  IsVisible="{Binding isDebug}" 
                                                  MinimumWidthRequest="400"  
                                                  HorizontalOptions="EndAndExpand" 
+                                                 VerticalOptions="Center"
                                                   >
-                                <xamarinJkh:BordlessEditor BackgroundColor="Transparent" 
+                                <xamarinJkh:BordlessEditor 
                                                            x:Name="filter"
                                                            AutoSize="Disabled" 
                                                            Placeholder="Поиск..." 
                                                            HorizontalOptions="Fill" 
-                                                           VerticalOptions="Center"
+                                                           VerticalOptions="Fill"
+                                    FontSize="14" 
                                                            HeightRequest="50" 
-                                                           TextChanged="filter_TextChanged">
+                                                           TextChanged="filter_TextChanged" BackgroundColor="Transparent">
 
                                 </xamarinJkh:BordlessEditor>
                             </pancakeView:PancakeView>
