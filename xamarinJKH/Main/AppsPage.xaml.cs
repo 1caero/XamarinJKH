@@ -305,8 +305,16 @@ namespace xamarinJKH.Main
                 }
             });
             Analytics.TrackEvent("Заявки жителя-CloseAPP подписались");
-            viewModel.LoadRequests.Execute(null);
-            Analytics.TrackEvent("Заявки жителя-LoadRequests");
+            try
+            {
+                viewModel.LoadRequests.Execute(null);
+                Analytics.TrackEvent("Заявки жителя-LoadRequests");
+            }
+            catch (Exception exc)
+            {
+                Analytics.TrackEvent("Заявки жителя-LoadRequests. error:"+exc.ToString());
+                throw;
+            }
 
             SwitchApp.Toggled += SwitchApp_Toggled;
             SwitchApp2.Toggled += SwitchApp_Toggled;

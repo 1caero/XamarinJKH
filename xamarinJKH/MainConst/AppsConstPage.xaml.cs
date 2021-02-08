@@ -55,6 +55,17 @@ namespace xamarinJKH.MainConst
         private bool _isRefreshing = false;
         public Color hex { get; set; }
         
+        public bool isDebug
+        {
+            get
+            {
+#if DEBUG 
+                return true;
+#endif
+                return false;
+            }
+        }
+
         private HashSet<RequestInfo> CheckRequestInfos = new HashSet<RequestInfo>();
         
         public bool IsRefreshing
@@ -162,6 +173,11 @@ namespace xamarinJKH.MainConst
             var closeApps = new TapGestureRecognizer();
             closeApps.Tapped += async (s, e) => { await CloseApps(); };
             StackLayoutClose.GestureRecognizers.Add(closeApps);
+
+            var buttonFilterTgr = new TapGestureRecognizer();
+            buttonFilterTgr.Tapped += (s, e) => { /*вызов формы фильтрации*/ };
+            buttonFilter.GestureRecognizers.Add(buttonFilterTgr);
+
             SetText();
             // additionalList.BackgroundColor = Color.Transparent;
             // additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
@@ -520,6 +536,11 @@ namespace xamarinJKH.MainConst
             {
                 Console.WriteLine(exception);
             }
+        }
+
+        private void filter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            additionalList.ItemsSource = RequestInfos.Where(_ => _.RequestNumber.Contains(e.NewTextValue) || _.Status.ToLowerInvariant().Contains(e.NewTextValue.ToLowerInvariant()) || _.Name.ToLowerInvariant().Contains(e.NewTextValue.ToLowerInvariant()));
         }
     }
 }

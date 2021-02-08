@@ -246,45 +246,55 @@ namespace xamarinJKH.Main
 
         async void Loadtab()
         {
-            Analytics.TrackEvent("Установка данных для вкладок");
-            if (Settings.MobileSettings == null)
+            try
             {
-                Analytics.TrackEvent("Ожидание подгрузки данных");
-            }
-            while (Settings.MobileSettings == null)
-            {
-                await Task.Delay(TimeSpan.FromMilliseconds(50));
-            }
-            if (Settings.MobileSettings != null)
-                if (!string.IsNullOrEmpty(Settings.MobileSettings.startScreen))
-                    switch (Settings.MobileSettings.startScreen.Trim())
-                    {
-                        case "Оплата":
-                            {
-                                SetTab(AppResources.Pays);
-                                break;
-                            }
-                        case "События":
-                            {
+                Analytics.TrackEvent("Установка данных для вкладок");
+                if (Settings.MobileSettings == null)
+                {
+                    Analytics.TrackEvent("Ожидание подгрузки данных");
+                }
+                while (Settings.MobileSettings == null)
+                {
+                    await Task.Delay(TimeSpan.FromMilliseconds(50));
+                }
+                if (Settings.MobileSettings != null)
+                    if (!string.IsNullOrEmpty(Settings.MobileSettings.startScreen))
+                        switch (Settings.MobileSettings.startScreen.Trim())
+                        {
+                            case "Оплата":
+                                {
+                                    SetTab(AppResources.Pays);
+                                    break;
+                                }
+                            case "События":
+                                {
+                                    SetTab(AppResources.Events_NavBar);
+                                    break;
+                                }
+                            case "Показания":
+                                {
+                                    SetTab(AppResources.Meters_NavBar);
+                                    break;
+                                }
+                            case "Наши услуги":
+                                {
+                                    SetTab(AppResources.Shop_NavBar);
+                                    await Task.Delay(TimeSpan.FromMilliseconds(700));
+                                    MessagingCenter.Send<Object>(this, "LoadGoods");
+                                    break;
+                                }
+                            default:
                                 SetTab(AppResources.Events_NavBar);
                                 break;
-                            }
-                        case "Показания":
-                            {
-                                SetTab(AppResources.Meters_NavBar);
-                                break;
-                            }
-                        case "Наши услуги":
-                            {
-                                SetTab(AppResources.Shop_NavBar);
-                                await Task.Delay(TimeSpan.FromMilliseconds(700));
-                                MessagingCenter.Send<Object>(this, "LoadGoods");
-                                break;
-                            }
-                        default:
-                            SetTab(AppResources.Events_NavBar);
-                            break;
-                    }
+                        }
+            }
+            catch(Exception e)
+            {
+                Analytics.TrackEvent("Установка данных для вкладок, error:"+e.ToString());
+
+                throw;
+            }
+            
         }
 
         private void GetBrand()
