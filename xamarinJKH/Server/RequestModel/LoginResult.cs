@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using xamarinJKH.Utils;
 using xamarinJKH.ViewModels;
 
 namespace xamarinJKH.Server.RequestModel
@@ -60,6 +62,10 @@ namespace xamarinJKH.Server.RequestModel
         public string Ident { get; set; } = "";
         public string FIO { get; set; } = "";
         public string Address { get; set; } = "";
+        public string AdressHalf
+        {
+            get => Settings.GetHalfAddress(Address);
+        }
         public string Company { get; set; }
         public int MetersStartDay { get; set; }
         public int MetersEndDay { get; set; }
@@ -76,7 +82,8 @@ namespace xamarinJKH.Server.RequestModel
                 OnPropertyChanged("IsFirst");
             }
         }
-
+        
+        
         bool selected;
         public bool Selected
         {
@@ -91,6 +98,7 @@ namespace xamarinJKH.Server.RequestModel
         {
             return Ident;
         }
+        
     }
     
    

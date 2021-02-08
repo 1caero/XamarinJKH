@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using xamarinJKH.Utils;
 using xamarinJKH.ViewModels;
 
 namespace xamarinJKH.Server.RequestModel
@@ -13,6 +14,10 @@ namespace xamarinJKH.Server.RequestModel
         public decimal Sum { get; set; }
         public decimal SumFine { get; set; }
         public string Address { get; set; }
+        public string AdressHalf
+        {
+            get => Settings.GetHalfAddress(Address);
+        }
         public string INN { get; set; }
         public string DebtActualDate { get; set; }
         public decimal InsuranceSum { get; set; }

@@ -230,5 +230,18 @@ namespace xamarinJKH.Utils
                 Person.Phone = phone;
         }
         
+        public static string GetHalfAddress(string address)
+        {
+            if (!string.IsNullOrWhiteSpace(address))
+            {
+                int addressLength = address.Length/2;
+                string secondHalf = address.Substring(addressLength);
+                int indexSpace = secondHalf.IndexOf(" ", StringComparison.Ordinal);
+                return address.Insert(addressLength + indexSpace + 1, "\n");
+            }
+
+            return "";
+        }
+        
     }
 }

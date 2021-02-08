@@ -90,7 +90,7 @@
                                         <CollectionView 
                                         x:Name="Picker"
                                         Margin="0,0,0,15"
-                                            HeightRequest="62"
+                                            HeightRequest="80"
                                         SelectedItem="{Binding SelectedAccount}"
                                         VerticalOptions="FillAndExpand"
                                             HorizontalScrollBarVisibility="Never"
@@ -133,7 +133,7 @@
                                                                TextColor="{Binding Source={x:Reference Frame}, Path=BorderColor}"
                                                                FontAttributes="Bold"
                                                                FontSize="16"/>
-                                                            <Label Text="{Binding Address}"
+                                                            <Label Text="{Binding AdressHalf}"
                                                                TextColor="{Binding Source={x:Reference Frame}, Path=BorderColor}"
                                                                FontSize="14"/>
                                                         </StackLayout>

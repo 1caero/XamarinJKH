@@ -125,7 +125,7 @@
                                                 HorizontalScrollBarVisibility="Never"
                                                 VerticalScrollBarVisibility="Never"
                                                 IsVisible="True"
-                                                HeightRequest="60"
+                                                HeightRequest="80"
                                                 SelectionMode="Single">
                                         <CollectionView.ItemsLayout>
                                             <LinearItemsLayout Orientation="Horizontal"
@@ -165,13 +165,13 @@
                                                        Padding="10"
                                                        CornerRadius="5">
                                                         <StackLayout VerticalOptions="Start"
-                                                                 Spacing="0">
+                                                                     Spacing="0">
                                                             <Label Text="{Binding Ident}"
                                                                TextColor="{Binding Source={x:Reference FrameIdent}, Path=BorderColor}"
                                                                FontAttributes="Bold"
                                                                FontSize="16" />
-                                                            <Label Text="{Binding Address}"
-                                                               TextColor="{Binding Source={x:Reference FrameIdent}, Path=BorderColor}"
+                                                            <Label Text="{Binding AdressHalf}"
+                                                                   TextColor="{Binding Source={x:Reference FrameIdent}, Path=BorderColor}"
                                                                FontSize="14" />
                                                         </StackLayout>
 
@@ -193,6 +193,7 @@
                                     x:Name="Scroll"
                                     IsEnabled="{Binding Path=Focused, Source={x:Reference EntryMess}, Converter={x:StaticResource Invert}}"
                                     Grid.Row="1"
+                                    BackgroundColor="Transparent"
                                     Margin="0,-95,0,0">
                             <StackLayout>
 
