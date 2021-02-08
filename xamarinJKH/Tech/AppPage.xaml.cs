@@ -176,7 +176,7 @@ namespace xamarinJKH.Tech
 
                             if (lastChild != null)
                                 Device.BeginInvokeOnMainThread(async () =>
-                                    await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, true));
+                                    await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, false));
                         });
                         messages.Add(each);
                         request.Messages.Add(each);
@@ -188,7 +188,7 @@ namespace xamarinJKH.Tech
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     if (lastChild != null)
-                        await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, true);
+                        await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, false);
                 });
              
             }
@@ -647,7 +647,7 @@ namespace xamarinJKH.Tech
                             var lastChild = baseForApp.Children.LastOrDefault();
                             if (lastChild != null)
                                 Device.BeginInvokeOnMainThread(async () =>
-                                    await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, true));
+                                    await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, false));
                         }
                     }
                     );
@@ -759,7 +759,7 @@ namespace xamarinJKH.Tech
                 var lastChild = baseForApp.Children.LastOrDefault();
                 if (lastChild != null)
                     //await scrollFroAppMessages.ScrollToAsync(lastChild.X, lastChild.Y + 30, true);// (lastChild.X, lastChild.Y + 30, true);
-                    await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, true);
+                    await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, false);
             }
             catch
             {
