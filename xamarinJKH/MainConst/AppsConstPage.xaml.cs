@@ -420,6 +420,11 @@ namespace xamarinJKH.MainConst
                     return;
                 }
 
+                if(_requestList.Requests == null)
+                {
+                    return;
+                }
+
                 if (SwitchApp.IsToggled)
                 {
                     
