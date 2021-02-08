@@ -91,7 +91,8 @@ namespace xamarinJKH.MainConst
             IsVisibleFunction();
             // additionalList.ItemsSource = null;
             // additionalList.ItemsSource = RequestInfos;
-            MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", RequestInfos.Where(x => !x.IsReaded).Count());
+            if (RequestInfos != null)
+                MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", RequestInfos.Count(x => !x.IsReaded));
         }
 
         public bool CanComplete => Settings.Person.UserSettings.RightPerformRequest;
@@ -380,7 +381,7 @@ namespace xamarinJKH.MainConst
             {
                 SetReaded();
                 Settings.UpdateKey = _requestList.UpdateKey;
-                MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", _requestList.Requests.Where(x => !x.IsReaded).Count());
+                MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", _requestList.Requests.Count(x => !x.IsReaded));
             }
             else
             {
@@ -443,12 +444,15 @@ namespace xamarinJKH.MainConst
                     
                     Device.BeginInvokeOnMainThread(async () =>
                     {
-                        RequestInfos.Clear();
-                        foreach (var each in new ObservableCollection<RequestInfo>(from i in _requestList.Requests
-                            where !i.IsReaded
-                            select i).OrderBy(o => o.ID).Reverse())
+                        if (_requestList != null)
                         {
-                            RequestInfos.Add(each);
+                            RequestInfos.Clear();
+                            foreach (var each in new ObservableCollection<RequestInfo>(from i in _requestList.Requests
+                                where !i.IsReaded
+                                select i).OrderBy(o => o.ID).Reverse())
+                            {
+                                RequestInfos.Add(each);
+                            }
                         }
                     });
                     
