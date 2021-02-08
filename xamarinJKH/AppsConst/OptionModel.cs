@@ -9,6 +9,7 @@ namespace xamarinJKH.AppsConst
     {
         public string Name { get; set; }
         public string Image { get; set; }
+        public string ID { get; set; }
         
         public bool HasSubTypes { get; set; }
         public List<NamedValue> SubTypes { get; set; }

@@ -584,6 +584,7 @@ _appModel = new AddAppModel()
                         type_.Name = type.Name;
                         type_.HasSubTypes = type.HasSubTypes;
                         type_.SubTypes = type.SubTypes;
+                        type_.ID = type.ID.ToString();
                         String image = "";
                         type_.ReplaceMap = SetIconType(type.Name, ref image);
                         type_.Image = image;
@@ -921,13 +922,20 @@ _appModel = new AddAppModel()
             LayoutPassApp.IsVisible = true;
             LayoutFloor.IsVisible = false;
             LayoutSetType.IsVisible = false;
-            LabelTitle.Text = AppResources.NamePassApp;
+        } 
+        void SetPassApp2()
+        {
+            FrameEntryMess.IsVisible = false;
+            LayoutPassApp.IsVisible = true;
+            LayoutFloor.IsVisible = false;
         }
         
         void SetDefaultApp()
         {
             FrameEntryMess.IsVisible = true;
             LayoutPassApp.IsVisible = false;
+            LayoutSetType.IsVisible = true;
+            LayoutFloor.IsVisible = true;
         }
 
         string SaveText { get; set; }
@@ -935,17 +943,18 @@ _appModel = new AddAppModel()
         private void pickerType_SelectedIndexChanged(object sender, EventArgs e)
         {
             _appModel.SelectTyp.Execute(null);
-            // if (_appModel.SelectedTyp.Name.Contains("пропуск"))
-            // {
-            //    
-            //     isPassAPP = true;
-            // }
-            // else
-            // {
-            //     SetDefaultApp();
-            //     // EntryMess.Text = "";
-            //     isPassAPP = false;
-            // }
+            if (_appModel.SelectedTyp.ID.Equals(Settings.MobileSettings.requestTypeForPassRequest.ToString()))
+            {
+               
+                isPassAPP = true;
+                SetPassApp2();
+            }
+            else
+            {
+                SetDefaultApp();
+                // EntryMess.Text = "";
+                isPassAPP = false;
+            }
         }
 
 
