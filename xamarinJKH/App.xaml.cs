@@ -368,39 +368,32 @@ namespace xamarinJKH
                                         {                                            
                                             RequestList requestList = await server.GetRequestsListConst();
                                             Analytics.TrackEvent("получен requestList");
-                                            if (requestList != null )
+                                            if(requestList?.Requests != null)
                                             {
-                                                if(requestList.Requests != null)
+                                                Analytics.TrackEvent("список Requests не null");
+                                                var request = requestList.Requests.FirstOrDefault(x => x.ID == id);
+                                                if (request != null)
+                                                    await MainPage.Navigation.PushModalAsync(new AppConstPage(request));
+                                                else
                                                 {
-                                                    Analytics.TrackEvent("список Requests не null");
-                                                    var request = requestList.Requests.FirstOrDefault(x => x.ID == id);
-                                                    if (request != null)
-                                                        await MainPage.Navigation.PushModalAsync(new AppConstPage(request));
-                                                    else
-                                                    {
-                                                        Analytics.TrackEvent("в списке Requests нет id="+ id);
-                                                    }
+                                                    Analytics.TrackEvent("в списке Requests нет id="+ id);
                                                 }
-                                                
                                             }
                                         }
                                         else
                                         {
                                             RequestList requestsList = await server.GetRequestsList();
                                             Analytics.TrackEvent("получен requestsList");
-                                            if (requestsList != null)
+                                            if (requestsList?.Requests != null)
                                             {
-                                                if (requestsList.Requests != null)
+                                                Analytics.TrackEvent("список Requests не null");
+                                                var request = requestsList.Requests.FirstOrDefault(x => x.ID == id);
+                                                if (request != null)
+                                                    await MainPage.Navigation.PushModalAsync(new AppPage(request, false,
+                                                        request.IsPaid));
+                                                else
                                                 {
-                                                    Analytics.TrackEvent("список Requests не null");
-                                                    var request = requestsList.Requests.FirstOrDefault(x => x.ID == id);
-                                                    if (request != null)
-                                                        await MainPage.Navigation.PushModalAsync(new AppPage(request, false,
-                                                            request.IsPaid));
-                                                    else
-                                                    {
-                                                        Analytics.TrackEvent("в списке Requests нет id=" + id);
-                                                    }
+                                                    Analytics.TrackEvent("в списке Requests нет id=" + id);
                                                 }
                                             }
                                         }
@@ -427,7 +420,7 @@ namespace xamarinJKH
                                 {
                                     Settings.SetPhoneTech(phone);
                                     await server.RegisterDeviceNotAvtorization(Settings.Person?.Phone);
-                                    if (MainPage.Navigation.NavigationStack==null || MainPage.Navigation.NavigationStack.FirstOrDefault(x => x is Tech.AppPage) == null)
+                                    if (MainPage.Navigation.NavigationStack?.FirstOrDefault(x => x is Tech.AppPage) == null)
                                         await MainPage.Navigation.PushModalAsync(new Tech.AppPage());
                                 }
                                 else
