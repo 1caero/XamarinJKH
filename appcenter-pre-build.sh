@@ -152,7 +152,7 @@ then
     echo "Updating package name to $PACKAGE_NAME in Info.plist"
 	
 	echo "Replace spaces for symbols in $LABEL"
-	LABEL="${LABEL// /&#x2007;}"	
+	LABEL="${LABEL// /" "}"	
 	
 	echo "Updating display name to $LABEL in Info.plist"
     plutil -replace CFBundleDisplayName -string "${LABEL}" ${INFO_PLIST_FILE}
