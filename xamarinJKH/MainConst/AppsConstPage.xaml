@@ -60,11 +60,11 @@
                                                  BorderColor="{Binding hex}" 
                                                  BackgroundColor="Transparent" 
                                                  BorderThickness="1" 
-                                                 Padding="0" 
+                                                 Padding="10" 
                                                  Margin="10,0" 
                                                  CornerRadius="10" 
                                                  WidthRequest="200" 
-                                                 HeightRequest="60"
+                                                 HeightRequest="50"
                                                  IsVisible="{Binding isDebug}" 
                                                  MinimumWidthRequest="400"  
                                                  HorizontalOptions="EndAndExpand" 
@@ -75,7 +75,7 @@
                                                            AutoSize="Disabled" 
                                                            Placeholder="Поиск..." 
                                                            HorizontalOptions="Fill" 
-                                                           VerticalOptions="Fill"
+                                                           VerticalOptions="CenterAndExpand"
                                     FontSize="14" 
                                                            HeightRequest="50" 
                                                            TextChanged="filter_TextChanged" BackgroundColor="Transparent">
@@ -86,7 +86,13 @@
                                                  BackgroundColor="Transparent" BorderThickness="1" CornerRadius="10" 
                                                  IsVisible="{Binding isDebug}"  HeightRequest="30" WidthRequest="30" Padding="5" 
                                                  VerticalOptions="Center" HorizontalOptions="End">
-                            <xamarinJkh:IconView Source="edit.png" Foreground="{Binding hex}"  VerticalOptions="Center"  ></xamarinJkh:IconView>
+                            <svg:SvgCachedImage 
+                                                Source="resource://xamarinJKH.Resources.edit.svg"
+                                                HeightRequest="20"
+                                                ReplaceStringMap="{Binding ChangeTheme, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"                                        
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center" />   
+                            <!-- <xamarinJkh:IconView Source="edit.png" Foreground="{Binding hex}"  VerticalOptions="Center"  ></xamarinJkh:IconView> -->
                         </pancakeView:PancakeView>
                         
                         
