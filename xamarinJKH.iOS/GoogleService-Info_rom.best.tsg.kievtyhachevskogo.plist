@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1027383111296-83588ac41rga0t0o4in4hovcp5f534k6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1027383111296-83588ac41rga0t0o4in4hovcp5f534k6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBgw2_Nhsj63Pwnr7QRD8phJh6wYVvkXHQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1027383111296</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>rom.best.tsg.kievtyhachevskogo</string>
+	<key>PROJECT_ID</key>
+	<string>xamarin2-1282c</string>
+	<key>STORAGE_BUCKET</key>
+	<string>xamarin2-1282c.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1027383111296:ios:c475b1a2b9a74ba337c065</string>
+</dict>
+</plist>
