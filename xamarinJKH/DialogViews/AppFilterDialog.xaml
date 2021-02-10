@@ -228,7 +228,7 @@
                                                VerticalOptions="Start"
                                                IsSelectedItemsVisibleInDropDown="False"
                                                SuggestionMode="Contains"
-                                               
+                                              
                                                DisplayMemberPath="Name"
                                                Watermark="{x:Static xamarinJkh:AppResources.EnterPodType}"
                                                BorderColor="{x:StaticResource MainColor}"

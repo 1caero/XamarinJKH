@@ -378,18 +378,27 @@ namespace xamarinJKH.DialogViews
 
                 Device.BeginInvokeOnMainThread(() =>
                 {
+                    sfAutoCompleteType.ShowSuggestionsOnFocus = false;
+                    sfAutoCompletePodType.ShowSuggestionsOnFocus = false;
+                    sfAutoCompletePriority.ShowSuggestionsOnFocus = false;
                     sfAutoCompleteType.SelectedItem = requestTypes;
                     sfAutoCompletePodType.SelectedItem = requestPodTypes;
                     sfAutoCompletePriority.SelectedItem = requestPriority;
+                    
                 });
 
-                // Device.BeginInvokeOnMainThread((() =>
-                // {
-                //     sfAutoCompleteType.IsDropDownOpen = false;
-                //     sfAutoCompletePodType.IsDropDownOpen = false;
-                //     sfAutoCompletePriority.IsDropDownOpen = false;
-                // }));
-                
+                Device.StartTimer (new TimeSpan (0, 0, 1), () =>
+                {
+                    
+                    Device.BeginInvokeOnMainThread (() => 
+                    {
+                        sfAutoCompleteType.ShowSuggestionsOnFocus = true;
+                        sfAutoCompletePodType.ShowSuggestionsOnFocus = true;
+                        sfAutoCompletePriority.ShowSuggestionsOnFocus = true;
+                    });
+                    return false; // runs again, or false to stop
+                });
+
                 SelectTyp = new Command<object>(name =>
                 {
                     var selected = SelectedTyp;
