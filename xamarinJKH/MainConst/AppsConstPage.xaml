@@ -67,7 +67,7 @@
                                                  CornerRadius="10" 
                                                  WidthRequest="200" 
                                                  HeightRequest="40"
-                                                 IsVisible="{Binding isDebug}" 
+                                                 
                                                  MinimumWidthRequest="400"  
                                                  HorizontalOptions="EndAndExpand" 
                                                  VerticalOptions="Center"
