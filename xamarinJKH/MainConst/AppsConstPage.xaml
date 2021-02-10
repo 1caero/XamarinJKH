@@ -67,7 +67,7 @@
                                                  CornerRadius="10" 
                                                  WidthRequest="200" 
                                                  HeightRequest="40"
-                                                 IsVisible="{Binding isDebug}" 
+                                                 
                                                  MinimumWidthRequest="400"  
                                                  HorizontalOptions="EndAndExpand" 
                                                  VerticalOptions="Center"
@@ -85,7 +85,7 @@
                             </pancakeView:PancakeView>
                         <pancakeView:PancakeView x:Name="buttonFilter" HasShadow="{AppThemeBinding Light=false, Dark=true}" BorderColor="{Binding hex}" 
                                                  BackgroundColor="Transparent" BorderThickness="1" CornerRadius="10" 
-                                                 IsVisible="{Binding isDebug}"  HeightRequest="30" WidthRequest="30" Padding="10" 
+                                                 HeightRequest="30" WidthRequest="30" Padding="10" 
                                                  VerticalOptions="Center" HorizontalOptions="End">
                             <svg:SvgCachedImage 
                                                 Source="resource://xamarinJKH.Resources.ic_filter.svg"
