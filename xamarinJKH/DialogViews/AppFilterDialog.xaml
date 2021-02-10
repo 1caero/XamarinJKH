@@ -271,7 +271,7 @@
                                HorizontalOptions="StartAndExpand">
                             <StackLayout
                                 Orientation="Horizontal"
-                                Spacing="0"
+                                Spacing="{OnPlatform Android=0, iOS=6}"
                                 Margin="18,0,0,0"
                                 VerticalOptions="CenterAndExpand"
                                 HorizontalOptions="Center">
@@ -300,7 +300,7 @@
                                HorizontalOptions="EndAndExpand">
                             <StackLayout
                                 Orientation="Horizontal"
-                                Spacing="0"
+                                Spacing="{OnPlatform Android=0, iOS=6}"
                                 Margin="18,0,0,0"
                                 VerticalOptions="CenterAndExpand"
                                 HorizontalOptions="Center">
