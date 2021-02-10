@@ -1841,4 +1841,28 @@
   <data name="EnterEntranceNumber" xml:space="preserve">
     <value>Enter the entrance number </value>
   </data>
+  <data name="NumberFilter" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="StatusFilterApp" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="EnterPodType" xml:space="preserve">
+    <value>Start introducing the type of fault </value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset </value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Apply </value>
+  </data>
+  <data name="EnterPriority" xml:space="preserve">
+    <value>Start typing priority </value>
+  </data>
+  <data name="EnterTypeApp" xml:space="preserve">
+    <value>Start typing the app type </value>
+  </data>
+  <data name="FilterError" xml:space="preserve">
+    <value>No results were found for this filter </value>
+  </data>
 </root>

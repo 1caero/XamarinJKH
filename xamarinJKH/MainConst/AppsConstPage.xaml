@@ -51,6 +51,7 @@
                         <Label
                             Text="{x:Static xamarinJkh:AppResources.App_NavBar}"
                             FontSize="23"
+                            MinimumWidthRequest="100"
                             TextColor="{AppThemeBinding Light=Black, Dark=White}"
                             FontAttributes="Bold"
                             HorizontalOptions="Start"
@@ -60,11 +61,12 @@
                                                  BorderColor="{Binding hex}" 
                                                  BackgroundColor="Transparent" 
                                                  BorderThickness="1" 
+                                                 x:Name="ViewSearch"
                                                  Padding="10" 
                                                  Margin="10,0" 
                                                  CornerRadius="10" 
                                                  WidthRequest="200" 
-                                                 HeightRequest="50"
+                                                 HeightRequest="40"
                                                  IsVisible="{Binding isDebug}" 
                                                  MinimumWidthRequest="400"  
                                                  HorizontalOptions="EndAndExpand" 
@@ -77,19 +79,19 @@
                                                            HorizontalOptions="Fill" 
                                                            VerticalOptions="CenterAndExpand"
                                     FontSize="14" 
-                                                           HeightRequest="50" 
                                                            TextChanged="filter_TextChanged" BackgroundColor="Transparent">
 
                                 </xamarinJkh:BordlessEditor>
                             </pancakeView:PancakeView>
                         <pancakeView:PancakeView x:Name="buttonFilter" HasShadow="{AppThemeBinding Light=false, Dark=true}" BorderColor="{Binding hex}" 
                                                  BackgroundColor="Transparent" BorderThickness="1" CornerRadius="10" 
-                                                 IsVisible="{Binding isDebug}"  HeightRequest="30" WidthRequest="30" Padding="5" 
+                                                 IsVisible="{Binding isDebug}"  HeightRequest="30" WidthRequest="30" Padding="10" 
                                                  VerticalOptions="Center" HorizontalOptions="End">
                             <svg:SvgCachedImage 
-                                                Source="resource://xamarinJKH.Resources.edit.svg"
-                                                HeightRequest="20"
-                                                ReplaceStringMap="{Binding ChangeTheme, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"                                        
+                                                Source="resource://xamarinJKH.Resources.ic_filter.svg"
+                                                HeightRequest="35"
+                                                WidthRequest="35"
+                                                ReplaceStringMap="{Binding ChangeTheme, Converter={x:StaticResource SvgColor}}"                                        
                                                 HorizontalOptions="Center"
                                                 VerticalOptions="Center" />   
                             <!-- <xamarinJkh:IconView Source="edit.png" Foreground="{Binding hex}"  VerticalOptions="Center"  ></xamarinJkh:IconView> -->

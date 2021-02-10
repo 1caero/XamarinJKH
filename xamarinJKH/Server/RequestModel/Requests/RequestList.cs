@@ -82,6 +82,12 @@ namespace xamarinJKH.Server.RequestModel
     {
         public string Phone { get; set; }
         public string Address { get; set; }
+
+        public string HalfAdress
+        {
+            get => Address.Length > 50 ? Settings.GetHalfAddress(Address) : Address;
+            set => Address = value;
+        }
         public int TypeID { get; set; }
         public string TypeName { get; set; }
         public string AuthorName { get; set; }

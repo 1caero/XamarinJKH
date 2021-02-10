@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<abstractions:DialogView xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         HorizontalOptions="FillAndExpand"
+                         x:Name="View"
+                         IsCanceledOnTouchOutside="False"
+                         VerticalOptions="StartAndExpand"
+                         xmlns:abstractions="clr-namespace:AiForms.Dialogs.Abstractions;assembly=AiForms.Dialogs.Abstractions"
+                         xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                         xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+                         xmlns:mask="clr-namespace:xamarinJKH.Mask;assembly=xamarinJKH"
+                         xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
+                         xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH"
+                         xmlns:xForms="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
+                         x:Class="xamarinJKH.DialogViews.AppFilterDialog">
+    <abstractions:DialogView.Resources>
+        <ResourceDictionary>
+            <converters:AccountSelectedBackgroundConverter x:Key="Background" />
+            <converters:AccountSelectedBorderConverter x:Key="Border" />
+            <converters:InverseBoolConverter x:Key="Invert" />
+        </ResourceDictionary>
+    </abstractions:DialogView.Resources>
+    <Frame x:Name="buttonFilter" HasShadow="{AppThemeBinding Light=false, Dark=true}"
+           BorderColor="{x:StaticResource MainColor}"
+           BackgroundColor="White"
+           IsVisible="{Binding isDebug}" Padding="20"
+           VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+        <StackLayout>
+            <Grid>
+                <StackLayout x:Name="MainContainer" HorizontalOptions="FillAndExpand" Spacing="15"
+                             VerticalOptions="FillAndExpand">
+                    <forms:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_close.svg"
+                                          x:Name="IconViewClose"
+                                          HeightRequest="15"
+                                          WidthRequest="15"
+                                          Margin="0,0,0,-10"
+                                          ReplaceStringMap="{Binding .,Converter={x:StaticResource SvgColor}}"
+                                          HorizontalOptions="End"
+                                          VerticalOptions="Center" />
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                        <Label
+                            TextColor="Black"
+                            FontSize="15"
+                            VerticalOptions="Center"
+                            Text="{x:Static xamarinJkh:AppResources.NumberFilter}" />
+
+                        <Entry HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Start"
+                               x:Name="EntryNumberApp"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               TextColor="Black"
+                               Keyboard="Numeric">
+                            <Entry.Behaviors>
+                                <mask:MaskedBehavior Mask="XXXXXXXX" />
+                            </Entry.Behaviors>
+                        </Entry>
+
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="FillAndExpand" Margin="0,-7,0,0" Orientation="Horizontal">
+                        <Label HeightRequest="2"
+                               BackgroundColor="#E5E5E5"
+                               WidthRequest="70"
+                               HorizontalOptions="Fill" />
+                        <Label HeightRequest="2"
+                               Margin="-20,0,0,0"
+                               BackgroundColor="{x:StaticResource MainColor}"
+                               HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                    <StackLayout x:Name="LayoutStatus" Orientation="Horizontal" Spacing="10"
+                                 HorizontalOptions="FillAndExpand">
+                        <Label
+                            TextColor="Black"
+                            FontSize="15"
+                            VerticalOptions="Center"
+                            Text="{x:Static xamarinJkh:AppResources.StatusFilterApp}" />
+                        <StackLayout x:Name="stackLayoutStatus" HorizontalOptions="CenterAndExpand"
+                                     Orientation="Horizontal">
+                            <forms:SvgCachedImage
+                                x:Name="ImageStatus"
+                                Source="resource://xamarinJKH.Resources.ic_status_wait.svg"
+                                HeightRequest="15"
+                                IsVisible="False"
+                                WidthRequest="15"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start"
+                                Margin="0"
+                                ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}" />
+                            <Label x:Name="LabelStatus"
+                                   FontSize="15"
+                                   Text=""
+                                   TextColor="Black"
+                                   VerticalTextAlignment="Center"
+                                   VerticalOptions="Center" />
+
+                        </StackLayout>
+                        <forms:SvgCachedImage
+                            Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                            HeightRequest="15"
+                            WidthRequest="15"
+                            Rotation="90"
+                            VerticalOptions="Center"
+                            HorizontalOptions="EndAndExpand"
+                            Margin="0"
+                            ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}" />
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="FillAndExpand" Margin="0,-7,0,0" Orientation="Horizontal">
+                        <Label HeightRequest="2"
+                               BackgroundColor="#E5E5E5"
+                               WidthRequest="70"
+                               HorizontalOptions="Fill" />
+                        <Label HeightRequest="2"
+                               Margin="-20,0,0,0"
+                               BackgroundColor="{x:StaticResource MainColor}"
+                               HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+
+                    <CollectionView ItemsSource="{Binding Types}"
+                                    SelectedItem="{Binding SelectedTyp}"
+                                    SelectionChangedCommand="{Binding SelectTyp}"
+                                    SelectionChangedCommandParameter="{Binding SelectedTyp}"
+                                    HeightRequest="60"
+                                    IsVisible="False"
+                                    HorizontalScrollBarVisibility="Never"
+                                    VerticalScrollBarVisibility="Never"
+                                    Margin="0,15,0,0"
+                                    SelectionMode="None">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="{OnPlatform Android='10'}" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="{OnPlatform iOS='2,2,10,2' , Android='2'}"
+                                             VerticalOptions="FillAndExpand">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer x:Name="FrameIdentGR2" Tapped="FrameIdentGR_Tapped" />
+                                    </StackLayout.GestureRecognizers>
+                                    <!-- <VisualStateManager.VisualStateGroups> -->
+                                    <!--     <VisualStateGroup x:Name="CommonStates"> -->
+                                    <!--         <VisualState x:Name="Normal"> -->
+                                    <!--             <VisualState.Setters> -->
+                                    <!--                 <Setter Property="BackgroundColor" -->
+                                    <!--                         Value="{AppThemeBinding Light=White, Dark=#494949}" /> -->
+                                    <!--             </VisualState.Setters> -->
+                                    <!--         </VisualState> -->
+                                    <!--         <VisualState x:Name="Selected"> -->
+                                    <!--             <VisualState.Setters> -->
+                                    <!--                 <Setter Property="BackgroundColor" -->
+                                    <!--                         Value="{AppThemeBinding Light=White, Dark=#494949}" /> -->
+                                    <!--             </VisualState.Setters> -->
+                                    <!--         </VisualState> -->
+                                    <!--     </VisualStateGroup> -->
+                                    <!-- </VisualStateManager.VisualStateGroups> -->
+                                    <Frame CornerRadius="5"
+                                           VerticalOptions="FillAndExpand"
+                                           Padding="10"
+                                           HasShadow="False"
+                                           BorderColor="{Binding SelectedColor}"
+                                           BackgroundColor="{Binding IsSelected, Converter={x:StaticResource Background}}"
+                                           x:Name="Frame">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="60" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <forms:SvgCachedImage Source="{Binding Image}"
+                                                                  Margin="5"
+                                                                  ReplaceStringMap="{Binding ReplaceMap}" />
+                                            <Label Text="{Binding Name}"
+                                                   VerticalTextAlignment="Center"
+                                                   HorizontalTextAlignment="Center"
+                                                   TextColor="{Binding Source={x:Reference Frame},Path=BorderColor}"
+                                                   Grid.Column="1" />
+                                        </Grid>
+                                        <!--<VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroup x:Name="CommonStates">
+                                                        <VisualState x:Name="Normal">
+                                                            <VisualState.Setters>
+                                                                <Setter Property="BorderColor" Value="{AppThemeBinding Light=#8D8D8D, Dark=White}"/>
+                                                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#8D8D8D}"/>
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+
+                                                        <VisualState x:Name="Selected">
+                                                            <VisualState.Setters>
+                                                                <Setter Property="BorderColor" Value="{x:StaticResource MainColor}"/>
+                                                                <Setter Property="BackgroundColor" Value="White"/>
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+                                                    </VisualStateGroup>
+                                                </VisualStateManager.VisualStateGroups>-->
+                                    </Frame>
+                                </StackLayout>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <StackLayout VerticalOptions="FillAndExpand" Spacing="20">
+                        
+                        <xForms:SfAutoComplete MultiSelectMode="Token"
+                                               HeightRequest="40"
+                                               MaximumDropDownHeight="300"
+                                               ShowClearButton="False"
+                                               ShowSuggestionsOnFocus="True"
+                                               WatermarkColor="Gray"
+                                               DataSource="{Binding Types}"
+                                               VerticalOptions="Start"
+                                               IsSelectedItemsVisibleInDropDown="False"
+                                               SuggestionMode="Contains"
+                                               DisplayMemberPath="Name"
+                                               Watermark="{x:Static xamarinJkh:AppResources.EnterTypeApp}"
+                                               BorderColor="{x:StaticResource MainColor}"
+                                               EnableAutoSize="True"
+                                               HighlightedTextColor="{x:StaticResource MainColor}"
+                                               SuggestionBoxPlacement="Bottom"
+                                               DropDownItemHeight="50"
+                                               x:Name="AutoCompleteType"
+                                               DropDownBorderColor="{x:StaticResource MainColor}" /> 
+                        
+                        <xForms:SfAutoComplete MultiSelectMode="Token"
+                                               HeightRequest="40"
+                                               MaximumDropDownHeight="300"
+                                               ShowClearButton="False"
+                                               ShowSuggestionsOnFocus="True"
+                                               WatermarkColor="Gray"
+                                               DataSource="{Binding PodTypes}"
+                                               VerticalOptions="Start"
+                                               IsSelectedItemsVisibleInDropDown="False"
+                                               SuggestionMode="Contains"
+                                               
+                                               DisplayMemberPath="Name"
+                                               Watermark="{x:Static xamarinJkh:AppResources.EnterPodType}"
+                                               BorderColor="{x:StaticResource MainColor}"
+                                               EnableAutoSize="True"
+                                               HighlightedTextColor="{x:StaticResource MainColor}"
+                                               SuggestionBoxPlacement="Bottom"
+                                               DropDownItemHeight="50"
+                                               x:Name="AutoCompletePodType"
+                                               DropDownBorderColor="{x:StaticResource MainColor}" /> 
+                        
+                        <xForms:SfAutoComplete MultiSelectMode="Token"
+                                               HeightRequest="40"
+                                               MaximumDropDownHeight="300"
+                                               ShowClearButton="False"
+                                               ShowSuggestionsOnFocus="True"
+                                               WatermarkColor="Gray"
+                                               DataSource="{Binding Prioritets}"
+                                               VerticalOptions="Start"
+                                               FocusChanged = "AutoCompletePrioritets_OnFocusChanged"
+                                               IsSelectedItemsVisibleInDropDown="False"
+                                               SuggestionMode="Contains"
+                                               DisplayMemberPath="Name"
+                                               Watermark="{x:Static xamarinJkh:AppResources.EnterPriority}"
+                                               BorderColor="{x:StaticResource MainColor}"
+                                               EnableAutoSize="True"
+                                               HighlightedTextColor="{x:StaticResource MainColor}"
+                                               SuggestionBoxPlacement="Bottom"
+                                               DropDownItemHeight="50"
+                                               x:Name="AutoCompletePrioritets"
+                                               DropDownBorderColor="{x:StaticResource MainColor}" />
+
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="CenterAndExpand">
+                        <Frame CornerRadius="10"
+                               x:Name="FrameBtnReset"
+                               Padding="0,0,10,0"
+                               HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                               BackgroundColor="White"
+                               BorderColor="{x:DynamicResource MainColor}"
+                               HorizontalOptions="StartAndExpand">
+                            <StackLayout
+                                Orientation="Horizontal"
+                                Spacing="0"
+                                Margin="18,0,0,0"
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="Center">
+                                <forms:SvgCachedImage
+                                    Source="resource://xamarinJKH.Resources.ic_gears.svg"
+                                    ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}"
+                                    x:Name="IconViewSaldos2"
+                                    HeightRequest="24"
+                                    WidthRequest="20" />
+                                <Button
+                                    Text="{x:Static xamarinJkh:AppResources.Reset}"
+                                    FontSize="15"
+                                    x:Name="ButtonReset"
+                                    Padding="0"
+                                    Clicked="ButtonReset_OnClicked"
+                                    FontAttributes="Bold"
+                                    TextColor="{x:DynamicResource MainColor}"
+                                    BackgroundColor="Transparent" />
+                            </StackLayout>
+                        </Frame>
+                        <Frame CornerRadius="10"
+                               x:Name="FrameBtnApply"
+                               Padding="0,0,10,0"
+                               HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                               BackgroundColor="{x:DynamicResource MainColor}"
+                               HorizontalOptions="EndAndExpand">
+                            <StackLayout
+                                Orientation="Horizontal"
+                                Spacing="0"
+                                Margin="18,0,0,0"
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="Center">
+                                <forms:SvgCachedImage
+                                    Source="resource://xamarinJKH.Resources.ic_check_mark.svg"
+                                    ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#FFFFFF'}"
+                                    x:Name="IconViewSaldos"
+                                    HeightRequest="24"
+                                    WidthRequest="20" />
+                                <Button
+                                    Text="{x:Static xamarinJkh:AppResources.Apply}"
+                                    FontSize="15"
+                                    Padding="0"
+                                    FontAttributes="Bold"
+                                    TextColor="White"
+                                    Clicked="Button_OnClicked"
+                                    BackgroundColor="Transparent" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout x:Name="LayoutLoading" IsVisible="False" HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand">
+                    <StackLayout
+                        VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <ActivityIndicator
+                            IsRunning="true"
+                            HeightRequest="45"
+                            WidthRequest="45"
+                            HorizontalOptions="CenterAndExpand"
+                            Color="{x:DynamicResource MainColor}" />
+                        <Label
+                            Text="{x:Static xamarinJkh:AppResources.Loading}"
+                            TextColor="Black"
+                            FontSize="16"
+                            HorizontalOptions="CenterAndExpand" />
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </Frame>
+</abstractions:DialogView>

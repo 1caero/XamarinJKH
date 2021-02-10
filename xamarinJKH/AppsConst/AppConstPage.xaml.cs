@@ -92,7 +92,7 @@ namespace xamarinJKH.AppsConst
             TokenSource = new CancellationTokenSource();
             Token = TokenSource.Token;
             RequestsUpdate requestsUpdate =
-                await _server.GetRequestsUpdates(Settings.UpdateKey, _requestInfo.ID.ToString());
+                await _server.GetRequestsUpdatesConst(Settings.UpdateKey, _requestInfo.ID.ToString());
             if (requestsUpdate.Error == null)
             {
                 Settings.UpdateKey = requestsUpdate.NewUpdateKey;
@@ -731,7 +731,7 @@ namespace xamarinJKH.AppsConst
         private async Task ClosePage()
         {
             MessagingCenter.Unsubscribe<Object, KeyValuePair<int, string>>(this, "performApp");
-            MessagingCenter.Send<Object>(this, "UpdateAppCons");
+            // MessagingCenter.Send<Object>(this, "UpdateAppCons");
             if (close)
             {
                 await Navigation.PopToRootAsync();

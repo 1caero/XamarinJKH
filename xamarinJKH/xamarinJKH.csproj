@@ -46,6 +46,8 @@
     <None Remove="Resources\ic_fio_reg.svg" />
     <None Remove="Resources\ic_flip.svg" />
     <None Remove="Resources\ic_history_pay.svg" />
+    <None Remove="Resources\ic_gears.svg" />
+    <None Remove="Resources\ic_filter.svg" />
     <None Remove="Resources\ic_home.svg" />
     <None Remove="Resources\ic_info.svg" />
     <None Remove="Resources\ic_info_app1.svg" />
@@ -205,6 +207,12 @@
     <EmbeddedResource Include="Resources\ic_history_pay.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ic_gears.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ic_filter.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\ic_home.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -337,7 +345,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AiForms.Dialogs" Version="1.0.3" />
+    <PackageReference Include="AiForms.Dialogs" Version="1.0.10" />
     <PackageReference Include="akavache" Version="6.10.20" />
     <PackageReference Include="dotMorten.Xamarin.Forms.AutoSuggestBox" Version="1.1.1" />
     <PackageReference Include="Messier16.Forms.Controls" Version="2.2.0" />

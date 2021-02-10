@@ -118,6 +118,12 @@ namespace xamarinJKH.Server
         public const string SEND_PUSH = "Dispatcher/SendAnnouncement"; //создание уведомления
         public const string GET_AREA_GROUPS = "RequestsDispatcher/GroupsOfDistrincts"; //Получение групп районов
         public const string REQUEST_MULTIPLE = "RequestsDispatcher/RequestStatsMultiple"; //Запрос по нескольким ID
+        public const string GET_REQUEST_STATUSES = "RequestsDispatcher/RequestStatuses"; //- получение статусов заявок
+        public const string GET_REQUEST_PRIORITETS = "RequestsDispatcher/RequestPriorities"; //- получение статусов заявок
+        public const string FILTR_REQUESTS = "RequestsDispatcher/Search "; //- поиск заявок по критериям
+        
+        
+        
         
             //Методы для работы диспетчера с заявками
         public const string CHANGE_CONSULTANT = "SupportService/ChangeConsultant"; //Перевод заявки. 
@@ -743,6 +749,28 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
+        public async Task<List<RequestInfo>> Search (List<CustomSearchCriteria> Criterias)
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(FILTR_REQUESTS, Method.POST);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            restRequest.AddBody(new
+            {
+                Criterias
+            });
+            var response = await restClientMp.ExecuteTaskAsync< List<RequestInfo>>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                Analytics.TrackEvent("GetRequestsListConst Error="+ response.StatusDescription);
+
+                return null;
+            }
+            return response.Data;
+        }
 
         /// <summary>
         /// Получение типов заявок
@@ -808,6 +836,44 @@ namespace xamarinJKH.Server
                 };
             }
 
+            return response.Data;
+        }
+        public async Task<ItemsList<NamedValue>> RequestStatuses ()
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(GET_REQUEST_STATUSES, Method.GET);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            var response = await restClientMp.ExecuteTaskAsync<ItemsList<NamedValue>>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new ItemsList<NamedValue>()
+                {
+                    Error = $"Ошибка {response.StatusDescription}"
+                };
+            }
+            return response.Data;
+        } 
+        public async Task<ItemsList<NamedValue>> RequestPriorities ()
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(GET_REQUEST_PRIORITETS, Method.GET);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            var response = await restClientMp.ExecuteTaskAsync<ItemsList<NamedValue>>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new ItemsList<NamedValue>()
+                {
+                    Error = $"Ошибка {response.StatusDescription}"
+                };
+            }
             return response.Data;
         }
         public async Task<List<ConsultantInfo>> GetConsultants()

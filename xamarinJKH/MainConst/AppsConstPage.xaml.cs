@@ -51,6 +51,7 @@ namespace xamarinJKH.MainConst
         public ObservableCollection<RequestInfo> RequestInfosAlive { get; set; }
         public ObservableCollection<RequestInfo> RequestInfosClose { get; set; }
         private RequestList _requestList;
+        private List<RequestInfo> RequestDefault;
         private RestClientMP _server = new RestClientMP();
         private bool _isRefreshing = false;
         public Color hex { get; set; }
@@ -134,7 +135,8 @@ namespace xamarinJKH.MainConst
             InitializeComponent();
 
             CanDoMassOps = !Settings.MobileSettings.disableBulkRequestsClosing;
-
+            ViewSearch.BackgroundColor = System.Drawing.Color.FromArgb(200, System.Drawing.Color.White);
+            buttonFilter.BackgroundColor = System.Drawing.Color.FromArgb(200, System.Drawing.Color.White);
             Resources["hexColor"] = (Color)Application.Current.Resources["MainColor"];
             Analytics.TrackEvent("Заявки сотрудника " + Settings.Person.Login);
             NavigationPage.SetHasNavigationBar(this, false);
@@ -175,7 +177,24 @@ namespace xamarinJKH.MainConst
             StackLayoutClose.GestureRecognizers.Add(closeApps);
 
             var buttonFilterTgr = new TapGestureRecognizer();
-            buttonFilterTgr.Tapped += (s, e) => { /*вызов формы фильтрации*/ };
+            buttonFilterTgr.Tapped += async (s, e) =>
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    Configurations.LoadingConfig = new LoadingConfig
+                    {
+                        IndicatorColor = Color.Transparent,
+                        OverlayColor = Color.Black,
+                        Opacity = 0.8,
+                        DefaultMessage = "",
+                    };
+                    await Loading.Instance.StartAsync(async progress =>
+                    {
+                        await Dialog.Instance.ShowAsync(new AppFilterDialog(this));
+
+                    });
+                });
+            };
             buttonFilter.GestureRecognizers.Add(buttonFilterTgr);
 
             SetText();
@@ -190,6 +209,7 @@ namespace xamarinJKH.MainConst
             });
             MessagingCenter.Unsubscribe<Object>(this, "ChangeAdminApp");
             MessagingCenter.Subscribe<Object>(this, "ChangeAdminApp", (sender) => ChangeTheme.Execute(null));
+           
             MessagingCenter.Subscribe<Object, int>(this, "OpenAppConst", async (sender, args) =>
             {
                 while (RequestInfos == null)
@@ -211,6 +231,22 @@ namespace xamarinJKH.MainConst
                 }
                 
             });
+            MessagingCenter.Unsubscribe<Object, List<RequestInfo>>(this, "SetFilter");
+            MessagingCenter.Subscribe<Object, List<RequestInfo>>(this, "SetFilter", (sender, kvp) => {
+                Device.BeginInvokeOnMainThread(() => {
+                    RequestDefault = kvp;
+                    SetReaded();
+                });
+            });
+            
+            MessagingCenter.Unsubscribe<Object, List<RequestInfo>>(this, "RemooveFilter");
+            MessagingCenter.Subscribe<Object>(this, "RemooveFilter", (sender) => {
+                Device.BeginInvokeOnMainThread(() => {
+                    RequestDefault = _requestList.Requests;
+                    SetReaded();
+                });
+            });
+            
         }
 
         private void CheckDown(string args)
@@ -356,7 +392,7 @@ namespace xamarinJKH.MainConst
         {
             base.OnAppearing();
 
-            SetReaded();
+            // SetReaded();
 
             if (bottomMenu.VerticalOptions.Alignment != LayoutAlignment.End)
                 Device.BeginInvokeOnMainThread(() => { bottomMenu.VerticalOptions = LayoutOptions.End; });
@@ -395,6 +431,7 @@ namespace xamarinJKH.MainConst
             _requestList = await _server.GetRequestsListConst();
             if (_requestList.Error == null)
             {
+                RequestDefault = _requestList.Requests;
                 SetReaded();
                 Settings.UpdateKey = _requestList.UpdateKey;
                 MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", _requestList.Requests.Count(x => !x.IsReaded));
@@ -431,15 +468,15 @@ namespace xamarinJKH.MainConst
         {
             try
             {
-                if (_requestList == null)
+                if (RequestDefault == null)
                 {
                     return;
                 }
 
-                if(_requestList.Requests == null)
-                {
-                    return;
-                }
+                // if(_requestList.Requests == null)
+                // {
+                //     return;
+                // }
 
                 if (SwitchApp.IsToggled)
                 {
@@ -449,7 +486,7 @@ namespace xamarinJKH.MainConst
                     Device.BeginInvokeOnMainThread(async () =>
                     {
                         RequestInfos.Clear();
-                        foreach (var each in new ObservableCollection<RequestInfo>(_requestList.Requests).OrderBy(o => o.ID).Reverse())
+                        foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).OrderBy(o => o.ID).Reverse())
                         {
                             RequestInfos.Add(each);
                         }
@@ -468,8 +505,7 @@ namespace xamarinJKH.MainConst
                         if (_requestList != null)
                         {
                             RequestInfos.Clear();
-                            foreach (var each in new ObservableCollection<RequestInfo>(from i in _requestList.Requests
-                                where !i.IsReaded
+                            foreach (var each in new ObservableCollection<RequestInfo>(from i in RequestDefault where !i.IsReaded
                                 select i).OrderBy(o => o.ID).Reverse())
                             {
                                 RequestInfos.Add(each);

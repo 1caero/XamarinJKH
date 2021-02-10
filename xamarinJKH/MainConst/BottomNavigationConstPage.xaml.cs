@@ -217,6 +217,16 @@ namespace xamarinJKH.MainConst
             }
         }
 
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            Preferences.Remove(AppFilterDialog.REQUEST_NUMBER);
+            Preferences.Remove(AppFilterDialog.REQUEST_STATUS_ID);
+            Preferences.Remove(AppFilterDialog.REQUEST_TYPE_ID);
+            Preferences.Remove(AppFilterDialog.REQUEST_SUB_TYPE_ID);
+            Preferences.Remove(AppFilterDialog.REQUEST_PRIORITY_ID);
+        }
+
         async void RegisterNewDevice()
         {
             if (Device.RuntimePlatform == "Android")

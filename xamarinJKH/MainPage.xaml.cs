@@ -445,6 +445,10 @@ namespace xamarinJKH
                     Settings.Person = login;
                     ItemsList<RequestType> result = await server.GetRequestsTypesConst();
                     Settings.TypeApp = result.Data;
+                    ItemsList<NamedValue> resultStatus = await server.RequestStatuses();
+                    Settings.StatusApp = resultStatus.Data;
+                    ItemsList<NamedValue> resultPrioritets = await server.RequestPriorities();
+                    Settings.PrioritetsApp = resultPrioritets.Data;
                     Preferences.Set("loginConst", replace);
                     Preferences.Set("passConst", pass);
                     Preferences.Set("constAuth", true);

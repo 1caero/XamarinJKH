@@ -18,6 +18,8 @@ namespace xamarinJKH.Utils
         public static MobileSettings MobileSettings = new MobileSettings();
         public static LoginResult Person = new LoginResult();
         public static List<RequestType> TypeApp = new List<RequestType>();
+        public static List<NamedValue> StatusApp = new List<NamedValue>();
+        public static List<NamedValue> PrioritetsApp = new List<NamedValue>();
         public static List<string> BrandCar= new List<string>();
         public static HashSet<Page> AppPAge = new HashSet<Page>();
         public static string UpdateKey = "";
@@ -135,6 +137,9 @@ namespace xamarinJKH.Utils
             switch (id)
             {
                 case 6:
+                case 5:
+                case 8:
+                case 10:
                 case 7: return "ic_status_done";
                 case 1: return "ic_status_new";
                 default: return "ic_status_wait";

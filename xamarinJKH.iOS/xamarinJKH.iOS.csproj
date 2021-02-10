@@ -275,7 +275,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AiForms.Dialogs" Version="1.0.3" />
+    <PackageReference Include="AiForms.Dialogs" Version="1.0.10" />
     <PackageReference Include="akavache">
       <Version>6.10.20</Version>
     </PackageReference>

@@ -385,6 +385,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Применить.
+        /// </summary>
+        internal static string Apply {
+            get {
+                return ResourceManager.GetString("Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Заявки закрыты.
         /// </summary>
         internal static string AppsClosed {
@@ -1393,6 +1402,24 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Начните вводить вид неисправности.
+        /// </summary>
+        internal static string EnterPodType {
+            get {
+                return ResourceManager.GetString("EnterPodType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Начните вводить приоритет.
+        /// </summary>
+        internal static string EnterPriority {
+            get {
+                return ResourceManager.GetString("EnterPriority", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Введите серию и номер паспорта.
         /// </summary>
         internal static string EnterSeriaAndNumber {
@@ -1425,6 +1452,15 @@ namespace xamarinJKH {
         internal static string EnterTextPush {
             get {
                 return ResourceManager.GetString("EnterTextPush", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Начните вводить тип заявки.
+        /// </summary>
+        internal static string EnterTypeApp {
+            get {
+                return ResourceManager.GetString("EnterTypeApp", resourceCulture);
             }
         }
         
@@ -2028,6 +2064,15 @@ namespace xamarinJKH {
         internal static string FileTooBig {
             get {
                 return ResourceManager.GetString("FileTooBig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to По данному фильтру ничего не найдено.
+        /// </summary>
+        internal static string FilterError {
+            get {
+                return ResourceManager.GetString("FilterError", resourceCulture);
             }
         }
         
@@ -2820,6 +2865,15 @@ namespace xamarinJKH {
         internal static string Number {
             get {
                 return ResourceManager.GetString("Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Номер.
+        /// </summary>
+        internal static string NumberFilter {
+            get {
+                return ResourceManager.GetString("NumberFilter", resourceCulture);
             }
         }
         
@@ -4079,6 +4133,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сбросить.
+        /// </summary>
+        internal static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Физическое лицо.
         /// </summary>
         internal static string Resident {
@@ -4642,6 +4705,15 @@ namespace xamarinJKH {
         internal static string StartEnterHome {
             get {
                 return ResourceManager.GetString("StartEnterHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Статус.
+        /// </summary>
+        internal static string StatusFilterApp {
+            get {
+                return ResourceManager.GetString("StatusFilterApp", resourceCulture);
             }
         }
         

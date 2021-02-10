@@ -1843,4 +1843,28 @@
   <data name="EnterEntranceNumber" xml:space="preserve">
     <value>Введите номер подъезда</value>
   </data>
+  <data name="NumberFilter" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+  <data name="StatusFilterApp" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="EnterPodType" xml:space="preserve">
+    <value>Начните вводить вид неисправности</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Сбросить</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Применить</value>
+  </data>
+  <data name="EnterPriority" xml:space="preserve">
+    <value>Начните вводить приоритет</value>
+  </data>
+  <data name="EnterTypeApp" xml:space="preserve">
+    <value>Начните вводить тип заявки</value>
+  </data>
+  <data name="FilterError" xml:space="preserve">
+    <value>По данному фильтру ничего не найдено</value>
+  </data>
 </root>
