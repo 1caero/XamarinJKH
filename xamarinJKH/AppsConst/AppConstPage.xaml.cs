@@ -41,6 +41,7 @@ namespace xamarinJKH.AppsConst
         private bool _isRefreshing = false;
         string TAKE_PHOTO = AppResources.AttachmentTakePhoto;
         string TAKE_GALRY = AppResources.AttachmentChoosePhoto;
+        string TAKE_GALARY_Video = AppResources.AttachmentChooseVideo;
         string TAKE_FILE = AppResources.AttachmentChooseFile;
         const string CAMERA = "camera";
         const string GALERY = "galery";
@@ -817,9 +818,19 @@ namespace xamarinJKH.AppsConst
             }
 
             MediaFile file = null;
-            var action = await DisplayActionSheet(AppResources.AttachmentTitle, AppResources.Cancel, null,
-                TAKE_PHOTO,
-                TAKE_GALRY, TAKE_FILE);
+            //var action = await DisplayActionSheet(AppResources.AttachmentTitle, AppResources.Cancel, null,
+            //    TAKE_PHOTO,
+            //    TAKE_GALRY, TAKE_FILE);
+
+            string action;
+            if (Device.RuntimePlatform == Device.Android)
+                action = await DisplayActionSheet(AppResources.AttachmentTitle, AppResources.Cancel, null,
+               TAKE_PHOTO,
+               TAKE_GALRY, TAKE_FILE);
+            else
+                action = await DisplayActionSheet(AppResources.AttachmentTitle, AppResources.Cancel, null,
+                   TAKE_PHOTO,
+                   TAKE_GALRY, TAKE_GALARY_Video, TAKE_FILE);
 
             if (action == TAKE_PHOTO)
             {
@@ -871,6 +882,30 @@ namespace xamarinJKH.AppsConst
                 catch (Exception e)
                 {
                     await DisplayAlert(AppResources.ErrorTitle, $"{e.Message}\n{e.StackTrace}", "OK");
+                    Console.WriteLine(e);
+                }
+
+                return;
+            }
+
+            if (action == TAKE_GALARY_Video)
+            {
+                if (!CrossMedia.Current.IsPickVideoSupported)
+                {
+                    await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorGalleryNotAvailable, "OK");
+
+                    return;
+                }
+
+                try
+                {
+                    file = await CrossMedia.Current.PickVideoAsync();
+                    if (file == null)
+                        return;
+                    await startLoadFile(GALERY, file);
+                }
+                catch (Exception e)
+                {
                     Console.WriteLine(e);
                 }
 
