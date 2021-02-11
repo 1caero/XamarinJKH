@@ -66,20 +66,21 @@
                                                  Margin="10,0" 
                                                  CornerRadius="10" 
                                                  WidthRequest="{x:OnPlatform Android=300, iOS=400}" 
-                                                 HeightRequest="60" 
-                                                 
-                                                 MinimumWidthRequest="60"  
+                                                 HeightRequest="{x:OnPlatform Android=40, iOS=50}" 
                                                  HorizontalOptions="EndAndExpand" 
                                                  VerticalOptions="Center"
                                                   >
                                 <xamarinJkh:BordlessEditor 
+                                    BackgroundColor="Transparent"
                                                            x:Name="filter"
                                                            AutoSize="Disabled" 
                                                            Placeholder="Поиск..." 
-                                                           HorizontalOptions="StartAndExpand" 
+                                                           HorizontalOptions="FillAndExpand" 
                                                            VerticalOptions="CenterAndExpand"
                                     FontSize="14" 
-                                                           TextChanged="filter_TextChanged" BackgroundColor="Transparent">
+                                                           TextChanged="filter_TextChanged" 
+                                    MinimumWidthRequest="{x:OnPlatform Android=280, iOS=380}" 
+                                    WidthRequest="{x:OnPlatform Android=280, iOS=380}">
                                 </xamarinJkh:BordlessEditor>
                             </pancakeView:PancakeView>
                             <pancakeView:PancakeView x:Name="buttonFilter" HasShadow="{AppThemeBinding Light=false, Dark=true}" BorderColor="{Binding hex}" 
