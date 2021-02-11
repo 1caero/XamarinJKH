@@ -76,7 +76,7 @@
                                                            x:Name="filter"
                                                            AutoSize="Disabled" 
                                                            Placeholder="Поиск..." 
-                                                           HorizontalOptions="Fill" 
+                                                           HorizontalOptions="StartAndExpand" 
                                                            VerticalOptions="CenterAndExpand"
                                     FontSize="14" 
                                                            TextChanged="filter_TextChanged" BackgroundColor="Transparent">
