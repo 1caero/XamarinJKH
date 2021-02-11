@@ -758,16 +758,24 @@ namespace xamarinJKH.AppsConst
 
         protected override bool OnBackButtonPressed()
         {
-            if (close)
+            if (PopupNavigation.Instance.PopupStack.Count > 0)
             {
-                Navigation.PopToRootAsync();
-                return true;
+               PopupNavigation.Instance.PopAllAsync();
+               return true;
             }
             else
             {
-                Settings.isSelf = null;
-                Settings.DateUniq = "";
-                return base.OnBackButtonPressed();
+                if (close)
+                {
+                    Navigation.PopToRootAsync();
+                    return true;
+                }
+                else
+                {
+                    Settings.isSelf = null;
+                    Settings.DateUniq = "";
+                    return base.OnBackButtonPressed();
+                }
             }
         }
 

@@ -374,6 +374,12 @@ namespace xamarinJKH.DialogViews
             _dispListModel.SelectDepartsment.Execute(null);
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            PopupNavigation.Instance.PopAsync();
+            return true;
+        }
+
         private void PickerDispPool_OnSelectedIndexChanged(object sender, EventArgs e)
         {
         }

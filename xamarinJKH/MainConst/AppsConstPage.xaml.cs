@@ -179,21 +179,10 @@ namespace xamarinJKH.MainConst
             var buttonFilterTgr = new TapGestureRecognizer();
             buttonFilterTgr.Tapped += async (s, e) =>
             {
-                Device.BeginInvokeOnMainThread(async () =>
+                if (PopupNavigation.Instance.PopupStack.FirstOrDefault(x => x is AppFilterDialog) == null)
                 {
-                    Configurations.LoadingConfig = new LoadingConfig
-                    {
-                        IndicatorColor = Color.Transparent,
-                        OverlayColor = Color.Black,
-                        Opacity = 0.8,
-                        DefaultMessage = "",
-                    };
-                    await Loading.Instance.StartAsync(async progress =>
-                    {
-                        await Dialog.Instance.ShowAsync(new AppFilterDialog(this));
-
-                    });
-                });
+                    await PopupNavigation.Instance.PushAsync(new AppFilterDialog(this));
+                }
             };
             buttonFilter.GestureRecognizers.Add(buttonFilterTgr);
 
@@ -259,6 +248,19 @@ namespace xamarinJKH.MainConst
             }
 
             IsVisibleFunction();
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            if (PopupNavigation.Instance.PopupStack.Count > 0)
+            {
+                PopupNavigation.Instance.PopAllAsync();
+                return true;
+            }
+            else
+            {
+                return base.OnBackButtonPressed();
+            }
         }
 
         private void CheckApp(string args)

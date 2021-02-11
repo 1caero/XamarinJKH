@@ -5,6 +5,7 @@
                  xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
                  KeyboardOffset="Infinity"
                  HasKeyboardOffset="False"
+                 
                  xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
