@@ -19,7 +19,8 @@ namespace xamarinJKH.Server.RequestModel
        
         public string RequestNumber { get; set; }
         public string Added { get; set; }
-
+// долг по лсч
+        public decimal Debt { get; set; }
         public string _Added
         {
             get => Added.Trim();
@@ -37,6 +38,7 @@ namespace xamarinJKH.Server.RequestModel
         public bool IsCheked { get; set; } = false;
         
         public string Address { get; set; }
+        public string Source { get; set; }
 
         private bool _isVisibleAddress;
 

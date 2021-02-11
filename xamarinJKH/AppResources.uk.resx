@@ -1100,7 +1100,7 @@
     <value>Показати закриті</value>
   </data>
   <data name="ShowReadApps" xml:space="preserve">
-    <value>показати в т.ч. прочитання</value>
+    <value>За терміном виконання </value>
   </data>
   <data name="SortByAcc" xml:space="preserve">
     <value>За о / рах</value>
@@ -1734,5 +1734,11 @@
   </data>
   <data name="FilterError" xml:space="preserve">
     <value>За даним фільтру нічого не знайдено </value>
+  </data>
+  <data name="Priority" xml:space="preserve">
+    <value>Пріоритет</value>
+  </data>
+  <data name="Debt" xml:space="preserve">
+    <value>Заборгованість </value>
   </data>
 </root>

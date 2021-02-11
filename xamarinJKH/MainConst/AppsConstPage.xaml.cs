@@ -485,12 +485,15 @@ namespace xamarinJKH.MainConst
                     
                     // RequestInfos =
                     //     new ObservableCollection<RequestInfo>(_requestList.Requests);
-                    Device.BeginInvokeOnMainThread(async () =>
+                     Device.BeginInvokeOnMainThread(async () =>
                     {
-                        RequestInfos.Clear();
-                        foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).OrderBy(o => o.ID).Reverse())
+                        if (_requestList != null)
                         {
-                            RequestInfos.Add(each);
+                            RequestInfos.Clear();
+                            foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).OrderBy(o => o.ID))
+                            {
+                                RequestInfos.Add(each);
+                            }
                         }
                     });
 
@@ -501,19 +504,15 @@ namespace xamarinJKH.MainConst
                     //     new ObservableCollection<RequestInfo>(from i in _requestList.Requests
                     //         where !i.IsReaded
                     //         select i);
-                    
                     Device.BeginInvokeOnMainThread(async () =>
                     {
-                        if (_requestList != null)
+                        RequestInfos.Clear();
+                        foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).OrderBy(o => !o.IsReaded).ThenBy(o=> o.ID ).Reverse())
                         {
-                            RequestInfos.Clear();
-                            foreach (var each in new ObservableCollection<RequestInfo>(from i in RequestDefault where !i.IsReaded
-                                select i).OrderBy(o => o.ID).Reverse())
-                            {
-                                RequestInfos.Add(each);
-                            }
+                            RequestInfos.Add(each);
                         }
                     });
+                  
                     
                 }
                 // BindingContext = this;

@@ -1105,6 +1105,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Задолженность.
+        /// </summary>
+        internal static string Debt {
+            get {
+                return ResourceManager.GetString("Debt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вход для жителя.
         /// </summary>
         internal static string DefaultLogin {
@@ -3952,6 +3961,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Приоритет.
+        /// </summary>
+        internal static string Priority {
+            get {
+                return ResourceManager.GetString("Priority", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Подтвердите согласие на обработку персональных данных.
         /// </summary>
         internal static string ProcessUserData {
@@ -4664,7 +4682,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Показать в т.ч. прочитанные.
+        ///   Looks up a localized string similar to По сроку исполнения.
         /// </summary>
         internal static string ShowReadApps {
             get {

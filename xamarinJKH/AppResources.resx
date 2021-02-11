@@ -700,7 +700,7 @@
     <value>Показать закрытые</value>
   </data>
   <data name="ShowReadApps" xml:space="preserve">
-    <value>Показать в т.ч. прочитанные</value>
+    <value>По сроку исполнения</value>
   </data>
   <data name="SortByAcc" xml:space="preserve">
     <value>По л/сч</value>
@@ -1866,5 +1866,11 @@
   </data>
   <data name="FilterError" xml:space="preserve">
     <value>По данному фильтру ничего не найдено</value>
+  </data>
+  <data name="Priority" xml:space="preserve">
+    <value>Приоритет</value>
+  </data>
+  <data name="Debt" xml:space="preserve">
+    <value>Задолженность</value>
   </data>
 </root>

@@ -864,7 +864,7 @@
     <value>Add an account</value>
   </data>
   <data name="ShowReadApps" xml:space="preserve">
-    <value>show incl. read </value>
+    <value>By due date  </value>
   </data>
   <data name="AddApp" xml:space="preserve">
     <value>Add</value>
@@ -1864,5 +1864,11 @@
   </data>
   <data name="FilterError" xml:space="preserve">
     <value>No results were found for this filter </value>
+  </data>
+  <data name="Priority" xml:space="preserve">
+    <value>Priority </value>
+  </data>
+  <data name="Debt" xml:space="preserve">
+    <value>Debt </value>
   </data>
 </root>

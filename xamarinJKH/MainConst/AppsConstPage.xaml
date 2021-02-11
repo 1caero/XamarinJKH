@@ -202,23 +202,44 @@
                                                     </StackLayout>
                                                 </StackLayout>
                                             </Grid>
-                                            <Label 
-                                                   TextColor="{Binding TextColor}"
-                                                   FontSize="10"
-                                                   HorizontalOptions="Start"
-                                                   Margin="0, -5, 0, 0"
-                                                   Text="{Binding PriorityName}"
-                                                   ></Label> 
+                                            
+                                            <Label
+                                                TextColor="Black"
+                                                IsVisible="{Binding PriorityName, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
+                                                HorizontalOptions="Start">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static xamarinJkh:AppResources.Priority}" TextColor="Black" FontAttributes="Bold"
+                                                              FontSize="11" />
+                                                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="11" />
+                                                        <Span Text=" {Binding PriorityName}" FontSize="11" FontAttributes="Bold" TextColor="{Binding TextColor}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label
+                                                TextColor="Black"
+                                                Margin="0, -5, 0, 0"
+                                                IsVisible="{Binding Source, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
+                                                HorizontalOptions="Start">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static xamarinJkh:AppResources.ASource}" TextColor="Black" FontAttributes="Bold"
+                                                              FontSize="11" />
+                                                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="11" />
+                                                        <Span Text=" {Binding Source}" FontSize="11" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
                                             <Label
                                                 TextColor="Black"
                                                 Margin="0, -5, 0, 0"
                                                 HorizontalOptions="Start">
                                                 <Label.FormattedText>
                                                     <FormattedString>
-                                                        <Span Text="{x:Static xamarinJkh:AppResources.ASource}" TextColor="Black" FontAttributes="Bold"
-                                                              FontSize="10" />
-                                                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="10" />
-                                                        <Span Text=" {Binding SourceType}" FontSize="10" />
+                                                        <Span Text="{x:Static xamarinJkh:AppResources.Debt}" TextColor="Black" FontAttributes="Bold"
+                                                              FontSize="11" />
+                                                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="11" />
+                                                        <Span Text=" {Binding Debt}" FontSize="11" />
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>
