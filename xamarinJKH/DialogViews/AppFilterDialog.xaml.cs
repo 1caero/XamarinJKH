@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
 using RestSharp;
+using Rg.Plugins.Popup.Pages;
+using Rg.Plugins.Popup.Services;
 using Syncfusion.SfAutoComplete.XForms;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -24,7 +26,7 @@ using SelectionChangedEventArgs = Syncfusion.SfAutoComplete.XForms.SelectionChan
 namespace xamarinJKH.DialogViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AppFilterDialog : DialogView
+    public partial class AppFilterDialog  : PopupPage
     {
         private FilterModel _filterModel = null;
         private RestClientMP server = new RestClientMP();
@@ -51,8 +53,9 @@ namespace xamarinJKH.DialogViews
             LayoutLoading.BackgroundColor = System.Drawing.Color.FromArgb(150, System.Drawing.Color.White);
             View.WidthRequest = App.ScreenWidth;
             var close = new TapGestureRecognizer();
-            close.Tapped += (s, e) => { DialogNotifier.Cancel(); };
+            close.Tapped += async (s, e) => { await PopupNavigation.Instance.PopAsync(); };
             IconViewClose.GestureRecognizers.Add(close);
+            var hideKeyboadr = new TapGestureRecognizer();
             var apply = new TapGestureRecognizer();
             apply.Tapped += (s, e) => { Apply(); };
             FrameBtnApply.GestureRecognizers.Add(apply);
@@ -64,6 +67,13 @@ namespace xamarinJKH.DialogViews
             var status = new TapGestureRecognizer();
             status.Tapped += async (s, e) =>
             {
+                Device.BeginInvokeOnMainThread((() =>
+                {
+                    AutoCompleteType.Unfocus();
+                    AutoCompletePodType.Unfocus();
+                    AutoCompletePrioritets.Unfocus();
+                    EntryNumberApp.Unfocus();
+                }));
                 string[] param = null;
                 SetListStatuses(Settings.StatusApp, ref param);
                 var action =
@@ -90,7 +100,7 @@ namespace xamarinJKH.DialogViews
             SetFilters();
         }
 
-        void Reset()
+        async void Reset()
         {
             MessagingCenter.Send<object>(this, "RemooveFilter");
             Preferences.Remove(REQUEST_NUMBER);
@@ -98,7 +108,7 @@ namespace xamarinJKH.DialogViews
             Preferences.Remove(REQUEST_TYPE_ID);
             Preferences.Remove(REQUEST_SUB_TYPE_ID);
             Preferences.Remove(REQUEST_PRIORITY_ID);
-            DialogNotifier.Cancel();
+            await PopupNavigation.Instance.PopAsync();
         }
         
         async void Apply()
@@ -217,7 +227,7 @@ namespace xamarinJKH.DialogViews
             if (requestInfos != null && requestInfos.Count > 0)
             {
                 MessagingCenter.Send<object, List<RequestInfo>>(this, "SetFilter", requestInfos);
-                DialogNotifier.Cancel();
+                await PopupNavigation.Instance.PopAsync();
             }
             else
             {
