@@ -117,34 +117,46 @@ namespace xamarinJKH.Apps
             SetText();
             files = new ObservableCollection<FileData>();
 
+            List<AccountInfo> accs = new List<AccountInfo>();
+            accs = isPassAPP ? Settings.Person.Accounts.Where(_ => _.AllowPassRequestCreation).ToList() : Settings.Person.Accounts;
+            
 #if DEBUG
             _appModel = new AddAppModel()
             {
-                AllAcc = Settings.Person.Accounts,
+                AllAcc = accs,
                 AllType = Settings.TypeApp,
                 AllKindPass = new List<string> { AppResources.PassMan, AppResources.PassMotorcycle,
                     AppResources.PassCar, AppResources.PassGazele, AppResources.PassCargo },
                 AllBrand = new List<string>() {"Suzuki", "Kavasaki", "Lada", "Opel", "Volkswagen", "Запорожец" }, /*Settings.BrandCar,*/
                 hex = (Color)Application.Current.Resources["MainColor"],
-                SelectedAcc = Settings.Person.Accounts[0],
+                SelectedAcc = accs[0],
                 SelectedType = null /*Settings.TypeApp[0]*/,
                 Files = files
             };
 #else
 _appModel = new AddAppModel()
             {
-                AllAcc = Settings.Person.Accounts,
+                AllAcc = accs,
                 AllType = Settings.TypeApp,
                 AllKindPass = new List<string>{AppResources.PassMan, AppResources.PassMotorcycle,
                     AppResources.PassCar, AppResources.PassGazele, AppResources.PassCargo},
                 AllBrand = Settings.BrandCar,
                 hex = (Color)Application.Current.Resources["MainColor"],
-                SelectedAcc = Settings.Person.Accounts[0],
+                SelectedAcc = accs[0],
                 SelectedType = null /*Settings.TypeApp[0]*/,
                 Files = files
             };
 #endif
-
+                        
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    foreach (var account in accs)
+                    {
+                        _appModel.Accounts.Add(account);
+                    }
+                    _appModel.SelectedAccount = accs[0];
+                });
+            
 
             BindingContext = _appModel;
             ListViewFiles.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
@@ -564,17 +576,17 @@ _appModel = new AddAppModel()
             public AddAppModel()
             {
                 Accounts = new ObservableCollection<AccountInfo>();
-                AllAcc = Settings.Person.Accounts;
+                //AllAcc = Settings.Person.Accounts;
                 Types = new ObservableCollection<OptionModel>();
                 PodTypes = new ObservableCollection<TypeModel>();
-                foreach (var account in AllAcc)
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        Accounts.Add(account);
-                        SelectedAccount = Accounts[0];
-                    });
-                }
+                //foreach (var account in AllAcc)
+                //{
+                //    Device.BeginInvokeOnMainThread(() =>
+                //    {
+                //        Accounts.Add(account);
+                //        SelectedAccount = Accounts[0];
+                //    });
+                //}
 
                 foreach (var type in Settings.TypeApp)
                 {

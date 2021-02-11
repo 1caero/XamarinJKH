@@ -283,7 +283,7 @@
                                 Spacing="20"
                                 Orientation="Horizontal">
                                 <Frame CornerRadius="10"
-                                       x:Name="FrameBtnAddPassIos"
+                                       x:Name="FrameBtnAddPass"
                                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                        Padding="10,0"
                                        BackgroundColor="White"
@@ -329,7 +329,7 @@
                                            HorizontalOptions="Center" />
                                 </StackLayout>
                                 
-                                <Frame CornerRadius="10"
+                                <!--<Frame CornerRadius="10"
                                        x:Name="FrameBtnAddPass"
                                        Padding="0,0,10,0"
                                        IsVisible="False"
@@ -358,7 +358,7 @@
                                             Clicked="StartNewPass"
                                             BackgroundColor="Transparent" />
                                     </StackLayout>
-                                </Frame>
+                                </Frame>-->
 
                                 <Frame CornerRadius="10"
                                        x:Name="FrameBtnAddIos"

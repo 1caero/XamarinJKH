@@ -1741,4 +1741,7 @@
   <data name="Debt" xml:space="preserve">
     <value>Заборгованість </value>
   </data>
+  <data name="AttachmentChooseVideo" xml:space="preserve">
+    <value>Вибрати вiдео з галереї</value>
+  </data>
 </root>
