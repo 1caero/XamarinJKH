@@ -37,6 +37,15 @@ namespace xamarinJKH.Server.RequestModel
         public bool IsCheked { get; set; } = false;
         
         public string Address { get; set; }
+
+        private bool _isVisibleAddress;
+
+        public bool IsVisibleAddress
+        {
+            get => !string.IsNullOrWhiteSpace(Address);
+            set => _isVisibleAddress = value;
+        }
+
         public bool IsPerformed { get; set; }
         public string PaidRequestStatus { get; set; } //- статус заказа
         public string PaidRequestCompleteCode { get; set; }//  - код подтверждения(подтягивается только для жителя)
@@ -46,7 +55,19 @@ namespace xamarinJKH.Server.RequestModel
         // Флаг "Прочитана сотрудником"
         public bool IsReaded { get; set; }
         public bool IsReadedByClient { get; set; }
+        // название приоритета
+        public string PriorityName { get; set; }
 
+        private Color _textColor;
+
+        public Color TextColor
+        {
+            get => Settings.GetPriorityColor(PriorityId);
+            set => _textColor = value;
+        }
+
+        // ид приоритета
+        public int PriorityId { get; set; }
         public bool _IsReadedByClient
         {
             get=>!IsReadedByClient && StatusID != 6;

@@ -20,7 +20,7 @@ namespace xamarinJKH.Utils
         public static List<RequestType> TypeApp = new List<RequestType>();
         public static List<NamedValue> StatusApp = new List<NamedValue>();
         public static List<NamedValue> PrioritetsApp = new List<NamedValue>();
-        public static List<string> BrandCar= new List<string>();
+        public static List<string> BrandCar = new List<string>();
         public static HashSet<Page> AppPAge = new HashSet<Page>();
         public static string UpdateKey = "";
         public static string DateUniq = "";
@@ -42,6 +42,26 @@ namespace xamarinJKH.Utils
             "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь",
             "Декабрь"
         };
+
+        public static Color GetPriorityColor(int id)
+        {
+            switch (id)
+            {
+                case 1:
+                    return Color.FromHex("#FF41B200");
+                    break;
+                case 2:
+                    return Color.FromHex("#FF809500");
+                    break;
+                case 3:
+                    return Color.FromHex("#FFCB5C00");
+                    break;
+                case 4:
+                    return Color.Red;
+                    break;
+            }
+            return Color.Black;
+        }
 
         public static Page mainPage;
         public static Page Page;
@@ -145,11 +165,13 @@ namespace xamarinJKH.Utils
                 default: return "ic_status_wait";
             }
         }
-        
+
         public static List<string> ParsingLink(String source)
         {
             List<string> links = new List<string>();
-            Regex regExHttpLinks = new Regex(@"(?<=\()\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\))|(?<=(?<wrap>[=~|_#]))\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\k<wrap>)|\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            Regex regExHttpLinks = new Regex(
+                @"(?<=\()\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\))|(?<=(?<wrap>[=~|_#]))\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\k<wrap>)|\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]",
+                RegexOptions.Compiled | RegexOptions.IgnoreCase);
             if (String.IsNullOrEmpty(source))
                 return links;
             var periodReplacement = "[[[replace:period]]]";
@@ -161,27 +183,31 @@ namespace xamarinJKH.Utils
                 links.Add(m);
                 Console.WriteLine("Т1: " + match);
             }
+
             return links;
         }
-        
-        public static FormattedString FormatedLink(String source, Color color )
+
+        public static FormattedString FormatedLink(String source, Color color)
         {
-            Regex regExHttpLinks = new Regex(@"(?<=\()\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\))|(?<=(?<wrap>[=~|_#]))\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\k<wrap>)|\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            Regex regExHttpLinks = new Regex(
+                @"(?<=\()\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\))|(?<=(?<wrap>[=~|_#]))\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\k<wrap>)|\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]",
+                RegexOptions.Compiled | RegexOptions.IgnoreCase);
             if (String.IsNullOrEmpty(source))
                 return source;
             var periodReplacement = "[[[replace:period]]]";
             source = Regex.Replace(source, @"(?<=\d)\.(?=\d)", periodReplacement);
             var linkMatches = regExHttpLinks.Matches(source);
             FormattedString formattedString = new FormattedString();
-           
+
             foreach (Match match in linkMatches)
             {
                 var m = match.ToString();
                 String s = (m.Contains("://")) ? m : "http://" + m;
 
                 //if (Device.RuntimePlatform == Device.Android)
-                    source = source.Replace(m,"<u>" + m + "<u>");
+                source = source.Replace(m, "<u>" + m + "<u>");
             }
+
             source = source.Replace(periodReplacement, ".");
 
             var rep = source.Split("<u>");
@@ -190,13 +216,15 @@ namespace xamarinJKH.Utils
             {
                 if (s.Contains("https://") || s.Contains("http://") || s.Contains("www."))
                 {
-                    formattedString.Spans.Add(new Span() { Text = s, FontSize = 15, TextColor = Color.Blue, TextDecorations = TextDecorations.Underline });
+                    formattedString.Spans.Add(new Span()
+                        {Text = s, FontSize = 15, TextColor = Color.Blue, TextDecorations = TextDecorations.Underline});
                 }
                 else
                 {
-                    formattedString.Spans.Add(new Span() { Text = s, FontSize = 15, TextColor = color });
+                    formattedString.Spans.Add(new Span() {Text = s, FontSize = 15, TextColor = color});
                 }
             }
+
             return formattedString;
         }
 
@@ -208,7 +236,8 @@ namespace xamarinJKH.Utils
                 if (links.Count > 0)
                 {
                     Analytics.TrackEvent($"Поиск ссылок {links.ToString()}");
-                    var action = await p.DisplayActionSheet(AppResources.OpenLink, AppResources.Cancel, null, links.ToArray());
+                    var action = await p.DisplayActionSheet(AppResources.OpenLink, AppResources.Cancel, null,
+                        links.ToArray());
                     Analytics.TrackEvent($"Открытие ссылки {action}");
                     await Launcher.OpenAsync(action);
                 }
@@ -222,8 +251,8 @@ namespace xamarinJKH.Utils
                 Console.WriteLine(e);
                 Analytics.TrackEvent($"Открытие ссылки {e.Message}");
             }
-            
         }
+
         public static void SetPhoneTech(string phone)
         {
             if (Person == null)
@@ -234,12 +263,12 @@ namespace xamarinJKH.Utils
             else
                 Person.Phone = phone;
         }
-        
+
         public static string GetHalfAddress(string address)
         {
             if (!string.IsNullOrWhiteSpace(address))
             {
-                int addressLength = address.Length/2;
+                int addressLength = address.Length / 2;
                 string secondHalf = address.Substring(addressLength);
                 int indexSpace = secondHalf.IndexOf(" ", StringComparison.Ordinal);
                 return address.Insert(addressLength + indexSpace + 1, "\n");
@@ -247,6 +276,5 @@ namespace xamarinJKH.Utils
 
             return "";
         }
-        
     }
 }
