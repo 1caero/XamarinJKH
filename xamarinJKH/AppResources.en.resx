@@ -1871,4 +1871,7 @@
   <data name="Debt" xml:space="preserve">
     <value>Debt </value>
   </data>
+  <data name="AttachmentChooseVideo" xml:space="preserve">
+    <value>Choose video from gallery</value>
+  </data>
 </root>

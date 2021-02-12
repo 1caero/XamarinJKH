@@ -220,25 +220,33 @@ namespace xamarinJKH.Main
                     }
 
                     FrameBtnAdd.IsVisible = false;
-                    FrameBtnAddPass.IsVisible = false;
+                    //FrameBtnAddPass.IsVisible = false;
                     FrameBtnAddIos.IsVisible = true;
-                    FrameBtnAddPassIos.IsVisible = Settings.MobileSettings.enableCreationPassRequests;
+                    //FrameBtnAddPassIos.IsVisible = Settings.MobileSettings.enableCreationPassRequests;
 
                     break;
                 case Device.Android:
                     FrameBtnAdd.IsVisible = true;
-                    FrameBtnAddPass.IsVisible = Settings.MobileSettings.enableCreationPassRequests;
+                    //FrameBtnAddPass.IsVisible = Settings.MobileSettings.enableCreationPassRequests;
                     FrameBtnAddIos.IsVisible = false;
-                    FrameBtnAddPassIos.IsVisible = false;
+                    //FrameBtnAddPassIos.IsVisible = false;
 
                     break;
                 default:
                     break;
             }
 
-            FrameSwitch.IsVisible = Settings.MobileSettings.enableCreationPassRequests;
-            LayoutSwitch.IsVisible = !Settings.MobileSettings.enableCreationPassRequests;
-        
+            //FrameBtnAddPass.IsVisible = Settings.MobileSettings.enableCreationPassRequests;
+            FrameBtnAddPass.IsVisible = Settings.Person.Accounts.Any(_=>_.AllowPassRequestCreation);
+#if DEBUG
+            FrameBtnAddPass.IsVisible = true; 
+#endif
+
+            //FrameSwitch.IsVisible = Settings.MobileSettings.enableCreationPassRequests;
+            //LayoutSwitch.IsVisible = !Settings.MobileSettings.enableCreationPassRequests;
+            FrameSwitch.IsVisible = FrameBtnAddPass.IsVisible;
+            LayoutSwitch.IsVisible = !FrameBtnAddPass.IsVisible;
+
             Analytics.TrackEvent("Заявки жителя-платформозависимый код выполнен");
 
             var profile = new TapGestureRecognizer();

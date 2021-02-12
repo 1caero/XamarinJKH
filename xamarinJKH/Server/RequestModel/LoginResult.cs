@@ -72,6 +72,9 @@ namespace xamarinJKH.Server.RequestModel
         public bool MetersAccessFlag { get; set; }
         public bool MetersPeriodStartIsCurrent { get; set; }
         public bool MetersPeriodEndIsCurrent { get; set; }
+
+        public bool AllowPassRequestCreation { get; set; }
+
         bool isfirst;
         public bool IsFirst
         {
