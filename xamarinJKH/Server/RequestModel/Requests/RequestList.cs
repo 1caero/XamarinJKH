@@ -32,6 +32,12 @@ namespace xamarinJKH.Server.RequestModel
             get => !Settings.MobileSettings.disableBulkRequestsClosing;
         }
         public string Name { get; set; }
+        
+        public string HalfName
+        {
+            get => Name.Length > 50 ? Settings.GetHalfAddress(Name) : Name;
+            set => Name = value;
+        }
         public string Status { get; set; }
         public int StatusID { get; set; }
         public bool IsClosed { get; set; }

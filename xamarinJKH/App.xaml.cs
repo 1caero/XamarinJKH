@@ -81,7 +81,7 @@ namespace xamarinJKH
             task.Wait();
 
             
-            if (/*Device.RuntimePlatform == Device.iOS &&*/ Application.Current.UserAppTheme == OSAppTheme.Unspecified)
+            if (/*Device.RuntimePlatform == Device.iOS &&*/Settings.MobileSettings?.appTheme != null && Application.Current.UserAppTheme == OSAppTheme.Unspecified)
             {
                switch (Settings.MobileSettings.appTheme)
                 {

@@ -220,14 +220,14 @@
                                             <Label
                                                 TextColor="Black"
                                                 Margin="0, -5, 0, 0"
-                                                IsVisible="{Binding Source, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
+                                                IsVisible="{Binding SourceType, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
                                                 HorizontalOptions="Start">
                                                 <Label.FormattedText>
                                                     <FormattedString>
                                                         <Span Text="{x:Static xamarinJkh:AppResources.ASource}" TextColor="Black" FontAttributes="Bold"
                                                               FontSize="11" />
                                                         <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="11" />
-                                                        <Span Text=" {Binding Source}" FontSize="11" />
+                                                        <Span Text=" {Binding SourceType}" FontSize="11" />
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>

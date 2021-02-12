@@ -27,7 +27,7 @@
                 HorizontalOptions="Start">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="{Binding _Request.Name}" TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                        <Span Text="{Binding _Request.HalfName}" TextColor="Black" FontAttributes="Bold" FontSize="15" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
@@ -66,14 +66,14 @@
             </Label>
             <Label
                 TextColor="Black"
-                IsVisible="{Binding _Request.Source, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
+                IsVisible="{Binding _Request.SourceType, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
                 HorizontalOptions="Start">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="{x:Static xamarinJkh:AppResources.ASource}" TextColor="Black" FontAttributes="Bold"
                               FontSize="15" />
                         <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
-                        <Span Text=" {Binding _Request.Source}" FontSize="15" />
+                        <Span Text=" {Binding _Request.SourceType}" FontSize="15" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>

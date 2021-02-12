@@ -101,7 +101,7 @@ namespace xamarinJKH.Pays
                         HorizontalTextAlignment = TextAlignment.Center,
                         TextColor = Color.Black,
                         IntegerPoint = 6,
-                        DecimalPoint = 6,
+                        DecimalPoint = 2,
                         HorizontalOptions = LayoutOptions.FillAndExpand
                     };
                     EntrySum.TextChanged += EntrySum_OnTextChanged;
