@@ -135,17 +135,12 @@
                                                 TextColor="Black"
                                                 Margin="-10, 0, 0, 0"
                                                 VerticalOptions="Center" />
-
-                                            <Entry x:Name="EntrySum"
-                                                   FontSize="15"
-                                                   VerticalOptions="End"
-                                                   FontAttributes="Bold"
-                                                   Completed="Entry_Completed"
-                                                   TextChanged="EntrySum_OnTextChanged"
-                                                   HorizontalTextAlignment="Center"
-                                                   TextColor="Black"
-                                                   Keyboard="Numeric"
-                                                   HorizontalOptions="FillAndExpand" />
+                                            <StackLayout x:Name="LayoutEntry"
+                                                         VerticalOptions="End"
+                                                         HorizontalOptions="FillAndExpand">
+                                                
+                                            </StackLayout>
+                                            
                                             <Label
                                                 Text="руб."
                                                 FontSize="12"

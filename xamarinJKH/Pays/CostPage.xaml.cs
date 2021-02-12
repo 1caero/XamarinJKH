@@ -27,7 +27,7 @@ namespace xamarinJKH.Pays
         private bool isComission = false;
         
         public string svg { get; set; }
-
+        private Entry EntrySum = new Entry();
         public CostPage(AccountAccountingInfo account, List<AccountAccountingInfo> accounts)
         {
             this.account = account;
@@ -69,12 +69,47 @@ namespace xamarinJKH.Pays
                         LabelHistory.FontSize = 10;
                         LabelSaldos.FontSize = 10;
                     }
+                    // <Entry x:Name="EntrySum"
+                    // FontSize="15"
+                    // VerticalOptions="End"
+                    // FontAttributes="Bold"
+                    // Completed="Entry_Completed"
+                    // TextChanged="EntrySum_OnTextChanged"
+                    // HorizontalTextAlignment="Center"
+                    // TextColor="Black"
+                    // Keyboard="Numeric"
+                    // HorizontalOptions="FillAndExpand
+                    EntrySum = new Entry
+                    {
+                        FontSize = 15,
+                        VerticalOptions = LayoutOptions.End,
+                        FontAttributes = FontAttributes.Bold,
+                        HorizontalTextAlignment = TextAlignment.Center,
+                        TextColor = Color.Black,
+                        Keyboard = Keyboard.Numeric,
+                        HorizontalOptions = LayoutOptions.FillAndExpand
+                    };
+                    EntrySum.TextChanged += EntrySum_OnTextChanged;
                     IconViewSaldos.Margin = new Thickness(0, 0, 5, 0);
+                    break;
+                case Device.Android:
+                    EntrySum = new EntryWithCustomKeyboard
+                    {
+                        FontSize = 15,
+                        VerticalOptions = LayoutOptions.End,
+                        FontAttributes = FontAttributes.Bold,
+                        HorizontalTextAlignment = TextAlignment.Center,
+                        TextColor = Color.Black,
+                        IntegerPoint = 6,
+                        DecimalPoint = 6,
+                        HorizontalOptions = LayoutOptions.FillAndExpand
+                    };
+                    EntrySum.TextChanged += EntrySum_OnTextChanged;
                     break;
                 default:
                     break;
             }
-
+            LayoutEntry.Children.Add(EntrySum);
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
