@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
 using xamarinJKH.Utils;
@@ -19,6 +20,13 @@ namespace xamarinJKH.Server.RequestModel
        
         public string RequestNumber { get; set; }
         public string Added { get; set; }
+        
+        public string RequestTerm { get; set; }
+
+        public string _RequestTerm
+        {
+            get => string.IsNullOrWhiteSpace(RequestTerm) ? DateTime.Now.AddDays(10).ToString("dd.MM.yyyy hh:mm:ss") : RequestTerm;
+        }
 // долг по лсч
         public decimal Debt { get; set; }
         public string _Added

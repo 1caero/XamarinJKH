@@ -490,7 +490,7 @@ namespace xamarinJKH.MainConst
                         if (_requestList != null)
                         {
                             RequestInfos.Clear();
-                            foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).OrderBy(o => o.ID))
+                            foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).OrderBy(o => o._RequestTerm))
                             {
                                 RequestInfos.Add(each);
                             }
