@@ -2077,6 +2077,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вид неисправности.
+        /// </summary>
+        internal static string FaultType {
+            get {
+                return ResourceManager.GetString("FaultType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отправка файла.
         /// </summary>
         internal static string FileSending {
@@ -3867,6 +3876,15 @@ namespace xamarinJKH {
         internal static string Period {
             get {
                 return ResourceManager.GetString("Period", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Срок исполнения.
+        /// </summary>
+        internal static string PeriodExecution {
+            get {
+                return ResourceManager.GetString("PeriodExecution", resourceCulture);
             }
         }
         

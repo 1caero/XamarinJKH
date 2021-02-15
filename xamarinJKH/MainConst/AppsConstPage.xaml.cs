@@ -543,11 +543,23 @@ namespace xamarinJKH.MainConst
             if (select != null)
             {
                 if (Navigation.NavigationStack.FirstOrDefault(x => x is AppConstPage) == null)
+                {
                     await Navigation.PushAsync(new AppConstPage(select));
+                    try
+                    {
+                        StackLayout stackLayout2 = (StackLayout) ((PancakeView) s.LogicalChildren[1]).Content;
+                        Grid grid = (Grid) stackLayout2.LogicalChildren[0];
+                        grid.Children[1].IsVisible = false;
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(exception);
+                    }
 
-                await Task.Delay(TimeSpan.FromSeconds(1));
+                    await Task.Delay(TimeSpan.FromSeconds(1));
 
-                MessagingCenter.Send<Object, int>(this, "SetAppReadConst", select.ID);
+                    MessagingCenter.Send<Object, int>(this, "SetAppReadConst", select.ID);
+                }
             }
         }
 

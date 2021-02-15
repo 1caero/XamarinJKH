@@ -1882,4 +1882,10 @@
   <data name="AreYouHide" xml:space="preserve">
     <value>Вы действительно хотите скрыть комментарий?</value>
   </data>
+  <data name="PeriodExecution" xml:space="preserve">
+    <value>Срок исполнения</value>
+  </data>
+  <data name="FaultType" xml:space="preserve">
+    <value>Вид неисправности</value>
+  </data>
 </root>

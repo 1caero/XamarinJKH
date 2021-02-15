@@ -234,6 +234,34 @@
                                             <Label
                                                 TextColor="Black"
                                                 Margin="0, -5, 0, 0"
+                                                IsVisible="{Binding RequestTerm, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
+                                                HorizontalOptions="Start">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static xamarinJkh:AppResources.PeriodExecution}" TextColor="Black" FontAttributes="Bold"
+                                                              FontSize="11" />
+                                                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="11" />
+                                                        <Span Text=" {Binding RequestTerm}" FontSize="11" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label
+                                                TextColor="Black"
+                                                Margin="0, -5, 0, 0"
+                                                IsVisible="{Binding MalfunctionType, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
+                                                HorizontalOptions="Start">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static xamarinJkh:AppResources.FaultType}" TextColor="Black" FontAttributes="Bold"
+                                                              FontSize="11" />
+                                                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="11" />
+                                                        <Span Text=" {Binding MalfunctionType}" FontSize="11" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label
+                                                TextColor="Black"
+                                                Margin="0, -5, 0, 0"
                                                 HorizontalOptions="Start">
                                                 <Label.FormattedText>
                                                     <FormattedString>

@@ -1880,4 +1880,10 @@
   <data name="AreYouHide" xml:space="preserve">
     <value>Are you sure you want to hide the comment? </value>
   </data>
+  <data name="PeriodExecution" xml:space="preserve">
+    <value>Period of execution </value>
+  </data>
+  <data name="FaultType" xml:space="preserve">
+    <value>Fault type </value>
+  </data>
 </root>

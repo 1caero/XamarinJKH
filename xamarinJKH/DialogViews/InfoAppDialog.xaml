@@ -2,6 +2,7 @@
 
 <abstractions:DialogView xmlns="http://xamarin.com/schemas/2014/forms"
                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         x:Name="View"
                          xmlns:extra="clr-namespace:AiForms.Dialogs.Abstractions;assembly=AiForms.Dialogs.Abstractions"
                          CornerRadius="30" OffsetX="0" OffsetY="0" UseCurrentPageLocation="false"
                          VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Center"
@@ -23,13 +24,9 @@
 
             <Label
                 x:Name="LabelTema"
-                TextColor="Black"
-                HorizontalOptions="Start">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{Binding _Request.HalfName}" TextColor="Black" FontAttributes="Bold" FontSize="15" />
-                    </FormattedString>
-                </Label.FormattedText>
+                Text="{Binding _Request.Text}" TextColor="Black" FontAttributes="Bold" FontSize="15"
+                HorizontalOptions="Fill">
+                
             </Label>
             <Label
                 x:Name="LabelDate"
@@ -74,6 +71,19 @@
                               FontSize="15" />
                         <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
                         <Span Text=" {Binding _Request.SourceType}" FontSize="15" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label
+                TextColor="Black"
+                IsVisible="{Binding _Request.RequestTerm, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
+                HorizontalOptions="Start">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{x:Static xamarinJkh:AppResources.PeriodExecution}" TextColor="Black" FontAttributes="Bold"
+                              FontSize="15" />
+                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                        <Span Text=" {Binding _Request.RequestTerm}" FontSize="15" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>

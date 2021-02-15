@@ -1750,4 +1750,10 @@
   <data name="AreYouHide" xml:space="preserve">
     <value>Ви дійсно хочете приховати коментар? </value>
   </data>
+  <data name="PeriodExecution" xml:space="preserve">
+    <value>Термін виконання </value>
+  </data>
+  <data name="FaultType" xml:space="preserve">
+    <value>Пошкодження </value>
+  </data>
 </root>

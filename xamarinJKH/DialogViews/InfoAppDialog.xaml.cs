@@ -20,6 +20,7 @@ namespace xamarinJKH.DialogViews
         public InfoAppDialog()
         {
             InitializeComponent();
+            View.WidthRequest = App.ScreenWidth;
             Analytics.TrackEvent("Инфо о заявке ");
             IconViewPhone.IsVisible = Settings.Person.IsDispatcher;
             Frame.SetAppThemeColor(Frame.BorderColorProperty, (Color)Application.Current.Resources["MainColor"], Color.White);
