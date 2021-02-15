@@ -7,6 +7,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1027383111296:android:361f846f199e8d8137c065",
+        "android_client_info": {
+          "package_name": "sys_rom.OOO_real"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnaROqMOoSRkEsElHaQ6A1_wsJ8R2A4ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027383111296-0n2ap32egs43u4io3304chu4k92h7vvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ukpodkova",
+                "app_store_id": "1545564384"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1027383111296:android:394d433655f7032537c065",
         "android_client_info": {
           "package_name": "sys_rom.baltik_spb"
@@ -229,6 +266,43 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1027383111296:android:5b24232571b97e7237c065",
+        "android_client_info": {
+          "package_name": "sys_rom.kievsko_tuhochevskogo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnaROqMOoSRkEsElHaQ6A1_wsJ8R2A4ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027383111296-0n2ap32egs43u4io3304chu4k92h7vvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ukpodkova",
+                "app_store_id": "1545564384"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1027383111296:android:6e2e0a53dfbd003d37c065",
         "android_client_info": {
           "package_name": "sys_rom.mkd_servis"
@@ -269,6 +343,117 @@
         "mobilesdk_app_id": "1:1027383111296:android:9b1338a1fa716b9237c065",
         "android_client_info": {
           "package_name": "sys_rom.mostovoy_krdr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnaROqMOoSRkEsElHaQ6A1_wsJ8R2A4ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027383111296-0n2ap32egs43u4io3304chu4k92h7vvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ukpodkova",
+                "app_store_id": "1545564384"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027383111296:android:dd20df8bb45809e637c065",
+        "android_client_info": {
+          "package_name": "sys_rom.new_domstroy_volzh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnaROqMOoSRkEsElHaQ6A1_wsJ8R2A4ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027383111296-0n2ap32egs43u4io3304chu4k92h7vvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ukpodkova",
+                "app_store_id": "1545564384"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027383111296:android:bebaae0c6e0b983237c065",
+        "android_client_info": {
+          "package_name": "sys_rom.new_pszh_mayak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnaROqMOoSRkEsElHaQ6A1_wsJ8R2A4ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027383111296-0n2ap32egs43u4io3304chu4k92h7vvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ukpodkova",
+                "app_store_id": "1545564384"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027383111296:android:c61eb7326dd42e9037c065",
+        "android_client_info": {
+          "package_name": "sys_rom.new_sweet_home_region"
         }
       },
       "oauth_client": [
@@ -380,6 +565,43 @@
         "mobilesdk_app_id": "1:1027383111296:android:14c517cd4845214137c065",
         "android_client_info": {
           "package_name": "sys_rom.preobrazhenskiy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnaROqMOoSRkEsElHaQ6A1_wsJ8R2A4ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027383111296-0n2ap32egs43u4io3304chu4k92h7vvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ukpodkova",
+                "app_store_id": "1545564384"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027383111296:android:006ce67c645b053437c065",
+        "android_client_info": {
+          "package_name": "sys_rom.pszh_mayak"
         }
       },
       "oauth_client": [
@@ -747,9 +969,194 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1027383111296:android:38f3b5018f3499f237c065",
+        "android_client_info": {
+          "package_name": "sys_rom.tszh_cheremushki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnaROqMOoSRkEsElHaQ6A1_wsJ8R2A4ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027383111296-0n2ap32egs43u4io3304chu4k92h7vvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ukpodkova",
+                "app_store_id": "1545564384"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027383111296:android:e133b03d55e30e3637c065",
+        "android_client_info": {
+          "package_name": "sys_rom.tszh_evrika_7"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnaROqMOoSRkEsElHaQ6A1_wsJ8R2A4ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027383111296-0n2ap32egs43u4io3304chu4k92h7vvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ukpodkova",
+                "app_store_id": "1545564384"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027383111296:android:a0be308af3fe017c37c065",
+        "android_client_info": {
+          "package_name": "sys_rom.tszh_uzhnoe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnaROqMOoSRkEsElHaQ6A1_wsJ8R2A4ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027383111296-0n2ap32egs43u4io3304chu4k92h7vvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ukpodkova",
+                "app_store_id": "1545564384"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1027383111296:android:6123314ed521970e37c065",
         "android_client_info": {
           "package_name": "sys_rom.uk_bogoroditskogo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnaROqMOoSRkEsElHaQ6A1_wsJ8R2A4ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027383111296-0n2ap32egs43u4io3304chu4k92h7vvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ukpodkova",
+                "app_store_id": "1545564384"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027383111296:android:10781d93f6d2bb7a37c065",
+        "android_client_info": {
+          "package_name": "sys_rom.uk_dobrodela"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnaROqMOoSRkEsElHaQ6A1_wsJ8R2A4ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027383111296-0n2ap32egs43u4io3304chu4k92h7vvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ukpodkova",
+                "app_store_id": "1545564384"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027383111296:android:48fa3f0d3ad1bf6c37c065",
+        "android_client_info": {
+          "package_name": "sys_rom.uk_east"
         }
       },
       "oauth_client": [
@@ -898,6 +1305,43 @@
         "mobilesdk_app_id": "1:1027383111296:android:bbb6d108000d0dd637c065",
         "android_client_info": {
           "package_name": "sys_rom.zhks_west"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnaROqMOoSRkEsElHaQ6A1_wsJ8R2A4ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027383111296-f5ejom5jaffmrlcc5stlku1ep8jm95gd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027383111296-0n2ap32egs43u4io3304chu4k92h7vvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ukpodkova",
+                "app_store_id": "1545564384"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027383111296:android:ed06a68663d38ed737c065",
+        "android_client_info": {
+          "package_name": "sys_rom.zhsk_parha"
         }
       },
       "oauth_client": [
