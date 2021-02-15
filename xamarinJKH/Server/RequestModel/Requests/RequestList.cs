@@ -41,11 +41,6 @@ namespace xamarinJKH.Server.RequestModel
         }
         public string Name { get; set; }
         public string Text  { get; set; }
-        public string HalfText
-        {
-            get => Text.Length > 50 ? Settings.GetHalfAddress(Text) : Text;
-            set => Text = value;
-        }
         public string HalfName
         {
             get => Name.Length > 50 ? Settings.GetHalfAddress(Name) : Name;

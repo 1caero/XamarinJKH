@@ -2,6 +2,7 @@
 using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarinJKH.Utils;
 
 namespace xamarinJKH.Converters
 {
@@ -16,7 +17,7 @@ namespace xamarinJKH.Converters
             }
             else
             {
-                return true;
+                return Settings.Person.IsDispatcher;
             }
         }
 

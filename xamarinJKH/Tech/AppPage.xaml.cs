@@ -237,7 +237,7 @@ namespace xamarinJKH.Tech
 
             Resources["hexColor"] = (Color)Application.Current.Resources["MainColor"];
 
-            LabelUkP.IsVisible = LabelUKLink.IsVisible = App.isStart && Settings.AppIsVisible;
+            LabelUkP.IsVisible = LabelUKLink.IsVisible = LayoutCallUK.IsVisible = App.isStart && Settings.AppIsVisible;
             
             LabelUk.Text = LabelUk.Text.Replace("УК", Settings.MobileSettings.main_name);
             //LabelUKLink.Text = LabelUKLink.Text.Replace("УК", Settings.MobileSettings.main_name);
@@ -334,7 +334,7 @@ namespace xamarinJKH.Tech
                 
             };
             //LabelUKLink.GestureRecognizers.Add(addApp);
-            LabelUKLinkStack.GestureRecognizers.Add(addApp);
+            LayoutCallUK.GestureRecognizers.Add(addApp);
             // var recordmic = new TapGestureRecognizer();
             // recordmic.Tapped += async (s, e) => { RecordMic(); };
             // IconViewMic.GestureRecognizers.Add(recordmic);

@@ -54,7 +54,7 @@
                                                            Foreground="{Binding hex}"
                                                            VerticalOptions="Center">
                         </xamarinJkh:IconView>
-                        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="0" >
+                        <StackLayout Orientation="Vertical" x:Name="LayoutCallUK" VerticalOptions="FillAndExpand" Spacing="0" >
                             <Label 
                                             x:Name="LabelUkP"
                                     HorizontalOptions="FillAndExpand"
