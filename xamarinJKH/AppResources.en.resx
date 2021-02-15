@@ -1874,4 +1874,10 @@
   <data name="AttachmentChooseVideo" xml:space="preserve">
     <value>Choose video from gallery</value>
   </data>
+  <data name="Hide " xml:space="preserve">
+    <value>Hide </value>
+  </data>
+  <data name="AreYouHide" xml:space="preserve">
+    <value>Are you sure you want to hide the comment? </value>
+  </data>
 </root>

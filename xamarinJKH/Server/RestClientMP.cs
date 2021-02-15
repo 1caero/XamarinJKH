@@ -121,6 +121,7 @@ namespace xamarinJKH.Server
         public const string GET_REQUEST_STATUSES = "RequestsDispatcher/RequestStatuses"; //- получение статусов заявок
         public const string GET_REQUEST_PRIORITETS = "RequestsDispatcher/RequestPriorities"; //- получение статусов заявок
         public const string FILTR_REQUESTS = "RequestsDispatcher/Search "; //- поиск заявок по критериям
+        public const string CHANGE_MESS_VISIBILITY = "RequestsDispatcher/ChangeMessageVisibility"; //- Метод для смены флага видимости сообщения
         
         
         
@@ -3092,6 +3093,35 @@ namespace xamarinJKH.Server
             {
                 Lat,
                 Lng
+            });
+
+            var response = await restClientMp.ExecuteTaskAsync<CommonResult>(restRequest);
+
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new CommonResult()
+                {
+                    Error = $"Ошибка {response.StatusDescription}"
+                };
+            }
+
+            return response.Data;
+        }
+        
+        public async Task<CommonResult> ChangeMessageVisibility(string RequestID, string MessageID, bool IsHidden)
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(CHANGE_MESS_VISIBILITY, Method.POST);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            restRequest.AddBody(new
+            {
+                RequestID,
+                MessageID,
+                IsHidden
             });
 
             var response = await restClientMp.ExecuteTaskAsync<CommonResult>(restRequest);

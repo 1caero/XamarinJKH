@@ -330,7 +330,7 @@ namespace xamarinJKH.AppsConst
             string newDate;
             if (message.IsSelf)
             {
-                data = new MessageCellAuthor(message, this, DateUniq, out newDate);
+                data = new MessageCellAuthor(message, this, DateUniq, out newDate, _requestInfo.ID.ToString());
             }
             else
             {
