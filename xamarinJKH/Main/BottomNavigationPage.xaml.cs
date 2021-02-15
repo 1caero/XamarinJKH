@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -241,6 +242,19 @@ namespace xamarinJKH.Main
             if (services != null)
             {
                 this.CurrentPage = services;
+            }
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            if (PopupNavigation.Instance.PopupStack.Count > 0)
+            {
+                PopupNavigation.Instance.PopAllAsync();
+                return true;
+            }
+            else
+            {
+                return base.OnBackButtonPressed();
             }
         }
 
