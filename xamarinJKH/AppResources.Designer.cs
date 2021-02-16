@@ -2266,7 +2266,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Скрыть.
+        ///   Looks up a localized string similar to Скрыть комментарий.
         /// </summary>
         internal static string Hide_ {
             get {

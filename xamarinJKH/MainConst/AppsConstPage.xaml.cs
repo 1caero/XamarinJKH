@@ -436,6 +436,7 @@ namespace xamarinJKH.MainConst
                 RequestDefault = _requestList.Requests;
                 SetReaded();
                 Settings.UpdateKey = _requestList.UpdateKey;
+                MessagingCenter.Unsubscribe<Object>(this, "SetRequestsAmount");
                 MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", _requestList.Requests.Count(x => !x.IsReaded));
             }
             else

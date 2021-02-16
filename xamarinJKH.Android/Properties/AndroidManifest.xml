@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="4" android:versionName="3.5"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="4" android:versionName="3.85"
 		  android:usesCleartextTraffic="true"
 		  package="sys_rom.ru.quiet_harbor" android:installLocation="preferExternal">
 	<uses-sdk android:minSdkVersion="18" android:targetSdkVersion="29" />

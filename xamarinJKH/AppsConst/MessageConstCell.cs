@@ -9,6 +9,7 @@ using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
 using FFImageLoading.Svg.Forms;
+using Microsoft.AppCenter.Analytics;
 using Xamarin.Forms.Markup;
 
 namespace xamarinJKH.AppsConst
@@ -24,7 +25,9 @@ namespace xamarinJKH.AppsConst
         private Label LabelDateA = new Label();
         Frame frameDateA = new Frame();
         SvgCachedImage imageA = new SvgCachedImage();
+
         IconView imageHiden = new IconView();
+
         //IconView imageHiden2 = new IconView();
         Frame frameA = new Frame();
 
@@ -56,7 +59,7 @@ namespace xamarinJKH.AppsConst
 
 
             StackLayout containerDateA = new StackLayout();
-            
+
 
             LabeltimeA.TextColor = Color.Gray;
             LabeltimeA.FontSize = 15;
@@ -66,10 +69,10 @@ namespace xamarinJKH.AppsConst
             Frame frameTextA = new Frame();
             frameTextA.HorizontalOptions = LayoutOptions.End;
             frameTextA.VerticalOptions = LayoutOptions.StartAndExpand;
-            Color currentResource = (Color)Application.Current.Resources["MainColor"];
+            Color currentResource = (Color) Application.Current.Resources["MainColor"];
             if (message.IsHidden)
             {
-                frameTextA.SetAppThemeColor(Frame.BorderColorProperty,currentResource, Color.Transparent );
+                frameTextA.SetAppThemeColor(Frame.BorderColorProperty, currentResource, Color.Transparent);
                 frameTextA.BackgroundColor = Color.FromHex("#EBEBEB");
                 LabelTextA.TextColor = Color.Black;
             }
@@ -77,7 +80,6 @@ namespace xamarinJKH.AppsConst
             {
                 frameTextA.BackgroundColor = currentResource;
                 LabelTextA.TextColor = Color.White;
-
             }
 
             frameTextA.Margin = new Thickness(0, 0, 0, 10);
@@ -97,7 +99,8 @@ namespace xamarinJKH.AppsConst
             imageA.HorizontalOptions = LayoutOptions.CenterAndExpand;
             imageA.HeightRequest = 40;
             imageA.WidthRequest = 40;
-            imageA.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", $"#FFFFFF" } };
+            imageA.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string>
+                {{"#000000", $"#FFFFFF"}};
             imageA.Source = "resource://xamarinJKH.Resources.ic_file_download.svg";
 
             imageHiden.IsVisible = message.IsHidden;
@@ -166,7 +169,6 @@ namespace xamarinJKH.AppsConst
                             await p.DisplayAlert("Ошибка", "Не удалось скачать файл", "OK");
                         }
                     }
-
                 };
                 imageA.GestureRecognizers.Add(tgr);
             }
@@ -181,16 +183,15 @@ namespace xamarinJKH.AppsConst
             stackLayoutIcon.Spacing = 0;
             stackLayoutIcon.HorizontalOptions = LayoutOptions.End;
             frameTextA.Content = stackLayoutContentA;
-            
+
             Grid grid = new Grid();
             grid.Children.Add(frameTextA);
             grid.Children.Add(imageHiden);
-            
+
             stackLayoutIcon.Children.Add(grid);
             stackLayoutIcon.Children.Add(frameA);
 
-            
-            
+
             frameDateA.HorizontalOptions = LayoutOptions.Center;
             frameDateA.VerticalOptions = LayoutOptions.Start;
             frameDateA.BackgroundColor = Color.FromHex("#E2E2E2");
@@ -215,7 +216,7 @@ namespace xamarinJKH.AppsConst
                 TextColor = currentResource,
                 Text = AppResources.Hide_,
                 IsVisible = !message.IsHidden,
-                Margin = new Thickness(0,0,15,0),
+                Margin = new Thickness(0, 0, 15, 0),
                 HorizontalOptions = LayoutOptions.EndAndExpand,
                 TextDecorations = TextDecorations.Underline,
                 FontSize = 15
@@ -249,8 +250,8 @@ namespace xamarinJKH.AppsConst
                 }
             };
             HiddenMess.GestureRecognizers.Add(hideMess);
-            
-            ConteinerA.Children.Add(HiddenMess);
+
+            // ConteinerA.Children.Add(HiddenMess);
             ConteinerA.Children.Add(frameDateA);
             ConteinerA.Children.Add(containerDateA);
 
@@ -283,18 +284,68 @@ namespace xamarinJKH.AppsConst
             {
                 LabelTextA.FormattedText = Settings.FormatedLink(message.Text, Color.White);
             }
+
             var link = new TapGestureRecognizer();
-            link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
+            link.Tapped += async (s, e) =>
+            {
+                try
+                {
+                    List<string> links = new List<string>();
+                    if(!message.IsHidden)
+                        links.Add(AppResources.Hide_);
+                    links.AddRange(Settings.ParsingLink(message.Text));
+
+                    if (links.Count > 0)
+                    {
+                        Analytics.TrackEvent($"Поиск ссылок {links.ToString()}");
+                        var action = await p.DisplayActionSheet(AppResources.ChoizeAction, AppResources.Cancel, null,
+                            links.ToArray());
+                        if (action != AppResources.Cancel)
+                        {
+                            if (action.Equals(AppResources.Hide_))
+                            {
+                                CommonResult changeMessageVisibility =
+                                    await _server.ChangeMessageVisibility(reqId, message.ID.ToString(), true);
+                                if (changeMessageVisibility.Error == null)
+                                {
+                                    message.IsHidden = true;
+                                    LabelTextA.FormattedText = Settings.FormatedLink(message.Text, Color.Black);
+                                    imageHiden.IsVisible = true;
+                                    frameTextA.SetAppThemeColor(Frame.BorderColorProperty, currentResource,
+                                        Color.Transparent);
+                                    frameTextA.BackgroundColor = Color.FromHex("#EBEBEB");
+                                    LabelTextA.TextColor = Color.Black;
+                                    LabeltimeA.Margin = new Thickness(0, -5, 5, 0);
+                                    HiddenMess.IsVisible = false;
+                                }
+                                else
+                                {
+                                    await p.DisplayAlert(AppResources.Error, changeMessageVisibility.Error, "OK");
+                                }
+                            }
+
+                            Analytics.TrackEvent($"Открытие ссылки {action}");
+                            await Launcher.OpenAsync(action);
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    Analytics.TrackEvent($"Открытие ссылки {ex.Message}");
+                }
+            };
             LabelTextA.GestureRecognizers.Add(link);
             LabeltimeA.Text = message.TimeAdd;
-
-                
 
 
             Children.Add(ConteinerA);
         }
 
-      
 
         private RestClientMP _server = new RestClientMP();
     }
@@ -365,7 +416,8 @@ namespace xamarinJKH.AppsConst
             frameText.SetOnAppTheme(Frame.HasShadowProperty, false, true);
             if (message.IsHidden)
             {
-                frameText.SetAppThemeColor(Frame.BorderColorProperty,(Color) Application.Current.Resources["MainColor"], Color.Transparent );
+                frameText.SetAppThemeColor(Frame.BorderColorProperty,
+                    (Color) Application.Current.Resources["MainColor"], Color.Transparent);
                 frameText.BackgroundColor = Color.FromHex("#EBEBEB");
                 LabelText.TextColor = Color.Black;
             }
@@ -373,8 +425,8 @@ namespace xamarinJKH.AppsConst
             {
                 frameText.BackgroundColor = (Color) Application.Current.Resources["MainColor"];
                 LabelText.TextColor = Color.White;
-
             }
+
             StackLayout stackLayoutContent = new StackLayout();
 
             //image.IsVisible = message.FileID != -1;
@@ -388,7 +440,8 @@ namespace xamarinJKH.AppsConst
             image.HorizontalOptions = LayoutOptions.CenterAndExpand;
             image.HeightRequest = 40;
             image.WidthRequest = 40;
-            image.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string> { { "#000000", $"#FFFFFF" } };
+            image.ReplaceStringMap = new System.Collections.Generic.Dictionary<string, string>
+                {{"#000000", $"#FFFFFF"}};
             image.Source = "resource://xamarinJKH.Resources.ic_file_download.svg";
 
             imageHiden.IsVisible = message.IsHidden;
@@ -399,7 +452,7 @@ namespace xamarinJKH.AppsConst
             imageHiden.Margin = new Thickness(-10, -10, 0, 0);
             imageHiden.Foreground = (Color) Application.Current.Resources["MainColor"];
             imageHiden.Source = "ic_close_password";
-            
+
             if (message.FileID != -1)
             {
                 var tgr = new TapGestureRecognizer();
@@ -421,7 +474,6 @@ namespace xamarinJKH.AppsConst
                         MessagingCenter.Send<Object, string>(this, "OpenFileConst",
                             message.FileID.ToString() + "," + fileName);
                     }
-
                 };
                 image.GestureRecognizers.Add(tgr);
             }
@@ -444,10 +496,9 @@ namespace xamarinJKH.AppsConst
             Grid grid = new Grid();
             grid.Children.Add(frameText);
             grid.Children.Add(imageHiden);
-            
+
             stackLayoutIconB.Children.Add(frame);
             stackLayoutIconB.Children.Add(grid);
-
 
 
             frameDate.HorizontalOptions = LayoutOptions.Center;
@@ -514,12 +565,13 @@ namespace xamarinJKH.AppsConst
 
             LabelDate.Text = dateMess;
             LabelName.Text = message.AuthorName;
-            if(message.IsHidden)
+            if (message.IsHidden)
                 LabelText.FormattedText = Settings.FormatedLink(message.Text, Color.Black);
             else
             {
-                LabelText.FormattedText = Settings.FormatedLink(message.Text, Color.White);  
+                LabelText.FormattedText = Settings.FormatedLink(message.Text, Color.White);
             }
+
             var link = new TapGestureRecognizer();
             link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
             LabelText.GestureRecognizers.Add(link);

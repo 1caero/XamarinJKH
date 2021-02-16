@@ -18,299 +18,310 @@
            HasShadow="True"
            Margin="15,120,15,15"
            Padding="25,20,25,20">
-        <StackLayout
-            x:Name="StackLayoutContainer"
-            HorizontalOptions="FillAndExpand">
-
-            <Label
-                x:Name="LabelTema"
-                Text="{Binding _Request.Text}" TextColor="Black" FontAttributes="Bold" FontSize="15"
-                HorizontalOptions="Fill">
-                
-            </Label>
-            <Label
-                x:Name="LabelDate"
-                TextColor="Black"
-                FontSize="15"
-                HorizontalOptions="Start"
-                Text="{Binding _Request.Added}" />
-            <Label
-                x:Name="LabelKind"
-                TextColor="Black"
-                HorizontalOptions="Start">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{x:Static xamarinJkh:AppResources.Type}" TextColor="Black" FontAttributes="Bold"
-                              FontSize="15" />
-                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
-                        <Span Text=" {Binding _Request.TypeName}" FontSize="15" />
-                        <Span Text=" {Binding _Request._MalfunctionType}" FontSize="15" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label
-                TextColor="Black"
-                IsVisible="{Binding _Request.PerofmerName, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.PerofmerName }"
-                HorizontalOptions="Start">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{x:Static xamarinJkh:AppResources.Executor}" TextColor="Black" FontAttributes="Bold"
-                              FontSize="15" />
-                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
-                        <Span Text=" {Binding _Request.PerofmerName}" FontSize="15" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label
-                TextColor="Black"
-                IsVisible="{Binding _Request.SourceType, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
-                HorizontalOptions="Start">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{x:Static xamarinJkh:AppResources.ASource}" TextColor="Black" FontAttributes="Bold"
-                              FontSize="15" />
-                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
-                        <Span Text=" {Binding _Request.SourceType}" FontSize="15" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label
-                TextColor="Black"
-                IsVisible="{Binding _Request.RequestTerm, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
-                HorizontalOptions="Start">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{x:Static xamarinJkh:AppResources.PeriodExecution}" TextColor="Black" FontAttributes="Bold"
-                              FontSize="15" />
-                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
-                        <Span Text=" {Binding _Request.RequestTerm}" FontSize="15" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label
-                TextColor="Black"
-                IsVisible="{Binding _Request.PriorityName, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
-                HorizontalOptions="Start">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{x:Static xamarinJkh:AppResources.Priority}" TextColor="Black" FontAttributes="Bold"
-                              FontSize="15" />
-                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
-                        <Span Text=" {Binding _Request.PriorityName}" FontSize="15"  TextColor="{Binding _Request.TextColor}" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label
-                TextColor="Black"
-                HorizontalOptions="Start">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{x:Static xamarinJkh:AppResources.Debt}" TextColor="Black" FontAttributes="Bold"
-                              FontSize="15" />
-                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
-                        <Span Text=" {Binding _Request.Debt}" FontSize="15" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label
-                x:Name="LabelAdress"
-                TextColor="Black"
-                HorizontalOptions="Start">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{x:Static xamarinJkh:AppResources.Adress}" TextColor="Black" FontAttributes="Bold"
-                              FontSize="15" />
-                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
-                        <Span Text=" {Binding _Request.HalfAdress}" FontSize="15" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label> 
-            <Label
-                x:Name="LabelFio"
-                TextColor="Black"
-                IsVisible="{Binding IsCons}"
-                HorizontalOptions="Start">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{x:Static xamarinJkh:AppResources.FIO}" TextColor="Black" FontAttributes="Bold"
-                              FontSize="15" />
-                        <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
-                        <Span Text=" {Binding _Request.AuthorName}" FontSize="15" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-
+        <ScrollView>
             <StackLayout
-                Orientation="Horizontal">
-                <Label
-                    x:Name="LabelPhone"
-                    TextColor="Black"
-                    HorizontalOptions="Start">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{x:Static xamarinJkh:AppResources.Phone}" TextColor="Black"
-                                  FontAttributes="Bold" FontSize="15" />
-                            <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
-                            <Span Text=" {Binding _Request.Phone}" FontSize="15" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding Calling}"
-                            CommandParameter="{Binding _Request.Phone}" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <xamarinJkh:IconView x:Name="IconViewPhone"
-                                     Source="ic_call_app"
-                                     HeightRequest="17"
-                                     IsVisible="False"
-                                     WidthRequest="17"
-                                     Foreground="{Binding HexColor}"
-                                     HorizontalOptions="Start"
-                                     VerticalOptions="Center">
-                    <xamarinJkh:IconView.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding Calling}"
-                            CommandParameter="{Binding _Request.Phone}" />
-                    </xamarinJkh:IconView.GestureRecognizers>
-                </xamarinJkh:IconView>
-            </StackLayout>
-            <StackLayout
-                IsVisible="{Binding _Request.IsPaid}"
-                Orientation="Horizontal">
-                <Label
-                    TextColor="Black"
-                    HorizontalOptions="Start">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{x:Static xamarinJkh:AppResources.StatusOrder}" TextColor="Black"
-                                  FontAttributes="Bold" FontSize="15" />
-                            <Span Text="{Binding _Request.PaidRequestStatus}" FontSize="15" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                x:Name="StackLayoutContainer"
+                HorizontalOptions="FillAndExpand">
 
-            </StackLayout>
-            <StackLayout
-                x:Name="code"
-                IsVisible="{Binding _Request.IsPaid }"
-                Orientation="Horizontal">
                 <Label
-                    x:Name="LabelCode"
-                    TextColor="Black"
-                    HorizontalOptions="Start">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{x:Static xamarinJkh:AppResources.CheckCode}" TextColor="Black"
-                                  FontAttributes="Bold" FontSize="15" />
-                            <Span Text=" {Binding _Request.PaidRequestCompleteCode}" FontSize="15" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-
-            </StackLayout>
-
-            <StackLayout
-                IsVisible="{Binding _Request.IsPaid, Converter={converters:InverseBoolConverter}  }"
-                Orientation="Horizontal">
-                <!-- <Label TextColor="Black" -->
-                <!--       FontSize="15" -->
-                <!--       HorizontalOptions="Start"> -->
-                <!--     <Label.FormattedText> -->
-                <!--         <FormattedString> -->
-                <!--             <FormattedString.Spans> -->
-                <!--                 <Span Text="Статус заказа: " -->
-                <!--                       FontAttributes="Bold"/> -->
-                <!--                 <Span Text="{Binding _Request.Status}"/> -->
-                <!--             </FormattedString.Spans> -->
-                <!--         </FormattedString> -->
-                <!--     </Label.FormattedText> -->
-                <!-- </Label> -->
-
-                <xamarinJkh:IconView x:Name="IconViewStatus"
-                                     Source="{Binding SourceApp}"
-                                     HeightRequest="17"
-                                     WidthRequest="17"
-                                     Foreground="{Binding HexColor}"
-                                     HorizontalOptions="Start"
-                                     VerticalOptions="Center" />
+                    x:Name="LabelTema"
+                    Text="{Binding _Request.Text}" TextColor="Black" FontAttributes="Bold" FontSize="15"
+                    HorizontalOptions="Fill" />
                 <Label
-                    x:Name="LabelStatus"
+                    x:Name="LabelDate"
                     TextColor="Black"
                     FontSize="15"
                     HorizontalOptions="Start"
-                    Text="{Binding _Request.Status}" />
-            </StackLayout>
-            <StackLayout IsVisible="{Binding isPass}">
-                <StackLayout IsVisible="{Binding isManType}">
+                    Text="{Binding _Request.Added}" />
+                <Label
+                    x:Name="LabelKind"
+                    TextColor="Black"
+                    HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static xamarinJkh:AppResources.Type}" TextColor="Black"
+                                  FontAttributes="Bold"
+                                  FontSize="15" />
+                            <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                            <Span Text=" {Binding _Request.TypeName}" FontSize="15" />
+                            <Span Text=" {Binding _Request._MalfunctionType}" FontSize="15" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    TextColor="Black"
+                    IsVisible="{Binding _Request.PerofmerName, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.PerofmerName }"
+                    HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static xamarinJkh:AppResources.Executor}" TextColor="Black"
+                                  FontAttributes="Bold"
+                                  FontSize="15" />
+                            <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                            <Span Text=" {Binding _Request.PerofmerName}" FontSize="15" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    TextColor="Black"
+                    IsVisible="{Binding _Request.SourceType, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
+                    HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static xamarinJkh:AppResources.ASource}" TextColor="Black"
+                                  FontAttributes="Bold"
+                                  FontSize="15" />
+                            <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                            <Span Text=" {Binding _Request.SourceType}" FontSize="15" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    TextColor="Black"
+                    IsVisible="{Binding _Request.RequestTerm, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
+                    HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static xamarinJkh:AppResources.PeriodExecution}" TextColor="Black"
+                                  FontAttributes="Bold"
+                                  FontSize="15" />
+                            <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                            <Span Text=" {Binding _Request.RequestTerm}" FontSize="15" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    TextColor="Black"
+                    IsVisible="{Binding _Request.PriorityName, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.SourceType }"
+                    HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static xamarinJkh:AppResources.Priority}" TextColor="Black"
+                                  FontAttributes="Bold"
+                                  FontSize="15" />
+                            <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                            <Span Text=" {Binding _Request.PriorityName}" FontSize="15"
+                                  TextColor="{Binding _Request.TextColor}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    TextColor="Black"
+                    HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static xamarinJkh:AppResources.Debt}" TextColor="Black"
+                                  FontAttributes="Bold"
+                                  FontSize="15" />
+                            <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                            <Span Text=" {Binding _Request.Debt}" FontSize="15" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    x:Name="LabelAdress"
+                    TextColor="Black"
+                    HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static xamarinJkh:AppResources.Adress}" TextColor="Black"
+                                  FontAttributes="Bold"
+                                  FontSize="15" />
+                            <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                            <Span Text=" {Binding _Request.HalfAdress}" FontSize="15" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    x:Name="LabelFio"
+                    TextColor="Black"
+                    IsVisible="{Binding IsCons}"
+                    HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static xamarinJkh:AppResources.FIO}" TextColor="Black" FontAttributes="Bold"
+                                  FontSize="15" />
+                            <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                            <Span Text=" {Binding _Request.AuthorName}" FontSize="15" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <StackLayout
+                    Orientation="Horizontal">
                     <Label
-                        FontSize="23"
-                        VerticalOptions="End"
-                        FontAttributes="Bold"
-                        HorizontalTextAlignment="Start"
+                        x:Name="LabelPhone"
                         TextColor="Black"
-                        HorizontalOptions="Fill">
+                        HorizontalOptions="Start">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding _Request.PassInfo.CategoryName}"  FontAttributes="Bold" TextColor="Black" FontSize="15" />
-                                <Span Text=": " TextColor="Black" FontSize="15" />
-                                <Span Text="{Binding _Request.PassInfo.FIO}" 
-                                      FontSize="15" />
+                                <Span Text="{x:Static xamarinJkh:AppResources.Phone}" TextColor="Black"
+                                      FontAttributes="Bold" FontSize="15" />
+                                <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                                <Span Text=" {Binding _Request.Phone}" FontSize="15" />
                             </FormattedString>
                         </Label.FormattedText>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Calling}"
+                                CommandParameter="{Binding _Request.Phone}" />
+                        </Label.GestureRecognizers>
                     </Label>
-                    <Label
-                        FontSize="23"
-                        VerticalOptions="End"
-                        IsVisible="False"
-                        FontAttributes="Bold"
-                        HorizontalTextAlignment="Start"
-                        TextColor="Black"
-                        HorizontalOptions="Fill">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="{x:Static xamarinJkh:AppResources.OSSInfoPassport}"  FontAttributes="Bold" TextColor="Black" FontSize="15" />
-                                <Span Text=": " TextColor="Black" FontSize="15" />
-                                <Span Text="{Binding _Request.PassInfo.PassportData}"
-                                      FontSize="15" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
+                    <xamarinJkh:IconView x:Name="IconViewPhone"
+                                         Source="ic_call_app"
+                                         HeightRequest="17"
+                                         IsVisible="False"
+                                         WidthRequest="17"
+                                         Foreground="{Binding HexColor}"
+                                         HorizontalOptions="Start"
+                                         VerticalOptions="Center">
+                        <xamarinJkh:IconView.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Calling}"
+                                CommandParameter="{Binding _Request.Phone}" />
+                        </xamarinJkh:IconView.GestureRecognizers>
+                    </xamarinJkh:IconView>
                 </StackLayout>
-                <StackLayout IsVisible="{Binding isManType, Converter={converters:InverseBoolConverter}}">
+                <StackLayout
+                    IsVisible="{Binding _Request.IsPaid}"
+                    Orientation="Horizontal">
                     <Label
-                        FontSize="23"
-                        VerticalOptions="End"
-                        FontAttributes="Bold"
-                        HorizontalTextAlignment="Center"
                         TextColor="Black"
-                        HorizontalOptions="Fill">
+                        HorizontalOptions="Start">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding _Request.PassInfo.CategoryName}" TextColor="Black" FontSize="15" />
-                                <Span Text=": " TextColor="Black" FontSize="15" />
-                                <Span Text="{Binding _Request.PassInfo.VehicleMark}" FontAttributes="Bold"
-                                      FontSize="15" />
+                                <Span Text="{x:Static xamarinJkh:AppResources.StatusOrder}" TextColor="Black"
+                                      FontAttributes="Bold" FontSize="15" />
+                                <Span Text="{Binding _Request.PaidRequestStatus}" FontSize="15" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-                    <pancakeView:PancakeView
-                        BorderThickness="4"
-                        BorderColor="Black"
-                        Padding="10,10,10,10"
-                        Margin="30,0,30,0"
-                        CornerRadius="10" BackgroundColor="White" HasShadow="True">
-                        <Label x:Name="EntryNumber"
-                               FontSize="23"
-                               VerticalOptions="End"
-                               FontAttributes="Bold"
-                               Text="{Binding _Request.PassInfo.VehicleNumber}"
-                               HorizontalTextAlignment="Center"
-                               TextColor="Black"
-                               HorizontalOptions="Fill" />
-                    </pancakeView:PancakeView>
+
+                </StackLayout>
+                <StackLayout
+                    x:Name="code"
+                    IsVisible="{Binding _Request.IsPaid }"
+                    Orientation="Horizontal">
+                    <Label
+                        x:Name="LabelCode"
+                        TextColor="Black"
+                        HorizontalOptions="Start">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static xamarinJkh:AppResources.CheckCode}" TextColor="Black"
+                                      FontAttributes="Bold" FontSize="15" />
+                                <Span Text=" {Binding _Request.PaidRequestCompleteCode}" FontSize="15" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                </StackLayout>
+
+                <StackLayout
+                    IsVisible="{Binding _Request.IsPaid, Converter={converters:InverseBoolConverter}  }"
+                    Orientation="Horizontal">
+                    <!-- <Label TextColor="Black" -->
+                    <!--       FontSize="15" -->
+                    <!--       HorizontalOptions="Start"> -->
+                    <!--     <Label.FormattedText> -->
+                    <!--         <FormattedString> -->
+                    <!--             <FormattedString.Spans> -->
+                    <!--                 <Span Text="Статус заказа: " -->
+                    <!--                       FontAttributes="Bold"/> -->
+                    <!--                 <Span Text="{Binding _Request.Status}"/> -->
+                    <!--             </FormattedString.Spans> -->
+                    <!--         </FormattedString> -->
+                    <!--     </Label.FormattedText> -->
+                    <!-- </Label> -->
+
+                    <xamarinJkh:IconView x:Name="IconViewStatus"
+                                         Source="{Binding SourceApp}"
+                                         HeightRequest="17"
+                                         WidthRequest="17"
+                                         Foreground="{Binding HexColor}"
+                                         HorizontalOptions="Start"
+                                         VerticalOptions="Center" />
+                    <Label
+                        x:Name="LabelStatus"
+                        TextColor="Black"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Text="{Binding _Request.Status}" />
+                </StackLayout>
+                <StackLayout IsVisible="{Binding isPass}">
+                    <StackLayout IsVisible="{Binding isManType}">
+                        <Label
+                            FontSize="23"
+                            VerticalOptions="End"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Start"
+                            TextColor="Black"
+                            HorizontalOptions="Fill">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding _Request.PassInfo.CategoryName}" FontAttributes="Bold"
+                                          TextColor="Black" FontSize="15" />
+                                    <Span Text=": " TextColor="Black" FontSize="15" />
+                                    <Span Text="{Binding _Request.PassInfo.FIO}"
+                                          FontSize="15" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label
+                            FontSize="23"
+                            VerticalOptions="End"
+                            IsVisible="False"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Start"
+                            TextColor="Black"
+                            HorizontalOptions="Fill">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{x:Static xamarinJkh:AppResources.OSSInfoPassport}"
+                                          FontAttributes="Bold" TextColor="Black" FontSize="15" />
+                                    <Span Text=": " TextColor="Black" FontSize="15" />
+                                    <Span Text="{Binding _Request.PassInfo.PassportData}"
+                                          FontSize="15" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                    <StackLayout IsVisible="{Binding isManType, Converter={converters:InverseBoolConverter}}">
+                        <Label
+                            FontSize="23"
+                            VerticalOptions="End"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            TextColor="Black"
+                            HorizontalOptions="Fill">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding _Request.PassInfo.CategoryName}" TextColor="Black"
+                                          FontSize="15" />
+                                    <Span Text=": " TextColor="Black" FontSize="15" />
+                                    <Span Text="{Binding _Request.PassInfo.VehicleMark}" FontAttributes="Bold"
+                                          FontSize="15" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <pancakeView:PancakeView
+                            BorderThickness="4"
+                            BorderColor="Black"
+                            Padding="10,10,10,10"
+                            Margin="30,0,30,0"
+                            CornerRadius="10" BackgroundColor="White" HasShadow="True">
+                            <Label x:Name="EntryNumber"
+                                   FontSize="23"
+                                   VerticalOptions="End"
+                                   FontAttributes="Bold"
+                                   Text="{Binding _Request.PassInfo.VehicleNumber}"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="Black"
+                                   HorizontalOptions="Fill" />
+                        </pancakeView:PancakeView>
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </Frame>
 </abstractions:DialogView>
