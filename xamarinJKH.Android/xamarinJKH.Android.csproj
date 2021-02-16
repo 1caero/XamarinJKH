@@ -67,8 +67,8 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <AndroidSupportedAbis>armeabi-v7a;x86;arm64-v8a;x86_64</AndroidSupportedAbis>
     <MandroidI18n />
-    <AndroidLinkMode>Full</AndroidLinkMode>
-    <AndroidLinkSkip>System.Collections, System.Runtime, System.Runtime.Serialization</AndroidLinkSkip>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidLinkSkip></AndroidLinkSkip>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
