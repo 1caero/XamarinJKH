@@ -31,6 +31,7 @@ namespace xamarinJKH.Notifications
         private RestClientMP _server = new RestClientMP();
         
         public List<FileInfo> Files { get; set; }
+        public string Title { get; set; }
 
         public NotificationOnePage(AnnouncementInfo announcementInfo)
         {
@@ -96,11 +97,10 @@ namespace xamarinJKH.Notifications
 
         async void SetText()
         {
-            UkName.Text = Settings.MobileSettings.main_name;
          
-            LabelTitle.Text = _announcementInfo.Header;
+            Title = _announcementInfo.Header;
             LabelDate.Text = _announcementInfo.Created;
-            LabelText.Text = _announcementInfo.Text;
+            LabelText.Text = _announcementInfo.Text.Trim();
             FrameBtnQuest.BackgroundColor = (Color)Application.Current.Resources["MainColor"];
             int announcementInfoAdditionalServiceId = _announcementInfo.AdditionalServiceId;
             if (announcementInfoAdditionalServiceId != -1)

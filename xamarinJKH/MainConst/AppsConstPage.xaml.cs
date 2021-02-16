@@ -394,7 +394,7 @@ namespace xamarinJKH.MainConst
         {
             base.OnAppearing();
 
-            // SetReaded();
+            SetReaded();
 
             if (bottomMenu.VerticalOptions.Alignment != LayoutAlignment.End)
                 Device.BeginInvokeOnMainThread(() => { bottomMenu.VerticalOptions = LayoutOptions.End; });
@@ -487,7 +487,7 @@ namespace xamarinJKH.MainConst
                     //     new ObservableCollection<RequestInfo>(_requestList.Requests);
                      Device.BeginInvokeOnMainThread(async () =>
                     {
-                        if (_requestList != null)
+                        if (RequestDefault != null)
                         {
                             RequestInfos.Clear();
                             foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).OrderBy(o => o._RequestTerm))
