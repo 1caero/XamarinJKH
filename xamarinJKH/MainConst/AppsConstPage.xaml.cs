@@ -441,7 +441,7 @@ namespace xamarinJKH.MainConst
             }
             else
             {
-                await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAppsInfo, "OK");
+                Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAppsInfo, "OK"));
             }
         }
 

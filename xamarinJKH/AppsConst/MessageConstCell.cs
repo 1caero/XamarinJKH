@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using AiForms.Dialogs;
 using Xamarin.Essentials;
@@ -286,60 +287,43 @@ namespace xamarinJKH.AppsConst
             }
 
             var link = new TapGestureRecognizer();
-            link.Tapped += async (s, e) =>
+            link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
+            ConteinerA.GestureRecognizers.Add(link);
+
+            var dragGestureRecognizer = new DragGestureRecognizer {CanDrag = true};
+            dragGestureRecognizer.DragStarting += async (s, e) =>
             {
-                try
+                if(message.IsHidden)
+                    return;
+                await Device.InvokeOnMainThreadAsync((async () =>
                 {
-                    List<string> links = new List<string>();
-                    if(!message.IsHidden)
-                        links.Add(AppResources.Hide_);
-                    links.AddRange(Settings.ParsingLink(message.Text));
-
-                    if (links.Count > 0)
+                    bool answer = await p.DisplayAlert("",
+                        AppResources.AreYouHide,
+                        AppResources.Yes, AppResources.No);
+                    if (answer)
                     {
-                        Analytics.TrackEvent($"Поиск ссылок {links.ToString()}");
-                        var action = await p.DisplayActionSheet(AppResources.ChoizeAction, AppResources.Cancel, null,
-                            links.ToArray());
-                        if (action != AppResources.Cancel)
+                        CommonResult changeMessageVisibility =
+                            await _server.ChangeMessageVisibility(reqId, message.ID.ToString(), true);
+                        if (changeMessageVisibility.Error == null)
                         {
-                            if (action.Equals(AppResources.Hide_))
-                            {
-                                CommonResult changeMessageVisibility =
-                                    await _server.ChangeMessageVisibility(reqId, message.ID.ToString(), true);
-                                if (changeMessageVisibility.Error == null)
-                                {
-                                    message.IsHidden = true;
-                                    LabelTextA.FormattedText = Settings.FormatedLink(message.Text, Color.Black);
-                                    imageHiden.IsVisible = true;
-                                    frameTextA.SetAppThemeColor(Frame.BorderColorProperty, currentResource,
-                                        Color.Transparent);
-                                    frameTextA.BackgroundColor = Color.FromHex("#EBEBEB");
-                                    LabelTextA.TextColor = Color.Black;
-                                    LabeltimeA.Margin = new Thickness(0, -5, 5, 0);
-                                    HiddenMess.IsVisible = false;
-                                }
-                                else
-                                {
-                                    await p.DisplayAlert(AppResources.Error, changeMessageVisibility.Error, "OK");
-                                }
-                            }
-
-                            Analytics.TrackEvent($"Открытие ссылки {action}");
-                            await Launcher.OpenAsync(action);
+                            LabelTextA.FormattedText = Settings.FormatedLink(message.Text, Color.Black);
+                            imageHiden.IsVisible = true;
+                            message.IsHidden = true;
+                            frameTextA.SetAppThemeColor(Frame.BorderColorProperty, currentResource, Color.Transparent);
+                            frameTextA.BackgroundColor = Color.FromHex("#EBEBEB");
+                            LabelTextA.TextColor = Color.Black;
+                            LabeltimeA.Margin = new Thickness(0, -5, 5, 0);
+                            HiddenMess.IsVisible = false;
+                        }
+                        else
+                        {
+                            await p.DisplayAlert(AppResources.Error, changeMessageVisibility.Error, "OK");
                         }
                     }
-                    else
-                    {
-                        return;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                    Analytics.TrackEvent($"Открытие ссылки {ex.Message}");
-                }
+                }));
             };
-            LabelTextA.GestureRecognizers.Add(link);
+            if(!message.IsHidden)
+                ConteinerA.GestureRecognizers.Add(dragGestureRecognizer);
             LabeltimeA.Text = message.TimeAdd;
 
 
