@@ -122,7 +122,7 @@ namespace xamarinJKH.Server.RequestModel
 
         public string HalfAdress
         {
-            get => Address.Length > 50 ? Settings.GetHalfAddress(Address) : Address;
+            get => !string.IsNullOrWhiteSpace(Address) && Address.Length > 50 ? Settings.GetHalfAddress(Address) : Address;
             set => Address = value;
         }
         public int TypeID { get; set; }

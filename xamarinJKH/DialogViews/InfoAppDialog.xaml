@@ -18,9 +18,10 @@
            HasShadow="True"
            Margin="15,120,15,15"
            Padding="25,20,25,20">
-        <ScrollView>
+        <ScrollView VerticalOptions="FillAndExpand" HeightRequest="400" VerticalScrollBarVisibility="Never">
             <StackLayout
                 x:Name="StackLayoutContainer"
+                VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand">
 
                 <Label
