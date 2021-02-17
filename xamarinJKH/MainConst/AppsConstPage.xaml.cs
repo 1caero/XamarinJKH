@@ -491,7 +491,10 @@ namespace xamarinJKH.MainConst
                         if (RequestDefault != null)
                         {
                             RequestInfos.Clear();
-                            foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).OrderBy(o => o._RequestTerm))
+                            foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault)
+                                .OrderBy(o => o._RequestTerm)
+                                .ThenBy(o => o.IsReaded)
+                                .ThenBy(o=> o.ID ))
                             {
                                 RequestInfos.Add(each);
                             }
@@ -508,7 +511,7 @@ namespace xamarinJKH.MainConst
                     Device.BeginInvokeOnMainThread(async () =>
                     {
                         RequestInfos.Clear();
-                        foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).OrderBy(o => !o.IsReaded).ThenBy(o=> o.ID ).Reverse())
+                        foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).OrderBy(o => o.IsReaded).ThenBy(o=> o.ID ))
                         {
                             RequestInfos.Add(each);
                         }
