@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
-using Newtonsoft.Json;
+
 using Plugin.FirebaseCrashlytics;
 using Plugin.Messaging;
 using Xamarin.Essentials;
@@ -33,7 +33,7 @@ namespace xamarinJKH.Main
         {
             InitializeComponent();
             Analytics.TrackEvent("События");
-            Analytics.TrackEvent(JsonConvert.SerializeObject(Settings.Person.Accounts));
+            // Analytics.TrackEvent(JsonConvert.SerializeObject(Settings.Person.Accounts));
             BindingContext = viewModel = new EventsPageViewModel();
             NavigationPage.SetHasNavigationBar(this, false);
             switch (Device.RuntimePlatform)

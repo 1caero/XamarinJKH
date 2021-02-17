@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reactive.Linq;
-using Akavache;
 using FFImageLoading.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;

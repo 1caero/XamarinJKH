@@ -11,7 +11,7 @@ using xamarinJKH.Utils;
 using Application = Xamarin.Forms.Application;
 using System.Linq;
 using System.Text;
-using Akavache;
+
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
@@ -468,11 +468,11 @@ namespace xamarinJKH
 
         private IEnumerable<ErrorAttachmentLog> GetErrorAttachmentHandler(ErrorReport report)
         {
-            string accountsJson = Newtonsoft.Json.JsonConvert.SerializeObject(Settings.Person.Accounts);
-            // Your code goes here.
+            // string accountsJson = Newtonsoft.Json.JsonConvert.SerializeObject(Settings.Person.Accounts);
+            // // Your code goes here.
             return new ErrorAttachmentLog[]
             {
-                ErrorAttachmentLog.AttachmentWithBinary(Encoding.UTF8.GetBytes(accountsJson), "Accounts.json", "application/json")
+                ErrorAttachmentLog.AttachmentWithBinary(Encoding.UTF8.GetBytes(""), "Accounts.json", "application/json")
             };
         }
 
@@ -482,7 +482,7 @@ namespace xamarinJKH
 
             var args = e as FailedToSendErrorReportEventArgs;
             ErrorReport report = args.Report;
-            string AccountsJson = Newtonsoft.Json.JsonConvert.SerializeObject(Settings.Person.Accounts);
+            // string AccountsJson = Newtonsoft.Json.JsonConvert.SerializeObject(Settings.Person.Accounts);
             //test some values
             if (report.Exception != null)
             {
@@ -505,7 +505,7 @@ namespace xamarinJKH
 
             var args = e as SentErrorReportEventArgs;
             ErrorReport report = args.Report;
-            string AccountsJson = Newtonsoft.Json.JsonConvert.SerializeObject(Settings.Person.Accounts);
+            // string AccountsJson = Newtonsoft.Json.JsonConvert.SerializeObject(Settings.Person.Accounts);
 
             //test some values
             if (report.Exception != null)
@@ -545,7 +545,7 @@ namespace xamarinJKH
 
         protected override void OnStart()
         {
-            Registrations.Start("XamarinJKH");
+           
                                     
             int theme = Preferences.Get("Theme", 0);
 

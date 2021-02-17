@@ -9,7 +9,7 @@ using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.CognitiveServices.Speech;
-using Newtonsoft.Json;
+
 using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
 using Plugin.Media;
@@ -741,7 +741,7 @@ namespace xamarinJKH.Tech
                                   request = await _server.GetRequestsDetailListTech(Settings.Person.Phone);
                                   if (request.Error == null)
                                   {
-                                      Analytics.TrackEvent("Результат запроса " + JsonConvert.SerializeObject(request));
+                                      // Analytics.TrackEvent("Результат запроса " + JsonConvert.SerializeObject(request));
                                       Settings.DateUniq = "";
                                       foreach (var message in request.Messages)
                                       {
