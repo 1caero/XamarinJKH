@@ -129,7 +129,7 @@
                                   FontAttributes="Bold"
                                   FontSize="15" />
                             <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
-                            <Span Text=" {Binding _Request.HalfAdress}" FontSize="15" />
+                            <Span Text=" {Binding _Request.Address}" FontSize="15" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
