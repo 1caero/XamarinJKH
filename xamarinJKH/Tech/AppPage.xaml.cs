@@ -759,7 +759,7 @@ namespace xamarinJKH.Tech
                                   {
                                       await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorComments, "OK");
                                   }
-                                  Device.BeginInvokeOnMainThread(async () => await MethodWithDelayAsync(1000));
+                                  await MethodWithDelayAsync(1000);
                               })
                               );
             }).Start();
