@@ -98,6 +98,13 @@ namespace xamarinJKH.Apps
                     string fileName = message.Text.Replace("Отправлен новый файл: ", "")
                         .Replace("\"", "")
                         .Replace("\"", "");
+                    if (fileName.ToLower().Contains(".jpg") || fileName.ToLower().Contains(".png")
+                                                            || fileName.ToLower().Contains(".jpeg")|| fileName.ToLower().Contains(".bmp"))
+                    {
+                        Device.BeginInvokeOnMainThread(async () => await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), false)));
+                        return;
+                    }
+                    
                     if (await DependencyService.Get<IFileWorker>().ExistsAsync(fileName))
                     {
                         await Launcher.OpenAsync(new OpenFileRequest
@@ -313,6 +320,12 @@ namespace xamarinJKH.Apps
                     string fileName = message.Text.Replace("Отправлен новый файл: ", "")
                 .Replace("\"", "")
                 .Replace("\"", "");
+                    if (fileName.ToLower().Contains(".jpg") || fileName.ToLower().Contains(".png")
+                                                            || fileName.ToLower().Contains(".jpeg")|| fileName.ToLower().Contains(".bmp"))
+                    {
+                        Device.BeginInvokeOnMainThread(async () => await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), false)));
+                        return;
+                    }
                     if (await DependencyService.Get<IFileWorker>().ExistsAsync(fileName))
                     {
                         Analytics.TrackEvent($"открытие файла {fileName}");

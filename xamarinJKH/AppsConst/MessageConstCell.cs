@@ -12,6 +12,7 @@ using xamarinJKH.Utils;
 using FFImageLoading.Svg.Forms;
 using Microsoft.AppCenter.Analytics;
 using Xamarin.Forms.Markup;
+using xamarinJKH.Apps;
 
 namespace xamarinJKH.AppsConst
 {
@@ -144,6 +145,12 @@ namespace xamarinJKH.AppsConst
                     string fileName = message.Text.Replace("Отправлен новый файл: ", "")
                         .Replace("\"", "")
                         .Replace("\"", "");
+                    if (fileName.ToLower().Contains(".jpg") || fileName.ToLower().Contains(".png")
+                                                            || fileName.ToLower().Contains(".jpeg")|| fileName.ToLower().Contains(".bmp"))
+                    {
+                        Device.BeginInvokeOnMainThread(async () => await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), true)));
+                        return;
+                    }
                     if (await DependencyService.Get<IFileWorker>().ExistsAsync(fileName))
                     {
                         await Launcher.OpenAsync(new OpenFileRequest
@@ -446,6 +453,12 @@ namespace xamarinJKH.AppsConst
                     string fileName = message.Text.Replace("Отправлен новый файл: ", "")
                         .Replace("\"", "")
                         .Replace("\"", "");
+                    if (fileName.ToLower().Contains(".jpg") || fileName.ToLower().Contains(".png")
+                                                            || fileName.ToLower().Contains(".jpeg")|| fileName.ToLower().Contains(".bmp"))
+                    {
+                        Device.BeginInvokeOnMainThread(async () => await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), true)));
+                        return;
+                    }
                     if (await DependencyService.Get<IFileWorker>().ExistsAsync(fileName))
                     {
                         await Launcher.OpenAsync(new OpenFileRequest

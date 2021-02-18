@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customRenderers="clr-namespace:xamarinJKH.CustomRenderers;assembly=xamarinJKH"
+             xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
+             x:Class="xamarinJKH.Apps.PhotoPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout
+               
+                Orientation="Horizontal"
+                Margin="10, 10, 10, 0"
+                HorizontalOptions="FillAndExpand">
+                <StackLayout  x:Name="BackStackLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                    <forms:SvgCachedImage
+                        Source="resource://xamarinJKH.Resources.ic_arrow_back.svg"
+                        HeightRequest="25"
+                        HorizontalOptions="Start"
+                        ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}, ConverterParameter='#000000'}"
+                        VerticalOptions="Center" />
+                    <Label
+                        Text="{x:Static xamarinJkh:AppResources.NewAppFiles}"
+                        FontSize="18"
+                        TextColor="Black"
+                        VerticalOptions="Center"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Start" />
+                </StackLayout>
+            </StackLayout>
+            <Grid
+                VerticalOptions="FillAndExpand" IsClippedToBounds="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <customRenderers:ZoomImage
+                    x:Name="ZoomImage"
+                    HorizontalOptions="FillAndExpand" 
+                    VerticalOptions="FillAndExpand"
+                    Aspect="{Binding ImageAspect}" />
+                    
+                <ActivityIndicator x:Name="progress"
+                                   IsRunning="true"
+                                   IsVisible="True"
+                                   HeightRequest="40"
+                                   VerticalOptions="Center"
+                                   Color="{x:DynamicResource MainColor}" 
+                                   Grid.Row="0"/>
+            </Grid>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
