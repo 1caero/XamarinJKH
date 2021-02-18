@@ -28,6 +28,18 @@
                         FontAttributes="Bold"
                         HorizontalOptions="Start" />
                 </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                    <xamarinJkh:IconView Foreground="{x:DynamicResource MainColor}"
+                                         Source="ic_share"
+                                         HeightRequest="20"
+                                         x:Name="ViewHare"
+                                         WidthRequest="40"
+                                         HorizontalOptions="End">
+                        <xamarinJkh:IconView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SharePhoto" />
+                        </xamarinJkh:IconView.GestureRecognizers>
+                    </xamarinJkh:IconView>
+                </StackLayout>
             </StackLayout>
             <Grid
                 VerticalOptions="FillAndExpand" IsClippedToBounds="True">
