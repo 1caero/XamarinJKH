@@ -26,7 +26,10 @@ namespace xamarinJKH.Apps
             {
                 case Device.iOS:
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
-                    mainStack.Padding = new Thickness(0, statusBarHeight, 0, 0);
+
+                    iosBarSeparator.IsVisible = true;
+                    iosBarSeparator.IsEnabled = true;
+                    iosBarSeparator.HeightRequest = statusBarHeight;
 
                     break;
                 default:
