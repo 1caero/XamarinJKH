@@ -467,6 +467,7 @@
                                                         <CheckBox
                                                             HorizontalOptions="Start"
                                                             x:Name="CheckBoxInNumber"
+                                                            CheckedChanged="CheckBoxInNumber_OnCheckedChanged"
                                                             VerticalOptions="Center"
                                                             Color="{x:DynamicResource MainColor}" />
                                                         <Label
@@ -478,21 +479,28 @@
                                                     </StackLayout>
                                                     <pancakeView:PancakeView
                                                         BorderThickness="4"
-                                                        BorderColor="Black"
+                                                        BorderColor="{Binding Path=ColorError,Source={x:Reference MaskAvtoNumber}}"
                                                         HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                                         Padding="0,10,0,10"
                                                         Margin="40,0,40,0"
                                                         CornerRadius="10" BackgroundColor="White">
+                                                        <StackLayout>
                                                         <Entry x:Name="EntryNumber"
                                                                FontSize="23"
                                                                VerticalOptions="End"
                                                                FontAttributes="Bold"
+                                                               TextTransform="Uppercase"
                                                                Placeholder="{x:Static xamarinJkh:AppResources.EnterStateNumber}"
                                                                HorizontalTextAlignment="Center"
                                                                TextChanged="EntryNumber_OnTextChanged"
                                                                TextColor="Black"
                                                                HorizontalOptions="Fill"
-                                                               Keyboard="Chat" />
+                                                               Keyboard="Chat" >
+                                                            <Entry.Behaviors>
+                                                                <mask:MaskAvtoNumber x:Name="MaskAvtoNumber" IsChecked="{Binding Path=IsChecked,Source={x:Reference CheckBoxInNumber}}" />
+                                                            </Entry.Behaviors>
+                                                        </Entry>
+                                                        </StackLayout>
                                                     </pancakeView:PancakeView>
                                                 </StackLayout>
                                             </StackLayout>

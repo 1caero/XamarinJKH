@@ -847,28 +847,32 @@ _appModel = new AddAppModel()
                         }
                         else
                         {
-                            if (!CheckBoxInNumber.IsChecked)
-                            {
-                                Regex regexNumberAvto = new Regex(@"^[А-Я]{1}[0-9]{3}[А-Я]{2}[0-9]{2,3}$");
-                                Regex regexNumberAvto2 = new Regex(@"[А-Я]{2}[0-9]{3}[0-9]{2,3}$");
-
-                                if (regexNumberAvto.IsMatch(_passApp.CarNumber.Replace(" ","")) ||
-                                    regexNumberAvto2.IsMatch(_passApp.CarNumber.Replace(" ","")))
-                                {
-                                    return true;
-                                }
-                                else
-                                {
-                                    DisplayAlert(AppResources.ErrorTitle,
-                                        AppResources.EnterStateNumber + " " + AppResources.MaskNumberCar + ":\n" +
-                                        "А 234 АА 12, А 234 АА 123, АА 234 22, АА 234 123", "OK");
-                                }
-                            }
-                            else
-                            {
-                                return true;
-                            }
+                            return true;
                         }
+                        // else
+                        // {
+                        //     if (!CheckBoxInNumber.IsChecked)
+                        //     {
+                        //         Regex regexNumberAvto = new Regex(@"^[А-Я]{1}[0-9]{3}[А-Я]{2}[0-9]{2,3}$");
+                        //         Regex regexNumberAvto2 = new Regex(@"[А-Я]{2}[0-9]{3}[0-9]{2,3}$");
+                        //
+                        //         if (regexNumberAvto.IsMatch(_passApp.CarNumber.Replace(" ","")) ||
+                        //             regexNumberAvto2.IsMatch(_passApp.CarNumber.Replace(" ","")))
+                        //         {
+                        //             return true;
+                        //         }
+                        //         else
+                        //         {
+                        //             DisplayAlert(AppResources.ErrorTitle,
+                        //                 AppResources.EnterStateNumber + " " + AppResources.MaskNumberCar + ":\n" +
+                        //                 "А 234 АА 12, А 234 АА 123, АА 234 22, АА 234 123", "OK");
+                        //         }
+                        //     }
+                        //     else
+                        //     {
+                        //         return true;
+                        //     }
+                        // }
                     }
                 }
                 else
@@ -972,27 +976,32 @@ _appModel = new AddAppModel()
 
         private async void EntryNumber_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            string entryNumberText = EntryNumber.Text;
-            EntryNumber.Text = entryNumberText.ToUpper();
-            Regex regexNumberAvto = new Regex(@"^[А-Я]{1}[0-9]{3}[А-Я]{2}[0-9]{2,3}$");
-            Regex regexNumberAvto2 = new Regex(@"[А-Я]{2}[0-9]{3}[0-9]{2,3}$");
-            string result = entryNumberText;
-            if (!CheckBoxInNumber.IsChecked)
-            {
-                if (regexNumberAvto.IsMatch(entryNumberText))
-                {
-                    result = entryNumberText.Insert(1, " ").Insert(5, " ").Insert(8, " ");
-                    EntryNumber.Text = result;
-                    EntryNumber.MaxLength = 12;
-
-                }
-                else if (regexNumberAvto2.IsMatch(entryNumberText))
-                {
-                    result = entryNumberText.Insert(2, " ").Insert(6, " ");
-                    EntryNumber.Text = result;
-                    EntryNumber.MaxLength = 10;
-                }
-            }
+            // string entryNumberText = EntryNumber.Text;
+            // Regex regexNumberAvto = new Regex(@"^[А-Я]{1}[0-9]{3}[А-Я]{2}[0-9]{2,3}$");
+            // Regex regexNumberAvto2 = new Regex(@"[А-Я]{2}[0-9]{3}[0-9]{2,3}$");
+            // string result = entryNumberText;
+            // if (!CheckBoxInNumber.IsChecked)
+            // {
+            //     if (regexNumberAvto.IsMatch(entryNumberText.Replace(" ","")))
+            //     {
+            //         result = entryNumberText.Insert(1, " ").Insert(5, " ").Insert(8, " ");
+            //         EntryNumber.Text = result;
+            //         EntryNumber.MaxLength = 12;
+            //         LabelError.BackgroundColor = Color.Transparent;
+            //
+            //     }
+            //     else if (regexNumberAvto2.IsMatch(entryNumberText.Replace(" ","")))
+            //     {
+            //         result = entryNumberText.Insert(2, " ").Insert(6, " ");
+            //         EntryNumber.Text = result;
+            //         EntryNumber.MaxLength = 10;
+            //         LabelError.BackgroundColor = Color.Transparent;
+            //     }
+            //     else
+            //     {
+            //         LabelError.BackgroundColor = Color.Red;
+            //     }
+            // }
         }
         
 
@@ -1130,6 +1139,28 @@ _appModel = new AddAppModel()
         private void PickerPodType_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void CheckBoxInNumber_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (CheckBoxInNumber.IsChecked)
+            {
+                MaskAvtoNumber.ColorError = Color.Black;
+            }
+            else
+            {
+                Regex regexNumberAvto = new Regex(@"^[А-Я]{1}[0-9]{3}[А-Я]{2}[0-9]{2,3}$");
+                Regex regexNumberAvto2 = new Regex(@"[А-Я]{2}[0-9]{3}[0-9]{2,3}$");
+                var entryNumberText = EntryNumber.Text.Replace(" ","");
+                if (regexNumberAvto.IsMatch(entryNumberText) || regexNumberAvto2.IsMatch(entryNumberText))
+                {
+                    MaskAvtoNumber.ColorError = Color.Black;
+                }
+                else
+                {
+                    MaskAvtoNumber.ColorError = Color.Red;
+                }
+            }
         }
     }
 }
