@@ -68,7 +68,8 @@
     <AndroidSupportedAbis>armeabi-v7a;x86;arm64-v8a;x86_64</AndroidSupportedAbis>
     <MandroidI18n />
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
-    <AndroidLinkSkip></AndroidLinkSkip>
+    <AndroidLinkSkip>
+    </AndroidLinkSkip>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -99,7 +100,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar">
       <Version>18.3.0.53</Version>
     </PackageReference>
-    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
+    <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xam.Plugins.Android.ExoPlayer.Core">
       <Version>2.11.8</Version>
     </PackageReference>

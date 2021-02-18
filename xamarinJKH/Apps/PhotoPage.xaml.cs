@@ -21,7 +21,18 @@ namespace xamarinJKH.Apps
         public PhotoPage(string idFile, string fileName, bool isConst)
         {
             InitializeComponent();
-            
+
+            switch (Device.RuntimePlatform)
+            {
+                case Device.iOS:
+                    int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
+                    mainStack.Padding = new Thickness(0, statusBarHeight, 0, 0);
+
+                    break;
+                default:
+                    break;
+            }
+
             _fileName = fileName;
             NavigationPage.SetHasNavigationBar(this, false);
             var backClick = new TapGestureRecognizer();

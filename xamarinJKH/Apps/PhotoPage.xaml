@@ -7,7 +7,7 @@
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
              x:Class="xamarinJKH.Apps.PhotoPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <StackLayout x:Name="mainStack" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <StackLayout
                
                 Orientation="Horizontal"

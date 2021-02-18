@@ -6,6 +6,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using xamarinJKH.Server.RequestModel;
+using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
 namespace xamarinJKH.ViewModels.Additional
 {
