@@ -7,7 +7,9 @@
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
              x:Class="xamarinJKH.Apps.PhotoPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        
+        <StackLayout x:Name="mainStack" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout x:Name="iosBarSeparator" HorizontalOptions="FillAndExpand" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" IsVisible="False" IsEnabled="False"></StackLayout>
             <StackLayout
                
                 Orientation="Horizontal"
