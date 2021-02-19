@@ -16,7 +16,7 @@ namespace xamarinJKH.Server.RequestModel
     public class RequestInfo
     {
         public int ID { get; set; }
-
+        public int TypeID { get; set; }
         private int index = 0;
         public string RequestNumber { get; set; }
         public string Added { get; set; }
@@ -36,10 +36,15 @@ namespace xamarinJKH.Server.RequestModel
             set => Added = value;
         }
 
-        public bool isEnableMass
+        private bool isEnableMass = !Settings.MobileSettings.disableBulkRequestsClosing;
+        
+
+        public bool IsEnableMass
         {
-            get => !Settings.MobileSettings.disableBulkRequestsClosing;
+            get => isEnableMass;
+            set => isEnableMass = value;
         }
+        
         public string Name { get; set; }
         public string Text  { get; set; }
         public string HalfName

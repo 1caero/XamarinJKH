@@ -16,6 +16,7 @@
     <TabbedPage.Resources>
         <ResourceDictionary>
             <converters:BadgeBackgroundColorConverter x:Key="BadgeColor"/>
+            <converters:BageTextColorConverter x:Key="BadgeTextColor"/>
             <Style TargetType="badge:Badge">
                 <Setter Property="badge:TabBadge.BadgeColor" Value="Red"/>
                 <Setter Property="badge:TabBadge.BadgeTextColor" Value="White"/>
@@ -24,6 +25,7 @@
     </TabbedPage.Resources>
     <NavigationPage x:Name="appNavBar" Title="{x:Static xamarinZkh:AppResources.App_NavBar}" IconImageSource="ic_apps" BarBackgroundColor="Black" BarTextColor="White"
                     badge:TabBadge.BadgeText="{Binding RequestsAmount}"
+                    badge:TabBadge.BadgeTextColor="{Binding RequestsAmount, Converter={x:StaticResource BadgeTextColor}}"
                     badge:TabBadge.BadgeColor="{Binding RequestsAmount, Converter={x:StaticResource BadgeColor}}">
         <x:Arguments>
             <local:AppsConstPage  Title="{x:Static xamarinZkh:AppResources.App_NavBar}" IconImageSource="ic_apps" >
@@ -34,8 +36,9 @@
         </x:Arguments>
     </NavigationPage>
     <NavigationPage x:Name="appPassNavBar"  Title="{x:Static xamarinZkh:AppResources.NavBarPassApp}" IconImageSource="ic_pass_icon" BarBackgroundColor="Black" BarTextColor="White"
-                    badge:TabBadge.BadgeText="{Binding requestsAmountPass}"
-                    badge:TabBadge.BadgeColor="{Binding requestsAmountPass, Converter={x:StaticResource BadgeColor}}">
+                    badge:TabBadge.BadgeText="{Binding RequestsAmountPass}"
+                    badge:TabBadge.BadgeTextColor="{Binding RequestsAmountPass, Converter={x:StaticResource BadgeTextColor}}"
+                    badge:TabBadge.BadgeColor="{Binding RequestsAmountPass, Converter={x:StaticResource BadgeColor}}">
         <x:Arguments>
             <local:AppsConstPage  Title="{x:Static xamarinZkh:AppResources.NavBarPassApp}" IconImageSource="ic_pass_icon" >
                 <x:Arguments>

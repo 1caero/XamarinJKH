@@ -165,9 +165,11 @@ namespace xamarinJKH.MainConst
             {
                 Children.Remove(NotifNavBar);
             }
-#if !DEBUG
-            Children.Remove(appPassNavBar);
-#endif
+
+            if (Settings.MobileSettings.requestTypeForPassRequest <= 0)
+            {
+                Children.Remove(appPassNavBar);
+            }
             BindingContext = this;
 
         }
@@ -181,7 +183,7 @@ namespace xamarinJKH.MainConst
             get => requestsAmount;
             set
             {
-                requestsAmount = value;
+                requestsAmount = value < 0 ? 0 : value;
                 OnPropertyChanged("RequestsAmount");
             }
         }
@@ -191,7 +193,7 @@ namespace xamarinJKH.MainConst
             get => requestsAmountPass;
             set
             {
-                requestsAmountPass = value;
+                requestsAmountPass = value < 0 ? 0 : value;
                 OnPropertyChanged("RequestsAmountPass");
             }
         }

@@ -31,6 +31,7 @@ namespace xamarinJKH.CustomRenderers
             Scale = MIN_SCALE;
             TranslationX = TranslationY = 0;
             AnchorX = AnchorY = 0;
+            
         }
 
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)

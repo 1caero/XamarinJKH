@@ -336,6 +336,7 @@ namespace xamarinJKH.AppsConst
                     new StoreCameraMediaOptions
                     {
                         SaveToAlbum = true,
+                        CompressionQuality =  90,
                         Directory = "Demo"
                     });
 
