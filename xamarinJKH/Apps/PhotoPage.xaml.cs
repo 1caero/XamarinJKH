@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,7 +55,18 @@ namespace xamarinJKH.Apps
                 {
                     Stream streamM = new MemoryStream(_file);
                     Device.BeginInvokeOnMainThread(async () =>
-                        ZoomImage.Source = ImageSource.FromStream(() => { return streamM; }));
+                    {
+                        try
+                        {
+                            ZoomImage.Source = ImageSource.FromStream(() => { return streamM; });
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            await DisplayAlert(AppResources.ErrorTitle, "Не удалось скачать файл", "OK");
+                        }
+                    });
+
                 }
                 else
                 {
@@ -70,7 +82,15 @@ namespace xamarinJKH.Apps
                 });
             }).Start();
         }
-
+        public static byte[] Compress(byte[] data)
+        {
+            MemoryStream output = new MemoryStream();
+            using (DeflateStream dstream = new DeflateStream(output, CompressionLevel.Optimal))
+            {
+                dstream.Write(data, 0, data.Length);
+            }
+            return output.ToArray();
+        }
         private async void SharePhoto(object sender, EventArgs e)
         {
             if (_file != null)

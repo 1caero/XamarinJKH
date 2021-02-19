@@ -2725,7 +2725,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пропуск.
+        ///   Looks up a localized string similar to Пропуска.
         /// </summary>
         internal static string NavBarPassApp {
             get {

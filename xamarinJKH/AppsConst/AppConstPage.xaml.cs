@@ -636,16 +636,7 @@ namespace xamarinJKH.AppsConst
                 }
             });
 
-            if (!requestInfo.IsReaded)
-            {
-                Task.Run(async () =>
-                {
-                    var res = await _server.SetReadedFlag(requestInfo.ID);
-                    MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", -1);
-                    MessagingCenter.Send<Object, int>(this, "SetAppReadConst", requestInfo.ID);
-                    requestInfo.IsReaded = true;
-                });
-            }
+            
 
             hiddenComent.IsVisible = !Settings.Person.UserSettings.AlwaysPostHiddenMessage;
             if (Settings.Person.UserSettings.AlwaysPostHiddenMessage)
@@ -850,6 +841,7 @@ namespace xamarinJKH.AppsConst
                             SaveToAlbum = false,
                             Directory = "Demo",
                             PhotoSize = PhotoSize.Medium,
+                            CompressionQuality =  90
                         });
 
                     if (file != null)
@@ -875,7 +867,9 @@ namespace xamarinJKH.AppsConst
 
                 try
                 {
-                    file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions {PhotoSize = PhotoSize.Medium});
+                    file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions {
+                        PhotoSize = PhotoSize.Medium,
+                        CompressionQuality =  90});
                     if (file == null)
                         return;
                     await startLoadFile(GALERY, file);
@@ -1117,6 +1111,23 @@ namespace xamarinJKH.AppsConst
                 LabelNumber.Text = "№ " + request.RequestNumber;
                 IsRequestPaid = request.IsPaid;
                 this.BindingContext = this;
+                
+                if (!request.IsReaded)
+                {
+                    await Task.Run(async () =>
+                    {
+                        var res = await _server.SetReadedFlag(request.ID);
+                        if (Settings.MobileSettings.requestTypeForPassRequest > 0)
+                        {
+                            if (request.TypeID == Settings.MobileSettings.requestTypeForPassRequest)
+                            {
+                                MessagingCenter.Send<Object, int>(this, "SetRequestsPassAmount", -1);
+                            }
+                        }
+                        MessagingCenter.Send<Object, int>(this, "SetAppReadConst", request.ID);
+                        request.IsReaded = true;
+                    });
+                }
             }
             else
             {

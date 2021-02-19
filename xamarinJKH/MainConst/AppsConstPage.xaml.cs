@@ -104,7 +104,15 @@ namespace xamarinJKH.MainConst
             // additionalList.ItemsSource = null;
             // additionalList.ItemsSource = RequestInfos;
             if (RequestInfos != null)
-                MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", RequestInfos.Count(x => !x.IsReaded));
+                if (IsPass)
+                {
+                    MessagingCenter.Send<Object, int>(this, "SetRequestsPassAmount", RequestInfos.Where(o => o.TypeID == Settings.MobileSettings.requestTypeForPassRequest || o.Name.ToLower().Contains("пропуск")).Count(x => !x.IsReaded));
+                }
+                else
+                {
+                    MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", RequestInfos.Count(x => !x.IsReaded));
+
+                }
         }
 
         public bool CanComplete => Settings.Person.UserSettings.RightPerformRequest;
@@ -221,21 +229,8 @@ namespace xamarinJKH.MainConst
                 }
                 
             });
-            MessagingCenter.Unsubscribe<Object, List<RequestInfo>>(this, "SetFilter");
-            MessagingCenter.Subscribe<Object, List<RequestInfo>>(this, "SetFilter", (sender, kvp) => {
-                Device.BeginInvokeOnMainThread(() => {
-                    RequestDefault = kvp;
-                    SetReaded();
-                });
-            });
             
-            MessagingCenter.Unsubscribe<Object, List<RequestInfo>>(this, "RemooveFilter");
-            MessagingCenter.Subscribe<Object>(this, "RemooveFilter", (sender) => {
-                Device.BeginInvokeOnMainThread(() => {
-                    RequestDefault = _requestList.Requests;
-                    SetReaded();
-                });
-            });
+            
             
         }
 
@@ -420,6 +415,26 @@ namespace xamarinJKH.MainConst
             if (IsPass)
             {
                 LabelTitle.Text = AppResources.NavBarPassApp;
+                LayoutFilter.IsVisible = false;
+                bottomMenu.IsVisible = false;
+            }
+            else
+            {
+                MessagingCenter.Unsubscribe<Object, List<RequestInfo>>(this, "SetFilter");
+                MessagingCenter.Subscribe<Object, List<RequestInfo>>(this, "SetFilter", (sender, kvp) => {
+                    Device.BeginInvokeOnMainThread(() => {
+                        RequestDefault = kvp;
+                        SetReaded();
+                    });
+                });
+            
+                MessagingCenter.Unsubscribe<Object, List<RequestInfo>>(this, "RemooveFilter");
+                MessagingCenter.Subscribe<Object>(this, "RemooveFilter", (sender) => {
+                    Device.BeginInvokeOnMainThread(() => {
+                        RequestDefault = _requestList.Requests;
+                        SetReaded();
+                    });
+                });
             }
             SwitchApp.OnColor = hex;
             FrameBtnAdd.BackgroundColor = hex;
@@ -443,8 +458,14 @@ namespace xamarinJKH.MainConst
                 RequestDefault = _requestList.Requests;
                 SetReaded();
                 Settings.UpdateKey = _requestList.UpdateKey;
-                
-                MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", _requestList.Requests.Count(x => !x.IsReaded));
+                if (IsPass)
+                {
+                    MessagingCenter.Send<Object, int>(this, "SetRequestsPassAmount", _requestList.Requests.Where(o => o.TypeID == Settings.MobileSettings.requestTypeForPassRequest || o.Name.ToLower().Contains("пропуск")).Count(x => !x.IsReaded));
+                }
+                else
+                {
+                    MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", _requestList.Requests.Count(x => !x.IsReaded));
+                }
             }
             else
             {
@@ -515,14 +536,30 @@ namespace xamarinJKH.MainConst
                     //     new ObservableCollection<RequestInfo>(from i in _requestList.Requests
                     //         where !i.IsReaded
                     //         select i);
-                    Device.BeginInvokeOnMainThread(async () =>
+                    if (IsPass)
                     {
-                        RequestInfos.Clear();
-                        foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).OrderBy(o => !o.IsReaded).ThenBy(o=> o.ID ).Reverse())
+                        Device.BeginInvokeOnMainThread(async () =>
                         {
-                            RequestInfos.Add(each);
-                        }
-                    });
+                            RequestInfos.Clear();
+                            foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).Where(o => o.TypeID == Settings.MobileSettings.requestTypeForPassRequest || o.Name.ToLower().Contains("пропуск")).OrderBy(o => !o.IsReaded).ThenBy(o=> o.ID ).Reverse())
+                            {
+                                each.IsEnableMass = false;
+                                RequestInfos.Add(each);
+                            }
+                        });
+                    }
+                    else
+                    {
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            RequestInfos.Clear();
+                            foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).OrderBy(o => !o.IsReaded).ThenBy(o=> o.ID ).Reverse())
+                            {
+                                RequestInfos.Add(each);
+                            }
+                        });
+                    }
+                   
                   
                     
                 }
@@ -556,20 +593,28 @@ namespace xamarinJKH.MainConst
                 if (Navigation.NavigationStack.FirstOrDefault(x => x is AppConstPage) == null)
                 {
                     await Navigation.PushAsync(new AppConstPage(select));
+                    
                     try
                     {
                         StackLayout stackLayout2 = (StackLayout) ((PancakeView) s.LogicalChildren[1]).Content;
                         Grid grid = (Grid) stackLayout2.LogicalChildren[0];
                         grid.Children[1].IsVisible = false;
+                        
+                        await Task.Delay(TimeSpan.FromSeconds(1));
+                        if (IsPass)
+                        {
+                            MessagingCenter.Send<Object, int>(this, "SetRequestsPassAmount", -1);
+                        }
+                        MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", -1);
+                        
                     }
                     catch (Exception exception)
                     {
                         Console.WriteLine(exception);
                     }
 
-                    await Task.Delay(TimeSpan.FromSeconds(1));
-
-                    MessagingCenter.Send<Object, int>(this, "SetAppReadConst", select.ID);
+                    
+                    
                 }
             }
         }

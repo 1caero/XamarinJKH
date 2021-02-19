@@ -434,6 +434,7 @@ _appModel = new AddAppModel()
                 new StoreCameraMediaOptions
                 {
                     SaveToAlbum = true,
+                    CompressionQuality =  90,
                     Directory = "Demo"
                 });
 

@@ -458,6 +458,7 @@ namespace xamarinJKH.Tech
                         new StoreCameraMediaOptions
                         {
                             SaveToAlbum = false,
+                            CompressionQuality =  90,
                             Directory = "Demo"
                         });
                     if (file != null)
