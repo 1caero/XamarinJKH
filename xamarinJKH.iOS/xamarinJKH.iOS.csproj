@@ -114,7 +114,7 @@
     <BundleResource Include="Resources\ic_gas.png" />
     <BundleResource Include="Resources\ic_heat_energ.png" />
     <BundleResource Include="Resources\ic_microphone.png" />
-    <BundleResource Include="Resources\ic_pass_icon.png" />
+    <None Include="Resources\ic_pass_icon_old.png" />
     <BundleResource Include="Resources\telegram.png" />
     <BundleResource Include="Resources\viber.png" />
     <BundleResource Include="Resources\whatsapp.png" />
@@ -178,6 +178,15 @@
     <ImageAsset Include="Assets.xcassets\ic_notification.imageset\ic_notification_3x.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_pass_icon.imageset\ic_pass@x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_pass_icon.imageset\ic_pass@x2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_pass_icon.imageset\ic_pass@x3.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\ic_shop.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -191,6 +200,9 @@
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\ic_notification.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_pass_icon.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

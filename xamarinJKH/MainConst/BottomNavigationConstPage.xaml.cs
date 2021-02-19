@@ -42,6 +42,7 @@ namespace xamarinJKH.MainConst
                         appNavBar.BarTextColor = Color.Black;
                         monNavBar.BarTextColor = Color.Black;
                         NotifNavBar.BarTextColor = Color.Black;
+                        appPassNavBar.BarTextColor = Color.Black;
                     }
                     break;
                 case OSAppTheme.Dark:
@@ -51,6 +52,7 @@ namespace xamarinJKH.MainConst
                         appNavBar.BarTextColor = Color.White;
                         monNavBar.BarTextColor = Color.White;
                         NotifNavBar.BarTextColor = Color.White;
+                        appPassNavBar.BarTextColor = Color.White;
                     }
                     break;
                 case OSAppTheme.Unspecified:
@@ -60,6 +62,7 @@ namespace xamarinJKH.MainConst
                         appNavBar.BarTextColor = Color.Black;
                         monNavBar.BarTextColor = Color.Black;
                         NotifNavBar.BarTextColor = Color.Black;
+                        appPassNavBar.BarTextColor = Color.Black;
                     }
                     break;
             }
@@ -79,6 +82,7 @@ namespace xamarinJKH.MainConst
                             appNavBar.BarTextColor = Color.Black;
                             monNavBar.BarTextColor = Color.Black;
                             NotifNavBar.BarTextColor = Color.Black;
+                            appPassNavBar.BarTextColor = Color.Black;
                         }
                         break;
                     case OSAppTheme.Dark: 
@@ -88,6 +92,7 @@ namespace xamarinJKH.MainConst
                             appNavBar.BarTextColor = Color.White;
                             monNavBar.BarTextColor = Color.White;
                             NotifNavBar.BarTextColor = Color.White;
+                            appPassNavBar.BarTextColor = Color.White;
                         }
                         break;
                     case OSAppTheme.Unspecified:
@@ -96,6 +101,7 @@ namespace xamarinJKH.MainConst
                             appNavBar.BarTextColor = Color.Black;
                             monNavBar.BarTextColor = Color.Black;
                             NotifNavBar.BarTextColor = Color.Black;
+                            appPassNavBar.BarTextColor = Color.Black;
                         }
                         break;
                 }
