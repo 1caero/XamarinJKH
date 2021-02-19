@@ -66,6 +66,7 @@ namespace xamarinJKH.Apps
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     progress.IsVisible = false;
+                    ViewHare.IsEnabled = true;
                 });
             }).Start();
         }

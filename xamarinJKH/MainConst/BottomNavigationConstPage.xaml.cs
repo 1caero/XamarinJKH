@@ -110,14 +110,14 @@ namespace xamarinJKH.MainConst
                 MessagingCenter.Send<Object, int>(this, "OpenAppConst", args);
             });
 
-            MessagingCenter.Unsubscribe<Object>(this, "SetRequestsAmount");
+          
             MessagingCenter.Subscribe<Object, int>(this, "SetRequestsAmount", async (sender, args) =>
             {
                 Device.BeginInvokeOnMainThread(() => RequestsAmount = args == -1 ? RequestsAmount -= 1 : RequestsAmount = args);
                 await Task.Delay(TimeSpan.FromMilliseconds(200));
             }); 
             
-            MessagingCenter.Unsubscribe<Object>(this, "SetRequestsPassAmount");
+   
             MessagingCenter.Subscribe<Object, int>(this, "SetRequestsPassAmount", async (sender, args) =>
             {
                 Device.BeginInvokeOnMainThread(() => RequestsAmountPass = args == -1 ? RequestsAmountPass -= 1 : RequestsAmountPass = args);

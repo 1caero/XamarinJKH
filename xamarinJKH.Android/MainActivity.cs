@@ -26,7 +26,7 @@ using xamarinJKH.Droid.CustomRenderers;
 
 namespace xamarinJKH.Droid
 {
-    [Activity(Label = "Тихая Гавань",  Icon = "@drawable/icon_login", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait, LaunchMode = LaunchMode.SingleTop)]
+    [Activity(Label = "Тихая Гавань",  Icon = "@drawable/icon_login", HardwareAccelerated = true,Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait, LaunchMode = LaunchMode.SingleTop)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IMessageSender
     {
         IMicrophoneService micService;

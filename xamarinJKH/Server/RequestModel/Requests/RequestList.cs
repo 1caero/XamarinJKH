@@ -16,16 +16,17 @@ namespace xamarinJKH.Server.RequestModel
     public class RequestInfo
     {
         public int ID { get; set; }
-        
-       
+
+        private int index = 0;
         public string RequestNumber { get; set; }
         public string Added { get; set; }
         
         public string RequestTerm { get; set; }
 
-        public string _RequestTerm
+        public DateTime _RequestTerm
         {
-            get => string.IsNullOrWhiteSpace(RequestTerm) ? DateTime.Now.AddDays(10).ToString("dd.MM.yyyy hh:mm:ss") : RequestTerm;
+            get => string.IsNullOrWhiteSpace(RequestTerm) ? DateTime.Now.AddDays(10).AddHours(index++) : DateTime.ParseExact(RequestTerm, "dd.MM.yyyy HH:mm:ss",
+                System.Globalization.CultureInfo.CurrentCulture);
         }
 // долг по лсч
         public decimal Debt { get; set; }
