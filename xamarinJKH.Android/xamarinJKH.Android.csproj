@@ -256,6 +256,7 @@
     <AndroidResource Include="Resources\drawable\ic_notification_top_light.png" />
     <AndroidResource Include="Resources\drawable\ic_not_author.png" />
     <AndroidResource Include="Resources\drawable\ic_no_photo.png" />
+    <AndroidResource Include="Resources\drawable\ic_pass_icon.png" />
     <AndroidResource Include="Resources\drawable\ic_pays_top.png" />
     <AndroidResource Include="Resources\drawable\ic_pays_top_light.png" />
     <AndroidResource Include="Resources\drawable\ic_phone.png" />

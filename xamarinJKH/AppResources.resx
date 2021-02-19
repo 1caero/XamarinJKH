@@ -1888,4 +1888,7 @@
   <data name="FaultType" xml:space="preserve">
     <value>Вид неисправности</value>
   </data>
+  <data name="NavBarPassApp" xml:space="preserve">
+    <value>Пропуск</value>
+  </data>
 </root>

@@ -109,9 +109,17 @@ namespace xamarinJKH.MainConst
                 MessagingCenter.Send<Object, int>(this, "OpenAppConst", args);
             });
 
+            MessagingCenter.Unsubscribe<Object>(this, "SetRequestsAmount");
             MessagingCenter.Subscribe<Object, int>(this, "SetRequestsAmount", async (sender, args) =>
             {
                 Device.BeginInvokeOnMainThread(() => RequestsAmount = args == -1 ? RequestsAmount -= 1 : RequestsAmount = args);
+                await Task.Delay(TimeSpan.FromMilliseconds(200));
+            }); 
+            
+            MessagingCenter.Unsubscribe<Object>(this, "SetRequestsPassAmount");
+            MessagingCenter.Subscribe<Object, int>(this, "SetRequestsPassAmount", async (sender, args) =>
+            {
+                Device.BeginInvokeOnMainThread(() => RequestsAmountPass = args == -1 ? RequestsAmountPass -= 1 : RequestsAmountPass = args);
                 await Task.Delay(TimeSpan.FromMilliseconds(200));
             });
 
@@ -156,7 +164,9 @@ namespace xamarinJKH.MainConst
             {
                 Children.Remove(NotifNavBar);
             }
-            
+#if !DEBUG
+            Children.Remove(appPassNavBar);
+#endif
             BindingContext = this;
 
         }
@@ -172,6 +182,16 @@ namespace xamarinJKH.MainConst
             {
                 requestsAmount = value;
                 OnPropertyChanged("RequestsAmount");
+            }
+        }
+        int requestsAmountPass;
+        public int RequestsAmountPass
+        {
+            get => requestsAmountPass;
+            set
+            {
+                requestsAmountPass = value;
+                OnPropertyChanged("RequestsAmountPass");
             }
         }
 

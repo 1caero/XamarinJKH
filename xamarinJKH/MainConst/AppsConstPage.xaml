@@ -52,6 +52,7 @@
                             Text="{x:Static xamarinJkh:AppResources.App_NavBar}"
                             FontSize="23"
                             MinimumWidthRequest="100"
+                            x:Name="LabelTitle"
                             TextColor="{AppThemeBinding Light=Black, Dark=White}"
                             FontAttributes="Bold"
                             HorizontalOptions="Start"

@@ -130,10 +130,11 @@ namespace xamarinJKH.MainConst
         }
 
         public bool CanDoMassOps = false;
-        public AppsConstPage()
+        public bool IsPass = false;
+        public AppsConstPage(bool isPass)
         {
             InitializeComponent();
-
+            IsPass = isPass;
             CanDoMassOps = !Settings.MobileSettings.disableBulkRequestsClosing;
             ViewSearch.BackgroundColor = System.Drawing.Color.FromArgb(200, System.Drawing.Color.White);
             buttonFilter.BackgroundColor = System.Drawing.Color.FromArgb(200, System.Drawing.Color.White);
@@ -237,6 +238,8 @@ namespace xamarinJKH.MainConst
             });
             
         }
+
+     
 
         private void CheckDown(string args)
         {
@@ -414,6 +417,10 @@ namespace xamarinJKH.MainConst
         {
             UkName.Text = Settings.MobileSettings.main_name;
             SetAdminName();
+            if (IsPass)
+            {
+                LabelTitle.Text = AppResources.NavBarPassApp;
+            }
             SwitchApp.OnColor = hex;
             FrameBtnAdd.BackgroundColor = hex;
             
@@ -436,7 +443,7 @@ namespace xamarinJKH.MainConst
                 RequestDefault = _requestList.Requests;
                 SetReaded();
                 Settings.UpdateKey = _requestList.UpdateKey;
-                MessagingCenter.Unsubscribe<Object>(this, "SetRequestsAmount");
+                
                 MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", _requestList.Requests.Count(x => !x.IsReaded));
             }
             else

@@ -1886,4 +1886,7 @@
   <data name="FaultType" xml:space="preserve">
     <value>Fault type </value>
   </data>
+  <data name="NavBarPassApp" xml:space="preserve">
+    <value>Pass</value>
+  </data>
 </root>

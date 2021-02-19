@@ -2725,6 +2725,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пропуск.
+        /// </summary>
+        internal static string NavBarPassApp {
+            get {
+                return ResourceManager.GetString("NavBarPassApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to + Прикрепить.
         /// </summary>
         internal static string NewAppAddFile {

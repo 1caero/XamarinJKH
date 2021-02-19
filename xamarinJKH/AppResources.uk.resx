@@ -1756,4 +1756,7 @@
   <data name="FaultType" xml:space="preserve">
     <value>Пошкодження </value>
   </data>
+  <data name="NavBarPassApp" xml:space="preserve">
+    <value>Пропуск</value>
+  </data>
 </root>
