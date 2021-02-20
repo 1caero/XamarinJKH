@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using LabelHtml.Forms.Plugin.iOS;
 //using MediaManager;
 //using KeyboardOverlap.Forms.Plugin.iOSUnified;
 using Plugin.FirebasePushNotification;
@@ -27,6 +28,9 @@ namespace xamarinJKH.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental", "IndicatorView_Experimental", "AppTheme_Experimental", "Markup_Experimental", "DragAndDrop_Experimental");
+
+            HtmlLabelRenderer.Initialize();
+
             Xamarin.FormsMaps.Init();
             global::Xamarin.Forms.Forms.Init();
 

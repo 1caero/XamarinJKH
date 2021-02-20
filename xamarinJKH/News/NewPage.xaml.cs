@@ -112,18 +112,35 @@ namespace xamarinJKH.News
             LabelTitle.Text = newsInfo.Header;
             LabelDate.Text = newsInfo.Created;
             newsInfoFull = await _server.GetNewsFull(newsInfo.ID.ToString());
-            // MainText.Source = new HtmlWebViewSource { Html = newsInfoFull.Text };
-            HtmlLabel.Text = newsInfoFull.Text;
-            HtmlLabel.FlowDirection = FlowDirection.MatchParent;
-            // MainText.FlowDirection = FlowDirection.MatchParent;
-            // MainText.Navigated += (s, e) =>
-            // {
-            //     if (!navigated)
-            //     {
-            //         (s as WebView).Source = new UrlWebViewSource() { Url = e.Url };
-            //         navigated = true;
-            //     }
-            // };
+            
+            
+            //if (Device.RuntimePlatform == Device.iOS)
+            //{
+            //    HtmlLabel.IsVisible = false;
+            //    htmlLabelScroll.IsVisible = false;
+            //    MainText.IsVisible = true;
+            //    MainText.Scale = 1;
+            //    MainText.Source = new HtmlWebViewSource { Html = newsInfoFull.Text };
+            //    MainText.FlowDirection = FlowDirection.MatchParent;
+            //    MainText.Navigated += (s, e) =>
+            //    {
+            //        if (!navigated)
+            //        {
+            //            (s as WebView).Source = new UrlWebViewSource() { Url = e.Url };
+            //            navigated = true;
+            //        }
+            //    };
+            //    //iosHtmlLabel.IsVisible = true;
+            //    //iosHtmlLabel.Text = newsInfoFull.Text;
+            //    //iosHtmlLabel.FlowDirection = FlowDirection.MatchParent;
+            //}
+            
+            
+                HtmlLabel.IsVisible = true;
+                HtmlLabel.Text = newsInfoFull.Text;
+                HtmlLabel.FlowDirection = FlowDirection.MatchParent;
+            
+            
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
             IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);            
             Pancake.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
