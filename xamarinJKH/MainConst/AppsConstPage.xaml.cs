@@ -469,7 +469,10 @@ namespace xamarinJKH.MainConst
             }
             else
             {
-                Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAppsInfo, "OK"));
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    Toast.Instance.Show<ToastDialog>(new {Title = AppResources.ErrorAppsInfo, Duration = 1700});
+                });
             }
         }
 
