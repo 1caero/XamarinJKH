@@ -103,7 +103,7 @@ namespace xamarinJKH.Additional
 
             if (additionalService.Name != null && !additionalService.Name.Equals(""))
             {
-                LabelTitle.Text = additionalService.Name;
+                LabelTitle.Text = additionalService.Name.Replace("\\n","");
                 Analytics.TrackEvent("Доп услуга " + additionalService.Name);
             }
             else
