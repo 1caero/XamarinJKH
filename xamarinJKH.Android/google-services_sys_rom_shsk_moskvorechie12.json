@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "613290169376",
+    "project_id": "xamarin3-5d6e3",
+    "storage_bucket": "xamarin3-5d6e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613290169376:android:9564ff2d084c3af5f81845",
+        "android_client_info": {
+          "package_name": "sys_rom.shsk_moskvorechie12"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613290169376-38ehh7djdgvkf2euioumrh8d5bndu5oo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEVPRITSNoLApFK0G-k6vfgCns88NT460"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613290169376-38ehh7djdgvkf2euioumrh8d5bndu5oo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "613290169376-75v8fm41btmjlsn6ok65qeq9ppdu7np5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ooo.transteplo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
