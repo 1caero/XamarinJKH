@@ -19,6 +19,7 @@ namespace xamarinJKH.DialogViews
         public AppConstDialogWindow(List<RequestsReceiptItem> items, int id, int shop)
         {
             InitializeComponent();
+            AppReciept.WidthRequest = App.ScreenWidth;
             Analytics.TrackEvent("Добавление товара к заказу сотрудником");
             Shop = shop;
             BindingContext = viewModel = new AppRecieptConstViewModel(items, id, this.DialogNotifier);

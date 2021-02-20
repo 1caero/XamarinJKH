@@ -4,11 +4,11 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             x:Name="DialogView"
              xmlns:app="clr-namespace:xamarinJKH"
              xmlns:models="clr-namespace:xamarinJKH.Server.RequestModel"
              xmlns:dialog="clr-namespace:AiForms.Dialogs.Abstractions;assembly=AiForms.Dialogs.Abstractions"
              xmlns:converters="clr-namespace:xamarinJKH.Converters"
-             Margin="40"
              x:Class="xamarinJKH.DialogViews.AppReceiptDialogWindow">
     <dialog:DialogView.Resources>
         <ResourceDictionary>

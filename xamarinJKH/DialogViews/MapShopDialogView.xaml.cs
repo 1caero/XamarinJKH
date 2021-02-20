@@ -37,6 +37,7 @@ namespace xamarinJKH.DialogViews
         public MapShopDialogView(AdditionalService service)
         {
             InitializeComponent();
+            DialogView.WidthRequest = App.ScreenWidth;
             Analytics.TrackEvent("Диалог выбора товара из магазина");
             Service = service;
             if (Service != null)

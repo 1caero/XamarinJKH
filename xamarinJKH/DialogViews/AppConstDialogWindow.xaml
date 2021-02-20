@@ -67,15 +67,25 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="0.55*"/>
                                 <ColumnDefinition Width="0.25*"/>
-                                <ColumnDefinition Width="0.35*"/>
+                                <ColumnDefinition Width="0.30*"/>
                                 <ColumnDefinition Width="0.05*"/>
                                 <ColumnDefinition Width="0.05*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Text="{Binding Name}"
+                            <Label 
                                    VerticalTextAlignment="Center"
-                                   Grid.Column="0"/>
+                                   Grid.Column="0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Name}" />
+                                        <Span Text="     &#10;" />
+                                        <Span Text="    " />
+                                        <Span Text="    " />
+                                        <Span Text="    " />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
                             <Label Text="{Binding Quantity}"
                                    VerticalTextAlignment="Center"
                                    HorizontalTextAlignment="Center"

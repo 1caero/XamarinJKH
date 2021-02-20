@@ -11,6 +11,7 @@ namespace xamarinJKH.DialogViews
         public ShopListDialogView(int shop)
         {
             InitializeComponent();
+            Shop.WidthRequest = App.ScreenWidth;
             BindingContext = viewModel = new ShopListViewModel(DialogNotifier, shop);
 
             viewModel.LoadItems.Execute(null);

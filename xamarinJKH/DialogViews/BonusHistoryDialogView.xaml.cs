@@ -13,6 +13,7 @@ namespace xamarinJKH.DialogViews
         public BonusHistoryDialogView(string ident)
         {
             InitializeComponent();
+            DialogView.WidthRequest = App.ScreenWidth;
             Analytics.TrackEvent("Диалог истории бонусов");
 
             BindingContext = viewModel = new BonusHistoryViewModel();

@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Name="DialogView"
              mc:Ignorable="d"
                Padding="{OnPlatform Android='50', iOS='10'}"
-               Margin="{OnPlatform Android='100', iOS='20'}"
+               Margin="{OnPlatform  iOS='20'}"
              xmlns:ai="clr-namespace:AiForms.Dialogs.Abstractions;assembly=AiForms.Dialogs.Abstractions"
                xmlns:models="clr-namespace:xamarinJKH.Server.RequestModel"
                xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
@@ -13,7 +14,7 @@
     <Frame CornerRadius="20"
            VerticalOptions="Center"
            HeightRequest="300"
-           Margin="0,40">
+           Margin="20,40">
         <StackLayout VerticalOptions="Center">
             <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_close.svg"
                                 IsVisible="True"

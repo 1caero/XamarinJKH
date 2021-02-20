@@ -52,7 +52,11 @@ namespace xamarinJKH.ViewModels.Main
                         Requests = new ObservableCollection<RequestInfo>();
                         foreach (var App in AllRequests.Where(x => x.IsClosed).ToList())
                         {
-                            Device.BeginInvokeOnMainThread(() => Requests.Add(App));
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                if (!Requests.Any(o => o.ID == App.ID))
+                                    Requests.Add(App);
+                            });
                         }
                         Empty = AllRequests.Count(x => x.IsClosed)==0;
                     }
@@ -64,7 +68,11 @@ namespace xamarinJKH.ViewModels.Main
                         Requests = new ObservableCollection<RequestInfo>();
                         foreach (var App in AllRequests.Where(x => !x.IsClosed).ToList())
                         {
-                            Device.BeginInvokeOnMainThread(() => Requests.Add(App));
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                if (!Requests.Any(o => o.ID == App.ID))
+                                    Requests.Add(App);
+                            });
                         }
                         Empty = AllRequests.Count(x => !x.IsClosed)==0;
                     }
@@ -132,11 +140,15 @@ namespace xamarinJKH.ViewModels.Main
                                 Empty = Requests.Count == 0;
                                 Requests = new ObservableCollection<RequestInfo>();
                             }
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
                             Requests.Clear();
                             foreach (var App in AllRequests.Where(x => x.IsClosed == ShowClosed))
                             {
-                                Device.BeginInvokeOnMainThread(() => Requests.Add(App));
+                                    if (!Requests.Where(o => o.ID == App.ID).Any())
+                                        Requests.Add(App);
                             }
+                            });
                         }
 
                         MessagingCenter.Subscribe<Object, string>(this, "AddIdent", (sender, args) => LoadRequests.Execute(null));
@@ -146,7 +158,7 @@ namespace xamarinJKH.ViewModels.Main
                 }
             });
         }
-
+        
         public async Task UpdateTask()
         {
             var response = await Server.GetRequestsList();
@@ -171,7 +183,8 @@ namespace xamarinJKH.ViewModels.Main
                         Device.BeginInvokeOnMainThread(() =>
                         {
                             AllRequests.Insert(0, newApp);
-                            Requests.Insert(0, newApp);
+                            if (!Requests.Contains(newApp))
+                                Requests.Insert(0, newApp);
                         });
                     }
                 }

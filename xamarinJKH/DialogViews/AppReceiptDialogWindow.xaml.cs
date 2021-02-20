@@ -11,6 +11,7 @@ namespace xamarinJKH.DialogViews
         public AppReceiptDialogWindow(AppRecieptViewModel vm)
         {
             InitializeComponent();
+            DialogView.WidthRequest = App.ScreenWidth;
             Analytics.TrackEvent("Чек по заказу");
 
             BindingContext = vm;

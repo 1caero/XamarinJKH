@@ -39,7 +39,7 @@ namespace xamarinJKH.Droid
             base.OnCreate(savedInstanceState);
           
         
-            global::Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental", "AppTheme_Experimental", "Markup_Experimental");
+            global::Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental", "AppTheme_Experimental", "Markup_Experimental", "DragAndDrop_Experimental");
             XamEffects.Droid.Effects.Init();
             AiForms.Dialogs.Dialogs.Init(this);
             App.ScreenHeight = (int)(Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density);

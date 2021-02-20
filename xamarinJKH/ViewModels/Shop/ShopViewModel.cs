@@ -174,7 +174,8 @@ namespace xamarinJKH.ViewModels.Shop
                                     good.IsLast = false;
                                     Goods.Add(good);
                                 }
-                                Goods.Last().IsLast = true;
+
+                                if (Goods != null && Goods.Count > 0) Goods.Last().IsLast = true;
                             });
                             
                         }
