@@ -5,7 +5,8 @@
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
+             xmlns:abstractions="clr-namespace:LabelHtml.Forms.Plugin.Abstractions;assembly=HtmlLabel.Forms.Plugin"
+             BackgroundColor="{AppThemeBinding Light=White, Dark=White}"
              x:Class="xamarinJKH.News.NewPage">
     <ContentPage.Content>
         <StackLayout>
@@ -102,6 +103,7 @@
             <StackLayout
                 BackgroundColor="White"
                 Spacing="0"
+                VerticalOptions="FillAndExpand"
                 Margin="0">
                 <Label x:Name="LabelTitle"
                        FontAttributes="Bold"
@@ -130,8 +132,21 @@
 
                 <WebView x:Name="MainText"
                          VerticalOptions="StartAndExpand"
+                         IsVisible="False"
                          HeightRequest="400"
                          Margin="20,0" />
+                <ScrollView VerticalOptions="FillAndExpand" Margin="0,0,0,20">
+                <abstractions:HtmlLabel 
+                    FontSize="16"
+                    x:Name="HtmlLabel"
+                    Margin="20,10"
+                    TextColor="Black"
+                    LinkColor="{x:StaticResource MainColor}"
+                    BackgroundColor="Transparent"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    />
+                </ScrollView>
             </StackLayout>
             <!--</ScrollView>-->
         </StackLayout>

@@ -645,7 +645,15 @@ namespace xamarinJKH.MainConst
 
         private void filter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            additionalList.ItemsSource = RequestInfos.Where(_ => _.RequestNumber.Contains(e.NewTextValue) || _.Status.ToLowerInvariant().Contains(e.NewTextValue.ToLowerInvariant()) || _.Name.ToLowerInvariant().Contains(e.NewTextValue.ToLowerInvariant()));
+            RequestInfos.Clear();
+                foreach (var each in RequestDefault.Where(_ => _.RequestNumber.Contains(e.NewTextValue) || _.Status.ToLowerInvariant().Contains(e.NewTextValue.ToLowerInvariant()) || _.Name.ToLowerInvariant().Contains(e.NewTextValue.ToLowerInvariant())))
+                {
+                    
+                    Device.BeginInvokeOnMainThread((() =>
+                    {
+                    RequestInfos.Add(each);
+                    }));
+                }
         }
     }
 }
