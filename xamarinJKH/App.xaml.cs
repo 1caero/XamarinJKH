@@ -116,7 +116,9 @@ namespace xamarinJKH
                             break;                        
                     }
 
-                    var c2 = Settings.MobileSettings.appTheme == "light" ? Color.Black : Color.White;
+                    //var c2 = Settings.MobileSettings.appTheme == "light" ? Color.Black : Color.White;
+                    var c2 = color==Color.White ? Color.Black : Color.White;
+
 
                     var nav = new Xamarin.Forms.NavigationPage(new MainPage())
                     {

@@ -455,6 +455,13 @@ namespace xamarinJKH.MainConst
             _requestList = await _server.GetRequestsListConst();
             if (_requestList.Error == null)
             {
+//#if DEBUG
+//                Device.BeginInvokeOnMainThread(() =>
+//                {
+//                    Toast.Instance.Show<ToastDialog>(new { Title = AppResources.ErrorAppsInfo, Duration = 1700 });
+//                });
+//#endif
+
                 RequestDefault = _requestList.Requests;
                 SetReaded();
                 Settings.UpdateKey = _requestList.UpdateKey;
@@ -469,9 +476,9 @@ namespace xamarinJKH.MainConst
             }
             else
             {
-                Device.BeginInvokeOnMainThread(async () =>
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    Toast.Instance.Show<ToastDialog>(new {Title = AppResources.ErrorAppsInfo, Duration = 1700});
+                    Toast.Instance.Show<ToastDialog>(new { Title = AppResources.ErrorAppsInfo, Duration = 1700 });
                 });
             }
         }
