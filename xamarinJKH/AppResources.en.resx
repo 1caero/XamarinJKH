@@ -1889,4 +1889,10 @@
   <data name="NavBarPassApp" xml:space="preserve">
     <value>Pass</value>
   </data>
+  <data name="NothingSet" xml:space="preserve">
+    <value>Nothing selected </value>
+  </data>
+  <data name="CompliteApp" xml:space="preserve">
+    <value>Completed applications</value>
+  </data>
 </root>

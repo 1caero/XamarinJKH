@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -26,7 +27,7 @@ using SelectionChangedEventArgs = Syncfusion.SfAutoComplete.XForms.SelectionChan
 namespace xamarinJKH.DialogViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AppFilterDialog  : PopupPage
+    public partial class AppFilterDialog : PopupPage
     {
         private FilterModel _filterModel = null;
         private RestClientMP server = new RestClientMP();
@@ -46,6 +47,16 @@ namespace xamarinJKH.DialogViews
         private Dictionary<string, int> Statuses = new Dictionary<string, int>();
         private Page _page;
 
+        private List<int> performed = new List<int>
+        {
+            5,6,7,8,10,11,12
+        }; 
+        private List<int> unPerformed = new List<int>
+        {
+            1,2,3,4,9
+        };
+       
+        
         public AppFilterDialog(Page page)
         {
             _page = page;
@@ -77,14 +88,13 @@ namespace xamarinJKH.DialogViews
                 string[] param = null;
                 SetListStatuses(Settings.StatusApp, ref param);
                 var action =
-                    await page.DisplayActionSheet(AppResources.StatusFilterApp, AppResources.Cancel, null, param);
+                    await page.DisplayActionSheet(AppResources.StatusFilterApp, AppResources.Cancel, null, AppResources.All,AppResources.FailedRequests, AppResources.CompliteApp);
                 if (action != null && !action.Equals(AppResources.Cancel))
                 {
-                    _filterModel.StatusId = Statuses[action];
+                    _filterModel.StatusId = action;
                     LabelStatus.Text = action;
                     ImageStatus.IsVisible = true;
-                    ImageStatus.Source = "resource://xamarinJKH.Resources." + Settings.GetStatusIcon(Statuses[action]) +
-                                         ".svg";
+                    ImageStatus.Source = "resource://xamarinJKH.Resources.ic_status_wait.svg";
                 }
             };
             LayoutStatus.GestureRecognizers.Add(status);
@@ -100,17 +110,30 @@ namespace xamarinJKH.DialogViews
             SetFilters();
         }
 
+        private bool isReset = false;
+
         async void Reset()
         {
-            MessagingCenter.Send<object>(this, "RemooveFilter");
             Preferences.Remove(REQUEST_NUMBER);
             Preferences.Remove(REQUEST_STATUS_ID);
             Preferences.Remove(REQUEST_TYPE_ID);
             Preferences.Remove(REQUEST_SUB_TYPE_ID);
             Preferences.Remove(REQUEST_PRIORITY_ID);
-            await PopupNavigation.Instance.PopAsync();
+            isReset = true;
+            EntryNumberApp.Text = "";
+            LabelStatus.Text = "";
+            ImageStatus.IsVisible = false;
+            Device.BeginInvokeOnMainThread((() =>
+            {
+                AutoCompleteType.SelectedItem = null;
+                AutoCompletePodType.SelectedItem = null;
+                _filterModel.PodTypes.Clear();
+                _filterModel.IsVisible = false;
+                AutoCompletePrioritets.SelectedItem = null;
+                MessagingCenter.Send<object>(this, "RemooveFilter");
+            }));
         }
-        
+
         async void Apply()
         {
             Device.BeginInvokeOnMainThread(() =>
@@ -139,12 +162,30 @@ namespace xamarinJKH.DialogViews
 
             if (!string.IsNullOrWhiteSpace(LabelStatus.Text))
             {
-                Criterias.Add(new CustomSearchCriteria
+                List<int> ids = new List<int>();
+                if (LabelStatus.Text.Equals(AppResources.CompliteApp))
                 {
-                    SearchCriteriaType = REQUEST_STATUS_ID,
-                    ItemID = _filterModel.StatusId
-                });
-                if (_filterModel.StatusId != null) Preferences.Set(REQUEST_STATUS_ID, (int) _filterModel.StatusId);
+                    ids = performed;
+                }else if (LabelStatus.Text.Equals(AppResources.FailedRequests))
+                {
+                    ids = unPerformed;
+                }
+                else
+                {
+                    ids.AddRange(performed);
+                    ids.AddRange(unPerformed);
+                }
+
+                foreach (var each in ids)
+                {
+                    Criterias.Add(new CustomSearchCriteria
+                    {
+                        SearchCriteriaType = REQUEST_STATUS_ID,
+                        ItemID = each
+                    });
+                }
+              
+                if (_filterModel.StatusId != null) Preferences.Set(REQUEST_STATUS_ID, _filterModel.StatusId);
             }
 
             try
@@ -222,17 +263,33 @@ namespace xamarinJKH.DialogViews
                 Console.WriteLine(e);
             }
 
-
-            List<RequestInfo> requestInfos = await server.Search(Criterias);
-            if (requestInfos != null && requestInfos.Count > 0)
+            if (Criterias.Count > 0)
             {
-                MessagingCenter.Send<object, List<RequestInfo>>(this, "SetFilter", requestInfos);
-                await PopupNavigation.Instance.PopAsync();
+                isReset = false;
+                List<RequestInfo> requestInfos = await server.Search(Criterias);
+                if (requestInfos != null && requestInfos.Count > 0)
+                {
+                    MessagingCenter.Send<object, List<RequestInfo>>(this, "SetFilter", requestInfos);
+                    await PopupNavigation.Instance.PopAsync();
+                }
+                else
+                {
+                    await _page.DisplayAlert(AppResources.ErrorTitle, AppResources.FilterError, "OK");
+                }
             }
             else
             {
-                await _page.DisplayAlert(AppResources.ErrorTitle, AppResources.FilterError, "OK");
+                await _page.DisplayAlert(AppResources.ErrorTitle, AppResources.NothingSet, "OK");
             }
+
+            // if (isReset)
+            // {
+            //     isReset = false;
+            //     MessagingCenter.Send<object>(this, "RemooveFilter");
+            //     await _page.DisplayAlert("", "Фильтр сброшен", "OK");
+            //     await PopupNavigation.Instance.PopAsync();
+            // }
+
 
             Device.BeginInvokeOnMainThread(() =>
             {
@@ -240,6 +297,7 @@ namespace xamarinJKH.DialogViews
                 LayoutLoading.IsVisible = false;
             });
         }
+
 
         void SetFilters()
         {
@@ -249,16 +307,14 @@ namespace xamarinJKH.DialogViews
                 EntryNumberApp.Text = numberApp;
             }
 
-            int statusId = Preferences.Get(REQUEST_STATUS_ID, -1);
-            if (statusId != -1)
+            string statusId = Preferences.Get(REQUEST_STATUS_ID, "");
+            if (!string.IsNullOrWhiteSpace(statusId))
             {
                 if (Settings.StatusApp != null)
                 {
-                    LabelStatus.Text = Settings.StatusApp?.FirstOrDefault(x => x.ID == statusId)?.Name;
+                    LabelStatus.Text = statusId;
                     ImageStatus.IsVisible = true;
-                    ImageStatus.Source = "resource://xamarinJKH.Resources." +
-                                         Settings.GetStatusIcon(statusId) +
-                                         ".svg";
+                    ImageStatus.Source = "resource://xamarinJKH.Resources.ic_status_wait.svg";
                     _filterModel.StatusId = statusId;
                 }
             }
@@ -317,7 +373,19 @@ namespace xamarinJKH.DialogViews
                 }
             }
 
-            public int? StatusId { get; set; } = null;
+            bool isVisible;
+
+            public bool IsVisible
+            {
+                get => isVisible;
+                set
+                {
+                    isVisible = value;
+                    OnPropertyChanged("IsVisible");
+                }
+            }
+
+            public string? StatusId { get; set; } = null;
             public Command SelectTyp { get; set; }
             private SfAutoComplete _sfAutoCompleteType;
 
@@ -362,7 +430,7 @@ namespace xamarinJKH.DialogViews
                             {
                                 if (idsPod.Contains(each.ID.ToString()))
                                     requestPodTypes.Add(each);
-                                PodTypes.Add(each);
+                                // PodTypes.Add(each);
                             }
                         }
 
@@ -389,18 +457,16 @@ namespace xamarinJKH.DialogViews
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     sfAutoCompleteType.ShowSuggestionsOnFocus = false;
-                    sfAutoCompletePodType.ShowSuggestionsOnFocus = false;
                     sfAutoCompletePriority.ShowSuggestionsOnFocus = false;
+                    sfAutoCompletePodType.ShowSuggestionsOnFocus = false;
                     sfAutoCompleteType.SelectedItem = requestTypes;
                     sfAutoCompletePodType.SelectedItem = requestPodTypes;
                     sfAutoCompletePriority.SelectedItem = requestPriority;
-                    
                 });
 
-                Device.StartTimer (new TimeSpan (0, 0, 1), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 1), () =>
                 {
-                    
-                    Device.BeginInvokeOnMainThread (() => 
+                    Device.BeginInvokeOnMainThread(() =>
                     {
                         sfAutoCompleteType.ShowSuggestionsOnFocus = true;
                         sfAutoCompletePodType.ShowSuggestionsOnFocus = true;
@@ -411,28 +477,56 @@ namespace xamarinJKH.DialogViews
 
                 SelectTyp = new Command<object>(name =>
                 {
-                    var selected = SelectedTyp;
-
-                    if (selected != null)
+                    RequestType rem = null;
+                    try
                     {
-                        if (selected.IsSelected)
+                        rem = name as RequestType;
+
+                        ObservableCollection<object> observableCollectionType =
+                            (ObservableCollection<object>) sfAutoCompleteType?.SelectedItem;
+                        if (observableCollectionType != null && observableCollectionType.Any())
                         {
-                            selected.Selected = false;
-                            selected.IsSelected = false;
-                            string replaceColor = Application.Current.RequestedTheme == OSAppTheme.Dark
-                                ? "#FFFFFF"
-                                : "#8D8D8D";
-                            selected.SelectedColor = Color.FromHex(replaceColor);
-                            selected.ReplaceMap = new Dictionary<string, string> {{"#000000", replaceColor}};
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                if (rem != null && rem.HasSubTypes)
+                                    foreach (var each in rem.SubTypes)
+                                    {
+                                        PodTypes.Remove(each);
+                                    }
+
+                                foreach (RequestType each in observableCollectionType)
+                                {
+                                    if (each.HasSubTypes)
+                                    {
+                                        foreach (var each2 in each.SubTypes)
+                                        {
+                                            if (!PodTypes.Contains(each2))
+                                                PodTypes.Add(each2);
+                                        }
+                                    }
+                                }
+
+                                IsVisible = PodTypes.Count > 0;
+                            });
                         }
                         else
                         {
-                            selected.IsSelected = true;
-                            selected.Selected = true;
-                            selected.SelectedColor = Color.FromHex(Settings.MobileSettings.color);
-                            selected.ReplaceMap = new Dictionary<string, string>
-                                {{"#000000", "#" + Settings.MobileSettings.color}};
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                if (rem != null && rem.HasSubTypes)
+                                    foreach (var each in rem.SubTypes)
+                                    {
+                                        PodTypes.Remove(each);
+                                    }
+
+                                IsVisible = PodTypes.Count > 0;
+                                PodTypes.Clear();
+                            });
                         }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
                     }
                 });
             }
@@ -514,8 +608,11 @@ namespace xamarinJKH.DialogViews
 
         private void AutoCompletePrioritets_OnFocusChanged(object sender, FocusChangedEventArgs e)
         {
-          
-            
+        }
+
+        private void AutoCompleteType_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _filterModel.SelectTyp.Execute(e.RemovedItems);
         }
     }
 }

@@ -147,17 +147,17 @@
                                                          BorderThickness="1"
                                                          HorizontalOptions="FillAndExpand"
                                                          HasShadow="False"
-                                                         Padding="25, 15, 25, 20"
+                                                         Padding="20, 15, 20, 20"
                                                          Margin="0,0,0,0"
                                                          CornerRadius="40" >
                                 <StackLayout>
                                 <Grid Padding="0" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="5"></ColumnDefinition>
+                                        <ColumnDefinition Width="15"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="5"></RowDefinition>
+                                        <RowDefinition Height="15"></RowDefinition>
                                         <RowDefinition Height="*"></RowDefinition>
                                     </Grid.RowDefinitions>
                                     <StackLayout x:Name="container" Orientation="Horizontal" Grid.ColumnSpan="2" Grid.RowSpan="2">
@@ -311,6 +311,8 @@
                                     </StackLayout>
                                     <Frame CornerRadius="5"
                                            BackgroundColor="Red"
+                                           HorizontalOptions="Fill"
+                                           Margin="3"
                                            Grid.Column="1"
                                            Grid.Row="0"
                                            IsVisible="{Binding IsReaded, Mode=TwoWay, Converter={converters:InverseBoolConverter} }"

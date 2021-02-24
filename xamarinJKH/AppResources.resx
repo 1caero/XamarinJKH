@@ -1891,4 +1891,10 @@
   <data name="NavBarPassApp" xml:space="preserve">
     <value>Пропуска</value>
   </data>
+  <data name="NothingSet" xml:space="preserve">
+    <value>Ничего не выбрано</value>
+  </data>
+  <data name="CompliteApp" xml:space="preserve">
+    <value>Выполненные заявки</value>
+  </data>
 </root>

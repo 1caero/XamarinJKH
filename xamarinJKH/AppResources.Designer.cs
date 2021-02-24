@@ -916,6 +916,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выполненные заявки.
+        /// </summary>
+        internal static string CompliteApp {
+            get {
+                return ResourceManager.GetString("CompliteApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Подтвердить.
         /// </summary>
         internal static string Confirm {
@@ -2892,6 +2901,15 @@ namespace xamarinJKH {
         internal static string NotDepartsment {
             get {
                 return ResourceManager.GetString("NotDepartsment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ничего не выбрано.
+        /// </summary>
+        internal static string NothingSet {
+            get {
+                return ResourceManager.GetString("NothingSet", resourceCulture);
             }
         }
         
