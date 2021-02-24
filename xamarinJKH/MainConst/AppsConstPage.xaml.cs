@@ -526,8 +526,8 @@ namespace xamarinJKH.MainConst
                     //     new ObservableCollection<RequestInfo>(_requestList.Requests);
                      Device.BeginInvokeOnMainThread(async () =>
                     {
-                        if (RequestDefault != null)
-                        {
+                        //if (RequestDefault != null)
+                        //{
                             RequestInfos.Clear();
                             foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault)
                                 .OrderBy(o => o._RequestTerm).ThenBy(o => o.IsReaded)
@@ -536,7 +536,7 @@ namespace xamarinJKH.MainConst
                             {
                                 RequestInfos.Add(each);
                             }
-                        }
+                        //}
                     });
 
                 }
@@ -548,10 +548,10 @@ namespace xamarinJKH.MainConst
                     //         select i);
                     if (IsPass)
                     {
-                        Device.BeginInvokeOnMainThread(async () =>
+                        Device.BeginInvokeOnMainThread(() =>
                         {
                             RequestInfos.Clear();
-                            foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).Where(o => o.TypeID == Settings.MobileSettings.requestTypeForPassRequest || o.Name.ToLower().Contains("пропуск")).OrderBy(o => !o.IsReaded).ThenBy(o=> o.ID ).Reverse())
+                            foreach (var each in RequestDefault.Where(o => o.TypeID == Settings.MobileSettings.requestTypeForPassRequest || o.Name.ToLower().Contains("пропуск")).OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse())
                             {
                                 each.IsEnableMass = false;
                                 RequestInfos.Add(each);
@@ -560,10 +560,10 @@ namespace xamarinJKH.MainConst
                     }
                     else
                     {
-                        Device.BeginInvokeOnMainThread(async () =>
+                        Device.BeginInvokeOnMainThread(() =>
                         {
                             RequestInfos.Clear();
-                            foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault).OrderBy(o => !o.IsReaded).ThenBy(o=> o.ID ).Reverse())
+                            foreach (var each in RequestDefault.OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse())
                             {
                                 RequestInfos.Add(each);
                             }
