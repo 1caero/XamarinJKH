@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>613290169376-61691d2c044tf1ras5opnl7turhu01mc.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.613290169376-61691d2c044tf1ras5opnl7turhu01mc</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA6uYT5YbYt-MBUxYi8bjxNe4Bi3QcmW0c</string>
+	<key>GCM_SENDER_ID</key>
+	<string>613290169376</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>rom.best.shsk.moskvorechie12</string>
+	<key>PROJECT_ID</key>
+	<string>xamarin3-5d6e3</string>
+	<key>STORAGE_BUCKET</key>
+	<string>xamarin3-5d6e3.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:613290169376:ios:74a9e9fa4b02b1b4f81845</string>
+</dict>
+</plist>
