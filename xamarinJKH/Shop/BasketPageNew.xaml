@@ -66,6 +66,7 @@
                     </StackLayout>
                     <yummy:PancakeView x:Name="GoodsLayot" 
                                        BorderThickness="1"
+                                       HeightRequest="1000"
                                        CornerRadius="30,30,30,30" BackgroundColor="White"
                                        VerticalOptions="Fill" Margin="15,10, 15,0" Padding="0">
                         <ScrollView Orientation="Vertical"
@@ -88,8 +89,8 @@
                                                         <!--<ColumnDefinition Width="0.45*"/>-->
                                                     </Grid.ColumnDefinitions>
                                                     <Grid.RowDefinitions>
-                                                        <RowDefinition Height="25"/>
-                                                        <RowDefinition Height="25"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
                                                     </Grid.RowDefinitions>
                                                     <Frame CornerRadius="10"
                                                            BackgroundColor="#e7e7e7"
@@ -105,14 +106,22 @@
                                                     </Frame>
                                                     <Label 
                                                            Grid.Column="1"
-                                                           Grid.RowSpan="2">
+                                                           HorizontalOptions="FillAndExpand"
+                                                           VerticalOptions="FillAndExpand"
+                                                           >
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <FormattedString.Spans>
                                                                     <Span Text="{Binding Name}"
                                                                           FontSize="15"
-                                                                          FontAttributes="Bold"/>
+                                                                          FontAttributes="None"/>
                                                                     <Span Text="{Binding Weight, Converter={x:StaticResource Weight}}"
+                                                                          FontSize="10"
+                                                                          FontAttributes="None"/> 
+                                                                    <Span Text=""
+                                                                          FontSize="10"
+                                                                          FontAttributes="None"/>
+                                                                    <Span Text="&#10;"
                                                                           FontSize="10"
                                                                           FontAttributes="None"/>
                                                                 </FormattedString.Spans>
@@ -136,6 +145,7 @@
                                                     </Label>
 
                                                     <StackLayout Grid.Column="2" HorizontalOptions="End"
+                                                                 VerticalOptions="Center"
                                                           Grid.Row="1" Orientation="Vertical" Margin="0, -5, 0, 0" >
                                                         <StackLayout  HorizontalOptions="Center" Orientation="Horizontal">
                                                             <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_shop_minus.svg" WidthRequest="25" HeightRequest="25"

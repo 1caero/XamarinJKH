@@ -80,9 +80,9 @@
                 <Label.FormattedText>
                     <FormattedString>
                         <FormattedString.Spans>
-                            <Span Text="{x:Static app:AppResources.Price}"
+                            <Span Text="{x:Static app:AppResources.Total}"
                                   FontAttributes="Bold"/>
-                            <Span Text=" "/>
+                            <Span Text=": "/>
                             <Span Text="{Binding Price, Converter={x:StaticResource Price}}"/>
                         </FormattedString.Spans>
                     </FormattedString>

@@ -100,6 +100,7 @@ namespace xamarinJKH.ViewModels.DialogViewModels
                 Price = Convert.ToDecimal(total);
             });
 
+            MessagingCenter.Unsubscribe<Object, List<Goods>>(this, "AddItems");
             MessagingCenter.Subscribe<Object, List<Goods>>(this, "AddItems", (sender, args) =>
             {
                 if (args != null)
@@ -112,7 +113,12 @@ namespace xamarinJKH.ViewModels.DialogViewModels
                             var existing = ReceiptItems.FirstOrDefault(x => x.Name == item.Name);
                             if (existing == null)
                             {
-                                Device.BeginInvokeOnMainThread(() => ReceiptItems.Add(receipt_item));
+                                Device.BeginInvokeOnMainThread(() =>
+                                {
+                                    ReceiptItems.Add(receipt_item);
+                                    var total = ReceiptItems.Select(x => x.Price * x.Quantity).Sum();
+                                    Price = Convert.ToDecimal(total);
+                                });
                             }
                             else
                             {

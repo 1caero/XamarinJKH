@@ -229,6 +229,12 @@
                                                                         <Span Text="{Binding Units}"
                                                                               FontSize="10"
                                                                               FontAttributes="None" />
+                                                                        <Span Text=""
+                                                                              FontSize="10"
+                                                                              FontAttributes="None" />
+                                                                        <Span Text="&#10;"
+                                                                              FontSize="10"
+                                                                              FontAttributes="None" />
                                                                     </FormattedString.Spans>
                                                                 </FormattedString>
                                                             </Label.FormattedText>
