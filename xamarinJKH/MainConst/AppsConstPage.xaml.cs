@@ -683,13 +683,6 @@ namespace xamarinJKH.MainConst
                     MainScrollView.ScrollToAsync(0, scrollY + e.VerticalOffset, false);
                 }));
             }
-            Console.WriteLine("NIC_HorizontalDelta: "+ e.HorizontalDelta.ToString(CultureInfo.InvariantCulture));
-            Console.WriteLine("NIC_VerticalDelta: " + e.VerticalDelta.ToString(CultureInfo.InvariantCulture));
-            Console.WriteLine("NIC_HorizontalOffset: " + e.HorizontalOffset.ToString(CultureInfo.InvariantCulture));
-            Console.WriteLine("NIC_VerticalOffset: " + e.VerticalOffset.ToString(CultureInfo.InvariantCulture));
-            Console.WriteLine("NIC_FirstVisibleItemIndex: " + e.FirstVisibleItemIndex.ToString());
-            Console.WriteLine("NIC_CenterItemIndex: " + e.CenterItemIndex.ToString());
-            Console.WriteLine("NIC_LastVisibleItemIndex: " + e.LastVisibleItemIndex.ToString());
         }
     }
 }
