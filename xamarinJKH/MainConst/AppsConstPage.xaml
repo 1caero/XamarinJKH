@@ -16,6 +16,9 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+            <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never" x:Name="MainScrollView">
         <StackLayout  VerticalOptions="FillAndExpand">
             <Grid  VerticalOptions="FillAndExpand">
                 <Image x:Name="ImageFon"
@@ -26,7 +29,7 @@
                        HorizontalOptions="FillAndExpand" />
                 <StackLayout  VerticalOptions="FillAndExpand">
                     <StackLayout
-                        Margin="25,10,15,0"
+                        Margin="25,90,15,0"
                         Orientation="Horizontal"
                         x:Name="Pancake">
                         <Label x:Name="UkName"  VerticalOptions="Center"
@@ -42,73 +45,18 @@
                             <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
                         </StackLayout>
                     </StackLayout>
-                    <StackLayout
-                        x:Name="BackStackLayout"
-                        Orientation="Horizontal"
-                        Margin="25, 10, 20, 0"
-                        HorizontalOptions="FillAndExpand" VerticalOptions="Center"  MinimumHeightRequest="40" >
-                        
-                        <Label
-                            Text="{x:Static xamarinJkh:AppResources.App_NavBar}"
-                            FontSize="23"
-                            MinimumWidthRequest="100"
-                            x:Name="LabelTitle"
-                            TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                            FontAttributes="Bold"
-                            HorizontalOptions="Start"
-                            VerticalOptions="Center" />
-                        <StackLayout Orientation="Horizontal" x:Name="LayoutFilter" HorizontalOptions="FillAndExpand" >
-                            <pancakeView:PancakeView HasShadow="{AppThemeBinding Light=false, Dark=true}" 
-                                                 BorderColor="{Binding hex}" 
-                                                 BackgroundColor="Transparent" 
-                                                 BorderThickness="1" 
-                                                 x:Name="ViewSearch"
-                                                 Padding="{x:OnPlatform Android=10, iOS=0}" 
-                                                 Margin="10,0" 
-                                                 CornerRadius="10" 
-                                                 WidthRequest="{x:OnPlatform Android=300, iOS=400}" 
-                                                 HeightRequest="{x:OnPlatform Android=40, iOS=50}" 
-                                                 HorizontalOptions="EndAndExpand" 
-                                                 VerticalOptions="Center"
-                                                  >
-                                <xamarinJkh:BordlessEditor 
-                                    BackgroundColor="Transparent"
-                                                           x:Name="filter"
-                                                           AutoSize="Disabled" 
-                                                           Placeholder="Поиск..." 
-                                                           HorizontalOptions="FillAndExpand" 
-                                                           VerticalOptions="CenterAndExpand"
-                                    FontSize="14" 
-                                                           TextChanged="filter_TextChanged" 
-                                    MinimumWidthRequest="{x:OnPlatform Android=280, iOS=380}" 
-                                    WidthRequest="{x:OnPlatform Android=280, iOS=380}">
-                                </xamarinJkh:BordlessEditor>
-                            </pancakeView:PancakeView>
-                            <pancakeView:PancakeView x:Name="buttonFilter" HasShadow="{AppThemeBinding Light=false, Dark=true}" BorderColor="{Binding hex}" 
-                                                 BackgroundColor="Transparent" BorderThickness="1" CornerRadius="10" 
-                                                 HeightRequest="40" 
-                                                 WidthRequest="40" 
-                                                 Padding="10" 
-                                                 VerticalOptions="Center" HorizontalOptions="End">
-                                <svg:SvgCachedImage 
-                                                Source="resource://xamarinJKH.Resources.ic_filter.svg"
-                                                HeightRequest="35"
-                                                WidthRequest="35"
-                                                ReplaceStringMap="{Binding ChangeTheme, Converter={x:StaticResource SvgColor}}"                                        
-                                                HorizontalOptions="Center"
-                                                VerticalOptions="Center" />
-                            </pancakeView:PancakeView>
-                        </StackLayout>
-                        
-                    </StackLayout>
-                    <StackLayout VerticalOptions="FillAndExpand">
+                   
+                    <StackLayout VerticalOptions="FillAndExpand" >
+                       
                         <Grid  VerticalOptions="FillAndExpand">
+                            
                             <RefreshView x:Name="messageRefreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="{Binding hex}">
                              <CollectionView 
                              x:Name="additionalList"
                              HorizontalScrollBarVisibility="Never"
                              Margin="10, 10, 10, 10"
                              SelectionMode="None"
+                             Scrolled="OnCollectionViewScrolled"
                              VerticalScrollBarVisibility="Never"
                              SelectedItem="{Binding SelectedRequest}"                            
                              ItemsSource="{Binding RequestInfos, Mode=TwoWay}"
@@ -338,7 +286,99 @@
                                    IsVisible="{Binding Empty}"/>
                         </Grid>
                         
-                        <pancakeView:PancakeView x:Name="bottomMenu" CornerRadius="50,50,0,0"
+                       
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+
+
+        </StackLayout>
+        </ScrollView>
+                <pancakeView:PancakeView Margin="10, 10, 10, 0"
+                                         Padding="10,10,10,10"
+                                         CornerRadius="20"
+                                         x:Name="BackStackLayout"
+                                         HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"  MinimumHeightRequest="40">
+                 <StackLayout
+                     Orientation="Horizontal"
+                     >
+                     <Label
+                            Text="{x:Static xamarinJkh:AppResources.App_NavBar}"
+                            FontSize="23"
+                            MinimumWidthRequest="100"
+                            x:Name="LabelTitle"
+                            TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center" />
+                        <StackLayout Orientation="Horizontal" x:Name="LayoutFilter" HorizontalOptions="FillAndExpand" >
+                            <pancakeView:PancakeView HasShadow="{AppThemeBinding Light=false, Dark=true}" 
+                                                 BorderColor="{Binding hex}" 
+                                                 BorderThickness="1" 
+                                                 x:Name="ViewSearch"
+                                                 Padding="{x:OnPlatform Android=10, iOS=0}" 
+                                                 Margin="10,0" 
+                                                 CornerRadius="10" 
+                                                 WidthRequest="{x:OnPlatform Android=300, iOS=400}" 
+                                                 HeightRequest="{x:OnPlatform Android=40, iOS=50}" 
+                                                 HorizontalOptions="EndAndExpand" 
+                                                 VerticalOptions="Center"
+                                                  >
+                                <pancakeView:PancakeView.BackgroundColor>
+                                    <Color>
+                                        <x:Arguments>
+                                            <x:Double>1</x:Double>
+                                            <x:Double>1</x:Double>
+                                            <x:Double>1</x:Double>
+                                            <x:Double>0.5</x:Double>
+                                        </x:Arguments>
+                                    </Color>
+                                </pancakeView:PancakeView.BackgroundColor>
+                                <xamarinJkh:BordlessEditor 
+                                    BackgroundColor="Transparent"
+                                                           x:Name="filter"
+                                                           AutoSize="Disabled" 
+                                    Placeholder="Поиск..." 
+                                                           HorizontalOptions="FillAndExpand" 
+                                                           VerticalOptions="CenterAndExpand"
+                                    FontSize="14" 
+                                                           TextChanged="filter_TextChanged" 
+                                    MinimumWidthRequest="{x:OnPlatform Android=280, iOS=380}" 
+                                    WidthRequest="{x:OnPlatform Android=280, iOS=380}">
+                                </xamarinJkh:BordlessEditor>
+                            </pancakeView:PancakeView>
+                            <pancakeView:PancakeView x:Name="buttonFilter" HasShadow="{AppThemeBinding Light=false, Dark=true}" BorderColor="{Binding hex}" 
+                                                BorderThickness="1" CornerRadius="10" 
+                                                 HeightRequest="40" 
+                                                 WidthRequest="40" 
+                                                 Padding="10" 
+                                                 VerticalOptions="Center" HorizontalOptions="End">
+                                <pancakeView:PancakeView.BackgroundColor>
+                                    <Color>
+                                        <x:Arguments>
+                                            <x:Double>1</x:Double>
+                                            <x:Double>1</x:Double>
+                                            <x:Double>1</x:Double>
+                                            <x:Double>0.5</x:Double>
+                                        </x:Arguments>
+                                    </Color>
+                                </pancakeView:PancakeView.BackgroundColor>
+                                <svg:SvgCachedImage 
+                                                Source="resource://xamarinJKH.Resources.ic_filter.svg"
+                                                HeightRequest="35"
+                                                WidthRequest="35"
+                                                BackgroundColor="Transparent"
+                                                ReplaceStringMap="{Binding ChangeTheme, Converter={x:StaticResource SvgColor}}"                                        
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center" >
+                                </svg:SvgCachedImage>
+                            </pancakeView:PancakeView>
+                        </StackLayout>
+                        
+                    </StackLayout>
+                </pancakeView:PancakeView>
+                </Grid>
+         <pancakeView:PancakeView x:Name="bottomMenu" CornerRadius="50,50,0,0"
                                                  BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
                                                  Padding="0,10,0,2"
                                                  BorderThickness="1"
@@ -439,11 +479,6 @@
                                 </StackLayout>
                             </StackLayout>
                         </pancakeView:PancakeView>
-                    </StackLayout>
-                </StackLayout>
-            </Grid>
-
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

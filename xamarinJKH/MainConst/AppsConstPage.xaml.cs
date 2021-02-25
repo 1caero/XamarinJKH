@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,6 +13,7 @@ using Microsoft.AppCenter.Analytics;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.AppsConst;
@@ -143,9 +146,13 @@ namespace xamarinJKH.MainConst
         {
             InitializeComponent();
             IsPass = isPass;
+            
             CanDoMassOps = !Settings.MobileSettings.disableBulkRequestsClosing;
-            ViewSearch.BackgroundColor = System.Drawing.Color.FromArgb(200, System.Drawing.Color.White);
-            buttonFilter.BackgroundColor = System.Drawing.Color.FromArgb(200, System.Drawing.Color.White);
+        
+            
+            BackStackLayout.SetAppThemeColor(BackgroundColorProperty,
+                System.Drawing.Color.Transparent,
+                System.Drawing.Color.FromArgb(200, System.Drawing.Color.Black));
             Resources["hexColor"] = (Color)Application.Current.Resources["MainColor"];
             Analytics.TrackEvent("Заявки сотрудника " + Settings.Person.Login);
             NavigationPage.SetHasNavigationBar(this, false);
@@ -664,6 +671,25 @@ namespace xamarinJKH.MainConst
                     RequestInfos.Add(each);
                     }));
                 }
+        }
+        
+        void OnCollectionViewScrolled(object sender, ItemsViewScrolledEventArgs e)
+        {
+            if (e.VerticalDelta > 0)
+            {
+                Device.BeginInvokeOnMainThread((() =>
+                {
+                    double scrollY = MainScrollView.ScrollY;
+                    MainScrollView.ScrollToAsync(0, scrollY + e.VerticalOffset, false);
+                }));
+            }
+            Console.WriteLine("NIC_HorizontalDelta: "+ e.HorizontalDelta.ToString(CultureInfo.InvariantCulture));
+            Console.WriteLine("NIC_VerticalDelta: " + e.VerticalDelta.ToString(CultureInfo.InvariantCulture));
+            Console.WriteLine("NIC_HorizontalOffset: " + e.HorizontalOffset.ToString(CultureInfo.InvariantCulture));
+            Console.WriteLine("NIC_VerticalOffset: " + e.VerticalOffset.ToString(CultureInfo.InvariantCulture));
+            Console.WriteLine("NIC_FirstVisibleItemIndex: " + e.FirstVisibleItemIndex.ToString());
+            Console.WriteLine("NIC_CenterItemIndex: " + e.CenterItemIndex.ToString());
+            Console.WriteLine("NIC_LastVisibleItemIndex: " + e.LastVisibleItemIndex.ToString());
         }
     }
 }
