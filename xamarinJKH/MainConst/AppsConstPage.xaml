@@ -298,10 +298,12 @@
                                          Padding="10,10,10,10"
                                          CornerRadius="20"
                                          x:Name="BackStackLayout"
-                                         HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"  MinimumHeightRequest="40">
+                                         HorizontalOptions="Start" VerticalOptions="StartAndExpand"  MinimumHeightRequest="40">
                  <StackLayout
                      Orientation="Horizontal"
+                     HorizontalOptions="Fill"
                      >
+                     
                      <Label
                             Text="{x:Static xamarinJkh:AppResources.App_NavBar}"
                             FontSize="23"

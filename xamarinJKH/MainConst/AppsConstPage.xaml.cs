@@ -423,6 +423,7 @@ namespace xamarinJKH.MainConst
             {
                 LabelTitle.Text = AppResources.NavBarPassApp;
                 LayoutFilter.IsVisible = false;
+                Pancake.Margin = new Thickness(25, 60, 15, 0);
                 bottomMenu.IsVisible = false;
             }
             else
