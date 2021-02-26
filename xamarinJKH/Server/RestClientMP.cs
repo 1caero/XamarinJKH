@@ -729,6 +729,10 @@ namespace xamarinJKH.Server
 
         public async Task<RequestList> GetRequestsListConst()
         {
+            string OS = Device.RuntimePlatform;
+            if (OS.ToLower() == "ios")
+                await Task.Delay(500);
+
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             RestRequest restRequest = new RestRequest(REQUEST_LIST_CONST, Method.GET);
             restRequest.RequestFormat = DataFormat.Json;

@@ -16,37 +16,51 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Grid>
-            <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never" x:Name="MainScrollView">
-        <StackLayout  VerticalOptions="FillAndExpand">
-            <Grid  VerticalOptions="FillAndExpand">
-                <Image x:Name="ImageFon"
+        <StackLayout Spacing="0">
+            <StackLayout IsVisible="{OnPlatform Android=false, iOS=true}" x:Name="iosPanel"  BackgroundColor="{AppThemeBinding Dark=Black, Light=White}" >
+                
+            </StackLayout>
+            <Grid x:Name="Pancake">
+               <!--<StackLayout VerticalOptions="FillAndExpand"  x:Name="MainScrollView">-->
+
+                <StackLayout x:Name="commGrid" VerticalOptions="FillAndExpand">
+                    <!--<Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>-->
+                    
+                        <Grid x:Name="commGrid1" VerticalOptions="FillAndExpand" MinimumHeightRequest="500" >
+                            <Image x:Name="ImageFon"
                        Source="{AppThemeBinding Light=ic_app_top_light, Dark=ic_app_top}"
                        VerticalOptions="Start"
                        Margin="0,0,0,0"
                        Aspect="{OnPlatform Android=Fill, iOS=AspectFill}"
                        HorizontalOptions="FillAndExpand" />
-                <StackLayout  VerticalOptions="FillAndExpand">
-                    <StackLayout
-                        Margin="25,90,15,0"
+                            <StackLayout
+                        Margin="25,70,15,0"
                         Orientation="Horizontal"
-                        x:Name="Pancake">
-                        <Label x:Name="UkName"  VerticalOptions="Center"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="Start"
+                           x:Name="ukNameStack"
+                            HeightRequest="40">
+                                <Label x:Name="UkName"  VerticalOptions="Center"
                                Text="Название"
                                FontAttributes="Bold"
                                HorizontalOptions="StartAndExpand"
                                FontSize="15"
                                TextColor="{AppThemeBinding Light=Black, Dark=White}" />
-                        <StackLayout
+                                <StackLayout
                             HorizontalOptions="EndAndExpand"                            
                             Orientation="Horizontal">
-                            <xamarinJkh:ButtonSupport x:Name="LabelTech"></xamarinJkh:ButtonSupport>
-                            <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
-                        </StackLayout>
-                    </StackLayout>
-                   
-                    <StackLayout VerticalOptions="FillAndExpand" >
+                                    <xamarinJkh:ButtonSupport x:Name="LabelTech"></xamarinJkh:ButtonSupport>
+                                    <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
+                                </StackLayout>
+                            </StackLayout>
+                        </Grid>
+                    
+                        <!--<StackLayout  VerticalOptions="FillAndExpand">-->
+
+                    <StackLayout x:Name="OrdersStack" VerticalOptions="FillAndExpand" Margin="0,-80,0,0">
                        
                         <Grid  VerticalOptions="FillAndExpand">
                             
@@ -288,13 +302,12 @@
                         
                        
                     </StackLayout>
-                </StackLayout>
-            </Grid>
+                <!--</StackLayout>-->
+            </StackLayout>
 
 
-        </StackLayout>
-        </ScrollView>
-                <pancakeView:PancakeView Margin="10, 10, 10, 0"
+        <!--</StackLayout>-->
+               <pancakeView:PancakeView Margin="10, 0, 10, 0"
                                          Padding="10,10,10,10"
                                          CornerRadius="20"
                                          x:Name="BackStackLayout"
@@ -351,8 +364,8 @@
                             </pancakeView:PancakeView>
                             <pancakeView:PancakeView x:Name="buttonFilter" HasShadow="{AppThemeBinding Light=false, Dark=true}" BorderColor="{Binding hex}" 
                                                 BorderThickness="1" CornerRadius="10" 
-                                                 HeightRequest="40" 
-                                                 WidthRequest="40" 
+                                                 HeightRequest="30" 
+                                                 WidthRequest="30" 
                                                  Padding="10" 
                                                  VerticalOptions="Center" HorizontalOptions="End">
                                 <pancakeView:PancakeView.BackgroundColor>
@@ -367,8 +380,8 @@
                                 </pancakeView:PancakeView.BackgroundColor>
                                 <svg:SvgCachedImage 
                                                 Source="resource://xamarinJKH.Resources.ic_filter.svg"
-                                                HeightRequest="35"
-                                                WidthRequest="35"
+                                                HeightRequest="25"
+                                                WidthRequest="25"
                                                 BackgroundColor="Transparent"
                                                 ReplaceStringMap="{Binding ChangeTheme, Converter={x:StaticResource SvgColor}}"                                        
                                                 HorizontalOptions="Center"
@@ -379,14 +392,13 @@
                         
                     </StackLayout>
                 </pancakeView:PancakeView>
-                </Grid>
-         <pancakeView:PancakeView x:Name="bottomMenu" CornerRadius="50,50,0,0"
+            </Grid>
+            <pancakeView:PancakeView x:Name="bottomMenu" CornerRadius="50,50,0,0"
                                                  BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
                                                  Padding="0,10,0,2"
                                                  BorderThickness="1"
                                                  Margin="0"
-                                                 VerticalOptions="End"
-                                                 >
+                                                 VerticalOptions="End">
                             <StackLayout>
                                 <StackLayout Orientation="Horizontal"
                                              IsVisible="False"

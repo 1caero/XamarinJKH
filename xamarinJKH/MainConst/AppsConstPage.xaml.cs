@@ -140,6 +140,8 @@ namespace xamarinJKH.MainConst
             }
         }
 
+        
+
         public bool CanDoMassOps = false;
         public bool IsPass = false;
         public AppsConstPage(bool isPass)
@@ -161,8 +163,15 @@ namespace xamarinJKH.MainConst
             {
                 case Device.iOS:
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
-                    Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
-                    additionalList.HeightRequest = 3000;
+                    //Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
+
+                    iosPanel.HeightRequest = statusBarHeight;
+                    //additionalList.HeightRequest = 6000;
+                    //commGrid1.MinimumHeightRequest = ImageFon.Height;
+
+                    //OrdersStack.Margin =  DeviceDisplay.MainDisplayInfo.Width < 700 ?  new Thickness(0, -80, 0, 0) : new Thickness(0, -160, 0, 0);
+
+                    
                     break;
                 default:
                     break;
@@ -395,10 +404,17 @@ namespace xamarinJKH.MainConst
 
         public Command ChangeTheme { get; set; }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
+            if (Device.RuntimePlatform == Device.Android)
+                await Task.Delay(500);
+
+            var delta =  OrdersStack.Y - ukNameStack.Y;
+            if (delta != 40)                
+              Device.BeginInvokeOnMainThread(() => { OrdersStack.Margin = new Thickness(OrdersStack.Margin.Left, OrdersStack.Margin.Top - delta +40, OrdersStack.Margin.Right, OrdersStack.Margin.Bottom); });
+            
             SetReaded();
 
             if (bottomMenu.VerticalOptions.Alignment != LayoutAlignment.End)
@@ -423,7 +439,7 @@ namespace xamarinJKH.MainConst
             {
                 LabelTitle.Text = AppResources.NavBarPassApp;
                 LayoutFilter.IsVisible = false;
-                Pancake.Margin = new Thickness(25, 60, 15, 0);
+                //Pancake.Margin = new Thickness(25, 60, 15, 0);
                 bottomMenu.IsVisible = false;
             }
             else
@@ -673,16 +689,23 @@ namespace xamarinJKH.MainConst
                     }));
                 }
         }
-        
+
+        //static double lastPos = 0;
         void OnCollectionViewScrolled(object sender, ItemsViewScrolledEventArgs e)
         {
-            if (e.VerticalDelta > 0)
-            {
+            if (e.VerticalOffset >= 0)
+            {                
                 Device.BeginInvokeOnMainThread((() =>
                 {
-                    double scrollY = MainScrollView.ScrollY;
-                    MainScrollView.ScrollToAsync(0, scrollY + e.VerticalOffset, false);
-                }));
+                    var top = ImageFon.Height > e.VerticalOffset ? -e.VerticalOffset : -ImageFon.Height;
+                    commGrid1.Margin = new Thickness(0, top, 0, 0);
+                //OrdersStack.Margin = t;
+                //ImageFon.Margin = new Thickness(0, lastPos, 0, 0);
+                //companyStack.Margin= new Thickness(25, 80+lastPos, 15, 0);
+
+                //double scrollY = MainScrollView.ScrollY;
+                //MainScrollView.ScrollToAsync(0, scrollY + e.VerticalOffset, false);
+            }));
             }
         }
     }
