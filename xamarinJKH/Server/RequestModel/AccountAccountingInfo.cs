@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Xamarin.Forms;
 using xamarinJKH.Utils;
 using xamarinJKH.ViewModels;
@@ -77,11 +79,60 @@ namespace xamarinJKH.Server.RequestModel
         public decimal Sum { get; set; }
     }
 
-    public class AccountingInfoModel
+    public class AccountingInfoModel: BaseViewModel
     {
         public List<AccountAccountingInfo> AllAcc { get; set; }
         public AccountAccountingInfo SelectedAcc { get; set; }
+
+        public double HeightCollections { get; set; } = 35;
         public Color hex { get; set; }
+        public ObservableCollection<PaymentSystem> PaymentSystems { get; set; } = new ObservableCollection<PaymentSystem>();
+        private RestClientMP server = new RestClientMP();
+
+        private PaymentSystem _selectedSystem;
+
+        public PaymentSystem SelectedSystem
+        {
+            get => _selectedSystem;
+            set
+            {
+                if (value != null) _selectedSystem = value;
+                OnPropertyChanged("SelectedSystem");
+            }
+        }
+
+        public Command LoadPaymentSystem { get; set; }
+        public AccountingInfoModel(CollectionView collectionView)
+        {
+            LoadPaymentSystem = new Command(async () =>
+            {
+                List<PaymentSystem> paymentSystemsList = await server.GetPaymentSystemsList();
+                if (paymentSystemsList != null && paymentSystemsList.Count > 0)
+                {
+                    if(!RestClientMP.SERVER_ADDR.Contains("komfortnew"))
+                        paymentSystemsList[0].Check = true;
+                    else
+                    {
+                        PaymentSystem firstOrDefault = paymentSystemsList.FirstOrDefault(x => x.Name.ToLower().Equals("sber"));
+                        if (firstOrDefault != null) firstOrDefault.Check = true;
+                    }
+                    collectionView.HeightRequest = 35 * paymentSystemsList.Count;
+                    Device.BeginInvokeOnMainThread((() =>
+                    {
+                       
+                        foreach (var each in paymentSystemsList)
+                        {
+                            PaymentSystems.Add(each);
+                        }
+                    }));
+                }
+            });
+            
+            LoadPaymentSystem.Execute(null);
+            
+            
+        }
+        
         
     }
     

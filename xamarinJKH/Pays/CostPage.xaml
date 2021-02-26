@@ -5,6 +5,7 @@
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.Pays.CostPage">
     <ContentPage.Content>
@@ -31,10 +32,10 @@
                         <StackLayout
                             HorizontalOptions="EndAndExpand"
                             Orientation="Horizontal">
-                            <xamarinJkh:ButtonSupport x:Name="LabelTech"></xamarinJkh:ButtonSupport>
-                            <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
+                            <xamarinJkh:ButtonSupport x:Name="LabelTech" />
+                            <xamarinJkh:ButtonProfile x:Name="IconViewProfile" Margin="2,0,5,0" />
 
-                           
+
                         </StackLayout>
                     </StackLayout>
                     <StackLayout
@@ -82,7 +83,7 @@
                                             FontAttributes="Bold"
                                             FontSize="17" />
                                         <StackLayout Spacing="0">
-                                            <StackLayout 
+                                            <StackLayout
                                                 x:Name="StackLayoutLs"
                                                 Orientation="Horizontal">
                                                 <xamarinJkh:BorderlessPicker x:Name="Picker" Title="Выбор"
@@ -137,10 +138,8 @@
                                                 VerticalOptions="Center" />
                                             <StackLayout x:Name="LayoutEntry"
                                                          VerticalOptions="End"
-                                                         HorizontalOptions="FillAndExpand">
-                                                
-                                            </StackLayout>
-                                            
+                                                         HorizontalOptions="FillAndExpand" />
+
                                             <Label
                                                 Text="руб."
                                                 FontSize="12"
@@ -148,7 +147,7 @@
                                                 Margin="-5, 0, 0, 0"
                                                 VerticalOptions="Center" />
                                         </StackLayout>
-                                       
+
                                         <StackLayout
                                             Orientation="Horizontal">
                                             <Label
@@ -160,10 +159,54 @@
                                                 x:Name="Labelseparator"
                                                 HeightRequest="2"
                                                 Margin="-10, 0, 0, 0"
-                                                BackgroundColor="Red"
+                                                BackgroundColor="{x:DynamicResource MainColor}"
                                                 HorizontalOptions="FillAndExpand" />
-
                                         </StackLayout>
+
+                                        <StackLayout Margin="0,10,0,0">
+                                            <Label
+                                                TextColor="Black"
+                                                Text="Платежная система:" />
+                                            <StackLayout Margin="15,0,0,0" x:Name="LayoutPaymentSystem">
+                                                <CollectionView
+                                                    x:Name="PayServiceList"
+                                                    HorizontalScrollBarVisibility="Never"
+                                                    Margin="10, 0, 10, 0"
+                                                    SelectionMode="None"
+                                                    VerticalScrollBarVisibility="Never"
+                                                    ItemsSource="{Binding PaymentSystems, Mode=TwoWay}"
+                                                    VerticalOptions="Start">
+                                                    <CollectionView.ItemsLayout>
+                                                        <GridItemsLayout Orientation="Vertical"
+                                                                         VerticalItemSpacing="5" />
+                                                    </CollectionView.ItemsLayout>
+                                                    <CollectionView.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackLayout Padding="{OnPlatform iOS='2'}"
+                                                                         Orientation="Horizontal">
+                                                                <RadioButton ClassId="1"
+                                                                             IsChecked="{Binding Check, Mode=TwoWay}"
+                                                                             GroupName="PaymentSystem" />
+                                                                <Image
+                                                                    HeightRequest="25"
+                                                                    WidthRequest="25"
+                                                                    VerticalOptions="Center"
+                                                                    Source="{Binding UriImageSource}" />
+                                                                <Label TextColor="Black"
+                                                                       VerticalOptions="Center"
+                                                                       Text="{Binding DisplayName}" />
+                                                            </StackLayout>
+                                                        </DataTemplate>
+                                                    </CollectionView.ItemTemplate>
+                                                </CollectionView>
+                                            </StackLayout>
+                                            <Label
+                                                HeightRequest="1"
+                                                Margin="0, 0, 0, 0"
+                                                BackgroundColor="Black"
+                                                HorizontalOptions="FillAndExpand" />
+                                        </StackLayout>
+
                                         <StackLayout
                                             Margin="5,0,0,0"
                                             x:Name="LayoutInsurance"
@@ -190,7 +233,7 @@
                                                x:Name="InsuranceDoc"
                                                TextColor="{x:StaticResource MainColor}">
                                             <Label.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="OpenInsuranceInfo"/>
+                                                <TapGestureRecognizer Tapped="OpenInsuranceInfo" />
                                             </Label.GestureRecognizers>
                                         </Label>
                                         <Label
@@ -251,7 +294,8 @@
 
                 </StackLayout>
             </Grid>
-            <pancakeView:PancakeView x:Name="GoodsLayot" CornerRadius="50,50,0,0" BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
+            <pancakeView:PancakeView x:Name="GoodsLayot" CornerRadius="50,50,0,0"
+                                     BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
                                      Padding="0,20,0,10"
                                      BorderThickness="1"
                                      HasShadow="{AppThemeBinding Light=false, Dark=true}"
@@ -315,7 +359,7 @@
                                     Text="{x:Static xamarinJkh:AppResources.Bills}"
                                     FontSize="12"
                                     Padding="0"
-                                    
+
                                     FontAttributes="Bold"
                                     TextColor="White"
                                     Clicked="openSaldo"

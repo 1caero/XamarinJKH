@@ -19,10 +19,11 @@ namespace xamarinJKH.Pays
     {
         private RestClientMP server = new RestClientMP();
         private int? idRequset;
-
-        public PayServicePage(string ident, decimal sum, int? idRequset = null, bool isInsurance= false)
+        private PaymentSystem paymentSystem = null;
+        public PayServicePage(string ident, decimal sum, int? idRequset = null, bool isInsurance= false, PaymentSystem paymentSystem = null)
         {
             this.idRequset = idRequset;
+            this.paymentSystem = paymentSystem;
             InitializeComponent();
             Analytics.TrackEvent("Шлюз оплаты по лс" + ident);
             NavigationPage.SetHasNavigationBar(this, false);
@@ -72,7 +73,7 @@ namespace xamarinJKH.Pays
             };
             await Loading.Instance.StartAsync(async progress =>
             {
-                PayService payLink = await server.GetPayLink(ident, sum, isInsurance);
+                PayService payLink = await server.GetPayLink(ident, sum, isInsurance, paymentSystem?.Name);
                 if (payLink.payLink != null)
                 {
                     Device.BeginInvokeOnMainThread(async () => webView.Source = payLink.payLink);

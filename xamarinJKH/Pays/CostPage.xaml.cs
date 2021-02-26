@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,11 +29,13 @@ namespace xamarinJKH.Pays
         
         public string svg { get; set; }
         private Entry EntrySum = new Entry();
+        private AccountingInfoModel _model;
         public CostPage(AccountAccountingInfo account, List<AccountAccountingInfo> accounts)
         {
             this.account = account;
             Accounts = accounts;
             InitializeComponent();
+            GetPaymentList();
             Analytics.TrackEvent("Оплата по ЛС " + account.Ident);
 
             var profile = new TapGestureRecognizer();
@@ -142,7 +145,7 @@ namespace xamarinJKH.Pays
             var openHistory = new TapGestureRecognizer();
             openHistory.Tapped += async (s, e) => { if (Navigation.NavigationStack.FirstOrDefault(x => x is HistoryPayedPage) == null) await Navigation.PushAsync(new HistoryPayedPage(Accounts)); };
             FrameBtnHistory.GestureRecognizers.Add(openHistory);
-            BindingContext = new AccountingInfoModel()
+            BindingContext =_model= new AccountingInfoModel(PayServiceList)
             {
                 AllAcc = Accounts,
                 hex = (Color)Application.Current.Resources["MainColor"]
@@ -150,12 +153,19 @@ namespace xamarinJKH.Pays
             SetText();
         }
 
+      
+
+        async void GetPaymentList()
+        {
+           
+            
+        }
         void SetText()
         {
             UkName.Text = Settings.MobileSettings.main_name;
            
             Picker.Title = account.Ident;
-            Labelseparator.BackgroundColor = (Color)Application.Current.Resources["MainColor"];
+            
             FrameBtnLogin.BackgroundColor = (Color)Application.Current.Resources["MainColor"];
             LabelSaldos.TextColor = (Color)Application.Current.Resources["MainColor"];
             LabelHistory.TextColor = (Color)Application.Current.Resources["MainColor"];
@@ -358,7 +368,7 @@ namespace xamarinJKH.Pays
         private async void Pay(object sender, EventArgs e)
         {
             string sumText = EntrySum.Text;
-            
+            PaymentSystem paymentSystem = _model.PaymentSystems.FirstOrDefault(x => x.Check);
             if (!sumText.Equals("") && !sumText.Equals("0") && !sumText.Equals("-"))
             {
                 decimal sumPay = -1; // Decimal.Parse(sumText);
@@ -391,7 +401,7 @@ namespace xamarinJKH.Pays
                 if (sumPay > 0)
                 {
                     if (Navigation.NavigationStack.FirstOrDefault(x => x is PayServicePage) == null)
-                        await Navigation.PushAsync(new PayServicePage(account.AccountID, sumPay, null, SwitchInsurance.IsToggled && SwitchInsurance.IsVisible));
+                        await Navigation.PushAsync(new PayServicePage(account.AccountID, sumPay, null, SwitchInsurance.IsToggled && SwitchInsurance.IsVisible, paymentSystem));
                 }
                 else
                 {
