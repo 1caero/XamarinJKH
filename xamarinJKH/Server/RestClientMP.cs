@@ -198,6 +198,8 @@ namespace xamarinJKH.Server
                 "OSS/ValidateCheckCode"; // Проверка кода из смс и установка пин-кода аккаунта (если проверка пройдена).
 
         public const string PAY_ONLINE = "PayOnline/GetPayLink"; // Метод возвращает ссылку на оплату
+        public const string GET_PAYMENT_LIST = "PayOnline/GetPaymentSystemsList"; // Метод возвращает список доступных систем оплаты
+        public const string GET_PAYMENT_IMAGE = "Public/PaymentSystemImage"; // Возвращает изображение для системы оплаты возвращаемой методом GetPaymentSystemsList по указанному name 
 
         public const string
             SEND_CODE = "RequestsDispatcher/CheckPaidRequestCompleteCode"; //Проверка кода подтверждения заказа
@@ -1314,7 +1316,8 @@ namespace xamarinJKH.Server
             }
 
             return response.RawBytes;
-        } public async Task<byte[]> GetFileAPP_Tech(string id)
+        } 
+        public async Task<byte[]> GetFileAPP_Tech(string id)
         {
             RestClient restClientMp = new RestClient(GET_TECH_FILE);
             RestRequest restRequest = new RestRequest("", Method.GET);
@@ -2542,7 +2545,7 @@ namespace xamarinJKH.Server
             return response.Data;
         }
 
-        public async Task<PayService> GetPayLink(string accountID, decimal Sum, bool PayInsurance = false, List<int> Services = null)
+        public async Task<PayService> GetPayLink(string accountID, decimal Sum, bool PayInsurance = false, string PaymentSystem = null,  List<int> Services = null)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             RestRequest restRequest = new RestRequest(PAY_ONLINE, Method.POST);
@@ -2555,7 +2558,8 @@ namespace xamarinJKH.Server
                 accountID,
                 Sum,
                 Services,
-                PayInsurance
+                PayInsurance,
+                PaymentSystem
             });
             var response = await restClientMp.ExecuteTaskAsync<PayService>(restRequest);
             // Проверяем статус
@@ -2569,11 +2573,44 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
+        public async Task<List<PaymentSystem>> GetPaymentSystemsList ()
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(GET_PAYMENT_LIST, Method.GET);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            var response = await restClientMp.ExecuteTaskAsync<List<PaymentSystem>>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return null;
+            }
 
+            return response.Data;
+        }
+        public async Task<byte[]> PaymentSystemImage(string name)
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(GET_PAYMENT_IMAGE + "/" + name, Method.GET);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            var response = restClientMp.Execute(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return null;
+            }
+
+            return response.RawBytes;
+        } 
         public async Task<PayService> GetPayLink(int? PaidRequestId, decimal Sum)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
-            RestRequest restRequest = new RestRequest(PAY_ONLINE, Method.POST);
+            RestRequest restRequest = new RestRequest(GET_PAYMENT_LIST, Method.POST);
             restRequest.RequestFormat = DataFormat.Json;
             restRequest.AddHeader("client", Device.RuntimePlatform);
             restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);

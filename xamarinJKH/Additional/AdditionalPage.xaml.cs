@@ -270,7 +270,7 @@ namespace xamarinJKH.Additional
                 StackLayout containerAdd = new StackLayout();
                 containerAdd.HorizontalOptions = LayoutOptions.FillAndExpand;
                 containerAdd.Orientation = StackOrientation.Horizontal;
-                foreach (var service in Settings.EventBlockData.AdditionalServicesByGroups[group].Where(x => !x.ShowInAdBlock.ToLower().Equals("не отображать")))
+                foreach (var service in Settings.EventBlockData.AdditionalServicesByGroups[group].Where(x => !x.NotNullShowInAdBlock.ToLower().Equals("не отображать")))
                 {
                    
                     StackLayout stackLayoutCon = new StackLayout()
