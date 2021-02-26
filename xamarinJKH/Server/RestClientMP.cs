@@ -28,7 +28,7 @@ namespace xamarinJKH.Server
         // public const string SERVER_ADDR = "https://api.sm-center.ru/vodokanal_narof"; // Водоканал
         //public const string SERVER_ADDR = "https://api.sm-center.ru/uk_egokomfort"; // Эгокомфорт
         // public const string SERVER_ADDR = "https://api.sm-center.ru/tsg_sivtsev_vrazhek14"; // ТСЖ Сивцев Вражек 14
-        public const string SERVER_ADDR = "https://api.sm-center.ru/ooo_zip"; // ЗИП
+        // public const string SERVER_ADDR = "https://api.sm-center.ru/ooo_zip"; // ЗИП
         // public const string SERVER_ADDR = "https://api.sm-center.ru/ukom"; // УК Огни Москвы
         //public const string SERVER_ADDR = "https://api.sm-center.ru/tsg_svyato-troitskii15"; // УК Свято троицк
         //public const string SERVER_ADDR = "https://api.sm-center.ru/ooo_uk_rks"; // УК РКС
