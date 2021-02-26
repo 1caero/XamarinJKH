@@ -91,6 +91,8 @@ namespace xamarinJKH.Server.RequestModel
         public int? id_Account { get; set; }
         public bool CanBeOrdered { get; set; }
         public string ShowInAdBlock { get; set; }
+
+        public string NotNullShowInAdBlock => string.IsNullOrWhiteSpace(ShowInAdBlock) ? "" : ShowInAdBlock;
         public string ShopName { get; set; }
         public int? ShopID { get; set; }
         string lat;
