@@ -94,6 +94,7 @@ namespace xamarinJKH.ViewModels.Main
         public AppsPageViewModel()
         {
             Requests = new ObservableCollection<RequestInfo>();
+            AllRequests = new List<RequestInfo>();
             MessagingCenter.Subscribe<Object, int>(this, "SetAppRead", (sender, args) =>
             {
                 IEnumerable<RequestInfo> requestInfos = _requests.Where(x => x.ID == args);
@@ -120,7 +121,7 @@ namespace xamarinJKH.ViewModels.Main
                     IsRefreshing = true;
                 }
                 var response = await Server.GetRequestsList();
-                AllRequests = new List<RequestInfo>();
+                //AllRequests = new List<RequestInfo>();
                 if (response.Error != null)
                 {
                     ShowError(response.Error);
@@ -140,15 +141,15 @@ namespace xamarinJKH.ViewModels.Main
                                 Empty = Requests.Count == 0;
                                 Requests = new ObservableCollection<RequestInfo>();
                             }
-                            Device.BeginInvokeOnMainThread(() =>
-                            {
+                            //Device.BeginInvokeOnMainThread(() =>
+                            //{
                             Requests.Clear();
                             foreach (var App in AllRequests.Where(x => x.IsClosed == ShowClosed))
                             {
                                     if (!Requests.Where(o => o.ID == App.ID).Any())
                                         Requests.Add(App);
                             }
-                            });
+                            //});
                         }
 
                         MessagingCenter.Subscribe<Object, string>(this, "AddIdent", (sender, args) => LoadRequests.Execute(null));
