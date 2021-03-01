@@ -151,6 +151,11 @@ namespace xamarinJKH.Pays
                 hex = (Color)Application.Current.Resources["MainColor"]
             };
             SetText();
+            
+            if (!RestClientMP.SERVER_ADDR.Contains("komfortnew"))
+            {
+                LayoutPaymentService.IsVisible = false;
+            }
         }
 
       

@@ -344,6 +344,7 @@ namespace xamarinJKH.MainConst
                             };
                             await Loading.Instance.StartAsync(async progress =>
                             {
+                                Analytics.TrackEvent("Календарь выбора дня");
                                 var ret = await Dialog.Instance.ShowAsync<CalendarDayDialog>(new
                                 {
                                     HexColor = hex
@@ -384,7 +385,8 @@ namespace xamarinJKH.MainConst
                                   DefaultMessage = "",
                               };
                               await Loading.Instance.StartAsync(async progress =>
-                              {                                  
+                              {         
+                                  Analytics.TrackEvent("Календарь выбора недель");
                                   var ret = await Dialog.Instance.ShowAsync<CalendarWeekDialog>(new
                                   {
                                       HexColor = hex
@@ -434,6 +436,7 @@ namespace xamarinJKH.MainConst
                             };
                             await Loading.Instance.StartAsync(async progress =>
                             {
+                                Analytics.TrackEvent("Календарь выбора месяца");
                                 var ret = await Dialog.Instance.ShowAsync<CalendarMonthDialog>(new
                                 {
                                     HexColor = hex

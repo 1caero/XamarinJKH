@@ -163,10 +163,10 @@
                                                 HorizontalOptions="FillAndExpand" />
                                         </StackLayout>
 
-                                        <StackLayout Margin="0,10,0,0">
+                                        <StackLayout x:Name="LayoutPaymentService" Margin="0,10,0,0">
                                             <Label
                                                 TextColor="Black"
-                                                Text="Платежная система:" />
+                                                Text="{x:Static xamarinJkh:AppResources.PaymentSystem}" />
                                             <StackLayout Margin="15,0,0,0" x:Name="LayoutPaymentSystem">
                                                 <CollectionView
                                                     x:Name="PayServiceList"
