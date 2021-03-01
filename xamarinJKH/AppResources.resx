@@ -1897,4 +1897,7 @@
   <data name="CompliteApp" xml:space="preserve">
     <value>Выполненные заявки</value>
   </data>
+  <data name="PaymentSystem" xml:space="preserve">
+    <value>Платежная система:</value>
+  </data>
 </root>

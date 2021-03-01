@@ -3790,6 +3790,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Платежная система:.
+        /// </summary>
+        internal static string PaymentSystem {
+            get {
+                return ResourceManager.GetString("PaymentSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  балл(ов).
         /// </summary>
         internal static string PayPoints {

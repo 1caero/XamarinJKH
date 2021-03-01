@@ -1895,4 +1895,7 @@
   <data name="CompliteApp" xml:space="preserve">
     <value>Completed applications</value>
   </data>
+  <data name="PaymentSystem" xml:space="preserve">
+    <value>Payment system: </value>
+  </data>
 </root>

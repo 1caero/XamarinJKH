@@ -1765,4 +1765,7 @@
   <data name="CompliteApp" xml:space="preserve">
     <value>Виконані заявки</value>
   </data>
+  <data name="PaymentSystem" xml:space="preserve">
+    <value>Платіжна система: </value>
+  </data>
 </root>

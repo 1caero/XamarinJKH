@@ -109,13 +109,8 @@ namespace xamarinJKH.Server.RequestModel
                 List<PaymentSystem> paymentSystemsList = await server.GetPaymentSystemsList();
                 if (paymentSystemsList != null && paymentSystemsList.Count > 0)
                 {
-                    if(!RestClientMP.SERVER_ADDR.Contains("komfortnew"))
-                        paymentSystemsList[0].Check = true;
-                    else
-                    {
-                        PaymentSystem firstOrDefault = paymentSystemsList.FirstOrDefault(x => x.Name.ToLower().Equals("sber"));
-                        if (firstOrDefault != null) firstOrDefault.Check = true;
-                    }
+                    paymentSystemsList[0].Check = true;
+                    
                     collectionView.HeightRequest = 35 * paymentSystemsList.Count;
                     Device.BeginInvokeOnMainThread((() =>
                     {
