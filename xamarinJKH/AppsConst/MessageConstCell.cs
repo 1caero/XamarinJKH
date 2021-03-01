@@ -390,8 +390,9 @@ namespace xamarinJKH.AppsConst
             Labeltime.HorizontalTextAlignment = TextAlignment.Start;
             Labeltime.VerticalOptions = LayoutOptions.End;
             Labeltime.HorizontalOptions = LayoutOptions.Start;
-            int margin = message.IsHidden ? -5 : -10;
-            Labeltime.Margin = new Thickness(5, margin, 15, 0);
+            int marginTop = message.IsHidden ? -5 : -10;
+            int marginBottom = Device.RuntimePlatform == Device.iOS ? 30 : 0;
+            Labeltime.Margin = new Thickness(5, marginTop, 15, marginBottom);// new Thickness(5, margin, 15, 0);
 
             containerFioTime.Orientation = StackOrientation.Horizontal;
             containerFioTime.HorizontalOptions = LayoutOptions.FillAndExpand;
