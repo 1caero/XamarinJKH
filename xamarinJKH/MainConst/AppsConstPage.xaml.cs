@@ -225,7 +225,7 @@ namespace xamarinJKH.MainConst
                 }
             });
             // Assuming this function needs to use Main/UI thread to move to your "Main Menu" Page
-            // getApps();
+            getApps();
             ChangeTheme = new Command(async () =>
             {
                 SetAdminName();

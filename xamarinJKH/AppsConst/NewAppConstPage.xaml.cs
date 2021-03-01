@@ -117,6 +117,7 @@ namespace xamarinJKH.AppsConst
             {
                 try
                 {
+                    MessagingCenter.Send<Object>(this, "UpdateAppCons");
                     _ = await Navigation.PopAsync();
                 }
                 catch { }
@@ -577,6 +578,7 @@ namespace xamarinJKH.AppsConst
                         await DisplayAlert(AppResources.AlertSuccess, AppResources.AppCreated, "OK");
                         try
                         {
+                            MessagingCenter.Send<Object>(this, "UpdateAppCons");
                             _ = await Navigation.PopAsync();
                         }
                         catch { }
@@ -626,6 +628,7 @@ namespace xamarinJKH.AppsConst
                         await DisplayAlert(AppResources.AlertSuccess, AppResources.AppCreated, "OK");
                         try
                         {
+                            MessagingCenter.Send<Object>(this, "UpdateAppCons");
                             _ = await Navigation.PopAsync();
                         }
                         catch { }

@@ -239,7 +239,7 @@ namespace xamarinJKH.MainConst
             base.OnCurrentPageChanged();
             var i = Children.IndexOf(CurrentPage);
             if (CurrentPage == appNavBar)
-                MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                // MessagingCenter.Send<Object>(this, "UpdateAppCons");
             if (CurrentPage == monNavBar)
             {
                 MessagingCenter.Send<Object>(this, "StartStatistic");
@@ -277,7 +277,6 @@ namespace xamarinJKH.MainConst
             TokenSource = new CancellationTokenSource();
             Token = TokenSource.Token;
             var Server = new RestClientMP();
-            return;
             if (Settings.Person.UserSettings.disableGeolocation)
             {
                 return;
