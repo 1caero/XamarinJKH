@@ -167,7 +167,7 @@
                                             <Label
                                                 TextColor="Black"
                                                 Text="{x:Static xamarinJkh:AppResources.PaymentSystem}" />
-                                            <StackLayout Margin="15,0,0,0" x:Name="LayoutPaymentSystem">
+                                            <StackLayout Margin="15,0,0,0" x:Name="LayoutPaymentSystem" HeightRequest="100" MinimumHeightRequest="30">
                                                 <CollectionView
                                                     x:Name="PayServiceList"
                                                     HorizontalScrollBarVisibility="Never"
@@ -175,7 +175,7 @@
                                                     SelectionMode="None"
                                                     VerticalScrollBarVisibility="Never"
                                                     ItemsSource="{Binding PaymentSystems, Mode=TwoWay}"
-                                                    VerticalOptions="Start">
+                                                    VerticalOptions="FillAndExpand">
                                                     <CollectionView.ItemsLayout>
                                                         <GridItemsLayout Orientation="Vertical"
                                                                          VerticalItemSpacing="5" />
