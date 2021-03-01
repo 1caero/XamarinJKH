@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AiForms.Dialogs;
@@ -148,7 +149,18 @@ namespace xamarinJKH.AppsConst
                     if (fileName.ToLower().Contains(".jpg") || fileName.ToLower().Contains(".png")
                                                             || fileName.ToLower().Contains(".jpeg")|| fileName.ToLower().Contains(".bmp"))
                     {
-                        Device.BeginInvokeOnMainThread(async () => await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, true)));
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            
+                            if(p.Navigation.ModalStack.FirstOrDefault(x => x is AppConstPage) != null)
+                            {
+                                await p.Navigation.PushModalAsync(new PhotoPage(message.FileID.ToString(), fileName, true));
+                            }
+                            else
+                            {
+                                await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, true));
+                            }
+                        });
                         return;
                     }
                     if (await DependencyService.Get<IFileWorker>().ExistsAsync(fileName))
@@ -456,7 +468,17 @@ namespace xamarinJKH.AppsConst
                     if (fileName.ToLower().Contains(".jpg") || fileName.ToLower().Contains(".png")
                                                             || fileName.ToLower().Contains(".jpeg")|| fileName.ToLower().Contains(".bmp"))
                     {
-                        Device.BeginInvokeOnMainThread(async () => await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, true)));
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            if(p.Navigation.ModalStack.FirstOrDefault(x => x is AppConstPage) != null)
+                            {
+                                await p.Navigation.PushModalAsync(new PhotoPage(message.FileID.ToString(), fileName, true));
+                            }
+                            else
+                            {
+                                await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, true));
+                            }
+                        });
                         return;
                     }
                     if (await DependencyService.Get<IFileWorker>().ExistsAsync(fileName))
