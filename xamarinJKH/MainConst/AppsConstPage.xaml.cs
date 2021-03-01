@@ -214,9 +214,18 @@ namespace xamarinJKH.MainConst
             SetText();
             // additionalList.BackgroundColor = Color.Transparent;
             // additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
-            MessagingCenter.Subscribe<Object>(this, "UpdateAppCons", (sender) => RefreshData());
+            MessagingCenter.Unsubscribe<Object>(this, "UpdateAppCons");
+            MessagingCenter.Subscribe<Object>(this, "UpdateAppCons", async (sender) =>
+            {
+                long seconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                if (seconds - Settings.timeLoadReq > 1000)
+                {
+                    await RefreshData();
+                    Settings.timeLoadReq = seconds;
+                }
+            });
             // Assuming this function needs to use Main/UI thread to move to your "Main Menu" Page
-            getApps();
+            // getApps();
             ChangeTheme = new Command(async () =>
             {
                 SetAdminName();
@@ -250,7 +259,7 @@ namespace xamarinJKH.MainConst
             
         }
 
-     
+       
 
         private void CheckDown(string args)
         {

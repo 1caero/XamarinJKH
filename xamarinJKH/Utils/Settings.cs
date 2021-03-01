@@ -32,7 +32,8 @@ namespace xamarinJKH.Utils
         public static bool AddVisible = true;
         public static bool GoodsIsVisible = false;
         public static int TimerTime = 59;
-
+        public static int coll = 0;
+        public static long timeLoadReq = 0;
         public static bool IsFirsStart = true;
         public static bool ConstAuth = false;
         public static EventBlockData EventBlockData = new EventBlockData();
