@@ -277,6 +277,7 @@ namespace xamarinJKH.MainConst
             TokenSource = new CancellationTokenSource();
             Token = TokenSource.Token;
             var Server = new RestClientMP();
+            return;
             if (Settings.Person.UserSettings.disableGeolocation)
             {
                 return;
