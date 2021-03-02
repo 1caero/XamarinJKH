@@ -228,6 +228,9 @@ namespace xamarinJKH.MainConst
                 }
                 loaded = true;
             });
+
+            
+
             AreasVisible = true;
             GroupVisible = true;
             StreetsVisible = true;
@@ -240,6 +243,7 @@ namespace xamarinJKH.MainConst
         {
             base.OnAppearing();
             Device.BeginInvokeOnMainThread(()=> isRunning = true);
+            MessagingCenter.Send<Object>(this, "StartStatistic");
             //isRunning = false;
             //await StartStatistick();
         }
