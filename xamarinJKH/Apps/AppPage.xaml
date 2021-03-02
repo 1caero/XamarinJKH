@@ -169,15 +169,17 @@
             <Frame CornerRadius="30"
                    Margin="15, -30, 15, 5"
                    BackgroundColor="White"
+                   HorizontalOptions="FillAndExpand"
                    HasShadow="{AppThemeBinding Light=false, Dark=true}"
                    IsVisible="{Binding closeMessages}"
                    BorderColor="{Binding hex}"
                    Padding="15">
                 <StackLayout
                     Spacing="10"
+                    HorizontalOptions="FillAndExpand"
                     Orientation="Horizontal"
                     MinimumHeightRequest="50">
-                    <Grid Padding="0">
+                    <Grid Padding="0" HorizontalOptions="FillAndExpand">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.06*" />
                             <ColumnDefinition Width="0.8*" />

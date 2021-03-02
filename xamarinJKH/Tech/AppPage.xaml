@@ -138,7 +138,7 @@
                     Spacing="10"
                     MinimumHeightRequest="50"
                     Orientation="Horizontal" >
-                    <Grid Padding="0" >
+                    <Grid Padding="0" HorizontalOptions="FillAndExpand" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.06*" />
                             <ColumnDefinition Width="0.8*" />
