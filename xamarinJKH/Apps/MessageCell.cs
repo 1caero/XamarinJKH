@@ -101,7 +101,12 @@ namespace xamarinJKH.Apps
                     if (fileName.ToLower().Contains(".jpg") || fileName.ToLower().Contains(".png")
                                                             || fileName.ToLower().Contains(".jpeg")|| fileName.ToLower().Contains(".bmp"))
                     {
-                        Device.BeginInvokeOnMainThread(async () => await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, false)));
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            var photoPage = new PhotoPage(message.FileID.ToString(), fileName, false, isTech);
+                            await p.Navigation.PushModalAsync(photoPage);
+                        }
+                        );
                         return;
                     }
                     
@@ -323,7 +328,7 @@ namespace xamarinJKH.Apps
                     if (fileName.ToLower().Contains(".jpg") || fileName.ToLower().Contains(".png")
                                                             || fileName.ToLower().Contains(".jpeg")|| fileName.ToLower().Contains(".bmp"))
                     {
-                        Device.BeginInvokeOnMainThread(async () => await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, false)));
+                        Device.BeginInvokeOnMainThread(async () => await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, false,false)));
                         return;
                     }
                     if (await DependencyService.Get<IFileWorker>().ExistsAsync(fileName))

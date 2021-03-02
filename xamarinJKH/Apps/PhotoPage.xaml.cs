@@ -19,7 +19,7 @@ namespace xamarinJKH.Apps
         private RestClientMP server = new RestClientMP();
         private byte[] _file = null;
         private string _fileName = "";
-        public PhotoPage(string idFile, string fileName, bool isConst)
+        public PhotoPage(string idFile, string fileName, bool isConst, bool isTech=false)
         {
             InitializeComponent();
 
@@ -40,17 +40,22 @@ namespace xamarinJKH.Apps
             _fileName = fileName;
             NavigationPage.SetHasNavigationBar(this, false);
             var backClick = new TapGestureRecognizer();
-            backClick.Tapped += async (s, e) => { _ = await Navigation.PopAsync(); };
+            backClick.Tapped += async (s, e) => { _ = await Navigation.PopModalAsync(); };
             BackStackLayout.GestureRecognizers.Add(backClick);
-            LoadPhoto(idFile, isConst);
+            Task.Run(async ()=> await LoadPhoto(idFile, isConst,isTech));
         }
 
-        async void LoadPhoto(string id, bool isConst)
+        async 
+        Task
+LoadPhoto(string id, bool isConst, bool isTech)
         {
-            new Task(async () =>
-            {
-             
-                _file = isConst ? await server.GetFileAPPConst(id) : await server.GetFileAPP(id);
+            //new Task(async () =>
+            //{
+                if (isTech)
+                    _file = await server.GetFileAPP_Tech(id);
+                else
+                    _file = isConst ? await server.GetFileAPPConst(id) : await server.GetFileAPP(id);
+
                 if (_file != null)
                 {
                     Stream streamM = new MemoryStream(_file);
@@ -75,12 +80,12 @@ namespace xamarinJKH.Apps
                         await DisplayAlert(AppResources.ErrorTitle, "Не удалось скачать файл", "OK");
                     });
                 }
-                Device.BeginInvokeOnMainThread(async () =>
+                Device.BeginInvokeOnMainThread(() =>
                 {
                     progress.IsVisible = false;
                     ViewHare.IsEnabled = true;
                 });
-            }).Start();
+            //}).Start();
         }
         public static byte[] Compress(byte[] data)
         {
