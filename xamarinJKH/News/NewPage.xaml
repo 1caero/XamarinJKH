@@ -68,16 +68,17 @@
                     </StackLayout>
                 </Grid>
             </pancakeView:PancakeView>
-            
-            <StackLayout HorizontalOptions="FillAndExpand" x:Name="Pancake2" IsVisible="{OnPlatform iOS=true, Android=false}" 
-                         BackgroundColor="{AppThemeBinding Light=White, Dark=Black}"></StackLayout>
 
-            <StackLayout Margin="0,20,0,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
-                <StackLayout  VerticalOptions="Center"
-                    x:Name="BackStackLayout"
-                    Orientation="Horizontal"
-                    Margin="20, 0, 0, 0"
-                    HorizontalOptions="StartAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand" x:Name="Pancake2"
+                         IsVisible="{OnPlatform iOS=true, Android=false}"
+                         BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" />
+
+            <StackLayout Margin="0,20,0,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <StackLayout VerticalOptions="Center"
+                             x:Name="BackStackLayout"
+                             Orientation="Horizontal"
+                             Margin="20, 0, 0, 0"
+                             HorizontalOptions="StartAndExpand">
                     <forms:SvgCachedImage
                         Source="resource://xamarinJKH.Resources.ic_arrow_back.svg"
                         HeightRequest="20"
@@ -95,9 +96,9 @@
                     HorizontalOptions="EndAndExpand"
                     Margin="0,0,15,0"
                     Orientation="Horizontal">
-                    <xamarinJkh:ButtonSupport x:Name="LabelTech" IsBlack="True"></xamarinJkh:ButtonSupport>
-                    <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" IsBlack="True" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
-                    
+                    <xamarinJkh:ButtonSupport x:Name="LabelTech" IsBlack="True" />
+                    <xamarinJkh:ButtonProfile x:Name="IconViewProfile" IsBlack="True" Margin="2,0,5,0" />
+
                 </StackLayout>
             </StackLayout>
             <StackLayout
@@ -136,22 +137,21 @@
                          HeightRequest="400"
                          Margin="20,0" />
                 <ScrollView x:Name="htmlLabelScroll" VerticalOptions="FillAndExpand" Margin="0,0,0,20">
-                    <StackLayout>
-                        <abstractions:HtmlLabel 
-                    FontSize="16"
-                    x:Name="HtmlLabel"
-                    Margin="20,10"
-                    TextColor="Black"
-                    LinkColor="{x:StaticResource MainColor}"
-                    BackgroundColor="Transparent"
-                    VerticalOptions="StartAndExpand"
-                    HorizontalOptions="FillAndExpand"
-                    />
+                    <StackLayout Margin="20,10">
+                        <abstractions:HtmlLabel
+                            FontSize="16"
+                            x:Name="HtmlLabel"
+                            TextColor="Black"
+                            LinkColor="{x:StaticResource MainColor}"
+                            BackgroundColor="Transparent"
+                            VerticalOptions="Start"
+                            HorizontalOptions="FillAndExpand" />
                         <Label x:Name="iosHtmlLabel" TextType="Html" BackgroundColor="Transparent"
-                    VerticalOptions="FillAndExpand"
-                    HorizontalOptions="FillAndExpand" 
-                               IsVisible="false"></Label>
-                    </StackLayout>                    
+                               VerticalOptions="FillAndExpand"
+                               HorizontalOptions="FillAndExpand"
+                               IsVisible="false" />
+                        <StackLayout x:Name="StackLayoutImg" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
                 </ScrollView>
             </StackLayout>
             <!--</ScrollView>-->
