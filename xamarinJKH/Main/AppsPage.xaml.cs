@@ -102,7 +102,11 @@ namespace xamarinJKH.Main
                         });
                     }
 
-                    await viewModel.UpdateTask();
+                    Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            await viewModel.UpdateTask();
+                        });
+//                    await viewModel.UpdateTask();
                 return;
             });
             try
@@ -315,7 +319,16 @@ namespace xamarinJKH.Main
             Analytics.TrackEvent("Заявки жителя-CloseAPP подписались");
             try
             {
-                viewModel.LoadRequests.Execute(null);
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    //await RefreshData();
+                    viewModel.LoadRequests.Execute(null);
+                });
+
+                
+
+
+                //viewModel.LoadRequests.Execute(null);
                 Analytics.TrackEvent("Заявки жителя-LoadRequests");
             }
             catch (Exception exc)
