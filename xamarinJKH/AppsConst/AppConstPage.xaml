@@ -280,7 +280,7 @@
                     
                     MinimumHeightRequest="50"
                     Orientation="Horizontal" >-->
-                        <Grid Padding="0"  Margin="0" HeightRequest="60" x:Name="Grid" MinimumHeightRequest="50">
+                        <Grid Padding="0" HorizontalOptions="FillAndExpand"  Margin="0" HeightRequest="60" x:Name="Grid" MinimumHeightRequest="50">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.06*" />
                                 <ColumnDefinition Width="0.72*" />

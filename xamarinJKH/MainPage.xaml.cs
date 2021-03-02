@@ -16,6 +16,7 @@ using xamarinJKH.DialogViews;
 using Rg.Plugins.Popup.Services;
 using xamarinJKH.CustomRenderers;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using Badge.Plugin;
 using Microsoft.AppCenter.Analytics;
@@ -351,7 +352,8 @@ namespace xamarinJKH
             {
                 Settings.SetPhoneTech(phone);
                 await server.RegisterDeviceNotAvtorization(Settings.Person.Phone);
-                await Navigation.PushModalAsync(new AppPage());
+                if (Navigation.ModalStack.FirstOrDefault(x => x is AppPage) == null)
+                    await Navigation.PushModalAsync(new AppPage());
             }
             else
             {

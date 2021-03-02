@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AiForms.Dialogs;
+using HtmlAgilityPack;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
 using Xamarin.Essentials;
@@ -137,7 +139,10 @@ namespace xamarinJKH.News
             
             
                 HtmlLabel.IsVisible = true;
-                HtmlLabel.Text = newsInfoFull.Text;
+                Regex regexImg = new Regex(@"<img[^>]+>");
+                string notImg = Regex.Replace(newsInfoFull.Text, @"<img[^>]+>", "");
+                IEnumerable<string> htmlAgilityPack = HtmlAgilityPack(newsInfoFull.Text);
+                HtmlLabel.Text = notImg.Trim();
                 HtmlLabel.FlowDirection = FlowDirection.MatchParent;
             
             
@@ -152,8 +157,49 @@ namespace xamarinJKH.News
             }
 
             Files.IsVisible = newsInfoFull.HasImage;
+
+            foreach (var each in htmlAgilityPack)
+            {
+                UriImageSource source = new UriImageSource
+                {
+                    Uri = new Uri(each),
+                    CachingEnabled = true,
+                    CacheValidity = new TimeSpan(5,0,0,0)
+                };
+
+                Image image = new Image
+                {
+                    Source = source,
+                    HorizontalOptions = LayoutOptions.FillAndExpand
+                };
+                
+                StackLayoutImg.Children.Add(image);
+            }
+            
         }
 
+        public IEnumerable<string> HtmlAgilityPack(string Html)
+        {
+            HtmlDocument htmlSnippet = new HtmlDocument();
+            htmlSnippet.LoadHtml(Html);
+
+            List<string> hrefTags = new List<string>();
+            try
+            {
+                foreach (HtmlNode link in htmlSnippet.DocumentNode.SelectNodes("//img[@src]"))
+                {
+                    HtmlAttribute att = link.Attributes["src"];
+                    hrefTags.Add(att.Value);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+          
+            return hrefTags;
+        }
+        
         public async void OpenFile(object sender, EventArgs args)
         {
             Analytics.TrackEvent("Открытие файла новости");
