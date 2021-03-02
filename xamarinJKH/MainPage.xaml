@@ -65,7 +65,7 @@
                         <!--Фрейм для ввода данных для входа-->
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="0.6*"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="0.4*"/>
                             </Grid.RowDefinitions>
 
@@ -78,6 +78,7 @@
                             <customRenderers:MaterialFrame Elevation="{AppThemeBinding Light=0, Dark=20}" CornerRadius="50"
                                                        Margin="15, 15, 15, 15"
                                                        BackgroundColor="White"
+                                                       VerticalOptions="Fill"
                                                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                                        x:Name="FrameLogin"
                                                        Padding="10" >
@@ -223,6 +224,7 @@
                                     <Frame CornerRadius="15"
                                        BackgroundColor="{x:DynamicResource MainColor}"
                                        Margin="0, 10, 0, 0"
+                                       IsVisible="True"
                                        x:Name="FrameBtnLogin"
                                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                        Padding="12">

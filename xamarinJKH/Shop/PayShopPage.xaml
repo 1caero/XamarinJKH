@@ -127,14 +127,17 @@
                                             </Label.FormattedText>
                                         </Label>
                                     </StackLayout>
-                                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Vertical"
+                                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal"
                                                  x:Name="PriceStack"
                                                  Padding="0,0,10,10">
                                         <Label HorizontalOptions="Start"
                                                Text="{x:Static xamarinJkh:AppResources.PriceText}" TextColor="Black"
                                                FontAttributes="Bold"
+                                               VerticalOptions="Center"
                                                FontSize="14" />
-                                        <Label HorizontalOptions="Start">
+                                        <Label 
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Start">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span x:Name="LabelPriceBuscket" Text="0"
@@ -152,6 +155,7 @@
                                 <BoxView Color="LightGray" HeightRequest="1" HorizontalOptions="FillAndExpand"
                                          Margin="10,0" />
                                 
+                                <StackLayout x:Name="LayoutBonus">
                                 <StackLayout Orientation="Horizontal"
                                              IsVisible="{Binding isBonusVisible}"
                                              HorizontalOptions="Start">
@@ -168,6 +172,7 @@
                                         HorizontalOptions="Start">
                                     </Label>
 
+                                    
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal"
                                              IsVisible="{Binding isBonusVisible}"
@@ -190,7 +195,7 @@
                                         Text="{x:Static xamarinJkh:AppResources.OffertDoc}">
                                     </Label>
                                 </StackLayout>
-                                
+                                </StackLayout>
                                 <Label FontSize="20" IsVisible="False" TextColor="Black"
                                        Text="{x:Static xamarinJkh:AppResources.Payment}" HorizontalOptions="Center"
                                        Margin="10,10" FontAttributes="Bold" />

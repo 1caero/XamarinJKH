@@ -306,6 +306,7 @@ namespace xamarinJKH.Shop
             Bonus accountBonusBalance = await server.GetAccountBonusBalance(SelectedAcc.ID);
             bonusCount = accountBonusBalance.BonusBalance;
 
+            // LayoutBonus.IsVisible =  bonusCount > 0;
 
             FormattedString formattedBonus = new FormattedString();
 

@@ -323,7 +323,7 @@
                                    HorizontalOptions="Start" />
                             <Frame CornerRadius="15"
                                    BackgroundColor="{x:DynamicResource MainColor}"
-                                   Margin="5, 5, 5, 0"
+                                   Margin="5, 5, 5, 5"
                                    x:Name="FrameBtnLogin"
                                    VerticalOptions="EndAndExpand"
                                    Padding="12"
