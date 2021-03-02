@@ -28,7 +28,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>-->
-                    
+                    <ScrollView x:Name="mainScroll1" MinimumHeightRequest="500" VerticalOptions="FillAndExpand" >
                         <Grid x:Name="commGrid1" VerticalOptions="FillAndExpand" MinimumHeightRequest="500" >
                             <Image x:Name="ImageFon"
                        Source="{AppThemeBinding Light=ic_app_top_light, Dark=ic_app_top}"
@@ -36,7 +36,7 @@
                        Margin="0,0,0,0"
                        Aspect="{OnPlatform Android=Fill, iOS=AspectFill}"
                        HorizontalOptions="FillAndExpand" />
-                            <StackLayout
+                            <StackLayout 
                         Margin="25,70,15,0"
                         Orientation="Horizontal"
                             HorizontalOptions="FillAndExpand"
@@ -57,6 +57,8 @@
                                 </StackLayout>
                             </StackLayout>
                         </Grid>
+                    </ScrollView>
+                      
                     
                         <!--<StackLayout  VerticalOptions="FillAndExpand">-->
 

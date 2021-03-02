@@ -699,23 +699,42 @@ namespace xamarinJKH.MainConst
                 }
         }
 
-        //static double lastPos = 0;
+        static double lastPos = 0;
         void OnCollectionViewScrolled(object sender, ItemsViewScrolledEventArgs e)
         {
-            if (e.VerticalOffset >= 0)
+            //if (e.VerticalOffset >= 0)
             {                
                 Device.BeginInvokeOnMainThread((() =>
                 {
-                    var top = ImageFon.Height > e.VerticalOffset ? -e.VerticalOffset : -ImageFon.Height;
-                    commGrid1.Margin = new Thickness(0, top, 0, 0);
-                //OrdersStack.Margin = t;
-                //ImageFon.Margin = new Thickness(0, lastPos, 0, 0);
-                //companyStack.Margin= new Thickness(25, 80+lastPos, 15, 0);
+                    //lastPos += e.VerticalOffset;
+                    //var top = ImageFon.Height > e.VerticalOffset ? -e.VerticalOffset : -ImageFon.Height;                    
+                    //commGrid1.Margin = new Thickness(0, top, 0, 0);
+                  
+                    
+                    lastPos = mainScroll1.ScrollY + e.VerticalOffset;
+                    if (ImageFon.Height > lastPos && lastPos>=0)
+                    {
+                        mainScroll1.ScrollToAsync(0, lastPos, false);
+                        //var delta = OrdersStack.Y - lastPos;
+                        //if (delta != 40)
+                            OrdersStack.Margin = new Thickness(OrdersStack.Margin.Left, OrdersStack.Margin.Top - e.VerticalOffset, OrdersStack.Margin.Right, OrdersStack.Margin.Bottom);
 
-                //double scrollY = MainScrollView.ScrollY;
-                //MainScrollView.ScrollToAsync(0, scrollY + e.VerticalOffset, false);
-            }));
+                    }
+
+                    
+                    //else
+                    //    mainScroll1.ScrollToAsync(0, lastPos, false);
+                }));
             }
+            //else
+            //{
+            //    Device.BeginInvokeOnMainThread((() =>
+            //    {                    
+            //        commGrid1.Margin = new Thickness(0, 0, 0, 0);                   
+            //    }));
+            //}
+
+
         }
     }
 }
