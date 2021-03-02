@@ -176,6 +176,7 @@
                                          RefreshColor="{x:DynamicResource MainColor}"
                                      IsRefreshing="{Binding IsRefreshing}">
                                 <ScrollView x:Name="scrollForCounters" VerticalScrollBarVisibility="Never"
+                                            HeightRequest="1000"
                                         VerticalOptions="FillAndExpand">
                                     <StackLayout>
                                         <ActivityIndicator x:Name="aIndicator" Color="{Binding hex}" Scale="2" Margin="20"
