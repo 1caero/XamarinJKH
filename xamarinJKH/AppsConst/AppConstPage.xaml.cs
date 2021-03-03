@@ -424,12 +424,22 @@ namespace xamarinJKH.AppsConst
                 IsVisible = true,
                 ReplaceMap = replace
             });
-            Options.Add(new OptionModel
+            try
             {
-                Name = AppResources.CompleteApp, Image = "resource://xamarinJKH.Resources.ic_check_mark.svg", Command = new Command(() => ComplicationRun()  /*performApp()*/),
-                IsVisible = CanComplete,
-                ReplaceMap = replace
-            });
+
+                Options.Add(new OptionModel
+                {
+                    Name = AppResources.CompleteApp, Image = "resource://xamarinJKH.Resources.ic_check_mark.svg",
+                    Command = new Command(() => ComplicationRun() /*performApp()*/),
+                    IsVisible = CanComplete,
+                    ReplaceMap = replace
+                });
+            }
+            catch (Exception ex)
+            {
+                Analytics.TrackEvent(ex.Message);
+            }
+
             Options.Add(new OptionModel
             {
                 Name = AppResources.PassApp,
