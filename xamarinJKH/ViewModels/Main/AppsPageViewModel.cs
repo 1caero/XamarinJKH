@@ -152,7 +152,8 @@ namespace xamarinJKH.ViewModels.Main
                             //});
                         }
 
-                        MessagingCenter.Subscribe<Object, string>(this, "AddIdent", (sender, args) => LoadRequests.Execute(null));
+                        MessagingCenter.Subscribe<Object, string>(this, "AddIdent", (sender, args) =>
+                        LoadRequests.Execute(null));
                         MessagingCenter.Send<Object>(this, "EndRefresh");
                         IsRefreshing = false;
                     });

@@ -440,12 +440,10 @@ namespace xamarinJKH.Main
                     throw;
                 }
                 };
-            //StackLayoutLs.GestureRecognizers.Add(pickLs);
             SetTextAndColor();
             getInfo();
             SetTitle();
 
-            //countersList.BackgroundColor = Color.Transparent;
             baseForCounters.BackgroundColor = Color.Transparent;
             //if (Device.RuntimePlatform != Device.iOS)
             //    countersList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
@@ -468,11 +466,7 @@ namespace xamarinJKH.Main
             };
             StackLayoutAddIdent.GestureRecognizers.Add(goAddIdent);
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            //IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-
-
-            //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
+            
             FrameTop.SetAppThemeColor(MaterialFrame.BorderColorProperty, hexColor, Color.FromHex("#494949"));
             ChangeTheme = new Command(() => { SetTitle(); });
             MessagingCenter.Subscribe<Object>(this, "ChangeThemeCounter", (sender) => ChangeTheme.Execute(null));
@@ -496,24 +490,24 @@ namespace xamarinJKH.Main
                     }
                 }
 
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    //
+                //Device.BeginInvokeOnMainThread(async () =>
+                //{
+                //    //
 
-                    //OnPropertyChanged("Accounts");
-                    //var all = Accounts.FirstOrDefault(x => x.Ident == AppResources.All);
-                    //if (all == null)
-                    //{
-                    //    Accounts.Insert(0, new AccountInfo { Ident = AppResources.All, Selected = true });
-                    //}
-                    //Accounts.Clear();
-                    //Accounts.Add(new AccountInfo { Ident = AppResources.All, Selected = true });
-                    //foreach (var account in Settings.Person.Accounts)
-                    //{
-                    //    Accounts.Add(account);
-                    //}
-                    //await RefreshCountersData();
-                });
+                //    //OnPropertyChanged("Accounts");
+                //    //var all = Accounts.FirstOrDefault(x => x.Ident == AppResources.All);
+                //    //if (all == null)
+                //    //{
+                //    //    Accounts.Insert(0, new AccountInfo { Ident = AppResources.All, Selected = true });
+                //    //}
+                //    //Accounts.Clear();
+                //    //Accounts.Add(new AccountInfo { Ident = AppResources.All, Selected = true });
+                //    //foreach (var account in Settings.Person.Accounts)
+                //    //{
+                //    //    Accounts.Add(account);
+                //    //}
+                //    //await RefreshCountersData();
+                //});
             });
             MessagingCenter.Subscribe<Object, AccountInfo>(this, "RemoveIdent", async (sender, ident) =>
             {
@@ -544,9 +538,11 @@ namespace xamarinJKH.Main
                 {
                     Accounts.Add(account);
                 }
+
+                Picker.ItemsSource = Accounts;
             });
 
-            Picker.ItemsSource = Accounts;
+            
         }
 
         private void SetTitle()

@@ -320,7 +320,7 @@
     <PackageReference Include="Xamarin.Firebase.iOS.Crashlytics">
       <Version>3.14.0.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1687" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1821" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="RestSharp">
       <Version>106.11.2</Version>

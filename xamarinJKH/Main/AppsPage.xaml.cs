@@ -294,6 +294,8 @@ namespace xamarinJKH.Main
             this.CancellationTokenSource = new CancellationTokenSource();
             //MessagingCenter.Subscribe<Object>(this, "UpdateAppCons", (sender) => RefreshData()); зачем тут обновлять заявки, при изменении заявок у "сотрудника"?
             //Analytics.TrackEvent("Заявки жителя-UpdateAppCons подписались");
+            Task.Run(async () => await RefreshData());
+
             MessagingCenter.Subscribe<Object, int>(this, "CloseAPP", async (sender, args) =>
             {
                 await RefreshData();
@@ -325,9 +327,7 @@ namespace xamarinJKH.Main
                     viewModel.LoadRequests.Execute(null);
                 });
 
-                
-
-
+                //viewModel.LoadRequests.Execute(null);
                 //viewModel.LoadRequests.Execute(null);
                 Analytics.TrackEvent("Заявки жителя-LoadRequests");
             }
@@ -450,7 +450,7 @@ namespace xamarinJKH.Main
 
             IconViewSaldos.ReplaceStringMap = buttonColor;
             
-            // viewModel.LoadRequests.Execute(false);
+            // viewModel.LoadRequests.Execute(null);
             CheckAkk();
             
         }
