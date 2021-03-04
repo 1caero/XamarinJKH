@@ -154,6 +154,7 @@ namespace xamarinJKH.MainConst
             {
                 OrdersStack.HeightRequest = 1000;
             }
+
             
             BackStackLayout.SetAppThemeColor(BackgroundColorProperty,
                 System.Drawing.Color.Transparent,
@@ -169,12 +170,13 @@ namespace xamarinJKH.MainConst
                     //Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
 
                     iosPanel.HeightRequest = statusBarHeight;
-                    //additionalList.HeightRequest = 6000;
+                    additionalList.HeightRequest = 3000;
                     //commGrid1.MinimumHeightRequest = ImageFon.Height;
 
+                    OrdersStack.Margin = new Thickness(OrdersStack.Margin.Left, OrdersStack.Margin.Top, OrdersStack.Margin.Right, OrdersStack.Margin.Bottom - 30);
                     //OrdersStack.Margin =  DeviceDisplay.MainDisplayInfo.Width < 700 ?  new Thickness(0, -80, 0, 0) : new Thickness(0, -160, 0, 0);
 
-                    
+
                     break;
                 default:
                     break;
@@ -709,78 +711,34 @@ namespace xamarinJKH.MainConst
         static double lastPos = 0;
         private double marginTopDefault = 0;
         void OnCollectionViewScrolled(object sender, ItemsViewScrolledEventArgs e)
-        {
-            //if (e.VerticalOffset >= 0)
-            {                
+        {            
+                            
                 Device.BeginInvokeOnMainThread((async () =>
                 {
-                    //lastPos += e.VerticalOffset;
-                    //var top = ImageFon.Height > e.VerticalOffset ? -e.VerticalOffset : -ImageFon.Height;                    
-                    //commGrid1.Margin = new Thickness(0, top, 0, 0);
-                    if (Device.RuntimePlatform == Device.iOS)
+                    if (e.VerticalDelta > 0 && e.VerticalOffset >= 10)
                     {
-
-                        lastPos = mainScroll1.ScrollY + e.VerticalOffset;
-                        if (ImageFon.Height > lastPos && lastPos >= 0)
-                        {
-                            mainScroll1.ScrollToAsync(0, lastPos, false);
-                            //var delta = OrdersStack.Y - lastPos;
-                            //if (delta != 40)
-                            OrdersStack.Margin = new Thickness(OrdersStack.Margin.Left,
-                                OrdersStack.Margin.Top - e.VerticalOffset, OrdersStack.Margin.Right,
-                                OrdersStack.Margin.Bottom);
-
-                        }
+                        await mainScroll1.FadeTo(0, 500, Easing.Linear);
+                        await OrdersStack.TranslateTo(0, -30, 500,Easing.Linear);
                     }
-                    else
+                    else if (e.VerticalDelta < 0 && e.VerticalOffset <= 5)
                     {
-                        if (e.VerticalDelta > 0 && e.VerticalOffset >= 10)
-                        {
-                            // double ht = mainScroll1.Margin.Top - e.VerticalOffset;
-                            // if (Math.Abs(ht)  <= ImageFon.Height)
-                            // {
-                                // mainScroll1.Margin = new Thickness(mainScroll1.Margin.Left,
-                                //     -ImageFon.Height, mainScroll1.Margin.Right,
-                                //     mainScroll1.Margin.Bottom);
-                            // }
-                            // mainScroll1.IsVisible = false;
-                            await mainScroll1.FadeTo (0, 500,Easing.Linear);
-                            await OrdersStack.TranslateTo (0, -30, 500);
-                        }
-                        else if (e.VerticalDelta < 0 && e.VerticalOffset <= 5)
-                        {
-                            // double ht = mainScroll1.Margin.Top + e.VerticalOffset;
-                            // if (ht < 0)
-                            // {
-                            //     ht = 0;
-                            // }
-                            // if (ht <=0)
-                            // {
-                                // mainScroll1.Margin = new Thickness(mainScroll1.Margin.Left,
-                                //     0, mainScroll1.Margin.Right,
-                                //     mainScroll1.Margin.Bottom);
-                                // mainScroll1.IsVisible = true;
-                                
-                                await mainScroll1.FadeTo (1, 500,Easing.Linear);
-                                await OrdersStack.TranslateTo (0, 5, 100);
-                        }
-
+                        await mainScroll1.FadeTo(1, 500, Easing.Linear);
+                        await OrdersStack.TranslateTo(0, 5, 100, Easing.Linear);
                     }
 
-
-                    //else
-                    //    mainScroll1.ScrollToAsync(0, lastPos, false);
                 }));
-            }
-            //else
-            //{
-            //    Device.BeginInvokeOnMainThread((() =>
-            //    {                    
-            //        commGrid1.Margin = new Thickness(0, 0, 0, 0);                   
-            //    }));
-            //}
 
+                //Device.BeginInvokeOnMainThread((() =>
+                //{                   
+                //    lastPos = mainScroll1.ScrollY + e.VerticalOffset;
+                //    if (ImageFon.Height > lastPos && lastPos >= 0)
+                //    {
+                //        mainScroll1.ScrollToAsync(0, lastPos, false);
+                //        OrdersStack.Margin = new Thickness(OrdersStack.Margin.Left, OrdersStack.Margin.Top , OrdersStack.Margin.Right, OrdersStack.Margin.Bottom - e.VerticalOffset);
+                //    }
 
+                //}));
+            
         }
     }
 }

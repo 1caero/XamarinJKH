@@ -62,12 +62,12 @@
                     
                         <!--<StackLayout  VerticalOptions="FillAndExpand">-->
 
-                    <StackLayout x:Name="OrdersStack" VerticalOptions="FillAndExpand" Margin="0,-80,0,0">
+                    <StackLayout x:Name="OrdersStack" VerticalOptions="FillAndExpand" Margin="0,-80,0,0" >
                        
-                        <Grid  VerticalOptions="FillAndExpand">
+                        <Grid  VerticalOptions="FillAndExpand"  HeightRequest="2000">
                             
                             <RefreshView x:Name="messageRefreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="{Binding hex}">
-                             <CollectionView 
+                                <CollectionView 
                              x:Name="additionalList"
                              HorizontalScrollBarVisibility="Never"
                              Margin="10, 10, 10, 10"
