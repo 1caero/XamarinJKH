@@ -62,7 +62,7 @@
                     
                         <!--<StackLayout  VerticalOptions="FillAndExpand">-->
 
-                    <StackLayout x:Name="OrdersStack" VerticalOptions="FillAndExpand" Margin="0,-80,0,0" >
+                    <StackLayout x:Name="OrdersStack" VerticalOptions="FillAndExpand" Margin="0,-80,0,-30" >
                        
                         <Grid  VerticalOptions="FillAndExpand"  HeightRequest="2000">
                             

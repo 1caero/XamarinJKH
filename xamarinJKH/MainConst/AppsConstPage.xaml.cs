@@ -173,7 +173,7 @@ namespace xamarinJKH.MainConst
                     additionalList.HeightRequest = 3000;
                     //commGrid1.MinimumHeightRequest = ImageFon.Height;
 
-                    OrdersStack.Margin = new Thickness(OrdersStack.Margin.Left, OrdersStack.Margin.Top, OrdersStack.Margin.Right, OrdersStack.Margin.Bottom - 30);
+                    //OrdersStack.Margin = new Thickness(OrdersStack.Margin.Left, OrdersStack.Margin.Top, OrdersStack.Margin.Right, OrdersStack.Margin.Bottom - 30);
                     //OrdersStack.Margin =  DeviceDisplay.MainDisplayInfo.Width < 700 ?  new Thickness(0, -80, 0, 0) : new Thickness(0, -160, 0, 0);
 
 
