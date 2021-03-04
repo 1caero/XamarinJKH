@@ -1285,6 +1285,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Нет заявок.
+        /// </summary>
+        internal static string EmptyApp {
+            get {
+                return ResourceManager.GetString("EmptyApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Введите пин-код в оба поля.
         /// </summary>
         internal static string EnterBothPins {

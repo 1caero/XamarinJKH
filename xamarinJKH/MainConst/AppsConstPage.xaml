@@ -72,6 +72,7 @@
                              HorizontalScrollBarVisibility="Never"
                              Margin="10, 10, 10, 10"
                              SelectionMode="None"
+                             EmptyView="{x:Static xamarinJkh:AppResources.EmptyApp}"
                              Scrolled="OnCollectionViewScrolled"
                              VerticalScrollBarVisibility="Never"
                              SelectedItem="{Binding SelectedRequest}"                            
@@ -295,11 +296,6 @@
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                             </RefreshView>
-                            
-                            <Label Text="Нет заявок"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"
-                                   IsVisible="{Binding Empty}"/>
                         </Grid>
                         
                        

@@ -1768,4 +1768,7 @@
   <data name="PaymentSystem" xml:space="preserve">
     <value>Платіжна система: </value>
   </data>
+  <data name="EmptyApp" xml:space="preserve">
+    <value>немає заявок</value>
+  </data>
 </root>

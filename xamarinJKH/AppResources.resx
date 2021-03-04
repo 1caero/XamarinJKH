@@ -1900,4 +1900,7 @@
   <data name="PaymentSystem" xml:space="preserve">
     <value>Платежная система:</value>
   </data>
+  <data name="EmptyApp" xml:space="preserve">
+    <value>Нет заявок</value>
+  </data>
 </root>

@@ -1898,4 +1898,7 @@
   <data name="PaymentSystem" xml:space="preserve">
     <value>Payment system: </value>
   </data>
+  <data name="EmptyApp" xml:space="preserve">
+    <value>No applications</value>
+  </data>
 </root>
