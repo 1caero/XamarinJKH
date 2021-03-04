@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AiForms.Dialogs;
 using HtmlAgilityPack;
+using LabelHtml.Forms.Plugin.Abstractions;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
 using Xamarin.Essentials;
@@ -114,8 +115,8 @@ namespace xamarinJKH.News
             LabelTitle.Text = newsInfo.Header;
             LabelDate.Text = newsInfo.Created;
             newsInfoFull = await _server.GetNewsFull(newsInfo.ID.ToString());
-            
-            
+
+
             //if (Device.RuntimePlatform == Device.iOS)
             //{
             //    HtmlLabel.IsVisible = false;
@@ -136,17 +137,29 @@ namespace xamarinJKH.News
             //    //iosHtmlLabel.Text = newsInfoFull.Text;
             //    //iosHtmlLabel.FlowDirection = FlowDirection.MatchParent;
             //}
+
+            Color hexColor = (Color)Application.Current.Resources["MainColor"];
+
+            var HtmlLabel = new HtmlLabel();
+
+            HtmlLabel.IsVisible = true;
+            Regex regexImg = new Regex(@"<img[^>]+>");
+            string notImg = Regex.Replace(newsInfoFull.Text, @"<img[^>]+>", "");
+
+            var t = notImg.Trim();
+            HtmlLabel.Text = t;
+            HtmlLabel.FlowDirection = FlowDirection.MatchParent;
+            HtmlLabel.BackgroundColor = Color.Transparent;
+            HtmlLabel.FontSize=16;
+            HtmlLabel.LinkColor = hexColor;
+
+            HtmlLabel.VerticalOptions = LayoutOptions.Start;
             
+            htmlStack.Children.Insert(0, HtmlLabel);
+
+
+            IEnumerable<string> htmlAgilityPack = HtmlAgilityPack(newsInfoFull.Text);
             
-                HtmlLabel.IsVisible = true;
-                Regex regexImg = new Regex(@"<img[^>]+>");
-                string notImg = Regex.Replace(newsInfoFull.Text, @"<img[^>]+>", "");
-                IEnumerable<string> htmlAgilityPack = HtmlAgilityPack(newsInfoFull.Text);
-                HtmlLabel.Text = notImg.Trim();
-                HtmlLabel.FlowDirection = FlowDirection.MatchParent;
-            
-            
-            Color hexColor = (Color) Application.Current.Resources["MainColor"];
             IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);            
             Pancake.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
             PancakeViewIcon.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);{ if (AppInfo.PackageName == "rom.best.saburovo" || AppInfo.PackageName == "sys_rom.ru.tsg_saburovo"){PancakeViewIcon.Padding = new Thickness(0);}}
@@ -175,6 +188,13 @@ namespace xamarinJKH.News
                 
                 StackLayoutImg.Children.Add(image);
             }
+            
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
             
         }
 

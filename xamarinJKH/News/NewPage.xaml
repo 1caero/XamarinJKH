@@ -136,21 +136,23 @@
                          IsVisible="False"
                          HeightRequest="400"
                          Margin="20,0" />
-                <ScrollView x:Name="htmlLabelScroll" VerticalOptions="FillAndExpand" Margin="0,0,0,20">
-                    <StackLayout Margin="20,10">
-                        <abstractions:HtmlLabel
+                <ScrollView x:Name="htmlLabelScroll" VerticalOptions="FillAndExpand" Margin="0,0,0,20" >
+                    <StackLayout x:Name="htmlStack" Margin="20,10" >
+                        <!--<abstractions:HtmlLabel
                             FontSize="16"
                             x:Name="HtmlLabel"
                             TextColor="Black"
                             LinkColor="{x:StaticResource MainColor}"
                             BackgroundColor="Transparent"
-                            VerticalOptions="Start"
-                            HorizontalOptions="FillAndExpand" />
-                        <Label x:Name="iosHtmlLabel" TextType="Html" BackgroundColor="Transparent"
+                            VerticalOptions="StartAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            HeightRequest="200"/>-->
+                        
+                        <!--<Label x:Name="iosHtmlLabel" TextType="Html" BackgroundColor="Transparent"
                                VerticalOptions="FillAndExpand"
                                HorizontalOptions="FillAndExpand"
-                               IsVisible="false" />
-                        <StackLayout x:Name="StackLayoutImg" HorizontalOptions="FillAndExpand" />
+                               IsVisible="false" />-->
+                        <StackLayout x:Name="StackLayoutImg" HorizontalOptions="FillAndExpand" BackgroundColor="Aqua" />
                     </StackLayout>
                 </ScrollView>
             </StackLayout>
