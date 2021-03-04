@@ -400,7 +400,7 @@
                                                  Padding="0,10,0,2"
                                                  BorderThickness="1"
                                                  Margin="0"
-                                                 VerticalOptions="End">
+                                                 VerticalOptions="{OnPlatform Android=EndAndExpand, iOS=End}">
                             <StackLayout>
                                 <StackLayout Orientation="Horizontal"
                                              IsVisible="False"
