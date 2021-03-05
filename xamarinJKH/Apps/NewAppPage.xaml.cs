@@ -408,7 +408,7 @@ _appModel = new AddAppModel()
                     Byteses.Add(pickedFile.DataArray);
                     ListViewFiles.IsVisible = true;
                     if (ListViewFiles.HeightRequest < 120)
-                        ListViewFiles.HeightRequest += 30;
+                        ListViewFiles.HeightRequest = _appModel.Files.Count * 42;
                     _appModel.Files = files;
                     ListViewFiles.ItemsSource = _appModel.Files;
                 }
@@ -445,7 +445,7 @@ _appModel = new AddAppModel()
             files.Add(fileData);
             ListViewFiles.IsVisible = true;
             if (ListViewFiles.HeightRequest < 120)
-                ListViewFiles.HeightRequest += 30;
+                ListViewFiles.HeightRequest = _appModel.Files.Count * 42;
             _appModel.Files = files;
             ListViewFiles.ItemsSource = _appModel.Files;
         }
@@ -469,7 +469,7 @@ _appModel = new AddAppModel()
             files.Add(fileData);
             ListViewFiles.IsVisible = true;
             if (ListViewFiles.HeightRequest < 120)
-                ListViewFiles.HeightRequest += 30;
+                ListViewFiles.HeightRequest = _appModel.Files.Count * 42;
             _appModel.Files = files;
             ListViewFiles.ItemsSource = _appModel.Files;
         }
@@ -909,7 +909,7 @@ _appModel = new AddAppModel()
                 files.RemoveAt(indexOf);
                 _appModel.Files = files;
                 ListViewFiles.ItemsSource = _appModel.Files;
-                ListViewFiles.HeightRequest -= 30;
+                ListViewFiles.HeightRequest = _appModel.Files.Count * 42;
                 if (files.Count == 0)
                 {
                     ListViewFiles.IsVisible = false;

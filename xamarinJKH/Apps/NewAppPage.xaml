@@ -195,13 +195,14 @@
                                     IsEnabled="{Binding Path=Focused, Source={x:Reference EntryMess}, Converter={x:StaticResource Invert}}"
                                     Grid.Row="1"
                                     BackgroundColor="Transparent"
-                                    Margin="0,-95,0,100">
-                            
+                                    Padding="0,0,0,300"
+                                    Margin="0,-95,0,0">
+                            <StackLayout VerticalOptions="FillAndExpand">
                                 <Frame CornerRadius="30"
                                        Margin="20, 10, 20, 15"
                                        x:Name="FrameTop"
                                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
-                                       VerticalOptions="Start"
+                                       VerticalOptions="StartAndExpand"
                                        BackgroundColor="White"
                                        Padding="0">
 
@@ -610,7 +611,8 @@
 
                                     </StackLayout>
                                 </Frame>
-                            
+                                <BoxView HeightRequest="200"></BoxView>
+                            </StackLayout>
                         </ScrollView>
                     </Grid>
 
