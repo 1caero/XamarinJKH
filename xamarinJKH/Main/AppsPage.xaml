@@ -95,8 +95,9 @@
                                            Margin="20"
                                            IsRunning="True" IsEnabled="True" IsVisible="{Binding IsRefreshing}"
                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
-                        <RefreshView x:Name="messageRefreshView" Command="{Binding LoadRequests}"
-                                     IsRefreshing="{Binding IsRefreshing}" RefreshColor="{x:DynamicResource MainColor}">
+                        <!--<RefreshView x:Name="messageRefreshView" Command="{Binding LoadRequests}"
+                                     IsRefreshing="{Binding IsRefreshing}" RefreshColor="{x:DynamicResource MainColor}">-->
+                        <RefreshView x:Name="messageRefreshView" RefreshColor="{x:DynamicResource MainColor}">
                             <CollectionView
                                 x:Name="additionalList"
                                 HorizontalScrollBarVisibility="Never"
@@ -294,7 +295,7 @@
                                         HorizontalOptions="Center">
                                         <svg:SvgCachedImage
                                             Source="resource://xamarinJKH.Resources.ic_pass.svg"
-                                            ReplaceStringMap="{Binding IsRefreshing, Converter={x:StaticResource SvgColor}}"
+                                            ReplaceStringMap="{Binding forColor, Converter={x:StaticResource SvgColor}}"
                                             HeightRequest="24"
                                             WidthRequest="20" />
                                         <Button
@@ -371,7 +372,7 @@
                                         HorizontalOptions="Center">
                                         <svg:SvgCachedImage
                                             Source="resource://xamarinJKH.Resources.icon_add_app.svg"
-                                            ReplaceStringMap="{Binding IsRefreshing, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#FFFFFF'}"
+                                            ReplaceStringMap="{Binding forColor, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#FFFFFF'}"
                                             HeightRequest="24"
                                             WidthRequest="20" />
                                         <Button
@@ -399,7 +400,7 @@
                                         HorizontalOptions="Center">
                                         <svg:SvgCachedImage
                                             Source="resource://xamarinJKH.Resources.icon_add_app.svg"
-                                            ReplaceStringMap="{Binding IsRefreshing, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#FFFFFF'}"
+                                            ReplaceStringMap="{Binding forColor, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#FFFFFF'}"
                                             x:Name="IconViewSaldos"
                                             HeightRequest="24"
                                             WidthRequest="20" />

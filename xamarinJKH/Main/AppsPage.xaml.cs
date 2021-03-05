@@ -29,35 +29,36 @@ namespace xamarinJKH.Main
         public List<RequestInfo> RequestInfosClose { get; set; }
         private RequestList _requestList;
         private RestClientMP _server = new RestClientMP();
-        private bool _isRefreshing = false;
+        //private bool _isRefreshing = false;
         public Color hex { get; set; }
         public AppsPageViewModel viewModel { get; set; }
 
-        public bool IsRefreshing
-        {
-            get { return _isRefreshing; }
-            set
-            {
-                _isRefreshing = value;
-                OnPropertyChanged(nameof(IsRefreshing));
-            }
-        }
+        
+        //public bool IsRefreshing
+        //{
+        //    get { return _isRefreshing; }
+        //    set
+        //    {
+        //        _isRefreshing = value;
+        //        OnPropertyChanged(nameof(IsRefreshing));
+        //    }
+        //}
 
-        public ICommand RefreshCommand2
-        {
-            get
-            {
-                return new Command(async () =>
-                {
-                    IsRefreshing = true;
+        //public ICommand RefreshCommand2
+        //{
+        //    get
+        //    {
+        //        return new Command(async () =>
+        //        {
+        //            IsRefreshing = true;
 
-                    await RefreshData();
+        //            await RefreshData();
 
-                    IsRefreshing = false;
-                });
-            }
+        //            IsRefreshing = false;
+        //        });
+        //    }
             
-        }
+        //}
 
         Task UpdateTask;
 
@@ -180,7 +181,15 @@ namespace xamarinJKH.Main
                 ? Settings.MobileSettings.color
                 : "#FF0000");
             Analytics.TrackEvent("Заявки жителя - определили основной цвет");
-            BindingContext = viewModel = new AppsPageViewModel();
+            
+            viewModel = new AppsPageViewModel();
+            BindingContext = viewModel;
+            
+
+            messageRefreshView.Command = viewModel.LoadRequests;
+            messageRefreshView.IsRefreshing = viewModel.IsRefreshing;
+
+
             Analytics.TrackEvent("Заявки жителя - создали/прибиндили модель");
             aIndicator.Color = hex;
 
@@ -193,7 +202,11 @@ namespace xamarinJKH.Main
             Analytics.TrackEvent("Заявки жителя-подписались на обновление");
 
             MessagingCenter.Subscribe<Object>(this, "EndRefresh", (sender) => 
-            { Device.BeginInvokeOnMainThread(() => aIndicator.IsVisible = false); });
+            { Device.BeginInvokeOnMainThread(() =>
+            { aIndicator.IsVisible = false;
+                messageRefreshView.IsRefreshing = false;
+            }); 
+            });
             Analytics.TrackEvent("Заявки жителя-подписались на окончание обновления");
 
             var goAddIdent = new TapGestureRecognizer();
@@ -294,7 +307,7 @@ namespace xamarinJKH.Main
             this.CancellationTokenSource = new CancellationTokenSource();
             //MessagingCenter.Subscribe<Object>(this, "UpdateAppCons", (sender) => RefreshData()); зачем тут обновлять заявки, при изменении заявок у "сотрудника"?
             //Analytics.TrackEvent("Заявки жителя-UpdateAppCons подписались");
-            Task.Run(async () => await RefreshData());
+            //Task.Run(async () => await RefreshData());
 
             MessagingCenter.Subscribe<Object, int>(this, "CloseAPP", async (sender, args) =>
             {
@@ -321,14 +334,14 @@ namespace xamarinJKH.Main
             Analytics.TrackEvent("Заявки жителя-CloseAPP подписались");
             try
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    //await RefreshData();
-                    viewModel.LoadRequests.Execute(null);
-                });
+                //Device.BeginInvokeOnMainThread(() =>
+                //{
+                //    //await RefreshData();
+                //    viewModel.LoadRequests.Execute(null);
+                //});
 
                 //viewModel.LoadRequests.Execute(null);
-                //viewModel.LoadRequests.Execute(null);
+                viewModel.LoadRequests.Execute(null);
                 Analytics.TrackEvent("Заявки жителя-LoadRequests");
             }
             catch (Exception exc)
@@ -392,17 +405,18 @@ namespace xamarinJKH.Main
 
         private void SwitchApp_Toggled(object sender, ToggledEventArgs e)
         {
-            if (SwitchApp.IsToggled)
-            {
-                RequestInfos = RequestInfosClose;
-            }
-            else
-            {
-                RequestInfos = RequestInfosAlive;
-            }
+            viewModel.ShowClosed = SwitchApp.IsToggled;
+            //if (SwitchApp.IsToggled)
+            //{
+            //    RequestInfos = RequestInfosClose;
+            //}
+            //else
+            //{
+            //    RequestInfos = RequestInfosAlive;
+            //}
 
-            additionalList.ItemsSource = null;
-            additionalList.ItemsSource = RequestInfos;
+            //additionalList.ItemsSource = null;
+            //additionalList.ItemsSource = RequestInfos;
         }
 
         public AppsPage(string app_id) : base()
@@ -449,8 +463,16 @@ namespace xamarinJKH.Main
             }
 
             IconViewSaldos.ReplaceStringMap = buttonColor;
-            
-            // viewModel.LoadRequests.Execute(null);
+            //if(!viewModel.IsRefreshing)
+            //{
+            //    Device.BeginInvokeOnMainThread(()=>
+            //    {
+            //        viewModel.IsRefreshing = false;
+            //        messageRefreshView.IsRefreshing=false;
+            //    }
+            //    );
+            //}
+             viewModel.LoadRequests.Execute(null);
             CheckAkk();
             
         }
