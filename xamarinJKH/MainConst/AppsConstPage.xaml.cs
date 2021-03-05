@@ -715,12 +715,12 @@ namespace xamarinJKH.MainConst
                             
                 Device.BeginInvokeOnMainThread((async () =>
                 {
-                    if (e.VerticalDelta > 0 && e.VerticalOffset >= 10)
+                    if (e.FirstVisibleItemIndex > 0)
                     {
                         await mainScroll1.FadeTo(0, 500, Easing.Linear);
                         await OrdersStack.TranslateTo(0, -30, 500,Easing.Linear);
                     }
-                    else if (e.VerticalDelta < 0 && e.VerticalOffset <= 5)
+                    else if (e.FirstVisibleItemIndex == 0)
                     {
                         await mainScroll1.FadeTo(1, 500, Easing.Linear);
                         await OrdersStack.TranslateTo(0, 5, 100, Easing.Linear);

@@ -125,6 +125,7 @@ namespace xamarinJKH.ViewModels.Main
                 if (response.Error != null)
                 {
                     ShowError(response.Error);
+                    IsRefreshing = false;
                     return;
                 }
                 else
