@@ -24,7 +24,7 @@ namespace xamarinJKH.Main
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AppsPage : ContentPage
     {
-        public List<RequestInfo> RequestInfos { get; set; }
+        //public List<RequestInfo> RequestInfos { get; set; }
         public List<RequestInfo> RequestInfosAlive { get; set; }
         public List<RequestInfo> RequestInfosClose { get; set; }
         private RequestList _requestList;
@@ -136,35 +136,35 @@ namespace xamarinJKH.Main
 
         static bool inUpdateNow = false;
 
-        public async Task RefreshData()
-        {
-            try
-            {
-                if (inUpdateNow)
-                    return;
-                inUpdateNow = true;
+        //public async Task RefreshData()
+        //{
+        //    try
+        //    {
+        //        if (inUpdateNow)
+        //            return;
+        //        inUpdateNow = true;
 
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    aIndicator.IsVisible = true;
-                });
+        //        Device.BeginInvokeOnMainThread(() =>
+        //        {
+        //            aIndicator.IsVisible = true;
+        //        });
 
-                await getAppsAsync();
-                inUpdateNow = false;
-            }
-            catch (Exception e)
-            {
-                inUpdateNow = false;
-            }
-            finally
-            {
-                inUpdateNow = false;
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    aIndicator.IsVisible = false;
-                });
-            }
-        }
+        //        await getAppsAsync();
+        //        inUpdateNow = false;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        inUpdateNow = false;
+        //    }
+        //    finally
+        //    {
+        //        inUpdateNow = false;
+        //        Device.BeginInvokeOnMainThread(() =>
+        //        {
+        //            aIndicator.IsVisible = false;
+        //        });
+        //    }
+        //}
 
         public CancellationTokenSource CancellationTokenSource { get; set; }
         public CancellationToken CancellationToken { get; set; }
@@ -311,8 +311,11 @@ namespace xamarinJKH.Main
 
             MessagingCenter.Subscribe<Object, int>(this, "CloseAPP", async (sender, args) =>
             {
-                await RefreshData();
-                var request = RequestInfos?.Find(x => x.ID == args);
+                //await RefreshData();
+                viewModel.LoadRequests.Execute(null);
+                //var request = RequestInfos?.Find(x => x.ID == args);
+                var request = viewModel.Requests?.FirstOrDefault(x => x.ID == args);
+                
                 if (request != null)
                 {
                     try
@@ -421,7 +424,8 @@ namespace xamarinJKH.Main
 
         public AppsPage(string app_id) : base()
         {
-            var request = RequestInfos.Find(x => x.ID == int.Parse(app_id));
+            //var request = RequestInfos.Find(x => x.ID == int.Parse(app_id));
+            var request = viewModel.Requests.FirstOrDefault(x => x.ID == int.Parse(app_id));
             if (request != null)
             {
                 Device.BeginInvokeOnMainThread(async () =>
@@ -487,63 +491,63 @@ namespace xamarinJKH.Main
             GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
         }
 
-        async Task getAppsAsync()
-        {
-            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
-            {
-                Device.BeginInvokeOnMainThread(async () =>
-                    await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
-                return;
-            }
+        //async Task getAppsAsync()
+        //{
+        //    if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+        //    {
+        //        Device.BeginInvokeOnMainThread(async () =>
+        //            await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
+        //        return;
+        //    }
 
-            _requestList = await _server.GetRequestsList();
-            if (_requestList.Error == null)
-            {
-                if (Settings.UpdateKey != _requestList.UpdateKey)
-                {
-                    RequestInfos = null;
-                    setCloses(_requestList.Requests);
-                    Settings.UpdateKey = _requestList.UpdateKey;
-                    this.BindingContext = this;
-                }
-            }
-            else
-            {
-                await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAppsInfo, "OK");
-            }
-        }
+        //    _requestList = await _server.GetRequestsList();
+        //    if (_requestList.Error == null)
+        //    {
+        //        if (Settings.UpdateKey != _requestList.UpdateKey)
+        //        {
+        //            RequestInfos = null;
+        //            setCloses(_requestList.Requests);
+        //            Settings.UpdateKey = _requestList.UpdateKey;
+        //            this.BindingContext = this;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAppsInfo, "OK");
+        //    }
+        //}
 
-        void setCloses(List<RequestInfo> infos)
-        {
-            RequestInfosAlive = new List<RequestInfo>();
-            RequestInfosClose = new List<RequestInfo>();
-            foreach (var each in infos)
-            {
-                if (each.IsClosed)
-                {
-                    RequestInfosClose.Add(each);
-                }
-                else
-                {
-                    RequestInfosAlive.Add(each);
-                }
-            }
+        //void setCloses(List<RequestInfo> infos)
+        //{
+        //    RequestInfosAlive = new List<RequestInfo>();
+        //    RequestInfosClose = new List<RequestInfo>();
+        //    foreach (var each in infos)
+        //    {
+        //        if (each.IsClosed)
+        //        {
+        //            RequestInfosClose.Add(each);
+        //        }
+        //        else
+        //        {
+        //            RequestInfosAlive.Add(each);
+        //        }
+        //    }
 
-            if (SwitchApp.IsToggled)
-            {
-                RequestInfos = RequestInfosClose;
-            }
-            else
-            {
-                RequestInfos = RequestInfosAlive;
-            }
+        //    if (SwitchApp.IsToggled)
+        //    {
+        //        RequestInfos = RequestInfosClose;
+        //    }
+        //    else
+        //    {
+        //        RequestInfos = RequestInfosAlive;
+        //    }
 
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                additionalList.ItemsSource = null;
-                additionalList.ItemsSource = RequestInfos;
-            });
-        }
+        //    Device.BeginInvokeOnMainThread(() =>
+        //    {
+        //        additionalList.ItemsSource = null;
+        //        additionalList.ItemsSource = RequestInfos;
+        //    });
+        //}
 
         private async void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
@@ -622,7 +626,8 @@ namespace xamarinJKH.Main
             var s = (StackLayout)sender;
             var id = Convert.ToInt32(((Label)s.Children[0]).Text);
 
-            RequestInfo select = RequestInfos.FirstOrDefault(_ => _.ID == id); // viewModel.Requests.First(_=>_.ID==id);
+            //RequestInfo select = RequestInfos.FirstOrDefault(_ => _.ID == id); // viewModel.Requests.First(_=>_.ID==id);
+            RequestInfo select = viewModel.Requests.First(_=>_.ID==id);
 
             if (select != null)
             {
