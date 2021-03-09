@@ -7,6 +7,7 @@ using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarinJKH.Apps;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
@@ -20,11 +21,13 @@ namespace xamarinJKH.DialogViews
         public Color HexColor { get; set; }
         public RequestInfo _Request { get; set; }
         bool IsConst = false;
-
-        public RatingBarContentView(Color hexColor, RequestInfo request, bool isConst)
+        private AppPage appPage;
+        public RatingBarContentView(Color hexColor, RequestInfo request, AppPage appPage)
         {
             HexColor = hexColor;
             _Request = request;
+            this.appPage = appPage;
+
             InitializeComponent();
             Frame.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.Transparent);
             if(Device.RuntimePlatform==Device.iOS)
@@ -56,7 +59,7 @@ namespace xamarinJKH.DialogViews
 
             }
 
-            IsConst = isConst;
+            
             var close = new TapGestureRecognizer();
             close.Tapped += async (s, e) => { await PopupNavigation.Instance.PopAsync(); };
             IconViewClose.GestureRecognizers.Add(close);
@@ -130,6 +133,8 @@ namespace xamarinJKH.DialogViews
                     {
                         MessagingCenter.Send<Object>(this, "CloseAPP");
                         await ShowToast(AppResources.AppClosed);
+                        _Request.IsClosed = true;
+                        await appPage.RefreshData();
                         await PopupNavigation.Instance.PopAsync();
                     }
                     else

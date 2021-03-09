@@ -376,6 +376,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Заявка уже закрыта.
+        /// </summary>
+        internal static string AppIsClosed {
+            get {
+                return ResourceManager.GetString("AppIsClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to приложение.
         /// </summary>
         internal static string application {
@@ -2068,7 +2077,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Заводской №:.
+        ///   Looks up a localized string similar to Номер:.
         /// </summary>
         internal static string FacNum {
             get {
