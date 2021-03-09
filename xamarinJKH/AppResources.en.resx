@@ -294,7 +294,7 @@
     <value>Log out</value>
   </data>
   <data name="FacNum" xml:space="preserve">
-    <value>Factory #:</value>
+    <value>Number:</value>
   </data>
   <data name="FailedReq" xml:space="preserve">
     <value>Not completed</value>
@@ -1900,5 +1900,8 @@
   </data>
   <data name="EmptyApp" xml:space="preserve">
     <value>No applications</value>
+  </data>
+  <data name="AppIsClosed" xml:space="preserve">
+    <value>Application already closed </value>
   </data>
 </root>

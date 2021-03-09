@@ -295,7 +295,7 @@
     <value>Выйти</value>
   </data>
   <data name="FacNum" xml:space="preserve">
-    <value>Заводской №:</value>
+    <value>Номер:</value>
   </data>
   <data name="FailedReq" xml:space="preserve">
     <value>Не выполнено</value>
@@ -1902,5 +1902,8 @@
   </data>
   <data name="EmptyApp" xml:space="preserve">
     <value>Нет заявок</value>
+  </data>
+  <data name="AppIsClosed" xml:space="preserve">
+    <value>Заявка уже закрыта</value>
   </data>
 </root>

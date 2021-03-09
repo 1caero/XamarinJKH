@@ -165,7 +165,7 @@ namespace xamarinJKH.Apps
             base.OnDisappearing();
         }
 
-        private async Task RefreshData()
+        public async Task RefreshData()
         {
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
@@ -340,8 +340,14 @@ namespace xamarinJKH.Apps
             var closeApp = new TapGestureRecognizer();
             closeApp.Tapped += async (s, e) =>
             {
-                await PopupNavigation.Instance.PushAsync(new RatingBarContentView(hex, _requestInfo, false));
-                await RefreshData();
+                if (!_requestInfo.IsClosed)
+                {
+                    await PopupNavigation.Instance.PushAsync(new RatingBarContentView(hex, _requestInfo, this));
+                }
+                else
+                {
+                    await ShowToast(AppResources.AppIsClosed);
+                }
             };
             StackLayoutClose.GestureRecognizers.Add(closeApp);
 
@@ -821,6 +827,7 @@ namespace xamarinJKH.Apps
             if (request.Error == null)
             {
                 Settings.DateUniq = "";
+                _requestInfo = request;
                 StackLayoutPlay.IsVisible = request.IsPaid;
                 LayoutResipt.IsVisible = request.IsPaid;
                 foreach (var message in request.Messages)
