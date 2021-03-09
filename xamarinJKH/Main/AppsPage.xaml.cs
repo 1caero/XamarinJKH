@@ -254,10 +254,10 @@ namespace xamarinJKH.Main
             }
 
             //FrameBtnAddPass.IsVisible = Settings.MobileSettings.enableCreationPassRequests;
-            FrameBtnAddPass.IsVisible = Settings.Person.Accounts.Any(_=>_.AllowPassRequestCreation);
-#if DEBUG
-            FrameBtnAddPass.IsVisible = true; 
-#endif
+            
+// #if DEBUG
+//             FrameBtnAddPass.IsVisible = true; 
+// #endif
 
             //FrameSwitch.IsVisible = Settings.MobileSettings.enableCreationPassRequests;
             //LayoutSwitch.IsVisible = !Settings.MobileSettings.enableCreationPassRequests;
@@ -452,6 +452,7 @@ namespace xamarinJKH.Main
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            FrameBtnAddPass.IsVisible = Settings.Person.Accounts.Any(_=>_.AllowPassRequestCreation);
             OSAppTheme currentTheme = Application.Current.RequestedTheme;
             var colors = new Dictionary<string, string>();
             var buttonColor = new Dictionary<string, string>();
