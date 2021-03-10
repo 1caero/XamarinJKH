@@ -1,17 +1,10 @@
-﻿﻿using System;
-using Android.Content;
- using Android.Content.Res;
- using Android.Runtime;
-using Android.Widget;
- using Java.Lang;
- using Xamarin.Forms;
+﻿using Android.Content;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
- using xamarinJKH.Android;
- using xamarinJKH.Utils;
- using Resource = Android.Resource;
+using xamarinJKH.Droid.CustomReader;
 
- [assembly: ExportRenderer(typeof(Entry), typeof(CustomEntryRenderer))]
-namespace xamarinJKH.Android
+[assembly: ExportRenderer(typeof(Entry), typeof(CustomEntryRenderer))]
+namespace xamarinJKH.Droid.CustomReader
 {
     public class CustomEntryRenderer : EntryRenderer
     {

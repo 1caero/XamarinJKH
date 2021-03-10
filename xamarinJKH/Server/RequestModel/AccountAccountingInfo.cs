@@ -73,10 +73,13 @@ namespace xamarinJKH.Server.RequestModel
 
     public class PaymentInfo
     {
+        public int ID { get; set; }
         public string Ident { get; set; }
         public string Date { get; set; }
         public string Period { get; set; }
         public decimal Sum { get; set; }
+        
+        public bool HasCheck { get; set; }
     }
 
     public class AccountingInfoModel: BaseViewModel

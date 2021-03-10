@@ -14,7 +14,6 @@ using Plugin.CurrentActivity;
 using Plugin.FirebasePushNotification;
 using Plugin.Media;
 using Xamarin.Forms;
-using xamarinJKH.Android;
 using xamarinJKH.Utils;
 
 using Firebase.Iid;

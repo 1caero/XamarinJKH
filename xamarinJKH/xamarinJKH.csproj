@@ -377,6 +377,7 @@
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="1.4.2" />
     <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.1.34" />
     <PackageReference Include="XamEffects" Version="1.6.3" />
+    <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
   </ItemGroup>
 
   <ItemGroup>

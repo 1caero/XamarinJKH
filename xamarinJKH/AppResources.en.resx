@@ -302,15 +302,6 @@
   <data name="FailedRequests" xml:space="preserve">
     <value>Failed requests</value>
   </data>
-  <data name="fgh" xml:space="preserve">
-    <value>Показания переданы</value>
-  </data>
-  <data name="fghf" xml:space="preserve">
-    <value>Изменить показания</value>
-  </data>
-  <data name="fghfj" xml:space="preserve">
-    <value>Заводской №</value>
-  </data>
   <data name="FIO" xml:space="preserve">
     <value>Full name</value>
   </data>
@@ -929,9 +920,6 @@
   <data name="OSSVotingResult" xml:space="preserve">
     <value>Voting result</value>
   </data>
-  <data name="OSSVotingResult1" xml:space="preserve">
-    <value>Итоги голосования</value>
-  </data>
   <data name="SuccessFileSent" xml:space="preserve">
     <value>File sent</value>
   </data>
@@ -1424,9 +1412,6 @@
   <data name="PassGazele" xml:space="preserve">
     <value>Gazelle</value>
   </data>
-  <data name="PassGargo" xml:space="preserve">
-    <value>Cargo</value>
-  </data>
   <data name="EnterFIO" xml:space="preserve">
     <value>Enter your full name</value>
   </data>
@@ -1903,5 +1888,14 @@
   </data>
   <data name="AppIsClosed" xml:space="preserve">
     <value>Application already closed </value>
+  </data>
+  <data name="ErrorFillIdent" xml:space="preserve">
+    <value>Fill in the account number</value>
+  </data>
+  <data name="PassCargo" xml:space="preserve">
+    <value>Cargo</value>
+  </data>
+  <data name="ToDate" xml:space="preserve">
+    <value>before </value>
   </data>
 </root>

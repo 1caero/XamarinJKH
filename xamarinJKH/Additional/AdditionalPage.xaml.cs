@@ -160,7 +160,7 @@ namespace xamarinJKH.Additional
             MessagingCenter.Subscribe<Object>(this, "LoadGoods", async (s) =>
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(500));
-                SetAdditional();
+                RefreshCommand.Execute(null);
             });
 
             // MessagingCenter.Subscribe<MapPageViewModel, Position>(this, "FocusMap",
@@ -240,7 +240,7 @@ namespace xamarinJKH.Additional
                         }
                     }
                     Device.BeginInvokeOnMainThread(SetGrupAdditional);
-                    IsBusy = false;
+                    
                 })
             );
 
@@ -253,82 +253,81 @@ namespace xamarinJKH.Additional
             StackLayout containerData = new StackLayout();
             containerData.HorizontalOptions = LayoutOptions.FillAndExpand;
             containerData.VerticalOptions = LayoutOptions.Start;
-            foreach (var group in Settings.EventBlockData.AdditionalServicesByGroups.Keys)
-            {
-                
-                Label titleLable = new Label();
-                titleLable.TextColor = Color.Black;
-                titleLable.FontSize = 18;
-                titleLable.Text = group;
-                titleLable.FontAttributes = FontAttributes.Bold;
-                titleLable.VerticalOptions = LayoutOptions.StartAndExpand;
-                titleLable.HorizontalOptions = LayoutOptions.StartAndExpand;
-
-                ScrollView scrollViewAdditional = new ScrollView();
-                scrollViewAdditional.Orientation = ScrollOrientation.Horizontal;
-                scrollViewAdditional.HorizontalScrollBarVisibility = ScrollBarVisibility.Never;
-                StackLayout containerAdd = new StackLayout();
-                containerAdd.HorizontalOptions = LayoutOptions.FillAndExpand;
-                containerAdd.Orientation = StackOrientation.Horizontal;
-                foreach (var service in Settings.EventBlockData.AdditionalServicesByGroups[group].Where(x => !x.NotNullShowInAdBlock.ToLower().Equals("не отображать")))
+            if (Settings.EventBlockData.AdditionalServicesByGroups?.Keys != null)
+                foreach (var group in Settings.EventBlockData.AdditionalServicesByGroups?.Keys)
                 {
-                   
-                    StackLayout stackLayoutCon = new StackLayout()
-                    {
-                        Padding = 10
-                    };
-                    PancakeView pic = new PancakeView()
-                    {
-                        HorizontalOptions=LayoutOptions.Center,
-                        CornerRadius=20,
-                        
-                    };
-                    
-                    CachedImage cachedImage = new CachedImage()
-                    {
-                        HeightRequest=70,
-                        WidthRequest=70,
-                        Source = service.LogoLink
-                    };
-                    pic.Content = cachedImage;
+                    Label titleLable = new Label();
+                    titleLable.TextColor = Color.Black;
+                    titleLable.FontSize = 18;
+                    titleLable.Text = @group;
+                    titleLable.FontAttributes = FontAttributes.Bold;
+                    titleLable.VerticalOptions = LayoutOptions.StartAndExpand;
+                    titleLable.HorizontalOptions = LayoutOptions.StartAndExpand;
 
-                    Label labelText = new Label()
+                    ScrollView scrollViewAdditional = new ScrollView();
+                    scrollViewAdditional.Orientation = ScrollOrientation.Horizontal;
+                    scrollViewAdditional.HorizontalScrollBarVisibility = ScrollBarVisibility.Never;
+                    StackLayout containerAdd = new StackLayout();
+                    containerAdd.HorizontalOptions = LayoutOptions.FillAndExpand;
+                    containerAdd.Orientation = StackOrientation.Horizontal;
+                    foreach (var service in Settings.EventBlockData.AdditionalServicesByGroups[@group]
+                        .Where(x => !x.NotNullShowInAdBlock.ToLower().Equals("не отображать")))
                     {
-                        TextColor = Color.Black,
-                        Text = FormatName(service.Name),//.Replace("\\n","\n"),
-                        VerticalTextAlignment=TextAlignment.Center,
-                        HorizontalOptions=LayoutOptions.Center,
-                        FontSize=12,
-                        HorizontalTextAlignment=TextAlignment.Center
-                    };
-                    stackLayoutCon.Children.Add(pic);
-                    stackLayoutCon.Children.Add(labelText);
-                    containerAdd.Children.Add(stackLayoutCon);
-                    
-                    var onItemTaped = new TapGestureRecognizer();
-                    onItemTaped.Tapped += async (s, e) =>
-                    {
-                        if (service.ShopID == null)
+                        StackLayout stackLayoutCon = new StackLayout()
                         {
-                            if (Navigation.NavigationStack.FirstOrDefault(x => x is AdditionalOnePage) == null)
-                                await Navigation.PushAsync(new AdditionalOnePage(service));
-                        }
-                        else
+                            Padding = 10
+                        };
+                        PancakeView pic = new PancakeView()
                         {
-                            if (Navigation.NavigationStack.FirstOrDefault(x => x is ShopPageNew) == null)
-                                await Navigation.PushAsync(new ShopPageNew(service));
-                        }
-                    };
-                    stackLayoutCon.GestureRecognizers.Add(onItemTaped);
-                    
+                            HorizontalOptions = LayoutOptions.Center,
+                            CornerRadius = 20,
+                        };
+
+                        CachedImage cachedImage = new CachedImage()
+                        {
+                            HeightRequest = 70,
+                            WidthRequest = 70,
+                            Source = service.LogoLink
+                        };
+                        pic.Content = cachedImage;
+
+                        Label labelText = new Label()
+                        {
+                            TextColor = Color.Black,
+                            Text = FormatName(service.Name), //.Replace("\\n","\n"),
+                            VerticalTextAlignment = TextAlignment.Center,
+                            HorizontalOptions = LayoutOptions.Center,
+                            FontSize = 12,
+                            HorizontalTextAlignment = TextAlignment.Center
+                        };
+                        stackLayoutCon.Children.Add(pic);
+                        stackLayoutCon.Children.Add(labelText);
+                        containerAdd.Children.Add(stackLayoutCon);
+
+                        var onItemTaped = new TapGestureRecognizer();
+                        onItemTaped.Tapped += async (s, e) =>
+                        {
+                            if (service.ShopID == null)
+                            {
+                                if (Navigation.NavigationStack.FirstOrDefault(x => x is AdditionalOnePage) == null)
+                                    await Navigation.PushAsync(new AdditionalOnePage(service));
+                            }
+                            else
+                            {
+                                if (Navigation.NavigationStack.FirstOrDefault(x => x is ShopPageNew) == null)
+                                    await Navigation.PushAsync(new ShopPageNew(service));
+                            }
+                        };
+                        stackLayoutCon.GestureRecognizers.Add(onItemTaped);
+                    }
+
+                    scrollViewAdditional.Content = containerAdd;
+                    containerData.Children.Add(titleLable);
+                    containerData.Children.Add(scrollViewAdditional);
                 }
 
-                scrollViewAdditional.Content = containerAdd;
-                containerData.Children.Add(titleLable);
-                containerData.Children.Add(scrollViewAdditional);
-            }
-
             StackLayoutContainer.Content = containerData;
+            IsBusy = false;
         }
 
         string FormatName(string input)

@@ -3790,15 +3790,6 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string PaymentDescription0 {
-            get {
-                return ResourceManager.GetString("PaymentDescription0", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Оплата производится по квитанции за.
         /// </summary>
         internal static string PaymentOf {
