@@ -192,6 +192,7 @@
                                            TextColor="Black"
                                            HorizontalOptions="EndAndExpand"
                                            FontSize="15"
+                                           Margin="0,0,15,0"
                                            FontAttributes="Bold" />
                                 </StackLayout>
                                 <Label
@@ -217,6 +218,8 @@
                                             <pays:HistoryPaysCell
                                                 Period="{Binding Period}"
                                                 DatePay="{Binding Date}"
+                                                HasCheck="{Binding HasCheck}"
+                                                IdPay="{Binding ID}"
                                                 SumPay="{Binding Sum}" />
                                         </DataTemplate>
 

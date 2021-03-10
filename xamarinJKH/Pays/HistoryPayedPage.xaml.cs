@@ -213,6 +213,11 @@ namespace xamarinJKH.Pays
             List<PaymentInfo> paymentInfo = new List<PaymentInfo>(accountingInfo.Payments);
             List<PaymentInfo> paymentUO = new List<PaymentInfo>(accountingInfo.PendingPayments);
             List<MobilePayment> mobile = new List<MobilePayment>(accountingInfo.MobilePayments);
+            paymentUO = paymentUO.Select(c =>
+            {
+                c.HasCheck = false;
+                return c;
+            }).ToList();
             paymentInfo.AddRange(paymentUO);
             foreach (var each in mobile)
             {
@@ -221,6 +226,7 @@ namespace xamarinJKH.Pays
                     Date = each.Date.Split(' ')[0],
                     Ident = each.Ident,
                     Period = "Мобильный",
+                    HasCheck = false,
                     Sum = each.Sum
                 });
             }
