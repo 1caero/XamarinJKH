@@ -305,8 +305,6 @@ namespace xamarinJKH.Main
             catch(Exception e)
             {
                 Analytics.TrackEvent("Установка данных для вкладок, error:"+e.ToString());
-
-                throw;
             }
             
         }
