@@ -329,7 +329,7 @@
                                                  BorderColor="{Binding hex}" 
                                                  BorderThickness="1" 
                                                  x:Name="ViewSearch"
-                                                 Padding="{x:OnPlatform Android=10, iOS=0}" 
+                                                 Padding="{x:OnPlatform Android=5, iOS=0}" 
                                                  Margin="10,0" 
                                                  CornerRadius="10" 
                                                  WidthRequest="{x:OnPlatform Android=300, iOS=400}" 

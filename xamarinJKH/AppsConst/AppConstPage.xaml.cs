@@ -649,10 +649,15 @@ namespace xamarinJKH.AppsConst
             
 
             hiddenComent.IsVisible = !Settings.Person.UserSettings.AlwaysPostHiddenMessage;
-            //if (Settings.Person.UserSettings.AlwaysPostHiddenMessage)
-            //{
-            //    IconViewSend.Column(3);
-            //}
+            if (Settings.Person.UserSettings.AlwaysPostHiddenMessage)
+            {
+                Grid.Children.Remove(IconViewSend);
+                Grid.Children.Remove(progress);
+                Grid.Children.Add(IconViewSend,3,0);
+                Grid.Children.Add(progress,3,0);
+            }
+         
+           
         }
 
         private void ComplicationRun()
