@@ -263,11 +263,11 @@
                                         BackgroundColor="{Binding hex}"
                                         HorizontalOptions="Fill" />
                                 </StackLayout>
-                                <ActivityIndicator IsVisible="{Binding LoadingStreets}"
+                                <!--<ActivityIndicator IsVisible="{Binding LoadingStreets}"
                                                    IsEnabled="{Binding LoadingStreets}"
                                                    IsRunning="{Binding LoadingStreets}"
                                                    BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
-                                                   Color="{x:StaticResource MainColor}" />
+                                                   Color="{x:StaticResource MainColor}" />-->
 
                             </StackLayout>
                         </Frame>
@@ -438,7 +438,7 @@
                             </ScrollView>
 
                             <ActivityIndicator Color="{x:StaticResource MainColor}"
-                                               Margin="120"
+                                               Margin="120" Scale="2"
                                                IsRunning="{Binding IsBusy}"
                                                IsEnabled="{Binding IsBusy}"
                                                IsVisible="{Binding IsBusy}" />

@@ -219,12 +219,13 @@ namespace xamarinJKH.MainConst
             MessagingCenter.Subscribe<Object>(this, "ChangeAdminMonitor", (sender) => ChangeTheme.Execute(null));
             BindingContext = this;
             Groups = new ObservableCollection<NamedValue>();
-            MessagingCenter.Unsubscribe<Object>(this, "StartStatistic");
-            MessagingCenter.Subscribe<Object>(this, "StartStatistic", sender =>
+            //MessagingCenter.Unsubscribe<Object>(this, "StartStatistic");
+            MessagingCenter.Subscribe<Object>(this, "StartStatistic", async sender =>
             {
                 if (!loaded)
                 {
-                    Device.BeginInvokeOnMainThread(async () => await StartStatistick());
+                    //Device.BeginInvokeOnMainThread(async () => await StartStatistick());
+                    await StartStatistick();
                 }
                 loaded = true;
             });
@@ -1042,8 +1043,8 @@ namespace xamarinJKH.MainConst
         }
         public async Task StartStatistick(bool isGroup = true)
         {
-            Device.BeginInvokeOnMainThread(() =>
-            {
+            //Device.BeginInvokeOnMainThread(async () =>
+            //{
                 if (!isRunning)
                     return;
                 // Loading settings
@@ -1055,8 +1056,8 @@ namespace xamarinJKH.MainConst
                     DefaultMessage = AppResources.MonitorStats,
                 };
 
-                Device.BeginInvokeOnMainThread(async () =>
-                {
+                //Device.BeginInvokeOnMainThread(async () =>
+                //{
                     await Task.Run(async () =>
                     {
                         //Device.BeginInvokeOnMainThread(async () =>
@@ -1094,20 +1095,21 @@ namespace xamarinJKH.MainConst
                     }).ContinueWith(async (obj) => { await getHouse(); }).ContinueWith(async (res) =>
                     {
                         await Task.Delay(500);
-                        Button_Clicked(null, null);
-                        try
-                        {
-                            await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog(false));
-                            await PopupNavigation.Instance.PopAsync();
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e);
-                        }
+                        //Button_Clicked(null, null);
+                        clck();
+                        //try
+                        //{
+                        //    await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog(false));
+                        //    await PopupNavigation.Instance.PopAsync();
+                        //}
+                        //catch (Exception e)
+                        //{
+                        //    Console.WriteLine(e);
+                        //}
 
                     });
-                });
-            });
+                //});
+            //});
 
         }
 
@@ -1702,6 +1704,7 @@ namespace xamarinJKH.MainConst
                     LoadingStreets = true;
                     (sender as CollectionView).ScrollTo(selection);
                     await getHouse();
+                    LoadingStreets = false;
                 });
             }
             catch
@@ -1763,6 +1766,7 @@ namespace xamarinJKH.MainConst
                     LoadingStreets = true;
                     // (sender as CollectionView).ScrollTo(SelectedArea);
                     await getHouse();
+                    LoadingStreets = false;
                 });
             }
             catch
@@ -1808,9 +1812,20 @@ namespace xamarinJKH.MainConst
         private List<int> AreaIDs { get; set; }
         private List<int> HouseIDs { get; set; }
         private List<int> GroupIDs { get; set; }
-        private async void Button_Clicked(object sender, EventArgs e)
+        private void Button_Clicked(object sender, EventArgs e)
         {
-            if(!isRunning)
+
+           Device.BeginInvokeOnMainThread(()=> {
+               IsBusy = true;
+               clck();
+               IsBusy = false;
+           });
+
+        }
+
+        void clck()
+        {
+            if (!isRunning)
                 return;
             var queries = new List<RequestStatsQuerySettings>();
             if (HouseIDs == null)
@@ -1820,21 +1835,21 @@ namespace xamarinJKH.MainConst
             if (GroupIDs == null)
                 GroupIDs = new List<int>();
             if (HouseIDs?.Count > 0)
-            for (int i = 0; i < HouseIDs.Count(); i++)
-            {
-                try
+                for (int i = 0; i < HouseIDs.Count(); i++)
                 {
-                    queries.Add(
-                        new RequestStatsQuerySettings
-                        {
-                            DistrictId = -1,//AreaIDs[i],
-                            GroupOfDistrictId = -1,
-                            HouseId = HouseIDs[i],
-                        });
+                    try
+                    {
+                        queries.Add(
+                            new RequestStatsQuerySettings
+                            {
+                                DistrictId = -1,//AreaIDs[i],
+                                GroupOfDistrictId = -1,
+                                HouseId = HouseIDs[i],
+                            });
+                    }
+                    catch (Exception ex)
+                    { }
                 }
-                catch (Exception ex)
-                { }
-            }
             else if (AreaIDs?.Count > 0)
             {
                 for (int i = 0; i < AreaIDs?.Count(); i++)
@@ -1890,7 +1905,7 @@ namespace xamarinJKH.MainConst
                     GroupOfDistrictId = -1
                 });
             }
-                IsBusy = false;
+            IsBusy = false;
             Device.BeginInvokeOnMainThread(async () =>
             {
                 await Loading.Instance.StartAsync(async progress =>
@@ -1939,8 +1954,6 @@ namespace xamarinJKH.MainConst
                     }
                 });
             });
-           
-            
         }
 
         private void HouseGroups_SelectionChanged(object sender, Syncfusion.SfAutoComplete.XForms.SelectionChangedEventArgs e)
