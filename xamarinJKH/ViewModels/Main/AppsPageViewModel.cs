@@ -192,7 +192,7 @@ namespace xamarinJKH.ViewModels.Main
             if (response.Error == null)
             {
                 MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", response.Requests.Where(x => !x.IsReadedByClient && x.StatusID != 6).Count());
-                if (AllRequests != null)
+                if (AllRequests != null )
                 {
                     //if (ShowClosed)
                     //{
@@ -201,19 +201,28 @@ namespace xamarinJKH.ViewModels.Main
                     //else
                     //{
                     //    Empty = response.Requests.Count(x => !x.IsClosed) == 0;
-                    //}
-                    
-                    var ids = AllRequests.Select(x => x.ID);
-                    var newRequests = response.Requests.Where(x => !ids.Contains(x.ID)).ToList();
-                    foreach (var newApp in newRequests)
+                    //}                    
+
+                    if( AllRequests.Count > 0)
                     {
-                        Device.BeginInvokeOnMainThread(() =>
+                        var ids = AllRequests.Select(x => x.ID);
+                        var newRequests = response.Requests.Where(x => !ids.Contains(x.ID)).ToList();
+                        foreach (var newApp in newRequests)
                         {
-                            AllRequests.Insert(0, newApp);
-                            if (!Requests.Contains(newApp))
-                                Requests.Insert(0, newApp);
-                        });
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                AllRequests.Insert(0, newApp);
+                                if (!Requests.Contains(newApp))
+                                    Requests.Insert(0, newApp);
+                            });
+                        }
                     }
+                    else
+                    {
+                        AllRequests = response.Requests;
+                        Requests = new ObservableCollection<RequestInfo>(response.Requests);
+                    }
+                    
                 }
 
             }
