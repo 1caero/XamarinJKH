@@ -105,7 +105,12 @@ namespace xamarinJKH.Main
 
                     Device.BeginInvokeOnMainThread(async () =>
                         {
-                            await viewModel.UpdateTask();
+                            await viewModel.UpdateTask().ContinueWith((obj )=> { Device.BeginInvokeOnMainThread(() => additionalList.ScrollTo(-1, null, ScrollToPosition.Start, false)); });
+                            //additionalList.ScrollTo(-1, null, ScrollToPosition.Start, false);
+                            //while (viewModel.AllRequests == null)
+                            //{
+                            //    await Task.Delay(TimeSpan.FromMilliseconds(50));
+                            //}
                         });
 //                    await viewModel.UpdateTask();
                 return;
@@ -401,6 +406,7 @@ namespace xamarinJKH.Main
                if (args == null)
                {
                    viewModel.Requests.Clear();
+                   viewModel.AllRequests.Clear();                   
                }
            });
             Analytics.TrackEvent("Заявки жителя-RemoveIdent подписались");
@@ -477,7 +483,8 @@ namespace xamarinJKH.Main
             //    }
             //    );
             //}
-             viewModel.LoadRequests.Execute(null);
+            Device.BeginInvokeOnMainThread(() => viewModel.LoadRequests.Execute(null));
+             //viewModel.LoadRequests.Execute(null);
             CheckAkk();
             
         }

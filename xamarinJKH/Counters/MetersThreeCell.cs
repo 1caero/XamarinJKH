@@ -842,8 +842,12 @@ namespace xamarinJKH.Main
                     var stack = frame.Content as StackLayout;
                     try
                     {
-                        stack.Children.RemoveAt(stack.Children.IndexOf(editLabel));
-                        stack.Children.RemoveAt(stack.Children.IndexOf(labelЗPeriod));
+                    var i1 = stack.Children.IndexOf(editLabel);
+                    if(i1!=-1)
+                        stack.Children.RemoveAt(i1);
+                    var i2 = stack.Children.IndexOf(labelЗPeriod);
+                    if(i2!=-1)
+                        stack.Children.RemoveAt(i2);
                     }
                     catch (Exception e)
                     {

@@ -361,6 +361,9 @@ namespace xamarinJKH.Main
                 case Device.iOS:
                     int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
+                    
+                    if (DeviceDisplay.MainDisplayInfo.Height > 2000)
+                        FrameTop.Padding = new Thickness(FrameTop.Padding.Left, FrameTop.Padding.Top, FrameTop.Padding.Right, FrameTop.Padding.Bottom + 30);
 
                     break;
                 default:
@@ -478,16 +481,38 @@ namespace xamarinJKH.Main
                     await Task.Delay(TimeSpan.FromMilliseconds(500));
                 if (ident != null)
                 {
-                    var contain = Accounts.FirstOrDefault(x => x.Ident == ident.Ident);
-                    if (contain == null)
-                        Device.BeginInvokeOnMainThread(() => Accounts.Add(ident));
-
-                    var all = Accounts.FirstOrDefault(x => x.Ident == AppResources.All);
-                    if (all == null)
+                    Device.BeginInvokeOnMainThread(() =>
                     {
-                        Device.BeginInvokeOnMainThread(() =>
-                            Accounts.Insert(0, new AccountInfo {Ident = AppResources.All, Selected = true}));
-                    }
+                        var all = Accounts.FirstOrDefault(x => x.Ident == AppResources.All);
+                        if (all == null)
+                        {
+                            try { Accounts.Add(new AccountInfo { Ident = AppResources.All, Selected = true }); }
+                            catch(Exception ex)
+                            {
+                                throw;
+                            }
+                            
+                        }
+
+                        var contain = Accounts.FirstOrDefault(x => x.Ident == ident.Ident);
+                        if (contain == null)
+                            Accounts.Add(ident);
+
+                    });
+                    
+
+                    
+
+                    //var contain = Accounts.FirstOrDefault(x => x.Ident == ident.Ident);
+                    //if (contain == null)
+                    //    Device.BeginInvokeOnMainThread(() => Accounts.Add(ident));
+
+                    //var all = Accounts.FirstOrDefault(x => x.Ident == AppResources.All);
+                    //if (all == null)
+                    //{
+                    //    Device.BeginInvokeOnMainThread(() =>
+                    //        Accounts.Insert(0, new AccountInfo { Ident = AppResources.All, Selected = true }));
+                    //}
                 }
 
                 //Device.BeginInvokeOnMainThread(async () =>
@@ -511,20 +536,56 @@ namespace xamarinJKH.Main
             });
             MessagingCenter.Subscribe<Object, AccountInfo>(this, "RemoveIdent", async (sender, ident) =>
             {
-                if (Device.RuntimePlatform == "iOS")
-                    await Task.Delay(TimeSpan.FromMilliseconds(500));
-                Device.BeginInvokeOnMainThread(() =>
+                try
                 {
-                    if (SelectedAccount != null && ident != null)
-                        if (SelectedAccount.Ident == ident.Ident)
-                            SelectedAccount = null;
-                    if (ident != null)
-                        Accounts.Remove(Accounts.First(x => x.Ident == ident.Ident));
-                    if (Accounts.Count == 1)
+                    if (Device.RuntimePlatform == "iOS")
+                        await Task.Delay(TimeSpan.FromMilliseconds(500));
+                    Device.BeginInvokeOnMainThread(() =>
                     {
-                        Accounts.Clear();
-                    }
-                });
+                        try
+                        {
+                            if (SelectedAccount != null && ident != null)
+                                if (SelectedAccount.Ident == ident.Ident)
+                                    SelectedAccount = null;
+                            if (ident != null)
+                            {
+                                try
+                                {
+                                    var delacc = Accounts.FirstOrDefault(x => x.Ident == ident.Ident);
+                                    if (delacc != null)
+                                        try { Accounts.Remove(delacc); }
+                                        catch(Exception exc)
+                                        { 
+                                            throw;
+                                        }
+                                    else
+                                    {
+                                        Console.WriteLine($"{ident.Ident} был уже удален");
+                                    }
+                                }
+                                catch(Exception exce)
+                                {
+                                    throw;
+                                }                                
+                            }
+                            if (Accounts.Count == 1)
+                            {
+                                Accounts.Clear();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            throw;
+                        }
+                        
+                    });
+                }
+                catch(Exception exc)
+                {
+                    throw;
+                }
+
+               
             });
             Device.BeginInvokeOnMainThread(() =>
             {
@@ -723,12 +784,22 @@ namespace xamarinJKH.Main
                 Device.BeginInvokeOnMainThread(async () =>
                {
                    if (Device.RuntimePlatform == Device.iOS)
+                   {
                        await Task.Delay(500);
+                       //if (Accounts != null && Accounts.Count > 0)
+                       //{
+                       //    Picker.ItemsSource = null;
+                       //    Picker.ItemsSource = Accounts;
+                       //}
+                           
+                   }
                    double x = Preferences.Get("scrollX", 0d);
                    double y = Preferences.Get("scrollY", 0d);
                    await scrollForCounters.ScrollToAsync(x, y, false);
                    Preferences.Remove("scrollX");
                    Preferences.Remove("scrollY");
+
+
                }
 
                 );

@@ -113,7 +113,7 @@ namespace xamarinJKH.MainConst
                 }
                 else
                 {
-                    MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", RequestInfos.Count(x => !x.IsReaded));
+                    MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", RequestInfos.Where(o => o.TypeID != Settings.MobileSettings.requestTypeForPassRequest && !o.Name.ToLower().Contains("пропуск")).Count(x => !x.IsReaded));
 
                 }
         }
@@ -509,7 +509,7 @@ namespace xamarinJKH.MainConst
                 }
                 else
                 {
-                    MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", _requestList.Requests.Count(x => !x.IsReaded));
+                    MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", _requestList.Requests.Where(o => o.TypeID != Settings.MobileSettings.requestTypeForPassRequest && !o.Name.ToLower().Contains("пропуск")).Count(x => !x.IsReaded));
                 }
             }
             else
@@ -601,7 +601,7 @@ namespace xamarinJKH.MainConst
                         Device.BeginInvokeOnMainThread(() =>
                         {
                             RequestInfos.Clear();
-                            foreach (var each in RequestDefault.OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse())
+                            foreach (var each in RequestDefault.Where(o => o.TypeID != Settings.MobileSettings.requestTypeForPassRequest && !o.Name.ToLower().Contains("пропуск")).OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse())
                             {
                                 RequestInfos.Add(each);
                             }
