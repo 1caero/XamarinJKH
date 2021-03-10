@@ -437,20 +437,28 @@ namespace xamarinJKH.Main
 
         protected override void OnCurrentPageChanged()
         {
-            base.OnCurrentPageChanged();
-            var i = Children.IndexOf(CurrentPage);
-            if (i == 0)
-                MessagingCenter.Send<Object>(this, "UpdateEvents");
-
-            if (CurrentPage != null)
+            try
             {
-                if (CurrentPage is AppsPage || CurrentPage is AppsConstPage ||
-                    CurrentPage.Title == AppResources.App_NavBar)
-                    MessagingCenter.Send<Object>(this, "AutoUpdate");
+                base.OnCurrentPageChanged();
+                var i = Children.IndexOf(CurrentPage);
+                if (i == 0)
+                    MessagingCenter.Send<Object>(this, "UpdateEvents");
 
-                if (CurrentPage.Title == AppResources.Shop_NavBar)
-                    MessagingCenter.Send<Object>(this, "LoadGoods");
+                if (CurrentPage != null)
+                {
+                    if (CurrentPage is AppsPage || CurrentPage is AppsConstPage ||
+                        CurrentPage.Title == AppResources.App_NavBar)
+                        MessagingCenter.Send<Object>(this, "AutoUpdate");
+
+                    if (CurrentPage.Title == AppResources.Shop_NavBar)
+                        MessagingCenter.Send<Object>(this, "LoadGoods");
+                }
             }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            
         }
 
 

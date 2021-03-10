@@ -93,28 +93,28 @@
                                     <StackLayout Spacing="0" x:Name="TypeStack" Orientation="Vertical"
                                                  VerticalOptions="Start">
                                         <StackLayout Spacing="0" Orientation="Horizontal" VerticalOptions="Start">
-                                            <RadioButton ClassId="0" Focused="RadioButton_Focused"
-                                                         Pressed="RadioButton_Pressed" GroupName="TypeApp" />
+                                            <RadioButton ClassId="0" Focused="RadioButton_Focused" 
+                                                         CheckedChanged="RadioButton_Pressed" GroupName="TypeApp" />
                                             <Label Text="{x:Static xamarinJkh:AppResources.Ident1}"
                                                    Style="{x:StaticResource RadioButton}" />
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal" VerticalOptions="Start">
                                             <RadioButton ClassId="1" Focused="RadioButton_Focused"
-                                                         Pressed="RadioButton_Pressed" IsVisible="{Binding ShowArea}"
+                                                         CheckedChanged="RadioButton_Pressed" IsVisible="{Binding ShowArea}"
                                                          GroupName="TypeApp" />
                                             <Label Text="{x:Static xamarinJkh:AppResources.District}"
                                                    Style="{x:StaticResource RadioButton}" />
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal" VerticalOptions="Start">
                                             <RadioButton ClassId="2" Focused="RadioButton_Focused"
-                                                         Pressed="RadioButton_Pressed"
+                                                         CheckedChanged="RadioButton_Pressed"
                                                          IsVisible="{Binding ShowStreets}" GroupName="TypeApp" />
                                             <Label Text="{x:Static xamarinJkh:AppResources.House}"
                                                    Style="{x:StaticResource RadioButton}" />
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal" VerticalOptions="Start">
                                             <RadioButton ClassId="4" Focused="RadioButton_Focused"
-                                                         Pressed="RadioButton_Pressed"
+                                                         CheckedChanged="RadioButton_Pressed"
                                                          IsVisible="{Binding ShowPremises}" GroupName="TypeApp" />
                                             <Label Text="{x:Static xamarinJkh:AppResources.Flat}"
                                                    Style="{x:StaticResource RadioButton}" />

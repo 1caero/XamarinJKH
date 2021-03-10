@@ -102,24 +102,19 @@ namespace xamarinJKH.Main
                             await Task.Delay(TimeSpan.FromSeconds(5));
                         });
                     }
-
-                    Device.BeginInvokeOnMainThread(async () =>
-                        {
-                            await viewModel.UpdateTask().ContinueWith((obj )=> { Device.BeginInvokeOnMainThread(() => additionalList.ScrollTo(-1, null, ScrollToPosition.Start, false)); });
-                            //additionalList.ScrollTo(-1, null, ScrollToPosition.Start, false);
-                            //while (viewModel.AllRequests == null)
-                            //{
-                            //    await Task.Delay(TimeSpan.FromMilliseconds(50));
-                            //}
-                        });
-//                    await viewModel.UpdateTask();
+                    if(Settings.Person.Accounts.Count>0)
+                    //Device.BeginInvokeOnMainThread(async () =>
+                    //    {
+                    //        await viewModel.UpdateTask().ContinueWith((obj )=> { Device.BeginInvokeOnMainThread(() => additionalList.ScrollTo(-1, null, ScrollToPosition.Start, false)); });                            
+                    //    });
+                    await viewModel.UpdateTask();
                 return;
             });
             try
             {
                 UpdateTask.Start();
             }
-            catch
+            catch(Exception ex)
             {
             }
         }
@@ -405,8 +400,19 @@ namespace xamarinJKH.Main
            {
                if (args == null)
                {
-                   viewModel.Requests.Clear();
-                   viewModel.AllRequests.Clear();                   
+                   try
+                   {
+                       if (viewModel.Requests != null && viewModel.Requests.Count > 0)
+                           //viewModel.Requests.Clear(); 
+                           viewModel.Requests = new System.Collections.ObjectModel.ObservableCollection<RequestInfo>();
+                       if (viewModel.AllRequests != null && viewModel.AllRequests.Count > 0)
+                           viewModel.AllRequests.Clear();
+                   }
+                   catch(Exception ex)
+                   {
+                       Console.WriteLine("не удалсоь очистить список заявок");
+                   }
+                   
                }
            });
             Analytics.TrackEvent("Заявки жителя-RemoveIdent подписались");

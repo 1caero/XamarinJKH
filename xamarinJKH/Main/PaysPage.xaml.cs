@@ -384,7 +384,8 @@ namespace xamarinJKH.Main
             Accounts = new List<AccountAccountingInfo>();
             LoadAccounts = new Command<List<AccountAccountingInfo>>(async (accounts) =>
             {
-                Accounts.Clear();
+                Accounts = new List<AccountAccountingInfo>();
+                //Accounts.Clear();
                 Device.BeginInvokeOnMainThread(() => { baseForPays.Children.Clear(); });
 
                 if (accounts == null)

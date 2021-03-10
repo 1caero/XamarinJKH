@@ -20,7 +20,7 @@ using Plugin.Permissions.Abstractions;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Markup;
+//using Xamarin.Forms.Markup;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
@@ -649,10 +649,10 @@ namespace xamarinJKH.AppsConst
             
 
             hiddenComent.IsVisible = !Settings.Person.UserSettings.AlwaysPostHiddenMessage;
-            if (Settings.Person.UserSettings.AlwaysPostHiddenMessage)
-            {
-                IconViewSend.Column(3);
-            }
+            //if (Settings.Person.UserSettings.AlwaysPostHiddenMessage)
+            //{
+            //    IconViewSend.Column(3);
+            //}
         }
 
         private void ComplicationRun()

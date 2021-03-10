@@ -12,7 +12,7 @@ using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
 using FFImageLoading.Svg.Forms;
 using Microsoft.AppCenter.Analytics;
-using Xamarin.Forms.Markup;
+//using Xamarin.Forms.Markup;
 using xamarinJKH.Apps;
 
 namespace xamarinJKH.AppsConst

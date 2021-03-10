@@ -238,7 +238,7 @@ namespace xamarinJKH.MainConst
         {
             base.OnCurrentPageChanged();
             var i = Children.IndexOf(CurrentPage);
-            if (CurrentPage == appNavBar)
+            //if (CurrentPage == appNavBar)
                 // MessagingCenter.Send<Object>(this, "UpdateAppCons");
             if (CurrentPage == monNavBar)
             {

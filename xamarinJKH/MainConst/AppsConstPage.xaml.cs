@@ -45,9 +45,13 @@ namespace xamarinJKH.MainConst
                     }
                     else
                     {
-                        Device.BeginInvokeOnMainThread(() => additionalList.HeightRequest = 3000);
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            if (additionalList.HeightRequest != 3000)
+                                additionalList.HeightRequest = 3000;
+                        });
                     }
-        
+
             }
         }
         public ObservableCollection<RequestInfo> RequestInfos { get; set; } = new ObservableCollection<RequestInfo>();
@@ -420,7 +424,11 @@ namespace xamarinJKH.MainConst
 
         protected override async void OnAppearing()
         {
-            base.OnAppearing();
+            if (IsPass)
+            {
+
+            }
+                base.OnAppearing();
 
             if (Device.RuntimePlatform == Device.Android)
                 await Task.Delay(500);
@@ -562,18 +570,18 @@ namespace xamarinJKH.MainConst
                     
                     // RequestInfos =
                     //     new ObservableCollection<RequestInfo>(_requestList.Requests);
-                     Device.BeginInvokeOnMainThread(async () =>
+                     Device.BeginInvokeOnMainThread(() =>
                     {
                         //if (RequestDefault != null)
                         //{
-                            RequestInfos.Clear();
-                            foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault)
-                                .OrderBy(o => o._RequestTerm).ThenBy(o => o.IsReaded)
-                                
-                                )
-                            {
-                                RequestInfos.Add(each);
-                            }
+                        RequestInfos.Clear();
+                        foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault)
+                            .OrderBy(o => o._RequestTerm).ThenBy(o => o.IsReaded)
+
+                            )
+                        {
+                            RequestInfos.Add(each);
+                        }
                         //}
                     });
 
@@ -589,7 +597,8 @@ namespace xamarinJKH.MainConst
                         Device.BeginInvokeOnMainThread(() =>
                         {
                             RequestInfos.Clear();
-                            foreach (var each in RequestDefault.Where(o => o.TypeID == Settings.MobileSettings.requestTypeForPassRequest || o.Name.ToLower().Contains("пропуск")).OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse())
+                            var lR = RequestDefault.Where(o => o.TypeID == Settings.MobileSettings.requestTypeForPassRequest || o.Name.ToLower().Contains("пропуск")).OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList();
+                            foreach (var each in lR)
                             {
                                 each.IsEnableMass = false;
                                 RequestInfos.Add(each);
@@ -601,7 +610,8 @@ namespace xamarinJKH.MainConst
                         Device.BeginInvokeOnMainThread(() =>
                         {
                             RequestInfos.Clear();
-                            foreach (var each in RequestDefault.Where(o => o.TypeID != Settings.MobileSettings.requestTypeForPassRequest && !o.Name.ToLower().Contains("пропуск")).OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse())
+                            var rl = RequestDefault.Where(o => o.TypeID != Settings.MobileSettings.requestTypeForPassRequest && !o.Name.ToLower().Contains("пропуск")).OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList();
+                            foreach (var each in rl)
                             {
                                 RequestInfos.Add(each);
                             }
@@ -621,11 +631,21 @@ namespace xamarinJKH.MainConst
 
             try
             {
-                Device.BeginInvokeOnMainThread(async () =>Empty = RequestInfos.Count == 0);
+                Device.BeginInvokeOnMainThread(() => {
+                    try
+                    {
+                        Empty = RequestInfos.Count == 0;
+                    }
+                    catch(Exception e)
+                    {
+                        throw;
+                    }
+                    
+                    });
             }
-            catch
+            catch(Exception ex)
             {
-                Device.BeginInvokeOnMainThread(async () => Empty = RequestInfos == null);
+                Device.BeginInvokeOnMainThread(() => Empty = RequestInfos == null);
             }
             this.BindingContext = this;
 

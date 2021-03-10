@@ -11,7 +11,7 @@ using Plugin.Messaging;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Markup;
+//using Xamarin.Forms.Markup;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.Counters;
@@ -363,7 +363,7 @@ namespace xamarinJKH.Main
                     Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
                     
                     if (DeviceDisplay.MainDisplayInfo.Height > 2000)
-                        FrameTop.Padding = new Thickness(FrameTop.Padding.Left, FrameTop.Padding.Top, FrameTop.Padding.Right, FrameTop.Padding.Bottom + 30);
+                        FrameTop.Padding = new Thickness(FrameTop.Padding.Left, FrameTop.Padding.Top+10, FrameTop.Padding.Right, FrameTop.Padding.Bottom + 10);
 
                     break;
                 default:
@@ -553,7 +553,15 @@ namespace xamarinJKH.Main
                                 {
                                     var delacc = Accounts.FirstOrDefault(x => x.Ident == ident.Ident);
                                     if (delacc != null)
-                                        try { Accounts.Remove(delacc); }
+                                        try 
+                                        { 
+                                            if(Accounts.Count==2)
+                                                Accounts.Clear();
+                                            else
+                                            {
+                                                Accounts.Remove(delacc);
+                                            }                                            
+                                        }
                                         catch(Exception exc)
                                         { 
                                             throw;
@@ -788,10 +796,21 @@ namespace xamarinJKH.Main
                        await Task.Delay(500);
                        //if (Accounts != null && Accounts.Count > 0)
                        //{
-                       //    Picker.ItemsSource = null;
-                       //    Picker.ItemsSource = Accounts;
+                       //    if(Picker.ItemsSource!=null)
+                       //    {
+
+                       //        if(Picker.SelectedItem!=null)
+                       //        {
+                       //            var si = (AccountInfo)Picker.SelectedItem;
+                       //            Picker.ItemsSource.
+                       //        }
+                       //    }
+                       //    else
+                       //    {
+                       //        Picker.ItemsSource = Accounts;
+                       //    }
                        //}
-                           
+
                    }
                    double x = Preferences.Get("scrollX", 0d);
                    double y = Preferences.Get("scrollY", 0d);
