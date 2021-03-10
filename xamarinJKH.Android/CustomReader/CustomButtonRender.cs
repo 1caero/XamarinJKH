@@ -1,7 +1,6 @@
 ﻿using Android.Content;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using xamarinJKH.Android;
 using xamarinJKH.Droid.CustomReader;
 
 [assembly: ExportRenderer(typeof(Button), typeof(CustomButtonRender))]

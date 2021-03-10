@@ -1,17 +1,15 @@
-﻿﻿using System;
-using Xamarin.Forms.Platform.Android;
-using Android.Widget;
-using System.ComponentModel;
-using Xamarin.Forms;
-using Android.Graphics;
-using Android.Graphics.Drawables;
- using xamarinJKH;
- using xamarinJKH.Android;
+﻿using System.ComponentModel;
 using Android.Content;
+using Android.Graphics;
+using Android.Widget;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
+using xamarinJKH;
+using xamarinJKH.Droid.CustomReader;
 
-[assembly: ExportRendererAttribute(typeof(IconView), typeof(IconViewRenderer))]
+[assembly: ExportRenderer(typeof(IconView), typeof(IconViewRenderer))]
 
-namespace xamarinJKH.Android
+namespace xamarinJKH.Droid.CustomReader
 {
     public class IconViewRenderer : ViewRenderer<IconView, ImageView>
     {

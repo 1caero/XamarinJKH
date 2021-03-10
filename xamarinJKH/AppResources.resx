@@ -561,9 +561,6 @@
   <data name="Payment" xml:space="preserve">
     <value>Способ оплаты:</value>
   </data>
-  <data name="PaymentDescription0" xml:space="preserve">
-    <value />
-  </data>
   <data name="PayProcess" xml:space="preserve">
     <value>Платеж обрабатывается </value>
   </data>

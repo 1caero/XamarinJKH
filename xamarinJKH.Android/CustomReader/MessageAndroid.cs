@@ -1,10 +1,10 @@
-﻿﻿using Android.App;
+﻿using Android.App;
 using Android.Widget;
- using xamarinJKH.Android;
- using xamarinJKH.InterfacesIntegration;
+using xamarinJKH.Droid.CustomReader;
+using xamarinJKH.InterfacesIntegration;
 
- [assembly: Xamarin.Forms.Dependency(typeof(MessageAndroid))]
-namespace xamarinJKH.Android
+[assembly: Xamarin.Forms.Dependency(typeof(MessageAndroid))]
+namespace xamarinJKH.Droid.CustomReader
 {
     public class MessageAndroid : IMessage
     {

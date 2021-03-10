@@ -166,6 +166,7 @@
     <Compile Include="CustomReader\OpenAppAndroid.cs" />
     <Compile Include="CustomReader\PrintAdapter.cs" />
     <Compile Include="CustomReader\PrintManager.cs" />
+    <Compile Include="CustomReader\QrScanningService.cs" />
     <Compile Include="CustomRenderers\AndroidMicrophoneService.cs" />
     <Compile Include="CustomRenderers\BorderlessDatePickerMonitorRenderer.cs" />
     <Compile Include="CustomRenderers\BorderlessDatePickerRenderer.cs" />

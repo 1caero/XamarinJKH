@@ -15,6 +15,7 @@ using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using System.Linq;
 using System.Text.RegularExpressions;
+using AiForms.Dialogs;
 using xamarinJKH.Utils;
 
 namespace xamarinJKH.MainConst
@@ -75,6 +76,14 @@ namespace xamarinJKH.MainConst
                 ButtonClick(FrameBtnLogin, null);
             };
             FrameBtnLogin.GestureRecognizers.Add(saveClick);
+            //
+            // var qr = new TapGestureRecognizer();
+            // qr.Tapped += async (s, e) =>
+            // {
+            //     string scanAsync = await DependencyService.Get<IQrScanningService>().ScanAsync();
+            //     Toast.Instance.Show<ToastDialog>(new { Title = scanAsync, Duration = 5500 });
+            // };
+            // UkName.GestureRecognizers.Add(qr);
 
             var createPush = new TapGestureRecognizer();
             createPush.Tapped += async (s, e) =>

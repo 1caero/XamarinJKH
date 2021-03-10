@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using System.Linq;
+using xamarinJKH.Droid.CustomReader;
 using xamarinJKH.InterfacesIntegration;
 
-[assembly: Dependency(typeof(xamarinJKH.Android.FileWorker))]
-namespace xamarinJKH.Android
+[assembly: Dependency(typeof(FileWorker))]
+namespace xamarinJKH.Droid.CustomReader
 {
     public class FileWorker : IFileWorker
     {

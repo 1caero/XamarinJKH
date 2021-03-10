@@ -942,9 +942,6 @@
   <data name="Payment" xml:space="preserve">
     <value>Спосіб оплати:</value>
   </data>
-  <data name="PaymentDescription0" xml:space="preserve">
-    <value />
-  </data>
   <data name="PaymentOf" xml:space="preserve">
     <value>Оплата здійснюється по квитанції за</value>
   </data>
@@ -1240,9 +1237,6 @@
   <data name="Price" xml:space="preserve">
     <value>Ціна</value>
   </data>
-  <data name="String" xml:space="preserve">
-    <value>Чек</value>
-  </data>
   <data name="b" xml:space="preserve">
     <value>б</value>
   </data>
@@ -1416,9 +1410,6 @@
   </data>
   <data name="PassGazele" xml:space="preserve">
     <value>Газель</value>
-  </data>
-  <data name="PassGargo" xml:space="preserve">
-    <value>Вантажний</value>
   </data>
   <data name="EnterFIO" xml:space="preserve">
     <value>Введите ФИО</value>
@@ -1773,5 +1764,11 @@
   </data>
   <data name="AppIsClosed" xml:space="preserve">
     <value>Заявка вже закрита </value>
+  </data>
+  <data name="PassCargo" xml:space="preserve">
+    <value>Вантажний </value>
+  </data>
+  <data name="ToDate" xml:space="preserve">
+    <value>до </value>
   </data>
 </root>
