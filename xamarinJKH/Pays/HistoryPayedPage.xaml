@@ -192,7 +192,7 @@
                                            TextColor="Black"
                                            HorizontalOptions="EndAndExpand"
                                            FontSize="15"
-                                           Margin="0,0,15,0"
+                                           Margin="0,0,50,0"
                                            FontAttributes="Bold" />
                                 </StackLayout>
                                 <Label
