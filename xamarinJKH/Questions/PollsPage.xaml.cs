@@ -250,7 +250,7 @@ namespace xamarinJKH.Questions
                     {
                         GroupName = "poolsGroup",
                         IsChecked = jAnswer.IsUserAnswer,
-                        BackgroundColor = Color.Transparent
+                        BackgroundColor = Color.Transparent                        
                     };
                     Label textRadio = new Label()
                     {
@@ -269,17 +269,28 @@ namespace xamarinJKH.Questions
                         textRadio.TextColor = (Color)Application.Current.Resources["MainColor"];
                     }
 
+                    //switch (Device.RuntimePlatform)
+                    //{
+                    //    case Device.iOS:
+                    //        radioButton.BorderColor = (Color)Application.Current.Resources["MainColor"];
+                    //        break;
+                    //    case Device.Android:
+                    //        radioButton.Effects.Add(Effect.Resolve("MyEffects.RadioButtonEffect"));
+                    //        break;
+                    //}
+
+                    //radioButton.BorderColor = ;
+
                     switch (Device.RuntimePlatform)
                     {
                         case Device.iOS:
-                            radioButton.BorderColor = (Color)Application.Current.Resources["MainColor"];
+                            radioButton.BorderColor = Color.Transparent;// (Color)Application.Current.Resources["MainColor"];
                             break;
                         case Device.Android:
                             radioButton.Effects.Add(Effect.Resolve("MyEffects.RadioButtonEffect"));
                             break;
                     }
 
-                    radioButton.BorderColor = Color.Red;
                     radioButton.Margin = new Thickness(-5, 0, 0, 0);
                     radioButton.CheckedChanged += (sender, e) =>
                     {
