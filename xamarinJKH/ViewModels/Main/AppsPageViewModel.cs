@@ -144,7 +144,7 @@ namespace xamarinJKH.ViewModels.Main
                 }
                 MessagingCenter.Send<Object>(this, "StartRefresh");
                 var response = await Server.GetRequestsList();
-                //AllRequests = new List<RequestInfo>();
+                AllRequests = new List<RequestInfo>();
                 if (response.Error != null)
                 {
                     ShowError(response.Error);
@@ -188,6 +188,8 @@ namespace xamarinJKH.ViewModels.Main
         
         public async Task UpdateTask()
         {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
             var response = await Server.GetRequestsList();
             if (response.Error == null)
             {
@@ -209,12 +211,11 @@ namespace xamarinJKH.ViewModels.Main
                         var newRequests = response.Requests.Where(x => !ids.Contains(x.ID)).ToList();
                         foreach (var newApp in newRequests)
                         {
-                            Device.BeginInvokeOnMainThread(() =>
-                            {
+                            
                                 AllRequests.Insert(0, newApp);
-                                if (!Requests.Contains(newApp))
+                                if (!Requests.Any(_ =>_.ID==newApp.ID))
                                     Requests.Insert(0, newApp);
-                            });
+                           
                         }
                     }
                     else
@@ -226,6 +227,7 @@ namespace xamarinJKH.ViewModels.Main
                 }
 
             }
+            });
         }
     }
 }
