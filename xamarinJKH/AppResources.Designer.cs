@@ -979,6 +979,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Постоянный.
+        /// </summary>
+        internal static string ConstantPass {
+            get {
+                return ResourceManager.GetString("ConstantPass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вход для сотрудника.
         /// </summary>
         internal static string ConstLogin {
@@ -2982,6 +2991,15 @@ namespace xamarinJKH {
         internal static string OffertDoc {
             get {
                 return ResourceManager.GetString("OffertDoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Разовый.
+        /// </summary>
+        internal static string OneOffPass {
+            get {
+                return ResourceManager.GetString("OneOffPass", resourceCulture);
             }
         }
         
@@ -5272,6 +5290,15 @@ namespace xamarinJKH {
         internal static string Type {
             get {
                 return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тип пропуска.
+        /// </summary>
+        internal static string TypePass {
+            get {
+                return ResourceManager.GetString("TypePass", resourceCulture);
             }
         }
         

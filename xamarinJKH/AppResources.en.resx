@@ -1898,4 +1898,13 @@
   <data name="ToDate" xml:space="preserve">
     <value>before </value>
   </data>
+  <data name="OneOffPass" xml:space="preserve">
+    <value>One-off</value>
+  </data>
+  <data name="ConstantPass" xml:space="preserve">
+    <value>Constant </value>
+  </data>
+  <data name="TypePass" xml:space="preserve">
+    <value>Pass type</value>
+  </data>
 </root>

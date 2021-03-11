@@ -711,6 +711,7 @@ _appModel = new AddAppModel()
             }
         }
 
+        private bool PassIsConstant = true;
         private async void addApp(object sender, EventArgs e)
         {
             string text = EntryMess.Text;
@@ -764,7 +765,7 @@ _appModel = new AddAppModel()
                     IDResult result = new IDResult();
                     if (isPassAPP)
                     {
-                        result = await _server.newAppPass(ident, typeId, text,_passApp.idType, _passApp.Fio,
+                        result = await _server.newAppPass(ident, typeId, text,_passApp.idType,PassIsConstant, _passApp.Fio,
                             _passApp.SeriaNumber, _passApp.CarBrand, _passApp.CarNumber);
 
                     }
@@ -1163,6 +1164,26 @@ _appModel = new AddAppModel()
                     MaskAvtoNumber.ColorError = Color.Red;
                 }
             }
+        }
+
+        private void ButtonConstantPass_OnClicked(object sender, EventArgs e)
+        {
+            Color currentResource = (Color)Application.Current.Resources["MainColor"];
+            FrameConstantPass.BorderColor =  currentResource;
+            ButtonConstantPass.TextColor =  currentResource;
+            PassIsConstant = true;
+            FrameOneOffPass.BorderColor = Color.Gray;
+            ButtonOneOffPass.TextColor = Color.Gray;
+        }
+
+        private void ButtonOneOffPass_OnClicked(object sender, EventArgs e)
+        {
+            Color currentResource = (Color)Application.Current.Resources["MainColor"];
+            FrameConstantPass.BorderColor =  Color.Gray;
+            ButtonConstantPass.TextColor =  Color.Gray;
+            PassIsConstant = false;
+            FrameOneOffPass.BorderColor = currentResource;
+            ButtonOneOffPass.TextColor = currentResource;
         }
     }
 }

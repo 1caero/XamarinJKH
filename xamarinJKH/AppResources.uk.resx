@@ -1771,4 +1771,13 @@
   <data name="ToDate" xml:space="preserve">
     <value>до </value>
   </data>
+  <data name="OneOffPass" xml:space="preserve">
+    <value>Разовий </value>
+  </data>
+  <data name="ConstantPass" xml:space="preserve">
+    <value>Постійний </value>
+  </data>
+  <data name="TypePass" xml:space="preserve">
+    <value>Тип пропуску</value>
+  </data>
 </root>

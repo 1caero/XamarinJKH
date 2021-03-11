@@ -55,6 +55,14 @@ namespace xamarinJKH.Server.RequestModel
         public string Status { get; set; }
         public int StatusID { get; set; }
         public bool IsClosed { get; set; }
+        
+        public bool HasPass  { get; set; }
+        public bool PassIsConstant   { get; set; }
+
+        public string TextPassIsConstant
+        {
+            get => PassIsConstant ? AppResources.ConstantPass : AppResources.OneOffPass;
+        }
         public bool IsCheked { get; set; } = false;
         
         public string Address { get; set; }
