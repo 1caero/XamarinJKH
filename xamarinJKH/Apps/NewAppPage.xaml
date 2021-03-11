@@ -362,7 +362,50 @@
                                                 Spacing="0"
                                                 HorizontalOptions="FillAndExpand"
                                                 Orientation="Vertical">
-
+                                                <StackLayout HorizontalOptions="Center" Spacing="20" Margin="0,0,0,10" Orientation="Horizontal">
+                                                <Frame CornerRadius="10"
+                                                       Padding="0"
+                                                       x:Name="FrameConstantPass"
+                                                       HasShadow="False"
+                                                       BorderColor="{x:DynamicResource MainColor}"
+                                                       BackgroundColor="White"
+                                                       HorizontalOptions="StartAndExpand">
+                                            <StackLayout
+                                                Orientation="Horizontal"
+                                                Spacing="{OnPlatform iOS='10' , Android='0'}"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="Start">
+                                                <Button 
+                                                    x:Name="ButtonConstantPass"
+                                                        Text="{x:Static xamarinJkh:AppResources.ConstantPass}"
+                                                        Padding="0"
+                                                    Clicked="ButtonConstantPass_OnClicked"
+                                                    TextColor="{x:DynamicResource MainColor}"
+                                                    BackgroundColor="Transparent" />
+                                            </StackLayout>
+                                        </Frame> 
+                                            <Frame CornerRadius="10"
+                                               x:Name="FrameOneOffPass"
+                                               Padding="0"
+                                               HasShadow="False"
+                                               BorderColor="Gray"
+                                               BackgroundColor="White"
+                                               HorizontalOptions="EndAndExpand">
+                                            <StackLayout
+                                                Orientation="Horizontal"
+                                                Spacing="{OnPlatform iOS='10' , Android='0'}"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="Start">
+                                                <Button
+                                                    x:Name="ButtonOneOffPass"
+                                                        Text="{x:Static xamarinJkh:AppResources.OneOffPass}"
+                                                        Padding="0"
+                                                    TextColor="Gray"
+                                                        Clicked="ButtonOneOffPass_OnClicked"
+                                                        BackgroundColor="Transparent" />
+                                            </StackLayout>
+                                        </Frame>
+                                                </StackLayout>
                                                 <Entry x:Name="PassType" TextChanged="SearchBar_OnTextChanged"
                                                        BackgroundColor="Transparent" Unfocused="PassType_Unfocused"
                                                        Focused="PassType_Focused"

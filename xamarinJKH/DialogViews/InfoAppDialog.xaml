@@ -51,6 +51,20 @@
                 </Label>
                 <Label
                     TextColor="Black"
+                    IsVisible="{Binding _Request.HasPass}"
+                    HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static xamarinJkh:AppResources.TypePass}" TextColor="Black"
+                                  FontAttributes="Bold"
+                                  FontSize="15" />
+                            <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                            <Span Text=" {Binding _Request.TextPassIsConstant}" FontSize="15" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    TextColor="Black"
                     IsVisible="{Binding _Request.PerofmerName, Converter={converters:StringEmptyConverters}, ConverterParameter=_Request.PerofmerName }"
                     HorizontalOptions="Start">
                     <Label.FormattedText>

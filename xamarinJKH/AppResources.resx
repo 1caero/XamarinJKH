@@ -1903,4 +1903,13 @@
   <data name="AppIsClosed" xml:space="preserve">
     <value>Заявка уже закрыта</value>
   </data>
+  <data name="OneOffPass" xml:space="preserve">
+    <value>Разовый</value>
+  </data>
+  <data name="ConstantPass" xml:space="preserve">
+    <value>Постоянный</value>
+  </data>
+  <data name="TypePass" xml:space="preserve">
+    <value>Тип пропуска</value>
+  </data>
 </root>

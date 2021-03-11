@@ -461,8 +461,58 @@ namespace xamarinJKH.MainConst
             {
                 LabelTitle.Text = AppResources.NavBarPassApp;
                 LayoutFilter.IsVisible = false;
+                LayoutFilterPass.IsVisible = true;
                 //Pancake.Margin = new Thickness(25, 60, 15, 0);
                 bottomMenu.IsVisible = false;
+                
+                var filterPas = new TapGestureRecognizer();
+                filterPas.Tapped += async (s, e) =>
+                {
+                    var action = await DisplayActionSheet(AppResources.HomeChoose, AppResources.Cancel, null,
+                        AppResources.All, AppResources.ConstantPass, AppResources.OneOffPass);
+                    if (action != null && !action.Equals(AppResources.Cancel))
+                    {
+                        if (RequestDefault != null)
+                        {
+                            if (action.Equals(AppResources.All) && !action.Equals(LabelKind.Text))
+                            {
+                                RequestInfos.Clear();
+                                foreach (var each in RequestDefault.Where(_ => _.HasPass ))
+                                {
+                                    Device.BeginInvokeOnMainThread((() =>
+                                    {
+                                        RequestInfos.Add(each);
+                                    }));
+                                }
+                            }else if (action.Equals(AppResources.ConstantPass) && !action.Equals(LabelKind.Text))
+                            {
+                              
+                                RequestInfos.Clear();
+                                foreach (var each in RequestDefault.Where(_ => _.PassIsConstant && _.HasPass ))
+                                {
+                                    Device.BeginInvokeOnMainThread((() =>
+                                    {
+                                        RequestInfos.Add(each);
+                                    }));
+                                }
+                            }else if (action.Equals(AppResources.OneOffPass) && !action.Equals(LabelKind.Text))
+                            {
+                                RequestInfos.Clear();
+                                foreach (var each in RequestDefault.Where(_ => !_.PassIsConstant  && _.HasPass ))
+                                {
+                                    Device.BeginInvokeOnMainThread((() =>
+                                    {
+                                        RequestInfos.Add(each);
+                                    }));
+                                }
+                            }
+                            LabelKind.Text = action;
+
+                        }
+
+                    }
+                };
+                LayoutFilterPass.GestureRecognizers.Add(filterPas);
             }
             else
             {
@@ -597,7 +647,7 @@ namespace xamarinJKH.MainConst
                         Device.BeginInvokeOnMainThread(() =>
                         {
                             RequestInfos.Clear();
-                            var lR = RequestDefault.Where(o => o.TypeID == Settings.MobileSettings.requestTypeForPassRequest || o.Name.ToLower().Contains("пропуск")).OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList();
+                            var lR = RequestDefault.Where(o => o.HasPass).OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList();
                             foreach (var each in lR)
                             {
                                 each.IsEnableMass = false;
@@ -610,7 +660,7 @@ namespace xamarinJKH.MainConst
                         Device.BeginInvokeOnMainThread(() =>
                         {
                             RequestInfos.Clear();
-                            var rl = RequestDefault.Where(o => o.TypeID != Settings.MobileSettings.requestTypeForPassRequest && !o.Name.ToLower().Contains("пропуск")).OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList();
+                            var rl = RequestDefault.Where(o => !o.HasPass).OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList();
                             foreach (var each in rl)
                             {
                                 RequestInfos.Add(each);
