@@ -92,15 +92,15 @@ namespace xamarinJKH.AppsConst
                     break;
             }
 
-            switch (Device.RuntimePlatform)
-            {
-                case Device.iOS:
-                    break;
-                case Device.Android:
-                    break;
-                default:
-                    break;
-            }
+            //switch (Device.RuntimePlatform)
+            //{
+            //    case Device.iOS:
+            //        break;
+            //    case Device.Android:
+            //        break;
+            //    default:
+            //        break;
+            //}
 
             NavigationPage.SetHasNavigationBar(this, false);
 
