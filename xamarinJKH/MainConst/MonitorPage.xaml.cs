@@ -245,6 +245,15 @@ namespace xamarinJKH.MainConst
             base.OnAppearing();
             Device.BeginInvokeOnMainThread(()=> isRunning = true);
             MessagingCenter.Send<Object>(this, "StartStatistic");
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                Device.StartTimer(new TimeSpan(0, 0, 2), () =>
+                {
+                    Device.BeginInvokeOnMainThread(() => { IsBusy = false; });
+                    return false; // runs again, or false to stop
+                });
+            }
+
             //isRunning = false;
             //await StartStatistick();
         }
