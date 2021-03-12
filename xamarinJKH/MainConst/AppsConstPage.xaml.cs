@@ -468,7 +468,7 @@ namespace xamarinJKH.MainConst
                 var filterPas = new TapGestureRecognizer();
                 filterPas.Tapped += async (s, e) =>
                 {
-                    var action = await DisplayActionSheet(AppResources.HomeChoose, AppResources.Cancel, null,
+                    var action = await DisplayActionSheet(AppResources.TypePass, AppResources.Cancel, null,
                         AppResources.All, AppResources.ConstantPass, AppResources.OneOffPass);
                     if (action != null && !action.Equals(AppResources.Cancel))
                     {
