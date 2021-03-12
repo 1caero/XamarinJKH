@@ -191,19 +191,20 @@ namespace xamarinJKH.Main
 
 
             Analytics.TrackEvent("Заявки жителя - создали/прибиндили модель");
-            aIndicator.Color = hex;
+            //aIndicator.Color = hex;
 
             NavigationPage.SetHasNavigationBar(this, false);
             MessagingCenter.Subscribe<Object>(this, "AutoUpdate", (sender) => { StartAutoUpdate(); });
             Analytics.TrackEvent("Заявки жителя - подписались на автообновление");
 
-            MessagingCenter.Subscribe<Object>(this, "StartRefresh", (sender) => 
-            { Device.BeginInvokeOnMainThread(() => aIndicator.IsVisible = true); });
+            //MessagingCenter.Subscribe<Object>(this, "StartRefresh", (sender) => 
+            //{ Device.BeginInvokeOnMainThread(() => aIndicator.IsVisible = true); });
             Analytics.TrackEvent("Заявки жителя-подписались на обновление");
 
             MessagingCenter.Subscribe<Object>(this, "EndRefresh", (sender) => 
             { Device.BeginInvokeOnMainThread(() =>
-            { aIndicator.IsVisible = false;
+            { 
+                //aIndicator.IsVisible = false;
                 messageRefreshView.IsRefreshing = false;
             }); 
             });
