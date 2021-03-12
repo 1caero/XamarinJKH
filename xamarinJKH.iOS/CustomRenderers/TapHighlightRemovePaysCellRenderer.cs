@@ -10,7 +10,9 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using xamarinJKH.Main;
 using xamarinJKH.iOS.CustomRenderers;
+using xamarinJKH.Pays;
 
+[assembly: ExportRenderer(typeof(HistoryPaysCell), typeof(TapHighlightRemovePaysCellRenderer))]
 [assembly: ExportRenderer(typeof(PaysCell), typeof(TapHighlightRemovePaysCellRenderer))]
 namespace xamarinJKH.iOS.CustomRenderers
 {
