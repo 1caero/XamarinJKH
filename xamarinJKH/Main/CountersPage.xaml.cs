@@ -481,8 +481,8 @@ namespace xamarinJKH.Main
                     await Task.Delay(TimeSpan.FromMilliseconds(500));
                 if (ident != null)
                 {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
+                    //Device.BeginInvokeOnMainThread(() =>
+                    //{
                         var all = Accounts.FirstOrDefault(x => x.Ident == AppResources.All);
                         if (all == null)
                         {
@@ -498,7 +498,7 @@ namespace xamarinJKH.Main
                         if (contain == null)
                             Accounts.Add(ident);
 
-                    });
+                    //});
                     
 
                     
