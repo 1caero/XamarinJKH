@@ -283,7 +283,7 @@ namespace xamarinJKH
             if (Settings.ConstAuth)
             {
                 Settings.ConstAuth = true;
-                EntryLabel.Text =AppResources.ConstLogin;
+                EntryLabel.Text =AppResources.ConstLogin + "\n";
                 LabelSotr.Text = AppResources.DefaultLogin;
                 LabelPhone.Text = AppResources.Login;
                 RegStackLayout.IsVisible = false;
@@ -297,7 +297,7 @@ namespace xamarinJKH
             else
             {
                 Settings.ConstAuth = false;
-                EntryLabel.Text = AppResources.LoginAuth;
+                EntryLabel.Text = AppResources.LoginAuth + "\n";
                 LabelSotr.Text = AppResources.ConstLogin;
                 LabelPhone.Text = AppResources.PhoneLabel;
                 RegStackLayout.IsVisible = true;
@@ -316,7 +316,7 @@ namespace xamarinJKH
             if (Settings.ConstAuth)
             {
                 Settings.ConstAuth = false;
-                EntryLabel.Text = AppResources.LoginAuth;
+                EntryLabel.Text = AppResources.LoginAuth+ "\n";
                 LabelSotr.Text = AppResources.ConstLogin;
                 LabelPhone.Text = AppResources.PhoneLabel;
                 RegStackLayout.IsVisible = true;
@@ -330,7 +330,7 @@ namespace xamarinJKH
             else
             {
                 Settings.ConstAuth = true;
-                EntryLabel.Text = AppResources.ConstLogin;
+                EntryLabel.Text = AppResources.ConstLogin+ "\n";
                 LabelSotr.Text = AppResources.DefaultLogin;
                 LabelPhone.Text = AppResources.Login;
                 RegStackLayout.IsVisible = false;
