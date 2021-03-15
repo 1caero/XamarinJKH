@@ -19,6 +19,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.AppsConst;
+using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.Server;
@@ -87,6 +88,24 @@ namespace xamarinJKH.Apps
             {
                 if (Navigation.NavigationStack.FirstOrDefault(x => x is Tech.AppPage) == null)
                     await Navigation.PushAsync(new Tech.AppPage());
+                
+                // Device.BeginInvokeOnMainThread(async () =>
+                //     {
+                //         Configurations.LoadingConfig = new LoadingConfig
+                //         {
+                //             IndicatorColor = Color.Transparent,
+                //             OverlayColor = Color.Black,
+                //             Opacity = 0.8,
+                //             DefaultMessage = "",
+                //         };
+                //         await Loading.Instance.StartAsync(async progress =>
+                //         {
+                //             Analytics.TrackEvent("Календарь выбора дня");
+                //             var ret = await Dialog.Instance.ShowAsync(new CalendarDayDialog(false, _appModel.SelectDate));
+                //         });
+                //     }
+                // );
+                
             };
             LabelTech.GestureRecognizers.Add(techSend);
             LabelTechOne.GestureRecognizers.Add(techSend);
@@ -573,6 +592,7 @@ _appModel = new AddAppModel()
             public ObservableCollection<FileData> Files { get; set; }
             public Color hex { get; set; }
             public Command SelectTyp { get; set; }
+            public Command SelectDate { get; set; }
             public Command PodTypeSelect { get; set; }
             public Command SelectAccount { get; set; }
             public AddAppModel()
@@ -676,6 +696,11 @@ _appModel = new AddAppModel()
                             SelectedAccount.Selected = true;
                         }
                     });
+                });
+                
+                SelectDate = new Command<DateTime>((date) =>
+                {
+                   Console.WriteLine(date.ToString());
                 });
             }
 

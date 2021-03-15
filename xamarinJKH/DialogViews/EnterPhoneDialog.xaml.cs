@@ -24,7 +24,11 @@ namespace xamarinJKH.DialogViews
             InitializeComponent();
             Frame.IsVisible = isVisible;
             var close = new TapGestureRecognizer();
-            close.Tapped += async (s, e) => { await PopupNavigation.Instance.PopAsync(); };
+            close.Tapped += async (s, e) =>
+            {
+                if(PopupNavigation.Instance.PopupStack.Count > 0)
+                    await PopupNavigation.Instance.PopAsync();
+            };
             IconViewClose.GestureRecognizers.Add(close);
         }
 
@@ -62,7 +66,8 @@ namespace xamarinJKH.DialogViews
                     Preferences.Set("techPhone", replace);
                     await _server.RegisterDeviceNotAvtorization(Settings.Person.Phone);
                     await Navigation.PushModalAsync(new AppPage());
-                    await PopupNavigation.Instance.PopAsync();
+                    if(PopupNavigation.Instance.PopupStack.Count > 0)
+                        await PopupNavigation.Instance.PopAsync();
                 }
             }
             else
