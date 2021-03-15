@@ -50,6 +50,8 @@ namespace xamarinJKH.iOS
 
             //CrossMediaManager.Current.Init();
             
+            ZXing.Net.Mobile.Forms.iOS.Platform.Init();
+
             //SimpleImageButton.SimpleImageButton.Initializator.Initializator.Init();
             LoadApplication(new App());
             UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
@@ -62,6 +64,7 @@ namespace xamarinJKH.iOS
 
             SfCalendarRenderer.Init();
 
+            
 
             return base.FinishedLaunching(app, options);
         }

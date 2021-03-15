@@ -454,13 +454,13 @@ namespace xamarinJKH.Tech
 
                 try
                 {
-                    file = await CrossMedia.Current.TakePhotoAsync(
-                        new StoreCameraMediaOptions
-                        {
-                            SaveToAlbum = false,
-                            CompressionQuality =  90,
-                            Directory = "Demo"
-                        });
+                    file = await CrossMedia.Current.TakePhotoAsync(                        
+                    new StoreCameraMediaOptions
+                    {
+                        SaveToAlbum = true,// Device.RuntimePlatform==Device.iOS, //ios - сохраняем файлы
+                        CompressionQuality = 90,
+                        Directory = string.Format(Xamarin.Essentials.AppInfo.Name.Replace("\"", "") /*+ "_" + AppResources.Photo*/)
+                    });
                     if (file != null)
                         await startLoadFile(CAMERA, file);
                 }

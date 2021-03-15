@@ -338,8 +338,9 @@ namespace xamarinJKH.AppsConst
                     {
                         SaveToAlbum = true,
                         CompressionQuality =  90,
-                        Directory = "Demo"
+                        Directory = Xamarin.Essentials.AppInfo.Name.Replace("\"", "")
                     });
+
 
                 if (file == null)
                     return;

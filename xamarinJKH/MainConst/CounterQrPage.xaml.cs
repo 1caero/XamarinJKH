@@ -40,7 +40,19 @@ namespace xamarinJKH.MainConst
             {
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    string scanAsync = await DependencyService.Get<IQrScanningService>().ScanAsync();
+                    string scanAsync;
+                    //if(Device.RuntimePlatform==Device.Android)
+                    scanAsync = await DependencyService.Get<IQrScanningService>().ScanAsync();
+                    //else
+                    //{
+                    //    var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+                    //    var result = await scanner.Scan();
+                        
+                    //        scanAsync = result != null ? result.Text : "";
+                    //}
+
+                    
+
                     if (scanAsync != null)
                     {
 #if DEBUG
