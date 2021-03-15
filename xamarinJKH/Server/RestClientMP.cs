@@ -227,6 +227,8 @@ namespace xamarinJKH.Server
         public const string GET_TECH_FILE = " https://help.1caero.ru/MobileAPI/TechSupport/DownloadFile.ashx";//  Скрипт,  который отдаст файл от пользователя в тех поддеркжку
 
         public const string GEOLOCATION = "Dispatcher/AddGeolocating";
+        public const string GET_METER = "Dispatcher/GetMeter"; //Возвращаюься все найденные приборы.
+        public const string SAVE_VALUE_DISPATCH_METER = "Dispatcher/SaveMeterValue"; //Сохранение показаний
 
         /// <summary>
         /// Аунтификация сотрудника
@@ -258,7 +260,25 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
+        public async Task<List<MeterInfo>> GetMeter (string uniqueNumber )
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(GET_METER, Method.GET);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            restRequest.AddParameter("uniqueNumber", uniqueNumber);
+            
+            var response = await restClientMp.ExecuteTaskAsync<List<MeterInfo>>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new List<MeterInfo>();
+            }
 
+            return response.Data;
+        }
         /// <summary>
         /// Аунтификация пользователя по номеру телефона
         /// </summary>
@@ -1601,7 +1621,8 @@ namespace xamarinJKH.Server
         public async Task<CommonResult> SaveMeterValue(string MeterId, string Value, string ValueT2, string ValueT3)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
-            RestRequest restRequest = new RestRequest(SAVE_METER_VALUE, Method.POST);
+            string url = Settings.Person.IsDispatcher ? SAVE_VALUE_DISPATCH_METER : SAVE_METER_VALUE;
+            RestRequest restRequest = new RestRequest(url, Method.POST);
             restRequest.RequestFormat = DataFormat.Json;
             restRequest.AddHeader("client", Device.RuntimePlatform);
             restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
