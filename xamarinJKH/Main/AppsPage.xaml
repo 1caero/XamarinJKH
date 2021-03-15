@@ -91,10 +91,10 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>-->
-                        <ActivityIndicator x:Name="aIndicator" Color="{x:DynamicResource MainColor}" Scale="2"
+                        <!--<ActivityIndicator x:Name="aIndicator" Color="{x:DynamicResource MainColor}" Scale="2"
                                            Margin="20"
-                                           IsRunning="True" IsEnabled="True" IsVisible="{Binding IsRefreshing}"
-                                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                                           IsRunning="True" IsEnabled="True" IsVisible="{Binding IsRefreshing1}"
+                                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />-->
                         <!--<RefreshView x:Name="messageRefreshView" Command="{Binding LoadRequests}"
                                      IsRefreshing="{Binding IsRefreshing}" RefreshColor="{x:DynamicResource MainColor}">-->
                         <RefreshView x:Name="messageRefreshView" RefreshColor="{x:DynamicResource MainColor}">
