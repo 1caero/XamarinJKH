@@ -301,13 +301,13 @@ namespace xamarinJKH.DialogViews
 
         void SetFilters()
         {
-            string numberApp = Preferences.Get(REQUEST_NUMBER, "");
+            string numberApp = Preferences.Get(REQUEST_NUMBER, "").ToString();
             if (!string.IsNullOrWhiteSpace(numberApp))
             {
                 EntryNumberApp.Text = numberApp;
             }
 
-            string statusId = Preferences.Get(REQUEST_STATUS_ID, "");
+            string statusId = Preferences.Get(REQUEST_STATUS_ID, "").ToString();
             if (!string.IsNullOrWhiteSpace(statusId))
             {
                 if (Settings.StatusApp != null)
@@ -392,9 +392,9 @@ namespace xamarinJKH.DialogViews
             public FilterModel(SfAutoComplete sfAutoCompleteType, SfAutoComplete sfAutoCompletePodType,
                 SfAutoComplete sfAutoCompletePriority)
             {
-                string TypesIds = Preferences.Get(REQUEST_TYPE_ID, "");
-                string PodTypesIds = Preferences.Get(REQUEST_SUB_TYPE_ID, "");
-                string PriorityIds = Preferences.Get(REQUEST_PRIORITY_ID, "");
+                string TypesIds = Preferences.Get(REQUEST_TYPE_ID, "").ToString();
+                string PodTypesIds = Preferences.Get(REQUEST_SUB_TYPE_ID, "").ToString();
+                string PriorityIds = Preferences.Get(REQUEST_PRIORITY_ID, "").ToString();
 
                 ObservableCollection<RequestType> requestTypes = new ObservableCollection<RequestType>();
                 ObservableCollection<NamedValue> requestPodTypes = new ObservableCollection<NamedValue>();
