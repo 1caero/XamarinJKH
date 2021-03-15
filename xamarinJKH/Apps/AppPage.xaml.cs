@@ -574,9 +574,9 @@ namespace xamarinJKH.Apps
                     file = await CrossMedia.Current.TakePhotoAsync(
                         new StoreCameraMediaOptions
                         {
-                            SaveToAlbum = false,
+                            SaveToAlbum = true,// Device.RuntimePlatform==Device.iOS, //ios - сохраняем файлы
                             CompressionQuality =  90,
-                            Directory = "Demo"
+                            Directory = string.Format(Xamarin.Essentials.AppInfo.Name.Replace("\"", "") /*+ "_" + AppResources.Photo*/)
                         });
                     if (file != null)
                         await startLoadFile(CAMERA, file);

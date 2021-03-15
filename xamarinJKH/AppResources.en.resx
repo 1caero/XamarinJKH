@@ -1910,4 +1910,7 @@
   <data name="NothingFound" xml:space="preserve">
     <value>Nothing found </value>
   </data>
+  <data name="Photo" xml:space="preserve">
+    <value>Photo</value>
+  </data>
 </root>

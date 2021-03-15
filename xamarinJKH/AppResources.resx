@@ -1915,4 +1915,7 @@
   <data name="NothingFound" xml:space="preserve">
     <value>Ничего не найдено</value>
   </data>
+  <data name="Photo" xml:space="preserve">
+    <value>Фото</value>
+  </data>
 </root>
