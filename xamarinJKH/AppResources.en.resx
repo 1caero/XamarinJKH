@@ -1907,4 +1907,7 @@
   <data name="TypePass" xml:space="preserve">
     <value>Pass type</value>
   </data>
+  <data name="NothingFound" xml:space="preserve">
+    <value>Nothing found </value>
+  </data>
 </root>

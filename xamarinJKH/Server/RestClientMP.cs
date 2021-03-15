@@ -19,7 +19,7 @@ namespace xamarinJKH.Server
     {
         // public const string SERVER_ADDR = "https://api.sm-center.ru/test_erc_udm"; // ОСС
         // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
-         public const string SERVER_ADDR = "https://api.sm-center.ru/water2"; // Тихая гавань water/ water2 - тихая гавань - 2 
+         public const string SERVER_ADDR = "https://api.sm-center.ru/water"; // Тихая гавань water/ water2 - тихая гавань - 2 
          // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
         //public const string SERVER_ADDR = "https://api.sm-center.ru/kapitall_all"; // Тихая гавань water/ water2 - тихая гавань - 2 
         //public const string SERVER_ADDR = "https://api.sm-center.ru/newjkh"; // Еще одна тестовая база
@@ -119,6 +119,8 @@ namespace xamarinJKH.Server
         public const string SET_READED_APP = "RequestsDispatcher/SetReadedFlag"; // Метод, который устанавливает что заявка прочитана сотрудником
         public const string CREATE_PUSH = "Dispatcher/NewAnnouncement"; //создание уведомления
         public const string SEND_PUSH = "Dispatcher/SendAnnouncement"; //создание уведомления
+        public const string GET_METER = "Dispatcher/GetMeter"; //Возвращаюься все найденные приборы.
+        public const string SAVE_VALUE_DISPATCH_METER = "Dispatcher/SaveMeterValue"; //Сохранение показаний
         public const string GET_AREA_GROUPS = "RequestsDispatcher/GroupsOfDistrincts"; //Получение групп районов
         public const string REQUEST_MULTIPLE = "RequestsDispatcher/RequestStatsMultiple"; //Запрос по нескольким ID
         public const string GET_REQUEST_STATUSES = "RequestsDispatcher/RequestStatuses"; //- получение статусов заявок
@@ -1507,6 +1509,25 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
+        public async Task<List<MeterInfo>> GetMeter (string uniqueNumber )
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(GET_METER, Method.GET);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            restRequest.AddParameter("uniqueNumber", uniqueNumber);
+            
+            var response = await restClientMp.ExecuteTaskAsync<List<MeterInfo>>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new List<MeterInfo>();
+            }
+
+            return response.Data;
+        }
 
         /// <summary>
         /// Получить историю показаний по прибору учета
@@ -1595,13 +1616,12 @@ namespace xamarinJKH.Server
         /// <summary>
         /// Сохранение показаний счетчика
         /// </summary>
-        /// <param name="email">E-mail</param>
-        /// <param name="fio">ФИО</param>
         /// <returns>CommonResult</returns>
         public async Task<CommonResult> SaveMeterValue(string MeterId, string Value, string ValueT2, string ValueT3)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
-            RestRequest restRequest = new RestRequest(SAVE_METER_VALUE, Method.POST);
+            string url = Settings.Person.IsDispatcher ? SAVE_VALUE_DISPATCH_METER : SAVE_METER_VALUE;
+            RestRequest restRequest = new RestRequest(url, Method.POST);
             restRequest.RequestFormat = DataFormat.Json;
             restRequest.AddHeader("client", Device.RuntimePlatform);
             restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);

@@ -1780,4 +1780,7 @@
   <data name="TypePass" xml:space="preserve">
     <value>Тип пропуску</value>
   </data>
+  <data name="NothingFound" xml:space="preserve">
+    <value>Нічого не знайдено </value>
+  </data>
 </root>

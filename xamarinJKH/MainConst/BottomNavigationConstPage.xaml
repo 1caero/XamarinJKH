@@ -52,6 +52,11 @@
             <pushNotification:SendPushPage Title="{x:Static xamarinZkh:AppResources.Notifications}" IconImageSource="ic_notification" />
         </x:Arguments>
     </NavigationPage> 
+    <NavigationPage x:Name="CounterPage" Title="{x:Static xamarinZkh:AppResources.Meters_NavBar}" IconImageSource="ic_counters" BarBackgroundColor="Black" BarTextColor="White">
+        <x:Arguments>
+            <local:CounterQrPage  Title="{x:Static xamarinZkh:AppResources.Meters_NavBar}" IconImageSource="ic_counters" />
+        </x:Arguments>
+    </NavigationPage>
     <NavigationPage x:Name="monNavBar" Title="{x:Static xamarinZkh:AppResources.Monitoring_NavBar}" IconImageSource="ic_monitor" BarBackgroundColor="Black" BarTextColor="White">
         <x:Arguments>
             <mainConst:MonitorPage Title="{x:Static xamarinZkh:AppResources.Monitoring_NavBar}" IconImageSource="ic_monitor" />

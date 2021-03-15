@@ -534,6 +534,7 @@ namespace xamarinJKH.Counters
         void SetTextAndColor()
         {
             OSAppTheme currentTheme = Application.Current.RequestedTheme;
+            LayoutSupport.IsVisible = !Settings.Person.IsDispatcher;
             if ((meter.Resource.ToLower().Contains("холод") && !meter.Resource.ToLower().Contains("гвс")) || (meter.Resource.ToLower().Contains("хвс") && !meter.Resource.ToLower().Contains("гвс") ))
             {
                 img.Source = ImageSource.FromFile("ic_cold_water");
@@ -639,6 +640,23 @@ namespace xamarinJKH.Counters
                 FontSize = 15
             });
             RecheckLbl.FormattedText = formattedRecheckup;
+            
+            formattedRecheckup = new FormattedString();
+            formattedRecheckup.Spans.Add(new Span
+            {
+                Text = AppResources.Adress + ": ",
+                TextColor = currentTheme.Equals(OSAppTheme.Light) ? Color.Black : Color.LightGray,
+                FontAttributes = FontAttributes.None,
+                FontSize = 15
+            });
+            formattedRecheckup.Spans.Add(new Span
+            {
+                Text = meter.Address.ToString(),
+                TextColor =  currentTheme.Equals(OSAppTheme.Light) ? Color.Black : Color.White,
+                FontAttributes = currentTheme.Equals(OSAppTheme.Light) ? FontAttributes.Bold : FontAttributes.None,
+                FontSize = 15
+            });
+            MeterAddress.FormattedText = formattedRecheckup;
             if (meter.Values.Count != 0)
             {
                 BindingContext = new AddMetersPageViewModel(SetPrev ? PrevValue : meter.Values[0].Value);
@@ -722,7 +740,7 @@ namespace xamarinJKH.Counters
                     await DisplayAlert("", AppResources.AddMetersSuccess, "OK");
                     FrameBtnLogin.IsVisible = true;
                     progress.IsVisible = false;
-                    if (rate)
+                    if (rate && !Settings.Person.IsDispatcher)
                     {
                         await PopupNavigation.Instance.PushAsync(new RatingAppMarketDialog());
                     }
@@ -731,7 +749,8 @@ namespace xamarinJKH.Counters
                         _ = await Navigation.PopAsync();
                     }
                     catch { }
-                    _countersPage.RefreshCountersData();
+
+                    if (_countersPage != null) _countersPage.RefreshCountersData();
                 }
                 else
                 {

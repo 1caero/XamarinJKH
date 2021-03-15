@@ -71,6 +71,7 @@
     <None Remove="Resources\ic_profile_email.svg" />
     <None Remove="Resources\ic_profile_top.svg" />
     <None Remove="Resources\ic_questions.svg" />
+    <None Remove="Resources\ic_qr_code.svg" />
     <None Remove="Resources\ic_questions2.svg" />
     <None Remove="Resources\ic_send_code.svg" />
     <None Remove="Resources\ic_send_mess.svg" />
@@ -271,6 +272,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ic_questions.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ic_qr_code.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ic_questions2.svg" />

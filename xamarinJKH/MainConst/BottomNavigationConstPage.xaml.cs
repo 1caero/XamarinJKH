@@ -176,6 +176,12 @@ namespace xamarinJKH.MainConst
             {
                 Children.Remove(appPassNavBar);
             }
+
+            if (Device.RuntimePlatform != Device.Android)
+            {
+                Children.Remove(CounterPage);
+            }
+            
             BindingContext = this;
 
         }

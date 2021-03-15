@@ -2932,6 +2932,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ничего не найдено.
+        /// </summary>
+        internal static string NothingFound {
+            get {
+                return ResourceManager.GetString("NothingFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ничего не выбрано.
         /// </summary>
         internal static string NothingSet {

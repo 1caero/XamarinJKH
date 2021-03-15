@@ -36,6 +36,7 @@
                                TextColor="{AppThemeBinding Light=Black, Dark=White}" />
                         <StackLayout
                             HorizontalOptions="EndAndExpand"
+                            x:Name="LayoutSupport"
                             Orientation="Horizontal">
                             <xamarinJkh:ButtonSupport x:Name="LabelTech"></xamarinJkh:ButtonSupport>
                             <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
@@ -107,6 +108,13 @@
                             HorizontalOptions="CenterAndExpand"
                             TextColor="White"
                             FontSize="15" />
+                        <Label x:Name="MeterAddress"
+                               Text="{x:Static xamarinJkh:AppResources.CheckInterval}"
+                               HeightRequest="20"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="CenterAndExpand"
+                               TextColor="White"
+                               FontSize="15" />
                     </StackLayout>
                 </Frame>
 
