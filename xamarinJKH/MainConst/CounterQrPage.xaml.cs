@@ -27,6 +27,17 @@ namespace xamarinJKH.MainConst
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+
+            switch (Device.RuntimePlatform)
+            {
+                case Device.iOS:
+                    int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
+                    Pancake2.Padding = new Thickness(0, statusBarHeight, 0, 0);
+                    break;
+                default:
+                    break;
+            }
+
             UkName.Text = Settings.MobileSettings.main_name;
             var profile = new TapGestureRecognizer();
             profile.Tapped += async (s, e) =>

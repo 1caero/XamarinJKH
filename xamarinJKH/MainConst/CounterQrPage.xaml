@@ -14,7 +14,7 @@
                        Margin="0,0,0,0"
                        Aspect="{OnPlatform Android=Fill, iOS=AspectFill}"
                        HorizontalOptions="FillAndExpand" />
-                <StackLayout>
+                <StackLayout x:Name="Pancake2">
 
                     <StackLayout
                         Margin="25,10,15,0"
