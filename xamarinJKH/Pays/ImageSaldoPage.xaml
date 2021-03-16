@@ -3,7 +3,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH" xmlns:customrenderers="clr-namespace:xamarinJKH.CustomRenderers"
+             xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH" 
+             xmlns:customrenderers="clr-namespace:xamarinJKH.CustomRenderers"
+             xmlns:pinch="clr-namespace:Xamarin.Forms.PinchZoomImage;assembly=Xamarin.Forms.PinchZoomImage" 
+
              x:Class="xamarinJKH.Pays.ImageSaldoPage">
     <ContentPage.Content>
         <StackLayout>
@@ -59,9 +62,13 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                    <customrenderers:ZoomImage x:Name="Image"  Grid.Row="0"
-                            />
-                    
+                    <!--<customrenderers:ZoomImage x:Name="Image"  Grid.Row="0" />-->
+                <pinch:PinchZoom>
+                    <pinch:PinchZoom.Content>
+                        <Image x:Name="Image"  Grid.Row="0" />
+                    </pinch:PinchZoom.Content>
+                </pinch:PinchZoom>
+
                 <ActivityIndicator x:Name="progress"
                                    IsRunning="true"
                                    IsVisible="True"

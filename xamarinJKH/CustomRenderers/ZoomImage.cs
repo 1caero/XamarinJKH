@@ -89,7 +89,9 @@ namespace xamarinJKH.CustomRenderers
                     if (Scale > MAX_SCALE)
                         this.ScaleTo(MAX_SCALE, 250, Easing.SpringOut);
                     else if (Scale < MIN_SCALE)
-                        this.ScaleTo(MIN_SCALE, 250, Easing.SpringOut);
+                    {
+                        this.ScaleTo(MIN_SCALE, 250, Easing.BounceIn);                        
+                    }
                     break;
             }           
         }
