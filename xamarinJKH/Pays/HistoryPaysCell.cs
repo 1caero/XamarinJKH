@@ -184,25 +184,27 @@ namespace xamarinJKH.Pays
                             Device.BeginInvokeOnMainThread((async () =>
                             {
                                 
-                                RestClientMP server = new RestClientMP();
-                                byte[] checkPp = await server.GetCheckPP(IdPay.ToString());
-                                string fileName = $"check {Period} {IdPay}.png";
-                                if (checkPp != null)
-                                {
-                                    await DependencyService.Get<IFileWorker>().SaveTextAsync(fileName, checkPp);
-                                    await Launcher.OpenAsync(new OpenFileRequest
-                                    {
-                                        File = new ReadOnlyFile(DependencyService.Get<IFileWorker>()
-                                            .GetFilePath(fileName))
-                                    });
-                                }
-                                else
-                                {
-                                    Toast.Instance.Show<ToastDialog>(new {Title = AppResources.ErrorFileLoading, Duration = 1500});
-                                }
+                                // RestClientMP server = new RestClientMP();
+                                // byte[] checkPp = await server.GetCheckPP(IdPay.ToString());
+                                string link =
+                                    $"{RestClientMP.SERVER_ADDR}/Accounting/Check/{IdPay}?acx={Uri.EscapeDataString(Settings.Person.acx ?? string.Empty)}"; 
+                                // string fileName = $"check {Period} {IdPay}.png";
+                                // if (checkPp != null)
+                                // {
+                                //     await DependencyService.Get<IFileWorker>().SaveTextAsync(fileName, checkPp);
+                                //     await Launcher.OpenAsync(new OpenFileRequest
+                                //     {
+                                //         File = new ReadOnlyFile(DependencyService.Get<IFileWorker>()
+                                //             .GetFilePath(fileName))
+                                //     });
+                                // }
+                                // else
+                                // {
+                                //     Toast.Instance.Show<ToastDialog>(new {Title = AppResources.ErrorFileLoading, Duration = 1500});
+                                // }
                                 // string link = RestClientMP.SERVER_ADDR + "/" +
                                 //               $"Accounting/Check/{IdPay}?acx={Settings.Person.acx}";
-                                //  await Launcher.OpenAsync(link);
+                                await Launcher.OpenAsync(link);
                              
                             }));
                            

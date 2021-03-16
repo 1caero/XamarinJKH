@@ -366,6 +366,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="18.3.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.3.0.53" />
     <PackageReference Include="Syncfusion.Xamarin.SfPdfViewer" Version="18.3.0.50" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="18.3.0.53" />
     <PackageReference Include="Xam.Plugin.Badge" Version="1.0.0" />
     <PackageReference Include="Xam.Plugin.HtmlLabel" Version="5.0.0" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />

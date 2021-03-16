@@ -244,7 +244,6 @@ namespace xamarinJKH.MainConst
         {
             base.OnAppearing();
             Device.BeginInvokeOnMainThread(()=> isRunning = true);
-            MessagingCenter.Send<Object>(this, "StartStatistic");
             if (Device.RuntimePlatform == Device.Android)
             {
                 Device.StartTimer(new TimeSpan(0, 0, 2), () =>
@@ -252,6 +251,10 @@ namespace xamarinJKH.MainConst
                     Device.BeginInvokeOnMainThread(() => { IsBusy = false; });
                     return false; // runs again, or false to stop
                 });
+            }
+            else
+            {
+                MessagingCenter.Send<Object>(this, "StartStatistic");
             }
 
             //isRunning = false;
@@ -1106,15 +1109,19 @@ namespace xamarinJKH.MainConst
                         await Task.Delay(500);
                         //Button_Clicked(null, null);
                         clck();
-                        //try
-                        //{
-                        //    await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog(false));
-                        //    await PopupNavigation.Instance.PopAsync();
-                        //}
-                        //catch (Exception e)
-                        //{
-                        //    Console.WriteLine(e);
-                        //}
+                        if (Device.RuntimePlatform == Device.Android)
+                        {
+                            try
+                            {
+                                await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog(false));
+                                await PopupNavigation.Instance.PopAsync();
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
+                        }
+                       
 
                     });
                 //});

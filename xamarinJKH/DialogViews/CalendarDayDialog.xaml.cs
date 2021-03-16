@@ -25,6 +25,7 @@ namespace xamarinJKH.DialogViews
             InitializeComponent();
             Init(isMonitor, setDate);
             HexColor = (Color)Application.Current.Resources["MainColor"];
+            LabelDate.Text = "Выберите дату и время";
             BindingContext = this;
         }
 
@@ -32,6 +33,7 @@ namespace xamarinJKH.DialogViews
         {
             _isMonitor = isMonitor;
             _setDate = setDate;
+            DialogView.WidthRequest = App.ScreenWidth;
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
@@ -44,7 +46,6 @@ namespace xamarinJKH.DialogViews
                 default:
                     break;
             }
-
             var close = new TapGestureRecognizer();
             close.Tapped += async (s, e) => { DialogNotifier.Cancel(); };
             IconViewClose.GestureRecognizers.Add(close);
@@ -54,20 +55,37 @@ namespace xamarinJKH.DialogViews
             calendar.Locale = new System.Globalization.CultureInfo(Application.Current.Properties["Culture"].ToString());
         }
 
+        private bool _checkDate = false;
 
         private void BtnConf_Clicked(object sender, EventArgs e)
         {
             if (calendar.SelectedDate != null)
             {
-                if(_isMonitor)
-                    MessagingCenter.Send<object, DateTime>(this, "MonitorDay", (DateTime)calendar.SelectedDate);
+                if (_isMonitor)
+                {
+                    MessagingCenter.Send<object, DateTime>(this, "MonitorDay", (DateTime) calendar.SelectedDate);
+                    DialogNotifier.Cancel();
+                }
                 else
                 {
-                    _setDate.Execute((DateTime)calendar.SelectedDate);
+                    if (!_checkDate)
+                    {
+                        calendar.IsVisible = false;
+                        timePicker.IsVisible = true;
+                        _checkDate = true;
+                    }
+                    else
+                    {
+                        DateTime calendarSelectedDate = calendar.SelectedDate.Value;
+                        TimeSpan timePickerTime = timePicker.Time;
+                        _setDate.Execute($"{calendarSelectedDate.Date:dd.MM.yyyy} {timePickerTime.ToString("g")}");
+                        DialogNotifier.Cancel();
+
+                    }
+                    
                 }
             }
             
-            DialogNotifier.Cancel();
         }
     }
 }

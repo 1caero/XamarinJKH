@@ -698,9 +698,9 @@ _appModel = new AddAppModel()
                     });
                 });
                 
-                SelectDate = new Command<DateTime>((date) =>
+                SelectDate = new Command<string>((date) =>
                 {
-                   Console.WriteLine(date.ToString());
+                    Toast.Instance.Show<ToastDialog>(new {Title = date, Duration = 5500});
                 });
             }
 

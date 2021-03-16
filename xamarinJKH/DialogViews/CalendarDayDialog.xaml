@@ -4,12 +4,13 @@
                          CornerRadius="30" OffsetX="0" OffsetY="0" UseCurrentPageLocation="True"
                          VerticalLayoutAlignment="Start" HorizontalLayoutAlignment="Center"
                          IsCanceledOnTouchOutside="False"
-                         
+                         x:Name="DialogView"
                          xmlns:abstractions="clr-namespace:AiForms.Dialogs.Abstractions;assembly=AiForms.Dialogs.Abstractions"
                          xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
                          xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
                           xmlns:calendar="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
-             x:Class="xamarinJKH.DialogViews.CalendarDayDialog">    
+                          xmlns:pickers="clr-namespace:Syncfusion.XForms.Pickers;assembly=Syncfusion.SfPicker.XForms"
+                          x:Class="xamarinJKH.DialogViews.CalendarDayDialog">    
 
     <Frame CornerRadius="30"
            x:Name="Frame"
@@ -45,6 +46,15 @@
                     <calendar:SfCalendar x:Name="calendar" FirstDayofWeek="1" ShowYearView="True" 
                              SelectionMode="SingleSelection" >
                     </calendar:SfCalendar>
+                    <pickers:SfTimePicker x:Name="timePicker"
+                                          IsVisible="False"
+                                          ShowHeader="False"
+                                          HourHeaderText="Часы"
+                                          MinutesHeaderText="Минуты"
+                                          SecondsHeaderText="Секунды"
+                                          SelectionBackgroundColor="{x:DynamicResource MainColor}"
+                                          SelectedItemTextColor="{x:DynamicResource MainColor}"
+                                          HeaderBackgroundColor="{x:DynamicResource MainColor}"/>
                 </StackLayout>
 
                 <Frame CornerRadius="15"
