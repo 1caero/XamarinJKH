@@ -353,11 +353,11 @@ namespace xamarinJKH
                 Settings.SetPhoneTech(phone);
                 await server.RegisterDeviceNotAvtorization(Settings.Person.Phone);
                 if (Navigation.ModalStack.FirstOrDefault(x => x is AppPage) == null)
-                    await Navigation.PushModalAsync(new AppPage());
+                    await Navigation.PushModalAsync(new AppPage(true));
             }
             else
             {
-                await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog());
+                await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog(true, true));
             }
         }
         

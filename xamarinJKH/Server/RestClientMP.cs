@@ -224,7 +224,7 @@ namespace xamarinJKH.Server
         public const string GET_TECH_MESSAGE = "https://help.1caero.ru/MobileAPI/TechSupport/RequestDetails.ashx";//скрипт, который отдает переписку по заявке 
         public const string ADD_TECH_MESSAGE = "https://help.1caero.ru/MobileAPI/TechSupport/AddMessage.ashx";// Скрипт, который сохранит коммент от пользователя и отдаст его специалисту поддержки в ксп 
         public const string ADD_TECH_FILE = "https://help.1caero.ru/MobileAPI/TechSupport/AddFile.ashx";//  Скрипт,  который отдаст файл от пользователя в тех поддеркжку
-        public const string GET_TECH_FILE = " https://help.1caero.ru/MobileAPI/TechSupport/DownloadFile.ashx";//  Скрипт,  который отдаст файл от пользователя в тех поддеркжку
+        public const string GET_TECH_FILE = "https://help.1caero.ru/MobileAPI/TechSupport/DownloadFile.ashx";//  Скрипт,  который отдаст файл от пользователя в тех поддеркжку
 
         public const string GEOLOCATION = "Dispatcher/AddGeolocating";
         public const string GET_METER = "Dispatcher/GetMeter"; //Возвращаюься все найденные приборы.
@@ -998,7 +998,7 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
-        public async Task<RequestContent> GetRequestsDetailListTech(string phone, string messageId = null)
+        public async Task<RequestContent> GetRequestsDetailListTech(string phone, string messageId = null, bool isId = false)
         {
             RestClient restClientMp = new RestClient(GET_TECH_MESSAGE);
             RestRequest restRequest = new RestRequest("", Method.GET);
@@ -1009,6 +1009,7 @@ namespace xamarinJKH.Server
             restRequest.AddParameter("database", SERVER_ADDR.Split("/")[3]);
             restRequest.AddParameter("messageId", messageId);
             restRequest.AddParameter("ident", GetIdent());
+            if(isId) restRequest.AddParameter("deviceId", App.DeviceId);
             restRequest.AddParameter("os", Device.RuntimePlatform);
             restRequest.AddParameter("appVersion", Xamarin.Essentials.AppInfo.VersionString);
             // ident - номер л/сч
@@ -1162,7 +1163,7 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
-        public async Task<IsSucceed> AddMessageTech(string text, string Phone)
+        public async Task<IsSucceed> AddMessageTech(string text, string Phone, bool isId = false)
         {
             string Database = SERVER_ADDR.Split("/")[3];
             RestClient restClientMp = new RestClient(ADD_TECH_MESSAGE);
@@ -1171,11 +1172,14 @@ namespace xamarinJKH.Server
             restRequest.AddHeader("client", Device.RuntimePlatform);
             restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             restRequest.AddHeader("acx", Settings.Person.acx);
+            string deviceId = null;
+            if (isId) deviceId = App.DeviceId;
             restRequest.AddBody(new
             {
                 text,
                 Phone,
-                Database
+                Database,
+                DeviceId = deviceId
             });
             var response = await restClientMp.ExecuteTaskAsync<IsSucceed>(restRequest);
 
@@ -1246,7 +1250,7 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
-        public async Task<CommonResult> AddFileAppsTech(string phone, string name, byte[] source, string path)
+        public async Task<CommonResult> AddFileAppsTech(string phone, string name, byte[] source, string path, bool isId = false)
         {
             string Database = SERVER_ADDR.Split("/")[3];
             RestClient restClientMp = new RestClient(ADD_TECH_FILE);
@@ -1256,6 +1260,7 @@ namespace xamarinJKH.Server
             restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             restRequest.AddParameter("Database", Database);
             restRequest.AddParameter("phone", phone);
+            if(isId) restRequest.AddParameter("deviceId", App.DeviceId);
             restRequest.AddFile(path, source, name);
             var response = await restClientMp.ExecuteTaskAsync<CommonResult>(restRequest);
 

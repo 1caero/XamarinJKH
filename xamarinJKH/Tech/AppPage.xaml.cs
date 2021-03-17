@@ -35,6 +35,7 @@ namespace xamarinJKH.Tech
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AppPage : ContentPage
     {
+        private readonly bool _isDeviceId;
         private RequestInfo _requestInfo;
         private RequestContent request;
 
@@ -93,7 +94,7 @@ namespace xamarinJKH.Tech
                     while (!Token.IsCancellationRequested)
                     {
                         await Task.Delay(TimeSpan.FromSeconds(2));
-                        var update = await _server.GetRequestsDetailListTech(Settings.Person.Phone, GetLastIdMessage());
+                        var update = await _server.GetRequestsDetailListTech(Settings.Person.Phone, GetLastIdMessage(), _isDeviceId);
                         if (update.Error == null)
                         {
                             foreach (var each in update.Messages)
@@ -162,7 +163,7 @@ namespace xamarinJKH.Tech
             }
 
             var update =
-                await _server.GetRequestsDetailListTech(Settings.Person.Phone, GetLastIdMessage());
+                await _server.GetRequestsDetailListTech(Settings.Person.Phone, GetLastIdMessage(), _isDeviceId);
             if (update.Error == null)
             {
                 //Settings.DateUniq = "";
@@ -226,15 +227,16 @@ namespace xamarinJKH.Tech
         bool isTranscribing = false;
 
         public bool isUser { get; set; }
-        public AppPage()
+        public AppPage(bool isDeviceId = false)
         {
+            _isDeviceId = isDeviceId;
             InitializeComponent();
 
             isUser = !Settings.ConstAuth;
             if(!isUser)
             {
                 FrameMessage.CornerRadius = new CornerRadius(30);
-                    }
+            }
 
             Resources["hexColor"] = (Color)Application.Current.Resources["MainColor"];
 
@@ -532,7 +534,7 @@ namespace xamarinJKH.Tech
                 return;
             CommonResult commonResult = await _server.AddFileAppsTech(Settings.Person.Phone,
                 getFileName(file.Path), StreamToByteArray(file.GetStream()),
-                file.Path);
+                file.Path,_isDeviceId);
             if (commonResult != null)
             {
                 if (string.IsNullOrEmpty(commonResult.Error))
@@ -575,7 +577,7 @@ namespace xamarinJKH.Tech
         {
             CommonResult commonResult = await _server.AddFileAppsTech(Settings.Person.Phone,
                 getFileName(file.Path), StreamToByteArray(file.GetStream()),
-                file.Path);
+                file.Path,_isDeviceId);
             if (commonResult == null)
             {
                 await ShowToast(AppResources.SuccessFileSent);
@@ -639,7 +641,7 @@ namespace xamarinJKH.Tech
 
                     CommonResult commonResult = await _server.AddFileAppsTech(Settings.Person.Phone,
                         pickedFile.FileName, pickedFile.DataArray,
-                        pickedFile.FilePath);
+                        pickedFile.FilePath,_isDeviceId);
                     if (commonResult == null)
                     {
                         await ShowToast(AppResources.SuccessFileSent);
@@ -674,7 +676,7 @@ namespace xamarinJKH.Tech
                     // progress.IsVisible = true;                   
                     IconViewSend.IsEnabled = false;
                     IconViewMic.IsEnabled = false;
-                    IsSucceed result = await _server.AddMessageTech(message, Settings.Person.Phone);
+                    IsSucceed result = await _server.AddMessageTech(message, Settings.Person.Phone, _isDeviceId);
                     if (result.isSucceed)
                         Device.BeginInvokeOnMainThread(() =>
                     {
@@ -740,7 +742,7 @@ namespace xamarinJKH.Tech
                               await Loading.Instance.StartAsync(async progress =>
                               {
                                   Analytics.TrackEvent("Запрос сообщений " + Settings.Person.Phone);
-                                  request = await _server.GetRequestsDetailListTech(Settings.Person.Phone);
+                                  request = await _server.GetRequestsDetailListTech(Settings.Person.Phone, null, _isDeviceId);
                                   if (request.Error == null)
                                   {
                                       Analytics.TrackEvent("Результат запроса " + JsonConvert.SerializeObject(request));

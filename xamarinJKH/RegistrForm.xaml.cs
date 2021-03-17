@@ -308,11 +308,11 @@ namespace xamarinJKH
             {
                 Settings.SetPhoneTech(phone);
                 await _server.RegisterDeviceNotAvtorization(Settings.Person.Phone);
-                await Navigation.PushModalAsync(new AppPage());
+                await Navigation.PushModalAsync(new AppPage(true));
             }
             else
             {
-                await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog());
+                await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog(true,true));
             }
         }
         private async void PersonPolicity(object sender, EventArgs e)

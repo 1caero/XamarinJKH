@@ -22,6 +22,7 @@ using xamarinJKH.InterfacesIntegration;
 
 using Android.Speech;
 using xamarinJKH.Droid.CustomRenderers;
+using Settings = Android.Provider.Settings;
 
 namespace xamarinJKH.Droid
 {
@@ -66,8 +67,29 @@ namespace xamarinJKH.Droid
             App.ScreenWidth2 = (width - 0.5f) / density;
             App.ScreenHeight2 = (height - 0.5f) / density;
             LoadApplication(new App());
+            GetId();
             micService = DependencyService.Resolve<IMicrophoneService>();
 
+        }
+
+        void GetId()
+        {
+            if (!string.IsNullOrWhiteSpace(App.DeviceId))
+                return;
+            App.DeviceId = Android.OS.Build.Serial;
+            if (string.IsNullOrWhiteSpace(App.DeviceId) || App.DeviceId == Build.Unknown || App.DeviceId == "0")
+            {
+                try
+                {
+                    var context = Android.App.Application.Context;
+                    App.DeviceId = Settings.Secure.GetString(context.ContentResolver, Settings.Secure.AndroidId);
+                }
+                catch (Exception ex)
+                {
+                    Android.Util.Log.Warn("DeviceInfo", "Unable to get id: " + ex.ToString());
+                }
+            }
+            
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {

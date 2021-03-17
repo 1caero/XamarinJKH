@@ -17,10 +17,12 @@ namespace xamarinJKH.DialogViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EnterPhoneDialog : Rg.Plugins.Popup.Pages.PopupPage
     {
+        private readonly bool _isDeviceId;
         private RestClientMP _server = new RestClientMP();
 
-        public EnterPhoneDialog(bool isVisible = true)
+        public EnterPhoneDialog(bool isVisible = true, bool isDeviceId = false)
         {
+            _isDeviceId = isDeviceId;
             InitializeComponent();
             Frame.IsVisible = isVisible;
             var close = new TapGestureRecognizer();
@@ -65,7 +67,7 @@ namespace xamarinJKH.DialogViews
                         Settings.Person.Phone = replace;
                     Preferences.Set("techPhone", replace);
                     await _server.RegisterDeviceNotAvtorization(Settings.Person.Phone);
-                    await Navigation.PushModalAsync(new AppPage());
+                    await Navigation.PushModalAsync(new AppPage(_isDeviceId));
                     if(PopupNavigation.Instance.PopupStack.Count > 0)
                         await PopupNavigation.Instance.PopAsync();
                 }

@@ -65,7 +65,7 @@ namespace xamarinJKH.iOS
             SfCalendarRenderer.Init();
 
             
-
+            App.DeviceId = UIDevice.CurrentDevice.IdentifierForVendor.AsString();
             return base.FinishedLaunching(app, options);
         }
 

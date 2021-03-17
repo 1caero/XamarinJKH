@@ -121,7 +121,7 @@ namespace xamarinJKH.Pays
                 }
                 else
                 {
-                    await DisplayAlert(AppResources.ErrorTitle, payLink.Error, "OK");
+                    Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, payLink.Error, "OK"));
                     try
                     {
                         _ = await Navigation.PopAsync();
@@ -176,7 +176,7 @@ namespace xamarinJKH.Pays
                 PayResult result = await server.GetPayResult(url);
                 if (result.error != null && result.Equals(""))
                 {
-                    await DisplayAlert(AppResources.ErrorTitle, result.error, "OK");
+                    Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, result.error, "OK"));
                     try
                     {
                         _ = await Navigation.PopAsync();
@@ -189,7 +189,7 @@ namespace xamarinJKH.Pays
                         Loading.Instance.Hide();
                     await Navigation.PopToRootAsync();
 
-                    await DisplayAlert(AppResources.AlertSuccess, result.message, "OK");
+                    Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.AlertSuccess, result.message, "OK"));
                     if (rate)
                     {
                         await PopupNavigation.Instance.PushAsync(new RatingAppMarketDialog());
@@ -208,13 +208,13 @@ namespace xamarinJKH.Pays
                 await server.SendPaidRequestCompleteCodeOnlineAndCah(idRequset, Settings.Person.Phone);
             if (resultCode.Error != null)
             {
-                await DisplayAlert(AppResources.ErrorTitle, resultCode.Error, "OK");
+                Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, resultCode.Error, "OK"));
             }
             else
             {
                 if (Device.RuntimePlatform == Device.iOS)
                 {
-                    await DisplayAlert("", AppResources.AlertCodeSent, "OK");
+                    Device.BeginInvokeOnMainThread(async () => await DisplayAlert("", AppResources.AlertCodeSent, "OK"));
                 }
                 else
                 {
