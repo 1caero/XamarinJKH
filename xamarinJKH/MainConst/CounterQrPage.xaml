@@ -51,7 +51,7 @@
                 <Frame CornerRadius="10"
                                            x:Name="FrameBtnAdd"
                                            Padding="15,10,15,10"
-                                           Margin="0,0,0,3"
+                                           Margin="0,30,0,3"
                                            MinimumWidthRequest="300"
                                            MinimumHeightRequest="40"
                                            VerticalOptions="CenterAndExpand"
