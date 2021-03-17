@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AppCenter.Analytics;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -167,7 +168,17 @@ namespace xamarinJKH.ViewModels.Main
                         }
                         else
                         {
-                            Requests.Clear();
+                            try
+                            {
+                                if (Requests != null)
+                                    Requests.Clear();
+                            }
+                            catch(Exception ex)
+                            {
+                                Analytics.TrackEvent("AppsPageViewModel:"+ex.ToString());
+                                Requests = new ObservableCollection<RequestInfo>();                                  
+                            }
+                            
                         }
                             var coll = AllRequests.Where(x => x.IsClosed == ShowClosed);
                         Requests = new ObservableCollection<RequestInfo>(coll);

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -1239,11 +1240,15 @@ namespace xamarinJKH.AppsConst
                 string Source = Settings.GetStatusIcon(request.StatusID);
                 if (!string.IsNullOrEmpty(Source))
                 {
-                    if (!string.IsNullOrWhiteSpace(request.Phone) && (request.Phone.Contains("+") == false &&
-                                                                      request.Phone.Substring(0, 2) == "79"))
+                    if (!string.IsNullOrWhiteSpace(request.Phone) && request.Phone.Contains("+") == false)
                     {
-                        request.Phone = "+" + request.Phone;
+                        Regex r= new Regex("^[0-9]+$");                        
+                        if (r.IsMatch(request.Phone))
+                        {
+                            request.Phone = "+" + request.Phone;
+                        }
                     }
+                        
 
                     Call = new Command<string>(async (phone) =>
                     {
