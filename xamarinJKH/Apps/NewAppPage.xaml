@@ -6,7 +6,8 @@
              xmlns:apps="clr-namespace:xamarinJKH.Apps;assembly=xamarinJKH"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             xmlns:converters="clr-namespace:xamarinJKH.Converters" xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:converters="clr-namespace:xamarinJKH.Converters"
+             xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:customRenderers="clr-namespace:xamarinJKH.CustomRenderers;assembly=xamarinJKH"
              xmlns:mask="clr-namespace:xamarinJKH.Mask;assembly=xamarinJKH"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
@@ -69,110 +70,116 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        
+
                         <StackLayout Orientation="Vertical" Spacing="0">
-                            <BoxView BackgroundColor="{x:DynamicResource MainColor}" IsVisible="{AppThemeBinding Dark=false, Light=true}" HeightRequest="{AppThemeBinding Dark=0, Light=1}"></BoxView>
-                            <StackLayout Orientation="Horizontal" BackgroundColor="{AppThemeBinding Dark=Black, Light=White}"  Padding="20,10" VerticalOptions="Center">
+                            <BoxView BackgroundColor="{x:DynamicResource MainColor}"
+                                     IsVisible="{AppThemeBinding Dark=false, Light=true}"
+                                     HeightRequest="{AppThemeBinding Dark=0, Light=1}" />
+                            <StackLayout Orientation="Horizontal"
+                                         BackgroundColor="{AppThemeBinding Dark=Black, Light=White}" Padding="20,10"
+                                         VerticalOptions="Center">
                                 <svg:SvgCachedImage x:Name="IconTech"
-                                        Source="resource://xamarinJKH.Resources.ic_tech.svg"
-                                        HeightRequest="40"
-                                        ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
-                                        Margin="0,0,10,0"
-                                        HorizontalOptions="Start"
-                                        VerticalOptions="Center" />
-                                <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="0" >
-                                    <Label                                 
-                                    HorizontalOptions="FillAndExpand"
-                                    HorizontalTextAlignment="Start"      
-                                            VerticalOptions="Center"
-                                            VerticalTextAlignment="Center"
-                                    Text="">
+                                                    Source="resource://xamarinJKH.Resources.ic_tech.svg"
+                                                    HeightRequest="40"
+                                                    ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
+                                                    Margin="0,0,10,0"
+                                                    HorizontalOptions="Start"
+                                                    VerticalOptions="Center" />
+                                <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="0">
+                                    <Label
+                                        HorizontalOptions="FillAndExpand"
+                                        HorizontalTextAlignment="Start"
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center"
+                                        Text="">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span FontAttributes="Bold" FontSize="12" Text="{x:Static xamarinJkh:AppResources.CallTechText}" TextColor="{AppThemeBinding Dark=White, Light=Black}">
-                                                </Span>
-                                                <Span Text=" "></Span>
-                                                <Span FontSize="12" Text="{x:Static xamarinJkh:AppResources.CallTechText1}" TextColor="{AppThemeBinding Dark=White, Light=Black}">
-                                                </Span>
-                                                <Span Text=" -"></Span>
+                                                <Span FontAttributes="Bold" FontSize="12"
+                                                      Text="{x:Static xamarinJkh:AppResources.CallTechText}"
+                                                      TextColor="{AppThemeBinding Dark=White, Light=Black}" />
+                                                <Span Text=" " />
+                                                <Span FontSize="12"
+                                                      Text="{x:Static xamarinJkh:AppResources.CallTechText1}"
+                                                      TextColor="{AppThemeBinding Dark=White, Light=Black}" />
+                                                <Span Text=" -" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
-                                    <Label 
-                                    FontSize="12"
-                                    HorizontalOptions="FillAndExpand"
-                                             VerticalOptions="Center"
-                                            VerticalTextAlignment="Center"
-                                    TextDecorations="Underline"
-                                    x:Name="LabelTechOne"
-                                    HorizontalTextAlignment="Start"
-                                    TextColor="{x:DynamicResource MainColor}"
-                                    Text="{x:Static xamarinJkh:AppResources.CallTech}"></Label>
+                                    <Label
+                                        FontSize="12"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center"
+                                        TextDecorations="Underline"
+                                        x:Name="LabelTechOne"
+                                        HorizontalTextAlignment="Start"
+                                        TextColor="{x:DynamicResource MainColor}"
+                                        Text="{x:Static xamarinJkh:AppResources.CallTech}" />
                                 </StackLayout>
                             </StackLayout>
                             <!--<BoxView BackgroundColor="{x:DynamicResource MainColor}"  IsVisible="{AppThemeBinding Dark=false, Light=true}" HeightRequest="1"></BoxView>-->
                             <Frame CornerRadius="1"
-                               HasShadow="False"
-                               BackgroundColor="{AppThemeBinding Dark=#494949, Light=White}"
-                               Padding="0,0,0,80"
-                               BorderColor="{AppThemeBinding Dark=#494949, Light={x:StaticResource MainColor}}">
+                                   HasShadow="False"
+                                   BackgroundColor="{AppThemeBinding Dark=#494949, Light=White}"
+                                   Padding="0,0,0,80"
+                                   BorderColor="{AppThemeBinding Dark=#494949, Light={x:StaticResource MainColor}}">
                                 <StackLayout Padding="20,12,20,10" Spacing="10">
 
                                     <CollectionView ItemsSource="{Binding Accounts}"
-                                                SelectedItem="{Binding SelectedAccount}"
-                                                SelectionChangedCommand="{Binding SelectAccount}"
-                                                SelectionChangedCommandParameter="{Binding Ident}"
-                                                HorizontalScrollBarVisibility="Never"
-                                                VerticalScrollBarVisibility="Never"
-                                                IsVisible="True"
-                                                HeightRequest="80"
-                                                SelectionMode="Single">
+                                                    SelectedItem="{Binding SelectedAccount}"
+                                                    SelectionChangedCommand="{Binding SelectAccount}"
+                                                    SelectionChangedCommandParameter="{Binding Ident}"
+                                                    HorizontalScrollBarVisibility="Never"
+                                                    VerticalScrollBarVisibility="Never"
+                                                    IsVisible="True"
+                                                    HeightRequest="80"
+                                                    SelectionMode="Single">
                                         <CollectionView.ItemsLayout>
                                             <LinearItemsLayout Orientation="Horizontal"
-                                                           ItemSpacing="{OnPlatform Android='10'}" />
+                                                               ItemSpacing="{OnPlatform Android='10'}" />
                                         </CollectionView.ItemsLayout>
 
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate>
                                                 <StackLayout Padding="{OnPlatform iOS='2,2,10,2'}"
-                                                         VerticalOptions="FillAndExpand">
+                                                             VerticalOptions="FillAndExpand">
                                                     <StackLayout.GestureRecognizers>
                                                         <TapGestureRecognizer x:Name="FrameIdentGR"
-                                                                          Tapped="FrameIdentGR_Tapped_1" />
+                                                                              Tapped="FrameIdentGR_Tapped_1" />
                                                     </StackLayout.GestureRecognizers>
                                                     <VisualStateManager.VisualStateGroups>
                                                         <VisualStateGroup x:Name="CommonStates">
                                                             <VisualState x:Name="Normal">
                                                                 <VisualState.Setters>
                                                                     <Setter Property="BackgroundColor"
-                                                                        Value="{AppThemeBinding Light=White, Dark=#494949}" />
+                                                                            Value="{AppThemeBinding Light=White, Dark=#494949}" />
                                                                 </VisualState.Setters>
                                                             </VisualState>
                                                             <VisualState x:Name="Selected">
                                                                 <VisualState.Setters>
                                                                     <Setter Property="BackgroundColor"
-                                                                        Value="{AppThemeBinding Light=White, Dark=#494949}" />
+                                                                            Value="{AppThemeBinding Light=White, Dark=#494949}" />
                                                                 </VisualState.Setters>
                                                             </VisualState>
                                                         </VisualStateGroup>
                                                     </VisualStateManager.VisualStateGroups>
                                                     <Frame VerticalOptions="FillAndExpand"
 
-                                                       BorderColor="{Binding Selected, Converter={x:StaticResource Border}}"
-                                                       BackgroundColor="{Binding Selected, Converter={x:StaticResource Background}}"
-                                                       x:Name="FrameIdent"
-                                                       HasShadow="False"
-                                                       Padding="10"
-                                                       CornerRadius="5">
+                                                           BorderColor="{Binding Selected, Converter={x:StaticResource Border}}"
+                                                           BackgroundColor="{Binding Selected, Converter={x:StaticResource Background}}"
+                                                           x:Name="FrameIdent"
+                                                           HasShadow="False"
+                                                           Padding="10"
+                                                           CornerRadius="5">
                                                         <StackLayout VerticalOptions="Start"
                                                                      Spacing="0">
                                                             <Label Text="{Binding Ident}"
-                                                               TextColor="{Binding Source={x:Reference FrameIdent}, Path=BorderColor}"
-                                                               FontAttributes="Bold"
-                                                               FontSize="16" />
+                                                                   TextColor="{Binding Source={x:Reference FrameIdent}, Path=BorderColor}"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="16" />
                                                             <Label Text="{Binding AdressHalf}"
                                                                    TextColor="{Binding Source={x:Reference FrameIdent}, Path=BorderColor}"
-                                                               FontSize="14" />
+                                                                   FontSize="14" />
                                                         </StackLayout>
 
 
@@ -186,7 +193,7 @@
                                 </StackLayout>
                             </Frame>
                         </StackLayout>
-                        
+
 
                         <ScrollView VerticalOptions="FillAndExpand"
                                     x:Name="Scroll"
@@ -308,7 +315,8 @@
                                                     HorizontalOptions="Fill" />
                                             </StackLayout>
                                         </StackLayout>
-                                        <StackLayout x:Name="LayoutFloor" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                        <StackLayout x:Name="LayoutFloor" Orientation="Horizontal"
+                                                     HorizontalOptions="FillAndExpand">
                                             <Frame CornerRadius="15"
                                                    x:Name="FrameFlat"
                                                    BackgroundColor="White"
@@ -317,20 +325,21 @@
                                                    BorderColor="{Binding hex}"
                                                    Margin="10, 10, 10, 0"
                                                    Padding="10,10,10,10">
-                                            <Entry x:Name="EntryFloor"
-                                                   FontSize="15"
-                                                   VerticalOptions="End"
-                                                   HorizontalTextAlignment="Center"
-                                                   TextColor="#A2A2A2"
-                                                   PlaceholderColor="#A2A2A2"
-                                                   Text=""
-                                                   Placeholder="{x:Static xamarinJkh:AppResources.Floor}"
-                                                   Keyboard="Numeric"
-                                                   HorizontalOptions="FillAndExpand">
-                                                <Entry.Behaviors>
-                                                    <mask:MaskedBehavior Mask="{x:Static xamarinJkh:AppResources.FlatNumber}" />
-                                                </Entry.Behaviors>
-                                            </Entry>
+                                                <Entry x:Name="EntryFloor"
+                                                       FontSize="15"
+                                                       VerticalOptions="End"
+                                                       HorizontalTextAlignment="Center"
+                                                       TextColor="#A2A2A2"
+                                                       PlaceholderColor="#A2A2A2"
+                                                       Text=""
+                                                       Placeholder="{x:Static xamarinJkh:AppResources.Floor}"
+                                                       Keyboard="Numeric"
+                                                       HorizontalOptions="FillAndExpand">
+                                                    <Entry.Behaviors>
+                                                        <mask:MaskedBehavior
+                                                            Mask="{x:Static xamarinJkh:AppResources.FlatNumber}" />
+                                                    </Entry.Behaviors>
+                                                </Entry>
                                             </Frame>
                                             <Frame CornerRadius="15"
                                                    x:Name="FrameEntrance"
@@ -340,20 +349,21 @@
                                                    BorderColor="{Binding hex}"
                                                    Margin="10, 10, 10, 0"
                                                    Padding="10,10,10,10">
-                                            <Entry x:Name="EntryEntrance"
-                                                   FontSize="15"
-                                                   VerticalOptions="End"
-                                                   HorizontalTextAlignment="Center"
-                                                   TextColor="#A2A2A2"
-                                                   PlaceholderColor="#A2A2A2"
-                                                   Text=""
-                                                   Placeholder="{x:Static xamarinJkh:AppResources.Entrance}"
-                                                   Keyboard="Numeric"
-                                                   HorizontalOptions="FillAndExpand">
-                                                <Entry.Behaviors>
-                                                    <mask:MaskedBehavior Mask="{x:Static xamarinJkh:AppResources.EntranceNumber}" />
-                                                </Entry.Behaviors>
-                                            </Entry>
+                                                <Entry x:Name="EntryEntrance"
+                                                       FontSize="15"
+                                                       VerticalOptions="End"
+                                                       HorizontalTextAlignment="Center"
+                                                       TextColor="#A2A2A2"
+                                                       PlaceholderColor="#A2A2A2"
+                                                       Text=""
+                                                       Placeholder="{x:Static xamarinJkh:AppResources.Entrance}"
+                                                       Keyboard="Numeric"
+                                                       HorizontalOptions="FillAndExpand">
+                                                    <Entry.Behaviors>
+                                                        <mask:MaskedBehavior
+                                                            Mask="{x:Static xamarinJkh:AppResources.EntranceNumber}" />
+                                                    </Entry.Behaviors>
+                                                </Entry>
                                             </Frame>
                                         </StackLayout>
                                         <StackLayout x:Name="LayoutPassApp" IsVisible="false"
@@ -362,49 +372,54 @@
                                                 Spacing="0"
                                                 HorizontalOptions="FillAndExpand"
                                                 Orientation="Vertical">
-                                                <StackLayout HorizontalOptions="Center" Spacing="20" Margin="0,0,0,10" Orientation="Horizontal">
-                                                <Frame CornerRadius="10"
-                                                       Padding="{OnPlatform iOS='10,0' , Android=0}"
-                                                       x:Name="FrameConstantPass"
-                                                       HasShadow="False"
-                                                       BorderColor="{x:DynamicResource MainColor}"
-                                                       BackgroundColor="White"
-                                                       HorizontalOptions="StartAndExpand">
-                                            <StackLayout
-                                                Orientation="Horizontal"
-                                                Spacing="{OnPlatform iOS='10' , Android='0'}"
-                                                VerticalOptions="CenterAndExpand"
-                                                HorizontalOptions="Start">
-                                                <Button 
-                                                    x:Name="ButtonConstantPass"
-                                                        Text="{x:Static xamarinJkh:AppResources.ConstantPass}"
-                                                        Padding="0"
-                                                    Clicked="ButtonConstantPass_OnClicked"
-                                                    TextColor="{x:DynamicResource MainColor}"
-                                                    BackgroundColor="Transparent" />
-                                            </StackLayout>
-                                        </Frame> 
-                                            <Frame CornerRadius="10"
-                                               x:Name="FrameOneOffPass"
-                                               Padding="{OnPlatform iOS='10,0' , Android=0}"
-                                               HasShadow="False"
-                                               BorderColor="Gray"
-                                               BackgroundColor="White"
-                                               HorizontalOptions="EndAndExpand">
-                                            <StackLayout
-                                                Orientation="Horizontal"
-                                                Spacing="{OnPlatform iOS=10 , Android=0}"
-                                                VerticalOptions="CenterAndExpand"
-                                                HorizontalOptions="Start">
-                                                <Button
-                                                    x:Name="ButtonOneOffPass"
-                                                        Text="{x:Static xamarinJkh:AppResources.OneOffPass}"
-                                                        Padding="0"
-                                                    TextColor="Gray"
-                                                        Clicked="ButtonOneOffPass_OnClicked"
-                                                        BackgroundColor="Transparent" />
-                                            </StackLayout>
-                                        </Frame>
+                                                <StackLayout HorizontalOptions="Center" Spacing="20" Margin="0,0,0,10"
+                                                             Orientation="Horizontal">
+                                                    <Frame CornerRadius="10"
+                                                           Padding="{OnPlatform iOS='10,0' , Android=0}"
+                                                           x:Name="FrameConstantPass"
+                                                           HasShadow="False"
+                                                           BorderColor="{x:DynamicResource MainColor}"
+                                                           BackgroundColor="White"
+                                                           HorizontalOptions="StartAndExpand">
+                                                        <StackLayout
+                                                            Orientation="Horizontal"
+                                                            Spacing="{OnPlatform iOS='10' , Android='0'}"
+                                                            VerticalOptions="CenterAndExpand"
+                                                            HorizontalOptions="Start">
+                                                            <Button
+                                                                x:Name="ButtonConstantPass"
+                                                                Text="{x:Static xamarinJkh:AppResources.ConstantPass}"
+                                                                Padding="0"
+                                                                Clicked="ButtonConstantPass_OnClicked"
+                                                                TextColor="{x:DynamicResource MainColor}"
+                                                                BackgroundColor="Transparent" />
+                                                        </StackLayout>
+                                                    </Frame>
+                                                    <Frame CornerRadius="10"
+                                                           x:Name="FrameOneOffPass"
+                                                           Padding="{OnPlatform iOS='10,0' , Android=0}"
+                                                           HasShadow="False"
+                                                           BorderColor="Gray"
+                                                           BackgroundColor="White"
+                                                           HorizontalOptions="EndAndExpand">
+                                                        <StackLayout
+                                                            Orientation="Horizontal"
+                                                            Spacing="{OnPlatform iOS=10 , Android=0}"
+                                                            VerticalOptions="CenterAndExpand"
+                                                            HorizontalOptions="Start">
+                                                            <Button
+                                                                x:Name="ButtonOneOffPass"
+                                                                Text="{x:Static xamarinJkh:AppResources.OneOffPass}"
+                                                                Padding="0"
+                                                                TextColor="Gray"
+                                                                Clicked="ButtonOneOffPass_OnClicked"
+                                                                BackgroundColor="Transparent" />
+                                                        </StackLayout>
+                                                    </Frame>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal" x:Name="LayoutValidity" Margin="0,0,0,10">
+                                                    <Label Text="{x:Static xamarinJkh:AppResources.Validity}" TextColor="Black" FontSize="17" />
+                                                    <Label x:Name="LabelTakeDateTime" Text="{x:Static xamarinJkh:AppResources.ClickToSelect}" FontSize="17"></Label>
                                                 </StackLayout>
                                                 <Entry x:Name="PassType" TextChanged="SearchBar_OnTextChanged"
                                                        BackgroundColor="Transparent" Unfocused="PassType_Unfocused"
@@ -528,21 +543,22 @@
                                                         Margin="40,0,40,0"
                                                         CornerRadius="10" BackgroundColor="White">
                                                         <StackLayout>
-                                                        <Entry x:Name="EntryNumber"
-                                                               FontSize="23"
-                                                               VerticalOptions="End"
-                                                               FontAttributes="Bold"
-                                                               TextTransform="Uppercase"
-                                                               Placeholder="{x:Static xamarinJkh:AppResources.EnterStateNumber}"
-                                                               HorizontalTextAlignment="Center"
-                                                               TextChanged="EntryNumber_OnTextChanged"
-                                                               TextColor="Black"
-                                                               HorizontalOptions="Fill"
-                                                               Keyboard="Chat" >
-                                                            <Entry.Behaviors>
-                                                                <mask:MaskAvtoNumber x:Name="MaskAvtoNumber" IsChecked="{Binding Path=IsChecked,Source={x:Reference CheckBoxInNumber}}" />
-                                                            </Entry.Behaviors>
-                                                        </Entry>
+                                                            <Entry x:Name="EntryNumber"
+                                                                   FontSize="23"
+                                                                   VerticalOptions="End"
+                                                                   FontAttributes="Bold"
+                                                                   TextTransform="Uppercase"
+                                                                   Placeholder="{x:Static xamarinJkh:AppResources.EnterStateNumber}"
+                                                                   HorizontalTextAlignment="Center"
+                                                                   TextChanged="EntryNumber_OnTextChanged"
+                                                                   TextColor="Black"
+                                                                   HorizontalOptions="Fill"
+                                                                   Keyboard="Chat">
+                                                                <Entry.Behaviors>
+                                                                    <mask:MaskAvtoNumber x:Name="MaskAvtoNumber"
+                                                                        IsChecked="{Binding Path=IsChecked,Source={x:Reference CheckBoxInNumber}}" />
+                                                                </Entry.Behaviors>
+                                                            </Entry>
                                                         </StackLayout>
                                                     </pancakeView:PancakeView>
                                                 </StackLayout>
@@ -654,7 +670,7 @@
 
                                     </StackLayout>
                                 </Frame>
-                                <BoxView HeightRequest="200"></BoxView>
+                                <BoxView HeightRequest="200" />
                             </StackLayout>
                         </ScrollView>
                     </Grid>

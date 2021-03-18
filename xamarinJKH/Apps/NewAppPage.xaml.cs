@@ -83,29 +83,33 @@ namespace xamarinJKH.Apps
                ClosePage();
             };
             BackStackLayout.GestureRecognizers.Add(backClick);
+            
+            var takeDateTime = new TapGestureRecognizer();
+            takeDateTime.Tapped += async (s, e) => {
+                Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        Configurations.LoadingConfig = new LoadingConfig
+                        {
+                            IndicatorColor = Color.Transparent,
+                            OverlayColor = Color.Black,
+                            Opacity = 0.8,
+                            DefaultMessage = "",
+                        };
+                        await Loading.Instance.StartAsync(async progress =>
+                        {
+                            Analytics.TrackEvent("Календарь выбора дня");
+                            var ret = await Dialog.Instance.ShowAsync(new CalendarDayDialog(false, _appModel.SelectDate));
+                        });
+                    }
+                );
+            };
+            LayoutValidity.GestureRecognizers.Add(takeDateTime);
             var techSend = new TapGestureRecognizer();
             techSend.Tapped += async (s, e) => 
             {
                 if (Navigation.NavigationStack.FirstOrDefault(x => x is Tech.AppPage) == null)
                     await Navigation.PushAsync(new Tech.AppPage());
-                
-                // Device.BeginInvokeOnMainThread(async () =>
-                //     {
-                //         Configurations.LoadingConfig = new LoadingConfig
-                //         {
-                //             IndicatorColor = Color.Transparent,
-                //             OverlayColor = Color.Black,
-                //             Opacity = 0.8,
-                //             DefaultMessage = "",
-                //         };
-                //         await Loading.Instance.StartAsync(async progress =>
-                //         {
-                //             Analytics.TrackEvent("Календарь выбора дня");
-                //             var ret = await Dialog.Instance.ShowAsync(new CalendarDayDialog(false, _appModel.SelectDate));
-                //         });
-                //     }
-                // );
-                
+  
             };
             LabelTech.GestureRecognizers.Add(techSend);
             LabelTechOne.GestureRecognizers.Add(techSend);
@@ -151,7 +155,8 @@ namespace xamarinJKH.Apps
                 hex = (Color)Application.Current.Resources["MainColor"],
                 SelectedAcc = accs[0],
                 SelectedType = null /*Settings.TypeApp[0]*/,
-                Files = files
+                Files = files,
+                LabelTakeDateTime = LabelTakeDateTime
             };
 #else
 _appModel = new AddAppModel()
@@ -570,6 +575,8 @@ _appModel = new AddAppModel()
                 }
             }
             TypeModel _podTypSelected;
+            private Label _labelTakeDateTime;
+
             public TypeModel PodTypSelected
             {
                 get => _podTypSelected;
@@ -595,6 +602,13 @@ _appModel = new AddAppModel()
             public Command SelectDate { get; set; }
             public Command PodTypeSelect { get; set; }
             public Command SelectAccount { get; set; }
+            public string DateValidity { get; set; }
+            public Label LabelTakeDateTime
+            {
+                get => _labelTakeDateTime;
+                set => _labelTakeDateTime = value;
+            }
+
             public AddAppModel()
             {
                 Accounts = new ObservableCollection<AccountInfo>();
@@ -698,9 +712,10 @@ _appModel = new AddAppModel()
                     });
                 });
                 
-                SelectDate = new Command<string>((date) =>
+                SelectDate = new Command<Tuple<string,string>>((date) =>
                 {
-                    Toast.Instance.Show<ToastDialog>(new {Title = date, Duration = 5500});
+                    DateValidity = date.Item1;
+                    LabelTakeDateTime.Text = date.Item2;
                 });
             }
 
@@ -790,9 +805,8 @@ _appModel = new AddAppModel()
                     IDResult result = new IDResult();
                     if (isPassAPP)
                     {
-                        result = await _server.newAppPass(ident, typeId, text,_passApp.idType,PassIsConstant, _passApp.Fio,
+                        result = await _server.newAppPass(ident, typeId, text,_passApp.idType,PassIsConstant, _appModel.DateValidity, _passApp.Fio,
                             _passApp.SeriaNumber, _passApp.CarBrand, _passApp.CarNumber);
-
                     }
                     else
                     {

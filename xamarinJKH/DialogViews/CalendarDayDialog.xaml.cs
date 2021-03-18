@@ -76,9 +76,23 @@ namespace xamarinJKH.DialogViews
                     }
                     else
                     {
-                        DateTime calendarSelectedDate = calendar.SelectedDate.Value;
                         TimeSpan timePickerTime = timePicker.Time;
-                        _setDate.Execute($"{calendarSelectedDate.Date:dd.MM.yyyy} {timePickerTime.ToString("g")}");
+                        DateTime calendarSelectedDate = calendar.SelectedDate.Value;
+                        DateTime select = new DateTime(
+                            calendarSelectedDate.Year,
+                            calendarSelectedDate.Month,
+                            calendarSelectedDate.Day,
+                            timePickerTime.Hours,
+                            timePickerTime.Minutes,
+                            timePickerTime.Seconds,
+                            timePickerTime.Seconds,
+                            calendarSelectedDate.Kind);
+                        
+                        DateTime universalTime = @select.ToUniversalTime();
+                        Tuple<string, string> dateStr =
+                            new Tuple<string, string>($"{universalTime:yyyy-MM-dd HH:mm:ss}",
+                                $"{select:dd.MM.yyyy HH:mm:ss}");
+                        _setDate.Execute(dateStr);
                         DialogNotifier.Cancel();
 
                     }

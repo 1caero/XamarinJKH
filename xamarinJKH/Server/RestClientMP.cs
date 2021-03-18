@@ -19,7 +19,7 @@ namespace xamarinJKH.Server
     {
         // public const string SERVER_ADDR = "https://api.sm-center.ru/test_erc_udm"; // ОСС
         // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
-         public const string SERVER_ADDR = "https://api.sm-center.ru/water2"; // Тихая гавань water/ water2 - тихая гавань - 2 
+         public const string SERVER_ADDR = "https://api.sm-center.ru/water"; // Тихая гавань water/ water2 - тихая гавань - 2 
          // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
         //public const string SERVER_ADDR = "https://api.sm-center.ru/kapitall_all"; // Тихая гавань water/ water2 - тихая гавань - 2 
         //public const string SERVER_ADDR = "https://api.sm-center.ru/newjkh"; // Еще одна тестовая база
@@ -580,7 +580,7 @@ namespace xamarinJKH.Server
             return response.Data;
         }
         public async Task<IDResult> newAppPass(string ident, string typeID, string Text,
-            int PassCategoryId, bool PassIsConstant, string? PassFIO, string? PassPassportData,
+            int PassCategoryId, bool PassIsConstant, string PassDateEnd, string? PassFIO, string? PassPassportData,
             string? PassVehicleMark, string? PassVehicleNumber)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
@@ -599,7 +599,8 @@ namespace xamarinJKH.Server
                 PassPassportData,
                 PassVehicleMark,
                 PassVehicleNumber,
-                PassIsConstant
+                PassIsConstant,
+                PassDateEnd
             });
             var response = await restClientMp.ExecuteTaskAsync<IDResult>(restRequest);
             // Проверяем статус

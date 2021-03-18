@@ -1913,4 +1913,10 @@
   <data name="Photo" xml:space="preserve">
     <value>Photo</value>
   </data>
+  <data name="Validity" xml:space="preserve">
+    <value>Validity </value>
+  </data>
+  <data name="ClickToSelect" xml:space="preserve">
+    <value>Click to select </value>
+  </data>
 </root>

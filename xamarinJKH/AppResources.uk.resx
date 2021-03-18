@@ -1786,4 +1786,10 @@
   <data name="Photo" xml:space="preserve">
     <value>Фото</value>
   </data>
+  <data name="Validity" xml:space="preserve">
+    <value>Термін дії </value>
+  </data>
+  <data name="ClickToSelect" xml:space="preserve">
+    <value>Натисніть для вибору </value>
+  </data>
 </root>
