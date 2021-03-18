@@ -70,8 +70,12 @@ namespace xamarinJKH.DialogViews
                 {
                     if (!_checkDate)
                     {
-                        calendar.IsVisible = false;
-                        timePicker.IsVisible = true;
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            calendar.IsVisible = false;
+                            timePicker.IsVisible = true;
+                        });
+                        
                         _checkDate = true;
                     }
                     else

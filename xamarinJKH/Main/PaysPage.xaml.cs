@@ -89,6 +89,7 @@ namespace xamarinJKH.Main
 
             Analytics.TrackEvent("Оплата");
             Settings.mainPage = this;
+            Settings.paysPage = this;
             NavigationPage.SetHasNavigationBar(this, false);
 
             switch (Device.RuntimePlatform)
@@ -182,7 +183,7 @@ namespace xamarinJKH.Main
         {
             base.OnAppearing();
             Settings.mainPage = this;
-            
+            Settings.paysPage = this;
             await SyncSetup(); // This could be an await'd task if need be
            
         }
@@ -639,7 +640,7 @@ namespace xamarinJKH.Main
 
 
             var delLs = new TapGestureRecognizer();
-            delLs.Tapped += async (s, e) => { ((PaysPage) Settings.mainPage).DellLs(info.Ident); };
+            delLs.Tapped += async (s, e) => { ((PaysPage) Settings.paysPage).DellLs(info.Ident); };
             dell.GestureRecognizers.Add(delLs);
 
             FormattedString formattedIdent = new FormattedString();

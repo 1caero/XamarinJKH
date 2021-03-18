@@ -313,6 +313,9 @@
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar">
       <Version>18.3.0.53</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfPicker">
+      <Version>18.3.0.53</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugin.HtmlLabel" Version="5.0.0" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xam.Plugins.Messaging" Version="5.2.0" />

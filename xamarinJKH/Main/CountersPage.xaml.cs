@@ -459,7 +459,12 @@ namespace xamarinJKH.Main
 
                     /*await Dialog.Instance.ShowAsync<AddAccountDialogView>();*/
                     if (Navigation.NavigationStack.FirstOrDefault(x => x is AddIdent) == null)
-                        await Navigation.PushAsync(new AddIdent((PaysPage)Settings.mainPage));
+                    {
+                        //var paysPage = Navigation.NavigationStack.FirstOrDefault(x=>x is PaysPage);
+                        //if(paysPage!=null)
+                        await Navigation.PushAsync(new AddIdent((PaysPage)Settings.paysPage));
+                    }
+                        
                 }
                 catch(Exception ex)
                 {

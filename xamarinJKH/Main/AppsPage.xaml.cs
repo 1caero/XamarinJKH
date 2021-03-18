@@ -215,7 +215,7 @@ namespace xamarinJKH.Main
             {
                 /*await Dialog.Instance.ShowAsync<AddAccountDialogView>();*/
                 if (Navigation.NavigationStack.FirstOrDefault(x => x is AddIdent) == null)
-                    await Navigation.PushAsync(new AddIdent((PaysPage) Settings.mainPage));
+                    await Navigation.PushAsync(new AddIdent((PaysPage)Settings.paysPage));                
             };
             StackLayoutIdent.GestureRecognizers.Add(goAddIdent);
             Analytics.TrackEvent("Заявки жителя-добавили обработку тапа добавления счета");

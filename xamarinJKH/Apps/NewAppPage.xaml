@@ -419,7 +419,7 @@
                                                 </StackLayout>
                                                 <StackLayout Orientation="Horizontal" x:Name="LayoutValidity" Margin="0,0,0,10">
                                                     <Label Text="{x:Static xamarinJkh:AppResources.Validity}" TextColor="Black" FontSize="17" />
-                                                    <Label x:Name="LabelTakeDateTime" Text="{x:Static xamarinJkh:AppResources.ClickToSelect}" FontSize="17"></Label>
+                                                    <Label x:Name="LabelTakeDateTime" Text="{x:Static xamarinJkh:AppResources.ClickToSelect}" TextColor="LightGray" FontSize="17"></Label>
                                                 </StackLayout>
                                                 <Entry x:Name="PassType" TextChanged="SearchBar_OnTextChanged"
                                                        BackgroundColor="Transparent" Unfocused="PassType_Unfocused"

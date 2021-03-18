@@ -8,6 +8,7 @@ using LabelHtml.Forms.Plugin.iOS;
 //using KeyboardOverlap.Forms.Plugin.iOSUnified;
 using Plugin.FirebasePushNotification;
 using Syncfusion.SfCalendar.XForms.iOS;
+using Syncfusion.SfPicker.XForms.iOS;
 using UIKit;
 
 namespace xamarinJKH.iOS
@@ -53,6 +54,10 @@ namespace xamarinJKH.iOS
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
 
             //SimpleImageButton.SimpleImageButton.Initializator.Initializator.Init();
+
+            SfCalendarRenderer.Init();
+            SfPickerRenderer.Init();
+
             LoadApplication(new App());
             UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
             Firebase.Core.App.Configure();
@@ -62,9 +67,9 @@ namespace xamarinJKH.iOS
             App.ScreenWidth2 = UIScreen.MainScreen.Bounds.Width;
             App.ScreenHeight2 = UIScreen.MainScreen.Bounds.Height;
 
-            SfCalendarRenderer.Init();
-
+            //SfCalendarRenderer.Init();
             
+
             App.DeviceId = UIDevice.CurrentDevice.IdentifierForVendor.AsString();
             return base.FinishedLaunching(app, options);
         }

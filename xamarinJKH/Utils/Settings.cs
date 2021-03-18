@@ -64,6 +64,7 @@ namespace xamarinJKH.Utils
             return Color.Black;
         }
 
+        public static PaysPage paysPage;
         public static Page mainPage;
         public static Page Page;
         public static bool? isSelf = null;

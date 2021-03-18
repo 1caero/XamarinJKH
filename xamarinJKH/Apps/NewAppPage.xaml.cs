@@ -716,6 +716,7 @@ _appModel = new AddAppModel()
                 {
                     DateValidity = date.Item1;
                     LabelTakeDateTime.Text = date.Item2;
+                    LabelTakeDateTime.TextColor = Color.Gray;
                 });
             }
 

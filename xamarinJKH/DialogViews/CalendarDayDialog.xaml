@@ -19,9 +19,8 @@
            HasShadow="True"
            Margin="15,30,15,15"
            Padding="25,20,25,20">
-            <StackLayout
+            <StackLayout 
             HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" >
-
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"  VerticalOptions="Center">
                     <Label
                 x:Name="LabelDate"
@@ -41,12 +40,12 @@
                                  VerticalOptions="Center" />
                 </StackLayout>
 
-                <StackLayout >
-               
+                <StackLayout VerticalOptions="FillAndExpand"  >               
                     <calendar:SfCalendar x:Name="calendar" FirstDayofWeek="1" ShowYearView="True" 
-                             SelectionMode="SingleSelection" >
+                             SelectionMode="SingleSelection" VerticalOptions="Center">
                     </calendar:SfCalendar>
-                    <pickers:SfTimePicker x:Name="timePicker"
+                <StackLayout VerticalOptions="CenterAndExpand">
+                    <pickers:SfTimePicker VerticalOptions="Center" x:Name="timePicker"
                                           IsVisible="False"
                                           ShowHeader="False"
                                           HourHeaderText="Часы"
@@ -55,6 +54,8 @@
                                           SelectionBackgroundColor="{x:DynamicResource MainColor}"
                                           SelectedItemTextColor="{x:DynamicResource MainColor}"
                                           HeaderBackgroundColor="{x:DynamicResource MainColor}"/>
+                </StackLayout>
+                    
                 </StackLayout>
 
                 <Frame CornerRadius="15"
