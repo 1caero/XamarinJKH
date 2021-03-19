@@ -1225,5 +1225,14 @@ _appModel = new AddAppModel()
             FrameOneOffPass.BorderColor = currentResource;
             ButtonOneOffPass.TextColor = currentResource;
         }
+
+        private void PickerType_OnSizeChanged(object sender, EventArgs e)
+        {
+            var picker = (BorderlessPicker) sender;
+            if (picker.Width > 170)
+            {
+                picker.WidthRequest = 170;
+            }
+        }
     }
 }
