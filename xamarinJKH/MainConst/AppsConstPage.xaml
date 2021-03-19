@@ -485,12 +485,28 @@
                                     Spacing="20"
                                     
                                     Orientation="Horizontal">
-                                    <StackLayout
+                                    <StackLayout>
+                                        <StackLayout
+                                            Orientation="Horizontal">
+                                            <Switch
+                                                OnColor="{Binding hex}"
+                                                Toggled="SwitchAppRead_OnToggled"
+                                                x:Name="SwitchAppRead"
+                                                VerticalOptions="Center" />
+
+                                            <Label Text="Первыми непрочитанные&#10;"
+                                                   x:Name="LabelSwitchRead"
+                                                   FontAttributes="Bold"
+                                                   FontSize="15"
+                                                   TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                                                   VerticalOptions="CenterAndExpand"
+                                                   HorizontalOptions="Center" />
+                                        </StackLayout>
+                                        <StackLayout
                                         Orientation="Horizontal">
                                         <Switch
                                             OnColor="{Binding hex}"
-                                            IsToggled="False"
-                                            PropertyChanged="change"
+                                            Toggled="SwitchApp_OnToggled"
                                             x:Name="SwitchApp"
                                             VerticalOptions="Center" />
 
@@ -502,13 +518,15 @@
                                                VerticalOptions="CenterAndExpand"
                                                HorizontalOptions="Center" />
                                     </StackLayout>
-
+                                    
+                                    </StackLayout>
                                     <Frame CornerRadius="10"
                                            x:Name="FrameBtnAdd"
-                                           Padding="15,10,15,10"
+                                           Padding="15,15,15,15"
                                            Margin="0,0,0,3"
                                            MinimumWidthRequest="300"
                                            MinimumHeightRequest="40"
+                                           VerticalOptions="Center"
                                            HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                            BackgroundColor="{Binding hex}"
                                            HorizontalOptions="FillAndExpand">

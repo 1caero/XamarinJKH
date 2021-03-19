@@ -559,6 +559,12 @@ namespace xamarinJKH.MainConst
 //#endif
 
                 RequestDefault = _requestList.Requests;
+                bool switchRead = Preferences.Get("SwitchAppRead",false);
+                bool switchApp = Preferences.Get("SwitchApp",false);
+                
+                SwitchApp.IsToggled = switchApp;
+                SwitchAppRead.IsToggled = switchRead;
+                
                 SetReaded();
                 Settings.UpdateKey = _requestList.UpdateKey;
                 if (IsPass)
@@ -595,11 +601,7 @@ namespace xamarinJKH.MainConst
             if (Navigation.NavigationStack.FirstOrDefault(x => x is NewAppConstPage) == null)
                 await Navigation.PushAsync(new NewAppConstPage(this));
         }
-
-        private async void change(object sender, PropertyChangedEventArgs e)
-        {
-            SetReaded();
-        }
+        
 
         private void SetReaded()
         {
@@ -609,68 +611,48 @@ namespace xamarinJKH.MainConst
                 {
                     return;
                 }
+                ObservableCollection<RequestInfo> setApps = new ObservableCollection<RequestInfo>(RequestDefault);
 
-                // if(_requestList.Requests == null)
-                // {
-                //     return;
-                // }
-
-                if (SwitchApp.IsToggled)
+                if (SwitchAppRead.IsToggled && SwitchApp.IsToggled)
                 {
-                    
-                    // RequestInfos =
-                    //     new ObservableCollection<RequestInfo>(_requestList.Requests);
-                     Device.BeginInvokeOnMainThread(() =>
-                    {
-                        //if (RequestDefault != null)
-                        //{
-                        RequestInfos.Clear();
-                        foreach (var each in new ObservableCollection<RequestInfo>(RequestDefault)
-                            .OrderBy(o => o._RequestTerm).ThenBy(o => o.IsReaded)
+                    var readed = RequestDefault.Where(o => !o.IsReaded).OrderByDescending(o => o.ID);
+                    var requestTerm = RequestDefault.Where(o => o.RequestTerm != null && o.IsReaded)
+                        .OrderBy(o => o._RequestTerm);
+                    var enother = RequestDefault.Where(o => o.IsReaded && o.RequestTerm == null);
 
-                            )
-                        {
-                            RequestInfos.Add(each);
-                        }
-                        //}
-                    });
+                    setApps = new ObservableCollection<RequestInfo>(readed.Concat(requestTerm).Concat(enother));
 
+                }else if (SwitchAppRead.IsToggled && !SwitchApp.IsToggled)
+                {
+                    setApps = new ObservableCollection<RequestInfo>(RequestDefault.Where(o => !o.HasPass)
+                        .OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList());
+                }else if (!SwitchAppRead.IsToggled && SwitchApp.IsToggled)
+                {
+                    setApps = new ObservableCollection<RequestInfo>(RequestDefault.OrderBy(o => o._RequestTerm));
                 }
                 else
                 {
-                    // RequestInfos =
-                    //     new ObservableCollection<RequestInfo>(from i in _requestList.Requests
-                    //         where !i.IsReaded
-                    //         select i);
                     if (IsPass)
                     {
-                        Device.BeginInvokeOnMainThread(() =>
-                        {
-                            RequestInfos.Clear();
-                            var lR = RequestDefault.Where(o => o.HasPass).OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList();
-                            foreach (var each in lR)
-                            {
-                                each.IsEnableMass = false;
-                                RequestInfos.Add(each);
-                            }
-                        });
+                        setApps = new ObservableCollection<RequestInfo>(RequestDefault.Where(o => o.HasPass)
+                            .OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList());
                     }
                     else
                     {
-                        Device.BeginInvokeOnMainThread(() =>
-                        {
-                            RequestInfos.Clear();
-                            var rl = RequestDefault.Where(o => !o.HasPass).OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList();
-                            foreach (var each in rl)
-                            {
-                                RequestInfos.Add(each);
-                            }
-                        });
+                        setApps = new ObservableCollection<RequestInfo>(RequestDefault.OrderBy(o => o.ID).Reverse());
                     }
-                   
-                  
-                    
                 }
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    if (setApps != null)
+                    {
+                        RequestInfos.Clear();
+                        foreach (var each in setApps)
+                        {
+                            RequestInfos.Add(each);
+                        }
+                    }
+                });
                 // BindingContext = this;
                 // additionalList.ItemsSource = null;
                 // additionalList.ItemsSource = RequestInfos.OrderBy(o => o.ID).Reverse();
@@ -809,6 +791,20 @@ namespace xamarinJKH.MainConst
 
                 //}));
             
+        }
+        
+
+        private void SwitchApp_OnToggled(object sender, ToggledEventArgs e)
+        {
+            SetReaded();
+            Preferences.Set("SwitchApp",e.Value);
+
+        }
+
+        private void SwitchAppRead_OnToggled(object sender, ToggledEventArgs e)
+        {
+            SetReaded();
+            Preferences.Set("SwitchAppRead",e.Value);
         }
     }
 }
