@@ -65,7 +65,6 @@
                     <StackLayout x:Name="OrdersStack" VerticalOptions="FillAndExpand" Margin="0,-80,0,-30" >
                        
                         <Grid  VerticalOptions="FillAndExpand"  HeightRequest="2000">
-                            
                             <RefreshView x:Name="messageRefreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="{Binding hex}">
                                 <CollectionView 
                              x:Name="additionalList"
@@ -311,6 +310,16 @@
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                             </RefreshView>
+                            <ActivityIndicator x:Name="aInd" 
+                                               IsRunning="True"
+                                               Color="{Binding hex}"
+                                               Scale="2" 
+                                               IsVisible="{Binding IndicatorRun}"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center">                                
+                            </ActivityIndicator>
+                            <!--IsVisible="{Binding IndicatorRun}"-->
+
                         </Grid>
                         
                        
@@ -486,7 +495,7 @@
                                     
                                     Orientation="Horizontal">
                                     <StackLayout>
-                                        <StackLayout
+                                        <StackLayout  HorizontalOptions="Center"
                                             Orientation="Horizontal">
                                             <Switch
                                                 OnColor="{Binding hex}"
@@ -494,13 +503,13 @@
                                                 x:Name="SwitchAppRead"
                                                 VerticalOptions="Center" />
 
-                                            <Label Text="Первыми непрочитанные&#10;"
+                                            <Label Text="Первыми непрочитанные"
                                                    x:Name="LabelSwitchRead"
                                                    FontAttributes="Bold"
                                                    FontSize="15"
                                                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                                                   VerticalOptions="CenterAndExpand"
-                                                   HorizontalOptions="Center" />
+                                                   
+                                                   VerticalOptions="Center"/>
                                         </StackLayout>
                                         <StackLayout
                                         Orientation="Horizontal">
