@@ -311,6 +311,16 @@
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                             </RefreshView>
+                            <ActivityIndicator x:Name="aInd" 
+                                               IsRunning="True"
+                                               Color="{Binding hex}"
+                                               Scale="2" 
+                                               IsVisible="{Binding IndicatorRun}"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center">                                
+                            </ActivityIndicator>
+                            <!--IsVisible="{Binding IndicatorRun}"-->
+
                         </Grid>
                         
                        
@@ -486,7 +496,7 @@
                                     
                                     Orientation="Horizontal">
                                     <StackLayout>
-                                        <StackLayout
+                                        <StackLayout  HorizontalOptions="Center"
                                             Orientation="Horizontal">
                                             <Switch
                                                 OnColor="{Binding hex}"

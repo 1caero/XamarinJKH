@@ -601,12 +601,16 @@ namespace xamarinJKH.MainConst
             if (Navigation.NavigationStack.FirstOrDefault(x => x is NewAppConstPage) == null)
                 await Navigation.PushAsync(new NewAppConstPage(this));
         }
-        
+
+        public bool IndicatorRun { get; set; }
 
         private void SetReaded()
         {
+            Device.BeginInvokeOnMainThread(() => aInd.IsVisible = true);
             try
             {
+                var d = aInd.IsEnabled;
+                IndicatorRun = true;
                 if (RequestDefault == null)
                 {
                     return;
@@ -679,8 +683,9 @@ namespace xamarinJKH.MainConst
             {
                 Device.BeginInvokeOnMainThread(() => Empty = RequestInfos == null);
             }
+            IndicatorRun = false;
             this.BindingContext = this;
-
+            Device.BeginInvokeOnMainThread(() => aInd.IsVisible = false);
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
