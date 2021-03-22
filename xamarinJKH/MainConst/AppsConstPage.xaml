@@ -494,13 +494,21 @@
                                                 x:Name="SwitchAppRead"
                                                 VerticalOptions="Center" />
 
-                                            <Label Text="Первыми непрочитанные&#10;"
+                                            <Label Text="{x:Static xamarinJkh:AppResources.FirstUnread}"
                                                    x:Name="LabelSwitchRead"
-                                                   FontAttributes="Bold"
                                                    FontSize="15"
                                                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
                                                    VerticalOptions="CenterAndExpand"
-                                                   HorizontalOptions="Center" />
+                                                   HorizontalOptions="Center" >
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static xamarinJkh:AppResources.FirstUnread}"                                                    FontAttributes="Bold"
+                                                              TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                                                              FontSize="15" />
+                                                        <Span Text="&#10;"  TextColor="{AppThemeBinding Light=Black, Dark=White}" FontSize="15" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
                                         </StackLayout>
                                         <StackLayout
                                         Orientation="Horizontal">

@@ -2185,6 +2185,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Первыми непрочитанные.
+        /// </summary>
+        internal static string FirstUnread {
+            get {
+                return ResourceManager.GetString("FirstUnread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Квартира.
         /// </summary>
         internal static string Flat {
