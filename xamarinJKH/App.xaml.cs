@@ -23,6 +23,7 @@ using Badge.Plugin;
 using Syncfusion.SfPdfViewer.XForms;
 using System.Resources;
 using System.Reflection;
+using AiForms.Dialogs;
 using Rg.Plugins.Popup.Services;
 using xamarinJKH.AppsConst;
 using xamarinJKH.DialogViews;
@@ -152,6 +153,9 @@ namespace xamarinJKH
             CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
             {
                 System.Diagnostics.Debug.WriteLine("Received");
+#if DEBUG
+                Device.BeginInvokeOnMainThread(async () =>Toast.Instance.Show<ToastDialog>(new {Title = Newtonsoft.Json.JsonConvert.SerializeObject(p), Duration = 15500}));
+#endif
                 if(Device.RuntimePlatform==Device.iOS)
                 {
                     if (DependencyService.Get<IAppState>().IsAppBackbround())

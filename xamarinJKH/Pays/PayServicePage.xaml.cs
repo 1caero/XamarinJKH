@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
@@ -58,6 +59,7 @@ namespace xamarinJKH.Pays
 
         async Task GetPayLink(string ident, decimal sum, bool isInsurance)
         {
+            Analytics.TrackEvent("Загрузка страницы оплаты по лс " + ident);
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () =>
@@ -76,12 +78,14 @@ namespace xamarinJKH.Pays
                 PayService payLink = await server.GetPayLink(ident, sum, isInsurance, paymentSystem?.Name);
                 if (payLink.payLink != null)
                 {
+                    Analytics.TrackEvent("Ссылка на оплату " + payLink.payLink);
                     Device.BeginInvokeOnMainThread(async () => webView.Source = payLink.payLink);
                 }
                 else
                 {
                     Device.BeginInvokeOnMainThread(async () =>
                     {
+                        Analytics.TrackEvent("Ссылка на оплату " + payLink.Error);
                         await DisplayAlert(AppResources.ErrorTitle, payLink.Error, "OK");
                         try
                         {
@@ -98,6 +102,7 @@ namespace xamarinJKH.Pays
 
         async Task GetPayLinkRequest(int? id, decimal sum)
         {
+            Analytics.TrackEvent("Загрузка страницы оплаты по платной заявке " + id);
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 Device.BeginInvokeOnMainThread(async () =>
@@ -117,10 +122,12 @@ namespace xamarinJKH.Pays
                 PayService payLink = await server.GetPayLink(id, sum);
                 if (payLink.payLink != null)
                 {
+                    Analytics.TrackEvent("Ссылка на оплату " + payLink.payLink);
                     webView.Source = payLink.payLink;
                 }
                 else
                 {
+                    Analytics.TrackEvent("Ссылка на оплату " + payLink.Error);
                     Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, payLink.Error, "OK"));
                     try
                     {
@@ -145,14 +152,18 @@ namespace xamarinJKH.Pays
             if (eUrl.Contains("GetPayResult"))
             {
                 string url = eUrl.Replace(RestClientMP.SERVER_ADDR + "/", "");
-                
-                await StartProgressBar(url);
+                Analytics.TrackEvent("оплата произведена " + url);
+                if(!isProgress)
+                    await StartProgressBar(url);
             }
             
         }
 
+        private bool isProgress = false;
         public async Task StartProgressBar(string url)
         {
+            isProgress = true;
+            Analytics.TrackEvent("Обработка завершения оплаты");
             bool rate = Preferences.Get("rate", true);
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
@@ -176,6 +187,7 @@ namespace xamarinJKH.Pays
                 PayResult result = await server.GetPayResult(url);
                 if (result.error != null && result.Equals(""))
                 {
+                    Analytics.TrackEvent("Результат оплаты " + result.error);
                     Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, result.error, "OK"));
                     try
                     {
@@ -188,7 +200,7 @@ namespace xamarinJKH.Pays
                     if(Device.RuntimePlatform==  Device.iOS)
                         Loading.Instance.Hide();
                     await Navigation.PopToRootAsync();
-
+                    Analytics.TrackEvent("Результат оплаты " + result.message);
                     Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.AlertSuccess, result.message, "OK"));
                     if (rate)
                     {
