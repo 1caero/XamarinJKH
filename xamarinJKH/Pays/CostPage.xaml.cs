@@ -405,6 +405,7 @@ namespace xamarinJKH.Pays
                 }
                 if (sumPay > 0)
                 {
+                    Analytics.TrackEvent("Оплата " + paymentSystem);
                     if (Navigation.NavigationStack.FirstOrDefault(x => x is PayServicePage) == null)
                         await Navigation.PushAsync(new PayServicePage(account.AccountID, sumPay, null, SwitchInsurance.IsToggled && SwitchInsurance.IsVisible, paymentSystem));
                 }

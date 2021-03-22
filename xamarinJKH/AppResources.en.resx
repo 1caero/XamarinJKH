@@ -1919,4 +1919,7 @@
   <data name="ClickToSelect" xml:space="preserve">
     <value>Click to select </value>
   </data>
+  <data name="FirstUnread" xml:space="preserve">
+    <value>First unread</value>
+  </data>
 </root>

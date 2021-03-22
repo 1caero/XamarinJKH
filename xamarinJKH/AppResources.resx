@@ -1924,4 +1924,7 @@
   <data name="ClickToSelect" xml:space="preserve">
     <value>Нажмите для выбора</value>
   </data>
+  <data name="FirstUnread" xml:space="preserve">
+    <value>Первыми непрочитанные</value>
+  </data>
 </root>
