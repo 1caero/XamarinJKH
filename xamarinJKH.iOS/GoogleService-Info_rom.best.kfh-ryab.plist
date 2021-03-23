@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>781697834817-fcik5ratq2k3put1rc3gn4n0uh3cjsrr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.781697834817-fcik5ratq2k3put1rc3gn4n0uh3cjsrr</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>781697834817-105vbdo7o09lom52b98l0eigi41293pr.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCEwACc4w9_F8AY_eoGBTbABgkqHs2DmyU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>781697834817</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>rom.best.kfh-ryab</string>
+	<key>PROJECT_ID</key>
+	<string>djservice-33702</string>
+	<key>STORAGE_BUCKET</key>
+	<string>djservice-33702.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:781697834817:ios:858aa1da0fb22221d2cbc0</string>
+	<key>DATABASE_URL</key>
+	<string>https://djservice-33702.firebaseio.com</string>
+</dict>
+</plist>
