@@ -80,11 +80,11 @@
                              VerticalOptions="FillAndExpand">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Vertical"
-                                                 VerticalItemSpacing="14"/>
+                                                 VerticalItemSpacing="0"/>
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate >
-                                        <StackLayout Padding="{OnPlatform iOS='2'}">
+                                        <StackLayout Padding="{OnPlatform iOS='2'}" Margin="0,7">
                                             <StackLayout.GestureRecognizers>
                                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
                                             </StackLayout.GestureRecognizers>
