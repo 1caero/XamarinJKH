@@ -61,7 +61,7 @@ namespace xamarinJKH.Droid.DependencyImplementation
                 {
                     Console.WriteLine($@"Сервис ожил {i++} раз");
                     MessagingCenter.Send<object>(this, "SetToken");
-                    Thread.Sleep(1000);
+                    Thread.Sleep(2000);
                 }
             }).Start();
             //Write want you want to do here
