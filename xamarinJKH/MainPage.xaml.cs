@@ -20,6 +20,7 @@ using System.Linq;
 using System.Threading;
 using Badge.Plugin;
 using Microsoft.AppCenter.Analytics;
+using xamarinJKH.InterfacesIntegration;
 
 namespace xamarinJKH
 {
@@ -128,41 +129,7 @@ namespace xamarinJKH
             EntryLogin.Text = "";
             EntryLoginConst.Text = "";
             EntryPass.Text = "";
-         
-            string login = Preferences.Get("login", "");
-            string pass = Preferences.Get("pass", "");
-            string loginConst = Preferences.Get("loginConst", "");
-            string passConst = Preferences.Get("passConst", "");
-            bool isSave = Preferences.Get("isPass", false);
-            if (Settings.MobileSettings.blockUserAuth)
-            {
-                Settings.ConstAuth = true;
-                LabelSotr.IsVisible = false;
-            }
-            else
-            {
-                if (!Settings.MobileSettings.useDispatcherAuth)
-                    LabelSotr.IsVisible = false;
-                Settings.ConstAuth = Preferences.Get("constAuth", false);
-            }
-            if (Settings.ConstAuth && Settings.IsFirsStart && !passConst.Equals("") && !loginConst.Equals("") && !isSave)
-            {
-                LoginDispatcher(loginConst, passConst);
-                Settings.IsFirsStart = false;
-                EntryLogin.Text = login;
-                EntryLoginConst.Text = loginConst;
-                EntryPass.Text = pass;
-                EntryPassConst.Text = passConst;
-            }
-            else if (Settings.IsFirsStart && !pass.Equals("") && !login.Equals("") && !isSave)
-            {
-                Login(login, pass);
-                Settings.IsFirsStart = false;
-                EntryLogin.Text = login;
-                EntryLoginConst.Text = loginConst;
-                EntryPass.Text = pass;
-                EntryPassConst.Text = passConst;
-            }
+            AutoLogin();
 
             switch (Device.RuntimePlatform)
             {
@@ -183,11 +150,51 @@ namespace xamarinJKH
                     }
                     break;
                 case Device.Android:
+                    DependencyService.Get<IStartService>().StartForegroundServiceCompat();
                     break;
                 default:
                     break;
             }
             var t = Application.Current.UserAppTheme;
+        }
+
+        private void AutoLogin()
+        {
+            string login = Preferences.Get("login", "");
+            string pass = Preferences.Get("pass", "");
+            string loginConst = Preferences.Get("loginConst", "");
+            string passConst = Preferences.Get("passConst", "");
+            bool isSave = Preferences.Get("isPass", false);
+            if (Settings.MobileSettings.blockUserAuth)
+            {
+                Settings.ConstAuth = true;
+                LabelSotr.IsVisible = false;
+            }
+            else
+            {
+                if (!Settings.MobileSettings.useDispatcherAuth)
+                    LabelSotr.IsVisible = false;
+                Settings.ConstAuth = Preferences.Get("constAuth", false);
+            }
+
+            if (Settings.ConstAuth && Settings.IsFirsStart && !passConst.Equals("") && !loginConst.Equals("") && !isSave)
+            {
+                LoginDispatcher(loginConst, passConst);
+                Settings.IsFirsStart = false;
+                EntryLogin.Text = login;
+                EntryLoginConst.Text = loginConst;
+                EntryPass.Text = pass;
+                EntryPassConst.Text = passConst;
+            }
+            else if (Settings.IsFirsStart && !pass.Equals("") && !login.Equals("") && !isSave)
+            {
+                Login(login, pass);
+                Settings.IsFirsStart = false;
+                EntryLogin.Text = login;
+                EntryLoginConst.Text = loginConst;
+                EntryPass.Text = pass;
+                EntryPassConst.Text = passConst;
+            }
         }
 
 

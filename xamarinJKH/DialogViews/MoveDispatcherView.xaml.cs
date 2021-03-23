@@ -150,7 +150,7 @@ namespace xamarinJKH.DialogViews
 
         public async Task ShowToast(string title)
         {
-            Toast.Instance.Show<ToastDialog>(new {Title = title, Duration = 1500});
+            Toast.Instance.Show<ToastDialog>(new {Title = title, Duration = 1500, ColorB = Color.Gray,  ColorT = Color.White});
             // Optionally, view model can be passed to the toast view instance.
         }
 

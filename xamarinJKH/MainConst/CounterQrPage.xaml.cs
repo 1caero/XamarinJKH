@@ -67,7 +67,7 @@ namespace xamarinJKH.MainConst
                     if (scanAsync != null)
                     {
 #if DEBUG
-                        Toast.Instance.Show<ToastDialog>(new {Title = scanAsync, Duration = 5500});
+                        Toast.Instance.Show<ToastDialog>(new {Title = scanAsync, Duration = 5500, ColorB = Color.Gray,  ColorT = Color.White});
 #endif
                         List<MeterInfo> meterInfos = await server.GetMeter(scanAsync);
                         if (meterInfos != null && meterInfos.Count > 0)
@@ -111,18 +111,18 @@ namespace xamarinJKH.MainConst
                                 else
                                 {
                                     Toast.Instance.Show<ToastDialog>(new
-                                        {Title = meterInfo.PeriodMessage, Duration = 5500});
+                                        {Title = meterInfo.PeriodMessage, Duration = 5500, ColorB = Color.Gray,  ColorT = Color.White});
                                 }
                             }
                         }
                         else
                         {
-                            Toast.Instance.Show<ToastDialog>(new {Title = AppResources.NothingFound, Duration = 5500});
+                            Toast.Instance.Show<ToastDialog>(new {Title = AppResources.NothingFound, Duration = 5500, ColorB = Color.Gray,  ColorT = Color.White});
                         }
                     }
                     else
                     {
-                        Toast.Instance.Show<ToastDialog>(new {Title = AppResources.NothingFound, Duration = 5500});
+                        Toast.Instance.Show<ToastDialog>(new {Title = AppResources.NothingFound, Duration = 5500, ColorB = Color.Gray,  ColorT = Color.White});
                     }
                 });
             };

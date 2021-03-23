@@ -212,7 +212,7 @@ namespace xamarinJKH.Pays
                         catch (Exception ex)
                         {
                             Console.WriteLine(ex);
-                            Toast.Instance.Show<ToastDialog>(new {Title = AppResources.ErrorAdditionalLink, Duration = 1500});
+                            Toast.Instance.Show<ToastDialog>(new {Title = AppResources.ErrorAdditionalLink, Duration = 1500, ColorB = Color.Gray,  ColorT = Color.White});
                         }
                     };
                     file.GestureRecognizers.Add(openCheck);

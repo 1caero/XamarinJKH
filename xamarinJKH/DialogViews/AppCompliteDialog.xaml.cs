@@ -56,7 +56,7 @@ namespace xamarinJKH.DialogViews
             else
             {
                 var comment = string.Format(AppResources.LettersLimit, 10);
-                Toast.Instance.Show<ToastDialog>(new { Title = comment, Duration = 1500 });
+                Toast.Instance.Show<ToastDialog>(new { Title = comment, Duration = 1500, ColorB = Color.Gray,  ColorT = Color.White });
             }
         }
 

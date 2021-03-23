@@ -1,4 +1,5 @@
 ﻿using AiForms.Dialogs.Abstractions;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace xamarinJKH.DialogViews
