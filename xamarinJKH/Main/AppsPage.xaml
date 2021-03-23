@@ -100,7 +100,7 @@
                         <RefreshView x:Name="messageRefreshView" RefreshColor="{x:DynamicResource MainColor}">
                             <CollectionView
                                 x:Name="additionalList"
-                                HorizontalScrollBarVisibility="Never"
+                                HorizontalScrollBarVisibility="Never"                                
                                 Margin="10, 10, 10, 0"
                                 SelectionMode="None"
                                 EmptyView="{x:Static xamarinJkh:AppResources.EmptyApp}"
