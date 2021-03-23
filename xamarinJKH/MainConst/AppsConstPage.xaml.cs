@@ -580,7 +580,7 @@ namespace xamarinJKH.MainConst
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    Toast.Instance.Show<ToastDialog>(new { Title = AppResources.ErrorAppsInfo, Duration = 1700 });
+                    Toast.Instance.Show<ToastDialog>(new { Title = AppResources.ErrorAppsInfo, Duration = 1700, ColorB = Color.Gray,  ColorT = Color.White });
                 });
             }
         }

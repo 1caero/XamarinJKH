@@ -28,6 +28,8 @@ using Rg.Plugins.Popup.Services;
 using xamarinJKH.AppsConst;
 using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
+using xamarinJKH.Main;
+using xamarinJKH.MainConst;
 
 namespace xamarinJKH
 {
@@ -35,20 +37,20 @@ namespace xamarinJKH
     {
         public static int ScreenHeight { get; set; }
         public static int ScreenWidth { get; set; }
-        
+
         public static double ScreenHeight2 { get; set; }
         public static double ScreenWidth2 { get; set; }
         public static string version { get; set; }
         public static string model { get; set; }
         public static string token { get; set; }
-        
+
         public static bool isStart { get; set; } = false;
         public static bool isCons { get; set; } = false;
         public static bool isConnected { get; set; } = true;
         private RestClientMP server = new RestClientMP();
         public static bool MessageNoInternet { get; set; }
-        
-        public static string DeviceId { get; set; } 
+
+        public static string DeviceId { get; set; }
 
 
         private async Task getSettingsAsync()
@@ -63,17 +65,19 @@ namespace xamarinJKH
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex);                
+                Crashes.TrackError(ex);
             }
         }
 
-        static int badgeCount=0;
+        static int badgeCount = 0;
 
         public App()
         {
             InitializeComponent();
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzU2OTY1QDMxMzgyZTMzMmUzMEtpcFNHRnBKOUppMFJ1RUxjWTlsbUt6QzFOY3JyMUlGVi9McDJSSmQxVW89");
-            PdfViewerResourceManager.Manager = new ResourceManager("xamarinJKH.Resources.Syncfusion.SfPdfViewer.XForms", GetType().GetTypeInfo().Assembly);
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(
+                "MzU2OTY1QDMxMzgyZTMzMmUzMEtpcFNHRnBKOUppMFJ1RUxjWTlsbUt6QzFOY3JyMUlGVi9McDJSSmQxVW89");
+            PdfViewerResourceManager.Manager = new ResourceManager("xamarinJKH.Resources.Syncfusion.SfPdfViewer.XForms",
+                GetType().GetTypeInfo().Assembly);
             CrossBadge.Current.ClearBadge();
             Crashes.SendingErrorReport += SendingErrorReportHandler;
             Crashes.SentErrorReport += SentErrorReportHandler;
@@ -83,17 +87,23 @@ namespace xamarinJKH
             var task = Task.Run(async () => await getSettingsAsync());
             task.Wait();
 
-            
-            if (/*Device.RuntimePlatform == Device.iOS &&*/Settings.MobileSettings?.appTheme != null && Application.Current.UserAppTheme == OSAppTheme.Unspecified)
+
+            if ( /*Device.RuntimePlatform == Device.iOS &&*/Settings.MobileSettings?.appTheme != null &&
+                                                            Application.Current.UserAppTheme == OSAppTheme.Unspecified)
             {
-               switch (Settings.MobileSettings.appTheme)
+                switch (Settings.MobileSettings.appTheme)
                 {
-                    case "": Application.Current.UserAppTheme = OSAppTheme.Light; break;
-                    case "light": Application.Current.UserAppTheme = OSAppTheme.Light; break;
-                    case "dark": Application.Current.UserAppTheme = OSAppTheme.Dark; break;
+                    case "":
+                        Application.Current.UserAppTheme = OSAppTheme.Light;
+                        break;
+                    case "light":
+                        Application.Current.UserAppTheme = OSAppTheme.Light;
+                        break;
+                    case "dark":
+                        Application.Current.UserAppTheme = OSAppTheme.Dark;
+                        break;
                 }
-                
-            } 
+            }
 
 
             DependencyService.Register<RestClientMP>();
@@ -101,26 +111,37 @@ namespace xamarinJKH
             {
                 case Device.iOS:
 
-                    Color color= Color.White; 
+                    Color color = Color.White;
 
                     int theme = Preferences.Get("Theme", 0);
 
                     switch (theme)
                     {
-                        case 1: color = Color.White; break;
-                        case 2: color = Color.Black; break;
+                        case 1:
+                            color = Color.White;
+                            break;
+                        case 2:
+                            color = Color.Black;
+                            break;
                         case 0:
                             switch (Settings.MobileSettings.appTheme)
                             {
-                                case "": color = Color.Black; break;
-                                case "light": color = Color.Black; break;
-                                case "dark": color = Color.White; break;
+                                case "":
+                                    color = Color.Black;
+                                    break;
+                                case "light":
+                                    color = Color.Black;
+                                    break;
+                                case "dark":
+                                    color = Color.White;
+                                    break;
                             }
-                            break;                        
+
+                            break;
                     }
 
                     //var c2 = Settings.MobileSettings.appTheme == "light" ? Color.Black : Color.White;
-                    var c2 = color==Color.White ? Color.Black : Color.White;
+                    var c2 = color == Color.White ? Color.Black : Color.White;
 
 
                     var nav = new Xamarin.Forms.NavigationPage(new MainPage())
@@ -141,6 +162,12 @@ namespace xamarinJKH
                     break;
             }
 
+            MessagingCenter.Subscribe<Object>(this, "SetToken",
+                async (sender) =>
+                {
+                    Device.BeginInvokeOnMainThread(async () => Toast.Instance.Show<ToastDialog>(new
+                        {Title = "", Duration = 15500, ColorB = Color.Transparent, ColorT = Color.Transparent}));
+                });
             CrossFirebasePushNotification.Current.Subscribe("general");
             CrossFirebasePushNotification.Current.OnTokenRefresh += async (s, p) =>
             {
@@ -149,27 +176,31 @@ namespace xamarinJKH
                 await server.RegisterDevice(isCons);
             };
 
-            
+
             CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
             {
                 System.Diagnostics.Debug.WriteLine("Received");
 #if DEBUG
-                Device.BeginInvokeOnMainThread(async () =>Toast.Instance.Show<ToastDialog>(new {Title = Newtonsoft.Json.JsonConvert.SerializeObject(p), Duration = 15500}));
+                Device.BeginInvokeOnMainThread(async () => Toast.Instance.Show<ToastDialog>(new
+                {
+                    Title = Newtonsoft.Json.JsonConvert.SerializeObject(p), Duration = 15500, ColorB = Color.Gray,
+                    ColorT = Color.White
+                }));
 #endif
-                if(Device.RuntimePlatform==Device.iOS)
+                if (Device.RuntimePlatform == Device.iOS)
                 {
                     if (DependencyService.Get<IAppState>().IsAppBackbround())
                     {
                         badgeCount++;
                         CrossBadge.Current.SetBadge(badgeCount);
-                    }                    
+                    }
                 }
                 else
-                { 
+                {
                     CrossBadge.Current.ClearBadge();
                 }
 
-                    Device.BeginInvokeOnMainThread(async () =>
+                Device.BeginInvokeOnMainThread(async () =>
                 {
                     if (isCons)
                     {
@@ -185,7 +216,7 @@ namespace xamarinJKH
                         bool displayAlert = false;
                         string o = string.Empty;
 
-                        if ( o.ToLower().Equals("осс"))
+                        if (o.ToLower().Equals("осс"))
                         {
                             await MainPage.Navigation.PushModalAsync(new OSSMain());
                         }
@@ -202,7 +233,7 @@ namespace xamarinJKH
                                 MessagingCenter.Send<Object>(this, "AutoUpdateComments");
                             }
                         }
-                        
+
                         if (o.ToLower().Equals("comment"))
                         {
                             var tabbedpage = App.Current.MainPage.Navigation.ModalStack.ToList()[0];
@@ -217,8 +248,8 @@ namespace xamarinJKH
                                 else
                                 {
                                     if (!isCons)
-                                    MessagingCenter.Send<Object, int>(this, "SwitchToApps",
-                                        int.Parse(p.Data["id_request"].ToString()));
+                                        MessagingCenter.Send<Object, int>(this, "SwitchToApps",
+                                            int.Parse(p.Data["id_request"].ToString()));
                                     else
                                         MessagingCenter.Send<Object, int>(this, "SwitchToAppsConst",
                                             int.Parse(p.Data["id_request"].ToString()));
@@ -254,11 +285,14 @@ namespace xamarinJKH
                                     .NavigationStack;
                                 if (stack.Count == 2 && !isCons)
                                 {
-                                    await (tabbedpage as Xamarin.Forms.TabbedPage).Children[0].Navigation.PopToRootAsync();
+                                    await (tabbedpage as Xamarin.Forms.TabbedPage).Children[0].Navigation
+                                        .PopToRootAsync();
                                 }
+
                                 if (!isCons)
                                 {
-                                    MessagingCenter.Send<Object, (string,string)>(this, "OpenNotification", (p.Data["body"].ToString(),p.Data["title"].ToString()));
+                                    MessagingCenter.Send<Object, (string, string)>(this, "OpenNotification",
+                                        (p.Data["body"].ToString(), p.Data["title"].ToString()));
                                 }
                             }
                         }
@@ -274,7 +308,7 @@ namespace xamarinJKH
                 System.Diagnostics.Debug.WriteLine("Opened");
                 if (rea != null)
                     if (rea.Data != null)
-                        
+                    {
                         if (rea.Data.ContainsKey("type_push") || rea.Data.ContainsKey("gcm.notification.type_push"))
                         {
                             string o = "";
@@ -303,18 +337,25 @@ namespace xamarinJKH
                                                 {
                                                     foreach (var each in Settings.EventBlockData.Announcements)
                                                     {
-                                                        if (rea.Data.ContainsKey("aps.alert.title") && rea.Data.ContainsKey("aps.alert.body"))
+                                                        if (rea.Data.ContainsKey("aps.alert.title") &&
+                                                            rea.Data.ContainsKey("aps.alert.body"))
                                                         {
-                                                            if (rea.Data["aps.alert.title"].Equals(each.Header) & rea.Data["aps.alert.body"].Equals(each.Text))
+                                                            if (rea.Data["aps.alert.title"].Equals(each.Header) &
+                                                                rea.Data["aps.alert.body"].Equals(each.Text))
                                                             {
-                                                                await MainPage.Navigation.PushModalAsync(new NotificationOnePage(each));
+                                                                await MainPage.Navigation.PushModalAsync(
+                                                                    new NotificationOnePage(each));
                                                             }
                                                         }
-                                                        if (rea.Data.ContainsKey("title") && rea.Data.ContainsKey("body"))
+
+                                                        if (rea.Data.ContainsKey("title") &&
+                                                            rea.Data.ContainsKey("body"))
                                                         {
-                                                            if (rea.Data["title"].Equals(each.Header) & rea.Data["body"].Equals(each.Text))
+                                                            if (rea.Data["title"].Equals(each.Header) &
+                                                                rea.Data["body"].Equals(each.Text))
                                                             {
-                                                                await MainPage.Navigation.PushModalAsync(new NotificationOnePage(each));
+                                                                await MainPage.Navigation.PushModalAsync(
+                                                                    new NotificationOnePage(each));
                                                             }
                                                         }
                                                     }
@@ -326,9 +367,9 @@ namespace xamarinJKH
                                             }
                                             else
                                             {
-                                                Analytics.TrackEvent($"Сервер вернул ошибку при загрузке данных: {Settings.EventBlockData}");
+                                                Analytics.TrackEvent(
+                                                    $"Сервер вернул ошибку при загрузке данных: {Settings.EventBlockData}");
                                             }
-                                        
                                         }
                                         else
                                         {
@@ -337,7 +378,7 @@ namespace xamarinJKH
                                     }
                                 });
                             }
-                            
+
                             if (o.ToLower().Equals("осс"))
                             {
                                 Device.BeginInvokeOnMainThread(async () =>
@@ -355,7 +396,7 @@ namespace xamarinJKH
                                     }
                                 });
                             }
-                            
+
                             if (o.ToLower().Equals("comment"))
                             {
                                 if (rea.Data.ContainsKey("id_request"))
@@ -363,20 +404,22 @@ namespace xamarinJKH
                                     var id = int.Parse(rea.Data["id_request"].ToString());
                                     Analytics.TrackEvent("ключ id_request=" + id);
                                     Analytics.TrackEvent("isCons=" + isCons);
-                            
+
                                     string login = Preferences.Get("login", "");
                                     string pass = Preferences.Get("pass", "");
                                     string loginConst = Preferences.Get("loginConst", "");
                                     string passConst = Preferences.Get("passConst", "");
-                                
-                                    LoginResult loginResult = isCons ? await server.LoginDispatcher(loginConst, passConst) : await server.Login(login, pass);
+
+                                    LoginResult loginResult = isCons
+                                        ? await server.LoginDispatcher(loginConst, passConst)
+                                        : await server.Login(login, pass);
                                     if (loginResult.Error == null)
                                     {
                                         if (isCons)
-                                        {                                            
+                                        {
                                             RequestList requestList = await server.GetRequestsListConst();
                                             Analytics.TrackEvent("получен requestList");
-                                            if(requestList?.Requests != null)
+                                            if (requestList?.Requests != null)
                                             {
                                                 Analytics.TrackEvent("список Requests не null");
                                                 var request = requestList.Requests.FirstOrDefault(x => x.ID == id);
@@ -384,7 +427,7 @@ namespace xamarinJKH
                                                     await MainPage.Navigation.PushModalAsync(new AppConstPage(request));
                                                 else
                                                 {
-                                                    Analytics.TrackEvent("в списке Requests нет id="+ id);
+                                                    Analytics.TrackEvent("в списке Requests нет id=" + id);
                                                 }
                                             }
                                         }
@@ -411,33 +454,34 @@ namespace xamarinJKH
                                 {
                                     Analytics.TrackEvent("ключ id_request не найден");
                                 }
-                            
                             }
-                            
+
                             if (o.ToLower().Equals("support"))
                             {
-                                
                                 string login = Preferences.Get("login", "");
                                 string pass = Preferences.Get("pass", "");
                                 string loginConst = Preferences.Get("loginConst", "");
                                 string passConst = Preferences.Get("passConst", "");
-                                
-                                LoginResult loginResult = isCons ? await server.LoginDispatcher(loginConst, passConst) : await server.Login(login, pass);
+
+                                LoginResult loginResult = isCons
+                                    ? await server.LoginDispatcher(loginConst, passConst)
+                                    : await server.Login(login, pass);
                                 string phone = Preferences.Get("techPhone", loginResult.Phone);
                                 if (!string.IsNullOrWhiteSpace(phone))
                                 {
                                     Settings.SetPhoneTech(phone);
                                     await server.RegisterDeviceNotAvtorization(Settings.Person?.Phone);
-                                    if (MainPage.Navigation.NavigationStack?.FirstOrDefault(x => x is Tech.AppPage) == null)
+                                    if (MainPage.Navigation.NavigationStack?.FirstOrDefault(x => x is Tech.AppPage) ==
+                                        null)
                                         await MainPage.Navigation.PushModalAsync(new Tech.AppPage());
                                 }
                                 else
                                 {
-                                    
                                     await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog());
-                                }                                
+                                }
                             }
                         }
+                    }
             };
             CrossFirebasePushNotification.Current.OnNotificationAction += (s, p) =>
             {
@@ -454,7 +498,6 @@ namespace xamarinJKH
             };
         }
 
-      
 
         async void pExec(FirebasePushNotificationResponseEventArgs p)
         {
@@ -480,7 +523,8 @@ namespace xamarinJKH
             // Your code goes here.
             return new ErrorAttachmentLog[]
             {
-                ErrorAttachmentLog.AttachmentWithBinary(Encoding.UTF8.GetBytes(accountsJson), "Accounts.json", "application/json")
+                ErrorAttachmentLog.AttachmentWithBinary(Encoding.UTF8.GetBytes(accountsJson), "Accounts.json",
+                    "application/json")
             };
         }
 
@@ -498,7 +542,7 @@ namespace xamarinJKH
             }
             else if (report.AndroidDetails != null)
             {
-                AppCenterLog.Info(LogTag, report.AndroidDetails.ThreadName );
+                AppCenterLog.Info(LogTag, report.AndroidDetails.ThreadName);
             }
 
             if (e.Exception != null)
@@ -522,12 +566,12 @@ namespace xamarinJKH
             }
             else
             {
-                AppCenterLog.Info(LogTag, "No system exception was found" );
+                AppCenterLog.Info(LogTag, "No system exception was found");
             }
 
             if (report.AndroidDetails != null)
             {
-                AppCenterLog.Info(LogTag, report.AndroidDetails.ThreadName );
+                AppCenterLog.Info(LogTag, report.AndroidDetails.ThreadName);
             }
         }
 
@@ -554,37 +598,43 @@ namespace xamarinJKH
         protected override void OnStart()
         {
             Registrations.Start("XamarinJKH");
-                                    
+
             int theme = Preferences.Get("Theme", 0);
 
             switch (theme)
-                {
-                    case 0:
+            {
+                case 0:
                     switch (Settings.MobileSettings.appTheme)
                     {
-                        case "": Current.UserAppTheme = OSAppTheme.Unspecified;  break;
-                        case "light": Current.UserAppTheme = OSAppTheme.Light; break;
-                        case "dark": Current.UserAppTheme = OSAppTheme.Dark; break;
+                        case "":
+                            Current.UserAppTheme = OSAppTheme.Unspecified;
+                            break;
+                        case "light":
+                            Current.UserAppTheme = OSAppTheme.Light;
+                            break;
+                        case "dark":
+                            Current.UserAppTheme = OSAppTheme.Dark;
+                            break;
                     }
+
                     break;
-                    
-                        break;
-                    case 1:
-                        Current.UserAppTheme = OSAppTheme.Dark;
-                        break;
-                    case 2:
-                        Current.UserAppTheme = OSAppTheme.Light;
-                        break;
-                }
+
+                    break;
+                case 1:
+                    Current.UserAppTheme = OSAppTheme.Dark;
+                    break;
+                case 2:
+                    Current.UserAppTheme = OSAppTheme.Light;
+                    break;
+            }
 
 
-
-            AppCenter.Start("android=4384b8c4-8639-411c-b011-9d9e8408acde;ios=4a45a15f-a591-4860-b748-a856636cf982;", typeof(Analytics), typeof(Crashes));
+            AppCenter.Start("android=4384b8c4-8639-411c-b011-9d9e8408acde;ios=4a45a15f-a591-4860-b748-a856636cf982;",
+                typeof(Analytics), typeof(Crashes));
             //AppCenter.Start("39dce15b-0d85-46a2-bf90-a28af9fb8795", typeof(Analytics), typeof(Crashes)); //тихая гавань иос
             AppCenter.LogLevel = LogLevel.Verbose;
-            
-        
-            
+
+
             // Handle when your app starts
             CrossFirebasePushNotification.Current.Subscribe("general");
             CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
@@ -621,7 +671,6 @@ namespace xamarinJKH
 
             CrossFirebasePushNotification.Current.OnNotificationOpened += (s, rea) =>
             {
-
                 System.Diagnostics.Debug.WriteLine("Opened");
                 foreach (var data in rea.Data)
                 {
@@ -678,18 +727,15 @@ namespace xamarinJKH
 
         protected override void OnSleep()
         {
-           
         }
 
         protected override void OnResume()
-        {            
+        {
             if (Device.RuntimePlatform == Device.iOS)
             {
                 CrossBadge.Current.ClearBadge();
-                badgeCount = 0;                 
+                badgeCount = 0;
             }
         }
-        
-        
     }
 }

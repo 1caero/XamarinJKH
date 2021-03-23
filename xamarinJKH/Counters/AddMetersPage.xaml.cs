@@ -758,14 +758,7 @@ namespace xamarinJKH.Counters
                     Console.WriteLine(result.ToString());
                     FrameBtnLogin.IsVisible = true;
                     progress.IsVisible = false;
-                    if (Device.RuntimePlatform == Device.iOS)
-                    {
-                        await DisplayAlert(AppResources.ErrorTitle, result.Error, "OK");
-                    }
-                    else
-                    {
-                        DependencyService.Get<IMessage>().ShortAlert(result.Error);
-                    }
+                    await DisplayAlert(AppResources.ErrorTitle, result.Error, "OK");
                 }
 
                 progress.IsVisible = false;
