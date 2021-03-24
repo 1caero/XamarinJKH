@@ -7,6 +7,7 @@
                  xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
                  xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
                  xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH"
+                IsAnimationEnabled="False"
                  x:Class="xamarinJKH.DialogViews.MeterValuesDialog">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -24,7 +25,8 @@
            BorderColor="{x:DynamicResource MainColor}"
            Margin="15,125,15,15"
            Padding="25,20,25,20">
-        <StackLayout WidthRequest="250" Spacing="0">
+        <StackLayout x:Name="PopupMeterValue"
+                                      Spacing="0">
             <forms:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_close.svg"
                                   x:Name="IconViewClose"
                                   HeightRequest="20"
@@ -100,7 +102,6 @@
             </StackLayout>
             <CollectionView ItemsSource="{Binding MeterValueInfos}"
                             SelectionMode="Single"
-                            HeightRequest="150"
                             Margin="0,15,0,0"
                             HorizontalOptions="CenterAndExpand" x:Name="CollectionViewFiles">
                 <CollectionView.ItemTemplate>

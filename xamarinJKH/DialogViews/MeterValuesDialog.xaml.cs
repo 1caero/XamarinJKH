@@ -30,6 +30,7 @@ namespace xamarinJKH.DialogViews
             this.mInfo = mInfo;
             this.countersPage = countersPage;
             InitializeComponent();
+            PopupMeterValue.HeightRequest = App.ScreenWidth;
             CollectionViewFiles.ItemsLayout = new GridItemsLayout(2, ItemsLayoutOrientation.Vertical);
             GetMeterValues();
             var close = new TapGestureRecognizer();
