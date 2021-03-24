@@ -2302,15 +2302,6 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  гр..
-        /// </summary>
-        internal static string Gram {
-            get {
-                return ResourceManager.GetString("Gram", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Скрытое.
         /// </summary>
         internal static string Hidden {
@@ -2442,6 +2433,15 @@ namespace xamarinJKH {
         internal static string kb {
             get {
                 return ResourceManager.GetString("kb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  кг..
+        /// </summary>
+        internal static string KGram {
+            get {
+                return ResourceManager.GetString("KGram", resourceCulture);
             }
         }
         
@@ -3067,11 +3067,29 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ваш заказ принят.
+        /// </summary>
+        internal static string OrderAccepted {
+            get {
+                return ResourceManager.GetString("OrderAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Заказ скоректирован: .
         /// </summary>
         internal static string OrderCorrected {
             get {
                 return ResourceManager.GetString("OrderCorrected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to В ближайшее время сотрудник свяжется с Вами для уточнения деталей.
+        /// </summary>
+        internal static string OrderMessageAdditional {
+            get {
+                return ResourceManager.GetString("OrderMessageAdditional", resourceCulture);
             }
         }
         

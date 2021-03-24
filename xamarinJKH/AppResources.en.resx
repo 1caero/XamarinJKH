@@ -1271,8 +1271,8 @@
   <data name="AtSumm" xml:space="preserve">
     <value>from the sum</value>
   </data>
-  <data name="Gram" xml:space="preserve">
-    <value>g</value>
+  <data name="KGram" xml:space="preserve">
+    <value>kg</value>
   </data>
   <data name="TechDialogTitle" xml:space="preserve">
     <value>After choosing a messenger, send the following code with the first message to activate a dialogue with technical support</value>
@@ -1921,5 +1921,11 @@
   </data>
   <data name="FirstUnread" xml:space="preserve">
     <value>First unread</value>
+  </data>
+  <data name="OrderAccepted" xml:space="preserve">
+    <value>Your order is accepted</value>
+  </data>
+  <data name="OrderMessageAdditional" xml:space="preserve">
+    <value>In the near future, an employee will contact you to clarify the details</value>
   </data>
 </root>

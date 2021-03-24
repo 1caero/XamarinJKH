@@ -332,7 +332,7 @@
                                                           TextColor="Black" />
                                                     <Span Text=" " FontSize="18" FontAttributes="Bold"
                                                           TextColor="Black" />
-                                                    <Span Text="{x:Static xamarinJkh:AppResources.Gram}" FontSize="12"
+                                                    <Span Text="{x:Static xamarinJkh:AppResources.KGram}" FontSize="12"
                                                           TextColor="#8a8a8a" />
                                                 </FormattedString>
                                             </Label.FormattedText>

@@ -180,7 +180,7 @@ namespace xamarinJKH.Shop
             }
 
             stringBuilder.Append($"{AppResources.TotalPrice}: ").Append(LabelPriceBuscket.Text)
-                .Append($"{AppResources.Currency}\n").Append(LabelWeightBuscket.Text != null ? $"{LabelWeightBuscket.Text} {AppResources.Gram}" : string.Empty);
+                .Append($"{AppResources.Currency}\n").Append(LabelWeightBuscket.Text != null ? $"{LabelWeightBuscket.Text} {AppResources.KGram}" : string.Empty);
 
             return stringBuilder.ToString();
         }

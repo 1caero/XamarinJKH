@@ -212,7 +212,7 @@
                                             <Span x:Name="TotalWeigth" Text="{Binding TotalWeight}" FontSize="18" FontAttributes="Bold"
                                                   TextColor="Black" />
                                             <Span Text=" "  />
-                                            <Span Text="{x:Static xamarinJkh:AppResources.Gram}" FontSize="12" TextColor="#8a8a8a" />
+                                            <Span Text="{x:Static xamarinJkh:AppResources.KGram}" FontSize="12" TextColor="#8a8a8a" />
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>

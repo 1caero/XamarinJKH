@@ -1270,8 +1270,8 @@
   <data name="AtSumm" xml:space="preserve">
     <value>від суми</value>
   </data>
-  <data name="Gram" xml:space="preserve">
-    <value> гр.</value>
+  <data name="KGram" xml:space="preserve">
+    <value> кг.</value>
   </data>
   <data name="TechDialogTitle" xml:space="preserve">
     <value>Після вибору месенджера, відправте наступний код першим же повідомленням для активації діалогу з техпідтримки</value>
@@ -1794,5 +1794,11 @@
   </data>
   <data name="FirstUnread" xml:space="preserve">
     <value>Першими непрочитані </value>
+  </data>
+  <data name="OrderAccepted" xml:space="preserve">
+    <value>Ваше замовлення прийнято</value>
+  </data>
+  <data name="OrderMessageAdditional" xml:space="preserve">
+    <value>Найближчим часом співробітник зв'яжеться з Вами для уточнення деталей</value>
   </data>
 </root>

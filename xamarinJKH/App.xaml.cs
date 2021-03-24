@@ -162,12 +162,7 @@ namespace xamarinJKH
                     break;
             }
 
-            MessagingCenter.Subscribe<Object>(this, "SetToken",
-                async (sender) =>
-                {
-                    Device.BeginInvokeOnMainThread(async () => Toast.Instance.Show<ToastDialog>(new
-                        {Title = "", Duration = 15500, ColorB = Color.Transparent, ColorT = Color.Transparent}));
-                });
+           
             CrossFirebasePushNotification.Current.Subscribe("general");
             CrossFirebasePushNotification.Current.OnTokenRefresh += async (s, p) =>
             {

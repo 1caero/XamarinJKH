@@ -162,9 +162,10 @@ namespace xamarinJKH.Additional
             progress.IsVisible = true;
             if (Settings.Person.Accounts.Count > 0)
             {
+                DateTime now = DateTime.Now;
                 IDResult result = await _server.newApp(Settings.Person.Accounts[0].Ident,
                     additionalService.id_RequestType.ToString(),
-                    "Ваш заказ принят. В ближайшее время сотрудник свяжется с Вами для уточнения деталей\n" +
+                    $"{AppResources.OrderAccepted} {now:dd.MM.yyyy HH:mm:ss}. {AppResources.OrderMessageAdditional}\n" +
                     additionalService.Description);
                 if (result.Error == null)
                 {
