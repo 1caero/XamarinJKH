@@ -80,8 +80,25 @@ namespace xamarinJKH.Server.RequestModel
 
     public class AdditionalService
     {
+        string Format(string input)
+        {
+            if (input.Contains("\\n"))
+            {
+                return input.Replace("\\n", "\n");
+            }
+
+            else
+            {
+                return input.Replace(" ", "\n");
+            }
+        }
         public int ID { get; set; }
         public string Name { get; set; }
+
+        public string FormatName
+        {
+            get => Format(Name);
+        }
         public string Address { get; set; }
         public string Description { get; set; }
         public bool HasLogo { get; set; }

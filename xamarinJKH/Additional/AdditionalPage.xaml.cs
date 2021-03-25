@@ -96,6 +96,7 @@ namespace xamarinJKH.Additional
         }
 
         bool _busy;
+        private ObservableCollection<AdditionalGroup> _additionalGroups = new ObservableCollection<AdditionalGroup>();
 
         public bool IsBusy
         {
@@ -249,98 +250,181 @@ namespace xamarinJKH.Additional
 
         void SetGrupAdditional()
         {
-            StackLayoutContainer.Content = null;
-            StackLayout containerData = new StackLayout();
-            containerData.HorizontalOptions = LayoutOptions.FillAndExpand;
-            containerData.VerticalOptions = LayoutOptions.Start;
-            if (Settings.EventBlockData.AdditionalServicesByGroups?.Keys != null)
-                foreach (var group in Settings.EventBlockData.AdditionalServicesByGroups?.Keys)
-                {
-                    Label titleLable = new Label();
-                    titleLable.TextColor = Color.Black;
-                    titleLable.FontSize = 18;
-                    titleLable.Text = @group;
-                    titleLable.FontAttributes = FontAttributes.Bold;
-                    titleLable.VerticalOptions = LayoutOptions.StartAndExpand;
-                    titleLable.HorizontalOptions = LayoutOptions.StartAndExpand;
-
-                    ScrollView scrollViewAdditional = new ScrollView();
-                    scrollViewAdditional.Orientation = ScrollOrientation.Horizontal;
-                    scrollViewAdditional.HorizontalScrollBarVisibility = ScrollBarVisibility.Never;
-                    StackLayout containerAdd = new StackLayout();
-                    containerAdd.HorizontalOptions = LayoutOptions.FillAndExpand;
-                    containerAdd.Orientation = StackOrientation.Horizontal;
-                    foreach (var service in Settings.EventBlockData.AdditionalServicesByGroups[@group]
-                        .Where(x => !x.NotNullShowInAdBlock.ToLower().Equals("не отображать")))
+            // StackLayout containerData = new StackLayout();
+            // containerData.HorizontalOptions = LayoutOptions.FillAndExpand;
+            // containerData.VerticalOptions = LayoutOptions.Start;
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                AdditionalGroups.Clear();
+                if (Settings.EventBlockData.AdditionalServicesByGroups?.Keys != null)
+                    foreach (var group in Settings.EventBlockData.AdditionalServicesByGroups?.Keys)
                     {
-                        StackLayout stackLayoutCon = new StackLayout()
-                        {
-                            Padding = 10
-                        };
-                        PancakeView pic = new PancakeView()
-                        {
-                            HorizontalOptions = LayoutOptions.Center,
-                            CornerRadius = 20,
-                        };
-
-                        CachedImage cachedImage = new CachedImage()
-                        {
-                            HeightRequest = 70,
-                            WidthRequest = 70,
-                            Source = service.LogoLink
-                        };
-                        pic.Content = cachedImage;
-
-                        Label labelText = new Label()
-                        {
-                            TextColor = Color.Black,
-                            Text = FormatName(service.Name), //.Replace("\\n","\n"),
-                            VerticalTextAlignment = TextAlignment.Center,
-                            HorizontalOptions = LayoutOptions.Center,
-                            FontSize = 12,
-                            HorizontalTextAlignment = TextAlignment.Center
-                        };
-                        stackLayoutCon.Children.Add(pic);
-                        stackLayoutCon.Children.Add(labelText);
-                        containerAdd.Children.Add(stackLayoutCon);
-
-                        var onItemTaped = new TapGestureRecognizer();
-                        onItemTaped.Tapped += async (s, e) =>
-                        {
-                            if (service.ShopID == null)
-                            {
-                                if (Navigation.NavigationStack.FirstOrDefault(x => x is AdditionalOnePage) == null)
-                                    await Navigation.PushAsync(new AdditionalOnePage(service));
-                            }
-                            else
-                            {
-                                if (Navigation.NavigationStack.FirstOrDefault(x => x is ShopPageNew) == null)
-                                    await Navigation.PushAsync(new ShopPageNew(service));
-                            }
-                        };
-                        stackLayoutCon.GestureRecognizers.Add(onItemTaped);
+                        IEnumerable<AdditionalService> additionalServices = Settings.EventBlockData.AdditionalServicesByGroups[@group]
+                              .Where(x => !x.NotNullShowInAdBlock.ToLower().Equals("не отображать"));
+                        AdditionalGroups.Add(new AdditionalGroup(group,new List<AdditionalService>(additionalServices)));
+                       
+                        
+                        // Label titleLable = new Label();
+                        // titleLable.TextColor = Color.Black;
+                        // titleLable.FontSize = 18;
+                        // titleLable.Text = @group;
+                        // titleLable.FontAttributes = FontAttributes.Bold;
+                        // titleLable.VerticalOptions = LayoutOptions.StartAndExpand;
+                        // titleLable.HorizontalOptions = LayoutOptions.StartAndExpand;
+                        //
+                        // ScrollView scrollViewAdditional = new ScrollView();
+                        // scrollViewAdditional.Orientation = ScrollOrientation.Horizontal;
+                        // scrollViewAdditional.HorizontalScrollBarVisibility = ScrollBarVisibility.Never;
+                        // StackLayout containerAdd = new StackLayout();
+                        // containerAdd.HorizontalOptions = LayoutOptions.FillAndExpand;
+                        // containerAdd.Orientation = StackOrientation.Horizontal;
+                        // // foreach (var service in Settings.EventBlockData.AdditionalServicesByGroups[@group]
+                        // //     .Where(x => !x.NotNullShowInAdBlock.ToLower().Equals("не отображать")))
+                        // // {
+                        // //     StackLayout stackLayoutCon = new StackLayout()
+                        // //     {
+                        // //         Padding = 10
+                        // //     };
+                        // //     PancakeView pic = new PancakeView()
+                        // //     {
+                        // //         HorizontalOptions = LayoutOptions.Center,
+                        // //         CornerRadius = 20,
+                        // //     };
+                        // //
+                        // //     CachedImage cachedImage = new CachedImage()
+                        // //     {
+                        // //         HeightRequest = 70,
+                        // //         WidthRequest = 70,
+                        // //         Source = service.LogoLink
+                        // //     };
+                        // //     pic.Content = cachedImage;
+                        // //
+                        // //     Label labelText = new Label()
+                        // //     {
+                        // //         TextColor = Color.Black,
+                        // //         VerticalTextAlignment = TextAlignment.Center,
+                        // //         HorizontalOptions = LayoutOptions.Center,
+                        // //         FontSize = 12,
+                        // //         HorizontalTextAlignment = TextAlignment.Center
+                        // //     };
+                        // //     stackLayoutCon.Children.Add(pic);
+                        // //     stackLayoutCon.Children.Add(labelText);
+                        // //     containerAdd.Children.Add(stackLayoutCon);
+                        // //
+                        // //     var onItemTaped = new TapGestureRecognizer();
+                        // //     onItemTaped.Tapped += async (s, e) =>
+                        // //     {
+                        // //         if (service.ShopID == null)
+                        // //         {
+                        // //             if (Navigation.NavigationStack.FirstOrDefault(x => x is AdditionalOnePage) == null)
+                        // //                 await Navigation.PushAsync(new AdditionalOnePage(service));
+                        // //         }
+                        // //         else
+                        // //         {
+                        // //             if (Navigation.NavigationStack.FirstOrDefault(x => x is ShopPageNew) == null)
+                        // //                 await Navigation.PushAsync(new ShopPageNew(service));
+                        // //         }
+                        // //     };
+                        // //     stackLayoutCon.GestureRecognizers.Add(onItemTaped);
+                        // // }
+                        //
+                        // IEnumerable<AdditionalService> additionalServices = Settings.EventBlockData.AdditionalServicesByGroups[@group]
+                        //     .Where(x => !x.NotNullShowInAdBlock.ToLower().Equals("не отображать"));
+                        // CollectionView collectionView = new CollectionView
+                        // {
+                        //     ItemsLayout = new GridItemsLayout(4,ItemsLayoutOrientation.Vertical),
+                        //     ItemsSource = new ObservableCollection<AdditionalService>(additionalServices) ,
+                        //     ItemTemplate = new DataTemplate(() =>
+                        //     {
+                        //          StackLayout stackLayoutCon = new StackLayout()
+                        //     {
+                        //         Padding = 10
+                        //     };
+                        //     PancakeView pic = new PancakeView()
+                        //     {
+                        //         HorizontalOptions = LayoutOptions.Center,
+                        //         CornerRadius = 20,
+                        //     };
+                        //
+                        //     CachedImage cachedImage = new CachedImage()
+                        //     {
+                        //         HeightRequest = 70,
+                        //         WidthRequest = 70,
+                        //     };
+                        //     cachedImage.SetBinding(CachedImage.SourceProperty, "LogoLink");
+                        //     pic.Content = cachedImage;
+                        //
+                        //     Label labelText = new Label()
+                        //     {
+                        //         TextColor = Color.Black,
+                        //         VerticalTextAlignment = TextAlignment.Center,
+                        //         HorizontalOptions = LayoutOptions.Center,
+                        //         FontSize = 12,
+                        //         HorizontalTextAlignment = TextAlignment.Center
+                        //     };
+                        //     labelText.SetBinding(Label.TextProperty, "FormatName");
+                        //     stackLayoutCon.Children.Add(pic);
+                        //     stackLayoutCon.Children.Add(labelText);
+                        //
+                        //     // var onItemTaped = new TapGestureRecognizer();
+                        //     // onItemTaped.Tapped += async (s, e) =>
+                        //     // {
+                        //     //     if (service.ShopID == null)
+                        //     //     {
+                        //     //         if (Navigation.NavigationStack.FirstOrDefault(x => x is AdditionalOnePage) == null)
+                        //     //             await Navigation.PushAsync(new AdditionalOnePage(service));
+                        //     //     }
+                        //     //     else
+                        //     //     {
+                        //     //         if (Navigation.NavigationStack.FirstOrDefault(x => x is ShopPageNew) == null)
+                        //     //             await Navigation.PushAsync(new ShopPageNew(service));
+                        //     //     }
+                        //     // };
+                        //     // stackLayoutCon.GestureRecognizers.Add(onItemTaped);
+                        //         return stackLayoutCon;
+                        //     })
+                        // };
+                        //
+                        // // scrollViewAdditional.Content = containerAdd;
+                        // containerData.Children.Add(titleLable);
+                        // containerData.Children.Add(collectionView);
                     }
 
-                    scrollViewAdditional.Content = containerAdd;
-                    containerData.Children.Add(titleLable);
-                    containerData.Children.Add(scrollViewAdditional);
-                }
-
-            StackLayoutContainer.Content = containerData;
-            IsBusy = false;
+                // StackLayoutContainer.Content = containerData;
+                IsBusy = false;
+            });
         }
 
-        string FormatName(string input)
+        public ObservableCollection<AdditionalGroup> AdditionalGroups
         {
-            if (input.Contains("\\n"))
-            {
-                return input.Replace("\\n", "\n");
-            }
+            get => _additionalGroups;
+            set => _additionalGroups = value;
+        }
 
+        public class AdditionalGroup : List<AdditionalService>
+        {
+            public string Name { get; private set; }
+
+            public AdditionalGroup(string name, List<AdditionalService> additional) : base(additional)
+            {
+                Name = name;
+            }
+        }
+
+        private async void OnItemTapped(object sender, SelectionChangedEventArgs e)
+        {
+            AdditionalService service = (AdditionalService) e.CurrentSelection?.First();
+            if (service?.ShopID == null)
+            {
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is AdditionalOnePage) == null)
+                    await Navigation.PushAsync(new AdditionalOnePage(service));
+            }
             else
             {
-                return input.Replace(" ", "\n");
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is ShopPageNew) == null)
+                    await Navigation.PushAsync(new ShopPageNew(service));
             }
+
         }
     }
 }

@@ -7,6 +7,7 @@
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:converters="clr-namespace:xamarinJKH.Converters"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="xamarinJKH.Additional.AdditionalPage">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -81,7 +82,7 @@
                                                  Padding="0, 0, 0, 10">
                             <StackLayout VerticalOptions="FillAndExpand" HeightRequest="1000">
                                 <StackLayout VerticalOptions="FillAndExpand"
-                                             Margin="20, 20, 0, 0">
+                                             Margin="20, 20, 0, 20">
                                     <ActivityIndicator Color="{Binding MainColor}"
                                                        IsRunning="{Binding IsBusy}"
                                                        IsEnabled="{Binding IsBusy}"
@@ -89,7 +90,46 @@
                                     <RefreshView IsRefreshing="{Binding IsRefreshing} "
                                                  VerticalOptions="FillAndExpand"
                                                  Command="{Binding RefreshCommand}">
-                                        <ScrollView  x:Name="StackLayoutContainer"  />
+                                        <!-- <ScrollView  x:Name="StackLayoutContainer"  /> -->
+                                        <CollectionView ItemsSource="{Binding AdditionalGroups}"
+                                                        ItemsLayout="VerticalGrid, 4"
+                                                        IsGrouped="true"
+                                                    SelectionMode="Single"
+                                                    SelectionChanged="OnItemTapped">
+                                            <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout Padding="10">
+                                                    <StackLayout BackgroundColor="Transparent">
+                                                        <pancakeView:PancakeView CornerRadius="20"
+                                                                             x:Name="Pic"
+                                                                             HorizontalOptions="Center"
+                                                                            >
+                                                            <forms:CachedImage Source="{Binding LogoLink}"
+                                                                               HeightRequest = "65"
+                                                                             WidthRequest = "65"
+                                                                        Aspect="AspectFill"/>
+                                                        </pancakeView:PancakeView>
+                                                        <Label Text="{Binding FormatName}"
+                                                               TextColor="Black"
+                                                               VerticalTextAlignment="Center"
+                                                               HorizontalOptions="Center"
+                                                               FontSize="12"
+                                                               HorizontalTextAlignment="Center"/>
+                                                    </StackLayout>
+                                                    
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                            <CollectionView.GroupHeaderTemplate>
+                                                <DataTemplate>
+                                                    <Label Text="{Binding Name}"
+                                                           BackgroundColor="Transparent"
+                                                           FontSize="Medium"
+                                                           TextColor="Black"
+                                                           FontAttributes="Bold" />
+                                                </DataTemplate>
+                                            </CollectionView.GroupHeaderTemplate>
+                                    </CollectionView>
                                     </RefreshView>
                                     
 

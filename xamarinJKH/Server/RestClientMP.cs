@@ -2655,10 +2655,10 @@ namespace xamarinJKH.Server
 
             return response.RawBytes;
         } 
-        public async Task<PayService> GetPayLink(int? PaidRequestId, decimal Sum)
+        public async Task<PayService> GetPayLink(int? PaidRequestId, decimal Sum, string? PaymentSystem = null)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
-            RestRequest restRequest = new RestRequest(GET_PAYMENT_LIST, Method.POST);
+            RestRequest restRequest = new RestRequest(PAY_ONLINE, Method.POST);
             restRequest.RequestFormat = DataFormat.Json;
             restRequest.AddHeader("client", Device.RuntimePlatform);
             restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
@@ -2666,7 +2666,8 @@ namespace xamarinJKH.Server
             restRequest.AddBody(new
             {
                 Sum,
-                PaidRequestId
+                PaidRequestId,
+                PaymentSystem
             });
             var response = await restClientMp.ExecuteTaskAsync<PayService>(restRequest);
             // Проверяем статус
