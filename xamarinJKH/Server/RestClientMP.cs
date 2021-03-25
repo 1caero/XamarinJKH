@@ -19,9 +19,9 @@ namespace xamarinJKH.Server
     {
         // public const string SERVER_ADDR = "https://api.sm-center.ru/test_erc_udm"; // ОСС
         // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
-         public const string SERVER_ADDR = "https://api.sm-center.ru/water"; // Тихая гавань water/ water2 - тихая гавань - 2 
+        // public const string SERVER_ADDR = "https://api.sm-center.ru/water2"; // Тихая гавань water/ water2 - тихая гавань - 2 
          // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
-        //public const string SERVER_ADDR = "https://api.sm-center.ru/kapitall_all"; // Тихая гавань water/ water2 - тихая гавань - 2 
+        public const string SERVER_ADDR = "https://api.sm-center.ru/kapitall_all"; // Основа
         //public const string SERVER_ADDR = "https://api.sm-center.ru/newjkh"; // Еще одна тестовая база
         //public const string SERVER_ADDR = "https://api.sm-center.ru/dgservicnew"; // Домжил (дом24)
         // public const string SERVER_ADDR = "https://api.sm-center.ru/UKUpravdom"; //Управдом Чебоксары
@@ -3259,13 +3259,13 @@ namespace xamarinJKH.Server
                 Queries
             });
 
-            if(Device.RuntimePlatform == Device.iOS)
-            {
-                var response = restClientMp.ExecuteAsync<ItemsList<RequestStats>>(restRequest).Result.Data;
+            //if(Device.RuntimePlatform == Device.iOS)
+            //{
+            //    var response = restClientMp.ExecuteAsync<ItemsList<RequestStats>>(restRequest).Result.Data;
 
-                return response;
-            }
-            else
+            //    return response;
+            //}
+            //else
             {
                 var response = await restClientMp.ExecuteAsync<ItemsList<RequestStats>>(restRequest);
 

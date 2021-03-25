@@ -437,11 +437,11 @@
                                 </StackLayout>
                             </ScrollView>
 
-                            <ActivityIndicator Color="{x:StaticResource MainColor}"
+                            <!--<ActivityIndicator Color="{x:StaticResource MainColor}"
                                                Margin="120" Scale="2"
                                                IsRunning="{Binding IsBusy}"
                                                IsEnabled="{Binding IsBusy}"
-                                               IsVisible="{Binding IsBusy}" />
+                                               IsVisible="{Binding IsBusy}" />-->
                         </Grid>
 
                     </StackLayout>

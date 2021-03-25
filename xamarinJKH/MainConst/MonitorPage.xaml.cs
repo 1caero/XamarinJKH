@@ -1924,51 +1924,62 @@ namespace xamarinJKH.MainConst
             IsBusy = false;
             Device.BeginInvokeOnMainThread(async () =>
             {
-                await Loading.Instance.StartAsync(async progress =>
+                try
                 {
-                    var result = await _server.GetMultipleStats(queries);
-                    if (result.Error == null)
+                    IsBusy = true;
+                    await Loading.Instance.StartAsync(async progress =>
                     {
-                        if (result.Data.Count > 0)
+                        var result = await _server.GetMultipleStats(queries);
+                        if (result!=null && result.Error == null)
                         {
-                            RequestStats sum = new RequestStats();
-                            sum.TotalUnperformedRequestsList = new List<Requests>();
-                            sum.Today = new PeriodStats();
-                            sum.Today.OverdueRequestsList = new List<Requests>();
-                            sum.Today.UnperformedRequestsList = new List<Requests>();
-                            sum.Week = new PeriodStats();
-                            sum.Week.OverdueRequestsList = new List<Requests>();
-                            sum.Week.UnperformedRequestsList = new List<Requests>();
-                            sum.Month = new PeriodStats();
-                            sum.Month.OverdueRequestsList = new List<Requests>();
-                            sum.Month.UnperformedRequestsList = new List<Requests>();
-                            foreach (var monitor in result.Data)
+                            if (result.Data.Count > 0)
                             {
-                                sum.CustomPeriod = monitor.CustomPeriod;
+                                RequestStats sum = new RequestStats();
+                                sum.TotalUnperformedRequestsList = new List<Requests>();
+                                sum.Today = new PeriodStats();
+                                sum.Today.OverdueRequestsList = new List<Requests>();
+                                sum.Today.UnperformedRequestsList = new List<Requests>();
+                                sum.Week = new PeriodStats();
+                                sum.Week.OverdueRequestsList = new List<Requests>();
+                                sum.Week.UnperformedRequestsList = new List<Requests>();
+                                sum.Month = new PeriodStats();
+                                sum.Month.OverdueRequestsList = new List<Requests>();
+                                sum.Month.UnperformedRequestsList = new List<Requests>();
+                                foreach (var monitor in result.Data)
+                                {
+                                    sum.CustomPeriod = monitor.CustomPeriod;
 
 
-                                sum.TotalUnperformedRequestsList.AddRange(monitor.TotalUnperformedRequestsList);
-                                sum.Today.OverdueRequestsList.AddRange(monitor.Today.OverdueRequestsList);
-                                sum.Today.RequestsCount += monitor.Today.RequestsCount;
-                                sum.Today.UnperformedRequestsList.AddRange(monitor.Today.UnperformedRequestsList);
+                                    sum.TotalUnperformedRequestsList.AddRange(monitor.TotalUnperformedRequestsList);
+                                    sum.Today.OverdueRequestsList.AddRange(monitor.Today.OverdueRequestsList);
+                                    sum.Today.RequestsCount += monitor.Today.RequestsCount;
+                                    sum.Today.UnperformedRequestsList.AddRange(monitor.Today.UnperformedRequestsList);
 
-                                sum.Week.OverdueRequestsList.AddRange(monitor.Week.OverdueRequestsList);
-                                sum.Week.RequestsCount += monitor.Week.RequestsCount;
-                                sum.Week.UnperformedRequestsList.AddRange(monitor.Week.UnperformedRequestsList);
+                                    sum.Week.OverdueRequestsList.AddRange(monitor.Week.OverdueRequestsList);
+                                    sum.Week.RequestsCount += monitor.Week.RequestsCount;
+                                    sum.Week.UnperformedRequestsList.AddRange(monitor.Week.UnperformedRequestsList);
 
-                                sum.Month.RequestsCount += monitor.Month.RequestsCount;
-                                sum.Month.OverdueRequestsList.AddRange(monitor.Month.OverdueRequestsList);
-                                sum.Month.UnperformedRequestsList.AddRange(monitor.Month.UnperformedRequestsList);
+                                    sum.Month.RequestsCount += monitor.Month.RequestsCount;
+                                    sum.Month.OverdueRequestsList.AddRange(monitor.Month.OverdueRequestsList);
+                                    sum.Month.UnperformedRequestsList.AddRange(monitor.Month.UnperformedRequestsList);
+                                }
+
+                                setMonitoring(sum);
                             }
-
-                            setMonitoring(sum);
                         }
-                    }
-                    else
-                    {
-                        await DisplayAlert(AppResources.ErrorTitle, result.Error, "OK");
-                    }
-                });
+                        else
+                        {
+                            await DisplayAlert(AppResources.ErrorTitle, result.Error, "OK");
+                        }
+                    });
+                }
+                catch(Exception exc)
+                {
+                    IsBusy = false;
+                    throw;
+                }
+                
+                
             });
         }
 
