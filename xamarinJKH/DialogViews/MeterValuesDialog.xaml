@@ -8,7 +8,8 @@
                  xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
                  xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH"
                 IsAnimationEnabled="False"
-                 x:Class="xamarinJKH.DialogViews.MeterValuesDialog">
+                 x:Class="xamarinJKH.DialogViews.MeterValuesDialog"
+                 >
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:TarifOneConverter x:Key="TarifOne"/>
@@ -111,20 +112,19 @@
                                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
                                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            
-                            <!--<Label Grid.Column="0" 
-                                   FontSize="15"
-                                   
+
+                            <!--<xamarinJkh:JustifiedLabel Grid.Column="0" 
+                                   FontSize="13"                                   
                                    HorizontalTextAlignment="Start"
                                    HorizontalOptions="FillAndExpand"
-                                   TextColor="Black">
-                                <Label.FormattedText>
+                                   TextColor="Black" Text="{Binding Period}"/>-->
+                            <!--<Label.FormattedText>
                                     <FormattedString>
-                                        <Span x:Name="ls1" Text="{Binding Period}" TextColor="Black" FontSize="15" />
-                                        <Span x:Name="ls2" Text=":" TextColor="Black"  FontSize="15" />
+                                        <Span x:Name="ls1" Text="{Binding Period}" TextColor="Black" FontSize="13" />
+                                        <Span x:Name="ls2" Text=":" TextColor="Black"  FontSize="13" />
                                     </FormattedString>
-                                </Label.FormattedText>
-                            </Label>-->
+                                </Label.FormattedText>-->
+
                             <Grid Grid.Column="0" HorizontalOptions="FillAndExpand"  ColumnSpacing="0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="13*"/>

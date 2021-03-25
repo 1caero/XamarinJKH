@@ -651,6 +651,7 @@ namespace xamarinJKH.MainConst
                     if (setApps != null)
                     {
                         RequestInfos.Clear();
+
                         foreach (var each in setApps)
                         {
                             RequestInfos.Add(each);

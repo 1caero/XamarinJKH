@@ -130,6 +130,7 @@
     <Compile Include="CustomRenderers\BordlessEditorRender.cs" />
     <Compile Include="CustomRenderers\CounterEntryNewRenderer.cs" />
     <Compile Include="CustomRenderers\iOSMicrophoneService.cs" />
+    <Compile Include="CustomRenderers\JustifiedLabelRenderer.cs" />
     <Compile Include="CustomRenderers\KeyboardOverlapRendererTechAppPage.cs" />
     <Compile Include="CustomRenderers\KeyboardOverlapRenderer.cs" />
     <Compile Include="CustomRenderers\ListViewHighlightEffect.cs" />

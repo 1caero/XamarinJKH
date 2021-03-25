@@ -186,6 +186,7 @@
     <Compile Include="CustomRenderers\CounterEntryRenderer.cs" />
     <Compile Include="CustomRenderers\CustomViewClient.cs" />
     <Compile Include="CustomRenderers\CustomWebViewRenderer.cs" />
+    <Compile Include="CustomRenderers\JustifiedLabelRenderer.cs" />
     <Compile Include="CustomRenderers\ListViewHighlightEffect.cs" />
     <Compile Include="CustomRenderers\MaterialFrameRenderer.cs" />
     <Compile Include="CustomRenderers\RadioButtonEffect.cs" />

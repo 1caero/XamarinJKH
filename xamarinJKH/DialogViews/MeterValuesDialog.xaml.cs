@@ -101,6 +101,28 @@ namespace xamarinJKH.DialogViews
 
         async void GetMeterValues()
         {
+//#if DEBUG
+//            ItemsList<MeterValueInfo> meterValues = new ItemsList<MeterValueInfo>();
+//            meterValues.Data = new List<MeterValueInfo>();
+//            Random r = new Random();
+//            for(int i=0;i<30; i++)
+//            {
+//                MeterValueInfo m = new MeterValueInfo();
+//                m.IsCurrentPeriod = false;
+//                int addDays = r.Next(-365, 0);
+//                m.Period = DateTime.Now.AddDays(addDays).ToString("dd.mm.yyyy");
+//                var p = r.Next(0, 99999);
+//                m.Value = p;
+//                m.ValueT2= r.Next(0, 99999);
+//                m.ValueT3 = r.Next(0, 99999);
+                
+//                meterValues.Data.Add(m);
+//            }
+//            //r.Next(99999);
+
+//#else
+//       ItemsList<MeterValueInfo> meterValues = await server.MeterValues(mInfo.UniqueNum);
+//#endif
             ItemsList<MeterValueInfo> meterValues = await server.MeterValues(mInfo.UniqueNum);
             if (meterValues.Error == null)
             {

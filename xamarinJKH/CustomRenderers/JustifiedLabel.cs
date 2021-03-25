@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace xamarinJKH.CustomRenderers
+namespace xamarinJKH
 {
     public class JustifiedLabel: Label
     {
