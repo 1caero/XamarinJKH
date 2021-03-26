@@ -181,6 +181,7 @@ namespace xamarinJKH
                     Title = Newtonsoft.Json.JsonConvert.SerializeObject(p), Duration = 15500, ColorB = Color.Gray,
                     ColorT = Color.White
                 }));
+
 #endif
                 if (Device.RuntimePlatform == Device.iOS)
                 {

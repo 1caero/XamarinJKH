@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android;
 using Android.App;
 using Context = Android.Content.Context;
@@ -56,6 +57,36 @@ namespace xamarinJKH.Droid
             ActivityCompat.ShouldShowRequestPermissionRationale(this, Manifest.Permission.ReadExternalStorage);
             //CreateNotificationChannel();
             FirebasePushNotificationManager.ProcessIntent(this, Intent);
+            FirebasePushNotificationManager.DefaultNotificationChannelImportance = NotificationImportance.High;
+#if DEBUG
+            FirebasePushNotificationManager.Initialize(this,
+                new NotificationUserCategory[]
+                {
+                    new NotificationUserCategory("message",new List<NotificationUserAction> {
+                        new NotificationUserAction("Reply","Reply", NotificationActionType.Foreground),
+                        new NotificationUserAction("Forward","Forward", NotificationActionType.Foreground)
+
+                    }),
+                    new NotificationUserCategory("request",new List<NotificationUserAction> {
+                        new NotificationUserAction("Accept","Accept", NotificationActionType.Default, "check"),
+                        new NotificationUserAction("Reject","Reject", NotificationActionType.Default, "cancel")
+                    })
+                }, true);
+#else
+  FirebasePushNotificationManager.Initialize(this,
+                new NotificationUserCategory[]
+                {
+                    new NotificationUserCategory("message",new List<NotificationUserAction> {
+                        new NotificationUserAction("Reply","Reply", NotificationActionType.Foreground),
+                        new NotificationUserAction("Forward","Forward", NotificationActionType.Foreground)
+
+                    }),
+                    new NotificationUserCategory("request",new List<NotificationUserAction> {
+                    new NotificationUserAction("Accept","Accept", NotificationActionType.Default, "check"),
+                    new NotificationUserAction("Reject","Reject", NotificationActionType.Default, "cancel")
+                    })
+                }, false);
+#endif
             Fabric.Fabric.With(this, new Crashlytics.Crashlytics());
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);

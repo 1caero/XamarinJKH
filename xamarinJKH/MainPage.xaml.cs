@@ -150,7 +150,6 @@ namespace xamarinJKH
                     }
                     break;
                 case Device.Android:
-                    // DependencyService.Get<IStartService>().StartForegroundServiceCompat();
                     break;
                 default:
                     break;
