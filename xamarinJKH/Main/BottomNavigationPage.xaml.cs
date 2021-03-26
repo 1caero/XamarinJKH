@@ -72,7 +72,7 @@ namespace xamarinJKH.Main
                         PayPage.BarTextColor = Color.Black;
                         CounterPage.BarTextColor = Color.Black;
                         AppPage.BarTextColor = Color.Black;
-                        ShopNavPage.BarTextColor = Color.Black;
+                        //ShopNavPage.BarTextColor = Color.Black;
                         ShopNavPage2.BarTextColor = Color.Black;
                     }
 
@@ -85,7 +85,7 @@ namespace xamarinJKH.Main
                         PayPage.BarTextColor = Color.White;
                         CounterPage.BarTextColor = Color.White;
                         AppPage.BarTextColor = Color.White;
-                        ShopNavPage.BarTextColor = Color.White;
+                        //ShopNavPage.BarTextColor = Color.White;
                         //ProfPage.BarTextColor = Color.White;
                         ShopNavPage2.BarTextColor = Color.White;
                     }
@@ -102,7 +102,7 @@ namespace xamarinJKH.Main
                                 PayPage.BarTextColor = Color.Black;
                                 CounterPage.BarTextColor = Color.Black;
                                 AppPage.BarTextColor = Color.Black;
-                                ShopNavPage.BarTextColor = Color.Black;
+                                //ShopNavPage.BarTextColor = Color.Black;
                                 //ProfPage.BarTextColor = Color.Black;
                                 ShopNavPage2.BarTextColor = Color.Black;
                                 break;
@@ -111,7 +111,7 @@ namespace xamarinJKH.Main
                                 PayPage.BarTextColor = Color.White;
                                 CounterPage.BarTextColor = Color.White;
                                 AppPage.BarTextColor = Color.White;
-                                ShopNavPage.BarTextColor = Color.White;
+                                //ShopNavPage.BarTextColor = Color.White;
                                 //ProfPage.BarTextColor = Color.White;
                                 ShopNavPage2.BarTextColor = Color.White;
                                 break;
@@ -159,7 +159,7 @@ namespace xamarinJKH.Main
                             PayPage.BarTextColor = Color.Black;
                             CounterPage.BarTextColor = Color.Black;
                             AppPage.BarTextColor = Color.Black;
-                            ShopNavPage.BarTextColor = Color.Black;
+                            //ShopNavPage.BarTextColor = Color.Black;
                             ShopNavPage2.BarTextColor = Color.Black;
                         }
 
@@ -172,7 +172,7 @@ namespace xamarinJKH.Main
                             PayPage.BarTextColor = Color.White;
                             CounterPage.BarTextColor = Color.White;
                             AppPage.BarTextColor = Color.White;
-                            ShopNavPage.BarTextColor = Color.White;
+                            //ShopNavPage.BarTextColor = Color.White;
                             ShopNavPage2.BarTextColor = Color.White;
                         }
 
@@ -184,7 +184,7 @@ namespace xamarinJKH.Main
                             PayPage.BarTextColor = Color.Black;
                             CounterPage.BarTextColor = Color.Black;
                             AppPage.BarTextColor = Color.Black;
-                            ShopNavPage.BarTextColor = Color.Black;
+                            //ShopNavPage.BarTextColor = Color.Black;
                             //ProfPage.BarTextColor = Color.Black;
                             ShopNavPage2.BarTextColor = Color.Black;
                         }
@@ -358,7 +358,7 @@ namespace xamarinJKH.Main
         {
             try
             {
-                Children.Remove(ShopNavPage);
+                //Children.Remove(//ShopNavPage);
                 if (!Settings.MobileSettings.showOurService)
                 {
                     
@@ -418,10 +418,10 @@ namespace xamarinJKH.Main
                             {
                                 Children.Remove(ShopNavPage2);
                             }
-                            else
-                            {
-                                Children.Remove(ShopNavPage);
-                            }
+                            //else
+                            //{
+                            //    Children.Remove(//ShopNavPage);
+                            //}
                         }
                     }
                 }

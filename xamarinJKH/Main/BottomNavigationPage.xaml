@@ -51,9 +51,9 @@
             <local:AppsPage  Title="{x:Static resources:AppResources.App_NavBar}" IconImageSource="ic_apps" />
         </x:Arguments>
     </NavigationPage>
-    <NavigationPage IsVisible="False" IsTabStop="False"  x:Name="ShopNavPage" Title="{x:Static resources:AppResources.Shop_NavBar}" IconImageSource="ic_shop" BarBackgroundColor="Black" BarTextColor="White">
+    <!--<NavigationPage IsVisible="False" IsTabStop="False"  x:Name="ShopNavPage" Title="{x:Static resources:AppResources.Shop_NavBar}" IconImageSource="ic_shop" BarBackgroundColor="Black" BarTextColor="White">
         <x:Arguments>
             <additional:AdditionalPage Title="{x:Static resources:AppResources.Shop_NavBar}" IconImageSource="ic_shop" />
         </x:Arguments>
-    </NavigationPage>
+    </NavigationPage>-->
 </TabbedPage>
