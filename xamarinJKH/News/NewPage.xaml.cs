@@ -34,7 +34,7 @@ namespace xamarinJKH.News
         {
             this.newsInfo = newsInfo;
             InitializeComponent();
-            Analytics.TrackEvent("Новость");
+            Analytics.TrackEvent("Новость id "+newsInfo.ID);
 
             switch (Device.RuntimePlatform)
             {
