@@ -244,19 +244,26 @@ namespace xamarinJKH.MainConst
         {
             base.OnAppearing();
             Device.BeginInvokeOnMainThread(()=> isRunning = true);
-            if (Device.RuntimePlatform == Device.Android)
-            {
+            //if (Device.RuntimePlatform == Device.Android)
+            //{
+            //    Device.StartTimer(new TimeSpan(0, 0, 2), () =>
+            //    {
+            //        Device.BeginInvokeOnMainThread(() => { IsBusy = false; });
+            //        return false; // runs again, or false to stop
+            //    });
+            //}
+            //else
+            //{
+            //    MessagingCenter.Send<Object>(this, "StartStatistic");
+            //}
+
+            
                 Device.StartTimer(new TimeSpan(0, 0, 2), () =>
                 {
                     Device.BeginInvokeOnMainThread(() => { IsBusy = false; });
                     return false; // runs again, or false to stop
                 });
-            }
-            else
-            {
-                MessagingCenter.Send<Object>(this, "StartStatistic");
-            }
-
+            
             //isRunning = false;
             //await StartStatistick();
         }
