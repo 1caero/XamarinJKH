@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace xamarinJKH.News
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewsPage : ContentPage
     {
-        public List<NewsInfo> NewsInfos { get; set; }
+        public ObservableCollection<NewsInfo> NewsInfos { get; set; }
         private bool _isRefreshing = false;
         private RestClientMP server = new RestClientMP();
 
@@ -64,11 +65,14 @@ namespace xamarinJKH.News
 
             if (!isAll)
             {
-                NewsInfos = await server.AllNews();
+                List<NewsInfo> newsInfos = await server.AllNews();
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    NotificationList.ItemsSource = null;
-                    NotificationList.ItemsSource = NewsInfos;
+                    NewsInfos = new ObservableCollection<NewsInfo>();
+                    foreach (var each in newsInfos)
+                    {
+                        NewsInfos.Add(each);
+                    }
                 });
             }
             else
@@ -76,9 +80,13 @@ namespace xamarinJKH.News
                 Settings.EventBlockData = await server.GetEventBlockData();
                 if (Settings.EventBlockData.Error == null)
                 {
-                    NewsInfos = Settings.EventBlockData.News;
-                    NotificationList.ItemsSource = null;
-                    NotificationList.ItemsSource = NewsInfos;
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        foreach (var each in Settings.EventBlockData.News)
+                        {
+                            NewsInfos.Add(each);
+                        }
+                    });
                 }
                 else
                 {
@@ -141,7 +149,7 @@ namespace xamarinJKH.News
             };
             BackStackLayout.GestureRecognizers.Add(backClick);
             SetText();
-            NewsInfos = Settings.EventBlockData.News;
+            NewsInfos = new ObservableCollection<NewsInfo>(Settings.EventBlockData.News);
             this.BindingContext = this;
             NotificationList.BackgroundColor = Color.Transparent;
             NotificationList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
@@ -195,11 +203,14 @@ namespace xamarinJKH.News
                     {
                         if (isAll)
                         {
-                            NewsInfos = await server.AllNews();
+                            List<NewsInfo> newsInfos = await server.AllNews();
                             Device.BeginInvokeOnMainThread(async () =>
                             {
-                                NotificationList.ItemsSource = null;
-                                NotificationList.ItemsSource = NewsInfos;
+                                NewsInfos = new ObservableCollection<NewsInfo>();
+                                foreach (var each in newsInfos)
+                                {
+                                    NewsInfos.Add(each);
+                                }
                                 SeeAll.Text = AppResources.SeeNews;
                                 isAll = false;
                             });
@@ -208,9 +219,10 @@ namespace xamarinJKH.News
                         {
                             Device.BeginInvokeOnMainThread(async () =>
                             {
-                                NewsInfos = Settings.EventBlockData.News;
-                                NotificationList.ItemsSource = null;
-                                NotificationList.ItemsSource = NewsInfos;
+                                foreach (var each in Settings.EventBlockData.News)
+                                {
+                                    NewsInfos.Add(each);
+                                }
                                 SeeAll.Text = AppResources.AllNews;
                                 isAll = true;
                             });

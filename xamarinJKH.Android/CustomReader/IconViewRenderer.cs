@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Android.Content;
 using Android.Graphics;
 using Android.Widget;
@@ -6,6 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using xamarinJKH;
 using xamarinJKH.Droid.CustomReader;
+using Exception = Java.Lang.Exception;
 
 [assembly: ExportRenderer(typeof(IconView), typeof(IconViewRenderer))]
 
@@ -57,11 +59,18 @@ namespace xamarinJKH.Droid.CustomReader
         {
             if (!_isDisposed && !string.IsNullOrWhiteSpace(Element.Source))
             {
-                var d = Resources.GetDrawable(Element.Source).Mutate();
-                d.SetColorFilter(new LightingColorFilter(Element.Foreground.ToAndroid(), Element.Foreground.ToAndroid()));
-                d.Alpha = Element.Foreground.ToAndroid().A;
-                Control.SetImageDrawable(d);
-                ((IVisualElementController)Element).NativeSizeChanged();
+                try
+                {
+                    var d = Context.GetDrawable(Element.Source).Mutate();
+                    d.SetTint(Element.Foreground.ToAndroid());
+                    d.Alpha = Element.Foreground.ToAndroid().A;
+                    Control.SetImageDrawable(d);
+                    ((IVisualElementController)Element).NativeSizeChanged();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
         }
     }

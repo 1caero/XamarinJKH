@@ -8,6 +8,7 @@
              xmlns:dialog="clr-namespace:AiForms.Dialogs.Abstractions;assembly=AiForms.Dialogs.Abstractions"
              xmlns:converters="clr-namespace:xamarinJKH.Converters"
              xmlns:app="clr-namespace:xamarinJKH"
+             xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              x:Class="xamarinJKH.DialogViews.AppConstDialogWindow">
     <dialog:DialogView.Resources>
         <ResourceDictionary>
@@ -28,13 +29,12 @@
            HeightRequest="400"
            Padding="20,20,10,20">
         <StackLayout>
-            <app:IconView Source="ic_shop_plus"
-                          Foreground="Black"
-                          HeightRequest="30">
-                <app:IconView.GestureRecognizers>
+            <forms:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_shop_plus.svg" WidthRequest="30" HeightRequest="30"
+                                  ReplaceStringMap="{Binding .,Converter={x:StaticResource SvgColor}, ConverterParameter='#000000|#000000'}">
+                <forms:SvgCachedImage.GestureRecognizers>
                     <TapGestureRecognizer Tapped="AddGoods"/>
-                </app:IconView.GestureRecognizers>
-            </app:IconView>
+                </forms:SvgCachedImage.GestureRecognizers>
+            </forms:SvgCachedImage>
             <Grid HeightRequest="80">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.3*"/>
