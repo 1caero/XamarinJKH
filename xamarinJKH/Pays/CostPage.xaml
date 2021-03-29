@@ -320,11 +320,10 @@
                             Spacing="7"
                             VerticalOptions="CenterAndExpand"
                             HorizontalOptions="Center">
-                            <xamarinJkh:IconView
-                                Source="ic_history_pay"
-                                Foreground="{Binding hex}"
-                                HeightRequest="24"
-                                WidthRequest="20" />
+                            
+                            <forms:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_history_pay.svg" HeightRequest="24"
+                                                  WidthRequest="20"
+                                                  ReplaceStringMap="{Binding .,Converter={x:StaticResource SvgColor}}"/>
                             <Button x:Name="LabelHistory"
                                     Text="{x:Static xamarinJkh:AppResources.PayHistory}"
                                     TextColor="White"

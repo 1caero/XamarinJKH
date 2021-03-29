@@ -37,7 +37,10 @@ namespace xamarinJKH.Tech
     {
         private readonly bool _isDeviceId;
         private RequestInfo _requestInfo;
-        private RequestContent request;
+        private RequestContent request = new RequestContent
+        {
+            Messages = new List<RequestMessage>()
+        };
 
         private RequestList _requestList;
         private RestClientMP _server = new RestClientMP();
@@ -83,7 +86,9 @@ namespace xamarinJKH.Tech
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-
+            Device.BeginInvokeOnMainThread(() =>
+                isRunning = true
+            );
             TokenSource = new CancellationTokenSource();
             Token = TokenSource.Token;
 
@@ -94,7 +99,8 @@ namespace xamarinJKH.Tech
                     while (!Token.IsCancellationRequested)
                     {
                         await Task.Delay(TimeSpan.FromSeconds(2));
-                        var update = await _server.GetRequestsDetailListTech(Settings.Person.Phone, GetLastIdMessage(), _isDeviceId);
+                        var update = await _server.GetRequestsDetailListTech(Settings.Person.Phone, GetLastIdMessage(),
+                            _isDeviceId);
                         if (update.Error == null)
                         {
                             foreach (var each in update.Messages)
@@ -108,7 +114,8 @@ namespace xamarinJKH.Tech
 
                                         if (lastChild != null)
                                         {
-                                            await scrollFroAppMessages.ScrollToAsync(lastChild.X, lastChild.Y + 30, false);
+                                            await scrollFroAppMessages.ScrollToAsync(lastChild.X, lastChild.Y + 30,
+                                                false);
                                         }
                                     });
                                 request.Messages.Add(each);
@@ -140,6 +147,9 @@ namespace xamarinJKH.Tech
 
         protected override void OnDisappearing()
         {
+            Device.BeginInvokeOnMainThread(() =>
+                isRunning = false
+            );
             try
             {
                 TokenSource.Cancel();
@@ -193,7 +203,6 @@ namespace xamarinJKH.Tech
                     if (lastChild != null)
                         await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, false);
                 });
-             
             }
             else
             {
@@ -227,21 +236,25 @@ namespace xamarinJKH.Tech
         bool isTranscribing = false;
 
         public bool isUser { get; set; }
+
         public AppPage(bool isDeviceId = false)
         {
             _isDeviceId = isDeviceId;
+            Device.BeginInvokeOnMainThread(() =>
+                isRunning = true
+            );
             InitializeComponent();
 
             isUser = !Settings.ConstAuth;
-            if(!isUser)
+            if (!isUser)
             {
                 FrameMessage.CornerRadius = new CornerRadius(30);
             }
 
-            Resources["hexColor"] = (Color)Application.Current.Resources["MainColor"];
+            Resources["hexColor"] = (Color) Application.Current.Resources["MainColor"];
 
             LabelUkP.IsVisible = LabelUKLink.IsVisible = LayoutCallUK.IsVisible = App.isStart && Settings.AppIsVisible;
-            
+
             LabelUk.Text = LabelUk.Text.Replace("УК", Settings.MobileSettings.main_name);
             //LabelUKLink.Text = LabelUKLink.Text.Replace("УК", Settings.MobileSettings.main_name);
             micService = DependencyService.Resolve<IMicrophoneService>();
@@ -276,7 +289,7 @@ namespace xamarinJKH.Tech
 
 
             messages =
-                new List<RequestMessage>(); 
+                new List<RequestMessage>();
 
             hex = (Color) Application.Current.Resources["MainColor"];
             getMessage2();
@@ -302,23 +315,22 @@ namespace xamarinJKH.Tech
             var backClick = new TapGestureRecognizer();
             backClick.Tapped += async (s, e) =>
             {
-               
-                    Settings.isSelf = null;
-                    Settings.DateUniq = "";
-                    try
-                    {
-                        _ = await Navigation.PopAsync();
-                    }
-                    catch
-                    {
-                        _ = await Navigation.PopModalAsync();
-                    }
+                Settings.isSelf = null;
+                Settings.DateUniq = "";
+                try
+                {
+                    _ = await Navigation.PopAsync();
+                }
+                catch
+                {
+                    _ = await Navigation.PopModalAsync();
+                }
             };
             BackStackLayout.GestureRecognizers.Add(backClick);
             var sendMess = new TapGestureRecognizer();
             sendMess.Tapped += (s, e) => { sendMessage(); };
             IconViewSend.GestureRecognizers.Add(sendMess);
-            
+
             var addApp = new TapGestureRecognizer();
             addApp.Tapped += async (s, e) =>
             {
@@ -333,8 +345,6 @@ namespace xamarinJKH.Tech
                 {
                     Console.WriteLine(exception);
                 }
-                
-                
             };
             //LabelUKLink.GestureRecognizers.Add(addApp);
             LayoutCallUK.GestureRecognizers.Add(addApp);
@@ -394,6 +404,7 @@ namespace xamarinJKH.Tech
                 return base.OnBackButtonPressed();
             }
         }
+
         async void addFileApp()
         {
             MediaFile file = null;
@@ -438,12 +449,12 @@ namespace xamarinJKH.Tech
             string action;
             if (Device.RuntimePlatform == Device.Android)
                 action = await DisplayActionSheet(AppResources.AttachmentTitle, AppResources.Cancel, null,
-               TAKE_PHOTO,
-               TAKE_GALRY, TAKE_FILE);
+                    TAKE_PHOTO,
+                    TAKE_GALRY, TAKE_FILE);
             else
                 action = await DisplayActionSheet(AppResources.AttachmentTitle, AppResources.Cancel, null,
-                   TAKE_PHOTO,
-                   TAKE_GALRY, TAKE_GALARY_Video, TAKE_FILE);
+                    TAKE_PHOTO,
+                    TAKE_GALRY, TAKE_GALARY_Video, TAKE_FILE);
 
             if (action == TAKE_PHOTO)
             {
@@ -456,13 +467,14 @@ namespace xamarinJKH.Tech
 
                 try
                 {
-                    file = await CrossMedia.Current.TakePhotoAsync(                        
-                    new StoreCameraMediaOptions
-                    {
-                        SaveToAlbum = true,// Device.RuntimePlatform==Device.iOS, //ios - сохраняем файлы
-                        CompressionQuality = 90,
-                        Directory = string.Format(Xamarin.Essentials.AppInfo.Name.Replace("\"", "") /*+ "_" + AppResources.Photo*/)
-                    });
+                    file = await CrossMedia.Current.TakePhotoAsync(
+                        new StoreCameraMediaOptions
+                        {
+                            SaveToAlbum = true, // Device.RuntimePlatform==Device.iOS, //ios - сохраняем файлы
+                            CompressionQuality = 90,
+                            Directory = string.Format(
+                                Xamarin.Essentials.AppInfo.Name.Replace("\"", "") /*+ "_" + AppResources.Photo*/)
+                        });
                     if (file != null)
                         await startLoadFile(CAMERA, file);
                 }
@@ -534,7 +546,7 @@ namespace xamarinJKH.Tech
                 return;
             CommonResult commonResult = await _server.AddFileAppsTech(Settings.Person.Phone,
                 getFileName(file.Path), StreamToByteArray(file.GetStream()),
-                file.Path,_isDeviceId);
+                file.Path, _isDeviceId);
             if (commonResult != null)
             {
                 if (string.IsNullOrEmpty(commonResult.Error))
@@ -577,7 +589,7 @@ namespace xamarinJKH.Tech
         {
             CommonResult commonResult = await _server.AddFileAppsTech(Settings.Person.Phone,
                 getFileName(file.Path), StreamToByteArray(file.GetStream()),
-                file.Path,_isDeviceId);
+                file.Path, _isDeviceId);
             if (commonResult == null)
             {
                 await ShowToast(AppResources.SuccessFileSent);
@@ -641,7 +653,7 @@ namespace xamarinJKH.Tech
 
                     CommonResult commonResult = await _server.AddFileAppsTech(Settings.Person.Phone,
                         pickedFile.FileName, pickedFile.DataArray,
-                        pickedFile.FilePath,_isDeviceId);
+                        pickedFile.FilePath, _isDeviceId);
                     if (commonResult == null)
                     {
                         await ShowToast(AppResources.SuccessFileSent);
@@ -664,13 +676,6 @@ namespace xamarinJKH.Tech
             try
             {
                 string message = EntryMess.Text;
-                var anim = new Task(async () =>
-                {
-                    IconViewSend.Scale = 0.7;
-                    await Task.Delay(TimeSpan.FromSeconds(0.5));
-                    IconViewSend.Scale = 1;
-                });
-                anim.Start();
                 if (!string.IsNullOrWhiteSpace(message))
                 {
                     // progress.IsVisible = true;                   
@@ -678,26 +683,26 @@ namespace xamarinJKH.Tech
                     IconViewMic.IsEnabled = false;
                     IsSucceed result = await _server.AddMessageTech(message, Settings.Person.Phone, _isDeviceId);
                     if (result.isSucceed)
-                        Device.BeginInvokeOnMainThread(() =>
                     {
+                        Device.BeginInvokeOnMainThread(() =>
+                            {
+                                {
+                                    EntryMess.Text = "";
 
-                        {
-                            EntryMess.Text = "";
-
-                            var lastChild = baseForApp.Children.LastOrDefault();
-                            if (lastChild != null)
-                                Device.BeginInvokeOnMainThread(async () =>
-                                    await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, false));
-                        }
+                                    // var lastChild = baseForApp.Children.LastOrDefault();
+                                    // if (lastChild != null)
+                                    //     Device.BeginInvokeOnMainThread(async () =>
+                                    //         await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, false));
+                                }
+                            }
+                        );
                     }
-                    );
-
-                    
                 }
                 else
                 {
                     await ShowToast(AppResources.ErrorMessageEmpty);
                 }
+
                 //IconViewSend.IsEnabled = true;
             }
             catch (Exception e)
@@ -707,7 +712,11 @@ namespace xamarinJKH.Tech
             }
             finally
             {
-                Device.BeginInvokeOnMainThread(() => { IconViewSend.IsEnabled = true; IconViewMic.IsEnabled = true; });
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    IconViewSend.IsEnabled = true;
+                    IconViewMic.IsEnabled = true;
+                });
                 //IconViewSend.IsEnabled = true;
             }
         }
@@ -724,10 +733,16 @@ namespace xamarinJKH.Tech
             }
         }
 
+        public bool isRunning = false;
 
         async void getMessage2()
         {
             Analytics.TrackEvent("Запрос сообщений");
+            if (!isRunning)
+            {
+                return;
+            }
+
             new Task(async () =>
             {
                 Configurations.LoadingConfig = new LoadingConfig
@@ -739,35 +754,33 @@ namespace xamarinJKH.Tech
                 };
                 await Task.Delay(TimeSpan.FromMilliseconds(300));
                 Device.BeginInvokeOnMainThread(async () =>
-                              await Loading.Instance.StartAsync(async progress =>
-                              {
-                                  Analytics.TrackEvent("Запрос сообщений " + Settings.Person.Phone);
-                                  request = await _server.GetRequestsDetailListTech(Settings.Person.Phone, null, _isDeviceId);
-                                  if (request.Error == null)
-                                  {
-                                      Analytics.TrackEvent("Результат запроса " + JsonConvert.SerializeObject(request));
-                                      Settings.DateUniq = "";
-                                      foreach (var message in request.Messages)
-                                      {
-                                          if (!messages.Contains(message))
-                                          {
-                                              Device.BeginInvokeOnMainThread(() => addAppMessage(message,
-                                                  messages.Count > 1 ? messages[messages.Count - 2].AuthorName : null));
-                                              messages.Add(message);
-                                          }
+                    await Loading.Instance.StartAsync(async progress =>
+                    {
+                        Analytics.TrackEvent("Запрос сообщений " + Settings.Person.Phone);
+                        request = await _server.GetRequestsDetailListTech(Settings.Person.Phone, null, _isDeviceId);
+                        if (request.Error == null)
+                        {
+                            Analytics.TrackEvent("Результат запроса " + JsonConvert.SerializeObject(request));
+                            Settings.DateUniq = "";
+                            foreach (var message in request.Messages)
+                            {
+                                if (!messages.Contains(message))
+                                {
+                                    Device.BeginInvokeOnMainThread(() => addAppMessage(message,
+                                        messages.Count > 1 ? messages[messages.Count - 2].AuthorName : null));
+                                    messages.Add(message);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorComments, "OK");
+                        }
 
-                                      }
-
-                                  }
-                                  else
-                                  {
-                                      await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorComments, "OK");
-                                  }
-                                  await MethodWithDelayAsync(1000);
-                              })
-                              );
+                        await MethodWithDelayAsync(1000);
+                    })
+                );
             }).Start();
-
         }
 
         void addAppMessage(RequestMessage message, string prevAuthor)
@@ -904,7 +917,7 @@ namespace xamarinJKH.Tech
         {
             TranscribeClicked(sender, e);
         }
-        
+
         async void TranscribeClicked(object sender, EventArgs e)
         {
             bool isMicEnabled = await micService.GetPermissionAsync();
@@ -921,14 +934,12 @@ namespace xamarinJKH.Tech
             if (recognizer == null)
             {
                 var autoDetectSourceLanguageConfig = AutoDetectSourceLanguageConfig.FromLanguages(
-                        new string[] { "en-US", "ru-RU" });
-                var config = SpeechConfig.FromSubscription(Constants.CognitiveServicesApiKey, Constants.CognitiveServicesRegion);
+                    new string[] {"en-US", "ru-RU"});
+                var config = SpeechConfig.FromSubscription(Constants.CognitiveServicesApiKey,
+                    Constants.CognitiveServicesRegion);
                 recognizer = new SpeechRecognizer(config, autoDetectSourceLanguageConfig);
-             
-                recognizer.Recognized += (obj, args) =>
-                {
-                    UpdateTranscription(args.Result.Text);
-                };
+
+                recognizer.Recognized += (obj, args) => { UpdateTranscription(args.Result.Text); };
             }
 
             // if already transcribing, stop speech recognizer
@@ -943,8 +954,9 @@ namespace xamarinJKH.Tech
 #if DEBUG
                     UpdateTranscription(ex.Message);
 #endif
-                    Analytics.TrackEvent("ошибка при остановке распознавании речи: " + ex.Message);                    
+                    Analytics.TrackEvent("ошибка при остановке распознавании речи: " + ex.Message);
                 }
+
                 isTranscribing = false;
             }
 
@@ -962,8 +974,10 @@ namespace xamarinJKH.Tech
 #endif
                     Analytics.TrackEvent("ошибка при старте распознавании речи: " + ex.Message);
                 }
+
                 isTranscribing = true;
             }
+
             UpdateDisplayState();
         }
 

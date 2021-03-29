@@ -560,10 +560,6 @@ namespace xamarinJKH.AppsConst
             IconViewAddFile.GestureRecognizers.Add(addFile);
             var showInfo = new TapGestureRecognizer();
             showInfo.Tapped += async (s, e) => { ShowInfo(); };
-            StackLayoutInfo.GestureRecognizers.Add(showInfo);
-            var acceptAp = new TapGestureRecognizer();
-            acceptAp.Tapped += async (s, e) => { acceptApp(); };
-            StackLayoutAccept.GestureRecognizers.Add(acceptAp);
             var performAp = new TapGestureRecognizer();
             performAp.Tapped += (s, e) =>
             {
@@ -582,14 +578,12 @@ namespace xamarinJKH.AppsConst
             });
 
 
-            StackLayoutExecute.GestureRecognizers.Add(performAp);
             var moveDisp = new TapGestureRecognizer();
             moveDisp.Tapped += async (s, e) =>
             {
                 await PopupNavigation.Instance.PushAsync(new MoveDispatcherView(hex, _requestInfo, true));
                 await RefreshData();
             };
-            StackLayoutMoveDisp.GestureRecognizers.Add(moveDisp);
             var closeApp = new TapGestureRecognizer();
             closeApp.Tapped += async (s, e) =>
             {
@@ -610,7 +604,6 @@ namespace xamarinJKH.AppsConst
                     await ShowToast(result.Error);
                 }
             };
-            StackLayoutClose.GestureRecognizers.Add(closeApp);
             hex = (Color) Application.Current.Resources["MainColor"];
 
             setText();
