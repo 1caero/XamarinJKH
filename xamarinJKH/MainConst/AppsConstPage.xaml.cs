@@ -263,9 +263,9 @@ namespace xamarinJKH.MainConst
                 }
                 
             });
-            
-            
-            
+
+            this.BindingContext = this;
+
         }
 
        
@@ -616,7 +616,13 @@ namespace xamarinJKH.MainConst
                     return;
                 }
                 ObservableCollection<RequestInfo> setApps = new ObservableCollection<RequestInfo>(RequestDefault);
-
+                
+                if (IsPass)
+                {
+                    setApps = new ObservableCollection<RequestInfo>(RequestDefault.Where(o => o.HasPass)
+                        .OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList());
+                }
+                else
                 if (SwitchAppRead.IsToggled && SwitchApp.IsToggled)
                 {
                     var readed = RequestDefault.Where(o => !o.IsReaded).OrderByDescending(o => o.ID);
@@ -626,38 +632,53 @@ namespace xamarinJKH.MainConst
 
                     setApps = new ObservableCollection<RequestInfo>(readed.Concat(requestTerm).Concat(enother));
 
-                }else if (SwitchAppRead.IsToggled && !SwitchApp.IsToggled)
+                }
+                else if (SwitchAppRead.IsToggled && !SwitchApp.IsToggled)
                 {
                     setApps = new ObservableCollection<RequestInfo>(RequestDefault.Where(o => !o.HasPass)
                         .OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList());
-                }else if (!SwitchAppRead.IsToggled && SwitchApp.IsToggled)
+                }
+                else 
+                if (!SwitchAppRead.IsToggled && SwitchApp.IsToggled)
                 {
                     setApps = new ObservableCollection<RequestInfo>(RequestDefault.OrderBy(o => o._RequestTerm));
                 }
                 else
                 {
-                    if (IsPass)
-                    {
-                        setApps = new ObservableCollection<RequestInfo>(RequestDefault.Where(o => o.HasPass)
-                            .OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList());
-                    }
-                    else
+                    //if (IsPass)
+                    //{
+                    //    setApps = new ObservableCollection<RequestInfo>(RequestDefault.Where(o => o.HasPass)
+                    //        .OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList());
+                    //}
+                    //else
                     {
                         setApps = new ObservableCollection<RequestInfo>(RequestDefault.OrderBy(o => o.ID).Reverse());
                     }
                 }
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    if (setApps != null)
-                    {
-                        RequestInfos.Clear();
+                //Device.BeginInvokeOnMainThread(() =>
+                //{
+                //    if (setApps != null)
+                //    {
+                //        RequestInfos.Clear();
+                //        foreach (var each in setApps)
+                //        {
+                //            RequestInfos.Add(each);
+                //        }
+                //    }
+                //});
 
-                        foreach (var each in setApps)
-                        {
-                            RequestInfos.Add(each);
-                        }
-                    }
-                });
+                if (setApps != null)
+                {
+                    //RequestInfos.Clear();
+                    additionalList.ItemsSource = setApps;
+                    //RequestInfos = new ObservableCollection<RequestInfo>(setApps);
+                    //foreach (var each in setApps)
+                    //{
+                    //    RequestInfos.Add(each);
+                    //}
+                }
+
+
                 // BindingContext = this;
                 // additionalList.ItemsSource = null;
                 // additionalList.ItemsSource = RequestInfos.OrderBy(o => o.ID).Reverse();
@@ -685,7 +706,7 @@ namespace xamarinJKH.MainConst
                 Device.BeginInvokeOnMainThread(() => Empty = RequestInfos == null);
             }
             IndicatorRun = false;
-            this.BindingContext = this;
+            //this.BindingContext = this;
             Device.BeginInvokeOnMainThread(() => aInd.IsVisible = false);
         }
 
