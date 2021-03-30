@@ -86,7 +86,18 @@ namespace xamarinJKH.Additional
                         Settings.EventBlockData = await server.GetEventBlockData();
                         if (Settings.EventBlockData.AdditionalServicesByGroups != null)
                         {
+                            //_ = Task.Run(() =>
+                            //  {
+
+                            //      Device.BeginInvokeOnMainThread(SetGrupAdditional);
+
+                            //  });
+
+
                             SetGrupAdditional();
+
+
+                            //Device.BeginInvokeOnMainThread(SetGrupAdditional);
                         }
                     }
 
@@ -96,7 +107,7 @@ namespace xamarinJKH.Additional
         }
 
         bool _busy;
-        private ObservableCollection<AdditionalGroup> _additionalGroups = new ObservableCollection<AdditionalGroup>();
+        private ObservableCollection<AdditionalGroup> _additionalGroups;
 
         public bool IsBusy
         {
@@ -113,6 +124,8 @@ namespace xamarinJKH.Additional
             Analytics.TrackEvent("Доп услуги");
             NavigationPage.SetHasNavigationBar(this, false);
             // Map.BindingContext = new MapPageViewModel();
+
+            AdditionalGroups = new ObservableCollection<AdditionalGroup>();
 
             switch (Device.RuntimePlatform)
             {
@@ -157,7 +170,7 @@ namespace xamarinJKH.Additional
             MainColor = "#" + Settings.MobileSettings.color;
             Additional = new ObservableCollection<AdditionalService>();
             Groups = new ObservableCollection<string>();
-            this.BindingContext = this;
+            
             MessagingCenter.Subscribe<Object>(this, "LoadGoods", async (s) =>
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(500));
@@ -203,6 +216,8 @@ namespace xamarinJKH.Additional
                 }
 
             });
+
+            this.BindingContext = this;
         }
 
         void SetText()
@@ -247,23 +262,54 @@ namespace xamarinJKH.Additional
 
         }
 
-
-        void SetGrupAdditional()
+        int timerun = 0;
+        void SetGrupAdditional_old()
         {
             // StackLayout containerData = new StackLayout();
             // containerData.HorizontalOptions = LayoutOptions.FillAndExpand;
             // containerData.VerticalOptions = LayoutOptions.Start;
+           
+
+           
             Device.BeginInvokeOnMainThread(() =>
             {
+         try
+            {
+                timerun++;
+                    var ok = new ObservableCollection<AdditionalGroup>();
                 AdditionalGroups.Clear();
-                if (Settings.EventBlockData.AdditionalServicesByGroups?.Keys != null)
+
+            if (Settings.EventBlockData.AdditionalServicesByGroups?.Keys != null)
                     foreach (var group in Settings.EventBlockData.AdditionalServicesByGroups?.Keys)
                     {
                         IEnumerable<AdditionalService> additionalServices = Settings.EventBlockData.AdditionalServicesByGroups[@group]
                               .Where(x => !x.NotNullShowInAdBlock.ToLower().Equals("не отображать"));
-                        AdditionalGroups.Add(new AdditionalGroup(group,new List<AdditionalService>(additionalServices)));
-                       
-                        
+                            
+                            ok.Add(new AdditionalGroup(group, new List<AdditionalService>(additionalServices)));
+                        //AdditionalGroups=ok;
+                        //MainThread.BeginInvokeOnMainThread(()=>
+                        //{
+                        //var list = new List<AdditionalGroup>();
+                        //foreach (var group in Settings.EventBlockData.AdditionalServicesByGroups?.Keys)
+                        //{
+                        //    IEnumerable<AdditionalService> additionalServices = Settings.EventBlockData.AdditionalServicesByGroups[@group]
+                        //          .Where(x => !x.NotNullShowInAdBlock.ToLower().Equals("не отображать"));
+
+                        //    list.Add(new AdditionalGroup(group, new List<AdditionalService>(additionalServices)));
+                        //   // AdditionalGroups.Add(new AdditionalGroup(group, new List<AdditionalService>(additionalServices)));
+                        //}
+
+                        //Device.BeginInvokeOnMainThread(() =>
+                        //{
+                        //    foreach (var v in list)
+                        //        AdditionalGroups.Add(v);
+                        //});
+
+
+
+                        //});
+
+
                         // Label titleLable = new Label();
                         // titleLable.TextColor = Color.Black;
                         // titleLable.FontSize = 18;
@@ -389,19 +435,152 @@ namespace xamarinJKH.Additional
                         // containerData.Children.Add(titleLable);
                         // containerData.Children.Add(collectionView);
                     }
+                    AdditionalGroups = ok;
+                    // StackLayoutContainer.Content = containerData;
+                    //GropusColl.ItemsSource = AdditionalGroups;
+                    IsBusy = false;
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            });
+        }
 
-                // StackLayoutContainer.Content = containerData;
-                IsBusy = false;
+        void SetGrupAdditional()
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+
+                allService.Children.Clear();
+
+                if (Settings.EventBlockData.AdditionalServicesByGroups?.Keys != null)
+                    foreach (var group in Settings.EventBlockData.AdditionalServicesByGroups?.Keys)
+                    {
+                        StackLayout containerData = new StackLayout();
+                        containerData.HorizontalOptions = LayoutOptions.FillAndExpand;
+                        containerData.VerticalOptions = LayoutOptions.Start;
+                        containerData.Orientation = StackOrientation.Vertical;
+
+                        var additionalServices = 
+                        Settings.EventBlockData.AdditionalServicesByGroups[@group].
+                        Where(x => !x.NotNullShowInAdBlock.ToLower().Equals("не отображать")).ToList();
+
+                        Label titleLable = new Label();
+                        titleLable.TextColor = Color.Black;
+                        titleLable.FontSize = 18;
+                        titleLable.Text = @group;
+                        titleLable.FontAttributes = FontAttributes.Bold;
+                        titleLable.VerticalOptions = LayoutOptions.StartAndExpand;
+                        titleLable.HorizontalOptions = LayoutOptions.StartAndExpand;
+
+                        StackLayout containerAdd = new StackLayout();
+                        containerAdd.HorizontalOptions = LayoutOptions.FillAndExpand;
+                        containerAdd.Orientation = StackOrientation.Horizontal;
+
+                        int l = Convert.ToInt32(additionalServices.Count() / 4);
+                        var lp = (double)additionalServices.Count() / 4;
+                        if(lp-l>0)
+                        {
+                            l++;
+                        }
+
+                        Grid g = new Grid();
+                        g.ColumnDefinitions.Add(new ColumnDefinition());
+                        g.ColumnDefinitions.Add(new ColumnDefinition());
+                        g.ColumnDefinitions.Add(new ColumnDefinition());
+                        g.ColumnDefinitions.Add(new ColumnDefinition());
+
+                        int j = 0;
+                        for (int i=0; i < l; i++)
+                        {
+                            g.RowDefinitions.Add(new RowDefinition());
+                            int col = 0;
+                            for(int k=j; k < additionalServices.Count(); k++)
+                            {
+                                StackLayout stackLayoutCon = new StackLayout()
+                                {
+                                    Padding = 0,
+                                    Margin=5
+                                };
+                                PancakeView pic = new PancakeView()
+                                {
+                                    HorizontalOptions = LayoutOptions.Center,
+                                    CornerRadius = 20,
+                                };
+
+                                CachedImage cachedImage = new CachedImage()
+                                {
+                                    HeightRequest = 65,
+                                    WidthRequest = 65,
+                                    Source = additionalServices[k].LogoLink
+                                };
+                                pic.Content = cachedImage;
+
+                                Label labelText = new Label()
+                                {
+                                    LineBreakMode=LineBreakMode.WordWrap,
+                                    TextColor = Color.Black,
+                                    VerticalTextAlignment = TextAlignment.Center,
+                                    HorizontalOptions = LayoutOptions.Center,
+                                    FontSize = 12,
+                                    HorizontalTextAlignment = TextAlignment.Center,
+                                    Text=additionalServices[k].FormatName
+                                };
+                                stackLayoutCon.Children.Add(pic);
+                                stackLayoutCon.Children.Add(labelText);
+                                containerAdd.Children.Add(stackLayoutCon);
+
+                                var onItemTaped = new TapGestureRecognizer();
+                                onItemTaped.Tapped += async (s, e) =>
+                                {
+                                    if (additionalServices[k].ShopID == null)
+                                    {
+                                        if (Navigation.NavigationStack.FirstOrDefault(x => x is AdditionalOnePage) == null)
+                                            await Navigation.PushAsync(new AdditionalOnePage(additionalServices[k]));
+                                    }
+                                    else
+                                    {
+                                        if (Navigation.NavigationStack.FirstOrDefault(x => x is ShopPageNew) == null)
+                                            await Navigation.PushAsync(new ShopPageNew(additionalServices[k]));
+                                    }
+                                };
+                                stackLayoutCon.GestureRecognizers.Add(onItemTaped);
+
+                                Grid.SetRow(stackLayoutCon, i);
+                                Grid.SetColumn(stackLayoutCon, col);
+
+                                g.Children.Add(stackLayoutCon);
+                                if (col == 3)
+                                {
+                                    j = k+1;
+                                    break;
+                                }
+                                col++;
+                                
+                            }
+                            //j++;
+                        }
+
+                        containerData.Children.Add(titleLable);
+                        containerData.Children.Add(g);
+                        allService.Children.Add(containerData);
+                    }
+
+                //StackLayoutContainer.Content = containerData;
             });
         }
 
         public ObservableCollection<AdditionalGroup> AdditionalGroups
         {
             get => _additionalGroups;
-            set => _additionalGroups = value;
+            set {
+                if (value != null) _additionalGroups = value;
+                OnPropertyChanged("AdditionalGroups");
+                  }
         }
 
-        public class AdditionalGroup : List<AdditionalService>
+    public class AdditionalGroup : List<AdditionalService>
         {
             public string Name { get; private set; }
 
