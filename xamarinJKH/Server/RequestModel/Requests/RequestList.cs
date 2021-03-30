@@ -103,7 +103,7 @@ namespace xamarinJKH.Server.RequestModel
             get=>!IsReadedByClient && StatusID != 6;
             set=> s = value;
         }
-
+        public string PassExpiration { get; set; }
         private bool s;
         
         private string _resource { get; set; }

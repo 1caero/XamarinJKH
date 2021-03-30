@@ -1801,4 +1801,10 @@
   <data name="OrderMessageAdditional" xml:space="preserve">
     <value>Найближчим часом співробітник зв'яжеться з Вами для уточнення деталей</value>
   </data>
+  <data name="InsuranceConditions" xml:space="preserve">
+    <value>Умови страхування </value>
+  </data>
+  <data name="DontInsurance" xml:space="preserve">
+    <value>Чи не пропонувати страхування </value>
+  </data>
 </root>

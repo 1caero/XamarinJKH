@@ -1249,6 +1249,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не предлагать страхование.
+        /// </summary>
+        internal static string DontInsurance {
+            get {
+                return ResourceManager.GetString("DontInsurance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Скачать.
         /// </summary>
         internal static string Download {
@@ -2406,6 +2415,15 @@ namespace xamarinJKH {
         internal static string Initial {
             get {
                 return ResourceManager.GetString("Initial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Условия страхования.
+        /// </summary>
+        internal static string InsuranceConditions {
+            get {
+                return ResourceManager.GetString("InsuranceConditions", resourceCulture);
             }
         }
         

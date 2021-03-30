@@ -253,6 +253,21 @@
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>
+                                            <Label
+                                                TextColor="Black"
+                                                IsVisible="{Binding HasPass}"
+                                                Margin="0, -5, 0, 0"
+                                                HorizontalOptions="Start">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static xamarinJkh:AppResources.Validity}" TextColor="Black"
+                                                              FontAttributes="Bold"
+                                                              FontSize="11" />
+                                                        <Span Text=" " TextColor="Black" FontAttributes="Bold" FontSize="11" />
+                                                        <Span Text=" {Binding PassExpiration}" FontSize="11" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
                                             <Label x:Name="LabelAdres"
                                                    TextColor="Black"
                                                    FontSize="10"

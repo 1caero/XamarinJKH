@@ -206,6 +206,7 @@ namespace xamarinJKH.Pays
             LayoutInsurance.IsVisible = account.InsuranceSum != 0;
             InsuranceDoc.IsVisible = account.InsuranceSum != 0;
             SwitchInsurance.IsToggled = account.InsuranceSum != 0;
+            InsuranceDont.IsVisible = account.InsuranceSum != 0;
 
             LabelInsurance.Text = AppResources.InsuranceText.Replace("111", account.InsuranceSum.ToString());
             formatted.Spans.Add(new Span
@@ -434,6 +435,23 @@ namespace xamarinJKH.Pays
             catch (Exception e)
             {
                 Console.WriteLine(e);
+            }
+        }
+
+        private async void CancelInsuranceTap(object sender, EventArgs e)
+        {
+            bool answer = await DisplayAlert("", $"{AppResources.DontInsurance} ?", AppResources.Yes, AppResources.Cancel);
+            if (answer)
+            {
+                CommonResult result = await server.DisableAccountInsurance(account.AccountID);
+                if (result.Error == null)
+                {
+                    LayoutInsurance.IsVisible = false;
+                    InsuranceDoc.IsVisible = false;
+                    InsuranceDont.IsVisible = false;
+                    account.InsuranceSum = 0;
+                    await SetSumPay();
+                }
             }
         }
     }

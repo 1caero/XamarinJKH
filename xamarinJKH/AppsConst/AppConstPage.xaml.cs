@@ -1263,6 +1263,7 @@ namespace xamarinJKH.AppsConst
                     {
                         _Request = request,
                         HexColor = this.hex,
+                        PassExpiration = _requestInfo.PassExpiration,
                         SourceApp = Source,
                         Calling = Call,
                         isPass = IsPass,

@@ -1928,4 +1928,10 @@
   <data name="OrderMessageAdditional" xml:space="preserve">
     <value>In the near future, an employee will contact you to clarify the details</value>
   </data>
+  <data name="InsuranceConditions" xml:space="preserve">
+    <value>Insurance conditions </value>
+  </data>
+  <data name="DontInsurance" xml:space="preserve">
+    <value>Do not offer insurance</value>
+  </data>
 </root>

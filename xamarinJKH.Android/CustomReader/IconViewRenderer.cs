@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Android.Content;
 using Android.Graphics;
 using Android.Widget;
+using Microsoft.AppCenter.Analytics;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using xamarinJKH;
@@ -57,10 +58,12 @@ namespace xamarinJKH.Droid.CustomReader
 
         private void UpdateBitmap(IconView previous = null)
         {
+          
             if (!_isDisposed && !string.IsNullOrWhiteSpace(Element.Source))
             {
                 try
                 {
+                    Analytics.TrackEvent($"Установка цвета {Element.Foreground.ToString()} картинки {Element.Source}");
                     var d = Context.GetDrawable(Element.Source).Mutate();
                     d.SetTint(Element.Foreground.ToAndroid());
                     d.Alpha = Element.Foreground.ToAndroid().A;

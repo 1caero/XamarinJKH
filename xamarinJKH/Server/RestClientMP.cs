@@ -18,8 +18,8 @@ namespace xamarinJKH.Server
     public class RestClientMP
     {
         // public const string SERVER_ADDR = "https://api.sm-center.ru/test_erc_udm"; // ОСС
-        public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
-        //public const string SERVER_ADDR = "https://api.sm-center.ru/water"; // Тихая гавань water/ water2 - тихая гавань - 2 
+        // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
+        public const string SERVER_ADDR = "https://api.sm-center.ru/water"; // Тихая гавань water/ water2 - тихая гавань - 2 
          // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
         // public const string SERVER_ADDR = "https://api.sm-center.ru/kapitall_all"; // Основа
         //public const string SERVER_ADDR = "https://api.sm-center.ru/newjkh"; // Еще одна тестовая база
@@ -207,6 +207,7 @@ namespace xamarinJKH.Server
         public const string
             SEND_CODE = "RequestsDispatcher/CheckPaidRequestCompleteCode"; //Проверка кода подтверждения заказа
         public const string BONUS_HISTORY = "Accounting/GetAccountBonusBalanceHistory";
+        public const string DISABLE_INSURANCE_ACC = "Accounting/DisableAccountInsurance";
         public const string
             TRANSIT_ORDER =
                 "RequestsDispatcher/SetPaidRequestStatusOnTheWay"; // Установка статуса платной заявки в 'курьер в пути'
@@ -3002,6 +3003,33 @@ namespace xamarinJKH.Server
             restRequest.AddHeader("acx", Settings.Person.acx);
             restRequest.AddParameter("id", id);
             var response = await client.ExecuteTaskAsync<ItemsList<BonusCashFlow>>(restRequest);
+            return response.Data;
+        } 
+        /// <summary>
+        /// Отключает страхование для указанного лицевого счета
+        /// </summary>
+        /// <param name="accountID">ID лицевого счета</param>
+        /// <returns></returns>
+        public async Task<CommonResult> DisableAccountInsurance (string accountID)
+        {
+            RestClient client = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(DISABLE_INSURANCE_ACC, Method.POST);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            restRequest.AddBody(new
+            {
+                accountID
+            });
+            var response = await client.ExecuteTaskAsync<CommonResult>(restRequest);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new CommonResult()
+                {
+                    Error = $"Ошибка {response.StatusDescription}"
+                };
+            }
             return response.Data;
         }
 
