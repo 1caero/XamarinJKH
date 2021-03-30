@@ -527,6 +527,7 @@ namespace xamarinJKH.Additional
                                     HorizontalTextAlignment = TextAlignment.Center,
                                     Text=additionalServices[k].FormatName
                                 };
+                                stackLayoutCon.Children.Add(new Label() { Text = additionalServices[k].ID.ToString(),IsVisible=false });
                                 stackLayoutCon.Children.Add(pic);
                                 stackLayoutCon.Children.Add(labelText);
                                 containerAdd.Children.Add(stackLayoutCon);
@@ -534,15 +535,18 @@ namespace xamarinJKH.Additional
                                 var onItemTaped = new TapGestureRecognizer();
                                 onItemTaped.Tapped += async (s, e) =>
                                 {
-                                    if (additionalServices[k].ShopID == null)
+                                    var id = Convert.ToInt32(((Label)((StackLayout)s).Children[0]).Text);
+                                    var additional = additionalServices.First(_ => _.ID == id);
+
+                                    if (additional.ShopID == null)
                                     {
                                         if (Navigation.NavigationStack.FirstOrDefault(x => x is AdditionalOnePage) == null)
-                                            await Navigation.PushAsync(new AdditionalOnePage(additionalServices[k]));
+                                            await Navigation.PushAsync(new AdditionalOnePage(additional));
                                     }
                                     else
                                     {
                                         if (Navigation.NavigationStack.FirstOrDefault(x => x is ShopPageNew) == null)
-                                            await Navigation.PushAsync(new ShopPageNew(additionalServices[k]));
+                                            await Navigation.PushAsync(new ShopPageNew(additional));
                                     }
                                 };
                                 stackLayoutCon.GestureRecognizers.Add(onItemTaped);
