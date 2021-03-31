@@ -16,6 +16,7 @@
                        HeightRequest="2"/>
                 <CollectionView ItemsSource="{Binding Items}"
                             SelectionMode="Single"
+                            EmptyView="{x:Static local:AppResources.NothingFound}"
                             SelectionChanged="ItemSelected">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical"/>

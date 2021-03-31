@@ -90,7 +90,11 @@ namespace xamarinJKH.DialogViews
                         var houses = await Server.GetHouse();
                         result.Data = new List<NamedValue>();
                         result.Error = houses.Error;
-                        foreach (var house in houses.Data.Where(x => x.DistrictId.Equals(id.ToString())))
+
+                        var setHouses =
+                            id != null ? houses.Data.Where(x => x.DistrictId.Equals(id.ToString())) : houses.Data;
+                        
+                        foreach (var house in setHouses)
                         {
                             var val = new NamedValue();
                             val.ID = house.ID;

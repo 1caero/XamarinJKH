@@ -74,7 +74,7 @@
                                    x:Name="BootomFrame"
                                    HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                    CornerRadius="40"
-                                   Margin="0,-50,0,-200" VerticalOptions="FillAndExpand" HeightRequest="1200"/>
+                                   Margin="0,-50,0,-200" VerticalOptions="FillAndExpand" HeightRequest="100"/>
                             <customRenderers:MaterialFrame Elevation="{AppThemeBinding Light=0, Dark=20}" CornerRadius="50"
                                                        Margin="15, 15, 15, 15"
                                                        BackgroundColor="White"
@@ -82,7 +82,6 @@
                                                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                                        x:Name="FrameLogin"
                                                        Padding="10" >
-
                                 <StackLayout
                                 Margin="10, 20, 10, 10">
 
