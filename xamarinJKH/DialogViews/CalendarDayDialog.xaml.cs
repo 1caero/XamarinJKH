@@ -4,6 +4,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.InterfacesIntegration;
+using xamarinJKH.Utils;
 
 namespace xamarinJKH.DialogViews
 {
@@ -59,50 +60,84 @@ namespace xamarinJKH.DialogViews
 
         private void BtnConf_Clicked(object sender, EventArgs e)
         {
-            if (calendar.SelectedDate != null)
+            Console.WriteLine("проверка !!!!! !!!" );
+            
+            try
             {
-                if (_isMonitor)
+                var d0 = 1 - 1;
+                //var c = 1 / d0;
+                if (calendar.SelectedDate != null)
                 {
-                    MessagingCenter.Send<object, DateTime>(this, "MonitorDay", (DateTime) calendar.SelectedDate);
-                    DialogNotifier.Cancel();
-                }
-                else
-                {
-                    if (!_checkDate)
+                    if (_isMonitor)
                     {
-                        Device.BeginInvokeOnMainThread(() =>
-                        {
-                            calendar.IsVisible = false;
-                            timePicker.IsVisible = true;
-                        });
-                        
-                        _checkDate = true;
+                        MessagingCenter.Send<object, DateTime>(this, "MonitorDay", (DateTime)calendar.SelectedDate);
+                        DialogNotifier.Cancel();
                     }
                     else
                     {
-                        TimeSpan timePickerTime = timePicker.Time;
-                        DateTime calendarSelectedDate = calendar.SelectedDate.Value;
-                        DateTime select = new DateTime(
-                            calendarSelectedDate.Year,
-                            calendarSelectedDate.Month,
-                            calendarSelectedDate.Day,
-                            timePickerTime.Hours,
-                            timePickerTime.Minutes,
-                            timePickerTime.Seconds,
-                            timePickerTime.Seconds,
-                            calendarSelectedDate.Kind);
-                        
-                        DateTime universalTime = @select.ToUniversalTime();
-                        Tuple<string, string> dateStr =
-                            new Tuple<string, string>($"{universalTime:yyyy-MM-dd HH:mm:ss}",
-                                $"{select:dd.MM.yyyy HH:mm:ss}");
-                        _setDate.Execute(dateStr);
-                        DialogNotifier.Cancel();
+                        if (!_checkDate)
+                        {
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                calendar.IsVisible = false;
+                                timePicker.IsVisible = true;
+                            });
+
+                            _checkDate = true;
+                        }
+                        else
+                        {
+                            TimeSpan timePickerTime = timePicker.Time;
+                            DateTime calendarSelectedDate = calendar.SelectedDate.Value;
+                            DateTime select = new DateTime(
+                                calendarSelectedDate.Year,
+                                calendarSelectedDate.Month,
+                                calendarSelectedDate.Day,
+                                timePickerTime.Hours,
+                                timePickerTime.Minutes,
+                                timePickerTime.Seconds,
+                                timePickerTime.Seconds,
+                                calendarSelectedDate.Kind);
+
+                            DateTime universalTime = @select.ToUniversalTime();
+
+                            Tuple<string, string> dateStr =
+                                new Tuple<string, string>($"{universalTime:yyyy-MM-dd HH:mm:ss}",
+                                    $"{select:dd.MM.yyyy HH:mm:ss}");
+
+                            //if (_setDate != null)
+                            //    _setDate.Execute(dateStr);
+                            //else
+                            {
+                                MessagingCenter.Send<object, Tuple<string, string>>(this, "SetDateTimePass",
+                                dateStr);
+                            }
+
+                            //_setDate.Execute(dateStr);
+
+                            DialogNotifier.Cancel();
+
+                        }
 
                     }
-                    
                 }
             }
+            catch(Exception ex)
+            {
+                Console.WriteLine("ОШИБКА: " + ex.ToString());
+                if (Settings.Person.Phone.Contains("79788262609"))
+                {
+                    foreach (var t in mainStack.Children)
+                        t.IsVisible = false;
+                    errorView.IsVisible = true;
+                    errorText.Text = ex.ToString();
+                }
+                else
+                {
+                    throw; 
+                }
+            }
+           
             
         }
     }

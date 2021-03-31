@@ -19,8 +19,11 @@
            HasShadow="True"
            Margin="15,30,15,15"
            Padding="25,20,25,20">
-            <StackLayout 
+            <StackLayout x:Name="mainStack"
             HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" >
+            <ScrollView x:Name="errorView" IsVisible="false" VerticalOptions="FillAndExpand">
+                <Editor x:Name="errorText" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></Editor>
+            </ScrollView>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"  VerticalOptions="Center">
                     <Label
                 x:Name="LabelDate"

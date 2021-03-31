@@ -209,6 +209,13 @@ _appModel = new AddAppModel()
                 //     isPassAPP = false;
                 // }
             });
+
+            MessagingCenter.Subscribe<Object, Tuple<string, string>>(this, "SetDateTimePass", (sender, tup) =>
+            {
+                if(isPassApp)
+                _appModel.SelectDate.Execute(tup);
+            });
+
             if (isPassAPP)
             {
                 SetPassApp();
