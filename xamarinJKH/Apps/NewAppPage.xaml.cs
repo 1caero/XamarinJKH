@@ -169,11 +169,12 @@ _appModel = new AddAppModel()
                 hex = (Color)Application.Current.Resources["MainColor"],
                 SelectedAcc = accs[0],
                 SelectedType = null /*Settings.TypeApp[0]*/,
-                Files = files
+                Files = files,
+                LabelTakeDateTime = LabelTakeDateTime
             };
 #endif
-                        
-                Device.BeginInvokeOnMainThread(() =>
+
+            Device.BeginInvokeOnMainThread(() =>
                 {
                     foreach (var account in accs)
                     {
