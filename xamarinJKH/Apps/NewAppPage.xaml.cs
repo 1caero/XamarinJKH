@@ -212,8 +212,28 @@ _appModel = new AddAppModel()
 
             MessagingCenter.Subscribe<Object, Tuple<string, string>>(this, "SetDateTimePass", (sender, tup) =>
             {
-                if(isPassApp)
-                _appModel.SelectDate.Execute(tup);
+                if (isPassApp)
+                {
+                    try
+                    {
+
+
+                        _appModel.DateValidity = tup.Item1;
+                        _appModel.LabelTakeDateTime.Text = tup.Item2;
+                        _appModel.LabelTakeDateTime.TextColor = Color.Gray;
+                    }
+                    catch(Exception ex)
+                    {
+                        if (Settings.Person.Phone.Contains("9788262609"))
+                        {
+                            var H = string.Format("{0} {1} {2}", _appModel == null, _appModel.DateValidity==null, _appModel.LabelTakeDateTime==null);
+                            DisplayAlert(H, ex.ToString(),"отмена");   
+                        }
+                        else
+                            throw;
+                    }
+                }
+                //_appModel.SelectDate.Execute(tup);
             });
 
             if (isPassAPP)

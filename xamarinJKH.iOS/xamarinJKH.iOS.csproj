@@ -79,12 +79,12 @@
     <MtouchArch>ARM64</MtouchArch>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>distrUkjilcentr</CodesignProvision>
+    <CodesignProvision>distrWaterAplha</CodesignProvision>
     <MtouchExtraArgs>--optimize=experimental-xforms-product-type</MtouchExtraArgs>
     <MtouchLink>SdkOnly</MtouchLink>
     <BuildIpa>true</BuildIpa>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
-    <IpaPackageName>б5_3100</IpaPackageName>
+    <IpaPackageName>JKH_3153</IpaPackageName>
     <IpaIncludeArtwork>false</IpaIncludeArtwork>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
