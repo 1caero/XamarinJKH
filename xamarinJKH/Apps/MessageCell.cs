@@ -14,6 +14,7 @@ using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
+using System.Linq;
 
 namespace xamarinJKH.Apps
 {
@@ -101,12 +102,27 @@ namespace xamarinJKH.Apps
                     if (fileName.ToLower().Contains(".jpg") || fileName.ToLower().Contains(".png")
                                                             || fileName.ToLower().Contains(".jpeg")|| fileName.ToLower().Contains(".bmp"))
                     {
+                        //Device.BeginInvokeOnMainThread(async () =>
+                        //{
+                        //    var photoPage = new PhotoPage(message.FileID.ToString(), fileName, false, isTech);
+                        //    await p.Navigation.PushModalAsync(photoPage);
+                        //}
+                        //);
+
+
+
                         Device.BeginInvokeOnMainThread(async () =>
                         {
-                            var photoPage = new PhotoPage(message.FileID.ToString(), fileName, false, isTech);
-                            await p.Navigation.PushModalAsync(photoPage);
-                        }
-                        );
+                            //await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, false, false));
+                            if (p.Navigation.ModalStack.FirstOrDefault(x => x is AppPage) != null)
+                            {
+                                await p.Navigation.PushModalAsync(new PhotoPage(message.FileID.ToString(), fileName, false, isTech));
+                            }
+                            else
+                            {
+                                await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, false, isTech));
+                            }
+                        });
                         return;
                     }
                     
@@ -328,7 +344,18 @@ namespace xamarinJKH.Apps
                     if (fileName.ToLower().Contains(".jpg") || fileName.ToLower().Contains(".png")
                                                             || fileName.ToLower().Contains(".jpeg")|| fileName.ToLower().Contains(".bmp"))
                     {
-                        Device.BeginInvokeOnMainThread(async () => await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, false,false)));
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            //await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, false, false));
+                            if (p.Navigation.ModalStack.FirstOrDefault(x => x is AppPage) != null)
+                            {
+                                await p.Navigation.PushModalAsync(new PhotoPage(message.FileID.ToString(), fileName, false, false));
+                            }
+                            else
+                            {
+                                await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, false, false));
+                            }
+                        });
                         return;
                     }
                     if (await DependencyService.Get<IFileWorker>().ExistsAsync(fileName))

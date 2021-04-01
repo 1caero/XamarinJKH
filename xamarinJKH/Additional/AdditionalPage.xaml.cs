@@ -527,6 +527,13 @@ namespace xamarinJKH.Additional
                                     HorizontalTextAlignment = TextAlignment.Center,
                                     Text=additionalServices[k].FormatName
                                 };
+
+                                //if( additionalServices[k].FormatName.Contains("\n"))
+                                //{
+                                //    Console.WriteLine($"строка с N:{additionalServices[k].FormatName}");
+
+                                //}
+
                                 stackLayoutCon.Children.Add(new Label() { Text = additionalServices[k].ID.ToString(),IsVisible=false });
                                 stackLayoutCon.Children.Add(pic);
                                 stackLayoutCon.Children.Add(labelText);

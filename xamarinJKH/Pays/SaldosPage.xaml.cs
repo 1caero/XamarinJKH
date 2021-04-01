@@ -80,23 +80,27 @@ namespace xamarinJKH.Pays
             }
         }
 
-        List<AccountAccountingInfo> GetIdent(List<AccountAccountingInfo> infos)
-        {
-            List<AccountAccountingInfo> result = new List<AccountAccountingInfo>();
-            var listStr = infos.Select(n => n.Ident.ToString()).ToHashSet();
-            foreach (var each in listStr)
-            {
-                result.Add(infos.Find(x => x.Ident==each));
-            }
-            return result;
-        }
+        //List<AccountAccountingInfo> GetIdent(List<AccountAccountingInfo> infos)
+        //{
+        //    List<AccountAccountingInfo> result = new List<AccountAccountingInfo>();
+        //    var listStr = infos.Select(n => n.Ident.ToString()).ToHashSet();
+        //    foreach (var each in listStr)
+        //    {
+        //        result.Add(infos.Find(x => x.Ident==each));
+        //    }
+        //    return result;
+        //}
         
         public SaldosPage(List<AccountAccountingInfo> infos)
-        {
-            SetBills(infos);
+        {            
             InitializeComponent();
             Analytics.TrackEvent("Квитанции");
-            Accounts = GetIdent(infos);
+            if(infos==null)
+            {                
+                Analytics.TrackEvent($"infos null:{infos == null}") ;
+            }
+            SetBills(infos);
+            Accounts = new List<AccountAccountingInfo>(infos);
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
