@@ -100,7 +100,16 @@ namespace xamarinJKH.Main
             CrossFirebaseCrashlytics.Current.SetUserEmail(Settings.Person.Email);
             MessagingCenter.Subscribe<Object>(this, "UpdateEvents", (sender) =>
             {
-                viewModel?.LoadData?.Execute(null);
+                try
+                {
+                    Analytics.TrackEvent("Загрузка событий");
+                    viewModel?.LoadData?.Execute(null);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    Analytics.TrackEvent(e.Message);
+                }
 
                 if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {

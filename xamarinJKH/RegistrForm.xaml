@@ -16,9 +16,9 @@
         <Grid VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*" />
-                <RowDefinition Height="0.6*" />
-                <RowDefinition Height="0.1*" />
-                <RowDefinition Height="0.1*" />
+                <RowDefinition Height="0.7*" />
+                <RowDefinition Height="0.05*" />
+                <RowDefinition Height="0.05*" />
             </Grid.RowDefinitions>
 
             <Frame BackgroundColor="{AppThemeBinding Light=White, Dark=LightGray}"
@@ -108,12 +108,13 @@
                 Grid.Row="1"
                 BackgroundColor="Transparent"
                 Grid.RowSpan="1"
+                x:Name="ScrollView"
                 Padding="0,0,0,0">
                 <StackLayout>
                     <Image x:Name="IconViewNameUk"
                            Source="icon_login"
                            Margin="0, 0, 0, 0"
-                           HeightRequest="70"
+                           HeightRequest="50"
                            HorizontalOptions="Center" />
 
                     <Label x:Name="UkName"
@@ -759,17 +760,17 @@
 
                 </StackLayout>
             </ScrollView>
-            <StackLayout Margin="0,0,0, 20" Grid.Row="3">
+            <StackLayout Margin="0,-10,0, 0" Grid.Row="3">
                 <Image x:Name="StepsImage"
                        Source="ic_steps_one"
                        VerticalOptions="Center"
-                       Margin="0, 15, 0, 0"
+                       Margin="0, 0, 0, 0"
                        HorizontalOptions="FillAndExpand" />
                 <Label x:Name="LabelSteps"
                        Text="{x:Static xamarinJkh:AppResources.Step1}"
                        FontSize="16"
                        FontAttributes="Bold"
-                       Margin="0, 10, 0, 15"
+                       Margin="0, 0, 0, 15"
                        TextColor="Black"
                        HorizontalOptions="Center" />
             </StackLayout>

@@ -249,11 +249,14 @@ namespace xamarinJKH.Main
         {
             if (PopupNavigation.Instance.PopupStack.Count > 0)
             {
+                Analytics.TrackEvent("Закрытие поп ап вкладок");
                 PopupNavigation.Instance.PopAllAsync();
                 return true;
             }
             else
             {
+                Analytics.TrackEvent("Выход на форму авторизации");
+
                 return base.OnBackButtonPressed();
             }
         }

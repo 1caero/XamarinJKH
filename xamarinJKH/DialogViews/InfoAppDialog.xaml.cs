@@ -20,6 +20,12 @@ namespace xamarinJKH.DialogViews
         public InfoAppDialog()
         {
             InitializeComponent();
+            var close = new TapGestureRecognizer();
+            close.Tapped += (s, e) =>
+            {
+                DialogNotifier.Cancel();
+            };
+            IconViewClose.GestureRecognizers.Add(close);
             View.WidthRequest = App.ScreenWidth;
             Analytics.TrackEvent("Инфо о заявке ");
             IconViewPhone.IsVisible = Settings.Person.IsDispatcher;
