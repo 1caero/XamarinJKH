@@ -126,7 +126,7 @@ namespace xamarinJKH
 
             };
             ImageClosePass.GestureRecognizers.Add(forgetPasswordVisible);
-            EntryLogin.Text = "";
+            // EntryLogin.Text = "";
             EntryLoginConst.Text = "";
             EntryPass.Text = "";
             AutoLogin();
@@ -180,7 +180,7 @@ namespace xamarinJKH
             {
                 LoginDispatcher(loginConst, passConst);
                 Settings.IsFirsStart = false;
-                EntryLogin.Text = login;
+                EntryLogin.Value = login;
                 EntryLoginConst.Text = loginConst;
                 EntryPass.Text = pass;
                 EntryPassConst.Text = passConst;
@@ -189,7 +189,7 @@ namespace xamarinJKH
             {
                 Login(login, pass);
                 Settings.IsFirsStart = false;
-                EntryLogin.Text = login;
+                EntryLogin.Value = login;
                 EntryLoginConst.Text = loginConst;
                 EntryPass.Text = pass;
                 EntryPassConst.Text = passConst;
@@ -376,7 +376,7 @@ namespace xamarinJKH
             }
             else
             {
-                Login(EntryLogin.Text, EntryPass.Text);
+                Login((string)EntryLogin.Value, EntryPass.Text);
             }            
         }
 

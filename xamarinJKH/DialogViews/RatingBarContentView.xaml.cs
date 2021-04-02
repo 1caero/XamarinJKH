@@ -86,8 +86,9 @@ namespace xamarinJKH.DialogViews
             {
                 MessageShowing = true;
                 //DependencyService.Get<IMessage>().ShortAlert(title);
-                Toast.Instance.Show<ToastDialog>(new {Title = title, Duration = 1500, ColorB = Color.Gray,  ColorT = Color.White});
-                await Task.Delay(TimeSpan.FromSeconds(5));
+                await DisplayAlert("", title, "OK");
+                // Toast.Instance.Show<ToastDialog>(new {Title = title, Duration = 1500, ColorB = Color.Gray,  ColorT = Color.White});
+                // await Task.Delay(TimeSpan.FromSeconds(5));
                 MessageShowing = false;
             }
 
