@@ -126,28 +126,28 @@
                                                Margin="0, 0, 0, 0"
                                                VerticalOptions="Center" />
 
-                                            <!-- <Entry x:Name="EntryLogin" -->
-                                            <!--    FontSize="15" -->
-                                            <!--    VerticalOptions="End" -->
-                                            <!--    HorizontalTextAlignment="Center" -->
-                                            <!--    TextColor="#A2A2A2" -->
-                                            <!--    HorizontalOptions="FillAndExpand" -->
-                                            <!--    Keyboard="Numeric"> -->
-                                            <!--     <Entry.Behaviors> -->
-                                            <!--         <mask:MaskedBehavior Mask="+7 (XXX) XXX-XXXX" /> -->
-                                            <!--     </Entry.Behaviors> -->
-                                            <!-- </Entry> -->
-                                            <maskedEdit:SfMaskedEdit x:Name="EntryLogin"
-                                                                     FontSize="17"
-                                                                     VerticalOptions="End"
-                                                                     BorderColor="White"
-                                                                     BackgroundColor="Transparent"
-                                                                     HorizontalTextAlignment="Center"
-                                                                     TextColor="#A2A2A2"
-                                                                     Margin="0,0,0,-8"
-                                                                     HorizontalOptions="FillAndExpand"
-                                                                     Keyboard="Numeric"
-                                                                     Mask="+7 (000) 000-0000"/>
+                                            <Entry x:Name="EntryLogin"
+                                               FontSize="15"
+                                               VerticalOptions="End"
+                                               HorizontalTextAlignment="Center"
+                                               TextColor="#A2A2A2"
+                                               HorizontalOptions="FillAndExpand"
+                                               Keyboard="Numeric">
+                                                <Entry.Behaviors>
+                                                    <mask:MaskedBehavior Mask="+7 (XXX) XXX-XXXX" />
+                                                </Entry.Behaviors>
+                                            </Entry>
+                                            <!-- <maskedEdit:SfMaskedEdit x:Name="EntryLogin" -->
+                                            <!--                          FontSize="17" -->
+                                            <!--                          VerticalOptions="End" -->
+                                            <!--                          BorderColor="White" -->
+                                            <!--                          BackgroundColor="Transparent" -->
+                                            <!--                          HorizontalTextAlignment="Center" -->
+                                            <!--                          TextColor="#A2A2A2" -->
+                                            <!--                          Margin="0,0,0,-8" -->
+                                            <!--                          HorizontalOptions="FillAndExpand" -->
+                                            <!--                          Keyboard="Numeric" -->
+                                            <!--                          Mask="+7 (000) 000-0000"/> -->
                                             <Entry x:Name="EntryLoginConst"
                                                FontSize="15"
                                                VerticalOptions="End"

@@ -180,7 +180,7 @@ namespace xamarinJKH
             {
                 LoginDispatcher(loginConst, passConst);
                 Settings.IsFirsStart = false;
-                EntryLogin.Value = login;
+                EntryLogin.Text = login;
                 EntryLoginConst.Text = loginConst;
                 EntryPass.Text = pass;
                 EntryPassConst.Text = passConst;
@@ -189,7 +189,7 @@ namespace xamarinJKH
             {
                 Login(login, pass);
                 Settings.IsFirsStart = false;
-                EntryLogin.Value = login;
+                EntryLogin.Text = login;
                 EntryLoginConst.Text = loginConst;
                 EntryPass.Text = pass;
                 EntryPassConst.Text = passConst;
@@ -376,7 +376,7 @@ namespace xamarinJKH
             }
             else
             {
-                Login((string)EntryLogin.Value, EntryPass.Text);
+                Login((string)EntryLogin.Text, EntryPass.Text);
             }            
         }
 
