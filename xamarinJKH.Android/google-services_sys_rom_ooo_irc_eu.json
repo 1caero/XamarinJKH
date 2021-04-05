@@ -1,0 +1,491 @@
+{
+  "project_info": {
+    "project_number": "50747074186",
+    "project_id": "xamarin1-a8d36",
+    "storage_bucket": "xamarin1-a8d36.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50747074186:android:8ab4a8ed02ac5f18adaf73",
+        "android_client_info": {
+          "package_name": "sys_rom.cb14"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKk2UasTw9P4qtfpSAKOh8XizrOBElimE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50747074186-285uvm46dvmcvmptprqgvsnk0bucd8ou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.stolitsa",
+                "app_store_id": "1437129214"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50747074186:android:a344f627b59a5dafadaf73",
+        "android_client_info": {
+          "package_name": "sys_rom.ooo_irc_eu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKk2UasTw9P4qtfpSAKOh8XizrOBElimE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50747074186-285uvm46dvmcvmptprqgvsnk0bucd8ou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.stolitsa",
+                "app_store_id": "1437129214"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50747074186:android:56a6db127cae45ebadaf73",
+        "android_client_info": {
+          "package_name": "sys_rom.ooo_novii_gorod_zheleznogorsk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKk2UasTw9P4qtfpSAKOh8XizrOBElimE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50747074186-285uvm46dvmcvmptprqgvsnk0bucd8ou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.stolitsa",
+                "app_store_id": "1437129214"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50747074186:android:0595af7026724d6aadaf73",
+        "android_client_info": {
+          "package_name": "sys_rom.ooo_uo_zelenii_gorod"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKk2UasTw9P4qtfpSAKOh8XizrOBElimE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50747074186-285uvm46dvmcvmptprqgvsnk0bucd8ou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.stolitsa",
+                "app_store_id": "1437129214"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50747074186:android:110ba1fd96940d1eadaf73",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.alfa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKk2UasTw9P4qtfpSAKOh8XizrOBElimE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50747074186-285uvm46dvmcvmptprqgvsnk0bucd8ou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.stolitsa",
+                "app_store_id": "1437129214"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50747074186:android:89fe2d51098d8f5badaf73",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.comfort_uk_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKk2UasTw9P4qtfpSAKOh8XizrOBElimE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50747074186-285uvm46dvmcvmptprqgvsnk0bucd8ou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.stolitsa",
+                "app_store_id": "1437129214"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50747074186:android:53cdfc9328736a85adaf73",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.ego_comfort"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKk2UasTw9P4qtfpSAKOh8XizrOBElimE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50747074186-285uvm46dvmcvmptprqgvsnk0bucd8ou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.stolitsa",
+                "app_store_id": "1437129214"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50747074186:android:bebb4db91423d62eadaf73",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.stolitsa_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKk2UasTw9P4qtfpSAKOh8XizrOBElimE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50747074186-285uvm46dvmcvmptprqgvsnk0bucd8ou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.stolitsa",
+                "app_store_id": "1437129214"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50747074186:android:1bb39566181dc552adaf73",
+        "android_client_info": {
+          "package_name": "sys_rom.shsk_krasnaya_presnya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKk2UasTw9P4qtfpSAKOh8XizrOBElimE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50747074186-285uvm46dvmcvmptprqgvsnk0bucd8ou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.stolitsa",
+                "app_store_id": "1437129214"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50747074186:android:62dba14a6788b185adaf73",
+        "android_client_info": {
+          "package_name": "sys_rom.shsk_serebryanii_bor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKk2UasTw9P4qtfpSAKOh8XizrOBElimE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50747074186-285uvm46dvmcvmptprqgvsnk0bucd8ou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.stolitsa",
+                "app_store_id": "1437129214"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50747074186:android:2fab2f97a9113893adaf73",
+        "android_client_info": {
+          "package_name": "sys_rom.shsk_soyuz11"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKk2UasTw9P4qtfpSAKOh8XizrOBElimE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50747074186-285uvm46dvmcvmptprqgvsnk0bucd8ou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.stolitsa",
+                "app_store_id": "1437129214"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50747074186:android:02847c0b324a4d32adaf73",
+        "android_client_info": {
+          "package_name": "sys_rom.tsg_kalinina5"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKk2UasTw9P4qtfpSAKOh8XizrOBElimE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50747074186-285uvm46dvmcvmptprqgvsnk0bucd8ou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.stolitsa",
+                "app_store_id": "1437129214"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50747074186:android:ab5b9aa13dcd180aadaf73",
+        "android_client_info": {
+          "package_name": "sys_rom.tsg_tsitadel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKk2UasTw9P4qtfpSAKOh8XizrOBElimE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50747074186-6205ma7mn5f7nks9fimmdd8qjrhqpqcu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50747074186-285uvm46dvmcvmptprqgvsnk0bucd8ou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.stolitsa",
+                "app_store_id": "1437129214"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
