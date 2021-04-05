@@ -1108,21 +1108,25 @@ _appModel = new AddAppModel()
         private void PassType_Unfocused(object sender, FocusEventArgs e)
         {
             PassTypesList.IsVisible = false;
+            Scroll.ScrollToAsync(FrameTop, ScrollToPosition.Start, false);
         }
 
         private void PassType_Focused(object sender, FocusEventArgs e)
         {
             PassTypesList.IsVisible = true;
+            Scroll.ScrollToAsync(LayoutFiles, ScrollToPosition.Start, false);
         }
                 
         private void TSBrand_Unfocused(object sender, FocusEventArgs e)
         {
             TSBrandList.IsVisible = false;
+            Scroll.ScrollToAsync(FrameTop, ScrollToPosition.Start, false);
         }
 
         private void TSBrand_Focused(object sender, FocusEventArgs e)
         {
             TSBrandList.IsVisible = true;
+            Scroll.ScrollToAsync(LayoutFiles, ScrollToPosition.Start, false);
         }
 
         StackLayout lastElementSelected;

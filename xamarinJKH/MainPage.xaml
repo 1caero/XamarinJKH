@@ -11,6 +11,7 @@
              mc:Ignorable="d"
              xmlns:resources="clr-namespace:xamarinJKH"
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:maskedEdit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms"
              x:Class="xamarinJKH.MainPage">
     <ContentPage.Content>
         <Grid VerticalOptions="FillAndExpand">
@@ -136,6 +137,17 @@
                                                     <mask:MaskedBehavior Mask="+7 (XXX) XXX-XXXX" />
                                                 </Entry.Behaviors>
                                             </Entry>
+                                            <!-- <maskedEdit:SfMaskedEdit x:Name="EntryLogin" -->
+                                            <!--                          FontSize="17" -->
+                                            <!--                          VerticalOptions="End" -->
+                                            <!--                          BorderColor="White" -->
+                                            <!--                          BackgroundColor="Transparent" -->
+                                            <!--                          HorizontalTextAlignment="Center" -->
+                                            <!--                          TextColor="#A2A2A2" -->
+                                            <!--                          Margin="0,0,0,-8" -->
+                                            <!--                          HorizontalOptions="FillAndExpand" -->
+                                            <!--                          Keyboard="Numeric" -->
+                                            <!--                          Mask="+7 (000) 000-0000"/> -->
                                             <Entry x:Name="EntryLoginConst"
                                                FontSize="15"
                                                VerticalOptions="End"

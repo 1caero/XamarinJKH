@@ -240,7 +240,7 @@
                                             <Label Text="{x:Static xamarinJkh:AppResources.DontInsurance}"
                                                    VerticalOptions="Center"
                                                    HorizontalOptions="EndAndExpand"
-                                                   HorizontalTextAlignment="Start"
+                                                   HorizontalTextAlignment="End"
                                                    VerticalTextAlignment="Center"
                                                    FontSize="15"
                                                    TextDecorations="Underline"

@@ -9,6 +9,7 @@ using LabelHtml.Forms.Plugin.iOS;
 using Plugin.FirebasePushNotification;
 using Syncfusion.SfCalendar.XForms.iOS;
 using Syncfusion.SfPicker.XForms.iOS;
+using Syncfusion.XForms.iOS.MaskedEdit;
 using UIKit;
 
 namespace xamarinJKH.iOS
@@ -61,6 +62,7 @@ namespace xamarinJKH.iOS
             LoadApplication(new App());
             UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
             Firebase.Core.App.Configure();
+            SfMaskedEditRenderer.Init();
             Firebase.Crashlytics.Crashlytics.Configure();
 
             FirebasePushNotificationManager.Initialize(options, true);

@@ -375,7 +375,7 @@
                                                 Spacing="0"
                                                 HorizontalOptions="FillAndExpand"
                                                 Orientation="Vertical">
-                                                <StackLayout HorizontalOptions="Center" Spacing="20" Margin="0,0,0,10"
+                                                <StackLayout HorizontalOptions="Start" Spacing="20" Margin="0,0,0,10"
                                                              Orientation="Horizontal">
                                                     <Frame CornerRadius="10"
                                                            Padding="{OnPlatform iOS='10,0' , Android=0}"
@@ -590,6 +590,7 @@
                                                                        HorizontalOptions="FillAndExpand" />
                                         </Frame>
                                         <StackLayout Orientation="Horizontal"
+                                                     x:Name="LayoutFiles"
                                                      Margin="10, 0, 10, 0">
                                             <StackLayout Spacing="0"
                                                          HorizontalOptions="FillAndExpand">
