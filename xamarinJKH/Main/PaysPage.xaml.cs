@@ -306,10 +306,15 @@ namespace xamarinJKH.Main
             if (answer)
             {
                 await DellIdent(Ident);
-                int numberIndex = Settings.Person.Accounts.FindIndex(0 , 1 ,x => x.Ident == Ident);
-                if (numberIndex >= 0)
+                //int numberIndex = Settings.Person.Accounts.FindIndex(0 , 1 ,x => x.Ident == Ident);
+                //if (numberIndex >= 0)
+                //{
+                //    Settings.Person.Accounts.Remove(Settings.Person.Accounts[numberIndex]);
+                //}
+                var delLSItem = Settings.Person.Accounts.FirstOrDefault(x => x.Ident == Ident);
+                if (delLSItem != null)
                 {
-                    Settings.Person.Accounts.Remove(Settings.Person.Accounts[numberIndex]);
+                    Settings.Person.Accounts.Remove(delLSItem);
                 }
             }
         }
