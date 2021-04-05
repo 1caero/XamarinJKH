@@ -645,7 +645,7 @@ namespace xamarinJKH.Main
             var id = Convert.ToInt32(((Label)s.Children[0]).Text);
 
             //RequestInfo select = RequestInfos.FirstOrDefault(_ => _.ID == id); // viewModel.Requests.First(_=>_.ID==id);
-            RequestInfo select = viewModel.Requests.First(_=>_.ID==id);
+            RequestInfo select = viewModel.Requests.FirstOrDefault(_=>_.ID==id);
 
             if (select != null)
             {
