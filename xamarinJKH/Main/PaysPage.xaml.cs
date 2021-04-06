@@ -494,17 +494,17 @@ namespace xamarinJKH.Main
             bonus.FormattedText = formattedBonus;
             bonus.HorizontalOptions = LayoutOptions.Start;
 
-            StackLayout BonusStack = new StackLayout { 
+            StackLayout BonusStack = new StackLayout {  Spacing=3,
                 Orientation = StackOrientation.Horizontal, 
-                HorizontalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.Start,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
             BonusStack.Children.Add(bonus);
             Label history = new Label { 
                 TextColor = (Color)Application.Current.Resources["MainColor"], 
                 Text = AppResources.ShowHistory, 
-                HorizontalOptions = LayoutOptions.End, 
-                HorizontalTextAlignment = TextAlignment.End,
+                HorizontalOptions = LayoutOptions.Start, 
+                HorizontalTextAlignment = TextAlignment.Start,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontAttributes = FontAttributes.Bold,
                 FontSize = 12
