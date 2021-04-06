@@ -158,7 +158,7 @@ namespace xamarinJKH.Main
         
         private async void ButtonClick(object sender, EventArgs e)
         {
-            Regex regex = new Regex(@"^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-zA-Z0-9А-Яа-я]+(\.[a-zA-Z0-9А-Яа-я]+)*\.[a-zA-ZА-Яа-я]{2,6}$");
+            Regex regex = new Regex(@"^([a-zA-Z0-9А-Яа-я_-]+\.)*[a-zA-Z0-9А-Яа-я_-]+@[a-zA-Z0-9А-Яа-я_-]+(\.[a-zA-Z0-9А-Яа-я_-]+)*\.[a-zA-ZА-Яа-я]{2,6}$");
             if (!string.IsNullOrEmpty(EntryEmail.Text))
             {
                 if (regex.IsMatch(EntryEmail.Text))

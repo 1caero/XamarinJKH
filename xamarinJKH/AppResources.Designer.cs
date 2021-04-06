@@ -2059,7 +2059,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Неверно введен пароль.
+        ///   Looks up a localized string similar to Введен неправильный номер телефона или пароль.
         /// </summary>
         internal static string ErrorUserNotFound {
             get {

@@ -45,7 +45,7 @@
                 <!-- Place new controls here -->
                 <ScrollView x:Name="StackLayoutContent"
                             VerticalOptions="FillAndExpand"
-                            IsVisible="False">
+                            >
                     <StackLayout VerticalOptions="FillAndExpand">
 
 
@@ -325,17 +325,23 @@
                 </ScrollView>
                 <StackLayout
                     IsVisible="False"
+                    x:Name="IconViewNameUkLoad"
                     VerticalOptions="CenterAndExpand"
                     Margin="0,-100,0,0"
                     HorizontalOptions="CenterAndExpand">
-                    <Image x:Name="IconViewNameUkLoad"
+                    <Image 
                            Source="icon_login"
                            HeightRequest="100"
                            HorizontalOptions="Center"
                            VerticalOptions="Center" />
+                    <Label x:Name="UkNameLoading"
+                           Text="Название"
+                           FontAttributes="Bold"
+                           FontSize="16"
+                           TextColor="Black"
+                           HorizontalOptions="Center" />
                     <ActivityIndicator x:Name="progress2"
                                        IsRunning="true"
-                                        
                                        Color="{x:DynamicResource MainColor}" />
                 </StackLayout>
             </StackLayout>

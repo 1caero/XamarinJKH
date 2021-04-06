@@ -178,6 +178,8 @@ namespace xamarinJKH
 
             if (Settings.ConstAuth && Settings.IsFirsStart && !passConst.Equals("") && !loginConst.Equals("") && !isSave)
             {
+                IconViewNameUkLoad.IsVisible = true;
+                StackLayoutContent.IsVisible = false;
                 LoginDispatcher(loginConst, passConst);
                 Settings.IsFirsStart = false;
                 EntryLogin.Text = login;
@@ -187,6 +189,8 @@ namespace xamarinJKH
             }
             else if (Settings.IsFirsStart && !pass.Equals("") && !login.Equals("") && !isSave)
             {
+                IconViewNameUkLoad.IsVisible = true;
+                StackLayoutContent.IsVisible = false;
                 Login(login, pass);
                 Settings.IsFirsStart = false;
                 EntryLogin.Text = login;
@@ -194,6 +198,7 @@ namespace xamarinJKH
                 EntryPass.Text = pass;
                 EntryPassConst.Text = passConst;
             }
+            
         }
 
 
@@ -231,7 +236,7 @@ namespace xamarinJKH
             if (Settings.MobileSettings.Error == null)
             {
                 
-                UkName.Text = Settings.MobileSettings.main_name;
+                UkName.Text = UkNameLoading .Text = Settings.MobileSettings.main_name;
                 var color = !string.IsNullOrEmpty(Settings.MobileSettings.color) ? $"#{Settings.MobileSettings.color}" :"#FF0000";
                 try
                 {
@@ -257,9 +262,9 @@ namespace xamarinJKH
                 FrameLogin.SetAppThemeColor(MaterialFrame.BorderColorProperty, hex, Color.White);
                 BootomFrame.SetAppThemeColor(Frame.BorderColorProperty, hex, Color.LightGray);
 
-                StackLayoutContent.IsVisible = true;
-                progress2.IsVisible = false;
-                IconViewNameUkLoad.IsVisible = false;
+                // StackLayoutContent.IsVisible = true;
+                // progress2.IsVisible = false;
+                // IconViewNameUkLoad.IsVisible = false;
                 FormattedString formatted = new FormattedString();
                 formatted.Spans.Add(new Span
                 {
@@ -414,6 +419,8 @@ namespace xamarinJKH
                     Preferences.Set("constAuth", false);
                     
                     await Navigation.PushModalAsync(new BottomNavigationPage());
+                    IconViewNameUkLoad.IsVisible = false;
+                    StackLayoutContent.IsVisible = true;
                 }
                 else
                 {
@@ -461,6 +468,9 @@ namespace xamarinJKH
                     Preferences.Set("passConst", pass);
                     Preferences.Set("constAuth", true);
                     await Navigation.PushModalAsync(new BottomNavigationConstPage());
+                    IconViewNameUkLoad.IsVisible = false;
+                    StackLayoutContent.IsVisible = true;
+                    BottomStackLayout.IsVisible = true;
                 }
                 else
                 {

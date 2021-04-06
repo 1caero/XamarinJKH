@@ -511,7 +511,7 @@
     <value>Під час виконання сталася помилка</value>
   </data>
   <data name="ErrorUserNotFound" xml:space="preserve">
-    <value>Користувач не знайдений</value>
+    <value>Введено невірний логін або пароль </value>
   </data>
   <data name="Events_NavBar" xml:space="preserve">
     <value>Події</value>

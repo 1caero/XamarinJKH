@@ -1168,7 +1168,7 @@
     <value>Неверный код доступа</value>
   </data>
   <data name="ErrorUserNotFound" xml:space="preserve">
-    <value>Неверно введен пароль</value>
+    <value>Введен неправильный номер телефона или пароль</value>
   </data>
   <data name="MoveDispatcher" xml:space="preserve">
     <value>Выберите сотрудника:</value>
