@@ -186,7 +186,7 @@ namespace xamarinJKH.MainConst
 
         public async void SaveInfoAccount(string fio, string email)
         {
-            Regex regex = new Regex(@"^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-zA-Z0-9А-Яа-я]+(\.[a-zA-Z0-9А-Яа-я]+)*\.[a-zA-ZА-Яа-я]{2,6}$");
+            Regex regex = new Regex(@"^([a-zA-Z0-9А-Яа-я_-]+\.)*[a-zA-Z0-9А-Яа-я_-]+@[a-zA-Z0-9А-Яа-я_-]+(\.[a-zA-Z0-9А-Яа-я_-]+)*\.[a-zA-ZА-Яа-я]{2,6}$");
             if (!string.IsNullOrWhiteSpace(fio) && !string.IsNullOrWhiteSpace(email))
             {
                 progress.IsVisible = true;
