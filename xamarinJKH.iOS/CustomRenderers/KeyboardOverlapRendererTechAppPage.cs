@@ -145,7 +145,7 @@ namespace xamarinJKH.iOS.CustomRenderers
             if (App.isStart)
                 r = (pageHeight - activeViewBottom) - keyboardHeight + (int)UIApplication.SharedApplication.StatusBarFrame.Height;
             else
-                r = (pageHeight - activeViewBottom) - keyboardHeight - 50;
+                r = (pageHeight - activeViewBottom) - keyboardHeight /*- 50*/;
             return r;
         }
     }

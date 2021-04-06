@@ -5,6 +5,7 @@
              xmlns:customRenderers="clr-namespace:xamarinJKH.CustomRenderers;assembly=xamarinJKH"
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
+             xmlns:pinch="clr-namespace:Xamarin.Forms.PinchZoomImage;assembly=Xamarin.Forms.PinchZoomImage" 
              x:Class="xamarinJKH.Apps.PhotoPage">
     <ContentPage.Content>
         
@@ -49,12 +50,20 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <customRenderers:ZoomImage
+                <!--<customRenderers:ZoomImage
                     x:Name="ZoomImage"
                     HorizontalOptions="FillAndExpand" 
                     VerticalOptions="FillAndExpand"
+                    Aspect="{Binding ImageAspect}" />-->
+
+                <pinch:PinchZoom>
+                    <pinch:PinchZoom.Content>
+                        <Image x:Name="ZoomImage"  HorizontalOptions="FillAndExpand" 
+                    VerticalOptions="FillAndExpand"
                     Aspect="{Binding ImageAspect}" />
-                    
+                    </pinch:PinchZoom.Content>
+                </pinch:PinchZoom>
+
                 <ActivityIndicator x:Name="progress"
                                    IsRunning="true"
                                    IsVisible="True"
