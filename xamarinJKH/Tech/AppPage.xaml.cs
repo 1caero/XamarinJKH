@@ -86,6 +86,9 @@ namespace xamarinJKH.Tech
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+
+            MessageBoxStartHeigth = EntryMess.Height;
+
             Device.BeginInvokeOnMainThread(() =>
                 isRunning = true
             );
@@ -237,6 +240,8 @@ namespace xamarinJKH.Tech
 
         public bool isUser { get; set; }
 
+        double MessageBoxStartHeigth = -1;
+
         public AppPage(bool isDeviceId = false)
         {
             _isDeviceId = isDeviceId;
@@ -356,6 +361,9 @@ namespace xamarinJKH.Tech
             IconViewAddFile.GestureRecognizers.Add(addFile);
 
             setText();
+
+            EntryMess.Keyboard = Keyboard.Create(KeyboardFlags.CapitalizeSentence | KeyboardFlags.Spellcheck);
+
         }
 
 
@@ -650,7 +658,6 @@ namespace xamarinJKH.Tech
                         return;
                     }
 
-
                     CommonResult commonResult = await _server.AddFileAppsTech(Settings.Person.Phone,
                         pickedFile.FileName, pickedFile.DataArray,
                         pickedFile.FilePath, _isDeviceId);
@@ -678,14 +685,12 @@ namespace xamarinJKH.Tech
                 string message = EntryMess.Text;
                 if (!string.IsNullOrWhiteSpace(message))
                 {
-                    // progress.IsVisible = true;
                      Device.BeginInvokeOnMainThread(() =>
                     {
                         IconViewSend.IsEnabled = true;
                         IconViewMic.IsEnabled = true;
                     });
-                    //IconViewSend.IsEnabled = false;
-                    //IconViewMic.IsEnabled = false;
+                    
                     IsSucceed result = await _server.AddMessageTech(message, Settings.Person.Phone, _isDeviceId);
                     if (result.isSucceed)
                     {
@@ -707,13 +712,10 @@ namespace xamarinJKH.Tech
                 {
                     await ShowToast(AppResources.ErrorMessageEmpty);
                 }
-
-                //IconViewSend.IsEnabled = true;
             }
             catch (Exception e)
             {
                 await ShowToast(AppResources.MessageNotSent);
-                //IconViewSend.IsEnabled = true;
             }
             finally
             {
@@ -722,7 +724,6 @@ namespace xamarinJKH.Tech
                     IconViewSend.IsEnabled = true;
                     IconViewMic.IsEnabled = true;
                 });
-                //IconViewSend.IsEnabled = true;
             }
         }
 
@@ -891,26 +892,35 @@ namespace xamarinJKH.Tech
         private void EntryMess_TextChanged(object sender, TextChangedEventArgs e)
         {
             var entry = sender as BordlessEditor;
-            entry.MinimumHeightRequest = 100;
-
-            if (entry != null)
+            if(e.NewTextValue=="")
             {
-                if (entry.Height > 121)
-                {
-                    entry.HeightRequest = 120;
-                    entry.AutoSize = EditorAutoSizeOption.Disabled;
-                }
-                else
-                {
-                    if (e.OldTextValue != null && e.NewTextValue.Length < e.OldTextValue.Length &&
-                        e.NewTextValue.Length < 100)
-                    {
-                        entry.HeightRequest = -1;
-                    }
-
-                    entry.AutoSize = EditorAutoSizeOption.TextChanges;
-                }
+              Device.BeginInvokeOnMainThread(()=>  entry.HeightRequest = MessageBoxStartHeigth);
             }
+            else
+                Device.BeginInvokeOnMainThread(() => entry.HeightRequest = -1);
+            //entry.HeightRequest = -1;
+
+
+            //entry.MinimumHeightRequest = 100;
+
+            //if (entry != null)
+            //{
+            //    if (entry.Height > 121)
+            //    {
+            //        entry.HeightRequest = 120;
+            //        entry.AutoSize = EditorAutoSizeOption.Disabled;
+            //    }
+            //    else
+            //    {
+            //        if (e.OldTextValue != null && e.NewTextValue.Length < e.OldTextValue.Length &&
+            //            e.NewTextValue.Length < 100)
+            //        {
+            //            entry.HeightRequest = -1;
+            //        }
+
+            //        entry.AutoSize = EditorAutoSizeOption.TextChanges;
+            //    }
+            //}
         }
 
         private void ImageButton_OnPressed(object sender, EventArgs e)

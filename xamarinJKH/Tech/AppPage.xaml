@@ -137,6 +137,7 @@
                 <StackLayout
                     Spacing="0"                    
                     VerticalOptions="Center"
+                    
                     MinimumHeightRequest="50"
                     Orientation="Horizontal" >
                     <Grid Padding="0" HorizontalOptions="FillAndExpand" >
@@ -164,17 +165,18 @@
                                            Grid.Column="0"
                                            HorizontalOptions="StartAndExpand"
                                            Color="{Binding hex}" />
-                        <Editor x:Name="EntryMess" 
+                        <xamarinJkh:BordlessEditor x:Name="EntryMess" 
                                                    FontSize="18"
-                                                   VerticalOptions="Center"
+                                                   VerticalOptions="CenterAndExpand"
                                                    Text=""
                                                    Grid.Column="1"
                                                    Placeholder="{x:Static xamarinJkh:AppResources.ChatPlaceholder}"
-                                                   TextColor="#A2A2A2"
-                                                   HeightRequest="45"
-                                                   MinimumHeightRequest="35"
+                                                   TextColor="#A2A2A2"  
+                                                   HeightRequest="40"
+                                                   MinimumHeightRequest="40"
                                                    HorizontalOptions="FillAndExpand"
-                                                   AutoSize="TextChanges"/>
+                                                   AutoSize="TextChanges"
+                                                   TextChanged="EntryMess_TextChanged"/>
                         <Grid Grid.Column="2"
                         >
                             <forms:SvgCachedImage
