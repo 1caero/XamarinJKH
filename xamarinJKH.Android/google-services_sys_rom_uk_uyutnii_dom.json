@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "200494899284",
+    "project_id": "xamarinjkh2",
+    "storage_bucket": "xamarinjkh2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200494899284:android:add712d9eea3c659334dc1",
+        "android_client_info": {
+          "package_name": "sys_rom.shsk_druzhba5"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200494899284-1eu4212tsaas20k35mraamooroh2e1pr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-Q-nDczCC-M9EstItZG1MdK3Um0IVbVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200494899284-1eu4212tsaas20k35mraamooroh2e1pr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200494899284:android:1d93ef7e90abb571334dc1",
+        "android_client_info": {
+          "package_name": "sys_rom.uk_uyutnii_dom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200494899284-1eu4212tsaas20k35mraamooroh2e1pr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-Q-nDczCC-M9EstItZG1MdK3Um0IVbVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200494899284-1eu4212tsaas20k35mraamooroh2e1pr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
