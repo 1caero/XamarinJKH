@@ -74,10 +74,16 @@ namespace xamarinJKH.Pays
                     if (SelectedAcc != null)
                         ident = SelectedAcc.Ident;
                     Accounts.Clear();
-                    foreach (var acc in info.Data)
-                    {
-                        Accounts.Add(acc);
-                    }
+
+                    //foreach (var acc in info.Data)
+                    //{
+                    //    Accounts.Add(acc);
+                    //}
+                    Accounts = new ObservableCollection<AccountAccountingInfo>(info.Data);
+                    AccountsCollection.ItemsSource = Accounts;
+                    //Accounts = ao;
+
+
                     additionalList.ItemsSource = null;
                     if (SelectedAcc == null || !string.IsNullOrEmpty(ident))
                         SelectedAcc = Accounts.FirstOrDefault(x => x.Ident == ident);

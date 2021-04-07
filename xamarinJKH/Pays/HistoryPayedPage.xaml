@@ -79,7 +79,8 @@
                                                        BackgroundColor="{AppThemeBinding Light=White, Dark=#494949}"
                                                        Padding="20,15,0,70">
                             <StackLayout Margin="0,0,20,0">
-                                <CollectionView ItemsSource="{Binding Accounts}"
+                                <CollectionView x:Name="AccountsCollection"
+                                                ItemsSource="{Binding Accounts}"
                                             SelectedItem="{Binding SelectedAcc}"
                                                 HeightRequest="120"
                                                 HorizontalScrollBarVisibility="Never"
