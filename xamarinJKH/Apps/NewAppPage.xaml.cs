@@ -98,7 +98,7 @@ namespace xamarinJKH.Apps
                         await Loading.Instance.StartAsync(async progress =>
                         {
                             Analytics.TrackEvent("Календарь выбора дня");
-                            var ret = await Dialog.Instance.ShowAsync(new CalendarDayDialog(false, _appModel.SelectDate));
+                            var ret = await Dialog.Instance.ShowAsync(new CalendarDayDialog(false, _appModel.SelectDate, this));
                         });
                     }
                 );

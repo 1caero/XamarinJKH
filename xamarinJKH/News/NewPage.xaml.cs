@@ -143,11 +143,14 @@ namespace xamarinJKH.News
             var HtmlLabel = new HtmlLabel();
 
             HtmlLabel.IsVisible = true;
-            Regex regexImg = new Regex(@"<img[^>]+>");
-            string notImg = Regex.Replace(newsInfoFull.Text, @"<img[^>]+>", "");
+            if (newsInfoFull.Text != null)
+            {
+                string notImg = Regex.Replace(newsInfoFull.Text, @"<img[^>]+>", "");
 
-            var t = notImg.Trim();
-            HtmlLabel.Text = t;
+                var t = notImg.Trim();
+                HtmlLabel.Text = t;
+            }
+
             HtmlLabel.FlowDirection = FlowDirection.MatchParent;
             HtmlLabel.BackgroundColor = Color.Transparent;
             HtmlLabel.FontSize=16;
@@ -201,9 +204,18 @@ namespace xamarinJKH.News
         public IEnumerable<string> HtmlAgilityPack(string Html)
         {
             HtmlDocument htmlSnippet = new HtmlDocument();
-            htmlSnippet.LoadHtml(Html);
 
             List<string> hrefTags = new List<string>();
+            if (Html != null)
+            {
+                htmlSnippet.LoadHtml(Html);
+            }
+            else
+            {
+                return hrefTags;
+                
+            }
+
             try
             {
                 foreach (HtmlNode link in htmlSnippet.DocumentNode.SelectNodes("//img[@src]"))

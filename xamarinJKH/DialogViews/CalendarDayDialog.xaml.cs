@@ -11,6 +11,7 @@ namespace xamarinJKH.DialogViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CalendarDayDialog :  DialogView
     {
+        private readonly Page _page;
         public Color HexColor { get; set; }
         private bool _isMonitor;
         private Command _setDate;
@@ -21,8 +22,9 @@ namespace xamarinJKH.DialogViews
             Init(true, null);
         }
 
-        public CalendarDayDialog(bool isMonitor = true, Command setDate = null)
+        public CalendarDayDialog(bool isMonitor = true, Command setDate = null, Page page = null)
         {
+            _page = page;
             InitializeComponent();
             Init(isMonitor, setDate);
             HexColor = (Color)Application.Current.Resources["MainColor"];
@@ -58,7 +60,7 @@ namespace xamarinJKH.DialogViews
 
         private bool _checkDate = false;
 
-        private void BtnConf_Clicked(object sender, EventArgs e)
+        private async void BtnConf_Clicked(object sender, EventArgs e)
         {
             Console.WriteLine("проверка !!!!! !!!" );
             
@@ -108,6 +110,14 @@ namespace xamarinJKH.DialogViews
                             //if (_setDate != null)
                             //    _setDate.Execute(dateStr);
                             //else
+                            DateTime current = DateTime.Now;
+                            if (current > select)
+                            {
+                                if (_page != null)
+                                    await _page.DisplayAlert(AppResources.ErrorTitle,
+                                        "Время должно быть больше текущего", "OK");
+                                return;
+                            }
                             {
                                 MessagingCenter.Send<object, Tuple<string, string>>(this, "SetDateTimePass",
                                 dateStr);
