@@ -135,7 +135,8 @@
                    BorderColor="{Binding hex}"
                    Padding="15">
                 <StackLayout
-                    Spacing="10"
+                    Spacing="0"                    
+                    VerticalOptions="Center"
                     MinimumHeightRequest="50"
                     Orientation="Horizontal" >
                     <Grid Padding="0" HorizontalOptions="FillAndExpand" >
@@ -163,13 +164,14 @@
                                            Grid.Column="0"
                                            HorizontalOptions="StartAndExpand"
                                            Color="{Binding hex}" />
-                        <xamarinJkh:BordlessEditor x:Name="EntryMess" 
+                        <Editor x:Name="EntryMess" 
                                                    FontSize="18"
                                                    VerticalOptions="Center"
                                                    Text=""
                                                    Grid.Column="1"
                                                    Placeholder="{x:Static xamarinJkh:AppResources.ChatPlaceholder}"
                                                    TextColor="#A2A2A2"
+                                                   HeightRequest="45"
                                                    MinimumHeightRequest="35"
                                                    HorizontalOptions="FillAndExpand"
                                                    AutoSize="TextChanges"/>

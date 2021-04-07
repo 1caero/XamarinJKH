@@ -678,9 +678,14 @@ namespace xamarinJKH.Tech
                 string message = EntryMess.Text;
                 if (!string.IsNullOrWhiteSpace(message))
                 {
-                    // progress.IsVisible = true;                   
-                    IconViewSend.IsEnabled = false;
-                    IconViewMic.IsEnabled = false;
+                    // progress.IsVisible = true;
+                     Device.BeginInvokeOnMainThread(() =>
+                    {
+                        IconViewSend.IsEnabled = true;
+                        IconViewMic.IsEnabled = true;
+                    });
+                    //IconViewSend.IsEnabled = false;
+                    //IconViewMic.IsEnabled = false;
                     IsSucceed result = await _server.AddMessageTech(message, Settings.Person.Phone, _isDeviceId);
                     if (result.isSucceed)
                     {
@@ -688,7 +693,7 @@ namespace xamarinJKH.Tech
                             {
                                 {
                                     EntryMess.Text = "";
-
+                                    
                                     // var lastChild = baseForApp.Children.LastOrDefault();
                                     // if (lastChild != null)
                                     //     Device.BeginInvokeOnMainThread(async () =>
