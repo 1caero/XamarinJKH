@@ -4367,6 +4367,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите дату и время.
+        /// </summary>
+        internal static string SelectDateTime {
+            get {
+                return ResourceManager.GetString("SelectDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выберите день.
         /// </summary>
         internal static string SelectDay {

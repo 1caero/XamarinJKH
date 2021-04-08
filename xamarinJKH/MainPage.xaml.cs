@@ -198,7 +198,16 @@ namespace xamarinJKH
                 EntryPass.Text = pass;
                 EntryPassConst.Text = passConst;
             }
-            
+            Device.StartTimer(new TimeSpan(0, 1, 0), () =>
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    IconViewNameUkLoad.IsVisible = false;
+                    StackLayoutContent.IsVisible = true;
+                    BottomStackLayout.IsVisible = true;
+                });
+                return false; // runs again, or false to stop
+            });
         }
 
 
@@ -419,8 +428,7 @@ namespace xamarinJKH
                     Preferences.Set("constAuth", false);
                     
                     await Navigation.PushModalAsync(new BottomNavigationPage());
-                    IconViewNameUkLoad.IsVisible = false;
-                    StackLayoutContent.IsVisible = true;
+                    
                 }
                 else
                 {
@@ -438,7 +446,8 @@ namespace xamarinJKH
             {
                 await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorFills, "OK");
             }
-
+            IconViewNameUkLoad.IsVisible = false;
+            StackLayoutContent.IsVisible = true;
             progress.IsVisible = false;
             FrameBtnLogin.IsVisible = true;
         }
@@ -468,9 +477,7 @@ namespace xamarinJKH
                     Preferences.Set("passConst", pass);
                     Preferences.Set("constAuth", true);
                     await Navigation.PushModalAsync(new BottomNavigationConstPage());
-                    IconViewNameUkLoad.IsVisible = false;
-                    StackLayoutContent.IsVisible = true;
-                    BottomStackLayout.IsVisible = true;
+                   
                 }
                 else
                 {
@@ -488,7 +495,10 @@ namespace xamarinJKH
             {
                 await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorFills, "OK");
             }
-
+            IconViewNameUkLoad.IsVisible = false;
+            StackLayoutContent.IsVisible = true;
+            BottomStackLayout.IsVisible = true;
+            
             progress.IsVisible = false;
             FrameBtnLogin.IsVisible = true;
         }

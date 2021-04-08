@@ -1807,4 +1807,7 @@
   <data name="DontInsurance" xml:space="preserve">
     <value>Чи не пропонувати страхування </value>
   </data>
+  <data name="SelectDateTime" xml:space="preserve">
+    <value>Виберіть дату і час </value>
+  </data>
 </root>

@@ -1934,4 +1934,7 @@
   <data name="DontInsurance" xml:space="preserve">
     <value>Do not offer insurance</value>
   </data>
+  <data name="SelectDateTime" xml:space="preserve">
+    <value>Select date and time </value>
+  </data>
 </root>

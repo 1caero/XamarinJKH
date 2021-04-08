@@ -1939,4 +1939,7 @@
   <data name="DontInsurance" xml:space="preserve">
     <value>Не предлагать страхование</value>
   </data>
+  <data name="SelectDateTime" xml:space="preserve">
+    <value>Выберите дату и время</value>
+  </data>
 </root>

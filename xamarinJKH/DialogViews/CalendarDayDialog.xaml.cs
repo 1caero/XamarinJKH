@@ -28,7 +28,8 @@ namespace xamarinJKH.DialogViews
             InitializeComponent();
             Init(isMonitor, setDate);
             HexColor = (Color)Application.Current.Resources["MainColor"];
-            LabelDate.Text = "Выберите дату и время";
+            LabelDate.Text = AppResources.SelectDateTime;
+            timePicker.IsVisible = true;
             BindingContext = this;
         }
 
@@ -50,6 +51,7 @@ namespace xamarinJKH.DialogViews
                     break;
             }
             var close = new TapGestureRecognizer();
+            timePicker.Time = DateTime.Now.TimeOfDay;
             close.Tapped += async (s, e) => { DialogNotifier.Cancel(); };
             IconViewClose.GestureRecognizers.Add(close);
             calendar.MonthViewSettings.DateSelectionColor = (Color) Application.Current.Resources["MainColor"];
@@ -77,18 +79,18 @@ namespace xamarinJKH.DialogViews
                     }
                     else
                     {
-                        if (!_checkDate)
-                        {
-                            Device.BeginInvokeOnMainThread(() =>
-                            {
-                                calendar.IsVisible = false;
-                                timePicker.IsVisible = true;
-                            });
-
-                            _checkDate = true;
-                        }
-                        else
-                        {
+                        // if (!_checkDate)
+                        // {
+                        //     Device.BeginInvokeOnMainThread(() =>
+                        //     {
+                        //         calendar.IsVisible = false;
+                        //         timePicker.IsVisible = true;
+                        //     });
+                        //
+                        //     _checkDate = true;
+                        // }
+                        // else
+                        // {
                             TimeSpan timePickerTime = timePicker.Time;
                             DateTime calendarSelectedDate = calendar.SelectedDate.Value;
                             DateTime select = new DateTime(
@@ -105,7 +107,7 @@ namespace xamarinJKH.DialogViews
 
                             Tuple<string, string> dateStr =
                                 new Tuple<string, string>($"{universalTime:yyyy-MM-dd HH:mm:ss}",
-                                    $"{select:dd.MM.yyyy HH:mm:ss}");
+                                    $"{select:dd.MM.yyyy HH:mm}");
 
                             //if (_setDate != null)
                             //    _setDate.Execute(dateStr);
@@ -127,7 +129,7 @@ namespace xamarinJKH.DialogViews
 
                             DialogNotifier.Cancel();
 
-                        }
+                        // }
 
                     }
                 }

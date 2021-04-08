@@ -48,15 +48,21 @@
                              SelectionMode="SingleSelection" VerticalOptions="Center">
                     </calendar:SfCalendar>
                 <StackLayout VerticalOptions="CenterAndExpand">
-                    <pickers:SfTimePicker VerticalOptions="Center" x:Name="timePicker"
-                                          IsVisible="False"
-                                          ShowHeader="False"
-                                          HourHeaderText="Часы"
-                                          MinutesHeaderText="Минуты"
-                                          SecondsHeaderText="Секунды"
-                                          SelectionBackgroundColor="{x:DynamicResource MainColor}"
-                                          SelectedItemTextColor="{x:DynamicResource MainColor}"
-                                          HeaderBackgroundColor="{x:DynamicResource MainColor}"/>
+                    <!-- <pickers:SfTimePicker VerticalOptions="Center" x:Name="timePicker" -->
+                    <!--                       IsVisible="False" -->
+                    <!--                       ShowHeader="False" -->
+                    <!--                       HourHeaderText="Часы" -->
+                    <!--                       MinutesHeaderText="Минуты" -->
+                    <!--                       SecondsHeaderText="Секунды" -->
+                    <!--                       SecondInterval="60" -->
+                    <!--                       SelectionBackgroundColor="{x:DynamicResource MainColor}" -->
+                    <!--                       SelectedItemTextColor="{x:DynamicResource MainColor}" -->
+                    <!--                       HeaderBackgroundColor="{x:DynamicResource MainColor}"/> -->
+                    <TimePicker x:Name="timePicker"
+                                IsVisible="False"
+                                Margin="10,0,10,0"
+                                
+                    />
                 </StackLayout>
                     
                 </StackLayout>
