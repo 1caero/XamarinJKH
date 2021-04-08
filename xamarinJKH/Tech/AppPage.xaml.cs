@@ -311,6 +311,7 @@ namespace xamarinJKH.Tech
 
                     break;
                 case Device.Android:
+                    Device.BeginInvokeOnMainThread(() => EntryMess.HeightRequest = -1);
                     break;
                 default:
                     break;
@@ -363,7 +364,6 @@ namespace xamarinJKH.Tech
             setText();
 
             EntryMess.Keyboard = Keyboard.Create(KeyboardFlags.CapitalizeSentence | KeyboardFlags.Spellcheck);
-
         }
 
 
@@ -892,7 +892,7 @@ namespace xamarinJKH.Tech
         private void EntryMess_TextChanged(object sender, TextChangedEventArgs e)
         {
             var entry = sender as BordlessEditor;
-            if(e.NewTextValue=="")
+            if(e.NewTextValue==""&& Device.RuntimePlatform != Device.Android)
             {
               Device.BeginInvokeOnMainThread(()=>  entry.HeightRequest = MessageBoxStartHeigth);
             }
