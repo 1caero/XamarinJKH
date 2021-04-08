@@ -388,6 +388,7 @@ namespace xamarinJKH.Main
 
         public EventsPageViewModel()
         {
+            Analytics.TrackEvent("Конструктор модели страницы событий");
             LoadData = new Command(async () =>
             {
                 bool isPerson = Settings.Person?.Accounts?.Count > 0;
@@ -432,6 +433,7 @@ namespace xamarinJKH.Main
                 ShowAdditionalServices = false;
                 CountNew.Execute(null);
             });
+            Analytics.TrackEvent("Конструктор модели страницы событий-команда LoadData");
             CountNew = new Command(() =>
             {
                 try
@@ -478,20 +480,29 @@ namespace xamarinJKH.Main
                 }
                 MessagingCenter.Send<Object, int>(this, "SetEventsAmount", PollsCount + AnnounsmentsCount + NewsCount);
             });
+            Analytics.TrackEvent("Конструктор модели страницы событий-команда CountNew");
             MessagingCenter.Subscribe<Object>(this, "ReducePolls", sender =>
             {
+                Analytics.TrackEvent("Конструктор модели страницы событий-ReducePolls");
+
                 PollsCount--;
             });
 
             MessagingCenter.Subscribe<Object>(this, "ReduceAnnounsements", sender =>
             {
+                Analytics.TrackEvent("Конструктор модели страницы событий-ReduceAnnounsements");
                 AnnounsmentsCount--;
             });
 
             MessagingCenter.Subscribe<Object>(this, "ReduceNews", sender =>
             {
+                Analytics.TrackEvent("Конструктор модели страницы событий-ReduceNews");
+
                 NewsCount--;
             });
+
+            Analytics.TrackEvent("Конструктор модели страницы событий-отработал");
+
         }
     }
 }
