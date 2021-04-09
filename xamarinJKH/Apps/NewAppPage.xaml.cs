@@ -589,6 +589,26 @@ _appModel = new AddAppModel()
                     isVisible = value;
                     OnPropertyChanged("IsVisible");
                 }
+            } 
+            bool isEnabled;
+            public bool IsEnabled
+            {
+                get => isEnabled;
+                set
+                {
+                    isEnabled = value;
+                    OnPropertyChanged("IsEnabled");
+                }
+            } 
+            string alertText = "";
+            public string AlertText
+            {
+                get => alertText;
+                set
+                {
+                    alertText = value;
+                    OnPropertyChanged("AlertText");
+                }
             }
             public ObservableCollection<OptionModel> Types { get; set; }
             public ObservableCollection<TypeModel> PodTypes { get; set; }  
@@ -736,6 +756,8 @@ _appModel = new AddAppModel()
                                 account.Selected = false;
                             }
                             SelectedAccount.Selected = true;
+                            IsEnabled = !SelectedAccount.DenyRequestCreation;
+                            AlertText = string.IsNullOrEmpty(SelectedAccount.DenyRequestCreationMessage) ? "" : SelectedAccount.DenyRequestCreationMessage;
                         }
                     });
                 });

@@ -317,7 +317,13 @@
                                                     BackgroundColor="{Binding hex}"
                                                     HorizontalOptions="Fill" />
                                             </StackLayout>
+                                            
                                         </StackLayout>
+                                        <Label TextColor="Red"
+                                               Text="{Binding AlertText}"
+                                               Margin="10, 10, 10, 0"
+                                               IsVisible="{Binding IsEnabled,  Converter={x:StaticResource Invert}}"
+                                               FontSize="15"></Label>
                                         <StackLayout x:Name="LayoutFloor" Orientation="Horizontal"
                                                      HorizontalOptions="FillAndExpand">
                                             <Frame CornerRadius="15"
@@ -661,12 +667,14 @@
                                         <Frame CornerRadius="15"
                                                BackgroundColor="{Binding hex}"
                                                Margin="10, 10, 10, 20"
+                                               IsEnabled="{Binding IsEnabled}"
                                                HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                                x:Name="FrameBtnAdd"
                                                Padding="0">
                                             <Button x:Name="BtnAdd"
                                                     Text="{x:Static xamarinJkh:AppResources.Create}"
                                                     TextColor="White"
+                                                    IsEnabled="{Binding IsEnabled}"
                                                     Clicked="addApp"
                                                     FontAttributes="Bold"
                                                     BackgroundColor="Transparent" />

@@ -67,6 +67,8 @@ namespace xamarinJKH.Server.RequestModel
             get => Settings.GetHalfAddress(Address);
         }
         public string Company { get; set; }
+        
+        public string DenyRequestCreationMessage { get; set; }
         public int MetersStartDay { get; set; }
         public int MetersEndDay { get; set; }
         public bool MetersAccessFlag { get; set; }
@@ -74,6 +76,8 @@ namespace xamarinJKH.Server.RequestModel
         public bool MetersPeriodEndIsCurrent { get; set; }
 
         public bool AllowPassRequestCreation { get; set; }
+        
+        public bool DenyRequestCreation { get; set; }
 
         bool isfirst;
         public bool IsFirst
