@@ -186,6 +186,11 @@ namespace xamarinJKH.Pays
 
         async void SetPays()
         {
+            LayoutInsurance.IsVisible = account.InsuranceSum != 0;
+            InsuranceDoc.IsVisible = account.InsuranceSum != 0;
+            SwitchInsurance.IsToggled = account.InsuranceSum != 0;
+            InsuranceDont.IsVisible = account.InsuranceSum != 0;
+            
             EntrySum.Text = account.Sum.ToString();
             FormattedString formatted = new FormattedString();
             ComissionModel result = await server.GetSumWithComission(account.Sum.ToString());
@@ -203,10 +208,7 @@ namespace xamarinJKH.Pays
                 }
             }
 
-            LayoutInsurance.IsVisible = account.InsuranceSum != 0;
-            InsuranceDoc.IsVisible = account.InsuranceSum != 0;
-            SwitchInsurance.IsToggled = account.InsuranceSum != 0;
-            InsuranceDont.IsVisible = account.InsuranceSum != 0;
+           
 
             LabelInsurance.Text = AppResources.InsuranceText.Replace("111", account.InsuranceSum.ToString());
             formatted.Spans.Add(new Span
