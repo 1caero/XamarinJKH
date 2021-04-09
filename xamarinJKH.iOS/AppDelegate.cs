@@ -73,6 +73,9 @@ namespace xamarinJKH.iOS
             
 
             App.DeviceId = UIDevice.CurrentDevice.IdentifierForVendor.AsString();
+
+            UIApplication.SharedApplication.BeginBackgroundTask(() => { });
+
             return base.FinishedLaunching(app, options);
         }
 
