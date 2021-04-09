@@ -30,11 +30,11 @@ namespace xamarinJKH.Droid
 
 
             //If debug you should reset the token each time.
-// #if DEBUG
+#if DEBUG
             FirebasePushNotificationManager.Initialize(this, true);
-// #else
-//               FirebasePushNotificationManager.Initialize(this,false);
-// #endif
+#else
+              FirebasePushNotificationManager.Initialize(this,false);
+#endif
             //Handle notification when app is closed here
             CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
             {

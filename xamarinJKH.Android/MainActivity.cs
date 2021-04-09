@@ -22,8 +22,10 @@ using xamarinJKH.Droid.CustomReader;
 using xamarinJKH.InterfacesIntegration;
 
 using Android.Speech;
+using xamarinJKH.DialogViews;
 using xamarinJKH.Droid.CustomRenderers;
 using Settings = Android.Provider.Settings;
+using Toast = AiForms.Dialogs.Toast;
 
 namespace xamarinJKH.Droid
 {
@@ -56,37 +58,7 @@ namespace xamarinJKH.Droid
             ActivityCompat.ShouldShowRequestPermissionRationale(this, Manifest.Permission.Camera);
             ActivityCompat.ShouldShowRequestPermissionRationale(this, Manifest.Permission.ReadExternalStorage);
             //CreateNotificationChannel();
-            FirebasePushNotificationManager.ProcessIntent(this, Intent);
-            FirebasePushNotificationManager.DefaultNotificationChannelImportance = NotificationImportance.High;
-#if DEBUG
-            FirebasePushNotificationManager.Initialize(this,
-                new NotificationUserCategory[]
-                {
-                    new NotificationUserCategory("message",new List<NotificationUserAction> {
-                        new NotificationUserAction("Reply","Reply", NotificationActionType.Foreground),
-                        new NotificationUserAction("Forward","Forward", NotificationActionType.Foreground)
-
-                    }),
-                    new NotificationUserCategory("request",new List<NotificationUserAction> {
-                        new NotificationUserAction("Accept","Accept", NotificationActionType.Default, "check"),
-                        new NotificationUserAction("Reject","Reject", NotificationActionType.Default, "cancel")
-                    })
-                }, true);
-#else
-  FirebasePushNotificationManager.Initialize(this,
-                new NotificationUserCategory[]
-                {
-                    new NotificationUserCategory("message",new List<NotificationUserAction> {
-                        new NotificationUserAction("Reply","Reply", NotificationActionType.Foreground),
-                        new NotificationUserAction("Forward","Forward", NotificationActionType.Foreground)
-
-                    }),
-                    new NotificationUserCategory("request",new List<NotificationUserAction> {
-                    new NotificationUserAction("Accept","Accept", NotificationActionType.Default, "check"),
-                    new NotificationUserAction("Reject","Reject", NotificationActionType.Default, "cancel")
-                    })
-                }, false);
-#endif
+           
             Fabric.Fabric.With(this, new Crashlytics.Crashlytics());
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
@@ -98,6 +70,8 @@ namespace xamarinJKH.Droid
             App.ScreenWidth2 = (width - 0.5f) / density;
             App.ScreenHeight2 = (height - 0.5f) / density;
             LoadApplication(new App());
+            FirebasePushNotificationManager.ProcessIntent(this, Intent);
+            FirebasePushNotificationManager.DefaultNotificationChannelImportance = NotificationImportance.High;
             GetId();
             micService = DependencyService.Resolve<IMicrophoneService>();
 
