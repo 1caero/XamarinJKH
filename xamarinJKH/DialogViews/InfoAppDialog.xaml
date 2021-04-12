@@ -182,7 +182,7 @@
                     </Label.FormattedText>
                 </Label>
 
-                <StackLayout
+                <!--<StackLayout
                     Orientation="Horizontal">
                     <Label
                         x:Name="LabelPhone"
@@ -216,7 +216,7 @@
                                 CommandParameter="{Binding _Request.Phone}" />
                         </xamarinJkh:IconView.GestureRecognizers>
                     </xamarinJkh:IconView>
-                </StackLayout>
+                </StackLayout>-->
                 <StackLayout
                     IsVisible="{Binding _Request.IsPaid}"
                     Orientation="Horizontal">

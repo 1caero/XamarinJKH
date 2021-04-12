@@ -28,7 +28,7 @@ namespace xamarinJKH.DialogViews
             IconViewClose.GestureRecognizers.Add(close);
             View.WidthRequest = App.ScreenWidth;
             Analytics.TrackEvent("Инфо о заявке ");
-            IconViewPhone.IsVisible = Settings.Person.IsDispatcher;
+            //IconViewPhone.IsVisible = Settings.Person.IsDispatcher;
             Frame.SetAppThemeColor(Frame.BorderColorProperty, (Color)Application.Current.Resources["MainColor"], Color.White);
             switch (Device.RuntimePlatform)
             {
