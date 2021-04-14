@@ -651,8 +651,8 @@
 
                                                 <DataTemplate>
                                                     <apps:FileCell
-                                                        FileName="{Binding FileName}"
-                                                        FileSize="{Binding DataArray}" />
+                                                        FileName="{Binding GetFileName}"
+                                                        FileSize="{Binding Bytes}" />
                                                 </DataTemplate>
 
                                             </ListView.ItemTemplate>

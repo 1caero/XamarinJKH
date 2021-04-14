@@ -401,7 +401,7 @@
 
                                         <DataTemplate>
                                             <apps:FileConstCell
-                                                FileName="{Binding FileName}"
+                                                FileName="{Binding GetFileName}"
                                                 FileSize="{Binding DataArray}" />
                                         </DataTemplate>
 

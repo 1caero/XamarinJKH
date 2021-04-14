@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Xamarin.Forms;
 
 namespace xamarinJKH.AppsConst
@@ -58,7 +59,7 @@ namespace xamarinJKH.AppsConst
             BindableProperty.Create("FileName", typeof(string), typeof(FileConstCell), "");
 
         public static readonly BindableProperty FileSizeProperty =
-            BindableProperty.Create("FileSize", typeof(byte[]), typeof(FileConstCell), new byte[] { 1 });
+            BindableProperty.Create("FileSize", typeof(Stream), typeof(FileConstCell));
 
         public string FileName
         {
@@ -66,10 +67,10 @@ namespace xamarinJKH.AppsConst
             set { SetValue(FileNameProperty, value); }
         }
 
-        public byte[] FileSize
+        public Stream FileSize
         {
-            get { return (byte[])GetValue(FileSizeProperty); }
-            set { SetValue(FileSizeProperty, new byte[] { 1 }); }
+            get { return (Stream)GetValue(FileSizeProperty); }
+            set { SetValue(FileSizeProperty, value); }
         }
 
         protected override async void OnBindingContextChanged()

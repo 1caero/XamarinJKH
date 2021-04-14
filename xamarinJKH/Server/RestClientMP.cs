@@ -5,13 +5,10 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
-using Plugin.FilePicker.Abstractions;
-using Plugin.Media.Abstractions;
 using xamarinJKH.Server.RequestModel;
 using RestSharp;
 using Xamarin.Forms;
 using xamarinJKH.Utils;
-using xamarinJKH.Server.RequestModel;
 
 namespace xamarinJKH.Server
 {
