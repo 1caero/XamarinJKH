@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using AiForms.Dialogs;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
 using Rg.Plugins.Popup.Services;
@@ -64,6 +65,40 @@ namespace xamarinJKH.Pays
 
             
             };
+
+            var scanQr = new TapGestureRecognizer();
+            scanQr.Tapped += async (s, e) =>
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    string scanAsync;
+                    
+                    scanAsync = await DependencyService.Get<IQrScanningService>().ScanAsync();
+                    if (scanAsync != null)
+                    {
+#if DEBUG
+                        Toast.Instance.Show<ToastDialog>(new { Title = scanAsync, Duration = 5500, ColorB = Color.Gray, ColorT = Color.White });
+#endif
+                        var qr =scanAsync.Split('|');
+                        var ls = qr.FirstOrDefault(_ => _.ToLower().Contains("persacc"));
+                        if (ls!=null)
+                        {
+                            EntryIdent.Text = ls.Replace("persAcc=", "");
+                        }
+                        else
+                        {
+                            Toast.Instance.Show<ToastDialog>(new { Title = AppResources.NothingFound, Duration = 5500, ColorB = Color.Gray, ColorT = Color.White });
+                        }
+                    }
+                    else
+                    {
+                        Toast.Instance.Show<ToastDialog>(new { Title = AppResources.NothingFound, Duration = 5500, ColorB = Color.Gray, ColorT = Color.White });
+                    }
+                });
+            };
+            FrameBtnAddFromQr.GestureRecognizers.Add(scanQr);
+
+
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
@@ -96,6 +131,11 @@ namespace xamarinJKH.Pays
             {
                 SetIconColor();
             });
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            GreySepLine.WidthRequest = IconViewFio.Width + LabelPhone2.Width +20;
         }
 
         void SetIconColor()
@@ -131,6 +171,8 @@ namespace xamarinJKH.Pays
             
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
             Frame.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
+
+            
         }
 
         async void AddIdentToList(AccountInfo ident)

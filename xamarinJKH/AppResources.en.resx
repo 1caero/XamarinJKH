@@ -1937,4 +1937,13 @@
   <data name="SelectDateTime" xml:space="preserve">
     <value>Select date and time </value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddIdentBack" xml:space="preserve">
+    <value>Add an account</value>
+  </data>
+  <data name="IdentNumber" xml:space="preserve">
+    <value>Account number</value>
+  </data>
 </root>

@@ -1810,4 +1810,13 @@
   <data name="SelectDateTime" xml:space="preserve">
     <value>Виберіть дату і час </value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Підключити</value>
+  </data>
+  <data name="AddIdentBack" xml:space="preserve">
+    <value>Підключити особовий рахунок</value>
+  </data>
+  <data name="IdentNumber" xml:space="preserve">
+    <value>Номер рахунку</value>
+  </data>
 </root>

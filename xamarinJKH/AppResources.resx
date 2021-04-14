@@ -1942,4 +1942,13 @@
   <data name="SelectDateTime" xml:space="preserve">
     <value>Выберите дату и время</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Подключить</value>
+  </data>
+  <data name="AddIdentBack" xml:space="preserve">
+    <value>Подключить лицевой счет</value>
+  </data>
+  <data name="IdentNumber" xml:space="preserve">
+    <value>Номер счёта</value>
+  </data>
 </root>

@@ -19,7 +19,7 @@ namespace xamarinJKH {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class AppResources {
@@ -97,6 +97,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Подключить.
+        /// </summary>
+        internal static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Добавить.
         /// </summary>
         internal static string AddApp {
@@ -129,6 +138,15 @@ namespace xamarinJKH {
         internal static string AddIdent {
             get {
                 return ResourceManager.GetString("AddIdent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подключить лицевой счет.
+        /// </summary>
+        internal static string AddIdentBack {
+            get {
+                return ResourceManager.GetString("AddIdentBack", resourceCulture);
             }
         }
         
@@ -2379,6 +2397,15 @@ namespace xamarinJKH {
         internal static string IdentNotFound {
             get {
                 return ResourceManager.GetString("IdentNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Номер счёта.
+        /// </summary>
+        internal static string IdentNumber {
+            get {
+                return ResourceManager.GetString("IdentNumber", resourceCulture);
             }
         }
         
