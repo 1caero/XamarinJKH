@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
-using Plugin.FilePicker;
+﻿using System.IO;
+using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace xamarinJKH.ViewModels
@@ -71,10 +72,11 @@ namespace xamarinJKH.ViewModels
 
             PickFile = new Command(async () =>
             {
-                var file = await CrossFilePicker.Current.PickFile();
-                if (file != null)
+                FileResult fileResult = await FilePicker.PickAsync(new PickOptions());
+                if (fileResult != null)
                 {
-                    if (file.DataArray.Length > 10E7)
+                    Stream stream = await fileResult.OpenReadAsync();
+                    if (stream.Length > 10E7)
                     {
                         ShowError("Размер файла превышает 10мб");
                     }

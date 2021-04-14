@@ -7,9 +7,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
+using FFImageLoading;
 using Microsoft.AppCenter.Analytics;
-using Plugin.FilePicker;
-using Plugin.FilePicker.Abstractions;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.Messaging;
@@ -25,6 +24,7 @@ using xamarinJKH.Main;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
+using xamarinJKH.Utils.FileUtils;
 using xamarinJKH.ViewModels;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
@@ -446,18 +446,19 @@ _appModel = new AddAppModel()
         {
             try
             {
-                FileData pickedFile = await CrossFilePicker.Current.PickFile(fileTypes);
-
-                if (pickedFile != null)
+                FileResult fileResult = await FilePicker.PickAsync(new PickOptions());
+                if (fileResult != null)
                 {
-                    if (pickedFile.DataArray.Length > 10000000)
+                    Stream stream = await fileResult.OpenReadAsync();
+
+                    if (stream.Length > 10000000)
                     {
                         await DisplayAlert(AppResources.ErrorTitle,AppResources.FileTooBig, "OK");
                         return;
                     }
 
-                    files.Add(pickedFile);
-                    Byteses.Add(pickedFile.DataArray);
+                    files.Add(new FileData(fileResult.FullPath,fileResult.FileName, stream));
+                    Byteses.Add(stream.ToByteArray());
                     ListViewFiles.IsVisible = true;
                     if (ListViewFiles.HeightRequest < 120)
                         ListViewFiles.HeightRequest = _appModel.Files.Count * 42;
@@ -492,7 +493,7 @@ _appModel = new AddAppModel()
 
             if (file == null)
                 return;
-            FileData fileData = new FileData( file.Path,getFileName(file.Path), () => file.GetStream() );
+            FileData fileData = new FileData( file.Path,getFileName(file.Path),  file.GetStream() );
             Byteses.Add(StreamToByteArray(file.GetStream()));
             files.Add(fileData);
             ListViewFiles.IsVisible = true;
@@ -516,7 +517,7 @@ _appModel = new AddAppModel()
             var file = await CrossMedia.Current.PickPhotoAsync();
             if (file == null)
                 return;
-            FileData fileData = new FileData( file.Path,getFileName(file.Path), () => file.GetStream() );
+            FileData fileData = new FileData( file.Path,getFileName(file.Path),  file.GetStream() );
             Byteses.Add(StreamToByteArray(file.GetStream()));
             files.Add(fileData);
             ListViewFiles.IsVisible = true;
@@ -1019,7 +1020,7 @@ _appModel = new AddAppModel()
             }
             foreach (var each in files)
             {
-                CommonResult commonResult = await _server.AddFileApps(id, each.FileName, Byteses[i],
+                CommonResult commonResult = await _server.AddFileApps(id, each.GetFileName, Byteses[i],
                     each.FilePath);
                 i++;
             }
@@ -1289,4 +1290,6 @@ _appModel = new AddAppModel()
             }
         }
     }
+
+    
 }

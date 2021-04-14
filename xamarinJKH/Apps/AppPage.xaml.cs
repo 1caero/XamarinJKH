@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
+using FFImageLoading;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.CognitiveServices.Speech;
-using Plugin.FilePicker;
-using Plugin.FilePicker.Abstractions;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
-using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -576,7 +574,7 @@ namespace xamarinJKH.Apps
                         {
                             SaveToAlbum = true,// Device.RuntimePlatform==Device.iOS, //ios - сохраняем файлы
                             CompressionQuality =  90,
-                            Directory = string.Format(Xamarin.Essentials.AppInfo.Name.Replace("\"", "") /*+ "_" + AppResources.Photo*/)
+                            Directory = string.Format(AppInfo.Name.Replace("\"", "") /*+ "_" + AppResources.Photo*/)
                         });
                     if (file != null)
                         await startLoadFile(CAMERA, file);
@@ -737,13 +735,17 @@ namespace xamarinJKH.Apps
         {
             try
             {
+                PickOptions pickOptions = new PickOptions
+                {
+                    PickerTitle = "Выбор файла"
+                };
                 IconViewAddFile.IsVisible = false;
                 progressFile.IsVisible = true;
-                FileData pickedFile = await CrossFilePicker.Current.PickFile(fileTypes);
-
-                if (pickedFile != null)
+                FileResult fileResult = await FilePicker.PickAsync(pickOptions);
+                if (fileResult != null) 
                 {
-                    if (pickedFile.DataArray.Length > 10000000)
+                    Stream stream = await fileResult.OpenReadAsync();
+                    if (stream.Length > 10000000)
                     {
                         await DisplayAlert(AppResources.ErrorTitle, AppResources.FileTooBig, "OK");
                         IconViewAddFile.IsVisible = true;
@@ -753,8 +755,8 @@ namespace xamarinJKH.Apps
 
 
                     CommonResult commonResult = await _server.AddFileApps(_requestInfo.ID.ToString(),
-                        pickedFile.FileName, pickedFile.DataArray,
-                        pickedFile.FilePath);
+                        fileResult.FileName, stream.ToByteArray(),
+                        fileResult.FullPath);
                     if (commonResult == null)
                     {
                         await ShowToast(AppResources.SuccessFileSent);
