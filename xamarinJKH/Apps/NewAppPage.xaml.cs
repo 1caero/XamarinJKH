@@ -758,6 +758,7 @@ _appModel = new AddAppModel()
                             }
                             SelectedAccount.Selected = true;
                             IsEnabled = !SelectedAccount.DenyRequestCreation;
+                            //BtnAdd.TextColor = IsEnabled ? Color.White : Color.Red;
                             AlertText = string.IsNullOrEmpty(SelectedAccount.DenyRequestCreationMessage) ? "" : SelectedAccount.DenyRequestCreationMessage;
                         }
                     });

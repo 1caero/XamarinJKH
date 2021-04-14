@@ -677,7 +677,39 @@
                                                     IsEnabled="{Binding IsEnabled}"
                                                     Clicked="addApp"
                                                     FontAttributes="Bold"
-                                                    BackgroundColor="Transparent" />
+                                                    BackgroundColor="Transparent" >
+                                                <VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroupList>
+                                                        <VisualStateGroup x:Name="CommonStates">
+                                                            <VisualState x:Name="Normal">
+                                                                <VisualState.Setters>
+                                                                    <Setter Property="TextColor" Value="White" />
+                                                                </VisualState.Setters>
+                                                            </VisualState>
+                                                            <!--<VisualState x:Name="Pressed">
+                                                                <VisualState.Setters>
+                                                                    <Setter Property="BackgroundColor" Value="{StaticResource ColorAccentTransparent}" />
+                                                                </VisualState.Setters>
+                                                            </VisualState>
+                                                            <VisualState x:Name="Focused">
+                                                                <VisualState.Setters>
+                                                                    <Setter Property="BackgroundColor" Value="{StaticResource ColorAccentTransparent}" />
+                                                                </VisualState.Setters>
+                                                            </VisualState>-->
+                                                            <VisualState x:Name="Disabled">
+                                                                <VisualState.Setters>
+                                                                    <Setter Property="TextColor" Value="Gray" />
+                                                                </VisualState.Setters>
+                                                            </VisualState>
+                                                        </VisualStateGroup>
+                                                    </VisualStateGroupList>
+                                                </VisualStateManager.VisualStateGroups>
+                                                <!--<Button.Triggers>
+                                                    <DataTrigger TargetType="Button" Binding="{Binding IsEnabled}" Value="False">
+                                                        <Setter Property="TextColor" Value="Green"></Setter>
+                                                    </DataTrigger>
+                                                </Button.Triggers>-->
+                                            </Button>
                                         </Frame>
 
                                     </StackLayout>
