@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using xamarinJKH.Utils;
 
 namespace xamarinJKH.Server.RequestModel
 {
@@ -78,6 +80,7 @@ namespace xamarinJKH.Server.RequestModel
     {
         // Дата
         public string Period { get; set; }
+        public string Kind { get; set; }
         // Значение (Т1 для 2х 3х тарифныз)
         public bool IsCurrentPeriod  { get; set; }
         public decimal Value { get; set; }
@@ -85,6 +88,20 @@ namespace xamarinJKH.Server.RequestModel
         public decimal? ValueT2 { get; set; }
         // Значение Т3
         public decimal? ValueT3 { get; set; }
+
+        public string IconKind
+        {
+            get => Kind == "Передано"
+                ? "resource://xamarinJKH.Resources.ic_send_meter.svg"
+                : "resource://xamarinJKH.Resources.ic_check_mark.svg";
+        }
+
+        public Dictionary<string, string> ColorIcon
+        {
+            get => Kind == "Передано"
+                ? new Dictionary<string, string> {{"#000000", "#333333"}}
+                : new Dictionary<string, string> {{"#000000", $"#{Settings.MobileSettings.color}"}};
+        }
         
         public int TariffNumberInt { get; set; }
     }

@@ -89,6 +89,7 @@
     <None Remove="Resources\ic_status_wait.svg" />
     <None Remove="Resources\ic_tech.svg" />
     <None Remove="Resources\pay.svg" />
+    <None Remove="Resources\ic_send_meter.svg" />
     <None Remove="Resources\star.svg" />
     <None Remove="Resources\star_filled.svg" />
     <None Remove="Resources\telegram.svg" />
@@ -126,6 +127,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource> 
     <EmbeddedResource Include="Resources\ic_pays.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ic_send_meter.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ic_ident_ls.svg">

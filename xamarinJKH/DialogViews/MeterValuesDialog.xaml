@@ -109,8 +109,9 @@
                     <DataTemplate>
                         <Grid >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
                             <!--<xamarinJkh:JustifiedLabel Grid.Column="0" 
@@ -131,7 +132,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0"
-                                   FontSize="13"
+                                   FontSize="15"
                                    HorizontalTextAlignment="Start"
                                    TextColor="Black"
                                 Text="{Binding Period}" 
@@ -144,22 +145,23 @@
                             </Grid>
 
 
-
-
+                            
                             <Label  Grid.Column="1"
-                                   FontSize="12"
+                                   FontSize="15"
                                    TextColor="Black"
                                    IsVisible="{Binding TariffNumberInt, Converter={x:StaticResource TarifOne}, ConverterParameter=TariffNumberInt}"
                                    VerticalOptions="End"
+                                   HorizontalOptions="FillAndExpand"
                                    HorizontalTextAlignment="Start"
                                    VerticalTextAlignment="End"
                                    Text="{Binding Value}"
                                    FontAttributes="Bold" />
                             <Label Grid.Column="1"
-                                   FontSize="12"
+                                   FontSize="15"
                                    TextColor="Black"
                                    IsVisible="{Binding TariffNumberInt, Converter={x:StaticResource TarifTwo}, ConverterParameter=TariffNumberInt}"
                                    VerticalOptions="End"
+                                   HorizontalOptions="FillAndExpand"
                                    HorizontalTextAlignment="Start"
                                    VerticalTextAlignment="End"
                                    FontAttributes="Bold" >
@@ -174,10 +176,11 @@
                                 </Label.FormattedText>
                             </Label>
                             <Label Grid.Column="1"
-                                   FontSize="12"
+                                   FontSize="15"
                                    TextColor="Black"
                                    IsVisible="{Binding TariffNumberInt, Converter={x:StaticResource TarifThree}, ConverterParameter=TariffNumberInt}"
                                    VerticalOptions="End"
+                                   HorizontalOptions="FillAndExpand"
                                    HorizontalTextAlignment="Start"
                                    VerticalTextAlignment="End"
                                    FontAttributes="Bold" >
@@ -194,6 +197,22 @@
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
+                            <StackLayout Grid.Column="2" HorizontalOptions="End" IsVisible="{Binding Kind, Converter={converters:StringEmptyConverterPeople}, ConverterParameter=Kind }" Orientation="Horizontal">
+                                <forms:SvgCachedImage
+                                    Source="{Binding IconKind}"
+                                    HeightRequest="15"
+                                    VerticalOptions="Center"
+                                    WidthRequest="15"
+                                    ReplaceStringMap="{Binding ColorIcon}" />
+                                <Label 
+                                       FontSize="15"
+                                       HorizontalTextAlignment="End"
+                                       VerticalOptions="Center"
+                                       TextColor="Black"
+                                       Text="{Binding Kind}" />
+                            </StackLayout>
+                            
+                            
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

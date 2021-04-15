@@ -31,7 +31,7 @@ namespace xamarinJKH.DialogViews
             this.countersPage = countersPage;
             InitializeComponent();
             PopupMeterValue.HeightRequest = App.ScreenWidth;
-            CollectionViewFiles.ItemsLayout = new GridItemsLayout(2, ItemsLayoutOrientation.Vertical);
+            CollectionViewFiles.ItemsLayout = new GridItemsLayout(1, ItemsLayoutOrientation.Vertical);
             GetMeterValues();
             var close = new TapGestureRecognizer();
             close.Tapped += async (s, e) => { await PopupNavigation.Instance.PopAsync(); };
@@ -151,8 +151,8 @@ namespace xamarinJKH.DialogViews
                 ValueT3 = mInfo.StartValueT3 ?? 0,
                 TariffNumberInt = mInfo.TariffNumberInt
             });
-          
-            return SetSortValues(meterValueInfo);
+            // return SetSortValues(meterValueInfo);
+            return meterValueInfo;
         }
 
         List<MeterValueInfo> SetSortValues(List<MeterValueInfo> meterValueInfo)
