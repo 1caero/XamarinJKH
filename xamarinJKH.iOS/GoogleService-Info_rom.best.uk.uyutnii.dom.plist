@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>200494899284-ea4j6nc42qe2n4vc0jis61alpf4ai1in.apps.googleusercontent.com</string>
+	<string>200494899284-h79ulepbt7aggp0u0ss9ork8aa5mcos6.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.200494899284-ea4j6nc42qe2n4vc0jis61alpf4ai1in</string>
+	<string>com.googleusercontent.apps.200494899284-h79ulepbt7aggp0u0ss9ork8aa5mcos6</string>
 	<key>API_KEY</key>
 	<string>AIzaSyB7H9H0iFlpOZkhk0D5go1hguMWwVzjE88</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>rom.best.uk.uyutnii.dom</string>
+	<string>rom.best.uk.umniy.dom</string>
 	<key>PROJECT_ID</key>
 	<string>xamarinjkh2</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:200494899284:ios:0d5f5a70b0d779c1334dc1</string>
+	<string>1:200494899284:ios:0cb342ec999072e4334dc1</string>
 </dict>
 </plist>
