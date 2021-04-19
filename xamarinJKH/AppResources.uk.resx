@@ -1819,4 +1819,25 @@
   <data name="IdentNumber" xml:space="preserve">
     <value>Номер рахунку</value>
   </data>
+  <data name="PassMixer" xml:space="preserve">
+    <value>Миксер</value>
+  </data>
+  <data name="AutoColor" xml:space="preserve">
+    <value>Колiр</value>
+  </data>
+  <data name="BiometricAddDialog" xml:space="preserve">
+    <value>Бажаєте захистити вхід за допомогою FaceId / відбитку пальця?</value>
+  </data>
+  <data name="BiometricNA" xml:space="preserve">
+    <value>Біометрія недоступна</value>
+  </data>
+  <data name="BiometricNotRecognizedDialog" xml:space="preserve">
+    <value>Не вдалося увійти за допомогою FaceId / відбитка пальця. Використовуйте логін і пароль для входу.</value>
+  </data>
+  <data name="BiometricUseDialog" xml:space="preserve">
+    <value>Будь ласка, використовуйте Face Id / відбиток пальця для входу</value>
+  </data>
+  <data name="BiometricUse" xml:space="preserve">
+    <value>Використовувати FaceId / відбиток пальця для входу</value>
+  </data>
 </root>

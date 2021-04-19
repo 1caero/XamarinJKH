@@ -28,6 +28,13 @@ namespace xamarinJKH.MainConst
         public bool isSave { get; set; }
         public string svg2 { get; set; }
 
+        public bool useBio { get; set; }
+
+        private void SwitchUseBio_OnPropertyChanged(object sender, ToggledEventArgs toggledEventArgs)
+        {
+            Preferences.Set("FingerPrintsOn", useBio.ToString().ToLower());
+        }
+
         private async void GoBack(object sender, EventArgs args)
         {
             try
@@ -59,6 +66,15 @@ namespace xamarinJKH.MainConst
             Analytics.TrackEvent("Профиль сотрудника");
 
             isSave = Preferences.Get("isPass", false);
+
+            var ub = Preferences.Get("FingerPrintsOn", "");
+
+            if (ub == "" || ub == "false")
+                useBio = false;
+            else
+                useBio = true;
+
+
             NavigationPage.SetHasNavigationBar(this, false);
             var exitClick = new TapGestureRecognizer();
             exitClick.Tapped += async (s, e) =>
@@ -291,6 +307,9 @@ namespace xamarinJKH.MainConst
             progress.Color = hexColor;
 
             FrameOffers.BorderColor = hexColor;
+
+            SwitchUseBio.OnColor = hexColor;
+            SwitchUseBio.ThumbColor = Color.Black;
 
             RadioButtonAuto.Effects.Add(Effect.Resolve("MyEffects.RadioButtonEffect"));
             RadioButtonDark.Effects.Add(Effect.Resolve("MyEffects.RadioButtonEffect"));

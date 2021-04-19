@@ -26,6 +26,7 @@ using xamarinJKH.DialogViews;
 using xamarinJKH.Droid.CustomRenderers;
 using Settings = Android.Provider.Settings;
 using Toast = AiForms.Dialogs.Toast;
+using Plugin.Fingerprint;
 
 namespace xamarinJKH.Droid
 {
@@ -58,7 +59,9 @@ namespace xamarinJKH.Droid
             ActivityCompat.ShouldShowRequestPermissionRationale(this, Manifest.Permission.Camera);
             ActivityCompat.ShouldShowRequestPermissionRationale(this, Manifest.Permission.ReadExternalStorage);
             //CreateNotificationChannel();
-           
+            
+            CrossFingerprint.SetCurrentActivityResolver(() => Xamarin.Essentials.Platform.CurrentActivity);
+
             Fabric.Fabric.With(this, new Crashlytics.Crashlytics());
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);

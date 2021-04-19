@@ -150,7 +150,7 @@ namespace xamarinJKH.Apps
                 AllAcc = accs,
                 AllType = Settings.TypeApp,
                 AllKindPass = new List<string> { AppResources.PassMan, AppResources.PassMotorcycle,
-                    AppResources.PassCar, AppResources.PassGazele, AppResources.PassCargo },
+                    AppResources.PassCar, AppResources.PassGazele, AppResources.PassCargo, AppResources.PassMixer },
                 AllBrand = new List<string>() {"Suzuki", "Kavasaki", "Lada", "Opel", "Volkswagen", "Запорожец" }, /*Settings.BrandCar,*/
                 hex = (Color)Application.Current.Resources["MainColor"],
                 SelectedAcc = accs[0],
@@ -164,7 +164,7 @@ _appModel = new AddAppModel()
                 AllAcc = accs,
                 AllType = Settings.TypeApp,
                 AllKindPass = new List<string>{AppResources.PassMan, AppResources.PassMotorcycle,
-                    AppResources.PassCar, AppResources.PassGazele, AppResources.PassCargo},
+                    AppResources.PassCar, AppResources.PassGazele, AppResources.PassCargo, AppResources.PassMixer},
                 AllBrand = Settings.BrandCar,
                 hex = (Color)Application.Current.Resources["MainColor"],
                 SelectedAcc = accs[0],
@@ -859,7 +859,7 @@ _appModel = new AddAppModel()
                     if (isPassAPP)
                     {
                         result = await _server.newAppPass(ident, typeId, text,_passApp.idType,PassIsConstant, _appModel.DateValidity, _passApp.Fio,
-                            _passApp.SeriaNumber, _passApp.CarBrand, _passApp.CarNumber);
+                            _passApp.SeriaNumber, _passApp.CarBrand, _passApp.CarNumber, _passApp.VehicleColor);
                     }
                     else
                     {
@@ -929,6 +929,7 @@ _appModel = new AddAppModel()
                         _passApp.Fio = null;
                         _passApp.SeriaNumber = null;
                         _passApp.CarNumber = EntryNumber.Text;
+                        _passApp.VehicleColor = AutoColor.Text;
                         if (string.IsNullOrWhiteSpace(_passApp.CarBrand))
                         {
                             DisplayAlert(AppResources.ErrorTitle, AppResources.EnterCarBrand, "OK");
@@ -1108,6 +1109,7 @@ _appModel = new AddAppModel()
             public string CarNumber { get; set;}
             public string Fio { get; set; }
             public string SeriaNumber { get; set; }
+            public string VehicleColor { get; set; }
         }
 
         private void TSBrandList_OnItemTapped(Object sender, ItemTappedEventArgs e)

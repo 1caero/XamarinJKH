@@ -80,5 +80,7 @@
 	<string>УК Новые возможности</string>
 	<key>CFBundleIdentifier</key>
 	<string>rom.best.water.alpha</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>разрешить использовать Face ID для входа в приложение</string>
 </dict>
 </plist>

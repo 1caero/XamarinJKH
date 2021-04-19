@@ -1951,4 +1951,25 @@
   <data name="IdentNumber" xml:space="preserve">
     <value>Номер счёта</value>
   </data>
+  <data name="PassMixer" xml:space="preserve">
+    <value>Миксер</value>
+  </data>
+  <data name="AutoColor" xml:space="preserve">
+    <value>Цвет</value>
+  </data>
+  <data name="BiometricAddDialog" xml:space="preserve">
+    <value>Хотите защитить вход с помощью FaceId/отпечатка пальца?</value>
+  </data>
+  <data name="BiometricNA" xml:space="preserve">
+    <value>Биометрия не доступна</value>
+  </data>
+  <data name="BiometricNotRecognizedDialog" xml:space="preserve">
+    <value>Не удалось войти с помощью  FaceId/отпечатка пальца. Используйте логин и пароль для входа.</value>
+  </data>
+  <data name="BiometricUseDialog" xml:space="preserve">
+    <value>Пожалуйста, используйте FaceId/отпечаток пальца для входа</value>
+  </data>
+  <data name="BiometricUse" xml:space="preserve">
+    <value>Использовать FaceId/отпечаток пальца для входа</value>
+  </data>
 </root>

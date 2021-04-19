@@ -24,6 +24,9 @@ namespace xamarinJKH.Main
         private LoginResult Person = new LoginResult();
         private RestClientMP _server = new RestClientMP();
         public bool isSave  {get;set;}
+
+        public bool useBio { get; set; }
+
         public bool GoodsIsVisible  {get;set;}
         bool _convert;
         public bool Convert
@@ -48,6 +51,13 @@ namespace xamarinJKH.Main
             Convert = true;
             GoodsIsVisible = Settings.GoodsIsVisible;
             isSave = Preferences.Get("isPass", false);
+            var ub = Preferences.Get("FingerPrintsOn", "");
+
+            if (ub == "" || ub == "false")
+                useBio = false;
+            else
+                useBio = true;
+
             NavigationPage.SetHasNavigationBar(this, false);
 
             var exitClick = new TapGestureRecognizer();
@@ -248,6 +258,10 @@ namespace xamarinJKH.Main
             LabelseparatorFio.BackgroundColor = hexColor;
             SwitchSavePass.OnColor = hexColor;
             SwitchSavePass.ThumbColor = Color.Black;
+
+            SwitchUseBio.OnColor = hexColor;
+            SwitchUseBio.ThumbColor = Color.Black;
+
             BtnExit.TextColor = hexColor;
             progress.Color = hexColor;
 
@@ -300,6 +314,11 @@ namespace xamarinJKH.Main
         private void SwitchSavePass_OnPropertyChanged(object sender, ToggledEventArgs toggledEventArgs)
         {
             Preferences.Set("isPass",isSave);
+        }
+
+        private void SwitchUseBio_OnPropertyChanged(object sender, ToggledEventArgs toggledEventArgs)
+        {
+            Preferences.Set("FingerPrintsOn", useBio.ToString().ToLower());
         }
 
         private void RadioButtonDark_OnCheckedChanged(object sender, CheckedChangedEventArgs e)

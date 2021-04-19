@@ -574,6 +574,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Цвет.
+        /// </summary>
+        internal static string AutoColor {
+            get {
+                return ResourceManager.GetString("AutoColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Автоматическая.
         /// </summary>
         internal static string Automatic {
@@ -642,6 +651,51 @@ namespace xamarinJKH {
         internal static string Bills {
             get {
                 return ResourceManager.GetString("Bills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Хотите защитить вход с помощью FaceId/отпечатка пальца?.
+        /// </summary>
+        internal static string BiometricAddDialog {
+            get {
+                return ResourceManager.GetString("BiometricAddDialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Биометрия не доступна.
+        /// </summary>
+        internal static string BiometricNA {
+            get {
+                return ResourceManager.GetString("BiometricNA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не удалось войти с помощью  FaceId/отпечатка пальца. Используйте логин и пароль для входа..
+        /// </summary>
+        internal static string BiometricNotRecognizedDialog {
+            get {
+                return ResourceManager.GetString("BiometricNotRecognizedDialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Использовать FaceId/отпечаток пальца для входа.
+        /// </summary>
+        internal static string BiometricUse {
+            get {
+                return ResourceManager.GetString("BiometricUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пожалуйста, используйте FaceId/отпечаток пальца для входа.
+        /// </summary>
+        internal static string BiometricUseDialog {
+            get {
+                return ResourceManager.GetString("BiometricUseDialog", resourceCulture);
             }
         }
         
@@ -3831,6 +3885,15 @@ namespace xamarinJKH {
         internal static string PassMan {
             get {
                 return ResourceManager.GetString("PassMan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Миксер.
+        /// </summary>
+        internal static string PassMixer {
+            get {
+                return ResourceManager.GetString("PassMixer", resourceCulture);
             }
         }
         

@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="4" android:versionName="3.85"
-		  
-		  package="sys_rom.ru.quiet_harbor" android:installLocation="preferExternal">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="4" android:versionName="3.85" package="sys_rom.ru.quiet_harbor" android:installLocation="preferExternal">
 	<uses-sdk android:minSdkVersion="18" android:targetSdkVersion="29" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
@@ -13,8 +11,8 @@
 	<uses-permission android:name="android.permission.CALL_PHONE" />
 	<uses-permission android:name="android.permission.WRITE_CALENDAR" />
 	<uses-permission android:name="android.permission.RECORD_AUDIO" />
-  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
 	<uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" />
 	<uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
@@ -33,29 +31,23 @@
 	<uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS" />
 	<uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_READ" />
 	<uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_WRITE" />
-	<uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
-	<application
-			android:requestLegacyExternalStorage="true"
-			android:hardwareAccelerated="false"
-			android:label="Тихая Гавань" android:icon="@drawable/icon_login" android:launchMode="singleTop" android:usesCleartextTraffic="true">
-		<provider android:name="android.support.v4.content.FileProvider" android:authorities="${applicationId}.fileprovider" android:exported="false" android:grantUriPermissions="true" >
+	<uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+	<uses-permission android:name="android.permission.USE_FINGERPRINT" />
+	<application android:requestLegacyExternalStorage="true" android:hardwareAccelerated="false" android:label="Тихая Гавань" android:icon="@drawable/icon_login" android:launchMode="singleTop" android:usesCleartextTraffic="true">
+		<provider android:name="android.support.v4.content.FileProvider" android:authorities="${applicationId}.fileprovider" android:exported="false" android:grantUriPermissions="true">
 			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" android:exported="true" />
 		</provider>
-		
 		<service android:exported="true" android:name="xamarinJKH.Droid.DependencyImplementation.MyBackgroundService" />
-    <receiver
-        android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
-        android:exported="true"
-        android:permission="com.google.android.c2dm.permission.SEND">
-      <intent-filter>
-        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-        <category android:name="${applicationId}" />
-      </intent-filter>
-    </receiver>
-    <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCm9H5BxsXh27TRlZGkgdTb15YdOilqIvA" />
-    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-    <!-- Necessary for apps that target Android 9.0 or higher -->
-    <uses-library android:name="org.apache.http.legacy" android:required="false" />
+		<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
+			<intent-filter>
+				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+				<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+				<category android:name="${applicationId}" />
+			</intent-filter>
+		</receiver>
+		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCm9H5BxsXh27TRlZGkgdTb15YdOilqIvA" />
+		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+		<!-- Necessary for apps that target Android 9.0 or higher -->
+		<uses-library android:name="org.apache.http.legacy" android:required="false" />
 	</application>
 </manifest>
