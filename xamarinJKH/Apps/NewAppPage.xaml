@@ -17,6 +17,7 @@
             <converters:AccountSelectedBackgroundConverter x:Key="Background" />
             <converters:AccountSelectedBorderConverter x:Key="Border" />
             <converters:InverseBoolConverter x:Key="Invert" />
+            <converters:PancakeBorderConverter x:Key="PancakeConvert"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -545,9 +546,7 @@
                                                             HorizontalOptions="Start" />
                                                     </StackLayout>
                                                     <pancakeView:PancakeView
-                                                        BorderThickness="4"
-                                                        BorderColor="{Binding Path=ColorError,Source={x:Reference MaskAvtoNumber}}"
-                                                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                                        Border="{Binding Path=ColorError,Source={x:Reference MaskAvtoNumber}, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
                                                         Padding="0,10,0,10"
                                                         Margin="40,0,40,0"
                                                         CornerRadius="10" BackgroundColor="White">

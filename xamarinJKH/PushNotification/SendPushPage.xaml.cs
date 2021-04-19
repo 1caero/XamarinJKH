@@ -32,12 +32,21 @@ namespace xamarinJKH.PushNotification
 
         private List<HouseProfile> DefaultHouses = new List<HouseProfile>();
         private List<HouseProfile> SelecttHouses = new List<HouseProfile>();
-
+        private bool _isChangeTheme;
+        public bool IsChangeTheme
+        {
+            get => _isChangeTheme;
+            set
+            {
+                _isChangeTheme = value;
+                OnPropertyChanged(nameof(IsChangeTheme));
+            }
+        }
         public SendPushPage()
         {
             InitializeComponent();
             DatePicker2.MinimumDate = DatePicker.Date;
-            Frame.SetAppThemeColor(PancakeView.BorderColorProperty,(Color)Application.Current.Resources["MainColor"],Color.Transparent );
+            // Frame.SetAppThemeColor(PancakeView.BorderColorProperty,(Color)Application.Current.Resources["MainColor"],Color.Transparent );
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
@@ -406,6 +415,12 @@ namespace xamarinJKH.PushNotification
             FrameIos.BorderColor = Color.Gray;
             ButtonIos.TextColor = Color.Black;
             
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            IsChangeTheme = !IsChangeTheme;
         }
 
         private void Button_Android_OS_Click(object sender, EventArgs e)

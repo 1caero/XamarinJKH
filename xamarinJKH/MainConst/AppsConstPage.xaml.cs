@@ -54,6 +54,17 @@ namespace xamarinJKH.MainConst
 
             }
         }
+        private bool _isChangeTheme;
+
+        public bool IsChangeTheme
+        {
+            get => _isChangeTheme;
+            set
+            {
+                _isChangeTheme = value;
+                OnPropertyChanged(nameof(IsChangeTheme));
+            }
+        }
         public ObservableCollection<RequestInfo> RequestInfos { get; set; } = new ObservableCollection<RequestInfo>();
         public ObservableCollection<RequestInfo> RequestInfosAlive { get; set; }
         public ObservableCollection<RequestInfo> RequestInfosClose { get; set; }
@@ -441,6 +452,8 @@ namespace xamarinJKH.MainConst
 
             if (bottomMenu.VerticalOptions.Alignment != LayoutAlignment.End)
                 Device.BeginInvokeOnMainThread(() => { bottomMenu.VerticalOptions = LayoutOptions.End; });
+            IsChangeTheme = !IsChangeTheme;
+            // additionalList.ItemsSource = additionalList.ItemsSource;
         }
 
         async void SyncSetup()
@@ -536,7 +549,7 @@ namespace xamarinJKH.MainConst
             FrameBtnAdd.BackgroundColor = hex;
             
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            bottomMenu.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
+            // bottomMenu.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
         }
 
 

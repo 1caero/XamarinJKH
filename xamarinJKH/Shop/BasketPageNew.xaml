@@ -16,7 +16,7 @@
              x:Class="xamarinJKH.Shop.BasketPageNew">
     <ContentPage.Resources>
         <ResourceDictionary>
-
+            <converters:PancakeBorderConverter x:Key="PancakeConvert"/>
             <converters:WeightDisplayConverter x:Key="Weight"/>
             <converters:ArrowIconConverter x:Key="Arrow"/>
             <converters:DisplayIfAmountConverter x:Key="Amount"/>
@@ -65,8 +65,8 @@
                         </StackLayout>
                     </StackLayout>
                     <yummy:PancakeView x:Name="GoodsLayot" 
-                                       BorderThickness="1"
                                        HeightRequest="1000"
+                                       Border="{Binding IsChangeTheme, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
                                        CornerRadius="30,30,30,30" BackgroundColor="White"
                                        VerticalOptions="Fill" Margin="15,10, 15,0" Padding="0">
                         <ScrollView Orientation="Vertical"
@@ -191,9 +191,7 @@
 
             <yummy:PancakeView
                 x:Name="PancakeBot"
-                BorderThickness="1"
-                HasShadow="{AppThemeBinding Light=false, Dark=true}"
-                BorderColor="{AppThemeBinding Dark=Transparent, Light={x:DynamicResource MainColor}}"
+                 Border="{Binding IsChangeTheme, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
                 Padding="0" CornerRadius="50,50,0,0" 
                 VerticalOptions="EndAndExpand" 
                 Margin="0,0,0,-10"

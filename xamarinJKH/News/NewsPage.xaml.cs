@@ -28,7 +28,22 @@ namespace xamarinJKH.News
         public ObservableCollection<NewsInfo> NewsInfos { get; set; }
         private bool _isRefreshing = false;
         private RestClientMP server = new RestClientMP();
+        private bool _isChangeTheme;
 
+        public bool IsChangeTheme
+        {
+            get => _isChangeTheme;
+            set
+            {
+                _isChangeTheme = value;
+                OnPropertyChanged(nameof(IsChangeTheme));
+            }
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            IsChangeTheme = !IsChangeTheme;
+        }
         public bool IsRefreshing
         {
             get { return _isRefreshing; }
@@ -171,8 +186,8 @@ namespace xamarinJKH.News
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
             IconViewLogin.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
             
-            Pancake.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
-            PancakeViewIcon.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);{ if (AppInfo.PackageName == "rom.best.saburovo" || AppInfo.PackageName == "sys_rom.ru.tsg_saburovo"){PancakeViewIcon.Padding = new Thickness(0);}}
+            // Pancake.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
+            // PancakeViewIcon.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);{ if (AppInfo.PackageName == "rom.best.saburovo" || AppInfo.PackageName == "sys_rom.ru.tsg_saburovo"){PancakeViewIcon.Padding = new Thickness(0);}}
             //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
             //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
         }

@@ -16,14 +16,15 @@
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style TargetType="yummy:PancakeView">
-                <Setter Property="BorderColor" Value="{AppThemeBinding Light={x:StaticResource MainColor}, Dark=White}" />
-            </Style>
+            <!-- <Style TargetType="yummy:PancakeView"> -->
+            <!--     <Setter Property="BorderColor" Value="{AppThemeBinding Light={x:StaticResource MainColor}, Dark=White}" /> -->
+            <!-- </Style> -->
             <converters:WeightDisplayConverter x:Key="Weight" />
             <converters:ArrowIconConverter x:Key="Arrow" />
             <converters:TextDecorationsUnderline x:Key="Underline" />
             <converters:NumberIsGreaterThanZeroConverter x:Key="MoreThanZero" />
             <converters:InverseBoolConverter x:Key="Invert" />
+            <converters:PancakeBorderConverter x:Key="PancakeConvert"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -74,11 +75,9 @@
                     <StackLayout VerticalOptions="FillAndExpand">
                         <yummy:PancakeView CornerRadius="40,0,40,0"
                                            BackgroundColor="{AppThemeBinding Light=White, Dark=#494949}"
-                                           BorderColor="{AppThemeBinding Light={x:StaticResource MainColor}, Dark=#494949}"
+                                           Border="{Binding IsChangeTheme, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
                                            Margin="15,10,0,-50"
-                                           HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                            x:Name="PancakeViewKind"
-                                           BorderThickness="1"
                                            Padding="20,5,10,30">
                             <CollectionView ItemsSource="{Binding Categories}"
                                             SelectionMode="Single"
@@ -133,8 +132,7 @@
                             </CollectionView>
                         </yummy:PancakeView>
                         <yummy:PancakeView x:Name="GoodsLayot" CornerRadius="30,30,30,30" BackgroundColor="White"
-                                           BorderThickness="1"
-                                           HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                           Border="{Binding IsChangeTheme, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
                                            VerticalOptions="FillAndExpand" Margin="15,10,15,0" Padding="10,0">
                             <StackLayout>
                                 <Grid Margin="10,10,10,0">
@@ -309,10 +307,8 @@
                         </yummy:PancakeView>
                         <yummy:PancakeView
                             x:Name="PancakeBot"
-                            BorderThickness="1"
-                            HasShadow="{AppThemeBinding Light=false, Dark=true}"
                             Margin="0,0,0,0" VerticalOptions="EndAndExpand" Padding="0" CornerRadius="50,50,0,0"
-                            BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=Transparent}"
+                            Border="{Binding IsChangeTheme, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
                             BackgroundColor="{AppThemeBinding Light=White, Dark=#e7e7e7}">
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
                                          Padding="30,0">

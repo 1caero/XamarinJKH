@@ -827,7 +827,7 @@ namespace xamarinJKH.Tech
         {
             await CrossMedia.Current.Initialize();
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            FrameMessage.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.White);
+            // FrameMessage.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.White);
         }
 
         private async void ShowInfo()

@@ -44,6 +44,23 @@ namespace xamarinJKH.Shop
                 }
             }
         }
+        private bool _isChangeTheme;
+
+        public bool IsChangeTheme
+        {
+            get => _isChangeTheme;
+            set
+            {
+                _isChangeTheme = value;
+                OnPropertyChanged(nameof(IsChangeTheme));
+            }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            IsChangeTheme = !IsChangeTheme;
+        }
 
         public PayShopPage(Dictionary<string, Goods> goodset, AdditionalService additional)
         {
@@ -123,7 +140,7 @@ namespace xamarinJKH.Shop
 
             hex = (Color)Application.Current.Resources["MainColor"];
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.White);
+            // GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.White);
             BindingContext = this;
             SetPriceAndWeight();
             

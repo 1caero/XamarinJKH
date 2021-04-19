@@ -35,7 +35,23 @@ namespace xamarinJKH
                 OnPropertyChanged(nameof(IsRefreshing));
             }
         }
+        private bool _isChangeTheme;
 
+        public bool IsChangeTheme
+        {
+            get => _isChangeTheme;
+            set
+            {
+                _isChangeTheme = value;
+                OnPropertyChanged(nameof(IsChangeTheme));
+            }
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            IsChangeTheme = !IsChangeTheme;
+        }
         public ICommand RefreshCommand
         {
             get

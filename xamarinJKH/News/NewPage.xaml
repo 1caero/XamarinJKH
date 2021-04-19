@@ -17,8 +17,6 @@
                 BackgroundColor="{AppThemeBinding Light=White, Dark=#131313}"
                 HorizontalOptions="Fill"
                 MinimumHeightRequest="102"
-                BorderThickness="1"
-                VerticalOptions="Start"
                 x:Name="Pancake"
                 IsClippedToBounds="True">
                 <Grid IsClippedToBounds="True">
@@ -53,9 +51,7 @@
                             </StackLayout>
                         </StackLayout>
                         <pancakeView:PancakeView
-                            BorderColor="Gray"
                             x:Name="PancakeViewIcon"
-                            BorderThickness="1"
                             Padding="5"
                             CornerRadius="25,0,25,25"
                             BackgroundColor="White"

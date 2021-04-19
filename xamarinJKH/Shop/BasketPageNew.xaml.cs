@@ -15,9 +15,10 @@ namespace xamarinJKH.Shop
     public partial class BasketPageNew : ContentPage
     {
         private Color hex;
-        
+        private ShopViewModel vm = null;
         public BasketPageNew(ShopViewModel vm)
         {
+            this.vm = vm;
             InitializeComponent();
             Analytics.TrackEvent("Корзина магазина");
 
@@ -29,8 +30,8 @@ namespace xamarinJKH.Shop
             
             hex = (Color)Application.Current.Resources["MainColor"];
             Color hexColor = (Color)Application.Current.Resources["MainColor"];
-            GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.White);
-            PancakeBot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
+            // GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.White);
+            // PancakeBot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
             var profile = new TapGestureRecognizer();
             profile.Tapped += async (s, e) =>
             {
@@ -56,5 +57,10 @@ namespace xamarinJKH.Shop
             catch { }
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            vm.IsChangeTheme = !vm.IsChangeTheme;
+        }
     }
 }

@@ -7,8 +7,14 @@
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.OSSTotalVotingResult">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PancakeBorderConverter x:Key="PancakeConvert"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>            
             <Grid VerticalOptions="FillAndExpand">
@@ -195,8 +201,7 @@
 
                         <yummy:PancakeView 
                             x:Name="PancakeBot"
-                            BorderThickness="1"
-                            HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                            Border="{Binding IsChangeTheme, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
                             Padding="0" CornerRadius="50,50,0,0"
                             BackgroundColor="{AppThemeBinding Light=White, Dark=#414141}" VerticalOptions="End" >
                             <yummy:PancakeView.Shadow>

@@ -80,14 +80,30 @@ namespace xamarinJKH
             
             SetData(oSS);
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            PancakeBot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
+            // PancakeBot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
             FrameResult.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
 
             BindingContext = this;
         }
 
         Color colorFromMobileSettings = (Color)Application.Current.Resources["MainColor"];
+        private bool _isChangeTheme;
 
+        public bool IsChangeTheme
+        {
+            get => _isChangeTheme;
+            set
+            {
+                _isChangeTheme = value;
+                OnPropertyChanged(nameof(IsChangeTheme));
+            }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            IsChangeTheme = !IsChangeTheme;
+        }
         void SetDecorations()
         {
             UkName.Text = Settings.MobileSettings.main_name;

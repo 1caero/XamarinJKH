@@ -44,6 +44,12 @@ namespace xamarinJKH.Shop
 
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            viewModel.IsChangeTheme = !viewModel.IsChangeTheme;
+        }
+
         async void Back(object sender, EventArgs args)
         {
             try

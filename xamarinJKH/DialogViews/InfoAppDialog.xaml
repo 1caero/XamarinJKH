@@ -11,6 +11,11 @@
                          xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH"
                          xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
                          x:Class="xamarinJKH.DialogViews.InfoAppDialog">
+    <abstractions:DialogView.Resources>
+        <ResourceDictionary>
+            <converters:PancakeBorderConverter x:Key="PancakeConvert"/>
+        </ResourceDictionary>
+    </abstractions:DialogView.Resources>
     <Frame CornerRadius="30"
            x:Name="Frame"
            HorizontalOptions="FillAndExpand"
@@ -340,11 +345,10 @@
                             </Label.FormattedText>
                         </Label>
                         <pancakeView:PancakeView
-                            BorderThickness="4"
-                            BorderColor="Black"
+                            Border="{Binding ColorBlack, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
                             Padding="10,10,10,10"
                             Margin="30,0,30,0"
-                            CornerRadius="10" BackgroundColor="White" HasShadow="True">
+                            CornerRadius="10" BackgroundColor="White" >
                             <Label x:Name="EntryNumber"
                                    FontSize="23"
                                    VerticalOptions="End"

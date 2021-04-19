@@ -169,9 +169,9 @@ namespace xamarinJKH
 
             BootomFrame.SetAppThemeColor(Frame.BorderColorProperty, hex, Color.LightGray);
 
-            RegistrationFrameStep1.SetAppThemeColor(PancakeView.BorderColorProperty, hex, Color.White);
-            RegistrationFrameStep2.SetAppThemeColor(PancakeView.BorderColorProperty, hex, Color.White);
-            RegistrationFrameStep3.SetAppThemeColor(PancakeView.BorderColorProperty, hex, Color.White);
+            // RegistrationFrameStep1.SetAppThemeColor(PancakeView.BorderColorProperty, hex, Color.White);
+            // RegistrationFrameStep2.SetAppThemeColor(PancakeView.BorderColorProperty, hex, Color.White);
+            // RegistrationFrameStep3.SetAppThemeColor(PancakeView.BorderColorProperty, hex, Color.White);
 
             //RegistrationFrameStep1.SetAppThemeColor(MaterialFrame.BorderColorProperty, hex, Color.White);
             //RegistrationFrameStep2.SetAppThemeColor(MaterialFrame.BorderColorProperty, hex, Color.White);

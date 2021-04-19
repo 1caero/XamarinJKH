@@ -20,7 +20,23 @@ namespace xamarinJKH
     {
         Color colorFromMobileSettings = (Color)Application.Current.Resources["MainColor"];
         public bool forsvg { get; set; }
+        private bool _isChangeTheme;
 
+        public bool IsChangeTheme
+        {
+            get => _isChangeTheme;
+            set
+            {
+                _isChangeTheme = value;
+                OnPropertyChanged(nameof(IsChangeTheme));
+            }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            IsChangeTheme = !IsChangeTheme;
+        }
         public OSSPersonalVotingResult(OSS oSS, bool userFinishPool=false)
         {
             InitializeComponent();
@@ -182,7 +198,7 @@ namespace xamarinJKH
             dayEndPlus.Text =" " + AppResources.OSSText.Replace("{r1Date}", r1Date).Replace("{r1Time}", r1Time);
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
             
-            PancakeBot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
+            // PancakeBot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
             FrameResult.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
 
         }

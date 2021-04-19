@@ -8,7 +8,11 @@
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              x:Class="xamarinJKH.Shop.PayShopPage">
-
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PancakeBorderConverter x:Key="PancakeConvert"/>
+            </ResourceDictionary>
+        </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <Grid VerticalOptions="FillAndExpand">
@@ -53,9 +57,9 @@
                     <ScrollView Margin="10,10,10,10">
                         <yummy:PancakeView
                             x:Name="GoodsLayot"
-                            BorderThickness="1"
                             Padding="15"
-                            CornerRadius="40" BackgroundColor="White" HasShadow="False">
+                            Border="{Binding IsChangeTheme, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
+                            CornerRadius="40" BackgroundColor="White">
                             <StackLayout Orientation="Vertical">
                                 <Label HorizontalOptions="Center" Margin="10">
                                     <Label.FormattedText>

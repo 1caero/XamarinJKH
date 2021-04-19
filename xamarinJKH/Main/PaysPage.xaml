@@ -4,8 +4,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.Main.PaysPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PancakeBorderConverter x:Key="PancakeConvert"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <Grid VerticalOptions="FillAndExpand">
@@ -102,12 +108,10 @@
                             </ScrollView>
                         </RefreshView>
                         <StackLayout VerticalOptions="EndAndExpand">
-                            <pancakeView:PancakeView x:Name="GoodsLayot" Elevation="{AppThemeBinding Light=0, Dark=20}" CornerRadius="50,50,0,0"
+                            <pancakeView:PancakeView x:Name="GoodsLayot"  CornerRadius="50,50,0,0"
                                                      BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
                                                      Padding="0,20,0,10"
-                                                     BorderThickness="1"
-                                                     BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=#8D8D8D}"
-                                                     HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                                     Border="{Binding IsChangeTheme, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
                                                      VerticalOptions="FillAndExpand">
                                 <Grid HorizontalOptions="FillAndExpand"
                                       ColumnSpacing="10"

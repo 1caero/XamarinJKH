@@ -6,6 +6,7 @@
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:xamarinJkh="clr-namespace:xamarinJKH"
+             xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH"
              mc:Ignorable="d"
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False"
@@ -17,6 +18,7 @@
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="TextColor" Value="Black"/>
             </Style>
+            <converters:PancakeBorderConverter x:Key="PancakeConvert"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -29,7 +31,8 @@
                                      IsVisible="False"
                                      Margin="0,-2,0,0"
                                      BackgroundColor="{AppThemeBinding Dark=#494949, Light=White}"
-                                     BorderColor="{AppThemeBinding Dark=#494949, Light={x:StaticResource MainColor}}" BorderThickness="2">
+                                     Border="{Binding IsChangeTheme, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
+                                     >
                 <StackLayout Orientation="Horizontal"
                                  VerticalOptions="Fill"
                                  HorizontalOptions="FillAndExpand">
@@ -61,9 +64,8 @@
                         </StackLayout>
                     </StackLayout>
                     <pancakeView:PancakeView
-                            BorderColor="{AppThemeBinding Dark=#494949, Light={x:StaticResource MainColor}}"
+                            Border="{Binding IsChangeTheme, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
                             x:Name="PancakeViewIcon"
-                            BorderThickness="1"
                             Padding="5"
                             CornerRadius="25,0,25,25"
                             BackgroundColor="White"

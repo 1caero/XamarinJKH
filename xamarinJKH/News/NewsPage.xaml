@@ -5,8 +5,14 @@
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.News.NewsPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PancakeBorderConverter x:Key="PancakeConvert"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
          <StackLayout VerticalOptions="FillAndExpand">
             <Grid VerticalOptions="FillAndExpand">
@@ -25,7 +31,6 @@
                         HorizontalOptions="Fill"
 						MinimumHeightRequest="102"
                         VerticalOptions="Start"
-                        BorderThickness="1"
                         x:Name="Pancake"
                         IsClippedToBounds="True">
                         <Grid IsClippedToBounds="True">
@@ -55,9 +60,7 @@
                                     </StackLayout>
                                 </StackLayout>
                                 <pancakeView:PancakeView
-                                    BorderColor="Gray"
                                     x:Name="PancakeViewIcon"
-                                    BorderThickness="1"
                                     Padding="5"
                                     CornerRadius="25,0,25,25"
                                     BackgroundColor="White"
@@ -141,8 +144,7 @@
                         <pancakeView:PancakeView x:Name="GoodsLayot" CornerRadius="50,50,0,0"
                                                  BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
                                                  Padding="0,17,0,5"
-                                                 BorderThickness="1"
-                                                 BorderColor="{AppThemeBinding Dark=White, Light={x:StaticResource MainColor}}"
+                                                 Border="{Binding IsChangeTheme, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
                                                  Margin="0"
                                                  VerticalOptions="FillAndExpand">
                             <StackLayout

@@ -23,10 +23,8 @@
                         Padding="0"
                         CornerRadius="0,0,25,25"
                         BackgroundColor="{AppThemeBinding Light=White, Dark=#131313}"
-                        BorderColor="{AppThemeBinding Light={x:StaticResource MainColor}, Dark=#131313}"
                         MinimumHeightRequest="102"
                         HorizontalOptions="Fill"
-                        BorderThickness="1"
                         VerticalOptions="Start"
                         x:Name="Pancake"
                         IsClippedToBounds="True">
@@ -62,9 +60,7 @@
                                 </StackLayout>
                             </StackLayout>
                             <pancakeView:PancakeView
-                                    BorderColor="Gray"
                                     x:Name="PancakeViewIcon"
-                                    BorderThickness="1"
                                     Padding="5"
                                     CornerRadius="25,0,25,25"
                                     BackgroundColor="White"

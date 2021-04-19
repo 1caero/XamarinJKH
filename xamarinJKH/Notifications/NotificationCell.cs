@@ -16,9 +16,7 @@ namespace xamarinJKH
         public NotificationCell()
         {
             PancakeView frame = new PancakeView();
-            frame.HasShadow = false;
-            frame.BorderThickness = 1;
-            frame.SetAppThemeColor(PancakeView.BorderColorProperty, (Color)Application.Current.Resources["MainColor"], Color.White);
+            frame.SetOnAppTheme(PancakeView.BorderProperty, new Border{ Color =(Color)Application.Current.Resources["MainColor"], Thickness = 1},new Border{ Color =Color.Transparent, Thickness = 1});
             frame.HorizontalOptions = LayoutOptions.FillAndExpand;
             frame.VerticalOptions = LayoutOptions.Start;
             frame.BackgroundColor = Color.White;

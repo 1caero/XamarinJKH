@@ -14,6 +14,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="hexColor">#FF0000</Color>
+            <converters:PancakeBorderConverter x:Key="PancakeConvert"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -136,11 +137,9 @@
                                 
                                             <Label IsVisible="False" Text="{Binding Number}"></Label>
                                 <pancakeView:PancakeView VerticalOptions="Start"
-                                                         BorderColor="{AppThemeBinding Light={StaticResource  hexColor}, Dark=Transparent}"
+                                                         Border="{Binding ., Converter={x:StaticResource PancakeConvert}}"
                                                          BackgroundColor="White"
-                                                         BorderThickness="1"
                                                          HorizontalOptions="FillAndExpand"
-                                                         HasShadow="False"
                                                          Padding="25, 15, 25, 20"
                                                          Margin="0,0,0,0"
                                                          CornerRadius="40" >

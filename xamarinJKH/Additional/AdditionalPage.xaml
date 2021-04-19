@@ -28,6 +28,8 @@
                 </Setter>
             </Style>
             <converters:TextDecorationsUnderline x:Key="Underline" />
+            <converters:PancakeBorderConverter x:Key="PancakeConvert"/>
+
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -75,9 +77,8 @@
                         <pancakeView:PancakeView CornerRadius="40,0,0,0"
                                                  Margin="20,0,0,-10"
                                                  x:Name="FrameKind"
-                                                 BorderThickness="1"
                                                  VerticalOptions="FillAndExpand"
-                                                 BorderColor="{AppThemeBinding Light={x:DynamicResource MainColor}, Dark=Transparent}"
+                                                 Border="{Binding IsChangeTheme, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
                                                  BackgroundColor="White"
                                                  Padding="0, 0, 0, 10">
                             <StackLayout VerticalOptions="FillAndExpand" HeightRequest="1000">

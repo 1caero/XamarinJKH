@@ -496,7 +496,8 @@ namespace xamarinJKH.Main
             Device.BeginInvokeOnMainThread(() => viewModel.LoadRequests.Execute(null));
              //viewModel.LoadRequests.Execute(null);
             CheckAkk();
-            
+            viewModel.IsChangeTheme = !viewModel.IsChangeTheme;
+            viewModel.SetAppTheme();
         }
 
         void SetText()
@@ -506,7 +507,7 @@ namespace xamarinJKH.Main
 
             SwitchApp.OnColor = hex;
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
+            // GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
         }
 
         //async Task getAppsAsync()

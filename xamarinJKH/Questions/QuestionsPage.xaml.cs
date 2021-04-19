@@ -154,12 +154,23 @@ namespace xamarinJKH.Questions
             additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
             this.BindingContext = this;
         }
+        private bool _isChangeTheme;
 
+        public bool IsChangeTheme
+        {
+            get => _isChangeTheme;
+            set
+            {
+                _isChangeTheme = value;
+                OnPropertyChanged(nameof(IsChangeTheme));
+            }
+        }
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
             new Task(SyncSetup).Start(); // This could be an await'd task if need be
+            IsChangeTheme = !IsChangeTheme;
         }
 
         async void SyncSetup()
@@ -222,7 +233,7 @@ namespace xamarinJKH.Questions
             
             SwitchQuest.OnColor = (Color)Application.Current.Resources["MainColor"];
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
+            // GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
             additionalList.RefreshControlColor = hexColor;
 
         }

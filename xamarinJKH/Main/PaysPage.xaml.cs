@@ -178,14 +178,24 @@ namespace xamarinJKH.Main
                 }
             });
         }
+        private bool _isChangeTheme;
 
+        public bool IsChangeTheme
+        {
+            get => _isChangeTheme;
+            set
+            {
+                _isChangeTheme = value;
+                OnPropertyChanged(nameof(IsChangeTheme));
+            }
+        }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
             Settings.mainPage = this;
             Settings.paysPage = this;
             await SyncSetup(); // This could be an await'd task if need be
-           
+            IsChangeTheme = !IsChangeTheme;
         }
 
         async Task SyncSetup()
@@ -211,7 +221,7 @@ namespace xamarinJKH.Main
             LabelHistory.TextColor = hex;
 
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
+            // GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
             FrameAddIdent.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.FromHex("#494949"));
 
             if (Settings.Person != null)

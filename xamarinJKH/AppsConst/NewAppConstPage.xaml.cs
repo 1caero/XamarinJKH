@@ -445,7 +445,7 @@ namespace xamarinJKH.AppsConst
                 FontSize = 16
             });
             Color hexColor = (Color)Application.Current.Resources["MainColor"];
-            Pancake.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
+            // Pancake.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
             FrameTop.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
         }
         public AddAppConstModel _model = new AddAppConstModel();

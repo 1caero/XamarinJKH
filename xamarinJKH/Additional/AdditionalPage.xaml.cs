@@ -31,9 +31,21 @@ namespace xamarinJKH.Additional
         public ObservableCollection<AdditionalService> Additional { get; set; }
         private bool _isRefreshing = false;
         private RestClientMP server = new RestClientMP();
-
+        
         string _selectedGroup;
 
+        private bool _isChangeTheme;
+
+        public bool IsChangeTheme
+        {
+            get => _isChangeTheme;
+            set
+            {
+                _isChangeTheme = value;
+                OnPropertyChanged(nameof(IsChangeTheme));
+            }
+        }
+        
         public string SelectedGroup
         {
             get => _selectedGroup;
@@ -224,7 +236,8 @@ namespace xamarinJKH.Additional
         {
             UkName.Text = Settings.MobileSettings.main_name;
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            FrameKind.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
+            IsChangeTheme = !IsChangeTheme;
+            // FrameKind.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
         }
 
         protected override async void OnAppearing()

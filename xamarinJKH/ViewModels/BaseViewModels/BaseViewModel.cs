@@ -47,6 +47,17 @@ namespace xamarinJKH.ViewModels
                 OnPropertyChanged("IsRefreshing");
             }
         }
+        private bool _isChangeTheme;
+
+        public bool IsChangeTheme
+        {
+            get => _isChangeTheme;
+            set
+            {
+                _isChangeTheme = value;
+                OnPropertyChanged(nameof(IsChangeTheme));
+            }
+        }
         string title;
         public string Title
         {

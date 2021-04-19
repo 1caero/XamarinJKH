@@ -930,6 +930,7 @@ namespace xamarinJKH.Apps
                                 _Request = request,
                                 HexColor = this.hex,
                                 SourceApp = Source,
+                                ColorBlack = Color.Black,
                                 PassExpiration = _requestInfo.PassExpiration,
                                 isPass = IsPass,
                                 isManType = isMan,

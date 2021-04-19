@@ -196,6 +196,11 @@ namespace xamarinJKH.ViewModels.Main
                 }
             });
         }
+
+        public void SetAppTheme()
+        {
+            Device.BeginInvokeOnMainThread(async () => { Requests = new ObservableCollection<RequestInfo>(Requests); });
+        }
         
         public async Task UpdateTask()
         {

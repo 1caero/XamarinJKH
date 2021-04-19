@@ -41,7 +41,23 @@ namespace xamarinJKH
 
             return statusInt;
         }
+        private bool _isChangeTheme;
 
+        public bool IsChangeTheme
+        {
+            get => _isChangeTheme;
+            set
+            {
+                _isChangeTheme = value;
+                OnPropertyChanged(nameof(IsChangeTheme));
+            }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            IsChangeTheme = !IsChangeTheme;
+        }
         public bool forsvg { get; set; }
 
 
@@ -127,7 +143,7 @@ namespace xamarinJKH
             SetDesignOrder(sObj);
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
             //IconViewTech.SetAppThemeColor(IconView.ForegroundProperty, hexColor, Color.White);
-            PancakeBot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
+            // PancakeBot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
             //LabelTech.SetAppThemeColor(Label.TextColorProperty, hexColor, Color.White);
         }
 

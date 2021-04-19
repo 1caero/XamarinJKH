@@ -177,7 +177,7 @@ namespace xamarinJKH.Pays
             FrameBtnHistory.BorderColor = (Color)Application.Current.Resources["MainColor"];
             FrameBtnSaldos.BorderColor = (Color)Application.Current.Resources["MainColor"];
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
-            GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
+            // GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
             Frame.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
 
             SetPays();

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using Microsoft.AppCenter.Analytics;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -68,6 +69,11 @@ namespace xamarinJKH.VideoStreaming
             {
 
             }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
         }
     }
 }
