@@ -511,7 +511,7 @@ namespace xamarinJKH
 
             //Биометрия
             var displayPassAlert = true;
-            var b = Preferences.Get("FingerPrintsOn", "");
+            var b = Preferences.Get("FingerPrintsOnCo", "");
             if (b == "")
             {
                 //биометрия не установлена вообще, предлогаем ее включить, если доступна
@@ -525,12 +525,12 @@ namespace xamarinJKH
                     bool answer = await DisplayAlert(AppResources.Attention, AppResources.BiometricAddDialog, AppResources.Yes, AppResources.No);
                     if (answer)
                     {
-                        Preferences.Set("FingerPrintsOn", "true");
+                        Preferences.Set("FingerPrintsOnCo", "true");
                         b = "true";
                     }
                     else
                     {
-                        Preferences.Set("FingerPrintsOn", "false");
+                        Preferences.Set("FingerPrintsOnCo", "false");
                         b = "false";
                     }
                 }

@@ -32,7 +32,7 @@ namespace xamarinJKH.MainConst
 
         private void SwitchUseBio_OnPropertyChanged(object sender, ToggledEventArgs toggledEventArgs)
         {
-            Preferences.Set("FingerPrintsOn", useBio.ToString().ToLower());
+            Preferences.Set("FingerPrintsOnCo", useBio.ToString().ToLower());
         }
 
         private async void GoBack(object sender, EventArgs args)
@@ -67,7 +67,7 @@ namespace xamarinJKH.MainConst
 
             isSave = Preferences.Get("isPass", false);
 
-            var ub = Preferences.Get("FingerPrintsOn", "");
+            var ub = Preferences.Get("FingerPrintsOnCo", "");
 
             if (ub == "" || ub == "false")
                 useBio = false;
