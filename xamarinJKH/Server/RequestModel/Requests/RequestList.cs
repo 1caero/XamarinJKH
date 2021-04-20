@@ -150,6 +150,9 @@ namespace xamarinJKH.Server.RequestModel
         public string Error { get; set; }
         // информация о пропуске
         public RequestPass PassInfo { get; set; }
+
+        public string AcceptedDispatcher { get; set; }
+
         public RequestContent Copy()
         {
             return (RequestContent)this.MemberwiseClone();

@@ -1967,4 +1967,7 @@
   <data name="BiometricUse" xml:space="preserve">
     <value>Use FaceId / fingerprint for login</value>
   </data>
+  <data name="FIOConsAcceptOrder" xml:space="preserve">
+    <value>Accepted dispatcher</value>
+  </data>
 </root>

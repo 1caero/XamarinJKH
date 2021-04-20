@@ -387,15 +387,15 @@ namespace xamarinJKH
         {
             if (Settings.ConstAuth)
             {
-                LoginDispatcher(EntryLoginConst.Text, EntryPassConst.Text);
+                LoginDispatcher(EntryLoginConst.Text, EntryPassConst.Text,true);
             }
             else
             {
-                Login((string)EntryLogin.Text, EntryPass.Text);
+                Login((string)EntryLogin.Text, EntryPass.Text, true);
             }            
         }
 
-        public async void Login(string loginAuth, string pass)
+        public async void Login(string loginAuth, string pass, bool isButtonClick=false)
         {
             Analytics.TrackEvent("Авторизация пользователя");
             progress.IsVisible = true;
@@ -403,52 +403,57 @@ namespace xamarinJKH
 
             //Биометрия
             var displayPassAlert = true;
-            var b = Preferences.Get("FingerPrintsOn", "");
-            if(b=="")
+
+            if (!isButtonClick)
             {
-                //биометрия не установлена вообще, предлогаем ее включить, если доступна
-                var a = await CrossFingerprint.Current.IsAvailableAsync();
-                if(!a)
+                var b = Preferences.Get("FingerPrintsOn", "");
+                if (b == "")
                 {
-                    await DisplayAlert(AppResources.Attention, AppResources.BiometricNA, "OK");
-                }
-                else
-                {
-                    bool answer = await DisplayAlert(AppResources.Attention, AppResources.BiometricAddDialog, AppResources.Yes, AppResources.No);
-                    if (answer)
+                    //биометрия не установлена вообще, предлогаем ее включить, если доступна
+                    var a = await CrossFingerprint.Current.IsAvailableAsync();
+                    if (!a)
                     {
-                        Preferences.Set("FingerPrintsOn", "true");
-                        b = "true";
+                        await DisplayAlert(AppResources.Attention, AppResources.BiometricNA, "OK");
                     }
                     else
                     {
-                        Preferences.Set("FingerPrintsOn", "false");
-                        b = "false";
+                        bool answer = await DisplayAlert(AppResources.Attention, AppResources.BiometricAddDialog, AppResources.Yes, AppResources.No);
+                        if (answer)
+                        {
+                            Preferences.Set("FingerPrintsOn", "true");
+                            b = "true";
+                        }
+                        else
+                        {
+                            Preferences.Set("FingerPrintsOn", "false");
+                            b = "false";
+                        }
                     }
+                }
+
+                if (b == "true")
+                {//биометрия назначена ранее
+                    var ar = await CrossFingerprint.Current.AuthenticateAsync(
+                        new Plugin.Fingerprint.Abstractions.AuthenticationRequestConfiguration(AppResources.Attention, AppResources.BiometricUseDialog));
+                    if (!ar.Authenticated)
+                    {
+                        await DisplayAlert(AppResources.Attention, AppResources.BiometricNotRecognizedDialog, "OK");
+                        EntryLogin.Text = "";
+                        EntryPass.Text = "";
+                        loginAuth = "";
+                        pass = "";
+
+                        displayPassAlert = false;
+                        //return;
                     }
-            }
+                }
 
-            if(b == "true")
-            {//биометрия назначена ранее
-                var ar = await CrossFingerprint.Current.AuthenticateAsync(
-                    new Plugin.Fingerprint.Abstractions.AuthenticationRequestConfiguration(AppResources.Attention, AppResources.BiometricUseDialog));
-                if(!ar.Authenticated)
-                {
-                    await DisplayAlert(AppResources.Attention, AppResources.BiometricNotRecognizedDialog, "OK");
-                    EntryLogin.Text = "";
-                    EntryPass.Text = "";
-                    loginAuth = "";
-                    pass = "";
+                if (b == "false")
+                {//биометрия отключена пользователем, делаем автовход если как это было раньше
 
-                    displayPassAlert = false;
-                    //return;
                 }
             }
-            
-            if (b == "false")
-            {//биометрия отключена пользователем, делаем автовход если как это было раньше
-
-            }
+           
 
             var replace = !string.IsNullOrEmpty(loginAuth) ? loginAuth
                 .Replace("+", "")
@@ -503,7 +508,7 @@ namespace xamarinJKH
             FrameBtnLogin.IsVisible = true;
         }
 
-        public async void LoginDispatcher(string loginAuth, string pass)
+        public async void LoginDispatcher(string loginAuth, string pass, bool isButtonClick = false)
         {
             Analytics.TrackEvent("Авторизация сотрудника");
             progress.IsVisible = true;
@@ -511,52 +516,54 @@ namespace xamarinJKH
 
             //Биометрия
             var displayPassAlert = true;
-            var b = Preferences.Get("FingerPrintsOnCo", "");
-            if (b == "")
+            if (!isButtonClick)
             {
-                //биометрия не установлена вообще, предлогаем ее включить, если доступна
-                var a = await CrossFingerprint.Current.IsAvailableAsync();
-                if (!a)
+                var b = Preferences.Get("FingerPrintsOnCo", "");
+                if (b == "")
                 {
-                    await DisplayAlert(AppResources.Attention, AppResources.BiometricNA, "OK");
-                }
-                else
-                {
-                    bool answer = await DisplayAlert(AppResources.Attention, AppResources.BiometricAddDialog, AppResources.Yes, AppResources.No);
-                    if (answer)
+                    //биометрия не установлена вообще, предлогаем ее включить, если доступна
+                    var a = await CrossFingerprint.Current.IsAvailableAsync();
+                    if (!a)
                     {
-                        Preferences.Set("FingerPrintsOnCo", "true");
-                        b = "true";
+                        await DisplayAlert(AppResources.Attention, AppResources.BiometricNA, "OK");
                     }
                     else
                     {
-                        Preferences.Set("FingerPrintsOnCo", "false");
-                        b = "false";
+                        bool answer = await DisplayAlert(AppResources.Attention, AppResources.BiometricAddDialog, AppResources.Yes, AppResources.No);
+                        if (answer)
+                        {
+                            Preferences.Set("FingerPrintsOnCo", "true");
+                            b = "true";
+                        }
+                        else
+                        {
+                            Preferences.Set("FingerPrintsOnCo", "false");
+                            b = "false";
+                        }
                     }
                 }
-            }
 
-            if (b == "true")
-            {//биометрия назначена ранее
-                var ar = await CrossFingerprint.Current.AuthenticateAsync(
-                    new Plugin.Fingerprint.Abstractions.AuthenticationRequestConfiguration(AppResources.Attention, AppResources.BiometricUseDialog));
-                if (!ar.Authenticated)
-                {
-                    await DisplayAlert(AppResources.Attention, AppResources.BiometricNotRecognizedDialog, "OK");
-                    EntryLogin.Text = "";
-                    EntryPass.Text = "";
-                    loginAuth = "";
-                    pass = "";
+                if (b == "true")
+                {//биометрия назначена ранее
+                    var ar = await CrossFingerprint.Current.AuthenticateAsync(
+                        new Plugin.Fingerprint.Abstractions.AuthenticationRequestConfiguration(AppResources.Attention, AppResources.BiometricUseDialog));
+                    if (!ar.Authenticated)
+                    {
+                        await DisplayAlert(AppResources.Attention, AppResources.BiometricNotRecognizedDialog, "OK");
+                        EntryLogin.Text = "";
+                        EntryPass.Text = "";
+                        loginAuth = "";
+                        pass = "";
 
-                    displayPassAlert = false;
-                    //return;
+                        displayPassAlert = false;
+                    }
+                }
+
+                if (b == "false")
+                {//биометрия отключена пользователем, делаем автовход если как это было раньше
                 }
             }
-
-            if (b == "false")
-            {//биометрия отключена пользователем, делаем автовход если как это было раньше
-
-            }
+           
 
             var replace = loginAuth;
             if (!string.IsNullOrEmpty(replace) && !string.IsNullOrEmpty(pass)) 

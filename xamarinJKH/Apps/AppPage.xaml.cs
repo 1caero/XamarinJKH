@@ -934,7 +934,8 @@ namespace xamarinJKH.Apps
                                 PassExpiration = _requestInfo.PassExpiration,
                                 isPass = IsPass,
                                 isManType = isMan,
-                                IsCons = false
+                                IsCons = false,
+                                ShowDispAccepted=!string.IsNullOrEmpty(request.AcceptedDispatcher)
                             });
                     }
                     catch { }
