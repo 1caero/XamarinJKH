@@ -719,7 +719,7 @@ namespace xamarinJKH
                     {
                         if (Navigation.ModalStack.Count > 0)
                             await Navigation.PopModalAsync();
-                        _mainPage.Login(Person.Phone, pass);
+                        _mainPage.Login(Person.Phone, pass, true);
                     }
                     else
                     {

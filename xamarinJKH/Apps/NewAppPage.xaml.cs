@@ -1135,7 +1135,9 @@ _appModel = new AddAppModel()
         {
             PassTypesList.IsVisible = false;
             Scroll.ScrollToAsync(FrameTop, ScrollToPosition.Start, false);
+            byHide = true;
         }
+        bool byHide = false;
 
         private void PassType_Focused(object sender, FocusEventArgs e)
         {
@@ -1147,10 +1149,13 @@ _appModel = new AddAppModel()
         {
             TSBrandList.IsVisible = false;
             Scroll.ScrollToAsync(FrameTop, ScrollToPosition.Start, false);
+            byHide = true;
         }
 
         private void TSBrand_Focused(object sender, FocusEventArgs e)
         {
+            if (byHide)
+            { byHide = false; return; }
             TSBrandList.IsVisible = true;
             Scroll.ScrollToAsync(LayoutFiles, ScrollToPosition.Start, false);
         }

@@ -2266,6 +2266,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Принявший диспетчер.
+        /// </summary>
+        internal static string FIOConsAcceptOrder {
+            get {
+                return ResourceManager.GetString("FIOConsAcceptOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Первыми непрочитанные.
         /// </summary>
         internal static string FirstUnread {

@@ -186,6 +186,20 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+                <Label
+                    x:Name="LabelConsFio"
+                    TextColor="Black"
+                    IsVisible="{Binding ShowDispAccepted }"
+                    HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static xamarinJkh:AppResources.FIOConsAcceptOrder}" TextColor="Black" FontAttributes="Bold"
+                                  FontSize="15" />
+                            <Span Text=": " TextColor="Black" FontAttributes="Bold" FontSize="15" />
+                            <Span Text=" {Binding _Request.AcceptedDispatcher}" FontSize="15" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
                 <!--<StackLayout
                     Orientation="Horizontal">

@@ -1972,4 +1972,7 @@
   <data name="BiometricUse" xml:space="preserve">
     <value>Использовать FaceId/отпечаток пальца для входа</value>
   </data>
+  <data name="FIOConsAcceptOrder" xml:space="preserve">
+    <value>Принявший диспетчер</value>
+  </data>
 </root>

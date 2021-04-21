@@ -12,11 +12,26 @@ namespace xamarinJKH.DialogViews
         public double width { get; set; }
         public Color HexColor { get; set; }
         public string SourceApp { get; set; }
-        public RequestInfo _Request { get; set; }
+        public RequestContent _Request { get; set; }
         public Command Call { get; set; }
         public bool isPass { get; set; } = false;
         public bool isManType { get; set; } = false;
-     
+
+        
+        //public bool IsUser { get; set; }
+
+
+        public bool ShowDispAccepted { get; set; } = false;
+        //{
+        //    get
+        //    {
+        //        if (_Request != null)
+        //            return !string.IsNullOrEmpty(_Request.AcceptedDispatcher);
+        //        return false;
+        //    }
+        //    set { value = false; }
+        //}
+
         public InfoAppDialog()
         {
             InitializeComponent();
@@ -43,12 +58,11 @@ namespace xamarinJKH.DialogViews
                     }
                     break;
             }
-
-            
+                        
             BindingContext = this;
-            
         }
 
+        
 
         public override void SetUp()
         {

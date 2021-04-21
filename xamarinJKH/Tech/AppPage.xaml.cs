@@ -860,7 +860,7 @@ namespace xamarinJKH.Tech
                                 HexColor = this.hex,
                                 SourceApp = Source,
                                 isPass = IsPass,
-                                isManType = isMan
+                                isManType = isMan,
                             });
                     }
                     catch
