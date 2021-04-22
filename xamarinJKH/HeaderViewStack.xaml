@@ -24,7 +24,7 @@
                         HorizontalOptions="Start">
                         <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_arrow_back.svg"
                                              HeightRequest="25"
-                                             ReplaceStringMap="{Binding Title, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
+                                             ReplaceStringMap="{Binding IsAppTheme, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF', Mode=TwoWay}"
                                              HorizontalOptions="Center" />
                         <Label
                             Text="{Binding Title}"

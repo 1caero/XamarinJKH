@@ -19,6 +19,12 @@ namespace xamarinJKH
             get => (string)GetValue(TitleProperty);
             set => SetValue(TitleProperty, value);
         }
+        public static BindableProperty IsAppThemeProperty = BindableProperty.Create("IsAppTheme", typeof(bool), typeof(bool));
+        public bool IsAppTheme
+        {
+            get => (bool)GetValue(IsAppThemeProperty);
+            set => SetValue(IsAppThemeProperty, value);
+        }
         public HeaderViewStack()
         { 
             InitializeComponent();
