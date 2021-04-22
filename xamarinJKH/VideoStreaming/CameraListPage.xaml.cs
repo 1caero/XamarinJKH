@@ -74,6 +74,7 @@ namespace xamarinJKH.VideoStreaming
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            headerStack.IsAppTheme = !headerStack.IsAppTheme;
         }
     }
 }
