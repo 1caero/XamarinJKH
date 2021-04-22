@@ -664,6 +664,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Чтобы использовать FaceId/отпечаток пальца включите их в настройках Вашего смартфона.
+        /// </summary>
+        internal static string BiometricEnableToUse {
+            get {
+                return ResourceManager.GetString("BiometricEnableToUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Биометрия не доступна.
         /// </summary>
         internal static string BiometricNA {

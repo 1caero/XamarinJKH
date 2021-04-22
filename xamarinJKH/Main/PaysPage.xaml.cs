@@ -151,6 +151,11 @@ namespace xamarinJKH.Main
             var openSaldos = new TapGestureRecognizer();
             openSaldos.Tapped += async (s, e) => { if (Navigation.NavigationStack.FirstOrDefault(x => x is SaldosPage) == null) await Navigation.PushAsync(new SaldosPage(_accountingInfo)); };
             FrameBtnSaldos.GestureRecognizers.Add(openSaldos);
+
+            var openHist = new TapGestureRecognizer();
+            openHist.Tapped += (s, e) => { oh(); };
+            FrameBtnHistory.GestureRecognizers.Add(openHist);
+
             MessagingCenter.Subscribe<Object>(this, "UpdateIdent", (sender) => SyncSetup());
 
             MessagingCenter.Subscribe<Object>(this, "StartRefresh", (sender) =>
@@ -296,6 +301,20 @@ namespace xamarinJKH.Main
         }
 
         private async void OpenHistory(object sender, EventArgs e)
+        {
+            oh();
+            //if (_accountingInfo != null && _accountingInfo.Count > 0)
+            //{
+            //    if (Navigation.NavigationStack.FirstOrDefault(x => x is HistoryPayedPage) == null)
+            //        await Navigation.PushAsync(new HistoryPayedPage(_accountingInfo));
+            //}
+            //else
+            //{
+            //    await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAppsNoIdent, "OK");
+            //}
+        }
+
+        async void oh()
         {
             if (_accountingInfo != null && _accountingInfo.Count > 0)
             {

@@ -404,13 +404,16 @@ namespace xamarinJKH
             //Биометрия
             var displayPassAlert = true;
 
+            var a = await CrossFingerprint.Current.IsAvailableAsync();
+            var aA = await CrossFingerprint.Current.GetAvailabilityAsync();
+            var at = await CrossFingerprint.Current.GetAuthenticationTypeAsync();
+
             if (!isButtonClick)
             {
                 var b = Preferences.Get("FingerPrintsOn", "");
                 if (b == "")
                 {
-                    //биометрия не установлена вообще, предлогаем ее включить, если доступна
-                    var a = await CrossFingerprint.Current.IsAvailableAsync();
+                    //биометрия не установлена вообще, предлогаем ее включить, если доступна                    
                     if (!a)
                     {
                         await DisplayAlert(AppResources.Attention, AppResources.BiometricNA, "OK");
@@ -433,19 +436,27 @@ namespace xamarinJKH
 
                 if (b == "true")
                 {//биометрия назначена ранее
-                    var ar = await CrossFingerprint.Current.AuthenticateAsync(
-                        new Plugin.Fingerprint.Abstractions.AuthenticationRequestConfiguration(AppResources.Attention, AppResources.BiometricUseDialog));
-                    if (!ar.Authenticated)
+                    
+                    if (!a)
                     {
-                        await DisplayAlert(AppResources.Attention, AppResources.BiometricNotRecognizedDialog, "OK");
-                        EntryLogin.Text = "";
-                        EntryPass.Text = "";
-                        loginAuth = "";
-                        pass = "";
-
-                        displayPassAlert = false;
-                        //return;
+                        await DisplayAlert(AppResources.Attention, AppResources.BiometricNA, "OK");
                     }
+                    else
+                    {
+                        var ar = await CrossFingerprint.Current.AuthenticateAsync(
+                       new Plugin.Fingerprint.Abstractions.AuthenticationRequestConfiguration(AppResources.Attention, AppResources.BiometricUseDialog));
+                        if (!ar.Authenticated)
+                        {
+                            await DisplayAlert(AppResources.Attention, AppResources.BiometricNotRecognizedDialog, "OK");
+                            EntryLogin.Text = "";
+                            EntryPass.Text = "";
+                            loginAuth = "";
+                            pass = "";
+
+                            displayPassAlert = false;
+                            //return;
+                        }
+                    }                   
                 }
 
                 if (b == "false")

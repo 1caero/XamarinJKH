@@ -1975,4 +1975,7 @@
   <data name="FIOConsAcceptOrder" xml:space="preserve">
     <value>Принявший диспетчер</value>
   </data>
+  <data name="BiometricEnableToUse" xml:space="preserve">
+    <value>Чтобы использовать FaceId/отпечаток пальца включите их в настройках Вашего смартфона</value>
+  </data>
 </root>

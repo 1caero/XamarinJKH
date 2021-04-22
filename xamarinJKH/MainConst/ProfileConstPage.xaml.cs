@@ -17,6 +17,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using AiForms.Dialogs;
 using xamarinJKH.Utils;
+using Plugin.Fingerprint;
 
 namespace xamarinJKH.MainConst
 {
@@ -30,9 +31,22 @@ namespace xamarinJKH.MainConst
 
         public bool useBio { get; set; }
 
-        private void SwitchUseBio_OnPropertyChanged(object sender, ToggledEventArgs toggledEventArgs)
+        private async void SwitchUseBio_OnPropertyChanged(object sender, ToggledEventArgs toggledEventArgs)
         {
-            Preferences.Set("FingerPrintsOnCo", useBio.ToString().ToLower());
+            //Preferences.Set("FingerPrintsOnCo", useBio.ToString().ToLower());
+            if (toggledEventArgs.Value == true)
+            {
+                var a = await CrossFingerprint.Current.IsAvailableAsync();
+                if (!a)
+                {
+                    await DisplayAlert(AppResources.Attention, AppResources.BiometricEnableToUse, "OK");
+                    SwitchUseBio.IsToggled = false;
+                }
+                else
+                    Preferences.Set("FingerPrintsOnCo", useBio.ToString().ToLower());
+            }
+            else
+                Preferences.Set("FingerPrintsOnCo", useBio.ToString().ToLower());
         }
 
         private async void GoBack(object sender, EventArgs args)

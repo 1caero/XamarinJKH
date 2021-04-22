@@ -205,7 +205,8 @@ namespace xamarinJKH.Pays
                                 // string link = RestClientMP.SERVER_ADDR + "/" +
                                 //               $"Accounting/Check/{IdPay}?acx={Settings.Person.acx}";
                                 await Launcher.OpenAsync(link);
-                             
+
+
                             }));
                            
                         }

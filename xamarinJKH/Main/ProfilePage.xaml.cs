@@ -15,6 +15,7 @@ using xamarinJKH.Tech;
 using xamarinJKH.Utils;
 using System.Collections.Generic;
 using System.Linq;
+using Plugin.Fingerprint;
 
 namespace xamarinJKH.Main
 {
@@ -316,8 +317,20 @@ namespace xamarinJKH.Main
             Preferences.Set("isPass",isSave);
         }
 
-        private void SwitchUseBio_OnPropertyChanged(object sender, ToggledEventArgs toggledEventArgs)
+        private async void SwitchUseBio_OnPropertyChanged(object sender, ToggledEventArgs toggledEventArgs)
         {
+            if (toggledEventArgs.Value == true)
+            {
+                var a = await CrossFingerprint.Current.IsAvailableAsync();
+                if (!a)
+                {
+                    await DisplayAlert(AppResources.Attention, AppResources.BiometricEnableToUse, "OK");
+                    SwitchUseBio.IsToggled = false;
+                }
+                else
+                  Preferences.Set("FingerPrintsOn", useBio.ToString().ToLower());
+            }
+            else
             Preferences.Set("FingerPrintsOn", useBio.ToString().ToLower());
         }
 

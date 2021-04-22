@@ -1970,4 +1970,7 @@
   <data name="FIOConsAcceptOrder" xml:space="preserve">
     <value>Accepted dispatcher</value>
   </data>
+  <data name="BiometricEnableToUse" xml:space="preserve">
+    <value>To use FaceId / fingerprint enable them in your smartphone settings</value>
+  </data>
 </root>

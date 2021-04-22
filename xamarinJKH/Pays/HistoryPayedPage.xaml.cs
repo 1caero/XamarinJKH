@@ -269,8 +269,15 @@ namespace xamarinJKH.Pays
             return;
         }
 
-        private void OnItemTapped(object sender, ItemTappedEventArgs e)
+        RestClientMP server = new RestClientMP();
+
+        private async void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
+            var s = e.Item as PaymentInfo;
+            
+            //byte[] stream;
+            //stream = await server.DownloadFileAsync(s.ID.ToString(), 1);
+
         }
 
         private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
