@@ -1168,7 +1168,7 @@
     <value>Неверный код доступа</value>
   </data>
   <data name="ErrorUserNotFound" xml:space="preserve">
-    <value>Номер телефона не зарегистрирован</value>
+    <value>Введен неправильный номер телефона или пароль</value>
   </data>
   <data name="MoveDispatcher" xml:space="preserve">
     <value>Выберите сотрудника:</value>
@@ -1977,8 +1977,5 @@
   </data>
   <data name="BiometricEnableToUse" xml:space="preserve">
     <value>Чтобы использовать FaceId/отпечаток пальца включите их в настройках Вашего смартфона</value>
-  </data>
-  <data name="ErrorPassword" xml:space="preserve">
-    <value>Введен неправильный пароль</value>
   </data>
 </root>
