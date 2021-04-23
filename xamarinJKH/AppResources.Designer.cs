@@ -2032,6 +2032,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Введен неправильный пароль.
+        /// </summary>
+        internal static string ErrorPassword {
+            get {
+                return ResourceManager.GetString("ErrorPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Заказ уже оплачен.
         /// </summary>
         internal static string ErrorPayApp {
@@ -2140,7 +2149,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Введен неправильный номер телефона или пароль.
+        ///   Looks up a localized string similar to Номер телефона не зарегистрирован.
         /// </summary>
         internal static string ErrorUserNotFound {
             get {

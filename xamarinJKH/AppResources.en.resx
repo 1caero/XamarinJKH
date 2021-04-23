@@ -1158,7 +1158,7 @@
     <value>Wrong security code</value>
   </data>
   <data name="ErrorUserNotFound" xml:space="preserve">
-    <value>Incorrect username or password entered </value>
+    <value>Phone number not registered </value>
   </data>
   <data name="MoveDispatcher" xml:space="preserve">
     <value>Choose a consultant:</value>
@@ -1972,5 +1972,8 @@
   </data>
   <data name="BiometricEnableToUse" xml:space="preserve">
     <value>To use FaceId / fingerprint enable them in your smartphone settings</value>
+  </data>
+  <data name="ErrorPassword" xml:space="preserve">
+    <value>Wrong password entered </value>
   </data>
 </root>

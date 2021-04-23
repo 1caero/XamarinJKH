@@ -511,7 +511,7 @@
     <value>Під час виконання сталася помилка</value>
   </data>
   <data name="ErrorUserNotFound" xml:space="preserve">
-    <value>Введено невірний логін або пароль </value>
+    <value>Номер телефону не зареєстрований</value>
   </data>
   <data name="Events_NavBar" xml:space="preserve">
     <value>Події</value>
@@ -1845,5 +1845,8 @@
   </data>
   <data name="BiometricEnableToUse" xml:space="preserve">
     <value>Щоб використовувати FaceId / відбиток пальця ввімкніть їх у налаштуваннях Вашого смартфону</value>
+  </data>
+  <data name="ErrorPassword" xml:space="preserve">
+    <value>Введено невірний пароль </value>
   </data>
 </root>

@@ -502,6 +502,10 @@ namespace xamarinJKH
                     {
                         await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorUserNotFound, "OK");
                     }
+                    else if(login.Error.ToLower().Contains("forbidden"))
+                    {
+                        await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorPassword, "OK");
+                    }
                     else
                     {
                         await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK");
