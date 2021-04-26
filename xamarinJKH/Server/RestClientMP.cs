@@ -1346,7 +1346,7 @@ namespace xamarinJKH.Server
 
             return response.RawBytes;
         } 
-        public async Task<byte[]> GetCheckPP(string id)
+        public async Task<byte[]> GetCheckPP(string id, int inJpg=0)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             RestRequest restRequest = new RestRequest(GET_CHECH + "/" + id, Method.GET);
@@ -1354,6 +1354,7 @@ namespace xamarinJKH.Server
             restRequest.AddHeader("client", Device.RuntimePlatform);
             restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             restRequest.AddHeader("acx", Settings.Person.acx);
+            restRequest.AddParameter("inJpg", inJpg);
             var response = restClientMp.Execute(restRequest);
             // Проверяем статус
             if (response.StatusCode != HttpStatusCode.OK)
