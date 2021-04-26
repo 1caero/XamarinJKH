@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reactive.Linq;
-using Akavache;
 using FFImageLoading.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
@@ -28,15 +24,15 @@ namespace xamarinJKH.Additional
             CachedImage.HeightRequest = ImageHeight;
 
 
-            frame = new PancakeView(); 
-            
+            frame = new PancakeView();
+
             frame.HorizontalOptions = LayoutOptions.FillAndExpand;
             frame.VerticalOptions = LayoutOptions.Start;
             frame.IsClippedToBounds = true;
             frame.Margin = new Thickness(10, 0, 10, 10);
             frame.Padding = new Thickness(0);
             frame.CornerRadius = 40;
-            frame.Content = CachedImage;// image;
+            frame.Content = CachedImage; // image;
 
             View = frame;
         }
@@ -91,7 +87,7 @@ namespace xamarinJKH.Additional
             base.OnBindingContextChanged();
             CachedImage.Source = RestClientMP.SERVER_ADDR + $"/AdditionalServices/logo/{Detail}";
             CachedImage.HeightRequest = ImageHeight;
-           
+
             return;
         }
     }
