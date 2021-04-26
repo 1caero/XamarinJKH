@@ -274,9 +274,33 @@ namespace xamarinJKH.Pays
         private async void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             var s = e.Item as PaymentInfo;
+
+            var select = new BillInfo();
+            select.ID = s.ID;
+            select.Ident = s.Ident;
+            select.Period = s.Period;
+
+            await Navigation.PushAsync(new ImageSaldoPage(select,true));
+
             
-            //byte[] stream;
-            //stream = await server.DownloadFileAsync(s.ID.ToString(), 1);
+            //RestClientMP server = new RestClientMP();
+            //byte[] checkPp = await server.GetCheckPP(s.ID.ToString());
+            ////string link =
+            ////    $"{RestClientMP.SERVER_ADDR}/Accounting/Check/{IdPay}?acx={Uri.EscapeDataString(Settings.Person.acx ?? string.Empty)}";
+            ////string fileName = $"check {Period} {IdPay}.png";
+            //if (checkPp != null)
+            //{
+            //    //await DependencyService.Get<IFileWorker>().SaveTextAsync(fileName, checkPp);
+            //    //await Launcher.OpenAsync(new OpenFileRequest
+            //    //{
+            //    //    File = new ReadOnlyFile(DependencyService.Get<IFileWorker>()
+            //    //        .GetFilePath(fileName))
+            //    //});
+            //}
+            //else
+            //{
+            //    //Toast.Instance.Show<ToastDialog>(new { Title = AppResources.ErrorFileLoading, Duration = 1500 });
+            //}
 
         }
 

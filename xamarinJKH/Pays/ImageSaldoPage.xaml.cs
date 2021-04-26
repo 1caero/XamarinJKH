@@ -20,8 +20,11 @@ namespace xamarinJKH.Pays
         private string _filename = "";
         private byte[] _file = null;
 
-        public ImageSaldoPage(BillInfo bill)
+        bool _isHist = false;
+
+        public ImageSaldoPage(BillInfo bill, bool isHist=false)
         {
+            _isHist = isHist;
             Period = bill.Period;
             _billInfo = bill;
             _filename = _billInfo.Period + "_" + _billInfo.Ident.Replace("/", "")
@@ -43,6 +46,8 @@ namespace xamarinJKH.Pays
             BindingContext = this;
         }
 
+        
+
 
         async void LoadPdf()
         {
@@ -51,13 +56,15 @@ namespace xamarinJKH.Pays
             new Task(async () =>
             {
                 byte[] stream;
-                stream = await server.DownloadFileAsync(_billInfo.ID.ToString(), 1);
+                
+                stream = !_isHist ? await server.DownloadFileAsync(_billInfo.ID.ToString(), 1): await server.GetCheckPP(_billInfo.ID.ToString(),1); 
+
                 if (stream != null)
                 {
                     Stream streamM = new MemoryStream(stream);
                     Device.BeginInvokeOnMainThread(async () =>
                         Image.Source = ImageSource.FromStream(() => { return streamM; }));
-                    _file = await server.DownloadFileAsync(_billInfo.ID.ToString());
+                    _file = !_isHist ? await server.DownloadFileAsync(_billInfo.ID.ToString()) : await server.GetCheckPP(_billInfo.ID.ToString()); //await server.DownloadFileAsync(_billInfo.ID.ToString());
                 }
                 else
                 {
@@ -85,7 +92,8 @@ namespace xamarinJKH.Pays
                 {
                     await DependencyService.Get<IFileWorker>().SaveTextAsync(_filename, _file);
                     FileBase fileBase = new ReadOnlyFile(DependencyService.Get<IFileWorker>().GetFilePath(_filename));
-                    await Share.RequestAsync(new ShareFileRequest(AppResources.ShareBill, fileBase));
+
+                    await Share.RequestAsync(new ShareFileRequest(!_isHist?AppResources.ShareBill: AppResources.Acc, fileBase));
                 }
                 else
                     await DisplayAlert(null, AppResources.ErrorFileLoading, "OK");
