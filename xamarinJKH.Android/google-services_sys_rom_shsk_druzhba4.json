@@ -32,11 +32,48 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286222649128:android:883b8dbfca3035c710321d",
+        "android_client_info": {
+          "package_name": "sys_rom.atlas_msk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ho2jBOy4gwGmzMxd-vh1W_6IBZFwD1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -69,11 +106,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -106,11 +143,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -143,11 +180,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -180,11 +217,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -217,11 +254,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -254,11 +291,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -291,11 +328,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -328,11 +365,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -365,11 +402,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -402,11 +439,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -439,11 +476,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -476,11 +513,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -513,48 +550,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:286222649128:android:de6e33135de9c94010321d",
-        "android_client_info": {
-          "package_name": "sys_rom.ru.avalon"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB_ho2jBOy4gwGmzMxd-vh1W_6IBZFwD1Q"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -587,11 +587,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -624,11 +624,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -661,11 +661,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -698,11 +698,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -735,11 +735,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -772,11 +772,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -809,11 +809,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -846,11 +846,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -883,11 +883,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -920,11 +920,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -957,11 +957,85 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286222649128:android:359262ca0bfc8f0710321d",
+        "android_client_info": {
+          "package_name": "sys_rom.shsk_druzhba4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ho2jBOy4gwGmzMxd-vh1W_6IBZFwD1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286222649128:android:811284bd827a8d8e10321d",
+        "android_client_info": {
+          "package_name": "sys_rom.shsk_zvezda13"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ho2jBOy4gwGmzMxd-vh1W_6IBZFwD1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -994,11 +1068,48 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286222649128:android:23190b66e23ab3c010321d",
+        "android_client_info": {
+          "package_name": "sys_rom.star_korolev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ho2jBOy4gwGmzMxd-vh1W_6IBZFwD1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -1031,11 +1142,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -1068,11 +1179,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -1105,11 +1216,159 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286222649128:android:28e5636bb747fec610321d",
+        "android_client_info": {
+          "package_name": "sys_rom.tszh_arctics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ho2jBOy4gwGmzMxd-vh1W_6IBZFwD1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286222649128:android:b6c11739e06756f310321d",
+        "android_client_info": {
+          "package_name": "sys_rom.uk_grad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ho2jBOy4gwGmzMxd-vh1W_6IBZFwD1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286222649128:android:23eafb46b31d34f410321d",
+        "android_client_info": {
+          "package_name": "sys_rom.uk_near_you"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ho2jBOy4gwGmzMxd-vh1W_6IBZFwD1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286222649128:android:80c6ed0ce503c16410321d",
+        "android_client_info": {
+          "package_name": "sys_rom.uk_shubino"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ho2jBOy4gwGmzMxd-vh1W_6IBZFwD1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286222649128-4m7l1ogp6ct2qk0urfarbdgs3sedd2l0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -1142,11 +1401,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -1179,11 +1438,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]
@@ -1216,11 +1475,11 @@
               "client_type": 3
             },
             {
-              "client_id": "286222649128-u8gnhnt4kfjsln40kp6o968tp5immljs.apps.googleusercontent.com",
+              "client_id": "286222649128-23qa6p32dim4iholot965ser1tqfmpcq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "rom.best.tsgmolodejnaya",
-                "app_store_id": "1542584933"
+                "bundle_id": "rom.best.jsk.zvezda13",
+                "app_store_id": "1543175445"
               }
             }
           ]

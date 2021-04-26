@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
 using Newtonsoft.Json;
-using Plugin.FirebaseCrashlytics;
 using Plugin.Messaging;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -95,9 +94,6 @@ namespace xamarinJKH.Main
             StartOffers();
             StartQuestions();
             StartOSS();
-            CrossFirebaseCrashlytics.Current.SetUserIdentifier(Settings.Person.Login);
-            CrossFirebaseCrashlytics.Current.SetUserName(Settings.Person.FIO);
-            CrossFirebaseCrashlytics.Current.SetUserEmail(Settings.Person.Email);
             MessagingCenter.Subscribe<Object>(this, "UpdateEvents", (sender) =>
             {
                 try

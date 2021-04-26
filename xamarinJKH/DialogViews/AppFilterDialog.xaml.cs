@@ -270,7 +270,8 @@ namespace xamarinJKH.DialogViews
                 if (requestInfos != null && requestInfos.Count > 0)
                 {
                     MessagingCenter.Send<object, List<RequestInfo>>(this, "SetFilter", requestInfos);
-                    await PopupNavigation.Instance.PopAsync();
+                    if(PopupNavigation.Instance.PopupStack.Any())
+                        await PopupNavigation.Instance.PopAllAsync();
                 }
                 else
                 {

@@ -152,14 +152,14 @@ namespace xamarinJKH.AppsConst
                         Device.BeginInvokeOnMainThread(async () =>
                         {
                             
-                            if(p.Navigation.ModalStack.FirstOrDefault(x => x is AppConstPage) != null)
-                            {
+                            // if(p.Navigation.ModalStack.FirstOrDefault(x => x is AppConstPage) != null)
+                            // {
                                 await p.Navigation.PushModalAsync(new PhotoPage(message.FileID.ToString(), fileName, true));
-                            }
-                            else
-                            {
-                                await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, true));
-                            }
+                            // }
+                            // else
+                            // {
+                            //     await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, true));
+                            // }
                         });
                         return;
                     }
@@ -471,14 +471,14 @@ namespace xamarinJKH.AppsConst
                     {
                         Device.BeginInvokeOnMainThread(async () =>
                         {
-                            if(p.Navigation.ModalStack.FirstOrDefault(x => x is AppConstPage) != null)
-                            {
+                            // if(p.Navigation.ModalStack.FirstOrDefault(x => x is AppConstPage) != null)
+                            // {
                                 await p.Navigation.PushModalAsync(new PhotoPage(message.FileID.ToString(), fileName, true));
-                            }
-                            else
-                            {
-                                await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, true));
-                            }
+                            // }
+                            // else
+                            // {
+                            //     await p.Navigation.PushAsync(new PhotoPage(message.FileID.ToString(), fileName, true));
+                            // }
                         });
                         return;
                     }

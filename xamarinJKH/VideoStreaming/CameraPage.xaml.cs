@@ -110,7 +110,7 @@ namespace xamarinJKH.VideoStreaming
                 MessagingCenter.Send<object, bool>(this, "FullScreen", rotated);
                 Video.BackgroundColor = Color.Transparent;
                 (VideoContainer.Parent as StackLayout).BackgroundColor = Color.Transparent;
-                Video.Margin = new Thickness(0);
+                Video.Margin = new Thickness(0,-20,0,0);
                 Video.ScaleTo(1);
                 rotated = !rotated;
                 FullScreen.IsVisible = true;

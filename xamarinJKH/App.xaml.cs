@@ -1,35 +1,39 @@
 using System;
 using System.Collections.Generic;
-using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
-using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
-using Plugin.FirebasePushNotification;
-using Xamarin.Essentials;
-using xamarinJKH.Server;
-using xamarinJKH.Server.RequestModel;
-using xamarinJKH.Utils;
-using Application = Xamarin.Forms.Application;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
+using System.Threading.Tasks;
+using AiForms.Dialogs;
 using Akavache;
+using Badge.Plugin;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using xamarinJKH.Apps;
-using xamarinJKH.Notifications;
-using Device = Xamarin.Forms.Device;
-using System.Threading.Tasks;
-using Badge.Plugin;
-using Syncfusion.SfPdfViewer.XForms;
-using System.Resources;
-using System.Reflection;
-using AiForms.Dialogs;
+using Plugin.FirebasePushNotification;
 using Rg.Plugins.Popup.Services;
+using Syncfusion.Licensing;
+using Syncfusion.SfPdfViewer.XForms;
+using Xamarin.Essentials;
+using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using xamarinJKH.Apps;
 using xamarinJKH.AppsConst;
 using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.MainConst;
+using xamarinJKH.Notifications;
+using xamarinJKH.Server;
+using xamarinJKH.Server.RequestModel;
+using xamarinJKH.Utils;
+using Application = Xamarin.Forms.Application;
+using Device = Xamarin.Forms.Device;
+using NavigationPage = Xamarin.Forms.NavigationPage;
+using TabbedPage = Xamarin.Forms.TabbedPage;
 
 namespace xamarinJKH
 {
@@ -57,7 +61,7 @@ namespace xamarinJKH
         {
             try
             {
-                var vers = Xamarin.Essentials.AppInfo.VersionString;
+                var vers = AppInfo.VersionString;
                 var s = await server.MobileAppSettings(vers, "0");
 
                 if (Settings.MobileSettings.Error == null)
@@ -74,7 +78,7 @@ namespace xamarinJKH
         public App()
         {
             InitializeComponent();
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(
+            SyncfusionLicenseProvider.RegisterLicense(
                 "MzU2OTY1QDMxMzgyZTMzMmUzMEtpcFNHRnBKOUppMFJ1RUxjWTlsbUt6QzFOY3JyMUlGVi9McDJSSmQxVW89");
             PdfViewerResourceManager.Manager = new ResourceManager("xamarinJKH.Resources.Syncfusion.SfPdfViewer.XForms",
                 GetType().GetTypeInfo().Assembly);
@@ -89,18 +93,18 @@ namespace xamarinJKH
 
 
             if ( /*Device.RuntimePlatform == Device.iOS &&*/Settings.MobileSettings?.appTheme != null &&
-                                                            Application.Current.UserAppTheme == OSAppTheme.Unspecified)
+                                                            Current.UserAppTheme == OSAppTheme.Unspecified)
             {
                 switch (Settings.MobileSettings.appTheme)
                 {
                     case "":
-                        Application.Current.UserAppTheme = OSAppTheme.Light;
+                        Current.UserAppTheme = OSAppTheme.Light;
                         break;
                     case "light":
-                        Application.Current.UserAppTheme = OSAppTheme.Light;
+                        Current.UserAppTheme = OSAppTheme.Light;
                         break;
                     case "dark":
-                        Application.Current.UserAppTheme = OSAppTheme.Dark;
+                        Current.UserAppTheme = OSAppTheme.Dark;
                         break;
                 }
             }
@@ -144,7 +148,7 @@ namespace xamarinJKH
                     var c2 = color == Color.White ? Color.Black : Color.White;
 
 
-                    var nav = new Xamarin.Forms.NavigationPage(new MainPage())
+                    var nav = new NavigationPage(new MainPage())
                     {
                         BarBackgroundColor = c2,
                         BarTextColor = color
@@ -166,7 +170,7 @@ namespace xamarinJKH
             CrossFirebasePushNotification.Current.Subscribe("general");
             CrossFirebasePushNotification.Current.OnTokenRefresh += async (s, p) =>
             {
-                System.Diagnostics.Debug.WriteLine($"TOKEN : {p.Token}");
+                Debug.WriteLine($"TOKEN : {p.Token}");
                 token = p.Token;
                 await server.RegisterDevice(isCons);
             };
@@ -174,7 +178,7 @@ namespace xamarinJKH
 
             CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
             {
-                System.Diagnostics.Debug.WriteLine("Received");
+                Debug.WriteLine("Received");
 #if DEBUG
                 Device.BeginInvokeOnMainThread(async () => Toast.Instance.Show<ToastDialog>(new
                 {
@@ -232,10 +236,10 @@ namespace xamarinJKH
 
                         if (o.ToLower().Equals("comment"))
                         {
-                            var tabbedpage = App.Current.MainPage.Navigation.ModalStack.ToList()[0];
-                            if (tabbedpage is xamarinJKH.Main.BottomNavigationPage)
+                            var tabbedpage = Current.MainPage.Navigation.ModalStack.ToList()[0];
+                            if (tabbedpage is BottomNavigationPage)
                             {
-                                var stack = (tabbedpage as Xamarin.Forms.TabbedPage).Children[3].Navigation
+                                var stack = (tabbedpage as TabbedPage).Children[3].Navigation
                                     .NavigationStack;
                                 if (stack.Count == 2)
                                 {
@@ -252,9 +256,9 @@ namespace xamarinJKH
                                 }
                             }
 
-                            if (tabbedpage is xamarinJKH.MainConst.BottomNavigationConstPage)
+                            if (tabbedpage is BottomNavigationConstPage)
                             {
-                                var stack = (tabbedpage as Xamarin.Forms.TabbedPage).Children[0].Navigation
+                                var stack = (tabbedpage as TabbedPage).Children[0].Navigation
                                     .NavigationStack;
                                 if (stack.Count == 2)
                                 {
@@ -274,14 +278,14 @@ namespace xamarinJKH
 
                         if (o.ToLower() == "announcement")
                         {
-                            var tabbedpage = App.Current.MainPage.Navigation.ModalStack.ToList()[0];
-                            if (tabbedpage is xamarinJKH.Main.BottomNavigationPage)
+                            var tabbedpage = Current.MainPage.Navigation.ModalStack.ToList()[0];
+                            if (tabbedpage is BottomNavigationPage)
                             {
-                                var stack = (tabbedpage as Xamarin.Forms.TabbedPage).Children[0].Navigation
+                                var stack = (tabbedpage as TabbedPage).Children[0].Navigation
                                     .NavigationStack;
                                 if (stack.Count == 2 && !isCons)
                                 {
-                                    await (tabbedpage as Xamarin.Forms.TabbedPage).Children[0].Navigation
+                                    await (tabbedpage as TabbedPage).Children[0].Navigation
                                         .PopToRootAsync();
                                 }
 
@@ -301,7 +305,7 @@ namespace xamarinJKH
             CrossFirebasePushNotification.Current.OnNotificationOpened += async (s, rea) =>
             {
                 Analytics.TrackEvent("открыт пуш");
-                System.Diagnostics.Debug.WriteLine("Opened");
+                Debug.WriteLine("Opened");
                 if (rea != null)
                     if (rea.Data != null)
                     {
@@ -481,14 +485,14 @@ namespace xamarinJKH
             };
             CrossFirebasePushNotification.Current.OnNotificationAction += (s, p) =>
             {
-                System.Diagnostics.Debug.WriteLine("Action");
+                Debug.WriteLine("Action");
 
                 if (!string.IsNullOrEmpty(p.Identifier))
                 {
-                    System.Diagnostics.Debug.WriteLine($"ActionId: {p.Identifier}");
+                    Debug.WriteLine($"ActionId: {p.Identifier}");
                     foreach (var data in p.Data)
                     {
-                        System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
+                        Debug.WriteLine($"{data.Key} : {data.Value}");
                     }
                 }
             };
@@ -630,20 +634,20 @@ namespace xamarinJKH
             CrossFirebasePushNotification.Current.Subscribe("general");
             CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
             {
-                System.Diagnostics.Debug.WriteLine($"TOKEN REC: {p.Token}");
+                Debug.WriteLine($"TOKEN REC: {p.Token}");
             };
-            System.Diagnostics.Debug.WriteLine($"TOKEN: {CrossFirebasePushNotification.Current.Token}");
+            Debug.WriteLine($"TOKEN: {CrossFirebasePushNotification.Current.Token}");
 
             CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
             {
                 try
                 {
-                    System.Diagnostics.Debug.WriteLine("Received");
+                    Debug.WriteLine("Received");
                     if (p.Data.ContainsKey("body"))
                     {
                         Device.BeginInvokeOnMainThread(() =>
                         {
-                            System.Diagnostics.Debug.WriteLine($"{p.Data["body"]}");
+                            Debug.WriteLine($"{p.Data["body"]}");
                         });
                     }
 
@@ -651,7 +655,7 @@ namespace xamarinJKH
                     {
                         Device.BeginInvokeOnMainThread(() =>
                         {
-                            System.Diagnostics.Debug.WriteLine($"{p.Data["aps.alert.body"]}");
+                            Debug.WriteLine($"{p.Data["aps.alert.body"]}");
                         });
                     }
                 }
@@ -662,10 +666,10 @@ namespace xamarinJKH
 
             CrossFirebasePushNotification.Current.OnNotificationOpened += (s, rea) =>
             {
-                System.Diagnostics.Debug.WriteLine("Opened");
+                Debug.WriteLine("Opened");
                 foreach (var data in rea.Data)
                 {
-                    System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
+                    Debug.WriteLine($"{data.Key} : {data.Value}");
                 }
 
                 if (!string.IsNullOrEmpty(rea.Identifier))
@@ -673,7 +677,7 @@ namespace xamarinJKH
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         // MainPage.Message = p.Identifier;
-                        System.Diagnostics.Debug.WriteLine("123");
+                        Debug.WriteLine("123");
                     });
                 }
                 else if (rea.Data.ContainsKey("color"))
@@ -691,28 +695,28 @@ namespace xamarinJKH
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         // MainPage.Message = $"{p.Data["aps.alert.title"]}";
-                        System.Diagnostics.Debug.WriteLine($"Пушшшш2 ==== {rea.Data["aps.alert.title"]}");
+                        Debug.WriteLine($"Пушшшш2 ==== {rea.Data["aps.alert.title"]}");
                     });
                 }
             };
 
             CrossFirebasePushNotification.Current.OnNotificationAction += (s, p) =>
             {
-                System.Diagnostics.Debug.WriteLine("Action");
+                Debug.WriteLine("Action");
 
                 if (!string.IsNullOrEmpty(p.Identifier))
                 {
-                    System.Diagnostics.Debug.WriteLine($"ActionId: {p.Identifier}");
+                    Debug.WriteLine($"ActionId: {p.Identifier}");
                     foreach (var data in p.Data)
                     {
-                        System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
+                        Debug.WriteLine($"{data.Key} : {data.Value}");
                     }
                 }
             };
 
             CrossFirebasePushNotification.Current.OnNotificationDeleted += (s, p) =>
             {
-                System.Diagnostics.Debug.WriteLine("Dismissed");
+                Debug.WriteLine("Dismissed");
             };
         }
 

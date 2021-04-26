@@ -1973,4 +1973,7 @@
   <data name="BiometricEnableToUse" xml:space="preserve">
     <value>To use FaceId / fingerprint enable them in your smartphone settings</value>
   </data>
+  <data name="ErrorPassword" xml:space="preserve">
+    <value>Wrong password entered </value>
+  </data>
 </root>
