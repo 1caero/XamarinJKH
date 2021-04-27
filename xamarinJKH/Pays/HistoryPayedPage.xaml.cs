@@ -279,7 +279,7 @@ namespace xamarinJKH.Pays
             select.ID = s.ID;
             select.Ident = s.Ident;
             select.Period = s.Period;
-
+            if(s.HasCheck)
             await Navigation.PushAsync(new ImageSaldoPage(select,true));
 
             

@@ -216,7 +216,7 @@ namespace xamarinJKH.Pays
                             Toast.Instance.Show<ToastDialog>(new {Title = AppResources.ErrorAdditionalLink, Duration = 1500, ColorB = Color.Gray,  ColorT = Color.White});
                         }
                     };
-                    file.GestureRecognizers.Add(openCheck);
+                    //file.GestureRecognizers.Add(openCheck);
                 }
                 
                 FormattedString formattedIdent = new FormattedString();
