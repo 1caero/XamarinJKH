@@ -52,7 +52,15 @@ namespace xamarinJKH.DialogViews
             PickerDispKindStack.GestureRecognizers.Add(PickerDispKindOpen);
 
             var CloseAppButtonTgr = new TapGestureRecognizer();
-            CloseAppButtonTgr.Tapped += (s, e) => { Device.BeginInvokeOnMainThread(async () => {
+            CloseAppButtonTgr.Tapped += (s, e) => { MoveApp(); };
+            CloseAppButton.GestureRecognizers.Add(CloseAppButtonTgr);
+            
+        }
+
+        private void MoveApp()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
                 try
                 {
                     CloseAppButton.IsEnabled = false;
@@ -73,11 +81,7 @@ namespace xamarinJKH.DialogViews
                     ClosingApp = false;
                     CloseAppButton.IsEnabled = true;
                 }
-            }); };
-            CloseAppButton.GestureRecognizers.Add(CloseAppButtonTgr);
-
-
-            
+            });
         }
 
         public DispListModel _dispListModel = null;
@@ -382,6 +386,11 @@ namespace xamarinJKH.DialogViews
 
         private void PickerDispPool_OnSelectedIndexChanged(object sender, EventArgs e)
         {
+        }
+
+        private void BtnMove_OnClicked(object sender, EventArgs e)
+        {
+            MoveApp();
         }
     }
 }
