@@ -276,9 +276,10 @@
                                 Foreground="White"
                                 WidthRequest="25"
                                 HeightRequest="25" />
-                            <Button x:Name="BtnAdd"
+                            <Button x:Name="BtnMove"
                                     Text="{x:Static xamarinJkh:AppResources.MoveDispatcherConfirm}"
                                     TextColor="White"
+                                    Clicked="BtnMove_OnClicked"
                                     FontAttributes="Bold"
                                     BackgroundColor="Transparent" />
                         </StackLayout>
