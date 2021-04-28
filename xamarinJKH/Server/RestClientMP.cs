@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
 using xamarinJKH.Server.RequestModel;
 using RestSharp;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using xamarinJKH.Utils;
 
@@ -2128,6 +2129,7 @@ namespace xamarinJKH.Server
         /// <returns></returns>
         public async Task<CommonResult> RegisterDevice(bool isCons = false)
         {
+            Analytics.TrackEvent($"Регистрация токена устройства {App.Model} пользователя {Preferences.Get("login", "")}");
             string OS = Device.RuntimePlatform;
             if (OS.ToLower() == "ios")
                 await Task.Delay(500);

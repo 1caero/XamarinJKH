@@ -43,6 +43,11 @@ namespace xamarinJKH
         public static int ScreenWidth { get; set; }
 
         public static double ScreenHeight2 { get; set; }
+
+        public static string Model
+        {
+            get =>Device.RuntimePlatform == Device.Android ? App.model : Xamarin.Essentials.DeviceInfo.Model;
+        } 
         public static double ScreenWidth2 { get; set; }
         public static string version { get; set; }
         public static string model { get; set; }
@@ -179,6 +184,7 @@ namespace xamarinJKH
             CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
             {
                 Debug.WriteLine("Received");
+                Analytics.TrackEvent($"Пришел пуш на устройство {Model} пользователю {Preferences.Get("login", "")}");
 #if DEBUG
                 Device.BeginInvokeOnMainThread(async () => Toast.Instance.Show<ToastDialog>(new
                 {
@@ -304,7 +310,7 @@ namespace xamarinJKH
             };
             CrossFirebasePushNotification.Current.OnNotificationOpened += async (s, rea) =>
             {
-                Analytics.TrackEvent("открыт пуш");
+                Analytics.TrackEvent($"открыт пуш на устройстве {Model} пользователя {Preferences.Get("login", "")}");
                 Debug.WriteLine("Opened");
                 if (rea != null)
                     if (rea.Data != null)
