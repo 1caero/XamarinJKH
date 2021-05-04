@@ -1978,4 +1978,7 @@
   <data name="BiometricEnableToUse" xml:space="preserve">
     <value>Чтобы использовать FaceId/отпечаток пальца включите их в настройках Вашего смартфона</value>
   </data>
+  <data name="DontRimind" xml:space="preserve">
+    <value>Больше не напоминать</value>
+  </data>
 </root>

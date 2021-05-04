@@ -223,7 +223,12 @@ namespace xamarinJKH.Main
             {
                 this.CurrentPage = this.EventsNavPage;
             });
+            
+             Settings.ChechEnabledNotification(this);
         }
+
+       
+
 
         protected override void OnDisappearing()
         {

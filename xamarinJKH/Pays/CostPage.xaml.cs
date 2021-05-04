@@ -193,7 +193,7 @@ namespace xamarinJKH.Pays
             
             EntrySum.Text = account.Sum.ToString();
             FormattedString formatted = new FormattedString();
-            ComissionModel result = await server.GetSumWithComission(account.Sum.ToString());
+            ComissionModel result = await server.GetSumWithComission(account.Sum.ToString(), account.AccountID);
             string totalSum = EntrySum.Text;
             if (result.Error == null && result.Comission != 0)
             {
@@ -323,7 +323,7 @@ namespace xamarinJKH.Pays
                 }
             }
 
-            ComissionModel result = await server.GetSumWithComission(totalSum.ToString());
+            ComissionModel result = await server.GetSumWithComission(totalSum.ToString(), account.AccountID);
             if (result.Error == null && !result.Comission.Equals("0"))
             {
                 isComission = true;

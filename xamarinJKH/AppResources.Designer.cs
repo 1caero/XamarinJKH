@@ -1339,6 +1339,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Больше не напоминать.
+        /// </summary>
+        internal static string DontRimind {
+            get {
+                return ResourceManager.GetString("DontRimind", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Скачать.
         /// </summary>
         internal static string Download {

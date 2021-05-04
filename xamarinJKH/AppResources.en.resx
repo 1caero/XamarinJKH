@@ -1976,4 +1976,7 @@
   <data name="ErrorPassword" xml:space="preserve">
     <value>Wrong password entered </value>
   </data>
+  <data name="DontRimind" xml:space="preserve">
+    <value>Do not remind again </value>
+  </data>
 </root>
