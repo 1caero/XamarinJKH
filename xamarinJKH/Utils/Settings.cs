@@ -8,6 +8,7 @@ using Microsoft.AppCenter.Analytics;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using xamarinJKH.DialogViews;
+using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Main;
 using xamarinJKH.Server.RequestModel;
 
@@ -278,5 +279,25 @@ namespace xamarinJKH.Utils
 
             return "";
         }
+        
+        public static async void ChechEnabledNotification(Page page)
+        {
+            if(DeviceInfo.Platform == DevicePlatform.Android)
+            {
+                bool isDisplay = Preferences.Get("DisplayNotification", true);
+                if (!DependencyService.Get<ISettingsService>().IsEnabledNotification() && isDisplay)
+                {
+                    bool displayAlert = await page.DisplayAlert("",
+                        "На вашем устройстве для данного приложения отключен прием пуш уведомлений." +
+                        " Включите прием уведомлений в настройках устройства", AppResources.DontRimind,
+                        "OK");
+                    if (displayAlert)
+                    {
+                        Preferences.Set("DisplayNotification", false);
+                    }
+                }
+            }
+        }
+        
     }
 }

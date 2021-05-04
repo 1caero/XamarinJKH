@@ -185,7 +185,7 @@
     <Compile Include="CustomRenderers\BorderlessDatePickerRenderer.cs" />
     <Compile Include="CustomRenderers\BorderlessPickerRenderer.cs" />
     <Compile Include="CustomRenderers\BordlessEditorRender.cs" />
-    <Compile Include="CustomRenderers\ChromeTabRenderer.cs" />
+    <Compile Include="CustomRenderers\SettingsServiceRenderer.cs" />
     <Compile Include="CustomRenderers\CounterEntryNewRenderer.cs" />
     <Compile Include="CustomRenderers\CounterEntryRenderer.cs" />
     <Compile Include="CustomRenderers\CustomViewClient.cs" />

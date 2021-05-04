@@ -242,7 +242,10 @@ namespace xamarinJKH.Main
         void SetText()
         {
             UkName.Text = Settings.MobileSettings.main_name;
-          
+            if (DeviceInfo.Platform == DevicePlatform.Android)
+            {
+                LabelNotification.IsVisible = !DependencyService.Get<ISettingsService>().IsEnabledNotification();
+            }
         }
         
         void SetColor()
