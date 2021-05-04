@@ -845,7 +845,7 @@ namespace xamarinJKH.Apps
             }
             else
             {
-                await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorComments, "OK");
+                Device.BeginInvokeOnMainThread(async () =>await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorComments, "OK"));
             }
 
             await MethodWithDelayAsync(1000);

@@ -440,8 +440,8 @@ namespace xamarinJKH
                         Settings.TimerTime = TimerTime;
                         Device.StartTimer(TimeSpan.FromSeconds(1), Settings.OnTimerTick);
                     }
-
-                    _ = await Navigation.PopModalAsync();
+                    if(Navigation.ModalStack.Any())
+                        await Navigation.PopModalAsync();
                     break;
                 case 1:
                     returnOneStep();

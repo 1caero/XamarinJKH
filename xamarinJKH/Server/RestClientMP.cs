@@ -2903,7 +2903,7 @@ namespace xamarinJKH.Server
         /// </summary>
         /// <param name="sum">сумма оплаты</param>
         /// <returns></returns>
-        public async Task<ComissionModel> GetSumWithComission(string sum)
+        public async Task<ComissionModel> GetSumWithComission(string sum, string accountID)
         {
             RestClient restClientMp = new RestClient(SERVER_ADDR);
             RestRequest restRequest = new RestRequest(GET_SUM_COMISSION, Method.GET);
@@ -2912,6 +2912,7 @@ namespace xamarinJKH.Server
             restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             restRequest.AddHeader("acx", Settings.Person.acx);
             restRequest.AddParameter("sum", sum.Replace(",", "."));
+            restRequest.AddParameter("accountID", accountID);
             var response = await restClientMp.ExecuteTaskAsync<ComissionModel>(restRequest);
             // Проверяем статус
             if (response.StatusCode != HttpStatusCode.OK)
