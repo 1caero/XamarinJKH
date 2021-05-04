@@ -76,7 +76,8 @@ namespace xamarinJKH
             }
             var response = await server.GetEventBlockData();
             Settings.EventBlockData = response;
-            Settings.EventBlockData.Announcements = response.Announcements.OrderByDescending(x => DateTime.ParseExact(x.Created, "dd.MM.yyyy", null)).ToList();
+            if (Settings.EventBlockData != null && Settings.EventBlockData.Announcements != null)
+                Settings.EventBlockData.Announcements = response.Announcements.OrderByDescending(x => DateTime.ParseExact(x.Created, "dd.MM.yyyy", null)).ToList();
             if (Settings.EventBlockData.Error == null)
             {
                 if (isAll)
@@ -148,6 +149,7 @@ namespace xamarinJKH
             
             };
             SetText();
+            if(Settings.EventBlockData!=null && Settings.EventBlockData.Announcements!=null)
             Settings.EventBlockData.Announcements = Settings.EventBlockData.Announcements.OrderByDescending(x => DateTime.ParseExact(x.Created, "dd.MM.yyyy", null)).ToList();
             Notifications = Settings.EventBlockData.Announcements.Take(3).ToList();
             this.BindingContext = this;
