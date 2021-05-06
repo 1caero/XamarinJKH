@@ -668,7 +668,7 @@ namespace xamarinJKH.AppsConst
                     var ret = await Dialog.Instance.ShowAsync<AppCompliteDialog>(new
                     {
                         HexColor = hex,
-                        Id = _requestInfo.ID
+                        Id = _requestInfo.ID,
                     });
                 });
             }
@@ -1177,7 +1177,10 @@ namespace xamarinJKH.AppsConst
             var request = await _server.PerformAppConst(_requestInfo.ID.ToString());
             if (request.Error == null)
             {
-                sendMessage();
+                if (!string.IsNullOrWhiteSpace(EntryMess.Text))
+                {
+                    sendMessage();
+                }
                 await ClosePage();
                 await ShowToast(AppResources.AppCompleted);
                 await RefreshData();

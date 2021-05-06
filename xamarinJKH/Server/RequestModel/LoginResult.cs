@@ -36,6 +36,9 @@ namespace xamarinJKH.Server.RequestModel
         public bool RightPerformRequest { get; set; }
         public bool RightCreateAnnouncements { get; set; }
         
+        public bool IsNeedCommnentOnCompleteRequest  { get; set; }
+        public bool IsCommnentRequiredOnCompleteRequest   { get; set; }
+        
         public bool disableGeolocation { get; set; }
         public bool AlwaysPostHiddenMessage { get; set; }
     }
