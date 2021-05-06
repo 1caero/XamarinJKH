@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "307364146042",
+    "project_id": "xamarinjkh3",
+    "storage_bucket": "xamarinjkh3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307364146042:android:a76ab6615aab8c364604c3",
+        "android_client_info": {
+          "package_name": "sys_rom.ooo_chastnii_zhek"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307364146042-v94j8gh391b9d7jaqgjtq6fb9losua7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfCbdIU28MwCMNGLhfkNu04RC7GszNAxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307364146042-v94j8gh391b9d7jaqgjtq6fb9losua7k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307364146042:android:bac00d54abef35d84604c3",
+        "android_client_info": {
+          "package_name": "sys_rom.tsg_plamya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307364146042-v94j8gh391b9d7jaqgjtq6fb9losua7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfCbdIU28MwCMNGLhfkNu04RC7GszNAxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307364146042-v94j8gh391b9d7jaqgjtq6fb9losua7k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
