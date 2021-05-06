@@ -180,8 +180,9 @@ namespace xamarinJKH.Pays
             // GoodsLayot.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
             Frame.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
 
-            SetPays();
             SwitchInsurance.IsToggled = true;
+            SetPays();
+
         }
 
         async void SetPays()

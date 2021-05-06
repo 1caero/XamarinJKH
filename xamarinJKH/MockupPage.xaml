@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:panCardView="clr-namespace:PanCardView;assembly=PanCardView"
+             xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
+             xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
+             x:Class="xamarinJKH.MockupPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ActiveIndicator" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{x:DynamicResource MainColor}" />
+            </Style>
+            <Style x:Key="InactiveIndicator" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="OutlineColor" Value="{x:DynamicResource MainColor}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <Grid VerticalOptions="FillAndExpand"
+                  BackgroundColor="#616161">
+               
+                <panCardView:CarouselView
+                    VerticalOptions="FillAndExpand"
+                    x:Name="TheCarousel">
+                    <panCardView:CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <ContentView>
+                                <Frame
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Padding="0"
+                                    HasShadow="false"
+                                    IsClippedToBounds="true"
+                                    CornerRadius="10"
+                                    >
+                                    <Image
+                                        VerticalOptions="FillAndExpand"
+                                        HorizontalOptions="FillAndExpand"
+                                        Aspect="AspectFill"
+                                        Source="{Binding .}" />
+                                </Frame>
+                            </ContentView>
+                        </DataTemplate>
+                    </panCardView:CarouselView.ItemTemplate>
+
+                    <controls:LeftArrowControl />
+                    <controls:RightArrowControl />
+                    <controls:IndicatorsControl
+                        SelectedIndicatorStyle="{StaticResource ActiveIndicator}"
+                        UnselectedIndicatorStyle="{StaticResource InactiveIndicator}" />
+                </panCardView:CarouselView>
+                <xamarinJkh:IconView x:Name="IconViewClose"
+                                     Source="ic_close"
+                                     HeightRequest="20"
+                                     WidthRequest="20"
+                                     Foreground="White"
+                                     Margin="10"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="Start" />
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

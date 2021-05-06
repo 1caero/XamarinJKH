@@ -130,6 +130,8 @@ namespace xamarinJKH
             // EntryLogin.Text = "";
             EntryLoginConst.Text = "";
             EntryPass.Text = "";
+          
+            // OpenCarousel();
             AutoLogin();
 
             switch (Device.RuntimePlatform)
@@ -158,6 +160,15 @@ namespace xamarinJKH
             var t = Application.Current.UserAppTheme;
         }
 
+        async void OpenCarousel()
+        {
+            if (Preferences.Get("IsFirstStart", true) && Settings.MobileSettings.MockupCount > 0)
+            {
+                await Navigation.PushModalAsync(new MockupPage());
+                Preferences.Set("IsFirstStart", false);
+            }
+        }
+        
         private void AutoLogin()
         {
             string login = Preferences.Get("login", "");

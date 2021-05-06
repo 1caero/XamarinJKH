@@ -63,6 +63,8 @@ namespace xamarinJKH.Server.RequestModel
         public string appLinkAndroid { get; set; }
 
         public string appTheme { get; set; }
+        
+        public int MockupCount { get; set; }
         public bool requireBirthDate { get; set; }
         public bool districtsExists { get; set; }
         public bool housesExists { get; set; }

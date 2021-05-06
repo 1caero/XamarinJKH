@@ -355,6 +355,7 @@
   <ItemGroup>
     <PackageReference Include="AiForms.Dialogs" Version="1.0.10" />
     <PackageReference Include="akavache" Version="6.10.20" />
+    <PackageReference Include="CardsView" Version="2.7.8" />
     <PackageReference Include="dotMorten.Xamarin.Forms.AutoSuggestBox" Version="1.1.1" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.30" />
     <PackageReference Include="Messier16.Forms.Controls" Version="2.2.0" />

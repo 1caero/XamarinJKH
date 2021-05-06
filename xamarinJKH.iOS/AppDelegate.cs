@@ -1,16 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+using AiForms.Dialogs;
+using FFImageLoading.Forms.Platform;
+using Firebase.Crashlytics;
 using Foundation;
 using LabelHtml.Forms.Plugin.iOS;
-//using MediaManager;
-//using KeyboardOverlap.Forms.Plugin.iOSUnified;
+using Messier16.Forms.iOS.Controls;
+using PanCardView.iOS;
 using Plugin.FirebasePushNotification;
+using Rg.Plugins.Popup;
+using Syncfusion.SfAutoComplete.XForms.iOS;
 using Syncfusion.SfCalendar.XForms.iOS;
+using Syncfusion.SfPdfViewer.XForms.iOS;
 using Syncfusion.SfPicker.XForms.iOS;
+using Syncfusion.SfRangeSlider.XForms.iOS;
 using Syncfusion.XForms.iOS.MaskedEdit;
 using UIKit;
+using Xamarin;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
+using XamEffects.iOS;
+using Platform = ZXing.Net.Mobile.Forms.iOS.Platform; //using MediaManager;
+//using KeyboardOverlap.Forms.Plugin.iOSUnified;
 
 namespace xamarinJKH.iOS
 {
@@ -18,7 +28,7 @@ namespace xamarinJKH.iOS
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
     [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    public partial class AppDelegate : FormsApplicationDelegate
     {
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
@@ -29,30 +39,30 @@ namespace xamarinJKH.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental", "IndicatorView_Experimental", "AppTheme_Experimental", "Markup_Experimental", "DragAndDrop_Experimental");
+            Forms.SetFlags("RadioButton_Experimental", "IndicatorView_Experimental", "AppTheme_Experimental", "Markup_Experimental", "DragAndDrop_Experimental");
 
             HtmlLabelRenderer.Initialize();
 
-            Xamarin.FormsMaps.Init();
-            global::Xamarin.Forms.Forms.Init();
+            FormsMaps.Init();
+            Forms.Init();
 
             //KeyboardOverlapRenderer.Init();
+            CardsViewRenderer.Preserve();
+            SfPdfDocumentViewRenderer.Init();
+            SfRangeSliderRenderer.Init();
+            new SfAutoCompleteRenderer();
 
-            Syncfusion.SfPdfViewer.XForms.iOS.SfPdfDocumentViewRenderer.Init();
-            Syncfusion.SfRangeSlider.XForms.iOS.SfRangeSliderRenderer.Init();
-            new Syncfusion.SfAutoComplete.XForms.iOS.SfAutoCompleteRenderer();
-
-            AiForms.Dialogs.Dialogs.Init();
-            XamEffects.iOS.Effects.Init(); 
+            Dialogs.Init();
+            Effects.Init(); 
             App.ScreenHeight = (int)UIScreen.MainScreen.Bounds.Height;
             App.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
-            Messier16.Forms.iOS.Controls.Messier16Controls.InitAll();
-            Rg.Plugins.Popup.Popup.Init();
-            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            Messier16Controls.InitAll();
+            Popup.Init();
+            CachedImageRenderer.Init();
 
             //CrossMediaManager.Current.Init();
             
-            ZXing.Net.Mobile.Forms.iOS.Platform.Init();
+            Platform.Init();
 
             //SimpleImageButton.SimpleImageButton.Initializator.Initializator.Init();
 
@@ -63,7 +73,7 @@ namespace xamarinJKH.iOS
             UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
             Firebase.Core.App.Configure();
             SfMaskedEditRenderer.Init();
-            Firebase.Crashlytics.Crashlytics.Configure();
+            Crashlytics.Configure();
 
             FirebasePushNotificationManager.Initialize(options, true);
             App.ScreenWidth2 = UIScreen.MainScreen.Bounds.Width;
@@ -101,7 +111,7 @@ namespace xamarinJKH.iOS
             // automatically with method swizzling enabled.
             FirebasePushNotificationManager.DidReceiveMessage(userInfo);
             // Do your magic to handle the notification data
-            System.Console.WriteLine(userInfo);
+            Console.WriteLine(userInfo);
 
             completionHandler(UIBackgroundFetchResult.NewData);
         }
