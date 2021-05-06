@@ -282,7 +282,7 @@ namespace xamarinJKH.Utils
         
         public static async void ChechEnabledNotification(Page page)
         {
-            if(DeviceInfo.Platform == DevicePlatform.Android)
+            //if(DeviceInfo.Platform == DevicePlatform.Android)
             {
                 bool isDisplay = Preferences.Get("DisplayNotification", true);
                 if (!DependencyService.Get<ISettingsService>().IsEnabledNotification() && isDisplay)

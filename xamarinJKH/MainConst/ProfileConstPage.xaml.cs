@@ -282,10 +282,10 @@ namespace xamarinJKH.MainConst
             SetAdminName();
             FrameTop.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
             FrameSettings.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
-            if (DeviceInfo.Platform == DevicePlatform.Android)
-            {
+            //if (DeviceInfo.Platform == DevicePlatform.Android)
+            //{
                 LabelNotification.IsVisible = !DependencyService.Get<ISettingsService>().IsEnabledNotification();
-            }
+            //}
         }
 
         private void SetAdminName()

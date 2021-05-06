@@ -135,6 +135,7 @@
     <Compile Include="CustomRenderers\KeyboardOverlapRenderer.cs" />
     <Compile Include="CustomRenderers\ListViewHighlightEffect.cs" />
     <Compile Include="CustomRenderers\MaterialFrameRenderer.cs" />
+    <Compile Include="CustomRenderers\SettingsServiceRenderer.cs" />
     <Compile Include="CustomRenderers\TapHighlightRemoveAdditionalCellRenderer.cs" />
     <Compile Include="CustomRenderers\TapHighlightRemoveNotificationCellRenderer.cs" />
     <Compile Include="CustomRenderers\RadioButtonEffect.cs" />

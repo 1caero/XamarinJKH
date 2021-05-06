@@ -164,7 +164,7 @@ namespace xamarinJKH.Server
         public const string REGISTR_DEVICE_NOT_AVTORIZATION = "Public/RegisterDevice"; // регистрация устройства
 
         public const string GET_METERS_THREE = "Meters/List"; // Получить последние 3 показания по приборам
-        public const string SAVE_METER_VALUE = "Meters/SaveMeterValue"; // Получить полную инфу по новости
+        public const string SAVE_METER_VALUE = "Meters/SaveMeterValue"; // Сохранение показаний
         public const string SET_METER_NAME = "Meters/SetMeterCustomName"; // Смена произвольного имени прибора
         public const string DELETE_METER_VALUE = "Meters/DeleteMeterValue "; // Удаляет значение показаний прибора учета
         public const string GET_METER_VALUE = "Meters/MeterValues"; // Получить историю показаний по прибору
