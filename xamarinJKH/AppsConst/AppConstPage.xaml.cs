@@ -656,21 +656,21 @@ namespace xamarinJKH.AppsConst
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                Configurations.LoadingConfig = new LoadingConfig
-                {
-                    IndicatorColor = Color.Transparent,
-                    OverlayColor = Color.Black,
-                    Opacity = 0.8,
-                    DefaultMessage = "",
-                };
-                await Loading.Instance.StartAsync(async progress =>
-                {
+                // Configurations.LoadingConfig = new LoadingConfig
+                // {
+                //     IndicatorColor = Color.Transparent,
+                //     OverlayColor = Color.Black,
+                //     Opacity = 0.8,
+                //     DefaultMessage = "",
+                // };
+                // await Loading.Instance.StartAsync(async progress =>
+                // {
                     var ret = await Dialog.Instance.ShowAsync<AppCompliteDialog>(new
                     {
                         HexColor = hex,
                         Id = _requestInfo.ID,
                     });
-                });
+                // });
             }
                                    );
         }

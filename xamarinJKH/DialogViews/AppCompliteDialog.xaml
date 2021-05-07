@@ -9,6 +9,16 @@
                          xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
                          xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
              x:Class="xamarinJKH.DialogViews.AppCompliteDialog">
+    <abstractions:DialogView.OverlayColor>
+        <Color>
+            <x:Arguments>
+                <x:Double>0</x:Double>
+                <x:Double>0</x:Double>
+                <x:Double>0</x:Double>
+                <x:Double>0.8</x:Double>
+            </x:Arguments>
+        </Color>
+    </abstractions:DialogView.OverlayColor>
 
     <Frame CornerRadius="30"
            x:Name="Frame"
@@ -57,7 +67,7 @@
                     HorizontalOptions="FillAndExpand" 
                     VerticalOptions="FillAndExpand" 
                     Text=""
-                    Placeholder="введите коментарий, минимум 10 символов" 
+                    Placeholder="{x:Static xamarinJkh:AppResources.ErrorMessageEmpty}" 
                     PlaceholderColor="LightGray"
                     AutoSize="TextChanges"
                     >                    

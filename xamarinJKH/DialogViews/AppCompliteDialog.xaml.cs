@@ -20,7 +20,10 @@ namespace xamarinJKH.DialogViews
             InitializeComponent();
 
             //Id = Id;
-            AppCompliteEntry.Placeholder = string.Format(AppResources.LettersLimit, 10);
+            if (Settings.Person.UserSettings.IsCommnentRequiredOnCompleteRequest)
+            {
+                AppCompliteEntry.Placeholder = string.Format(AppResources.LettersLimit, 10);
+            }
 
             var close = new TapGestureRecognizer();
             close.Tapped += (s, e) =>
