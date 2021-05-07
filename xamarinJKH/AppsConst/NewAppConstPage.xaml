@@ -93,14 +93,15 @@
                                     <StackLayout Spacing="0" x:Name="TypeStack" Orientation="Vertical"
                                                  VerticalOptions="Start">
                                         <StackLayout Spacing="0" Orientation="Horizontal" VerticalOptions="Start">
-                                            <RadioButton ClassId="0" Focused="RadioButton_Focused" 
+                                            <RadioButton ClassId="0" Focused="RadioButton_Focused"
                                                          CheckedChanged="RadioButton_Pressed" GroupName="TypeApp" />
                                             <Label Text="{x:Static xamarinJkh:AppResources.Ident1}"
                                                    Style="{x:StaticResource RadioButton}" />
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal" VerticalOptions="Start">
                                             <RadioButton ClassId="1" Focused="RadioButton_Focused"
-                                                         CheckedChanged="RadioButton_Pressed" IsVisible="{Binding ShowArea}"
+                                                         CheckedChanged="RadioButton_Pressed"
+                                                         IsVisible="{Binding ShowArea}"
                                                          GroupName="TypeApp" />
                                             <Label Text="{x:Static xamarinJkh:AppResources.District}"
                                                    Style="{x:StaticResource RadioButton}" />
@@ -253,8 +254,7 @@
                                         VerticalOptions="Center"
                                         HorizontalOptions="Start"
                                         FontSize="15"
-                                        FontAttributes="Bold"
-                                      />
+                                        FontAttributes="Bold" />
                                     <StackLayout Spacing="0">
                                         <StackLayout
                                             x:Name="StackLayoutType"
@@ -286,50 +286,51 @@
                                     </StackLayout>
                                 </StackLayout>
                                 <StackLayout
-                                        Margin="0,0,0,0"
-                                        Spacing="0"
-                                        x:Name="PodTypeLayout"
-                                        IsVisible="False"
-                                        HorizontalOptions="Center"
-                                        Orientation="Horizontal">
+                                    Margin="0,0,0,0"
+                                    Spacing="0"
+                                    x:Name="PodTypeLayout"
+                                    IsVisible="False"
+                                    HorizontalOptions="Center"
+                                    Orientation="Horizontal">
 
-                                        <Label
+                                    <Label
 
-                                            TextColor="Black"
-                                            Text="{x:Static xamarinJkh:AppResources.Malfunction}"
-                                            VerticalOptions="Center"
-                                            FontAttributes="Bold"
-                                            FontSize="15" />
-                                        <StackLayout Spacing="0">
-                                            <StackLayout
-                                                Orientation="Horizontal" x:Name="StackLayoutPodType">
-                                                <xamarinJkh:BorderlessPicker x:Name="PickerPodType"
-                                                                             Title="{x:Static xamarinJkh:AppResources.Choose}"
-                                                                             TitleColor="{Binding hex}"
-                                                                             TextColor="{Binding hex}"
-                                                                             VerticalOptions="End"
-                                                                             FontSize="15"
-                                                                             SizeChanged="PickerType_OnSizeChanged"
-                                                                             HorizontalOptions="Fill"
-                                                                             SelectedIndexChanged="PickerPodType_OnSelectedIndexChanged"
-                                                                             ItemsSource="{Binding PodTypes}"
-                                                                             ItemDisplayBinding="{Binding _NamePicker}"
-                                                                             SelectedItem="{Binding PodTypSelected}" />
-                                                <xamarinJkh:IconView Source="ic_arrow_forward"
-                                                                     HeightRequest="12"
-                                                                     WidthRequest="12"
-                                                                     Rotation="90"
-                                                                     Margin="0,5,0,0"
-                                                                     VerticalOptions="Center"
-                                                                     Foreground="{Binding hex}"
-                                                                     HorizontalOptions="Center" />
-                                            </StackLayout>
-                                            <Label
-                                                HeightRequest="1"
-                                                BackgroundColor="{Binding hex}"
-                                                HorizontalOptions="Fill" />
+                                        TextColor="Black"
+                                        Text="{x:Static xamarinJkh:AppResources.Malfunction}"
+                                        VerticalOptions="Center"
+                                        FontAttributes="Bold"
+                                        FontSize="15" />
+                                    <StackLayout Spacing="0">
+                                        <StackLayout
+                                            Orientation="Horizontal" x:Name="StackLayoutPodType">
+                                            <xamarinJkh:BorderlessPicker x:Name="PickerPodType"
+                                                                         Title="{x:Static xamarinJkh:AppResources.Choose}"
+                                                                         TitleColor="{Binding hex}"
+                                                                         TextColor="{Binding hex}"
+                                                                         VerticalOptions="End"
+                                                                         FontSize="15"
+                                                                         SizeChanged="PickerType_OnSizeChanged"
+                                                                         HorizontalOptions="Fill"
+                                                                         SelectedIndexChanged="PickerPodType_OnSelectedIndexChanged"
+                                                                         ItemsSource="{Binding PodTypes}"
+                                                                         ItemDisplayBinding="{Binding _NamePicker}"
+                                                                         SelectedItem="{Binding PodTypSelected}" />
+                                            <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                                 HeightRequest="12"
+                                                                 WidthRequest="12"
+                                                                 Rotation="90"
+                                                                 Margin="0,5,0,0"
+                                                                 VerticalOptions="Center"
+                                                                 Foreground="{Binding hex}"
+                                                                 HorizontalOptions="Center" />
                                         </StackLayout>
+                                        <Label
+                                            HeightRequest="1"
+                                            BackgroundColor="{Binding hex}"
+                                            HorizontalOptions="Fill" />
                                     </StackLayout>
+                                </StackLayout>
+
                                 <Frame CornerRadius="15"
                                        BackgroundColor="White"
                                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
