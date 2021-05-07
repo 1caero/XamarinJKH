@@ -16,7 +16,7 @@ namespace xamarinJKH.Pays
     public class HistoryPaysCell : ViewCell
     {
         Label LabelDate = new Label();
-        Label LabelPeriod = new Label();
+        //Label LabelPeriod = new Label();
         Label LabelSum = new Label();
         private SvgCachedImage file = new SvgCachedImage();
         private ActivityIndicator _indicator;
@@ -50,12 +50,12 @@ namespace xamarinJKH.Pays
             LabelDate.VerticalOptions = LayoutOptions.Center;
             LabelDate.HorizontalTextAlignment = TextAlignment.Start;
 
-            LabelPeriod.TextColor = Color.Black;
-            LabelPeriod.HorizontalOptions = LayoutOptions.Fill;
-            LabelPeriod.FontSize = 15;
-            LabelPeriod.VerticalOptions = LayoutOptions.Center;
-            LabelPeriod.FontAttributes = FontAttributes.Bold;
-            LabelPeriod.HorizontalTextAlignment = TextAlignment.Start;
+            //LabelPeriod.TextColor = Color.Black;
+            //LabelPeriod.HorizontalOptions = LayoutOptions.Fill;
+            //LabelPeriod.FontSize = 15;
+            //LabelPeriod.VerticalOptions = LayoutOptions.Center;
+            //LabelPeriod.FontAttributes = FontAttributes.Bold;
+            //LabelPeriod.HorizontalTextAlignment = TextAlignment.Start;
 
             LabelSum.TextColor = Color.Black;
             LabelSum.HorizontalOptions = LayoutOptions.EndAndExpand;
@@ -64,7 +64,7 @@ namespace xamarinJKH.Pays
             LabelSum.HorizontalTextAlignment = TextAlignment.Start;
 
             container.Children.Add(LabelDate);
-            container.Children.Add(LabelPeriod);
+            //container.Children.Add(LabelPeriod);
             container.Children.Add(LabelSum);
 
 
@@ -98,7 +98,7 @@ namespace xamarinJKH.Pays
             stackLayoutFile.Children.Add(_indicator);
             
             grid.Children.Add(LabelDate, 0, 0);
-            grid.Children.Add(LabelPeriod, 1, 0);
+            //grid.Children.Add(LabelPeriod, 1, 0);
             grid.Children.Add(LabelSum, 2, 0);
             grid.Children.Add(stackLayoutFile, 3, 0);
         
@@ -157,17 +157,17 @@ namespace xamarinJKH.Pays
             if (BindingContext != null)
             {
                 LabelDate.Text = DatePay;
-                string str = Period;
+                //string str = Period;
                 FontAttributes fontAttributes = FontAttributes.Bold;
                 double fontsize = 15;
-                if (Period.Equals(""))
-                {
-                    str = "Обрабатывается";
-                    LabelPeriod.FontAttributes = FontAttributes.None;
-                    LabelPeriod.FontSize = 13;
-                }
+                //if (Period.Equals(""))
+                //{
+                //    str = "Обрабатывается";
+                //    LabelPeriod.FontAttributes = FontAttributes.None;
+                //    LabelPeriod.FontSize = 13;
+                //}
 
-                LabelPeriod.Text = str;
+                //LabelPeriod.Text = str;
 
                 if (HasCheck)
                 {

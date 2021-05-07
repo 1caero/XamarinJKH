@@ -185,10 +185,10 @@
                                            TextColor="Black"
                                            HorizontalOptions="StartAndExpand"
                                            FontSize="15" />
-                                    <Label Text="{x:Static xamarinJkh:AppResources.Period}"
+                                    <!--<Label Text="{x:Static xamarinJkh:AppResources.Period}"
                                            TextColor="Black"
                                            HorizontalOptions="CenterAndExpand"
-                                           FontSize="15" />
+                                           FontSize="15" />-->
                                     <Label Text="{x:Static xamarinJkh:AppResources.Sum}"
                                            TextColor="Black"
                                            HorizontalOptions="EndAndExpand"
