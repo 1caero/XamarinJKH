@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using FFImageLoading;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
@@ -124,6 +125,9 @@ namespace xamarinJKH.AppsConst
             var addFile = new TapGestureRecognizer();
             addFile.Tapped += async (s, e) => { AddFile(); };
             StackLayoutAddFile.GestureRecognizers.Add(addFile);
+            var getDisp = new TapGestureRecognizer();
+            getDisp.Tapped += async (s, e) => { await PopupNavigation.Instance.PushAsync(new MoveDispatcherView((Color)Application.Current.Resources["MainColor"], null, true, true, SetMoveDispCommand)); };
+            LabelSwitchRead.GestureRecognizers.Add(getDisp);
             var techSend = new TapGestureRecognizer();
             techSend.Tapped += TechSend; 
             LabelTech.GestureRecognizers.Add(techSend);
@@ -469,12 +473,52 @@ namespace xamarinJKH.AppsConst
             }
         }
 
+        private bool isSetMove = false;
+        private Tuple<long?, int?, int?, string?> _moveArgument = null;
+        public ICommand SetMoveDispCommand
+        {
+            get
+            {
+                return new Command<Tuple<long?, int?, int?, string, string?>>(async (data) =>
+                {
+                    isSetMove = true;
+                    LabelSwitchRead.Text = data.Item4;
+                    _moveArgument = new Tuple<long?, int?, int?,string?>(data.Item1, data.Item2, data.Item3, data.Item5);
+                });
+            }
+        }
+
+        private async void MoveDispatcher(int ID)
+        {
+            CommonResult result = await _server.ChangeConsultant(ID, _moveArgument.Item1, _moveArgument.Item3,
+                _moveArgument.Item2 == -999 ? null : _moveArgument.Item2);
+            if (result.Error == null)
+            {
+                if (!string.IsNullOrWhiteSpace(_moveArgument.Item4))
+                {
+                    await _server.AddMessageConst(_moveArgument.Item4, ID.ToString(),
+                        true);
+#if DEBUG
+                    await DisplayAlert("", $"перевод по ID {ID}", "OK");           
+#endif
+                }
+
+            }
+            else
+            {
+                await DisplayAlert(AppResources.ErrorTitle, result.Error, "OK");
+            }
+        }
+      
         public class AddAppConstModel : BaseViewModel
         {
             public List<RequestType> AllType { get; set; }
             public RequestType SelectedType { get; set; }
 
             public List<FileData> Files { get; set; }
+
+          
+            
             public Color hex { get; set; }
             public ObservableCollection<NamedValue> CreateTypes { get; set; }
             public ObservableCollection<NamedValue> PodTypes { get; set; } = new ObservableCollection<NamedValue>();
@@ -537,6 +581,15 @@ namespace xamarinJKH.AppsConst
                 return;
             }
 
+            if (SwitchMoveDispatcher.IsToggled && !isSetMove)
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                    await DisplayAlert(AppResources.ErrorTitle, "Выберте кому перевести созданную заявку", "OK"));
+                FrameBtnAdd.IsVisible = true;
+                progress.IsVisible = false;
+                return;
+            }
+            
             if (!(BindingContext as AddAppConstModel).Ident)
             {
                 if ((this.District == null && this.CreateType == 1 || this.House == null && this.CreateType == 2 || this.Flat == null && (this.CreateType == 3 || this.CreateType == 4)) || string.IsNullOrEmpty(text))
@@ -574,6 +627,10 @@ namespace xamarinJKH.AppsConst
                     if (result.Error == null)
                     {
                         sendFiles(result.ID.ToString());
+                        if (SwitchMoveDispatcher.IsToggled)
+                        {
+                            MoveDispatcher(result.ID);
+                        }
                         await DisplayAlert(AppResources.AlertSuccess, AppResources.AppCreated, "OK");
                         try
                         {
@@ -624,6 +681,10 @@ namespace xamarinJKH.AppsConst
                     if (result.Error == null)
                     {
                         sendFiles(result.ID.ToString());
+                        if (SwitchMoveDispatcher.IsToggled)
+                        {
+                            MoveDispatcher(result.ID);
+                        }
                         await DisplayAlert(AppResources.AlertSuccess, AppResources.AppCreated, "OK");
                         try
                         {
@@ -748,6 +809,11 @@ namespace xamarinJKH.AppsConst
             {
                 picker.WidthRequest = 170;
             }
+        }
+
+        private void SwitchMoveDispatcher_OnToggled(object sender, ToggledEventArgs e)
+        {
+            
         }
     }
 }

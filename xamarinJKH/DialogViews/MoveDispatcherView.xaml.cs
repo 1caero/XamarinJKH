@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
@@ -24,10 +26,13 @@ namespace xamarinJKH.DialogViews
         public Color HexColor { get; set; }
         public RequestInfo _Request { get; set; }
         bool IsConst = false;
+        private readonly bool _addApp;
+        private readonly ICommand _setMoveCommand;
         public int PikerDispItem = 0;
         List<ConsultantInfo> dispList { get; set; }
 
-        public MoveDispatcherView(Color hexColor, RequestInfo request, bool isConst)
+        public MoveDispatcherView(Color hexColor, RequestInfo request, bool isConst, bool addApp = false,
+            ICommand setMoveCommand = null)
         {
             HexColor = hexColor;
             _Request = request;
@@ -35,6 +40,8 @@ namespace xamarinJKH.DialogViews
             Analytics.TrackEvent("Диалог смены сотрудника");
 
             IsConst = isConst;
+            _addApp = addApp;
+            _setMoveCommand = setMoveCommand;
             getDispatcherList();
             var close = new TapGestureRecognizer();
             close.Tapped += async (s, e) => { await PopupNavigation.Instance.PopAsync(); };
@@ -44,17 +51,22 @@ namespace xamarinJKH.DialogViews
             Layout.GestureRecognizers.Add(pickerOpen);
 
             var PickerDispDepartOpen = new TapGestureRecognizer();
-            PickerDispDepartOpen.Tapped += (s, e) => { Device.BeginInvokeOnMainThread(() => { PickerDispDepart.Focus(); }); };
+            PickerDispDepartOpen.Tapped += (s, e) =>
+            {
+                Device.BeginInvokeOnMainThread(() => { PickerDispDepart.Focus(); });
+            };
             PickerDispDepartStack.GestureRecognizers.Add(PickerDispDepartOpen);
 
             var PickerDispKindOpen = new TapGestureRecognizer();
-            PickerDispKindOpen.Tapped += (s, e) => { Device.BeginInvokeOnMainThread(() => { PickerDispKind.Focus(); }); };
+            PickerDispKindOpen.Tapped += (s, e) =>
+            {
+                Device.BeginInvokeOnMainThread(() => { PickerDispKind.Focus(); });
+            };
             PickerDispKindStack.GestureRecognizers.Add(PickerDispKindOpen);
 
             var CloseAppButtonTgr = new TapGestureRecognizer();
             CloseAppButtonTgr.Tapped += (s, e) => { MoveApp(); };
             CloseAppButton.GestureRecognizers.Add(CloseAppButtonTgr);
-            
         }
 
         private void MoveApp()
@@ -154,7 +166,8 @@ namespace xamarinJKH.DialogViews
 
         public async Task ShowToast(string title)
         {
-            Toast.Instance.Show<ToastDialog>(new {Title = title, Duration = 1500, ColorB = Color.Gray,  ColorT = Color.White});
+            Toast.Instance.Show<ToastDialog>(new
+                {Title = title, Duration = 1500, ColorB = Color.Gray, ColorT = Color.White});
             // Optionally, view model can be passed to the toast view instance.
         }
 
@@ -258,6 +271,7 @@ namespace xamarinJKH.DialogViews
 
                             SelectedDisp = null;
                             SelectedDepartments = null;
+                            SelectedPool = AllPool[0];
                         });
                     }
                     else if (SelectedKind.Equals(AppResources.MoveDepartsment))
@@ -319,28 +333,61 @@ namespace xamarinJKH.DialogViews
                     return;
                 }
 
-                CommonResult result = await server.ChangeConsultant(_Request.ID, dispId, poolId, departId==-999 ? null : departId);
-                if (result != null)
+                if (!_addApp)
                 {
-                    if (result.Error == null)
+                    CommonResult result = await server.ChangeConsultant(_Request.ID, dispId, poolId,
+                        departId == -999 ? null : departId);
+                    if (result != null)
                     {
-                        if (!string.IsNullOrWhiteSpace(BordlessEditor.Text))
+                        if (result.Error == null)
                         {
-                            result = await server.AddMessageConst(BordlessEditor.Text, _Request.ID.ToString(), true);
-                        }
+                            if (!string.IsNullOrWhiteSpace(BordlessEditor.Text))
+                            {
+                                result = await server.AddMessageConst(BordlessEditor.Text, _Request.ID.ToString(),
+                                    true);
+                            }
 
-                        await ShowToast(AppResources.MoveDispatcherSuccess);
-                        MessagingCenter.Send<Object>(this, "UpdateAppCons");
-                        await PopupNavigation.Instance.PopAsync();
+                            await ShowToast(AppResources.MoveDispatcherSuccess);
+                            MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                            await PopupNavigation.Instance.PopAsync();
+                        }
+                        else
+                        {
+                            await ShowToast(result.Error);
+                        }
                     }
                     else
                     {
-                        await ShowToast(result.Error);
+                        await ShowToast(AppResources.ErrorUnknown);
                     }
                 }
                 else
                 {
-                    await ShowToast(AppResources.ErrorUnknown);
+                    StringBuilder text = new StringBuilder();
+                    text.Append($"{_dispListModel.SelectedKind} - ");
+                    if (dispId != null)
+                    {
+                        text.Append($"{_dispListModel.SelectedDisp.Name}\n");
+                    }
+
+                    if (departId != null)
+                    {
+                        text.Append($"{_dispListModel.SelectedDepartments._Name} ");
+                    }
+
+                    if (poolId != null)
+                    {
+                        text.Append($"{_dispListModel.SelectedPool._Name} ");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(BordlessEditor.Text))
+                    {
+                        text.Append($"\nС сообщением: \"{BordlessEditor.Text}\"");
+                    }
+
+                    _setMoveCommand.Execute(new Tuple<long?, int?, int?, string, string?>(dispId, departId, poolId,
+                        text.ToString(), BordlessEditor.Text));
+                    await PopupNavigation.Instance.PopAsync();
                 }
             });
         }

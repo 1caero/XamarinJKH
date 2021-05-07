@@ -574,14 +574,7 @@ namespace xamarinJKH.AppsConst
                 //EntryMess.Text = kvp.Value;
                 //performApp(); 
             });
-
-
-            var moveDisp = new TapGestureRecognizer();
-            moveDisp.Tapped += async (s, e) =>
-            {
-                await PopupNavigation.Instance.PushAsync(new MoveDispatcherView(hex, _requestInfo, true));
-                await RefreshData();
-            };
+            
             var closeApp = new TapGestureRecognizer();
             closeApp.Tapped += async (s, e) =>
             {

@@ -330,7 +330,34 @@
                                             HorizontalOptions="Fill" />
                                     </StackLayout>
                                 </StackLayout>
-
+                                <StackLayout>
+                                    <StackLayout  HorizontalOptions="StartAndExpand"
+                                                  Orientation="Horizontal">
+                                        <Switch
+                                            OnColor="{Binding hex}"
+                                            IsToggled="False"
+                                            Toggled="SwitchMoveDispatcher_OnToggled"
+                                            x:Name="SwitchMoveDispatcher"
+                                            VerticalOptions="StartAndExpand" />
+                                        <StackLayout>
+                                            <Label Text="Перевести созданную заяку"
+                                                   FontSize="15"
+                                                   TextColor="Black"
+                                                   FontAttributes="Bold"
+                                                   VerticalOptions="CenterAndExpand"
+                                                   HorizontalOptions="StartAndExpand"/>
+                                               
+                                            <Label Text="Нажмите для выбора"
+                                                   x:Name="LabelSwitchRead"
+                                                   FontSize="16"
+                                                   Margin="0, 0, 10, 0"
+                                                   IsVisible="{Binding Path=IsToggled, Source={x:Reference SwitchMoveDispatcher}}"
+                                                   VerticalOptions="StartAndExpand"
+                                                   HorizontalOptions="StartAndExpand" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                    
+                                </StackLayout>
                                 <Frame CornerRadius="15"
                                        BackgroundColor="White"
                                        HasShadow="{AppThemeBinding Light=false, Dark=true}"
