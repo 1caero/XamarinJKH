@@ -37,8 +37,16 @@ namespace xamarinJKH.Droid.CustomRenderers
             bool areNotificationsEnabled = NotificationManagerCompat.From(Android.App.Application.Context).AreNotificationsEnabled();
             if (areNotificationsEnabled)
             {
-                return NotificationManagerCompat.From(Android.App.Application.Context).NotificationChannels.First()
-                    .Importance != NotificationImportance.None;
+                var notificationChannels = NotificationManagerCompat.From(Android.App.Application.Context).NotificationChannels;
+                if(notificationChannels.Any())
+                {
+                    return notificationChannels.First()
+                        .Importance != NotificationImportance.None;
+                }
+                else
+                {
+                    return true;
+                }
             }
             return false;
         }

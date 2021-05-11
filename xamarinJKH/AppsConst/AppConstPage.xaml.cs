@@ -447,8 +447,11 @@ namespace xamarinJKH.AppsConst
                 {
                     //Device.BeginInvokeOnMainThread(async () =>
                     //{
+                    if (PopupNavigation.Instance.PopupStack.FirstOrDefault(x => x is MoveDispatcherView) == null)
+                    {
                         await PopupNavigation.Instance.PushAsync(new MoveDispatcherView(hex, _requestInfo, true));
                         await RefreshData();
+                    }
                     //});
                 }),
                 IsVisible = true,
