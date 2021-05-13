@@ -15,6 +15,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
+using xamarinJKH.Utils.ReqiestUtils;
 using xamarinJKH.ViewModels;
 
 namespace xamarinJKH.DialogViews
@@ -348,7 +349,12 @@ namespace xamarinJKH.DialogViews
                             }
 
                             await ShowToast(AppResources.MoveDispatcherSuccess);
-                            MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                            // MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                            Device.StartTimer(new TimeSpan(0, 0, 1), () =>
+                            {
+                                RequestUtils.UpdateRequestCons();
+                                return false; // runs again, or false to stop
+                            });
                             await PopupNavigation.Instance.PopAsync();
                         }
                         else

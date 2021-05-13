@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Globalization;
 using Xamarin.Forms;
+using xamarinJKH.Server.DataModel;
 using xamarinJKH.Utils;
 
 namespace xamarinJKH.Server.RequestModel
@@ -11,10 +12,74 @@ namespace xamarinJKH.Server.RequestModel
         public List<RequestInfo> Requests { get; set; }
         public string UpdateKey { get; set; }
         public string Error { get; set; }
+    } 
+    public class RequestListDao
+    {
+        public List<RequestInfoDao> Requests { get; set; }
+        public string UpdateKey { get; set; }
+        public string Error { get; set; }
     }
     
     public class RequestInfo
     {
+        public static RequestInfoDao InfoToDao(RequestInfo requestInfo)
+        {
+            return new RequestInfoDao
+            {
+                ID = requestInfo.ID,
+                TypeID = requestInfo.TypeID,
+                RequestTerm = requestInfo.RequestTerm,
+                IsReadedByClient = requestInfo.IsReadedByClient,
+                RequestNumber=requestInfo.RequestNumber,
+                Added=requestInfo.Added,
+                Name=requestInfo.Name,
+                Status=requestInfo.Status,
+                StatusID=requestInfo.StatusID,
+                IsClosed=requestInfo.IsClosed,
+                IsPerformed=requestInfo.IsPerformed,
+                Address=requestInfo.Address,
+                IsReaded=requestInfo.IsReaded,
+                SourceType=requestInfo.SourceType,
+                MalfunctionType=requestInfo.MalfunctionType,
+                PerofmerName=requestInfo.PerofmerName,
+                PriorityName=requestInfo.PriorityName,
+                PriorityId=requestInfo.PriorityId,
+                Debt=requestInfo.Debt,
+                Source=requestInfo.Source,
+                HasPass=requestInfo.HasPass,
+                PassIsConstant=requestInfo.PassIsConstant,
+                PassExpiration=requestInfo.PassExpiration,
+            };
+        }
+        public static RequestInfo DaoToInfo(RequestInfoDao requesDao)
+        {
+            return new RequestInfo
+            {
+                ID = requesDao.ID,
+                TypeID = requesDao.TypeID,
+                RequestTerm = requesDao.RequestTerm,
+                IsReadedByClient = requesDao.IsReadedByClient,
+                RequestNumber=requesDao.RequestNumber,
+                Added=requesDao.Added,
+                Name=requesDao.Name,
+                Status=requesDao.Status,
+                StatusID=requesDao.StatusID,
+                IsClosed=requesDao.IsClosed,
+                IsPerformed=requesDao.IsPerformed,
+                Address=requesDao.Address,
+                IsReaded=requesDao.IsReaded,
+                SourceType=requesDao.SourceType,
+                MalfunctionType=requesDao.MalfunctionType,
+                PerofmerName=requesDao.PerofmerName,
+                PriorityName=requesDao.PriorityName,
+                PriorityId=requesDao.PriorityId,
+                Debt=requesDao.Debt,
+                Source=requesDao.Source,
+                HasPass=requesDao.HasPass,
+                PassIsConstant=requesDao.PassIsConstant,
+                PassExpiration=requesDao.PassExpiration,
+            };
+        }
         public int ID { get; set; }
         public int TypeID { get; set; }
         private int index = 0;
@@ -26,7 +91,7 @@ namespace xamarinJKH.Server.RequestModel
         public DateTime _RequestTerm
         {
             get => string.IsNullOrWhiteSpace(RequestTerm) ? DateTime.Now.AddDays(10).AddHours(index++) : DateTime.ParseExact(RequestTerm, "dd.MM.yyyy HH:mm:ss",
-                System.Globalization.CultureInfo.CurrentCulture);
+                CultureInfo.CurrentCulture);
         }
 // долг по лсч
         public decimal Debt { get; set; }

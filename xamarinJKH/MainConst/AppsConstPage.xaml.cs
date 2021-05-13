@@ -1,28 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
+using Realms;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.AppsConst;
 using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Server;
+using xamarinJKH.Server.DataModel;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
+using xamarinJKH.Utils.ReqiestUtils;
 
 namespace xamarinJKH.MainConst
 {
@@ -66,8 +65,7 @@ namespace xamarinJKH.MainConst
             }
         }
         public ObservableCollection<RequestInfo> RequestInfos { get; set; } = new ObservableCollection<RequestInfo>();
-        public ObservableCollection<RequestInfo> RequestInfosAlive { get; set; }
-        public ObservableCollection<RequestInfo> RequestInfosClose { get; set; }
+   
         private RequestList _requestList;
         private List<RequestInfo> RequestDefault;
         private RestClientMP _server = new RestClientMP();
@@ -117,20 +115,10 @@ namespace xamarinJKH.MainConst
         {
             SetDisableCheck();
             CheckRequestInfos.Clear();
+            RequestUtils.UpdateRequestCons();
             getApps();
             IsVisibleFunction();
-            // additionalList.ItemsSource = null;
-            // additionalList.ItemsSource = RequestInfos;
-            if (RequestInfos != null)
-                if (IsPass)
-                {
-                    MessagingCenter.Send<Object, int>(this, "SetRequestsPassAmount", RequestInfos.Where(o => o.TypeID == Settings.MobileSettings.requestTypeForPassRequest || o.Name.ToLower().Contains("пропуск")).Count(x => !x.IsReaded));
-                }
-                else
-                {
-                    MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", RequestInfos.Where(o => o.TypeID != Settings.MobileSettings.requestTypeForPassRequest && !o.Name.ToLower().Contains("пропуск")).Count(x => !x.IsReaded));
-
-                }
+        
         }
 
         public bool CanComplete => Settings.Person.UserSettings.RightPerformRequest;
@@ -159,11 +147,12 @@ namespace xamarinJKH.MainConst
 
         public bool CanDoMassOps = false;
         public bool IsPass = false;
+        private readonly Realm _realm;
         public AppsConstPage(bool isPass)
         {
             InitializeComponent();
             IsPass = isPass;
-            
+            _realm = Realm.GetInstance();
             CanDoMassOps = !Settings.MobileSettings.disableBulkRequestsClosing;
             if (Device.RuntimePlatform == Device.Android)
             {
@@ -232,8 +221,7 @@ namespace xamarinJKH.MainConst
             buttonFilter.GestureRecognizers.Add(buttonFilterTgr);
 
             SetText();
-            // additionalList.BackgroundColor = Color.Transparent;
-            // additionalList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));
+            
             MessagingCenter.Unsubscribe<Object>(this, "UpdateAppCons");
             MessagingCenter.Subscribe<Object>(this, "UpdateAppCons", async (sender) =>
             {
@@ -245,7 +233,7 @@ namespace xamarinJKH.MainConst
                 }
             });
             // Assuming this function needs to use Main/UI thread to move to your "Main Menu" Page
-            getApps();
+            // getApps();
             ChangeTheme = new Command(async () =>
             {
                 SetAdminName();
@@ -448,23 +436,17 @@ namespace xamarinJKH.MainConst
             if (delta != 40)                
               Device.BeginInvokeOnMainThread(() => { OrdersStack.Margin = new Thickness(OrdersStack.Margin.Left, OrdersStack.Margin.Top - delta +40, OrdersStack.Margin.Right, OrdersStack.Margin.Bottom); });
             
-            SetReaded();
-
+            // SetReaded();
+            getApps();
+                
             if (bottomMenu.VerticalOptions.Alignment != LayoutAlignment.End)
                 Device.BeginInvokeOnMainThread(() => { bottomMenu.VerticalOptions = LayoutOptions.End; });
             IsChangeTheme = !IsChangeTheme;
             // additionalList.ItemsSource = additionalList.ItemsSource;
+            
+            
         }
-
-        async void SyncSetup()
-        {
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                // Assuming this function needs to use Main/UI thread to move to your "Main Menu" Page
-                RefreshData();
-
-            });
-        }
+        
 
         void SetText()
         {
@@ -539,8 +521,10 @@ namespace xamarinJKH.MainConst
             
                 MessagingCenter.Unsubscribe<Object, List<RequestInfo>>(this, "RemooveFilter");
                 MessagingCenter.Subscribe<Object>(this, "RemooveFilter", (sender) => {
-                    Device.BeginInvokeOnMainThread(() => {
-                        RequestDefault = _requestList.Requests;
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        RequestDefault = new List<RequestInfoDao>(_realm.All<RequestInfoDao>()).ConvertAll(
+                            new Converter<RequestInfoDao, RequestInfo>(RequestInfo.DaoToInfo));
                         SetReaded();
                     });
                 });
@@ -555,23 +539,15 @@ namespace xamarinJKH.MainConst
 
         async void getApps()
         {
+            var requestInfoDaos = _realm.All<RequestInfoDao>();
 
-            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+            if (requestInfoDaos.Any())
             {
-                Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
-                return;
-            }
-            _requestList = await _server.GetRequestsListConst();
-            if (_requestList.Error == null)
-            {
-//#if DEBUG
-//                Device.BeginInvokeOnMainThread(() =>
-//                {
-//                    Toast.Instance.Show<ToastDialog>(new { Title = AppResources.ErrorAppsInfo, Duration = 1700 });
-//                });
-//#endif
 
-                RequestDefault = _requestList.Requests;
+
+                RequestDefault =new List<RequestInfoDao>( requestInfoDaos).ConvertAll(
+                    new Converter<RequestInfoDao, RequestInfo>(RequestInfo.DaoToInfo));
+                
                 bool switchRead = Preferences.Get("SwitchAppRead",false);
                 bool switchApp = Preferences.Get("SwitchApp",false);
                 
@@ -579,15 +555,22 @@ namespace xamarinJKH.MainConst
                 SwitchAppRead.IsToggled = switchRead;
                 
                 SetReaded();
-                Settings.UpdateKey = _requestList.UpdateKey;
-                if (IsPass)
+                Device.StartTimer(new TimeSpan(0, 0, 1), () =>
                 {
-                    MessagingCenter.Send<Object, int>(this, "SetRequestsPassAmount", _requestList.Requests.Where(o => o.TypeID == Settings.MobileSettings.requestTypeForPassRequest || o.Name.ToLower().Contains("пропуск")).Count(x => !x.IsReaded));
-                }
-                else
-                {
-                    MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", _requestList.Requests.Where(o => o.TypeID != Settings.MobileSettings.requestTypeForPassRequest && !o.Name.ToLower().Contains("пропуск")).Count(x => !x.IsReaded));
-                }
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        if (IsPass)
+                        {
+                            MessagingCenter.Send<Object, int>(this, "SetRequestsPassAmount", requestInfoDaos.Where(x => x.HasPass).Count(x => !x.IsReaded));
+                        }
+                        else
+                        {
+                            MessagingCenter.Send<Object, int>(this, "SetRequestsAmount", requestInfoDaos.Where(x => !x.HasPass).Count(x => !x.IsReaded));
+                        }
+                    });
+                    return false; // runs again, or false to stop
+                });
+             
             }
             else
             {
