@@ -1,0 +1,154 @@
+{
+  "project_info": {
+    "project_number": "307364146042",
+    "project_id": "xamarinjkh3",
+    "storage_bucket": "xamarinjkh3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307364146042:android:a76ab6615aab8c364604c3",
+        "android_client_info": {
+          "package_name": "sys_rom.ooo_chastnii_zhek"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307364146042-v94j8gh391b9d7jaqgjtq6fb9losua7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfCbdIU28MwCMNGLhfkNu04RC7GszNAxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307364146042-v94j8gh391b9d7jaqgjtq6fb9losua7k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "307364146042-6g8s3o3dn4tr8mjn0je35teqt1osnuq4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ooo.chastnii.zhek"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307364146042:android:a6feaba0c520e1a14604c3",
+        "android_client_info": {
+          "package_name": "sys_rom.snt_msl_polyana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307364146042-v94j8gh391b9d7jaqgjtq6fb9losua7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfCbdIU28MwCMNGLhfkNu04RC7GszNAxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307364146042-v94j8gh391b9d7jaqgjtq6fb9losua7k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "307364146042-6g8s3o3dn4tr8mjn0je35teqt1osnuq4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ooo.chastnii.zhek"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307364146042:android:bac00d54abef35d84604c3",
+        "android_client_info": {
+          "package_name": "sys_rom.tsg_plamya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307364146042-v94j8gh391b9d7jaqgjtq6fb9losua7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfCbdIU28MwCMNGLhfkNu04RC7GszNAxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307364146042-v94j8gh391b9d7jaqgjtq6fb9losua7k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "307364146042-6g8s3o3dn4tr8mjn0je35teqt1osnuq4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ooo.chastnii.zhek"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307364146042:android:e66fa5696a77f5c54604c3",
+        "android_client_info": {
+          "package_name": "sys_rom.tsg_prosveshenia_87_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307364146042-v94j8gh391b9d7jaqgjtq6fb9losua7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfCbdIU28MwCMNGLhfkNu04RC7GszNAxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307364146042-v94j8gh391b9d7jaqgjtq6fb9losua7k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "307364146042-6g8s3o3dn4tr8mjn0je35teqt1osnuq4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.ooo.chastnii.zhek"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
