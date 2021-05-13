@@ -23,6 +23,7 @@ using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
 using xamarinJKH.Utils.FileUtils;
+using xamarinJKH.Utils.ReqiestUtils;
 using xamarinJKH.ViewModels;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
@@ -116,7 +117,8 @@ namespace xamarinJKH.AppsConst
             {
                 try
                 {
-                    MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                    // MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                    RequestUtils.UpdateRequestCons();
                     _ = await Navigation.PopAsync();
                 }
                 catch { }
@@ -634,7 +636,12 @@ namespace xamarinJKH.AppsConst
                         await DisplayAlert(AppResources.AlertSuccess, AppResources.AppCreated, "OK");
                         try
                         {
-                            MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                            // MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                            Device.StartTimer(new TimeSpan(0, 0, 1), () =>
+                            {
+                                RequestUtils.UpdateRequestCons();
+                                return false; // runs again, or false to stop
+                            });
                             _ = await Navigation.PopAsync();
                         }
                         catch { }
@@ -688,7 +695,12 @@ namespace xamarinJKH.AppsConst
                         await DisplayAlert(AppResources.AlertSuccess, AppResources.AppCreated, "OK");
                         try
                         {
-                            MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                            // MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                            Device.StartTimer(new TimeSpan(0, 0, 1), () =>
+                            {
+                                RequestUtils.UpdateRequestCons();
+                                return false; // runs again, or false to stop
+                            });
                             _ = await Navigation.PopAsync();
                         }
                         catch { }

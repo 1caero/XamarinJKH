@@ -13,6 +13,7 @@ using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Plugin.FirebasePushNotification;
+using Realms;
 using Rg.Plugins.Popup.Services;
 using Syncfusion.Licensing;
 using Syncfusion.SfPdfViewer.XForms;
@@ -30,6 +31,7 @@ using xamarinJKH.Notifications;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
+using xamarinJKH.Utils.ReqiestUtils;
 using Application = Xamarin.Forms.Application;
 using Device = Xamarin.Forms.Device;
 using NavigationPage = Xamarin.Forms.NavigationPage;
@@ -83,6 +85,8 @@ namespace xamarinJKH
         public App()
         {
             InitializeComponent();
+            var config = RealmConfiguration.DefaultConfiguration;
+            config.SchemaVersion = 2;
             SyncfusionLicenseProvider.RegisterLicense(
                 "MzU2OTY1QDMxMzgyZTMzMmUzMEtpcFNHRnBKOUppMFJ1RUxjWTlsbUt6QzFOY3JyMUlGVi9McDJSSmQxVW89");
             PdfViewerResourceManager.Manager = new ResourceManager("xamarinJKH.Resources.Syncfusion.SfPdfViewer.XForms",
@@ -210,7 +214,8 @@ namespace xamarinJKH
                 {
                     if (isCons)
                     {
-                        MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                        // MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                        RequestUtils.UpdateRequestCons();
                     }
                     else
                     {
@@ -423,14 +428,14 @@ namespace xamarinJKH
                                     {
                                         if (isCons)
                                         {
-                                            RequestList requestList = await server.GetRequestsListConst();
+                                            RequestListDao requestList = await server.GetRequestsListConst();
                                             Analytics.TrackEvent("получен requestList");
                                             if (requestList?.Requests != null)
                                             {
                                                 Analytics.TrackEvent("список Requests не null");
                                                 var request = requestList.Requests.FirstOrDefault(x => x.ID == id);
                                                 if (request != null)
-                                                    await MainPage.Navigation.PushModalAsync(new AppConstPage(request));
+                                                    await MainPage.Navigation.PushModalAsync(new AppConstPage(RequestInfo.DaoToInfo(request)));
                                                 else
                                                 {
                                                     Analytics.TrackEvent("в списке Requests нет id=" + id);

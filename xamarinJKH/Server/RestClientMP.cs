@@ -5,10 +5,12 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
+using Realms;
 using xamarinJKH.Server.RequestModel;
 using RestSharp;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using xamarinJKH.Server.DataModel;
 using xamarinJKH.Utils;
 
 namespace xamarinJKH.Server
@@ -754,7 +756,7 @@ namespace xamarinJKH.Server
             return response.Data;
         }
 
-        public async Task<RequestList> GetRequestsListConst()
+        public async Task<RequestListDao> GetRequestsListConst()
         {
             string OS = Device.RuntimePlatform;
             if (OS.ToLower() == "ios")
@@ -767,18 +769,21 @@ namespace xamarinJKH.Server
             restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             restRequest.AddHeader("acx", Settings.Person.acx);
 
-            var response = await restClientMp.ExecuteTaskAsync<RequestList>(restRequest);
+            var response = await restClientMp.ExecuteTaskAsync<RequestListDao>(restRequest);
             // Проверяем статус
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 Analytics.TrackEvent("GetRequestsListConst Error="+ RestResponceToString(response));
 
-                return new RequestList()
+                return new RequestListDao()
                 {
                     Error = $"Ошибка {response.StatusDescription}"
                 };
             }
-
+            Realm _realm = Realm.GetInstance();
+            _realm.Write(() => _realm.RemoveAll());
+            // List<RequestInfoDao> requestInfoDaos = response.Data.Requests.ConvertAll(new Converter<RequestInfo, RequestInfoDao>(RequestInfo.InfoToDao));
+            _realm.Write(() => _realm.Add(response.Data.Requests));
             return response.Data;
         }
         public async Task<List<RequestInfo>> Search (List<CustomSearchCriteria> Criterias)

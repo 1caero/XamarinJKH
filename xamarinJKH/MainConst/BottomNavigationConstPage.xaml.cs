@@ -264,6 +264,8 @@ namespace xamarinJKH.MainConst
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
+            MessagingCenter.Unsubscribe<Object>(this, "SetRequestsPassAmount");
+            MessagingCenter.Unsubscribe<Object>(this, "SetRequestsAmount");
             Preferences.Remove(AppFilterDialog.REQUEST_NUMBER);
             Preferences.Remove(AppFilterDialog.REQUEST_STATUS_ID);
             Preferences.Remove(AppFilterDialog.REQUEST_TYPE_ID);

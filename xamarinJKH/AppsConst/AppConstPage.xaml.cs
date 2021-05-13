@@ -17,6 +17,7 @@ using Plugin.Media.Abstractions;
 using Plugin.Messaging;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using Realms;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -26,6 +27,7 @@ using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
+using xamarinJKH.Utils.ReqiestUtils;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus; //using Xamarin.Forms.Markup;
 
 namespace xamarinJKH.AppsConst
@@ -535,7 +537,37 @@ namespace xamarinJKH.AppsConst
                 IsVisible = IsRequestPaid,
                 ReplaceMap = replace
             });
-            
+            Options.Add(new OptionModel
+            {
+                Name = AppResources.CloseApp,
+                Image = "resource://xamarinJKH.Resources.ic_close_app1.svg",
+                Command = new Command(async () =>
+                {
+
+                    CommonResult result = await _server.CloseAppConst(_requestInfo.ID.ToString());
+                    if (result.Error == null)
+                    {
+                        var result2 = await DisplayAlert("", AppResources.RatingBarClose, "OK", AppResources.Cancel);
+                        if (result2)
+                        {
+                            Device.StartTimer(new TimeSpan(0, 0, 1), () =>
+                            {
+                                RequestUtils.UpdateRequestCons();
+                                return false; // runs again, or false to stop
+                            });
+                            await ClosePage();
+                            await ShowToast(AppResources.AppClosed);
+                            await RefreshData();
+                        }
+                    }
+                    else
+                    {
+                        await ShowToast(result.Error);
+                    }
+                }),
+                IsVisible = CanClose,
+                ReplaceMap = replace
+            });
 
             MessagingCenter.Subscribe<Object>(this, "ClosePage", async (sender) =>
             {
@@ -617,7 +649,12 @@ namespace xamarinJKH.AppsConst
             });
             MessagingCenter.Subscribe<Object>(this, "CloseAPP", callback: async (sender) =>
             {
-                MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                // MessagingCenter.Send<Object>(this, "UpdateAppCons");
+                 Device.StartTimer(new TimeSpan(0, 0, 1), () =>
+                                {
+                                    RequestUtils.UpdateRequestCons();
+                                    return false; // runs again, or false to stop
+                                });
                 if (close)
                 {
                     await Navigation.PopToRootAsync();
@@ -1122,6 +1159,8 @@ namespace xamarinJKH.AppsConst
                     await Task.Run(async () =>
                     {
                         var res = await _server.SetReadedFlag(request.ID);
+                        var instance = Realm.GetInstance();
+                        instance.Write(() => RequestInfo.InfoToDao(request).IsReaded = true);
                         if (Settings.MobileSettings.requestTypeForPassRequest > 0)
                         {
                             if (request.TypeID == Settings.MobileSettings.requestTypeForPassRequest)
@@ -1129,8 +1168,13 @@ namespace xamarinJKH.AppsConst
                                 MessagingCenter.Send<Object, int>(this, "SetRequestsPassAmount", -1);
                             }
                         }
-                        MessagingCenter.Send<Object, int>(this, "SetAppReadConst", request.ID);
+                        Device.StartTimer(new TimeSpan(0, 0, 1), () =>
+                        {
+                            RequestUtils.UpdateRequestCons();
+                            return false; // runs again, or false to stop
+                        });
                         request.IsReaded = true;
+                       
                     });
                 }
             }
@@ -1179,6 +1223,11 @@ namespace xamarinJKH.AppsConst
                 {
                     sendMessage();
                 }
+                Device.StartTimer(new TimeSpan(0, 0, 1), () =>
+                {
+                    RequestUtils.UpdateRequestCons();
+                    return false; // runs again, or false to stop
+                });
                 await ClosePage();
                 await ShowToast(AppResources.AppCompleted);
                 await RefreshData();

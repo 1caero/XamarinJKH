@@ -18,10 +18,12 @@ using xamarinJKH.CustomRenderers;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Badge.Plugin;
 using Microsoft.AppCenter.Analytics;
 using xamarinJKH.InterfacesIntegration;
 using Plugin.Fingerprint;
+using xamarinJKH.Utils.ReqiestUtils;
 
 namespace xamarinJKH
 {
@@ -596,12 +598,23 @@ namespace xamarinJKH
                 {
                     App.isCons = true;
                     Settings.Person = login;
-                    ItemsList<RequestType> result = await server.GetRequestsTypesConst();
-                    Settings.TypeApp = result.Data;
-                    ItemsList<NamedValue> resultStatus = await server.RequestStatuses();
-                    Settings.StatusApp = resultStatus.Data;
-                    ItemsList<NamedValue> resultPrioritets = await server.RequestPriorities();
-                    Settings.PrioritetsApp = resultPrioritets.Data;
+                    await Task.Factory.StartNew(async () =>
+                    {
+                        ItemsList<RequestType> result = await server.GetRequestsTypesConst();
+                        Settings.TypeApp = result.Data;
+                    });
+                    await Task.Factory.StartNew(async () =>
+                    {
+                        ItemsList<NamedValue> resultStatus = await server.RequestStatuses();
+                        Settings.StatusApp = resultStatus.Data;
+                    });
+                    await Task.Factory.StartNew(async () =>
+                    {
+                      ItemsList<NamedValue> resultPrioritets = await server.RequestPriorities();
+                      Settings.PrioritetsApp = resultPrioritets.Data;
+                    });
+                   
+                    await Task.Factory.StartNew( RequestUtils.UpdateRequestCons);
                     Preferences.Set("loginConst", replace);
                     Preferences.Set("passConst", pass);
                     Preferences.Set("constAuth", true);
