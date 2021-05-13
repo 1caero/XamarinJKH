@@ -441,6 +441,33 @@ namespace xamarinJKH.AppsConst
 
             Options.Add(new OptionModel
             {
+                Name = AppResources.CloseApp,
+                Image = "resource://xamarinJKH.Resources.ic_close_app1.svg",
+                Command = new Command(async () =>
+                {
+
+                    CommonResult result = await _server.CloseAppConst(_requestInfo.ID.ToString());
+                    if (result.Error == null)
+                    {
+                        var result2 = await DisplayAlert("", AppResources.RatingBarClose, "OK", AppResources.Cancel);
+                        if (result2)
+                        {
+                            await ClosePage();
+                            await ShowToast(AppResources.AppClosed);
+                            await RefreshData();
+                        }
+                    }
+                    else
+                    {
+                        await ShowToast(result.Error);
+                    }
+                }),
+                IsVisible = CanClose,
+                ReplaceMap = replace
+            });
+
+            Options.Add(new OptionModel
+            {
                 Name = AppResources.PassApp,
                 Image = "resource://xamarinJKH.Resources.ic_next_disp.svg",
                 Command = new Command(async () =>
@@ -508,32 +535,7 @@ namespace xamarinJKH.AppsConst
                 IsVisible = IsRequestPaid,
                 ReplaceMap = replace
             });
-            Options.Add(new OptionModel
-            {
-                Name = AppResources.CloseApp,
-                Image = "resource://xamarinJKH.Resources.ic_close_app1.svg",
-                Command = new Command(async () =>
-                {
-
-                    CommonResult result = await _server.CloseAppConst(_requestInfo.ID.ToString());
-                    if (result.Error == null)
-                    {
-                        var result2 = await DisplayAlert("", AppResources.RatingBarClose, "OK", AppResources.Cancel);
-                        if (result2)
-                        {
-                            await ClosePage();
-                            await ShowToast(AppResources.AppClosed);
-                            await RefreshData();
-                        }
-                    }
-                    else
-                    {
-                        await ShowToast(result.Error);
-                    }
-                }),
-                IsVisible = CanClose,
-                ReplaceMap = replace
-            });
+            
 
             MessagingCenter.Subscribe<Object>(this, "ClosePage", async (sender) =>
             {

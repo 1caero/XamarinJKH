@@ -22,7 +22,7 @@ namespace xamarinJKH.DialogViews
             if(Device.RuntimePlatform==Device.iOS)
             {
                 if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Height < 1200)
-                    Frame.Margin = new Thickness(10,15,10,15);
+                    Frame.Margin = new Thickness(10,40,10,15);
             }
             if (Settings.Person.UserSettings.IsCommnentRequiredOnCompleteRequest)
             {
