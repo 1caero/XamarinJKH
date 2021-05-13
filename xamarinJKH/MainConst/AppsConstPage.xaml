@@ -459,128 +459,168 @@
                 </pancakeView:PancakeView>
             </Grid>
             <pancakeView:PancakeView x:Name="bottomMenu" CornerRadius="50,50,0,0"
+                                     
                                                 BackgroundColor="{AppThemeBinding Light=White, Dark=#8D8D8D}"
                                                  Border="{Binding IsChangeTheme, Converter={x:StaticResource PancakeConvert}, Mode=TwoWay}"
                                                  Padding="0,10,0,2"
                                                  Margin="0"
                                                  VerticalOptions="{OnPlatform Android=EndAndExpand, iOS=End}">
                             <StackLayout>
-                                <StackLayout Orientation="Horizontal"
-                                             IsVisible="False"
-                                             Margin="0,0,0,10"
-                                             x:Name="StackLayoutFunction"
-                                             HorizontalOptions="Center">
-                                    <StackLayout
-                                        Margin="0,5,0,0"
-                                        x:Name="StackLayoutExecute"
-                                        VerticalOptions="Center"
-                                        IsVisible="{Binding CanComplete}"
-                                        HorizontalOptions="StartAndExpand">
-                                        <svg:SvgCachedImage  Margin="0, 0, 0, 0"
-                                                             Source="resource://xamarinJKH.Resources.ic_check_mark.svg"
-                                                             HeightRequest="25"
-                                                             ReplaceStringMap="{Binding IsRefreshing, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}"
-                                                             WidthRequest="25"
-                                                             VerticalOptions="Center" />
-                                        <Label Text="{x:Static xamarinJkh:AppResources.CompleteApp}"
-                                               TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                                               FontAttributes="Bold"
-                                               FontSize="10" />
-                                    </StackLayout>
-                                    <StackLayout
-                                        Margin="0,5,0,0"
-                                        VerticalOptions="Center"
-                                        x:Name="StackLayoutClose"
-                                        IsVisible="{Binding CanClose}"
-                                        HorizontalOptions="EndAndExpand">
-                                        <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_close_app1.svg"
-                                                            ReplaceStringMap="{Binding IsRefreshing, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}"
-                                                             HeightRequest="25"
-                                                             WidthRequest="25" />
-                                        <Label Text="{x:Static xamarinJkh:AppResources.CloseApp}"
-                                               TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                                               FontAttributes="Bold"
-                                               FontSize="10" />
-                                    </StackLayout>
+                                <StackLayout HorizontalOptions="FillAndExpand" x:Name="StackLayoutArrow">
+                                <svg:SvgCachedImage
+                                    Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                    HeightRequest="25"
+                                    x:Name="ImageHide"
+                                    WidthRequest="25"
+                                    Rotation="90"
+                                    VerticalOptions="CenterAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Margin="0"
+                                    ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}"/>
                                 </StackLayout>
-                                <StackLayout
-                                    x:Name="StackLayoutBot"
-                                    HorizontalOptions="Center"
-                                    Margin="20, 10, 20, 15"
-                                    Spacing="20"
-                                    
-                                    Orientation="Horizontal">
-                                    <StackLayout>
-                                        <StackLayout  HorizontalOptions="Center"
+                                <StackLayout x:Name="StackLayoutHide">
+                                    <StackLayout Orientation="Horizontal"
+                                                 IsVisible="False"
+                                                 Margin="0,0,0,10"
+                                                 x:Name="StackLayoutFunction"
+                                                 HorizontalOptions="Center">
+                                        <StackLayout
+                                            Margin="0,5,0,0"
+                                            x:Name="StackLayoutExecute"
+                                            VerticalOptions="Center"
+                                            IsVisible="{Binding CanComplete}"
+                                            HorizontalOptions="StartAndExpand">
+                                            <svg:SvgCachedImage  Margin="0, 0, 0, 0"
+                                                                 Source="resource://xamarinJKH.Resources.ic_check_mark.svg"
+                                                                 HeightRequest="25"
+                                                                 ReplaceStringMap="{Binding IsRefreshing, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}"
+                                                                 WidthRequest="25"
+                                                                 VerticalOptions="Center" />
+                                            <Label Text="{x:Static xamarinJkh:AppResources.CompleteApp}"
+                                                   TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                                                   FontAttributes="Bold"
+                                                   FontSize="10" />
+                                        </StackLayout>
+                                        <StackLayout
+                                            Margin="0,5,0,0"
+                                            VerticalOptions="Center"
+                                            x:Name="StackLayoutClose"
+                                            IsVisible="{Binding CanClose}"
+                                            HorizontalOptions="EndAndExpand">
+                                            <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_close_app1.svg"
+                                                                ReplaceStringMap="{Binding IsRefreshing, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}"
+                                                                 HeightRequest="25"
+                                                                 WidthRequest="25" />
+                                            <Label Text="{x:Static xamarinJkh:AppResources.CloseApp}"
+                                                   TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                                                   FontAttributes="Bold"
+                                                   FontSize="10" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <StackLayout
+                                        x:Name="StackLayoutBot"
+                                        HorizontalOptions="Center"
+                                        Margin="20, 10, 20, 15"
+                                        Spacing="20"
+                                        
+                                        Orientation="Horizontal">
+                                        <StackLayout>
+                                            <StackLayout  HorizontalOptions="StartAndExpand"
+                                                Orientation="Horizontal">
+                                                <Switch
+                                                    OnColor="{Binding hex}"
+                                                    Toggled="SwitchAppHidePerfom_OnToggled"
+                                                    x:Name="SwitchAppHidePerfom"
+                                                    VerticalOptions="Center" />
+
+                                                <Label Text="Скрыть выполненные"
+                                                       x:Name="LabelSwitchHidePerfom"
+                                                       FontSize="15"
+                                                       TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                                                       VerticalOptions="CenterAndExpand"
+                                                       HorizontalOptions="Center" >
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Скрыть выполненные"   
+                                                                  FontAttributes="Bold"
+                                                                  TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                                                                  FontSize="15" />
+                                                            <Span Text="&#10;"  TextColor="{AppThemeBinding Light=Black, Dark=White}" FontSize="15" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+                                            <StackLayout  HorizontalOptions="Center"
+                                                Orientation="Horizontal">
+                                                <Switch
+                                                    OnColor="{Binding hex}"
+                                                    Toggled="SwitchAppRead_OnToggled"
+                                                    x:Name="SwitchAppRead"
+                                                    VerticalOptions="Center" />
+
+                                                <Label Text="{x:Static xamarinJkh:AppResources.FirstUnread}"
+                                                       x:Name="LabelSwitchRead"
+                                                       FontSize="15"
+                                                       TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                                                       VerticalOptions="CenterAndExpand"
+                                                       HorizontalOptions="Center" >
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{x:Static xamarinJkh:AppResources.FirstUnread}"                                                    FontAttributes="Bold"
+                                                                  TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                                                                  FontSize="15" />
+                                                            <Span Text="&#10;"  TextColor="{AppThemeBinding Light=Black, Dark=White}" FontSize="15" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+                                            <StackLayout
                                             Orientation="Horizontal">
                                             <Switch
                                                 OnColor="{Binding hex}"
-                                                Toggled="SwitchAppRead_OnToggled"
-                                                x:Name="SwitchAppRead"
+                                                Toggled="SwitchApp_OnToggled"
+                                                x:Name="SwitchApp"
                                                 VerticalOptions="Center" />
 
-                                            <Label Text="{x:Static xamarinJkh:AppResources.FirstUnread}"
-                                                   x:Name="LabelSwitchRead"
+                                            <Label Text="{x:Static xamarinJkh:AppResources.ShowReadApps}"
+                                                   x:Name="LabelSwitch"
+                                                   FontAttributes="Bold"
                                                    FontSize="15"
                                                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
                                                    VerticalOptions="CenterAndExpand"
-                                                   HorizontalOptions="Center" >
-                                                <Label.FormattedText>
-                                                    <FormattedString>
-                                                        <Span Text="{x:Static xamarinJkh:AppResources.FirstUnread}"                                                    FontAttributes="Bold"
-                                                              TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                                                              FontSize="15" />
-                                                        <Span Text="&#10;"  TextColor="{AppThemeBinding Light=Black, Dark=White}" FontSize="15" />
-                                                    </FormattedString>
-                                                </Label.FormattedText>
-                                            </Label>
+                                                   HorizontalOptions="Center" />
                                         </StackLayout>
-                                        <StackLayout
-                                        Orientation="Horizontal">
-                                        <Switch
-                                            OnColor="{Binding hex}"
-                                            Toggled="SwitchApp_OnToggled"
-                                            x:Name="SwitchApp"
-                                            VerticalOptions="Center" />
-
-                                        <Label Text="{x:Static xamarinJkh:AppResources.ShowReadApps}"
-                                               x:Name="LabelSwitch"
-                                               FontAttributes="Bold"
-                                               FontSize="15"
-                                               TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                                               VerticalOptions="CenterAndExpand"
-                                               HorizontalOptions="Center" />
-                                    </StackLayout>
-                                    
-                                    </StackLayout>
-                                    <Frame CornerRadius="10"
-                                           x:Name="FrameBtnAdd"
-                                           Padding="15,15,15,15"
-                                           Margin="0,0,0,3"
-                                           MinimumWidthRequest="300"
-                                           MinimumHeightRequest="40"
-                                           VerticalOptions="Center"
-                                           HasShadow="{AppThemeBinding Light=false, Dark=true}"
-                                           BackgroundColor="{Binding hex}"
-                                           HorizontalOptions="FillAndExpand">
-                                        <StackLayout
-                                            Orientation="Horizontal"
-                                            VerticalOptions="Center"
-                                            HorizontalOptions="FillAndExpand">
-                                            <svg:SvgCachedImage x:Name="IconAddApp"
-                                                            Source="resource://xamarinJKH.Resources.icon_add_app.svg"
-                                                                ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#FFFFFF'}"
-                                                            HeightRequest="20"
-                                                            WidthRequest="20"
-                                                            VerticalOptions="Center" />
-                                            <Label x:Name="BtnExit"
-                                                   Text="{x:Static xamarinJkh:AppResources.AddApp}"
-                                                   FontSize="15"
-                                                   TextColor="White"
-                                                   HorizontalOptions="FillAndExpand"
-                                                   VerticalOptions="Center" />
+                                        
                                         </StackLayout>
-                                    </Frame>
+                                        <Frame CornerRadius="10"
+                                               x:Name="FrameBtnAdd"
+                                               Padding="15,15,15,15"
+                                               Margin="0,0,0,3"
+                                               MinimumWidthRequest="300"
+                                               MinimumHeightRequest="40"
+                                               VerticalOptions="Center"
+                                               HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                               BackgroundColor="{Binding hex}"
+                                               HorizontalOptions="FillAndExpand">
+                                            <StackLayout
+                                                Orientation="Horizontal"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="FillAndExpand">
+                                                <svg:SvgCachedImage x:Name="IconAddApp"
+                                                                Source="resource://xamarinJKH.Resources.icon_add_app.svg"
+                                                                    ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#FFFFFF'}"
+                                                                HeightRequest="20"
+                                                                WidthRequest="20"
+                                                                VerticalOptions="Center" />
+                                                <Label x:Name="BtnExit"
+                                                       Text="{x:Static xamarinJkh:AppResources.AddApp}"
+                                                       FontSize="15"
+                                                       TextColor="White"
+                                                       HorizontalOptions="FillAndExpand"
+                                                       VerticalOptions="Center" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>
                                 </StackLayout>
                             </StackLayout>
                         </pancakeView:PancakeView>

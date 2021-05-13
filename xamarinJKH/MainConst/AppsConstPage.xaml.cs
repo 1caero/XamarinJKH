@@ -209,6 +209,9 @@ namespace xamarinJKH.MainConst
             var closeApps = new TapGestureRecognizer();
             closeApps.Tapped += async (s, e) => { await CloseApps(); };
             StackLayoutClose.GestureRecognizers.Add(closeApps);
+            var hideBot = new TapGestureRecognizer();
+            hideBot.Tapped += async (s, e) => { await HideBot(); };
+            StackLayoutArrow.GestureRecognizers.Add(hideBot);
 
             var buttonFilterTgr = new TapGestureRecognizer();
             buttonFilterTgr.Tapped += async (s, e) =>
@@ -267,7 +270,14 @@ namespace xamarinJKH.MainConst
 
         }
 
-       
+        private int rotation = 1;
+        private async Task HideBot()
+        {
+            StackLayoutHide.IsVisible = !StackLayoutHide.IsVisible;
+            await ImageHide.RotateTo(ImageHide.Rotation + 180 * rotation, 500, Easing.Linear);
+            rotation *= -1;
+        }
+
 
         private void CheckDown(string args)
         {
@@ -550,9 +560,11 @@ namespace xamarinJKH.MainConst
                 
                 bool switchRead = Preferences.Get("SwitchAppRead",false);
                 bool switchApp = Preferences.Get("SwitchApp",false);
+                bool switchHide = Preferences.Get("SwitchAppHidePerfom",false);
                 
                 SwitchApp.IsToggled = switchApp;
                 SwitchAppRead.IsToggled = switchRead;
+                SwitchAppHidePerfom.IsToggled = switchHide;
                 
                 SetReaded();
                 Device.StartTimer(new TimeSpan(0, 0, 1), () =>
@@ -599,7 +611,10 @@ namespace xamarinJKH.MainConst
         }
 
         public bool IndicatorRun { get; set; }
-
+        private List<int> performed = new List<int>
+        {
+            5,6,7,8,10,11,12
+        }; 
         private void SetReaded()
         {
             Device.BeginInvokeOnMainThread(() => aInd.IsVisible = true);
@@ -611,7 +626,12 @@ namespace xamarinJKH.MainConst
                 {
                     return;
                 }
-                ObservableCollection<RequestInfo> setApps = new ObservableCollection<RequestInfo>(RequestDefault);
+                ObservableCollection<RequestInfo> setApps = new ObservableCollection<RequestInfo>();
+                List<RequestInfo> dopList = new List<RequestInfo>(RequestDefault);
+                if (SwitchAppHidePerfom.IsToggled)
+                {
+                    dopList = new List<RequestInfo>(RequestDefault.Where(x => !performed.Contains(x.StatusID)));
+                }
                 
                 if (IsPass)
                 {
@@ -621,23 +641,23 @@ namespace xamarinJKH.MainConst
                 else
                 if (SwitchAppRead.IsToggled && SwitchApp.IsToggled)
                 {
-                    var readed = RequestDefault.Where(o => !o.IsReaded).OrderByDescending(o => o.ID);
-                    var requestTerm = RequestDefault.Where(o => o.RequestTerm != null && o.IsReaded)
+                    var readed = dopList.Where(o => !o.IsReaded).OrderByDescending(o => o.ID);
+                    var requestTerm = dopList.Where(o => o.RequestTerm != null && o.IsReaded)
                         .OrderBy(o => o._RequestTerm);
-                    var enother = RequestDefault.Where(o => o.IsReaded && o.RequestTerm == null);
+                    var enother = dopList.Where(o => o.IsReaded && o.RequestTerm == null);
 
                     setApps = new ObservableCollection<RequestInfo>(readed.Concat(requestTerm).Concat(enother));
 
                 }
                 else if (SwitchAppRead.IsToggled && !SwitchApp.IsToggled)
                 {
-                    setApps = new ObservableCollection<RequestInfo>(RequestDefault.Where(o => !o.HasPass)
+                    setApps = new ObservableCollection<RequestInfo>(dopList.Where(o => !o.HasPass)
                         .OrderBy(o => !o.IsReaded).ThenBy(o => o.ID).Reverse().ToList());
                 }
                 else 
                 if (!SwitchAppRead.IsToggled && SwitchApp.IsToggled)
                 {
-                    setApps = new ObservableCollection<RequestInfo>(RequestDefault.OrderBy(o => o._RequestTerm));
+                    setApps = new ObservableCollection<RequestInfo>(dopList.OrderBy(o => o._RequestTerm));
                 }
                 else
                 {
@@ -648,7 +668,7 @@ namespace xamarinJKH.MainConst
                     //}
                     //else
                     {
-                        setApps = new ObservableCollection<RequestInfo>(RequestDefault.OrderBy(o => o.ID).Reverse());
+                        setApps = new ObservableCollection<RequestInfo>(dopList.OrderBy(o => o.ID).Reverse());
                     }
                 }
                 //Device.BeginInvokeOnMainThread(() =>
@@ -828,6 +848,12 @@ namespace xamarinJKH.MainConst
         {
             SetReaded();
             Preferences.Set("SwitchAppRead",e.Value);
+        }
+
+        private void SwitchAppHidePerfom_OnToggled(object sender, ToggledEventArgs e)
+        {
+            SetReaded();
+            Preferences.Set("SwitchAppHidePerfom",e.Value);
         }
     }
 }
