@@ -19,7 +19,11 @@ namespace xamarinJKH.DialogViews
         {
             InitializeComponent();
 
-            //Id = Id;
+            if(Device.RuntimePlatform==Device.iOS)
+            {
+                if (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Height < 1200)
+                    Frame.Margin = new Thickness(10,15,10,15);
+            }
             if (Settings.Person.UserSettings.IsCommnentRequiredOnCompleteRequest)
             {
                 AppCompliteEntry.Placeholder = string.Format(AppResources.LettersLimit, 10);

@@ -30,23 +30,23 @@ namespace xamarinJKH.Pays
             {
                 RowDefinitions =
                 {
-                    new RowDefinition {Height = new GridLength(1, GridUnitType.Star)},
+                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
                 },
                 ColumnDefinitions =
                 {
-                    new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)},
-                    new ColumnDefinition {Width = new GridLength(1.2, GridUnitType.Star)},
-                    new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)},
-                    new ColumnDefinition {Width = new GridLength(1, GridUnitType.Auto)}
+                    new ColumnDefinition { Width = new GridLength(1.3, GridUnitType.Star) },
+                    //new ColumnDefinition { Width = new GridLength(1.2, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(1.3, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) }
                 },
                 RowSpacing = 10
-
+                , Margin = new Thickness(20, 0)
             };
 
 
             LabelDate.TextColor = Color.Black;
             LabelDate.HorizontalOptions = LayoutOptions.FillAndExpand;
-            LabelDate.FontSize = 15;
+            LabelDate.FontSize = 18;
             LabelDate.VerticalOptions = LayoutOptions.Center;
             LabelDate.HorizontalTextAlignment = TextAlignment.Start;
 
@@ -59,9 +59,9 @@ namespace xamarinJKH.Pays
 
             LabelSum.TextColor = Color.Black;
             LabelSum.HorizontalOptions = LayoutOptions.EndAndExpand;
-            LabelSum.FontSize = 15;
+            LabelSum.FontSize = 18;
             LabelSum.VerticalOptions = LayoutOptions.Center;
-            LabelSum.HorizontalTextAlignment = TextAlignment.Start;
+            LabelSum.HorizontalTextAlignment = TextAlignment.End;
 
             container.Children.Add(LabelDate);
             //container.Children.Add(LabelPeriod);
@@ -99,8 +99,8 @@ namespace xamarinJKH.Pays
             
             grid.Children.Add(LabelDate, 0, 0);
             //grid.Children.Add(LabelPeriod, 1, 0);
-            grid.Children.Add(LabelSum, 2, 0);
-            grid.Children.Add(stackLayoutFile, 3, 0);
+            grid.Children.Add(LabelSum, 1, 0);
+            grid.Children.Add(stackLayoutFile, 2, 0);
         
             View = grid;
         }
@@ -158,8 +158,8 @@ namespace xamarinJKH.Pays
             {
                 LabelDate.Text = DatePay;
                 //string str = Period;
-                FontAttributes fontAttributes = FontAttributes.Bold;
-                double fontsize = 15;
+                //FontAttributes fontAttributes = FontAttributes.Bold;
+                //double fontsize = 15;
                 //if (Period.Equals(""))
                 //{
                 //    str = "Обрабатывается";
@@ -229,13 +229,13 @@ namespace xamarinJKH.Pays
                         Text = $"{sum2:0.00}".Replace(',', '.'),
                         TextColor = (Color) Application.Current.Resources["MainColor"],
                         FontAttributes = FontAttributes.Bold,
-                        FontSize = 15
+                        FontSize = 18
                     });
                     formattedIdent.Spans.Add(new Span
                     {
                         Text = $" {AppResources.Currency}",
                         TextColor = Color.Gray,
-                        FontSize = 10
+                        FontSize = 12
                     });
                 }
                 else
@@ -245,13 +245,13 @@ namespace xamarinJKH.Pays
                         Text = $"{SumPay}".Replace(',', '.'),
                         TextColor = (Color) Application.Current.Resources["MainColor"],
                         FontAttributes = FontAttributes.Bold,
-                        FontSize = 15
+                        FontSize = 18
                     });
                     formattedIdent.Spans.Add(new Span
                     {
                         Text = $" {AppResources.Currency}",
                         TextColor = Color.Gray,
-                        FontSize = 10
+                        FontSize = 12
                     });
                 }
 
