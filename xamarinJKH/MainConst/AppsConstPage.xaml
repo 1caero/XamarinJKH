@@ -550,7 +550,7 @@
                                                     </Label.FormattedText>
                                                 </Label>
                                             </StackLayout>
-                                            <StackLayout  HorizontalOptions="Center"
+                                            <StackLayout  HorizontalOptions="StartAndExpand"
                                                 Orientation="Horizontal">
                                                 <Switch
                                                     OnColor="{Binding hex}"
@@ -575,6 +575,7 @@
                                                 </Label>
                                             </StackLayout>
                                             <StackLayout
+                                                HorizontalOptions="StartAndExpand"
                                             Orientation="Horizontal">
                                             <Switch
                                                 OnColor="{Binding hex}"

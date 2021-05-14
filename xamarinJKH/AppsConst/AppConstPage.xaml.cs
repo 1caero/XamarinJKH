@@ -467,7 +467,6 @@ namespace xamarinJKH.AppsConst
             //    IsVisible = CanClose,
             //    ReplaceMap = replace
             //});
-
             Options.Add(new OptionModel
             {
                 Name = AppResources.CloseApp,
