@@ -4,6 +4,7 @@ using Microsoft.AppCenter.Analytics;
 using Xamarin.Forms;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
+using xamarinJKH.ViewModels.DialogViewModels;
 
 namespace xamarinJKH.DialogViews
 {
@@ -102,57 +103,59 @@ namespace xamarinJKH.DialogViews
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            var copyToClipboardInfo = $"{AppResources.Theme}: {_Request.Text}\r\n" +
-                $"{_Request.Added}\r\n" +
-                $"{AppResources.Type}: {_Request.TypeName} {_Request._MalfunctionType}\r\n";
-            if (_Request.HasPass)
-                copyToClipboardInfo += $"{AppResources.TypePass}: {_Request.TextPassIsConstant}\r\n"+
-                    $"{AppResources.Validity}: {_Request.PassExpiration}\r\n";
+            var bk = (InfoAppDialogViewModel) BindingContext;
 
-            if (!string.IsNullOrWhiteSpace(_Request.PerofmerName))
-                copyToClipboardInfo += $"{AppResources.Executor}: {_Request.PerofmerName}\r\n";
-            if (!string.IsNullOrWhiteSpace(_Request.SourceType))
-                copyToClipboardInfo += $"{AppResources.ASource}: {_Request.SourceType}\r\n";
-            if (!string.IsNullOrWhiteSpace(_Request.RequestTerm))
-                copyToClipboardInfo += $"{AppResources.PeriodExecution}: {_Request.RequestTerm}\r\n";
-            if (!string.IsNullOrWhiteSpace(_Request.PriorityName))
-                copyToClipboardInfo += $"{AppResources.Priority}: {_Request.PriorityName}\r\n";
+            var copyToClipboardInfo = $"{AppResources.Theme}: {bk._Request.Text}\r\n" +
+                $"{bk._Request.Added}\r\n" +
+                $"{AppResources.Type}: {bk._Request.TypeName} {bk._Request._MalfunctionType}\r\n";
+            if (bk._Request.HasPass)
+                copyToClipboardInfo += $"{AppResources.TypePass}: {bk._Request.TextPassIsConstant}\r\n"+
+                    $"{AppResources.Validity}: {bk._Request.PassExpiration}\r\n";
+
+            if (!string.IsNullOrWhiteSpace(bk._Request.PerofmerName))
+                copyToClipboardInfo += $"{AppResources.Executor}: {bk._Request.PerofmerName}\r\n";
+            if (!string.IsNullOrWhiteSpace(bk._Request.SourceType))
+                copyToClipboardInfo += $"{AppResources.ASource}: {bk._Request.SourceType}\r\n";
+            if (!string.IsNullOrWhiteSpace(bk._Request.RequestTerm))
+                copyToClipboardInfo += $"{AppResources.PeriodExecution}: {bk._Request.RequestTerm}\r\n";
+            if (!string.IsNullOrWhiteSpace(bk._Request.PriorityName))
+                copyToClipboardInfo += $"{AppResources.Priority}: {bk._Request.PriorityName}\r\n";
 
 
 
-            copyToClipboardInfo += $"{AppResources.Debt}: {_Request.Debt}\r\n" +
-                $"{AppResources.Adress}: {_Request.Address}\r\n";
-            if(IsCons)
+            copyToClipboardInfo += $"{AppResources.Debt}: {bk._Request.Debt}\r\n" +
+                $"{AppResources.Adress}: {bk._Request.Address}\r\n";
+            if(bk.IsCons)
             {
-                copyToClipboardInfo += $"{AppResources.FIO}: {_Request.AuthorName}\r\n";
+                copyToClipboardInfo += $"{AppResources.FIO}: {bk._Request.AuthorName}\r\n";
             }
-            if (ShowDispAccepted)
+            if (bk.ShowDispAccepted)
             {
-                copyToClipboardInfo += $"{AppResources.FIOConsAcceptOrder}: {_Request.AcceptedDispatcher}\r\n";
-            }
-
-            if (IsCons)
-            {
-                copyToClipboardInfo += $"{AppResources.Phone}: {_Request.Phone}\r\n";
+                copyToClipboardInfo += $"{AppResources.FIOConsAcceptOrder}: {bk._Request.AcceptedDispatcher}\r\n";
             }
 
-            if (_Request.IsPaid)
+            if (bk.IsCons)
             {
-                copyToClipboardInfo += $"{AppResources.StatusOrder}: {_Request.PaidRequestStatus}\r\n"+
-                    $"{AppResources.CheckCode}: {_Request.PaidRequestCompleteCode}\r\n"+
-                    $"{_Request.Status}\r\n";
+                copyToClipboardInfo += $"{AppResources.Phone}: {bk._Request.Phone}\r\n";
             }
 
-            if (isPass)
+            if (bk._Request.IsPaid)
             {
-                if (isManType)
+                copyToClipboardInfo += $"{AppResources.StatusOrder}: {bk._Request.PaidRequestStatus}\r\n"+
+                    $"{AppResources.CheckCode}: {bk._Request.PaidRequestCompleteCode}\r\n"+
+                    $"{bk._Request.Status}\r\n";
+            }
+
+            if (bk.isPass)
+            {
+                if (bk.isManType)
                 {
-                    copyToClipboardInfo += $"{_Request.PassInfo.CategoryName}: {_Request.PassInfo.FIO}\r\n";
+                    copyToClipboardInfo += $"{bk._Request.PassInfo.CategoryName}: {bk._Request.PassInfo.FIO}\r\n";
                 }
                 else
                 {
-                    copyToClipboardInfo += $"{_Request.PassInfo.CategoryName}: {_Request.PassInfo.VehicleMark}\r\n"+
-                        $"{_Request.PassInfo.VehicleNumber}\r\n";
+                    copyToClipboardInfo += $"{bk._Request.PassInfo.CategoryName}: {bk._Request.PassInfo.VehicleMark}\r\n"+
+                        $"{bk._Request.PassInfo.VehicleNumber}\r\n";
                 }
 
             }

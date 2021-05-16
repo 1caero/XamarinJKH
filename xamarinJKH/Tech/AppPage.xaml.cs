@@ -854,7 +854,7 @@ namespace xamarinJKH.Tech
                     try
                     {
                         if (!string.IsNullOrEmpty(Source))
-                            await Dialog.Instance.ShowAsync<InfoAppDialog>(new
+                            await Dialog.Instance.ShowAsync<InfoAppDialog>(new InfoAppDialogViewModel
                             {
                                 _Request = request,
                                 HexColor = this.hex,

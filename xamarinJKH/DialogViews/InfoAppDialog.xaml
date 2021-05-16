@@ -35,16 +35,17 @@
                                      Foreground="Black"
                                      HorizontalOptions="End"
                                      VerticalOptions="Center" />
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,-10"  >
                     <Label
                     x:Name="LabelTema"
                     Text="{Binding _Request.Text}" TextColor="Black" FontAttributes="Bold" FontSize="15"
-                    HorizontalOptions="Start" />
-                    <!--<Button  BorderWidth="1" BorderColor="{Binding HexColor}" Text="{x:Static xamarinJkh:AppResources.Copy}" Clicked="Button_Clicked" HorizontalOptions="End" CornerRadius="10"></Button>-->
+                    HorizontalOptions="StartAndExpand"/>
                     <Frame CornerRadius="15"
                    BackgroundColor="{x:DynamicResource MainColor}"
-                   Margin="0, 20, 0, 10"
+                   Margin="10, 0"
                    x:Name="FrameBtn"
+                           HorizontalOptions="End" 
+                           VerticalOptions="Center"
                    Padding="0" HasShadow="{AppThemeBinding Light=false, Dark=true}">
                         <StackLayout
                     Orientation="Horizontal"

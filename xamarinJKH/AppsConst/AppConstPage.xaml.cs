@@ -28,6 +28,7 @@ using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
 using xamarinJKH.Utils.ReqiestUtils;
+using xamarinJKH.ViewModels.DialogViewModels;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus; //using Xamarin.Forms.Markup;
 
 namespace xamarinJKH.AppsConst
@@ -1308,7 +1309,7 @@ namespace xamarinJKH.AppsConst
                     {
                         isMan = request.PassInfo.CategoryId == 1;
                     }
-                    var ret = await Dialog.Instance.ShowAsync<InfoAppDialog>(new
+                    var ret = await Dialog.Instance.ShowAsync<InfoAppDialog>(new InfoAppDialogViewModel
                     {
                         _Request = request,
                         HexColor = this.hex,
