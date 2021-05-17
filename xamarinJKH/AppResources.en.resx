@@ -1979,4 +1979,7 @@
   <data name="DontRimind" xml:space="preserve">
     <value>Do not remind again </value>
   </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
 </root>

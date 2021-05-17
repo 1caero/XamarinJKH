@@ -28,6 +28,7 @@ using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
 using xamarinJKH.Utils.ReqiestUtils;
+using xamarinJKH.ViewModels.DialogViewModels;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus; //using Xamarin.Forms.Markup;
 
 namespace xamarinJKH.AppsConst
@@ -441,6 +442,32 @@ namespace xamarinJKH.AppsConst
                 Analytics.TrackEvent(ex.Message);
             }
 
+            //Options.Add(new OptionModel
+            //{
+            //    Name = AppResources.CloseApp,
+            //    Image = "resource://xamarinJKH.Resources.ic_close_app1.svg",
+            //    Command = new Command(async () =>
+            //    {
+
+            //        CommonResult result = await _server.CloseAppConst(_requestInfo.ID.ToString());
+            //        if (result.Error == null)
+            //        {
+            //            var result2 = await DisplayAlert("", AppResources.RatingBarClose, "OK", AppResources.Cancel);
+            //            if (result2)
+            //            {
+            //                await ClosePage();
+            //                await ShowToast(AppResources.AppClosed);
+            //                await RefreshData();
+            //            }
+            //        }
+            //        else
+            //        {
+            //            await ShowToast(result.Error);
+            //        }
+            //    }),
+            //    IsVisible = CanClose,
+            //    ReplaceMap = replace
+            //});
             Options.Add(new OptionModel
             {
                 Name = AppResources.CloseApp,
@@ -454,6 +481,11 @@ namespace xamarinJKH.AppsConst
                         var result2 = await DisplayAlert("", AppResources.RatingBarClose, "OK", AppResources.Cancel);
                         if (result2)
                         {
+                            Device.StartTimer(new TimeSpan(0, 0, 1), () =>
+                            {
+                                RequestUtils.UpdateRequestCons();
+                                return false; // runs again, or false to stop
+                            });
                             await ClosePage();
                             await ShowToast(AppResources.AppClosed);
                             await RefreshData();
@@ -537,37 +569,7 @@ namespace xamarinJKH.AppsConst
                 IsVisible = IsRequestPaid,
                 ReplaceMap = replace
             });
-            Options.Add(new OptionModel
-            {
-                Name = AppResources.CloseApp,
-                Image = "resource://xamarinJKH.Resources.ic_close_app1.svg",
-                Command = new Command(async () =>
-                {
-
-                    CommonResult result = await _server.CloseAppConst(_requestInfo.ID.ToString());
-                    if (result.Error == null)
-                    {
-                        var result2 = await DisplayAlert("", AppResources.RatingBarClose, "OK", AppResources.Cancel);
-                        if (result2)
-                        {
-                            Device.StartTimer(new TimeSpan(0, 0, 1), () =>
-                            {
-                                RequestUtils.UpdateRequestCons();
-                                return false; // runs again, or false to stop
-                            });
-                            await ClosePage();
-                            await ShowToast(AppResources.AppClosed);
-                            await RefreshData();
-                        }
-                    }
-                    else
-                    {
-                        await ShowToast(result.Error);
-                    }
-                }),
-                IsVisible = CanClose,
-                ReplaceMap = replace
-            });
+            
 
             MessagingCenter.Subscribe<Object>(this, "ClosePage", async (sender) =>
             {
@@ -1307,7 +1309,7 @@ namespace xamarinJKH.AppsConst
                     {
                         isMan = request.PassInfo.CategoryId == 1;
                     }
-                    var ret = await Dialog.Instance.ShowAsync<InfoAppDialog>(new
+                    var ret = await Dialog.Instance.ShowAsync<InfoAppDialog>(new InfoAppDialogViewModel
                     {
                         _Request = request,
                         HexColor = this.hex,

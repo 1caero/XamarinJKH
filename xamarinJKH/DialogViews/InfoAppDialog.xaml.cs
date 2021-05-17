@@ -4,6 +4,7 @@ using Microsoft.AppCenter.Analytics;
 using Xamarin.Forms;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
+using xamarinJKH.ViewModels.DialogViewModels;
 
 namespace xamarinJKH.DialogViews
 {
@@ -17,8 +18,8 @@ namespace xamarinJKH.DialogViews
         public bool isPass { get; set; } = false;
         public bool isManType { get; set; } = false;
 
-        
-        //public bool IsUser { get; set; }
+
+        public bool IsCons { get; set; } = false;
 
 
         public bool ShowDispAccepted { get; set; } = false;
@@ -98,6 +99,68 @@ namespace xamarinJKH.DialogViews
         {
             // send cancel notification to the dialog.
             DialogNotifier.Cancel();
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            var bk = (InfoAppDialogViewModel) BindingContext;
+
+            var copyToClipboardInfo = $"{AppResources.Theme}: {bk._Request.Text}\r\n" +
+                $"{bk._Request.Added}\r\n" +
+                $"{AppResources.Type}: {bk._Request.TypeName} {bk._Request._MalfunctionType}\r\n";
+            if (bk._Request.HasPass)
+                copyToClipboardInfo += $"{AppResources.TypePass}: {bk._Request.TextPassIsConstant}\r\n"+
+                    $"{AppResources.Validity}: {bk._Request.PassExpiration}\r\n";
+
+            if (!string.IsNullOrWhiteSpace(bk._Request.PerofmerName))
+                copyToClipboardInfo += $"{AppResources.Executor}: {bk._Request.PerofmerName}\r\n";
+            if (!string.IsNullOrWhiteSpace(bk._Request.SourceType))
+                copyToClipboardInfo += $"{AppResources.ASource}: {bk._Request.SourceType}\r\n";
+            if (!string.IsNullOrWhiteSpace(bk._Request.RequestTerm))
+                copyToClipboardInfo += $"{AppResources.PeriodExecution}: {bk._Request.RequestTerm}\r\n";
+            if (!string.IsNullOrWhiteSpace(bk._Request.PriorityName))
+                copyToClipboardInfo += $"{AppResources.Priority}: {bk._Request.PriorityName}\r\n";
+
+
+
+            copyToClipboardInfo += $"{AppResources.Debt}: {bk._Request.Debt}\r\n" +
+                $"{AppResources.Adress}: {bk._Request.Address}\r\n";
+            if(bk.IsCons)
+            {
+                copyToClipboardInfo += $"{AppResources.FIO}: {bk._Request.AuthorName}\r\n";
+            }
+            if (bk.ShowDispAccepted)
+            {
+                copyToClipboardInfo += $"{AppResources.FIOConsAcceptOrder}: {bk._Request.AcceptedDispatcher}\r\n";
+            }
+
+            if (bk.IsCons)
+            {
+                copyToClipboardInfo += $"{AppResources.Phone}: {bk._Request.Phone}\r\n";
+            }
+
+            if (bk._Request.IsPaid)
+            {
+                copyToClipboardInfo += $"{AppResources.StatusOrder}: {bk._Request.PaidRequestStatus}\r\n"+
+                    $"{AppResources.CheckCode}: {bk._Request.PaidRequestCompleteCode}\r\n"+
+                    $"{bk._Request.Status}\r\n";
+            }
+
+            if (bk.isPass)
+            {
+                if (bk.isManType)
+                {
+                    copyToClipboardInfo += $"{bk._Request.PassInfo.CategoryName}: {bk._Request.PassInfo.FIO}\r\n";
+                }
+                else
+                {
+                    copyToClipboardInfo += $"{bk._Request.PassInfo.CategoryName}: {bk._Request.PassInfo.VehicleMark}\r\n"+
+                        $"{bk._Request.PassInfo.VehicleNumber}\r\n";
+                }
+
+            }
+
+            await Xamarin.Essentials.Clipboard.SetTextAsync(copyToClipboardInfo);
         }
     }
 }
