@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
@@ -13,7 +11,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.AppsConst;
 using xamarinJKH.DialogViews;
-using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
@@ -39,14 +36,13 @@ namespace xamarinJKH.PushNotification
         }
 
         #endregion
-        
+
         public SoundlessPushPage()
         {
             SoundlessPushViewModel = new SoundlessViewModel();
             InitializeComponent();
             BindingContext = SoundlessPushViewModel;
             NavigationPage.SetHasNavigationBar(this, false);
-            UkName.Text = Settings.MobileSettings.main_name;
             var techSend = new TapGestureRecognizer();
             techSend.Tapped += async (s, e) =>
             {
@@ -69,54 +65,153 @@ namespace xamarinJKH.PushNotification
             Button button = (Button) sender;
             await button.ScaleTo(0.6, 250, Easing.Linear);
             await button.ScaleTo(1, 250, Easing.Linear);
-            await Dialog.Instance.ShowAsync<AddRuleDialog>(SoundlessPushViewModel.AddRuleViewModel);
+            // await Dialog.Instance.ShowAsync<AddRuleDialog>(SoundlessPushViewModel.AddRuleViewModel);
         }
-        
+
         public class SoundlessViewModel : BaseViewModel
         {
-            private RestClientMP server = new RestClientMP();
             #region AddRuleViewModel
-
-            private AddRuleViewModel _addRuleViewModel;
 
             public AddRuleViewModel AddRuleViewModel
             {
-                get { return new AddRuleViewModel(); }
+                get => new AddRuleViewModel(RefreshCommand);
+            }
+
+            #endregion
+
+            #region RefreshCommand
+
+            private ICommand _refreshCommand;
+
+            public ICommand RefreshCommand
+            {
+                get { return _refreshCommand; }
                 set
                 {
-                    _addRuleViewModel = value;
-                    OnPropertyChanged("AddRuleViewModel");
+                    _refreshCommand = value;
+                    OnPropertyChanged("RefreshCommand");
                 }
             }
 
             #endregion
 
-            public ObservableCollection<SilenceOption> Rules { get; set; }
+            #region OpenAddRule
+
+            private ICommand _openAddRele;
+
+            public ICommand OpenAddRule
+            {
+                get { return _openAddRele; }
+                set
+                {
+                    _openAddRele = value;
+                    OnPropertyChanged("OpenAddRule");
+                }
+            }
+
+            #endregion
+
+            #region Rules
+
+            private ObservableCollection<SilenceOption> _rules;
+
+            public ObservableCollection<SilenceOption> Rules
+            {
+                get { return _rules; }
+                set
+                {
+                    _rules = value;
+                    OnPropertyChanged("Rules");
+                }
+            }
+
+            #endregion
+
+            #region RemoveRuleCommand
+
+            private ICommand _removeRuleComman;
+
+            public ICommand RemoveRuleCommand
+            {
+                get { return _removeRuleComman; }
+                set
+                {
+                    _removeRuleComman = value;
+                    OnPropertyChanged("RemoveRuleCommand");
+                }
+            }
+
+            #endregion
+
+
             public SoundlessViewModel()
             {
+                RefreshCommand = new Command(RefreshAction);
+                OpenAddRule = new Command(AddRuleAction);
+                RemoveRuleCommand = new Command(RemoveRuleAction);
                 GetRules();
+            }
+
+            private async void RemoveRuleAction(object obj)
+            {
+                SilenceOption silenceOption = (SilenceOption) obj;
+                bool showChoose = await ShowChoose("Удалить настройку?");
+                if (showChoose)
+                {
+                    var removeSilenceOption = await Server.RemoveSilenceOption(silenceOption.ID);
+                    if (removeSilenceOption.Error == null)
+                    {
+                        Device.BeginInvokeOnMainThread(() => {
+                        {
+                            Rules.Remove(silenceOption);
+                        } });
+                        Toast.Instance.Show<ToastDialog>(new
+                            {Title = "Настройка удалена", Duration = 500, ColorB = Color.Gray, ColorT = Color.White});
+                    }
+                    else
+                    {
+                        ShowError(removeSilenceOption.Error);
+                    }
+                }
+
+                
+            }
+
+            private async void AddRuleAction()
+            {
+                await ShowDialog<AddRuleDialog>(AddRuleViewModel);
             }
 
             async void GetRules()
             {
-                List<SilenceOption> silenceSettings = await server.GetSilenceSettings();
-                Device.BeginInvokeOnMainThread( () => Rules = new ObservableCollection<SilenceOption>(silenceSettings));
+                RefreshCommand.Execute(null);
             }
 
-            
+            private async void RefreshAction()
+            {
+                IsRefreshing = true;
+
+                List<SilenceOption> silenceSettings = await Server.GetSilenceSettings();
+
+                Device.BeginInvokeOnMainThread(() =>
+                    {
+                        Rules = new ObservableCollection<SilenceOption>(silenceSettings);
+                    }
+                );
+                IsRefreshing = false;
+            }
         }
 
         public class AddRuleViewModel : BaseViewModel
         {
             public ObservableCollection<OptionModel> DaysOfWeek { get; set; }
 
-            private RestClientMP server = new RestClientMP();
 
             #region Dialog
 
-            private IDialogNotifier  _dialog;
+            private IDialogNotifier _dialog;
 
-            public IDialogNotifier  Dialog
+            public IDialogNotifier Dialog
             {
                 get { return _dialog; }
                 set
@@ -128,8 +223,7 @@ namespace xamarinJKH.PushNotification
 
             #endregion
 
-            
-            
+
             #region CommandSave
 
             private ICommand _commandSave;
@@ -242,62 +336,105 @@ namespace xamarinJKH.PushNotification
 
             #endregion
 
-            public AddRuleViewModel()
+            #region RefreshRulesCommand
+
+            private ICommand _refreshRulesCommand;
+
+            public ICommand RefreshRulesCommand
+            {
+                get { return _refreshRulesCommand; }
+                set
+                {
+                    _refreshRulesCommand = value;
+                    OnPropertyChanged("RefreshRulesCommand");
+                }
+            }
+
+            #endregion
+
+            #region SelectRuleCommand
+
+            private ICommand _selectRuleCommand;
+
+            public ICommand SelectRuleCommand
+            {
+                get { return _selectRuleCommand; }
+                set
+                {
+                    _selectRuleCommand = value;
+                    OnPropertyChanged("SelectRuleCommand");
+                }
+            }
+
+            #endregion
+
+            #region OpenHelpCommand
+
+            private ICommand _OpenHelpCommand;
+
+            public ICommand OpenHelpCommand
+            {
+                get { return _OpenHelpCommand; }
+                set
+                {
+                    _OpenHelpCommand = value;
+                    OnPropertyChanged("OpenHelpCommand");
+                }
+            }
+
+            #endregion
+
+            
+
+            public AddRuleViewModel(ICommand refresRules)
             {
                 InitDays();
-                CommandSave = new Command(async () =>
-                {
-                    string fromTime = null;
-                    if (StartTime != null)
-                    {
-                        DateTime dop = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,
-                               StartTime.Value.Hours,
-                               StartTime.Value.Minutes,
-                               StartTime.Value.Seconds,
-                               StartTime.Value.Milliseconds,
-                               DateTime.Now.Kind
-                               
-                        );
-                        fromTime = $"{dop:HH:mm}";
-                    }
+                RefreshRulesCommand = refresRules;
+                SelectRuleCommand = new Command(SelectDayAction);
+                CommandSave = new Command(SaveRuleAction);
+                OpenHelpCommand = new Command(OpenHelpAction);
+            }
 
-                    string toTime = null;
-                    if (EndTime != null)
-                    {
-                        DateTime dop = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,
-                            EndTime.Value.Hours,
-                            EndTime.Value.Minutes,
-                            EndTime.Value.Seconds,
-                            EndTime.Value.Milliseconds,
-                            DateTime.Now.Kind
-                               
-                        );
-                        toTime = $"{dop:HH:mm}";
-                    }
-                    CommonResult newSilenceOption = await server.NewSilenceOption($"{StartDate:dd.MM.yyy}", $"{EndDate:dd.MM.yyy}",
-                        fromTime, toTime,
-                        DaysOfWeek[0].IsSelected, DaysOfWeek[1].IsSelected, DaysOfWeek[2].IsSelected,
-                        DaysOfWeek[3].IsSelected, DaysOfWeek[4].IsSelected, DaysOfWeek[5].IsSelected,
-                        DaysOfWeek[6].IsSelected
-                    );
-                    if (newSilenceOption.Error == null)
-                    {
-                        Toast.Instance.Show<ToastDialog>(new
-                        {
-                            Title = "Настройка добавлена", Duration = 500, ColorB = Color.Gray,
-                            ColorT = Color.White
-                        });
-                        Dialog.Cancel();
-                    }
-                    else
-                    {
-                        Toast.Instance.Show<ToastDialog>(new
-                        {
-                            Title = newSilenceOption.Error, Duration = 500, ColorB = Color.Gray,
-                            ColorT = Color.White
-                        });
-                    }
-                });
+            private void OpenHelpAction()
+            {
+                ShowError("Если дата окончания меньше даты начала, то считается что окончание будет на следующие сутки после даты начала, таким образом можно включить беззвучный режим на ночь.","Примечание");
+            }
+
+            private async void SaveRuleAction()
+            {
+                string fromTime = null;
+                if (StartTime != null)
+                {
+                    DateTime dop = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,
+                        StartTime.Value.Hours, StartTime.Value.Minutes, StartTime.Value.Seconds,
+                        StartTime.Value.Milliseconds, DateTime.Now.Kind);
+                    fromTime = $"{dop:HH:mm}";
+                }
+
+                string toTime = null;
+                if (EndTime != null)
+                {
+                    DateTime dop = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,
+                        EndTime.Value.Hours, EndTime.Value.Minutes, EndTime.Value.Seconds, EndTime.Value.Milliseconds,
+                        DateTime.Now.Kind);
+                    toTime = $"{dop:HH:mm}";
+                }
+
+                CommonResult newSilenceOption = await Server.NewSilenceOption($"{StartDate:dd.MM.yyy}",
+                    $"{EndDate:dd.MM.yyy}", fromTime, toTime, DaysOfWeek[0].IsSelected, DaysOfWeek[1].IsSelected,
+                    DaysOfWeek[2].IsSelected, DaysOfWeek[3].IsSelected, DaysOfWeek[4].IsSelected,
+                    DaysOfWeek[5].IsSelected, DaysOfWeek[6].IsSelected);
+                if (newSilenceOption.Error == null)
+                {
+                    Toast.Instance.Show<ToastDialog>(new
+                        {Title = "Настройка добавлена", Duration = 500, ColorB = Color.Gray, ColorT = Color.White});
+                    RefreshRulesCommand.Execute(null);
+                    Dialog.Cancel();
+                }
+                else
+                {
+                    ShowError(newSilenceOption.Error);
+                }
             }
 
             private void InitDays()
@@ -306,46 +443,39 @@ namespace xamarinJKH.PushNotification
                 DaysOfWeek.Add(new OptionModel
                 {
                     Name = "ПН",
-                    Command = new Command(Execute)
                 });
                 DaysOfWeek.Add(new OptionModel
                 {
                     Name = "ВТ",
-                    Command = new Command(Execute)
-                    
                 });
                 DaysOfWeek.Add(new OptionModel
                 {
                     Name = "СР",
-                    Command = new Command(Execute)
                 });
                 DaysOfWeek.Add(new OptionModel
                 {
                     Name = "ЧТ",
-                    Command = new Command(Execute)
                 });
                 DaysOfWeek.Add(new OptionModel
                 {
                     Name = "ПТ",
-                    Command = new Command(Execute)
                 });
                 DaysOfWeek.Add(new OptionModel
                 {
                     Name = "СБ",
-                    Command = new Command(Execute)
                 });
                 DaysOfWeek.Add(new OptionModel
                 {
                     Name = "ВС",
-                    Command = new Command(Execute)
                 });
             }
 
-            private void Execute(object obj)
+            private void SelectDayAction(object obj)
             {
+                OptionModel optionModel = (OptionModel) obj;
+                optionModel.IsSelected = !optionModel.IsSelected;
                 IsEnabledSave = DaysOfWeek.Any(x => x.IsSelected);
             }
         }
-        
     }
 }

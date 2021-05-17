@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using AiForms.Dialogs;
+using AiForms.Dialogs.Abstractions;
 using Xamarin.Forms;
 using xamarinJKH.Server;
 using xamarinJKH.Utils;
@@ -83,5 +85,16 @@ namespace xamarinJKH.ViewModels
                 await Application.Current.MainPage.DisplayAlert(title, error, "OK");
             });
         }
+
+        protected async Task<bool> ShowChoose(string title)
+        {
+            return await Application.Current.MainPage.DisplayAlert("",title, AppResources.Yes, AppResources.No );
+        }
+        
+        protected async Task<bool> ShowDialog<T>(BaseViewModel model) where T: DialogView
+        {
+           return await Dialog.Instance.ShowAsync<T>(model);
+        }
+        
     }
 }

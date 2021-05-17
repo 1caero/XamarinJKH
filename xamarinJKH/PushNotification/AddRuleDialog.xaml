@@ -151,11 +151,21 @@
                                         Time="{Binding EndTime, Mode=TwoWay}"
                                         HorizontalOptions="Center"
                                         TextColor="{x:StaticResource MainColor}" />
+                           
+                            <Button WidthRequest="30"   Text="?"
+                                    TextColor="{x:StaticResource MainColor}" Margin="10,0,0,0"
+                                    FontAttributes="Bold" BackgroundColor="Transparent"
+                                    FontSize="20" BorderColor="{x:StaticResource MainColor}" 
+                                    VerticalOptions="CenterAndExpand" HeightRequest="30"
+                                    Command="{Binding OpenHelpCommand}"
+                                    BorderRadius="15" BorderWidth="1">
+                            </Button>
                         </StackLayout>
                     </StackLayout>
                     <CollectionView ItemsSource="{Binding DaysOfWeek}"
                                     BackgroundColor="White"
                                     HeightRequest="35"
+                                    x:Name="Week"
                                     HorizontalOptions="FillAndExpand"
                                     Margin="0,5,0,0"
                                     SelectionMode="None">
@@ -179,7 +189,8 @@
                                            HorizontalTextAlignment="Center"
                                            FontSize="10" />
                                     <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding CommandSelect}" />
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectRuleCommand, Source={x:Reference Name=Week}}"
+                                                              CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
                                 </Frame>
                             </DataTemplate>
