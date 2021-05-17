@@ -2527,6 +2527,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Информация о заявке скопирована.
+        /// </summary>
+        internal static string InfoCopied {
+            get {
+                return ResourceManager.GetString("InfoCopied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Начальные.
         /// </summary>
         internal static string Initial {

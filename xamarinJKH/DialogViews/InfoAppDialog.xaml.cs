@@ -1,4 +1,5 @@
 ﻿using System;
+using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
 using Xamarin.Forms;
@@ -161,6 +162,8 @@ namespace xamarinJKH.DialogViews
             }
 
             await Xamarin.Essentials.Clipboard.SetTextAsync(copyToClipboardInfo);
+            Toast.Instance.Show<ToastDialog>(new { Title = AppResources.InfoCopied, Duration = 1900, ColorB = Color.Gray, ColorT = Color.White });
         }
+
     }
 }

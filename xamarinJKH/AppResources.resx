@@ -1984,4 +1984,7 @@
   <data name="Copy" xml:space="preserve">
     <value>Скопировать</value>
   </data>
+  <data name="InfoCopied" xml:space="preserve">
+    <value>Информация о заявке скопирована</value>
+  </data>
 </root>

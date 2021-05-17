@@ -1855,4 +1855,7 @@
   <data name="Copy" xml:space="preserve">
     <value>Скопіювати</value>
   </data>
+  <data name="InfoCopied" xml:space="preserve">
+    <value>Iнформація про заявку скопійована</value>
+  </data>
 </root>
