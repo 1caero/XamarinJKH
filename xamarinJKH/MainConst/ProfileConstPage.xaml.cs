@@ -118,7 +118,7 @@ namespace xamarinJKH.MainConst
             var createPush = new TapGestureRecognizer();
             createPush.Tapped += async (s, e) =>
             {
-                await Navigation.PushAsync(new SendPushPage());
+                await Navigation.PushAsync(new SoundlessPushPage());
             };
             FrameOffers.GestureRecognizers.Add(createPush);
 

@@ -230,6 +230,9 @@ namespace xamarinJKH.Server
         public const string GEOLOCATION = "Dispatcher/AddGeolocating";
         public const string GET_METER = "Dispatcher/GetMeter"; //Возвращаюься все найденные приборы.
         public const string SAVE_VALUE_DISPATCH_METER = "Dispatcher/SaveMeterValue"; //Сохранение показаний
+        public const string NEW_SILENCE_OPTION = "Dispatcher/NewSilenceOption"; //Добавление нового правила беззвучного режима
+        public const string REMOOVE_SILENCE_OPTION = "Dispatcher/RemoveSilenceOption "; //Удаление опции тишины
+        public const string GET_SILENCE_OPTION = "Dispatcher/GetSilenceSettings  "; //Возвращает настройки беззвучного режима для текущего пользователя.
 
         /// <summary>
         /// Аунтификация сотрудника
@@ -280,6 +283,24 @@ namespace xamarinJKH.Server
 
             return response.Data;
         }
+        public async Task<List<SilenceOption>> GetSilenceSettings ()
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(GET_SILENCE_OPTION, Method.GET);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            
+            var response = await restClientMp.ExecuteAsync<List<SilenceOption>>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new List<SilenceOption>();
+            }
+
+            return response.Data;
+        }
         /// <summary>
         /// Аунтификация пользователя по номеру телефона
         /// </summary>
@@ -326,6 +347,42 @@ namespace xamarinJKH.Server
             restRequest.AddBody(new
             {
                 phone
+            });
+            var response = await restClientMp.ExecuteTaskAsync<CommonResult>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new CommonResult()
+                {
+                    Error = $"Ошибка {response.StatusDescription}"
+                };
+            }
+
+            return response.Data;
+        }
+        
+        public async Task<CommonResult> NewSilenceOption(string? FromDate, string? ToDate , string? FromTime , string? ToTime ,
+            bool OnMonday, bool OnTuesday, bool OnWednesday, bool OnThursday, bool OnFriday, bool OnSaturday, bool OnSunday )
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(NEW_SILENCE_OPTION, Method.POST);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddBody(new
+            {
+                FromDate,
+                ToDate,
+                FromTime,
+                ToTime,
+                OnMonday, 
+                OnTuesday,
+                OnWednesday,
+                OnThursday,
+                OnFriday,
+                OnSaturday,
+                OnSunday
             });
             var response = await restClientMp.ExecuteTaskAsync<CommonResult>(restRequest);
             // Проверяем статус

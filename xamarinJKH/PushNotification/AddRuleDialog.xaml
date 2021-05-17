@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<abstractions:DialogView xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         x:Name="View"
+                         DialogNotifier="{Binding Dialog}"
+                         xmlns:abstractions="clr-namespace:AiForms.Dialogs.Abstractions;assembly=AiForms.Dialogs.Abstractions"
+                         xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+                         xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
+                         xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH"
+                         x:Class="xamarinJKH.PushNotification.AddRuleDialog">
+    <abstractions:DialogView.Resources>
+        <ResourceDictionary>
+            <converters:BoolToColorConverter x:Key="BoolToColor"/>
+        </ResourceDictionary>
+    </abstractions:DialogView.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame x:Name="buttonFilter" HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                   BorderColor="{x:StaticResource MainColor}"
+                   BackgroundColor="White"
+                   Margin="1"
+                   CornerRadius="20"
+                   Padding="20"
+                   VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <forms:SvgCachedImage
+                            Source="resource://xamarinJKH.Resources.ic_calendar.svg"
+                            HeightRequest="25"
+                            HorizontalOptions="Start"
+                            ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}"
+                            VerticalOptions="Center" />
+                        <Label
+                            TextColor="Black"
+                            HorizontalTextAlignment="Start"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"
+                            FontSize="15"
+                            FontAttributes="Bold"
+                            Text="{x:Static xamarinJkh:AppResources.FromToDate}" Margin="0,10" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                            <Label Text="{x:Static xamarinJkh:AppResources.With}"
+                                   FontSize="16"
+                                   TextColor="Black"
+                                   HorizontalOptions="Center"
+                                   Margin="0"
+                                   VerticalOptions="Center" />
+                            <StackLayout Spacing="0" x:Name="StackLayoutDate">
+                                <StackLayout Orientation="Horizontal" x:Name="StackLayoutDo">
+                                    <xamarinJkh:BorderlessDatePicker
+                                        x:Name="DatePicker"
+                                        Margin="0,0,0,0"
+                                        Format="dd.MM.yyyy"
+                                        FontSize="16"
+                                        Date="{Binding StartDate}"
+                                        MinimumDate="{Binding MinimumDate, Mode=TwoWay}"
+                                        HorizontalOptions="Center"
+                                        TextColor="{x:StaticResource MainColor}" />
+                                    <forms:SvgCachedImage
+                                        Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                        HeightRequest="12"
+                                        Rotation="90"
+                                        Margin="0,5,0,0"
+                                        HorizontalOptions="Start"
+                                        ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}"
+                                        VerticalOptions="Center" />
+                                </StackLayout>
+                                <Label
+                                    HeightRequest="1"
+                                    BackgroundColor="{x:StaticResource MainColor}"
+                                    HorizontalOptions="Fill" />
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                            <Label Text="{x:Static xamarinJkh:AppResources.ToDate}"
+                                   FontSize="16"
+                                   TextColor="Black"
+                                   HorizontalOptions="Center"
+                                   Margin="0"
+                                   VerticalOptions="Center" />
+                            <StackLayout Spacing="0" x:Name="StackLayoutDate2">
+                                <StackLayout Orientation="Horizontal">
+                                    <xamarinJkh:BorderlessDatePicker
+                                        x:Name="DatePicker2"
+                                        Margin="0,0,0,0"
+                                        Format="dd.MM.yyyy"
+                                        Date="{Binding EndDate, Mode=TwoWay}"
+                                        MinimumDate="{Binding StartDate}"
+                                        FontSize="16"
+                                        HorizontalOptions="Center"
+                                        TextColor="{x:StaticResource MainColor}" />
+                                    <forms:SvgCachedImage
+                                        Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                        HeightRequest="12"
+                                        Rotation="90"
+                                        Margin="0,5,0,0"
+                                        HorizontalOptions="Start"
+                                        ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}"
+                                        VerticalOptions="Center" />
+                                </StackLayout>
+                                <Label
+                                    HeightRequest="1"
+                                    BackgroundColor="{x:StaticResource MainColor}"
+                                    HorizontalOptions="Fill" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Margin="0,10,0,0" Orientation="Horizontal">
+                        <forms:SvgCachedImage
+                            Source="resource://xamarinJKH.Resources.ic_clock.svg"
+                            HeightRequest="25"
+                            HorizontalOptions="Start"
+                            ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}"
+                            VerticalOptions="Center" />
+                        <Label
+                            TextColor="Black"
+                            HorizontalTextAlignment="Start"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"
+                            FontSize="15"
+                            FontAttributes="Bold"
+                            Text="Время действия" Margin="0,0,0,0" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                            <Label Text="{x:Static xamarinJkh:AppResources.With}"
+                                   FontSize="16"
+                                   TextColor="Black"
+                                   HorizontalOptions="Center"
+                                   Margin="0"
+                                   VerticalOptions="Center" />
+                            <TimePicker x:Name="timePickerStart"
+                                        TextColor="{x:StaticResource MainColor}"
+                                        FontSize="16"
+                                        Time="{Binding StartTime, Mode=TwoWay}"
+                                        HorizontalOptions="Center"
+                                        Margin="0,0,0,0" />
+
+                            <Label Text="{x:Static xamarinJkh:AppResources.ToDate}"
+                                   FontSize="16"
+                                   TextColor="Black"
+                                   HorizontalOptions="Center"
+                                   Margin="0"
+                                   VerticalOptions="Center" />
+                            <TimePicker x:Name="timePickerEnd"
+                                        Margin="0,0,0,0"
+                                        FontSize="16"
+                                        Time="{Binding EndTime, Mode=TwoWay}"
+                                        HorizontalOptions="Center"
+                                        TextColor="{x:StaticResource MainColor}" />
+                        </StackLayout>
+                    </StackLayout>
+                    <CollectionView ItemsSource="{Binding DaysOfWeek}"
+                                    BackgroundColor="White"
+                                    HeightRequest="35"
+                                    HorizontalOptions="FillAndExpand"
+                                    Margin="0,5,0,0"
+                                    SelectionMode="None">
+                        
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal"
+                                               ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame x:Name="buttonFilter" HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                       BorderColor="{Binding IsSelected, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
+                                       BackgroundColor="White"
+                                       CornerRadius="70"
+                                       Padding="20,10,20,10"
+                                       VerticalOptions="Center" HorizontalOptions="Fill">
+                                    <Label Text="{Binding Name}"
+                                           TextColor="{Binding IsSelected, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           FontSize="10" />
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding CommandSelect}" />
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Frame CornerRadius="10"
+                           x:Name="FrameBtnApply"
+                           Margin="0,10,0,0"
+                           Padding="20,12"
+                           IsEnabled="{Binding IsEnabledSave}"
+                           HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                           BackgroundColor="{Binding IsEnabledSave, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
+                           HorizontalOptions="CenterAndExpand">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CommandSave}" />
+                        </Frame.GestureRecognizers>
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Spacing="{OnPlatform Android=0, iOS=6}"
+                            Margin="0,0,0,0"
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="Center">
+                            <Label
+                                Text="Сохранить"
+                                FontSize="15"
+                                Padding="0"
+                                IsEnabled="{Binding IsEnabledSave}"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                BackgroundColor="Transparent" />
+                        </StackLayout>
+                    </Frame>
+        </StackLayout>
+        </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</abstractions:DialogView>

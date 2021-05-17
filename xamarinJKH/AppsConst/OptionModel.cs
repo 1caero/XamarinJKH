@@ -40,6 +40,19 @@ namespace xamarinJKH.AppsConst
         }
 
         public Command Command { get; set; }
+
+        public Command CommandSelect
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    IsSelected = !IsSelected;
+                    Command.Execute(null);
+                });
+            }
+        }
+
         Dictionary<string, string> replace;
 
         private Color _selectedColor = Color.FromHex(Application.Current.RequestedTheme == OSAppTheme.Dark

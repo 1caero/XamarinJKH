@@ -225,7 +225,6 @@
                                 </StackLayout>
                             </customRenderers:MaterialFrame>
                              <customRenderers:MaterialFrame Elevation="{AppThemeBinding Light=0, Dark=20}" x:Name="FrameOffers"
-                                                           IsVisible="false"
                                                            HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                                            CornerRadius="30"
                                                            Margin="10, 0, 10, 10"
@@ -247,7 +246,7 @@
                                             HorizontalOptions="Start"
                                             VerticalOptions="Center" />
                                         <Label
-                                            Text="{x:Static xamarinJkh:AppResources.CreatePush}"
+                                            Text="Настройка уведомлений"
                                             FontSize="20"
                                             TextColor="Black"
                                             Margin="-20, 0, 0, 0"

@@ -40,6 +40,7 @@
     <None Remove="Resources\ic_discont.svg" />
     <None Remove="Resources\ic_dislike.svg" />
     <None Remove="Resources\ic_exit.svg" />
+    <None Remove="Resources\ic_clock.svg" />
     <None Remove="Resources\ic_export_pdf.svg" />
     <None Remove="Resources\ic_file.svg" />
     <None Remove="Resources\ic_file_download.svg" />
@@ -195,6 +196,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ic_exit.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ic_clock.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ic_export_pdf.svg">

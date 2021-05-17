@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH"
+             x:Class="xamarinJKH.PushNotification.SoundlessPushPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PancakeBorderConverter x:Key="PancakeConvert" />
+            <converters:BoolToColorConverter x:Key="BoolToColor"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid VerticalOptions="FillAndExpand">
+                <Image x:Name="ImageFon"
+                       Source="{AppThemeBinding Light=ic_app_top_light, Dark=ic_app_top}"
+                       VerticalOptions="Start"
+                       Margin="0,0,0,0"
+                       Aspect="{OnPlatform Android=Fill, iOS=AspectFill}"
+                       HorizontalOptions="FillAndExpand" />
+                <StackLayout VerticalOptions="FillAndExpand" x:Name="mainStack">
+                    <StackLayout
+                        Margin="25,10,15,0"
+                        Orientation="Horizontal"
+                        x:Name="Pancake">
+                        <Label x:Name="UkName" VerticalOptions="Center"
+                               Text="Название"
+                               FontAttributes="Bold"
+                               HorizontalOptions="StartAndExpand"
+                               FontSize="15"
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                        <StackLayout
+                            HorizontalOptions="EndAndExpand"
+                            Orientation="Horizontal">
+                            <xamarinJkh:ButtonSupport x:Name="LabelTech" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout
+                        x:Name="BackStackLayout"
+                        Orientation="Horizontal"
+                        Spacing="0"
+                        Margin="25, 0, 0, 0"
+                        HorizontalOptions="FillAndExpand">
+                        <Label
+                            Text="Настройка уведомлений"
+                            FontSize="23"
+                            TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                            FontAttributes="Bold"
+                            VerticalOptions="Center"
+                            HorizontalOptions="StartAndExpand" />
+                        <Button Text="+" VerticalOptions="Center" Clicked="ButtonAddRule_OnClicked"
+                                HorizontalOptions="EndAndExpand" FontSize="60" Padding="-15" Margin="0"
+                                TextColor="{AppThemeBinding Light=Black, Dark=White}" BackgroundColor="Transparent" />
+                    </StackLayout>
+                    <StackLayout VerticalOptions="FillAndExpand">
+                        <CollectionView ItemsSource="{Binding Rules}"
+                                        BackgroundColor="White"
+                                        HorizontalOptions="FillAndExpand"
+                                        Margin="10,5,10,0"
+                                        SelectionMode="None">
+
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical"
+                                                   ItemSpacing="10" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame x:Name="buttonFilter" HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                           BorderColor="{x:StaticResource MainColor}"
+                                           BackgroundColor="White"
+                                           CornerRadius="20"
+                                           Margin="10"
+                                           Padding="20,10,20,10"
+                                           VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                        <StackLayout Orientation="Horizontal">
+                                            <StackLayout Orientation="Vertical">
+                                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                                    <Label Text="{Binding FromDate}" />
+                                                    <Label Text="{Binding ToDate}" />
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                                    <Label Text="{Binding FromTime}" />
+                                                    <Label Text="{Binding ToTime}" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" Spacing="5">
+                                                <Label Text="ПН"
+                                                       TextColor="{Binding OnMonday, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
+                                                       FontAttributes="Bold"/>
+                                                <Label Text="ВТ"
+                                                       TextColor="{Binding OnTuesday, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
+                                                       FontAttributes="Bold"/>
+                                                <Label Text="СР"
+                                                       TextColor="{Binding OnWednesday, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
+                                                       FontAttributes="Bold"/>
+                                                <Label Text="ЧТ"
+                                                       TextColor="{Binding OnThursday, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
+                                                       FontAttributes="Bold"/>
+                                                <Label Text="ПТ"
+                                                       TextColor="{Binding OnFriday, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
+                                                       FontAttributes="Bold"/>
+                                                <Label Text="СБ"
+                                                       TextColor="{Binding OnSaturday, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
+                                                       FontAttributes="Bold"/>
+                                                <Label Text="ВС"
+                                                       TextColor="{Binding OnSunday, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
+                                                       FontAttributes="Bold"/>
+                                            </StackLayout>
+                                            <Label Text="×" FontSize="30" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" TextColor="{x:StaticResource MainColor}"></Label>
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
