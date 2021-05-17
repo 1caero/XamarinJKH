@@ -35,7 +35,7 @@
                                      Foreground="Black"
                                      HorizontalOptions="End"
                                      VerticalOptions="Center" />
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,-10"  >
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,-30"  >
                     <Label
                     x:Name="LabelTema"
                     Text="{Binding _Request.Text}" TextColor="Black" FontAttributes="Bold" FontSize="15"
@@ -46,7 +46,7 @@
                    x:Name="FrameBtn"
                            HorizontalOptions="End" 
                            VerticalOptions="Center"
-                   Padding="0" HasShadow="{AppThemeBinding Light=false, Dark=true}">
+                   Padding="5,0" HasShadow="{AppThemeBinding Light=false, Dark=true}">
                         <StackLayout
                     Orientation="Horizontal"
                     Spacing="0"
