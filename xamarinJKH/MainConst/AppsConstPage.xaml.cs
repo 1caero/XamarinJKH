@@ -730,7 +730,7 @@ namespace xamarinJKH.MainConst
         {
             var s = (StackLayout)sender;
             var id = Convert.ToInt32(((Label)s.Children[0]).Text);
-            RequestInfo select = RequestInfos.First(_=>_.ID==id);
+            RequestInfo select = RequestInfos.FirstOrDefault(_=>_.ID==id);
             if (select != null)
             {
                 if (Navigation.NavigationStack.FirstOrDefault(x => x is AppConstPage) == null)
@@ -754,10 +754,7 @@ namespace xamarinJKH.MainConst
                     catch (Exception exception)
                     {
                         Console.WriteLine(exception);
-                    }
-
-                    
-                    
+                    }                    
                 }
             }
         }

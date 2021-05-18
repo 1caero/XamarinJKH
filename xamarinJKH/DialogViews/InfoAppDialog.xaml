@@ -35,24 +35,23 @@
                                      Foreground="Black"
                                      HorizontalOptions="End"
                                      VerticalOptions="Center" />
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,-30"  >
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,0"  >
                     <Label
                     x:Name="LabelTema"
                     Text="{Binding _Request.Text}" TextColor="Black" FontAttributes="Bold" FontSize="15"
                     HorizontalOptions="StartAndExpand"/>
                     <Frame CornerRadius="15"
                    BackgroundColor="{x:DynamicResource MainColor}"
-                   Margin="10, 0"
+                   Margin="10, 0,10,-20"
                    x:Name="FrameBtn"
                            HorizontalOptions="End" 
                            VerticalOptions="Center"
-                   Padding="5,0" HasShadow="{AppThemeBinding Light=false, Dark=true}">
-                        <StackLayout
+                   Padding="10,0" HasShadow="{AppThemeBinding Light=false, Dark=true}">
+                        <!--<StackLayout
                     Orientation="Horizontal"
-                    Spacing="0"
-                    Margin="0"
+                    Spacing="0"                    
                     VerticalOptions="CenterAndExpand"
-                    HorizontalOptions="Center">
+                    HorizontalOptions="Center">-->
                             <!--<svg:SvgCachedImage 
                         Source="resource://xamarinJKH.Resources.ic_check_mark.svg"
                         ReplaceStringMap="{Binding .,Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#FFFFFF'}"
@@ -63,8 +62,10 @@
                             TextColor="White"
                             Clicked="Button_Clicked"
                             FontAttributes="Bold"
-                            BackgroundColor="Transparent" />
-                        </StackLayout>
+                            BackgroundColor="Transparent"
+                                    VerticalOptions="Center"
+                    HorizontalOptions="Center" />
+                        <!--</StackLayout>-->
                     </Frame>
                 </StackLayout>
                 <!--<Label

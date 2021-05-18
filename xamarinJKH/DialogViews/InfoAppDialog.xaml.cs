@@ -59,6 +59,9 @@ namespace xamarinJKH.DialogViews
                         Frame.Margin = new Thickness(15,100,15,15); 
                     }
                     break;
+                case Device.iOS:
+
+                    break;
             }
                         
             BindingContext = this;
