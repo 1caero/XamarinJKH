@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH"
+             xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH" xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              x:Class="xamarinJKH.PushNotification.SoundlessPushPage">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -45,14 +45,27 @@
                         Spacing="0"
                         Margin="25, 0, 0, 0"
                         HorizontalOptions="FillAndExpand">
+                        <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_arrow_back.svg"
+                                     HeightRequest="25"
+                                     WidthRequest="25"
+                                     ReplaceStringMap="{Binding svgClr, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}"
+                                     HorizontalOptions="Center" >
+                            <svg:SvgCachedImage.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoBack"/>
+                            </svg:SvgCachedImage.GestureRecognizers>
+                        </svg:SvgCachedImage>
                         <Label
                             Text="Настройка уведомлений"
                             FontSize="23"
                             TextColor="{AppThemeBinding Light=Black, Dark=White}"
                             FontAttributes="Bold"
                             VerticalOptions="Center"
-                            HorizontalOptions="StartAndExpand" />
-                        <Button Text="+" VerticalOptions="Center" Clicked="ButtonAddRule_OnClicked"
+                            HorizontalOptions="StartAndExpand" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoBack"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Button x:Name="ButtonAddRule" Text="+" VerticalOptions="Center" Clicked="ButtonAddRule_OnClicked"
                                 Command="{Binding OpenAddRule}"
                                 HorizontalOptions="EndAndExpand" FontSize="60" Padding="-15" Margin="0"
                                 TextColor="{AppThemeBinding Light=Black, Dark=White}" BackgroundColor="Transparent" />
@@ -93,7 +106,7 @@
                                                             <Binding Path="FromDate" />
                                                         </MultiBinding>
                                                     </StackLayout.IsVisible>
-                                                    <Label >
+                                                    <Label  FontSize="12">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding FromDate}" TextColor="Black" />
@@ -111,7 +124,7 @@
                                                         </Label.FormattedText>
                                                     </Label>
 
-                                                    <Label Text="{Binding FromTime}">
+                                                    <Label Text="{Binding FromTime}" FontSize="12">
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="{Binding FromTime}"
@@ -133,7 +146,7 @@
                                                 </StackLayout>
                                                 <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand"
                                                              Margin="0,0,15,0"
-                                                             Spacing="5">
+                                                             Spacing="3">
                                                     <StackLayout.HorizontalOptions>
                                                         <MultiBinding Converter="{StaticResource HVConverter}">
                                                             <Binding Path="FromTime" />
@@ -142,27 +155,27 @@
                                                             <Binding Path="FromDate" />
                                                         </MultiBinding>
                                                     </StackLayout.HorizontalOptions>
-                                                    <Label Text="ПН"
+                                                    <Label Text="ПН" FontSize="13"
                                                            TextColor="{Binding OnMonday, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
-                                                           FontAttributes="Bold" />
-                                                    <Label Text="ВТ"
+                                                           FontAttributes="Bold" LineBreakMode="NoWrap" MaxLines="1" Margin="3,0" />
+                                                    <Label Text="ВТ" FontSize="13"
                                                            TextColor="{Binding OnTuesday, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
-                                                           FontAttributes="Bold" />
-                                                    <Label Text="СР"
+                                                           FontAttributes="Bold" LineBreakMode="NoWrap" MaxLines="1" Margin="3,0"/>
+                                                    <Label Text="СР" FontSize="13"
                                                            TextColor="{Binding OnWednesday, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
-                                                           FontAttributes="Bold" />
-                                                    <Label Text="ЧТ"
+                                                           FontAttributes="Bold" LineBreakMode="NoWrap" MaxLines="1" Margin="3,0"/>
+                                                    <Label Text="ЧТ" FontSize="13"
                                                            TextColor="{Binding OnThursday, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
-                                                           FontAttributes="Bold" />
-                                                    <Label Text="ПТ"
+                                                           FontAttributes="Bold" LineBreakMode="NoWrap" MaxLines="1" Margin="3,0"/>
+                                                    <Label Text="ПТ" FontSize="13"
                                                            TextColor="{Binding OnFriday, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
-                                                           FontAttributes="Bold" />
-                                                    <Label Text="СБ"
+                                                           FontAttributes="Bold" LineBreakMode="NoWrap" MaxLines="1" Margin="3,0"/>
+                                                    <Label Text="СБ" FontSize="13"
                                                            TextColor="{Binding OnSaturday, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
-                                                           FontAttributes="Bold" />
-                                                    <Label Text="ВС"
+                                                           FontAttributes="Bold" LineBreakMode="NoWrap" MaxLines="1" Margin="3,0"/>
+                                                    <Label Text="ВС" FontSize="13"
                                                            TextColor="{Binding OnSunday, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
-                                                           FontAttributes="Bold" />
+                                                           FontAttributes="Bold" LineBreakMode="NoWrap" MaxLines="1" Margin="3,0"/>
                                                 </StackLayout>
                                                 <Label Text="×" FontSize="30"  VerticalOptions="CenterAndExpand"
                                                        HorizontalOptions="End"
