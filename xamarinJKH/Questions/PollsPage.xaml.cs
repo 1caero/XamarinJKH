@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using LabelHtml.Forms.Plugin.Abstractions;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Messaging;
 using Xamarin.Essentials;
@@ -230,13 +231,17 @@ namespace xamarinJKH.Questions
                     TextColor = Color.Black,
                     FontSize = 17
                 });
-                formattedString.Spans.Add(new Span
+                foreach (var eSpan in Settings.FormatedLink(" "+each.Text, Color.Black,17).Spans)
                 {
-                    Text = " " + each.Text,
-                    TextColor = Color.Black,
-                    FontSize = 17
-                });
-
+                    formattedString.Spans.Add(eSpan);
+                }
+                var openLink = new TapGestureRecognizer();
+                openLink.Tapped += async (s, e) =>
+                {
+                   await Settings.OpenLinksMessage(each.Text, this);
+                };
+                questions.GestureRecognizers.Add(openLink);
+                
                 questions.FormattedText = formattedString;
                 containerPolss.Children.Add(questions);
                 StackLayout radio = new StackLayout();
