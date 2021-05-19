@@ -1790,7 +1790,7 @@
     <value>Подразделение не указано</value>
   </data>
   <data name="OpenLink" xml:space="preserve">
-    <value>Открыть ссылку</value>
+    <value>Выберите ссылку для открытия</value>
   </data>
   <data name="unauthorized" xml:space="preserve">
     <value>Неверно введен пароль</value>

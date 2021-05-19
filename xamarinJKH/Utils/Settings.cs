@@ -190,7 +190,7 @@ namespace xamarinJKH.Utils
             return links;
         }
 
-        public static FormattedString FormatedLink(String source, Color color)
+        public static FormattedString FormatedLink(String source, Color color, int fontSize = 15)
         {
             Regex regExHttpLinks = new Regex(
                 @"(?<=\()\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\))|(?<=(?<wrap>[=~|_#]))\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\k<wrap>)|\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]",
@@ -220,22 +220,22 @@ namespace xamarinJKH.Utils
                 if (s.Contains("https://") || s.Contains("http://") || s.Contains("www."))
                 {
                     formattedString.Spans.Add(new Span()
-                        {Text = s, FontSize = 15, TextColor = Color.Blue, TextDecorations = TextDecorations.Underline});
+                        {Text = s, FontSize = fontSize, TextColor = Color.Blue, TextDecorations = TextDecorations.Underline});
                 }
                 else
                 {
-                    formattedString.Spans.Add(new Span() {Text = s, FontSize = 15, TextColor = color});
+                    formattedString.Spans.Add(new Span() {Text = s, FontSize = fontSize, TextColor = color});
                 }
             }
 
             return formattedString;
         }
 
-        public static async Task OpenLinksMessage(RequestMessage message, Page p)
+        public static async Task OpenLinksMessage(string message, Page p)
         {
             try
             {
-                List<string> links = ParsingLink(message.Text);
+                List<string> links = ParsingLink(message);
                 if (links.Count > 0)
                 {
                     Analytics.TrackEvent($"Поиск ссылок {links.ToString()}");

@@ -306,7 +306,7 @@ namespace xamarinJKH.AppsConst
             }
 
             var link = new TapGestureRecognizer();
-            link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
+            link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message.Text, p); };
             ConteinerA.GestureRecognizers.Add(link);
 
             var dragGestureRecognizer = new DragGestureRecognizer {CanDrag = true};
@@ -593,7 +593,7 @@ namespace xamarinJKH.AppsConst
             }
 
             var link = new TapGestureRecognizer();
-            link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message, p); };
+            link.Tapped += async (s, e) => { await Settings.OpenLinksMessage(message.Text, p); };
             LabelText.GestureRecognizers.Add(link);
             Labeltime.Text = message.TimeAdd;
 

@@ -3184,7 +3184,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Открыть ссылку.
+        ///   Looks up a localized string similar to Выберите ссылку для открытия.
         /// </summary>
         internal static string OpenLink {
             get {
