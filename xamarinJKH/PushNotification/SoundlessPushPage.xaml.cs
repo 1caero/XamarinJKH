@@ -11,6 +11,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.AppsConst;
 using xamarinJKH.DialogViews;
+using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
 using xamarinJKH.Utils;
@@ -37,6 +38,8 @@ namespace xamarinJKH.PushNotification
 
         #endregion
 
+        public bool svgClr { get; set; }
+
         public SoundlessPushPage()
         {
             SoundlessPushViewModel = new SoundlessViewModel();
@@ -57,6 +60,19 @@ namespace xamarinJKH.PushNotification
                     await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog());
                 }
             };
+
+            switch (Device.RuntimePlatform)
+            {
+                case Device.iOS:
+                    int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
+                    mainStack.Padding = new Thickness(0, statusBarHeight, 0, 0);
+                    ButtonAddRule.Padding = 0;
+                    ButtonAddRule.Margin = new Thickness(0, 0, 10, 0);
+                    break;
+                default:
+                    break;
+            }
+
             LabelTech.GestureRecognizers.Add(techSend);
         }
 
@@ -66,6 +82,11 @@ namespace xamarinJKH.PushNotification
             await button.ScaleTo(0.6, 250, Easing.Linear);
             await button.ScaleTo(1, 250, Easing.Linear);
             // await Dialog.Instance.ShowAsync<AddRuleDialog>(SoundlessPushViewModel.AddRuleViewModel);
+        }
+
+        private async void GoBack(object sender, EventArgs args)
+        {
+            await Navigation.PopAsync();
         }
 
         public class SoundlessViewModel : BaseViewModel

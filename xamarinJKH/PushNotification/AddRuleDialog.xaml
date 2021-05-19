@@ -172,15 +172,16 @@
                         
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal"
-                                               ItemSpacing="10"/>
+                                               ItemSpacing="{OnPlatform Android=10, iOS=5}"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Frame x:Name="buttonFilter" HasShadow="{AppThemeBinding Light=false, Dark=true}"
                                        BorderColor="{Binding IsSelected, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
                                        BackgroundColor="White"
-                                       CornerRadius="70"
-                                       Padding="20,10,20,10"
+                                       CornerRadius="{OnPlatform Android=70, iOS=10}"
+                                       Padding="{OnPlatform Android='20,10,20,10', iOS='10'}"
+                                       Margin="{OnPlatform Android=0, iOS='5,0'}"
                                        VerticalOptions="Center" HorizontalOptions="Fill">
                                     <Label Text="{Binding Name}"
                                            TextColor="{Binding IsSelected, Converter={x:StaticResource BoolToColor}, Mode=TwoWay}"
