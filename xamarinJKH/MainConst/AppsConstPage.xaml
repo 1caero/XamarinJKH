@@ -78,6 +78,8 @@
                              VerticalScrollBarVisibility="Never"
                              SelectedItem="{Binding SelectedRequest}"                            
                              ItemsSource="{Binding RequestInfos, Mode=TwoWay}"
+                                    ItemsUpdatingScrollMode="KeepLastItemInView"
+                                    
                              VerticalOptions="FillAndExpand">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Vertical"

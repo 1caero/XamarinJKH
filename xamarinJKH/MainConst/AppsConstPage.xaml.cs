@@ -267,17 +267,57 @@ namespace xamarinJKH.MainConst
             });
 
             this.BindingContext = this;
+            //isNeedShow = true;// StackLayoutHide.IsVisible;
 
+           //Device.StartTimer(TimeSpan.FromMilliseconds(200), ShowBotTimer);
+
+            Device.StartTimer(TimeSpan.FromMilliseconds(100), SetCanHideTrueAsync);
         }
+
+        bool SetCanHideTrueAsync()
+        {
+            Device.BeginInvokeOnMainThread(async () => {
+                await Task.Delay(1000); 
+                canHide = true; 
+            } );
+            
+            return false;
+        }
+
+        static bool canHide = false;
 
         private int rotation = 1;
+        private int rotation2 = 1;
         private async Task HideBot()
         {
-            StackLayoutHide.IsVisible = !StackLayoutHide.IsVisible;
-            await ImageHide.RotateTo(ImageHide.Rotation + 180 * rotation, 500, Easing.Linear);
-            rotation *= -1;
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                additionalList.Scrolled -= OnCollectionViewScrolled;
+                StackLayoutHide.IsVisible = !StackLayoutHide.IsVisible;
+                await ImageHide.RotateTo(ImageHide.Rotation + 180 * rotation, 500, Easing.Linear);
+                rotation *= -1;
+
+                canHide = true;
+                additionalList.Scrolled += OnCollectionViewScrolled;
+            });
+            //isNeedHide = StackLayoutHide.IsVisible;
+            //hideBotClikced = true;
         }
 
+        //bool hideBotClikced = false;
+
+        private async Task HideBotTimer()
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                additionalList.Scrolled -= OnCollectionViewScrolled;
+            StackLayoutHide.IsVisible = !StackLayoutHide.IsVisible;
+            //await ImageHide.RotateTo(ImageHide.Rotation + 180 * rotation2);
+            rotation2 *= -1;
+            additionalList.Scrolled += OnCollectionViewScrolled;
+                //isNeedShow = StackLayoutHide.IsVisible;
+            });
+        }
 
         private void CheckDown(string args)
         {
@@ -446,14 +486,12 @@ namespace xamarinJKH.MainConst
             if (delta != 40)                
               Device.BeginInvokeOnMainThread(() => { OrdersStack.Margin = new Thickness(OrdersStack.Margin.Left, OrdersStack.Margin.Top - delta +40, OrdersStack.Margin.Right, OrdersStack.Margin.Bottom); });
             
-            // SetReaded();
             getApps();
                 
             if (bottomMenu.VerticalOptions.Alignment != LayoutAlignment.End)
                 Device.BeginInvokeOnMainThread(() => { bottomMenu.VerticalOptions = LayoutOptions.End; });
             IsChangeTheme = !IsChangeTheme;
-            // additionalList.ItemsSource = additionalList.ItemsSource;
-            
+
             
         }
         
@@ -799,38 +837,88 @@ namespace xamarinJKH.MainConst
             }
             
         }
+        bool alive = false;
+
+        private  bool ShowBotTimer()
+        {
+            if (canHide)
+            {
+                if (currentPos != lastPos)
+                {
+                    if (StackLayoutHide.IsVisible)
+                    {
+                        //isNeedShow = true;
+                        Device.BeginInvokeOnMainThread(async () => await HideBotTimer());
+                    }
+                     alive = true;
+                }
+                else
+                {
+                     alive = false;
+
+                    if (/*isNeedShow &&*/ !StackLayoutHide.IsVisible)
+                    {
+                        //hideBotClikced = false;
+                        //isNeedShow = false;
+                        canHide = false;
+                        Device.StartTimer(TimeSpan.FromMilliseconds(200), SetCanHideTrueAsync);
+                        Device.BeginInvokeOnMainThread(async () => await HideBotTimer());
+                    }
+                }
+                currentPos = lastPos;
+
+            }
+            return alive;
+        }
+
+        
+        //bool isNeedShow = false;
 
         static double lastPos = 0;
-        private double marginTopDefault = 0;
+        static double currentPos = 0;
+
+        
+        //private double marginTopDefault = 0;
         void OnCollectionViewScrolled(object sender, ItemsViewScrolledEventArgs e)
-        {            
-                            
-                Device.BeginInvokeOnMainThread((async () =>
+        {
+            if(canHide && StackLayoutHide.IsVisible)
+            Device.StartTimer(TimeSpan.FromMilliseconds(300), ShowBotTimer);
+
+            Device.BeginInvokeOnMainThread((async () =>
+            {
+                if (canHide && StackLayoutHide.IsVisible)
                 {
-                    if (e.FirstVisibleItemIndex > 0)
-                    {
-                        await mainScroll1.FadeTo(0, 500, Easing.Linear);
-                        await OrdersStack.TranslateTo(0, -30, 500,Easing.Linear);
-                    }
-                    else if (e.FirstVisibleItemIndex == 0)
-                    {
-                        await mainScroll1.FadeTo(1, 500, Easing.Linear);
-                        await OrdersStack.TranslateTo(0, 5, 100, Easing.Linear);
-                    }
+                    //isNeedShow = true;
+                    await HideBotTimer();                    
+                }
 
-                }));
+                if (e.FirstVisibleItemIndex > 0)
+                {
+                    await mainScroll1.FadeTo(0, 500, Easing.Linear);
+                    await OrdersStack.TranslateTo(0, -30, 500, Easing.Linear);
+                }
+                else if (e.FirstVisibleItemIndex == 0)
+                {
+                    await mainScroll1.FadeTo(1, 500, Easing.Linear);
+                    await OrdersStack.TranslateTo(0, 5, 100, Easing.Linear);
+                }
 
-                //Device.BeginInvokeOnMainThread((() =>
-                //{                   
-                //    lastPos = mainScroll1.ScrollY + e.VerticalOffset;
-                //    if (ImageFon.Height > lastPos && lastPos >= 0)
-                //    {
-                //        mainScroll1.ScrollToAsync(0, lastPos, false);
-                //        OrdersStack.Margin = new Thickness(OrdersStack.Margin.Left, OrdersStack.Margin.Top , OrdersStack.Margin.Right, OrdersStack.Margin.Bottom - e.VerticalOffset);
-                //    }
+            }));
 
-                //}));
-            
+            if(canHide)
+                lastPos = mainScroll1.ScrollY + e.VerticalOffset;
+
+            //Device.BeginInvokeOnMainThread((() =>
+            //{                   
+            //    lastPos = mainScroll1.ScrollY + e.VerticalOffset;
+            //    if (ImageFon.Height > lastPos && lastPos >= 0)
+            //    {
+            //        mainScroll1.ScrollToAsync(0, lastPos, false);
+            //        OrdersStack.Margin = new Thickness(OrdersStack.Margin.Left, OrdersStack.Margin.Top , OrdersStack.Margin.Right, OrdersStack.Margin.Bottom - e.VerticalOffset);
+            //    }
+
+            //}));
+
         }
         
 
