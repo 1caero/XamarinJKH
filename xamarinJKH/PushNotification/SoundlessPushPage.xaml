@@ -48,7 +48,7 @@
                         <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_arrow_back.svg"
                                      HeightRequest="25"
                                      WidthRequest="25"
-                                     ReplaceStringMap="{Binding svgClr, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}"
+                                     ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}"
                                      HorizontalOptions="Center" >
                             <svg:SvgCachedImage.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="GoBack"/>

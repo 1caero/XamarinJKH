@@ -37,9 +37,7 @@ namespace xamarinJKH.PushNotification
         }
 
         #endregion
-
-        public bool svgClr { get; set; }
-
+        
         public SoundlessPushPage()
         {
             SoundlessPushViewModel = new SoundlessViewModel();
