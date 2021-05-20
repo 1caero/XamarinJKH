@@ -62,6 +62,7 @@ namespace xamarinJKH.Utils
                     return Color.Red;
                     break;
             }
+
             return Color.Black;
         }
 
@@ -172,15 +173,18 @@ namespace xamarinJKH.Utils
         public static List<string> ParsingLink(String source)
         {
             List<string> links = new List<string>();
-            Regex regExHttpLinks = new Regex(
-                @"(?<=\()\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\))|(?<=(?<wrap>[=~|_#]))\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\k<wrap>)|\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]",
-                RegexOptions.Compiled | RegexOptions.IgnoreCase);
+         
+
+            string pattern = @"^(https?:\/\/)? #протокол
+([\w-]{1,32}\.[\w-]{1,32}) #домен
+[^\s@]* #любой не пробельный символ + @
+$ ";
+       
+
             if (String.IsNullOrEmpty(source))
                 return links;
-            var periodReplacement = "[[[replace:period]]]";
-            source = Regex.Replace(source, @"(?<=\d)\.(?=\d)", periodReplacement);
-            var linkMatches = regExHttpLinks.Matches(source);
-            foreach (Match match in linkMatches)
+            RegexOptions options = RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace;
+            foreach (Match match in Regex.Matches(source.Replace(" ", "\n"), pattern, options))
             {
                 var m = match.ToString();
                 links.Add(m);
@@ -192,23 +196,21 @@ namespace xamarinJKH.Utils
 
         public static FormattedString FormatedLink(String source, Color color, int fontSize = 15)
         {
-            Regex regExHttpLinks = new Regex(
-                @"(?<=\()\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\))|(?<=(?<wrap>[=~|_#]))\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|](?=\k<wrap>)|\b(https?://|www\.)[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]",
-                RegexOptions.Compiled | RegexOptions.IgnoreCase);
+         
             if (String.IsNullOrEmpty(source))
                 return source;
             var periodReplacement = "[[[replace:period]]]";
             source = Regex.Replace(source, @"(?<=\d)\.(?=\d)", periodReplacement);
-            var linkMatches = regExHttpLinks.Matches(source);
+            var linkMatches = ParsingLink(source);
             FormattedString formattedString = new FormattedString();
 
-            foreach (Match match in linkMatches)
+            foreach (string match in linkMatches)
             {
                 var m = match.ToString();
                 String s = (m.Contains("://")) ? m : "http://" + m;
 
                 //if (Device.RuntimePlatform == Device.Android)
-                source = source.Replace(m, "<u>" + m + "<u>");
+                source = source.Replace(m, "<u>" + s + "<u>");
             }
 
             source = source.Replace(periodReplacement, ".");
@@ -220,7 +222,10 @@ namespace xamarinJKH.Utils
                 if (s.Contains("https://") || s.Contains("http://") || s.Contains("www."))
                 {
                     formattedString.Spans.Add(new Span()
-                        {Text = s, FontSize = fontSize, TextColor = Color.Blue, TextDecorations = TextDecorations.Underline});
+                    {
+                        Text = s, FontSize = fontSize, TextColor = Color.Blue,
+                        TextDecorations = TextDecorations.Underline
+                    });
                 }
                 else
                 {
@@ -236,11 +241,16 @@ namespace xamarinJKH.Utils
             try
             {
                 List<string> links = ParsingLink(message);
+                var linksWithHttps = new List<string>();
+                foreach (var each in links)
+                {
+                    linksWithHttps.Add(each.Contains("://") ? each: "http://" + each);
+                }
                 if (links.Count > 0)
                 {
                     Analytics.TrackEvent($"Поиск ссылок {links.ToString()}");
                     var action = await p.DisplayActionSheet(AppResources.OpenLink, AppResources.Cancel, null,
-                        links.ToArray());
+                        linksWithHttps.ToArray());
                     Analytics.TrackEvent($"Открытие ссылки {action}");
                     await Launcher.OpenAsync(action);
                 }
@@ -279,7 +289,7 @@ namespace xamarinJKH.Utils
 
             return "";
         }
-        
+
         public static async void ChechEnabledNotification(Page page)
         {
             //if(DeviceInfo.Platform == DevicePlatform.Android)
@@ -298,6 +308,5 @@ namespace xamarinJKH.Utils
                 }
             }
         }
-        
     }
 }
