@@ -1,0 +1,1815 @@
+{
+  "project_info": {
+    "project_number": "781697834817",
+    "firebase_url": "https://djservice-33702.firebaseio.com",
+    "project_id": "djservice-33702",
+    "storage_bucket": "djservice-33702.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:9e4355c02c74d6db",
+        "android_client_info": {
+          "package_name": "sys_rom.dj_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-vjdsknqonf8vl0lq68gh2i012bopnpje.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sys_rom.dj_app",
+            "certificate_hash": "75676c95f60f2b286f75bd52d89ae362c4b09575"
+          }
+        },
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:a9986e46d395b033",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.almaz_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:d4a26ba6d4768fef",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.blagodatnaya1315"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:cfa0bee5bc3a2917",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.center_invest_50_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:b7912bba5d584ec3",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.center_invest_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:32be76839e3c1ea5",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.chist_dom_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:03ca22d77fe5204f",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.comfort_uk_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:692d1e9301e97d7b",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.december_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:eb1a610318aec629",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.demo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-e597ri7ug97tfakt96p1rvvpsg4769u5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sys_rom.ru.demo_app",
+            "certificate_hash": "75676c95f60f2b286f75bd52d89ae362c4b09575"
+          }
+        },
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:32cd414e4ca948e3d2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.dom_24"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:d94a2c787c19564d",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.domelkom_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:41b54fccd5cea60cd2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.domodedovo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:b3641730060d9faad2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.elektro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:2192a054536100bbd2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.erc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:723e67cf8a9b9f3fd2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.gas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:4fc7b65bc7edf12d",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.kamastroyinvest_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:4670c06289511ee0d2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.khf_ryab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:44433706127be7c6",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.klimovsk_12_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:fb1d452370d181d2",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.kosmos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:881d58e8595ba045d2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.lefortovo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:900c1e6127298071d2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.lider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:fde168d7d95d448f",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.maksimum_t"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:c9d8a6ff01c71ee3",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.muprcmytishi_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:8cba9695fda000e2d2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.murmansk_parther_plus_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:0a266eb7c0ffd657",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.okolitsa_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:cbe8e29a25ca7367",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.our_obj_home_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:11b8426427dc72a0d2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.pedogagicheskiy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:bb3d9b0cb1975343",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.pshsk17_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:00c7acb80bd139c3d2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.service_komfort_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:f4a0a381cc7b43f4",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.standart_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:68c2ffe560f8ea30",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.stolitsa_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:bc5c753ade4999a1",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.system_plus_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:3264d4cd30e016e3",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.t181_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:27d2feef3a4e6eef",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.t183_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:fd90e6163126cd78",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.taborskaya14_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:b938b25c8eccbf9ad2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.tafgai_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:e5e18dd585861a90",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.teplo_energo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:1e9de2d3ae9519dc",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.testpush"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-105vbdo7o09lom52b98l0eigi41293pr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sys_rom.ru.testpush",
+            "certificate_hash": "dc612b73ec23151cee8a2664713da90c8d419c03"
+          }
+        },
+        {
+          "client_id": "781697834817-69husmbitecssd90fet53lrmq9lblqeh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sys_rom.ru.testpush",
+            "certificate_hash": "75676c95f60f2b286f75bd52d89ae362c4b09575"
+          }
+        },
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:def98c652e2dc745",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.tsg270_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:443655e58fe86b6f",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.tsgpobeda1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:ab65a9c5de9c43ce",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.tssovetskoe_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:75096307403acb82",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.uk_first_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:36e434b06eb25412d2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.uk_garant_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:9feaeb6588332651",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.uk_paritet_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-86jujvujhqasqbg6ahekutjhgfcl7m2g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sys_rom.ru.uk_paritet_app",
+            "certificate_hash": "276b9decdbcd3def8d004fde47bcbecd46077b84"
+          }
+        },
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:ea67bdb82fca5d8bd2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.ukom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:ee4dc9b9032de881",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.ukrk_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:912357eb3a536dab",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.upravdom_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:4d30ff989fa0ea87d2cbc0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.zarinsk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781697834817:android:44712e67d3133691",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.zkh_pocket_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0YS9wsx-So1vMM6DUs8wAFVQtg0KM6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781697834817-nacid3rkphvvbcuqj643f1is9vj01018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781697834817-13a0p747i5heeu0cis578b86n0hp4jr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsj-pedagog"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
