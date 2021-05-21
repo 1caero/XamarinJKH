@@ -63,7 +63,10 @@ namespace xamarinJKH.DialogViews
 
                     break;
             }
-                        
+
+            var tgr = new TapGestureRecognizer();
+            tgr.Tapped += Tgr_Tapped;
+            BtnCopy.GestureRecognizers.Add(tgr);
             BindingContext = this;
         }
 
@@ -104,9 +107,13 @@ namespace xamarinJKH.DialogViews
             // send cancel notification to the dialog.
             DialogNotifier.Cancel();
         }
-
-        private async void Button_Clicked(object sender, EventArgs e)
+        private async void Tgr_Tapped(object sender, EventArgs e)
         {
+            //throw new NotImplementedException();
+        //}
+
+        //private async void Button_Clicked(object sender, EventArgs e)
+        //{
             var bk = (InfoAppDialogViewModel) BindingContext;
 
             var copyToClipboardInfo = $"{AppResources.Theme}: {bk._Request.Text}\r\n" +

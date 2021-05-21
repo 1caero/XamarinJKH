@@ -1858,4 +1858,16 @@
   <data name="InfoCopied" xml:space="preserve">
     <value>Iнформація про заявку скопійована</value>
   </data>
+  <data name="Enable" xml:space="preserve">
+    <value>Увімкнути</value>
+  </data>
+  <data name="NoThanks" xml:space="preserve">
+    <value>Ні, дякую</value>
+  </data>
+  <data name="PushDiasbleInfoMessage" xml:space="preserve">
+    <value>У програмі відключені push-повідомлення. Ви не зможете отримувати повідомлення про нові квитанції, терміни передачі показань приладів обліку, відповіді на заявки</value>
+  </data>
+  <data name="PushDisableMessageNeverShow" xml:space="preserve">
+    <value>Більше не відображати це повідомлення</value>
+  </data>
 </root>

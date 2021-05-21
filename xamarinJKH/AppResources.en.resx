@@ -1985,4 +1985,16 @@
   <data name="InfoCopied" xml:space="preserve">
     <value>Application information copied</value>
   </data>
+  <data name="Enable" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="NoThanks" xml:space="preserve">
+    <value>No, thanks</value>
+  </data>
+  <data name="PushDiasbleInfoMessage" xml:space="preserve">
+    <value>Push notifications are disabled in the application. You will not be able to receive notifications about new receipts, due dates for meter readings, responses to applications</value>
+  </data>
+  <data name="PushDisableMessageNeverShow" xml:space="preserve">
+    <value>Don't show this message again</value>
+  </data>
 </root>

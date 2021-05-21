@@ -192,7 +192,7 @@ namespace xamarinJKH.MainConst
 
 
             BindingContext = this;
-            Settings.ChechEnabledNotification(this);
+            Settings.ChechEnabledNotification(this,hex);
         }
         void StartUpdateToken()
         {

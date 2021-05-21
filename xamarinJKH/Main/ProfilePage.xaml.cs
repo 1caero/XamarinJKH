@@ -244,10 +244,15 @@ namespace xamarinJKH.Main
             UkName.Text = Settings.MobileSettings.main_name;
             //if (DeviceInfo.Platform == DevicePlatform.Android)
             //{
-                LabelNotification.IsVisible = !DependencyService.Get<ISettingsService>().IsEnabledNotification();
+            PushEnable.IsVisible = !DependencyService.Get<ISettingsService>().IsEnabledNotification();
             //}
         }
-        
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Xamarin.Essentials.AppInfo.ShowSettingsUI();
+        }
+
         void SetColor()
         {
             Color hexColor = (Color) Application.Current.Resources["MainColor"];

@@ -284,8 +284,12 @@ namespace xamarinJKH.MainConst
             FrameSettings.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
             //if (DeviceInfo.Platform == DevicePlatform.Android)
             //{
-                LabelNotification.IsVisible = !DependencyService.Get<ISettingsService>().IsEnabledNotification();
+            PushEnable.IsVisible = !DependencyService.Get<ISettingsService>().IsEnabledNotification();
             //}
+        }
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Xamarin.Essentials.AppInfo.ShowSettingsUI();
         }
 
         private void SetAdminName()

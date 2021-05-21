@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AiForms.Dialogs;
 using AiForms.Dialogs.Abstractions;
 using Microsoft.AppCenter.Analytics;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using xamarinJKH.DialogViews;
@@ -280,23 +281,35 @@ namespace xamarinJKH.Utils
             return "";
         }
         
-        public static async void ChechEnabledNotification(Page page)
+        public static async void ChechEnabledNotification(Page page, Color hex)
         {
-            //if(DeviceInfo.Platform == DevicePlatform.Android)
-            {
-                bool isDisplay = Preferences.Get("DisplayNotification", true);
-                if (!DependencyService.Get<ISettingsService>().IsEnabledNotification() && isDisplay)
-                {
-                    bool displayAlert = await page.DisplayAlert("",
-                        "На вашем устройстве для данного приложения отключен прием пуш уведомлений." +
-                        " Включите прием уведомлений в настройках устройства", AppResources.DontRimind,
-                        "OK");
-                    if (displayAlert)
-                    {
-                        Preferences.Set("DisplayNotification", false);
-                    }
-                }
-            }
+            //Preferences.Set("DisplayNotification", true);
+
+            bool isDisplay = Preferences.Get("DisplayNotification", true);
+
+            if (!DependencyService.Get<ISettingsService>().IsEnabledNotification() && isDisplay)
+                //var ret = await Dialog.Instance.ShowAsync<PushNotificationEnableCheck>(new
+                //{
+                //    HexColor = hex
+                //});
+                await PopupNavigation.Instance.PushAsync(new PushEnableCheck());
+
+
+            //bool isDisplay = Preferences.Get("DisplayNotification", true);
+            //    if (!DependencyService.Get<ISettingsService>().IsEnabledNotification() && isDisplay)
+            //    {
+            //       await Dialog.Instance.ShowAsync<PushNotificationEnableCheck>();
+
+            //        //bool displayAlert = await page.DisplayAlert("",
+            //        //    "На вашем устройстве для данного приложения отключен прием пуш уведомлений." +
+            //        //    " Включите прием уведомлений в настройках устройства", AppResources.DontRimind,
+            //        //    "OK");
+            //        //if (displayAlert)
+            //        //{
+            //        //    Preferences.Set("DisplayNotification", false);
+            //        //}
+            //    }
+
         }
         
     }

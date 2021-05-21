@@ -224,7 +224,7 @@ namespace xamarinJKH.Main
                 this.CurrentPage = this.EventsNavPage;
             });
             
-             Settings.ChechEnabledNotification(this);
+             Settings.ChechEnabledNotification(this,hex);
         }
 
        

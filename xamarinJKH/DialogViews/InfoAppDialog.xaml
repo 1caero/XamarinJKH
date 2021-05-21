@@ -35,7 +35,7 @@
                                      Foreground="Black"
                                      HorizontalOptions="End"
                                      VerticalOptions="Center" />
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,0"  >
+                <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,0"  >
                     <Label
                     x:Name="LabelTema"
                     Text="{Binding _Request.Text}" TextColor="Black" FontAttributes="Bold" FontSize="15"
@@ -47,16 +47,12 @@
                            HorizontalOptions="End" 
                            VerticalOptions="Center"
                    Padding="10,0" HasShadow="{AppThemeBinding Light=false, Dark=true}">
-                        <!--<StackLayout
+                        --><!--<StackLayout
                     Orientation="Horizontal"
                     Spacing="0"                    
                     VerticalOptions="CenterAndExpand"
-                    HorizontalOptions="Center">-->
-                            <!--<svg:SvgCachedImage 
-                        Source="resource://xamarinJKH.Resources.ic_check_mark.svg"
-                        ReplaceStringMap="{Binding .,Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#FFFFFF'}"
-                        WidthRequest="25"
-                        HeightRequest="25" />-->
+                    HorizontalOptions="Center">--><!--
+                            
                             <Button x:Name="BtnCopy"
                             Text="{x:Static xamarinJkh:AppResources.Copy}"
                             TextColor="White"
@@ -65,13 +61,13 @@
                             BackgroundColor="Transparent"
                                     VerticalOptions="Center"
                     HorizontalOptions="Center" />
-                        <!--</StackLayout>-->
+                        --><!--</StackLayout>--><!--
                     </Frame>
-                </StackLayout>
-                <!--<Label
+                </StackLayout>-->
+                <Label
                     x:Name="LabelTema"
                     Text="{Binding _Request.Text}" TextColor="Black" FontAttributes="Bold" FontSize="15"
-                    HorizontalOptions="Fill" />-->
+                    HorizontalOptions="Fill" />
                 <Label
                     x:Name="LabelDate"
                     TextColor="Black"
@@ -407,6 +403,14 @@
                         </pancakeView:PancakeView>
                     </StackLayout>
                 </StackLayout>
+                <svg:SvgCachedImage x:Name="BtnCopy"
+                        Source="resource://xamarinJKH.Resources.ic_copy.svg"
+                        ReplaceStringMap="{Binding .,Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}"
+                        WidthRequest="25"
+                        HeightRequest="25" 
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center">                    
+                </svg:SvgCachedImage>
             </StackLayout>
         </ScrollView>
     </Frame>

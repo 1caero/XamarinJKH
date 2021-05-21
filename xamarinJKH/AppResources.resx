@@ -1987,4 +1987,16 @@
   <data name="InfoCopied" xml:space="preserve">
     <value>Информация о заявке скопирована</value>
   </data>
+  <data name="Enable" xml:space="preserve">
+    <value>Включить</value>
+  </data>
+  <data name="NoThanks" xml:space="preserve">
+    <value>Нет, спасибо</value>
+  </data>
+  <data name="PushDiasbleInfoMessage" xml:space="preserve">
+    <value>В приложении отключены push-уведомления. Вы не сможете получать уведомления о новых квитанциях, сроках передачи показаний приборов учета, ответы на заявки</value>
+  </data>
+  <data name="PushDisableMessageNeverShow" xml:space="preserve">
+    <value>Не показывать больше это сообщение</value>
+  </data>
 </root>

@@ -1429,6 +1429,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Включить.
+        /// </summary>
+        internal static string Enable {
+            get {
+                return ResourceManager.GetString("Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Введите пин-код в оба поля.
         /// </summary>
         internal static string EnterBothPins {
@@ -3094,6 +3103,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Нет, спасибо.
+        /// </summary>
+        internal static string NoThanks {
+            get {
+                return ResourceManager.GetString("NoThanks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ничего не найдено.
         /// </summary>
         internal static string NothingFound {
@@ -4308,6 +4326,24 @@ namespace xamarinJKH {
         internal static string Profile_NavBar {
             get {
                 return ResourceManager.GetString("Profile_NavBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to В приложении отключены push-уведомления. Вы не сможете получать уведомления о новых квитанциях, сроках передачи показаний приборов учета, ответы на заявки.
+        /// </summary>
+        internal static string PushDiasbleInfoMessage {
+            get {
+                return ResourceManager.GetString("PushDiasbleInfoMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не показывать больше это сообщение.
+        /// </summary>
+        internal static string PushDisableMessageNeverShow {
+            get {
+                return ResourceManager.GetString("PushDisableMessageNeverShow", resourceCulture);
             }
         }
         
