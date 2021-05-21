@@ -196,20 +196,23 @@ namespace xamarinJKH.Pays
             FormattedString formatted = new FormattedString();
             ComissionModel result = await server.GetSumWithComission(account.Sum.ToString(), account.AccountID);
             string totalSum = EntrySum.Text;
-            if (result.Error == null && result.Comission != 0)
+            if (result.Error == null)
             {
-                isComission = true;
-                LabelCommision.Text = $"{AppResources.Commision} " + result.Comission + $" {AppResources.Currency}";
-                LabelCommision.IsVisible = !result.HideComissionInfo;
-                
-                totalSum = result.TotalSum.ToString();
-                if (result.Comission == 0)
+                if (result.Comission != 0)
                 {
-                    LabelCommision.Text = AppResources.NotComissions;
+                    isComission = true;
+                    LabelCommision.Text = $"{AppResources.Commision} " + result.Comission + $" {AppResources.Currency}";
+                    LabelCommision.IsVisible = !result.HideComissionInfo;
+
+                    if (result.Comission == 0)
+                    {
+                        LabelCommision.Text = AppResources.NotComissions;
+                    }
                 }
+                totalSum = result.TotalSum.ToString();
             }
 
-           
+
 
             LabelInsurance.Text = AppResources.InsuranceText.Replace("111", account.InsuranceSum.ToString());
             formatted.Spans.Add(new Span
@@ -294,7 +297,7 @@ namespace xamarinJKH.Pays
         {
             FormattedString formatted = new FormattedString();
             //
-            string sumText = string.IsNullOrEmpty(EntrySum.Text) ? "0" : EntrySum.Text;
+            string sumText = string.IsNullOrEmpty(EntrySum.Text) ? account.Sum.ToString(CultureInfo.InvariantCulture) : EntrySum.Text;
 
 
             decimal totalSum = 0;
@@ -325,16 +328,20 @@ namespace xamarinJKH.Pays
             }
 
             ComissionModel result = await server.GetSumWithComission(totalSum.ToString(), account.AccountID);
-            if (result.Error == null && !result.Comission.Equals("0"))
+            if (result.Error == null)
             {
-                isComission = true;
-                LabelCommision.Text = $"{AppResources.Commision} " + result.Comission + $" {AppResources.Currency}";
-                LabelCommision.IsVisible =  !result.HideComissionInfo;
-                totalSum = result.TotalSum + (SwitchInsurance.IsToggled ? account.InsuranceSum : 0);
-                if (result.Comission == 0)
+                if (!result.Comission.Equals(0))
                 {
-                    LabelCommision.Text = AppResources.NotComissions;
+                    isComission = true;
+                    LabelCommision.Text = $"{AppResources.Commision} " + result.Comission + $" {AppResources.Currency}";
+                    LabelCommision.IsVisible = !result.HideComissionInfo;
+                    if (result.Comission == 0)
+                    {
+                        LabelCommision.Text = AppResources.NotComissions;
+                    }
                 }
+                totalSum = result.TotalSum + (SwitchInsurance.IsToggled ? account.InsuranceSum : 0);
+
             }
 
             await Task.Delay(TimeSpan.FromMilliseconds(100));
