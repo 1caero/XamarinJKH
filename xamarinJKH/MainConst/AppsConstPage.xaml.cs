@@ -249,6 +249,7 @@ namespace xamarinJKH.MainConst
                 while (RequestInfos == null)
                 {
                     await Task.Delay(TimeSpan.FromMilliseconds(50));
+                    
                 }
                 try
                 {
@@ -256,7 +257,12 @@ namespace xamarinJKH.MainConst
                     if (request != null)
                     {
                         if (Navigation.NavigationStack.FirstOrDefault(x => x is AppConstPage) == null)
+                        {
+                            List<RequestInfo> req = new List<RequestInfo>(additionalList.ItemsSource as IEnumerable<RequestInfo> ?? Array.Empty<RequestInfo>());
+                            var index = req.IndexOf(request);
+                            Preferences.Set("scrollY",index);
                             await Navigation.PushAsync(new AppConstPage(request));
+                        }
                     }
                 }
                 catch
@@ -491,7 +497,9 @@ namespace xamarinJKH.MainConst
             if (bottomMenu.VerticalOptions.Alignment != LayoutAlignment.End)
                 Device.BeginInvokeOnMainThread(() => { bottomMenu.VerticalOptions = LayoutOptions.End; });
             IsChangeTheme = !IsChangeTheme;
-
+            int y = Preferences.Get("scrollY", 0);
+            additionalList.ScrollTo(y, animate:false);
+            Preferences.Remove("scrollY");
             
         }
         
@@ -774,7 +782,9 @@ namespace xamarinJKH.MainConst
                 if (Navigation.NavigationStack.FirstOrDefault(x => x is AppConstPage) == null)
                 {
                     await Navigation.PushAsync(new AppConstPage(select));
-                    
+                    List<RequestInfo> req = new List<RequestInfo>(additionalList.ItemsSource as IEnumerable<RequestInfo> ?? Array.Empty<RequestInfo>());
+                    var index = req.IndexOf(select);
+                    Preferences.Set("scrollY",index);
                     try
                     {
                         StackLayout stackLayout2 = (StackLayout) ((PancakeView) s.LogicalChildren[1]).Content;
