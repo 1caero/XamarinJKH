@@ -2922,6 +2922,7 @@ namespace xamarinJKH.Server
             return response.Data;
         }
 
+        static bool commissionLoading = false;
         /// <summary>
         /// Получить сумму комиссии
         /// </summary>
@@ -2929,25 +2930,39 @@ namespace xamarinJKH.Server
         /// <returns></returns>
         public async Task<ComissionModel> GetSumWithComission(string sum, string accountID)
         {
-            RestClient restClientMp = new RestClient(SERVER_ADDR);
-            RestRequest restRequest = new RestRequest(GET_SUM_COMISSION, Method.GET);
-            restRequest.RequestFormat = DataFormat.Json;
-            restRequest.AddHeader("client", Device.RuntimePlatform);
-            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
-            restRequest.AddHeader("acx", Settings.Person.acx);
-            restRequest.AddParameter("sum", sum.Replace(",", "."));
-            restRequest.AddParameter("accountID", accountID);
-            var response = await restClientMp.ExecuteTaskAsync<ComissionModel>(restRequest);
-            // Проверяем статус
-            if (response.StatusCode != HttpStatusCode.OK)
+            try
             {
-                return new ComissionModel()
-                {
-                    Error = $"Ошибка {response.StatusDescription}"
-                };
-            }
+                if (commissionLoading)
+                    return null;
+                commissionLoading = true;
 
-            return response.Data;
+                RestClient restClientMp = new RestClient(SERVER_ADDR);
+                RestRequest restRequest = new RestRequest(GET_SUM_COMISSION, Method.GET);
+                restRequest.RequestFormat = DataFormat.Json;
+                restRequest.AddHeader("client", Device.RuntimePlatform);
+                restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+                restRequest.AddHeader("acx", Settings.Person.acx);
+                restRequest.AddParameter("sum", sum.Replace(",", "."));
+                restRequest.AddParameter("accountID", accountID);
+                var response = await restClientMp.ExecuteTaskAsync<ComissionModel>(restRequest);
+                // Проверяем статус
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    return new ComissionModel()
+                    {
+                        Error = $"Ошибка {response.StatusDescription}"
+                    };
+                }
+
+                commissionLoading = false;
+
+                return response.Data;
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            
         }
 
         public async Task<Bonus> GetAccountBonusBalance(int id)
