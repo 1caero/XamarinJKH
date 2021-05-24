@@ -9,25 +9,32 @@
         <Frame CornerRadius="30" Margin="10" Padding="10"   HorizontalOptions="Center" VerticalOptions="Center">
             <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                 <Label Text="{x:Static xamarinJkh:AppResources.PushDiasbleInfoMessage}" Margin="10,10" Padding="10" HorizontalTextAlignment="Center"/>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10,0,10,10" Spacing="30">
-                    <Button x:Name="Cancel" BackgroundColor="White"
-                    WidthRequest="100"
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="10,0,10,10" >
+                    <Button HorizontalOptions="CenterAndExpand"
+                        x:Name="Cancel" 
+                        BackgroundColor="White" 
+                        Margin="10,0"
+                        Padding="10,0"
+                        WidthRequest="130"
                         HeightRequest="40"
-                    CornerRadius="20"
-                            BorderWidth="1"
+                        CornerRadius="20"
+                        BorderWidth="1"
                         BorderColor="{Binding HexColor}"
-                    TextColor="Black"
-                    Clicked="Cancel_Clicked"
+                        TextColor="Black"
+                        Clicked="Cancel_Clicked"
                         MinimumWidthRequest="100"
-                    Text="{x:Static xamarinJkh:AppResources.NoThanks}"/>
-                    <Button  BackgroundColor="{Binding HexColor}"
-                    WidthRequest="100"
-                         HeightRequest="40"
-                    CornerRadius="20"
-                    TextColor="White"
-                    Clicked="Button_Clicked"
-                         MinimumWidthRequest="100"
-                    Text="{x:Static xamarinJkh:AppResources.Enable}"/>
+                        Text="{x:Static xamarinJkh:AppResources.NoThanks}"/>
+                    <Button HorizontalOptions="CenterAndExpand"
+                        BackgroundColor="{Binding HexColor}" 
+                        Margin="10,0"
+                        Padding="10,0"
+                        WidthRequest="130"
+                        HeightRequest="40"
+                        CornerRadius="20"
+                        TextColor="White"
+                        Clicked="Button_Clicked"
+                        MinimumWidthRequest="100"
+                        Text="{x:Static xamarinJkh:AppResources.Enable}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Margin="10,0">
                     <Switch
