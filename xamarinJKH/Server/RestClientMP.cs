@@ -12,6 +12,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using xamarinJKH.Server.DataModel;
 using xamarinJKH.Utils;
+using System.Linq;
 
 namespace xamarinJKH.Server
 {
@@ -19,7 +20,7 @@ namespace xamarinJKH.Server
     {
         // public const string SERVER_ADDR = "https://api.sm-center.ru/test_erc_udm"; // ОСС
          // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
-        public const string SERVER_ADDR = "https://api.sm-center.ru/water"; // Тихая гавань water/ water2 - тихая гавань - 2 
+        public const string SERVER_ADDR = "https://api.sm-center.ru/water2"; // Тихая гавань water/ water2 - тихая гавань - 2 
          // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
         // public const string SERVER_ADDR = "https://api.sm-center.ru/kapitall_all"; // Основа
         //public const string SERVER_ADDR = "https://api.sm-center.ru/newjkh"; // Еще одна тестовая база
@@ -781,9 +782,27 @@ namespace xamarinJKH.Server
                 };
             }
             Realm _realm = Realm.GetInstance();
-            _realm.Write(() => _realm.RemoveAll());
+            
+           await _realm.Write(async () => { 
+                _realm.RemoveAll();
+                if (_realm.All<RequestInfoDao>().Any())
+                {
+                    while (_realm.All<RequestInfoDao>().Any())
+                        await Task.Delay(50);
+                }                
+                _realm.Add(response.Data.Requests); });
+
             // List<RequestInfoDao> requestInfoDaos = response.Data.Requests.ConvertAll(new Converter<RequestInfo, RequestInfoDao>(RequestInfo.InfoToDao));
-            _realm.Write(() => _realm.Add(response.Data.Requests));
+            
+            //_realm.Write(() => _realm.RemoveAll());            
+
+            //if (_realm.All<RequestInfoDao>().Any())
+            //{
+            //    while (_realm.All<RequestInfoDao>().Any())
+            //        await Task.Delay(50);
+            //}
+
+            //_realm.Write(() => _realm.Add(response.Data.Requests));
             return response.Data;
         }
         public async Task<List<RequestInfo>> Search (List<CustomSearchCriteria> Criterias)
