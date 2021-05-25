@@ -1,14 +1,25 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using AiForms.Dialogs;
+using AiForms.Dialogs.Abstractions;
+using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
+using xamarinJKH.DialogViews;
+using xamarinJKH.MainConst;
 using xamarinJKH.Server;
+using xamarinJKH.Tech;
 using xamarinJKH.Utils;
 
 namespace xamarinJKH.ViewModels
 {
     public class BaseViewModel:INotifyPropertyChanged
     {
+        public double Width => App.ScreenWidth2;
+        
         bool _isLoading;
         public bool IsLoading
         {
@@ -76,6 +87,15 @@ namespace xamarinJKH.ViewModels
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        protected void ShowToast(string title)
+        {
+            Device.BeginInvokeOnMainThread(async () => Toast.Instance.Show<ToastDialog>(new
+            {
+                Title = title, Duration = 500, ColorB = Color.Gray,
+                ColorT = Color.White
+            }));
+        }
+        
         protected void ShowError(string error, string title = "Ошибка")
         {
             Device.BeginInvokeOnMainThread(async () =>
@@ -83,5 +103,18 @@ namespace xamarinJKH.ViewModels
                 await Application.Current.MainPage.DisplayAlert(title, error, "OK");
             });
         }
+        protected async Task<bool> ShowChoose(string title)
+        {
+            return await Application.Current.MainPage.DisplayAlert("",title, AppResources.Yes, AppResources.No );
+        }
+        protected async Task<bool> ShowDialog<T>(BaseViewModel model) where T: DialogView
+        {
+            return await Dialog.Instance.ShowAsync<T>(model);
+        }
+        
+
+        
+        
+        
     }
 }

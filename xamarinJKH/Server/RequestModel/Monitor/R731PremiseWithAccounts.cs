@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace xamarinJKH.Server.RequestModel
 {
@@ -10,6 +11,9 @@ namespace xamarinJKH.Server.RequestModel
         public bool IsNonresidential { get; set; }
         public string Number { get; set; }
         public string UniqueNum { get; set; }
+
+        public string Type => IsNonresidential ? "нежилое" : "жилое";
+        public string DisplayText => $"{Number} ({Type})";
 
         public List<Account> Accounts { get; set; }
     }

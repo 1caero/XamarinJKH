@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<abstractions:DialogView xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         WidthRequest="{Binding Width}"
+                         DialogNotifier="{Binding Dialog}"
+                         xmlns:abstractions="clr-namespace:AiForms.Dialogs.Abstractions;assembly=AiForms.Dialogs.Abstractions"
+                         xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
+                         x:Class="xamarinJKH.AppsConst.ApproversDialog">
+    <StackLayout
+        Margin="10">
+        <Frame x:Name="buttonFilter" HasShadow="{AppThemeBinding Light=false, Dark=true}"
+               BorderColor="{x:DynamicResource MainColor}"
+               BackgroundColor="White"
+               CornerRadius="30"
+               Padding="10"
+               VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+            <StackLayout>
+                <Grid  HorizontalOptions="FillAndExpand">
+                <Label Text="{x:Static xamarinJkh:AppResources.Signatories}"
+                       HorizontalOptions="CenterAndExpand" 
+                       TextColor="Black" FontAttributes="Bold"
+                       FontSize="Medium"/>
+                <xamarinJkh:IconView x:Name="IconViewClose"
+                                     Source="ic_close"
+                                     HeightRequest="15"
+                                     WidthRequest="15"
+                                     Margin="0,5,5,0"
+                                     Foreground="Black"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="Center" >
+                    <xamarinJkh:IconView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CloseDialogCommand}" />
+                    </xamarinJkh:IconView.GestureRecognizers>
+                </xamarinJkh:IconView>
+                </Grid>
+                <CollectionView ItemsSource="{Binding Approvers}"
+                                BackgroundColor="White"
+                                HeightRequest="300"
+                                x:Name="Week"
+                                HorizontalOptions="CenterAndExpand"
+                                Margin="0,5,0,0"
+
+                                SelectionMode="None">
+
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="2" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                          Color="{x:DynamicResource MainColor}" />
+                                <Label Text="{Binding Name}"
+                                       TextColor="Black"
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="12" />
+                            </StackLayout>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</abstractions:DialogView>

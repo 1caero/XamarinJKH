@@ -1870,4 +1870,40 @@
   <data name="PushDisableMessageNeverShow" xml:space="preserve">
     <value>Більше не відображати це повідомлення</value>
   </data>
+  <data name="AddDocument" xml:space="preserve">
+    <value>Створення документа </value>
+  </data>
+  <data name="Intercom" xml:space="preserve">
+    <value>Домофон</value>
+  </data>
+  <data name="TitleDocument" xml:space="preserve">
+    <value>Назва (залиште порожнім для автозаповнення)</value>
+  </data>
+  <data name="ConfigureAdmin" xml:space="preserve">
+    <value>(Настроюється адміністратором)</value>
+  </data>
+  <data name="Signatories" xml:space="preserve">
+    <value>підписанти</value>
+  </data>
+  <data name="BasicInfo" xml:space="preserve">
+    <value>Основна інформація</value>
+  </data>
+  <data name="Premises" xml:space="preserve">
+    <value>приміщення:</value>
+  </data>
+  <data name="DocumentSource" xml:space="preserve">
+    <value>Джерело документа:</value>
+  </data>
+  <data name="Term" xml:space="preserve">
+    <value>Термін:</value>
+  </data>
+  <data name="AttachFiles" xml:space="preserve">
+    <value>Прикріпити файли:</value>
+  </data>
+  <data name="NewApplication" xml:space="preserve">
+    <value>Нова заявка</value>
+  </data>
+  <data name="NewDocument" xml:space="preserve">
+    <value>Новый документ</value>
+  </data>
 </root>

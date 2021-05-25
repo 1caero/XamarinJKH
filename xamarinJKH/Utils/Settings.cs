@@ -188,7 +188,8 @@ $ ";
             foreach (Match match in Regex.Matches(source.Replace(" ", "\n"), pattern, options))
             {
                 var m = match.ToString();
-                links.Add(m);
+                if(!m.ToLower().EndsWith(".jpg") && !m.ToLower().EndsWith(".png") && !m.ToLower().EndsWith(".pdf") && !m.ToLower().EndsWith(".doc"))
+                    links.Add(m);
                 Console.WriteLine("Т1: " + match);
             }
 

@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<abstractions:DialogView xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         WidthRequest="{Binding Width}"
+                         DialogNotifier="{Binding FileDialog}"
+                         xmlns:abstractions="clr-namespace:AiForms.Dialogs.Abstractions;assembly=AiForms.Dialogs.Abstractions"
+                         xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
+                         xmlns:appsConst="clr-namespace:xamarinJKH.AppsConst;assembly=xamarinJKH"
+                         x:Class="xamarinJKH.AppsConst.FilesDialog">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     Margin="10"
+                     HeightRequest="300">
+            <Frame x:Name="buttonFilter" HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                   BorderColor="{x:DynamicResource MainColor}"
+                   BackgroundColor="White"
+                   CornerRadius="30"
+                   Padding="10"
+                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <StackLayout>
+                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                        <Label Text="{x:Static xamarinJkh:AppResources.NewAppFiles}"
+                               HorizontalOptions="CenterAndExpand"
+                               TextColor="Black" FontAttributes="Bold"
+                               FontSize="Medium" />
+                        <xamarinJkh:IconView
+                            Source="ic_close"
+                            HeightRequest="15"
+                            WidthRequest="15"
+                            Margin="0,5,5,0"
+                            Foreground="Black"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center">
+                            <xamarinJkh:IconView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CloseFileDialogCommand}" />
+                            </xamarinJkh:IconView.GestureRecognizers>
+                        </xamarinJkh:IconView>
+                    </Grid>
+                    <CollectionView x:Name="ListViewFiles"
+                                    Margin="10, 10, 10, 0"
+                                    HeightRequest="230"
+                                    VerticalOptions="CenterAndExpand"
+                                    VerticalScrollBarVisibility="Never"
+                                    SelectionMode="None"
+                                    ItemsSource="{Binding Files}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical"
+                                               ItemSpacing="5" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+
+                            <DataTemplate>
+                                <!-- <appsConst:FileConstCell -->
+                                <!--     FileName="{Binding GetFileName}" -->
+                                <!--     FileSize="{Binding DataArray}" /> -->
+                                <Frame x:Name="buttonFilter"
+                                       BorderColor="{x:DynamicResource MainColor}"
+                                       BackgroundColor="White"
+                                       CornerRadius="10"
+                                       Padding="5"
+                                       VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.RemoveFileCommand, Source={x:Reference Name=ListViewFiles}}"
+                                                              CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding GetFileName}"
+                                               HorizontalOptions="StartAndExpand"
+                                               TextColor="Black"
+                                               VerticalOptions="Center"
+                                               FontSize="13" />
+                                        <Label Text="{Binding Length}"
+                                               HorizontalOptions="End"
+                                               VerticalOptions="Center"
+                                               FontSize="13" />
+                                        <Label Text="×"
+                                               TextColor="{x:DynamicResource MainColor}"
+                                               HorizontalOptions="End"
+                                               Margin="0,-3,0,0"
+                                               FontSize="30" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Button x:Name="BtnMove"
+                            Text="+ Добавить файл"
+                            TextColor="White"
+                            HorizontalOptions="Center"
+                            VerticalOptions="EndAndExpand"
+                            Padding="15,0"
+                            BorderWidth="1"
+                            Command="{Binding AddFileCommand}"
+                            CornerRadius="15"
+                            FontAttributes="Bold"
+                            BackgroundColor="{x:DynamicResource MainColor}" />
+
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</abstractions:DialogView>

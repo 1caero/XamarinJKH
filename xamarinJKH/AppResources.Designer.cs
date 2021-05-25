@@ -133,6 +133,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Создание документа.
+        /// </summary>
+        internal static string AddDocument {
+            get {
+                return ResourceManager.GetString("AddDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to + Подключить лицевой счет.
         /// </summary>
         internal static string AddIdent {
@@ -520,6 +529,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Прикрепить файлы:.
+        /// </summary>
+        internal static string AttachFiles {
+            get {
+                return ResourceManager.GetString("AttachFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выбрать файл.
         /// </summary>
         internal static string AttachmentChooseFile {
@@ -615,6 +633,15 @@ namespace xamarinJKH {
         internal static string Back {
             get {
                 return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Основная информация.
+        /// </summary>
+        internal static string BasicInfo {
+            get {
+                return ResourceManager.GetString("BasicInfo", resourceCulture);
             }
         }
         
@@ -1024,6 +1051,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (Настраивается администратором).
+        /// </summary>
+        internal static string ConfigureAdmin {
+            get {
+                return ResourceManager.GetString("ConfigureAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Подтвердить.
         /// </summary>
         internal static string Confirm {
@@ -1326,6 +1362,15 @@ namespace xamarinJKH {
         internal static string District {
             get {
                 return ResourceManager.GetString("District", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Источник документа:.
+        /// </summary>
+        internal static string DocumentSource {
+            get {
+                return ResourceManager.GetString("DocumentSource", resourceCulture);
             }
         }
         
@@ -2194,7 +2239,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Исполнитель .
+        ///   Looks up a localized string similar to Исполнитель.
         /// </summary>
         internal static string Executor {
             get {
@@ -2568,6 +2613,15 @@ namespace xamarinJKH {
         internal static string InsuranceText {
             get {
                 return ResourceManager.GetString("InsuranceText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Домофон.
+        /// </summary>
+        internal static string Intercom {
+            get {
+                return ResourceManager.GetString("Intercom", resourceCulture);
             }
         }
         
@@ -2977,6 +3031,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Новая заявка.
+        /// </summary>
+        internal static string NewApplication {
+            get {
+                return ResourceManager.GetString("NewApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Максимальный размер: 10 МБ.
         /// </summary>
         internal static string NewAppMaxSize {
@@ -3000,6 +3063,15 @@ namespace xamarinJKH {
         internal static string NewData {
             get {
                 return ResourceManager.GetString("NewData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Новый документ.
+        /// </summary>
+        internal static string NewDocument {
+            get {
+                return ResourceManager.GetString("NewDocument", resourceCulture);
             }
         }
         
@@ -4258,6 +4330,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Помещение:.
+        /// </summary>
+        internal static string Premises {
+            get {
+                return ResourceManager.GetString("Premises", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to предыдущего месяца.
         /// </summary>
         internal static string PreviousMonth {
@@ -5051,6 +5132,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Подписанты.
+        /// </summary>
+        internal static string Signatories {
+            get {
+                return ResourceManager.GetString("Signatories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to По л/сч.
         /// </summary>
         internal static string SortByAcc {
@@ -5384,6 +5474,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Срок:.
+        /// </summary>
+        internal static string Term {
+            get {
+                return ResourceManager.GetString("Term", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не поступает звонок?  Получите текстовое сообщение:.
         /// </summary>
         internal static string TextSms {
@@ -5398,6 +5497,15 @@ namespace xamarinJKH {
         internal static string Theme {
             get {
                 return ResourceManager.GetString("Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Название (оставьте пустым для автозаполнения).
+        /// </summary>
+        internal static string TitleDocument {
+            get {
+                return ResourceManager.GetString("TitleDocument", resourceCulture);
             }
         }
         

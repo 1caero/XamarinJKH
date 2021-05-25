@@ -23,6 +23,7 @@ using Badge.Plugin;
 using Microsoft.AppCenter.Analytics;
 using xamarinJKH.InterfacesIntegration;
 using Plugin.Fingerprint;
+using Realms;
 using xamarinJKH.Utils.ReqiestUtils;
 
 namespace xamarinJKH

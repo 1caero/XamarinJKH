@@ -1733,7 +1733,7 @@
     <value>Произошла неизвестная ошибка, повторите попытку позже</value>
   </data>
   <data name="Executor" xml:space="preserve">
-    <value>Исполнитель </value>
+    <value>Исполнитель</value>
   </data>
   <data name="ASource" xml:space="preserve">
     <value>Источник</value>
@@ -1998,5 +1998,41 @@
   </data>
   <data name="PushDisableMessageNeverShow" xml:space="preserve">
     <value>Не показывать больше это сообщение</value>
+  </data>
+  <data name="AddDocument" xml:space="preserve">
+    <value>Создание документа</value>
+  </data>
+  <data name="Intercom" xml:space="preserve">
+    <value>Домофон</value>
+  </data>
+  <data name="TitleDocument" xml:space="preserve">
+    <value>Название (оставьте пустым для автозаполнения)</value>
+  </data>
+  <data name="ConfigureAdmin" xml:space="preserve">
+    <value>(Настраивается администратором)</value>
+  </data>
+  <data name="Signatories" xml:space="preserve">
+    <value>Подписанты</value>
+  </data>
+  <data name="BasicInfo" xml:space="preserve">
+    <value>Основная информация</value>
+  </data>
+  <data name="Premises" xml:space="preserve">
+    <value>Помещение:</value>
+  </data>
+  <data name="DocumentSource" xml:space="preserve">
+    <value>Источник документа:</value>
+  </data>
+  <data name="Term" xml:space="preserve">
+    <value>Срок:</value>
+  </data>
+  <data name="AttachFiles" xml:space="preserve">
+    <value>Прикрепить файлы:</value>
+  </data>
+  <data name="NewApplication" xml:space="preserve">
+    <value>Новая заявка</value>
+  </data>
+  <data name="NewDocument" xml:space="preserve">
+    <value>Новый документ</value>
   </data>
 </root>

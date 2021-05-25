@@ -20,6 +20,7 @@ namespace xamarinJKH.Server
         // public const string SERVER_ADDR = "https://api.sm-center.ru/test_erc_udm"; // ОСС
          // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
         public const string SERVER_ADDR = "https://api.sm-center.ru/water"; // Тихая гавань water/ water2 - тихая гавань - 2 
+        // public const string SERVER_ADDR = "http://alphaapi.uk-gkh.org/water"; // Тихая гавань water/ water2 - тихая гавань - 2 
          // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
         // public const string SERVER_ADDR = "https://api.sm-center.ru/kapitall_all"; // Основа
         //public const string SERVER_ADDR = "https://api.sm-center.ru/newjkh"; // Еще одна тестовая база
@@ -230,6 +231,14 @@ namespace xamarinJKH.Server
         public const string GEOLOCATION = "Dispatcher/AddGeolocating";
         public const string GET_METER = "Dispatcher/GetMeter"; //Возвращаюься все найденные приборы.
         public const string SAVE_VALUE_DISPATCH_METER = "Dispatcher/SaveMeterValue"; //Сохранение показаний
+        
+        
+        public const string GET_DOCUMENT_TYPES = "SupportServiceData/GetDocumentTypes"; //Получение типов документа
+        public const string GET_REQUEST_SOURCE_TYPES = "SupportServiceData/GetRequestSourceTypes"; //Получение источников 
+        public const string ADD_DOCUMENT = "SupportService/AddDocument"; //Добавление документа 
+        public const string LOCK_REQUEST = "SupportService/LockRequest"; //Заблокировать за пользователем заявку
+        
+        
 
         /// <summary>
         /// Аунтификация сотрудника
@@ -276,6 +285,43 @@ namespace xamarinJKH.Server
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 return new List<MeterInfo>();
+            }
+
+            return response.Data;
+        }
+        
+        public async Task<List<DocumentType>> GetDocumentTypes ()
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(GET_DOCUMENT_TYPES, Method.GET);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+
+            var response = await restClientMp.ExecuteTaskAsync<List<DocumentType>>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new List<DocumentType>();
+            }
+
+            return response.Data;
+        }
+        public async Task<List<NamedValue>> GetRequestSourceTypes()
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(GET_REQUEST_SOURCE_TYPES, Method.GET);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+
+            var response = await restClientMp.ExecuteTaskAsync<List<NamedValue>>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new List<NamedValue>();
             }
 
             return response.Data;
@@ -647,6 +693,54 @@ namespace xamarinJKH.Server
                 return new IDResult()
                 {
                     Error = $"Ошибка {response.StatusDescription}"
+                };
+            }
+
+            return response.Data;
+        }
+        
+        public async Task<IDResultDocument> CreateNewDocument(AddDocumentArguments arguments)
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(ADD_DOCUMENT, Method.POST);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            restRequest.AddBody(arguments);
+            var response = await restClientMp.ExecuteTaskAsync<IDResultDocument>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new IDResultDocument
+                {
+                    Error =  $"Ошибка {response.StatusDescription}"
+                };
+            }
+
+            return response.Data;
+        }
+        public async Task<CommonResult> LockRequest(long requestID, long accountID, bool isPaid = false)
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(LOCK_REQUEST, Method.POST);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            restRequest.AddBody(new
+            {
+                requestID,
+                accountID,
+                isPaid
+            });
+            var response = await restClientMp.ExecuteTaskAsync<CommonResult>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new CommonResult
+                {
+                    Error =  $"Ошибка {response.StatusDescription}"
                 };
             }
 

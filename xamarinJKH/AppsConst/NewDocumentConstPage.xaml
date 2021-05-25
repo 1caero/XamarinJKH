@@ -1,0 +1,800 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:converters="clr-namespace:xamarinJKH.Converters;assembly=xamarinJKH"
+             xmlns:mask="clr-namespace:xamarinJKH.Mask;assembly=xamarinJKH"
+             xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             x:Class="xamarinJKH.AppsConst.NewDocumentConstPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PancakeBorderConverter x:Key="PancakeConvert" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Image x:Name="ImageFon"
+                       Source="{AppThemeBinding Light=ic_app_top_light, Dark=ic_app_top}"
+                       VerticalOptions="Start"
+                       Margin="0,0,0,0"
+                       Aspect="{OnPlatform Android=Fill, iOS=AspectFill}"
+                       HorizontalOptions="FillAndExpand" />
+                <StackLayout>
+                    <StackLayout
+                        Margin="25,10,15,0"
+                        Orientation="Horizontal"
+                        x:Name="Pancake">
+                        <Label x:Name="UkName" VerticalOptions="Center"
+                               Text="{Binding Title}"
+                               FontAttributes="Bold"
+                               HorizontalOptions="StartAndExpand"
+                               FontSize="15"
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                        <StackLayout
+                            HorizontalOptions="EndAndExpand"
+                            Orientation="Horizontal">
+                            <xamarinJkh:ButtonSupport x:Name="LabelTech"/>
+                            <xamarinJkh:ButtonProfile x:Name="IconViewProfile" Margin="2,0,5,0"/>
+
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout
+                        x:Name="BackStackLayout"
+                        Orientation="Horizontal"
+                        Margin="25, 0, 0, 0"
+                        HorizontalOptions="Start">
+                        <xamarinJkh:IconView Source="ic_arrow_back"
+                                             HeightRequest="15"
+                                             Foreground="{AppThemeBinding Light=Black, Dark=White}"
+                                             HorizontalOptions="Center" />
+                        <Label
+                            Text="{x:Static xamarinJkh:AppResources.AddDocument}"
+                            FontSize="18"
+                            TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Start" />
+                    </StackLayout>
+                    <Grid>
+                        <ScrollView IsEnabled="{Binding IsBusy, Converter={converters:InverseBoolConverter}}"
+                                    VerticalOptions="FillAndExpand">
+                            <Frame CornerRadius="30"
+                                   x:Name="FrameTop"
+                                   Margin="10, 15, 10, 15"
+                                   VerticalOptions="FillAndExpand"
+                                   BorderColor="{AppThemeBinding Dark=Transparent, Light={x:StaticResource MainColor}}"
+                                   HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                   BackgroundColor="White"
+                                   Padding="0">
+
+                                <StackLayout
+                                    Margin="15, 15, 15, 10">
+                                    <Entry x:Name="EntryName"
+                                           FontSize="16"
+                                           VerticalOptions="End"
+                                           HorizontalTextAlignment="Start"
+                                           TextColor="Black"
+                                           Text="{Binding TitleDocument}"
+                                           PlaceholderColor="#A2A2A2"
+                                           HorizontalOptions="FillAndExpand"
+                                           Placeholder="{x:Static xamarinJkh:AppResources.TitleDocument}"
+                                           Keyboard="Text" />
+                                    <Label
+                                        HeightRequest="1"
+                                        Margin="0, 0, 0, 15"
+                                        BackgroundColor="{x:DynamicResource MainColor}"
+                                        HorizontalOptions="FillAndExpand" />
+
+                                    <pancakeView:PancakeView CornerRadius="20" x:Name="commentFrame"
+                                                             BackgroundColor="White"
+                                                             Border="{Binding ., Converter={x:StaticResource PancakeConvert}, ConverterParameter=True}"
+                                                             Padding="10" HeightRequest="60">
+                                        <xamarinJkh:BordlessEditor x:Name="BordlessEditor"
+                                                                   FontSize="16"
+                                                                   VerticalOptions="FillAndExpand"
+                                                                   Text="{Binding TextDocument}"
+                                                                   AutoSize="TextChanges"
+                                                                   WidthRequest="100"
+                                                                   TextChanged="BordlessEditor_OnTextChanged"
+                                                                   IsSpellCheckEnabled="True"
+                                                                   PlaceholderColor="#A2A2A2"
+                                                                   Placeholder="{x:Static xamarinJkh:AppResources.SfPdfViewerPlaceHolderText}"
+                                                                   TextColor="Black"
+                                                                   HorizontalOptions="FillAndExpand" />
+                                    </pancakeView:PancakeView>
+                                    <Grid RowSpacing="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <StackLayout
+                                            Margin="5, 5, 5, 0"
+                                            Spacing="5"
+                                            Grid.ColumnSpan="2"
+                                            HorizontalOptions="FillAndExpand"
+                                            Orientation="Horizontal">
+                                            <Label
+                                                TextColor="Black"
+                                                Text=""
+                                                HorizontalTextAlignment="Start"
+                                                VerticalOptions="Start"
+                                                HorizontalOptions="Start"
+                                                FontSize="15"
+                                                FontAttributes="Bold">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static xamarinJkh:AppResources.Type}" />
+                                                        <Span Text=": " />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <StackLayout Spacing="0"
+                                                         x:Name="StackLayoutType"
+                                                         HorizontalOptions="FillAndExpand">
+                                                <StackLayout
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Orientation="Horizontal">
+                                                    <xamarinJkh:BorderlessPicker x:Name="PickerType" Title=""
+                                                        TitleColor="{x:DynamicResource MainColor}"
+                                                        TextColor="{x:DynamicResource MainColor}"
+                                                        VerticalOptions="End"
+                                                        HorizontalOptions="Center"
+                                                        HorizontalTextAlignment="Center"
+                                                        FontSize="15"
+                                                        ItemsSource="{Binding DocumentTypes}"
+                                                        ItemDisplayBinding="{Binding Name}"
+                                                        SelectedItem="{Binding SelectedDocumentType}" />
+                                                    <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                                         HeightRequest="12"
+                                                                         WidthRequest="12"
+                                                                         Rotation="90"
+                                                                         Margin="0,5,0,0"
+                                                                         VerticalOptions="Center"
+                                                                         Foreground="{x:DynamicResource MainColor}"
+                                                                         HorizontalOptions="EndAndExpand" />
+                                                </StackLayout>
+
+                                                <Label
+                                                    HeightRequest="1"
+                                                    BackgroundColor="{x:DynamicResource MainColor}"
+                                                    HorizontalOptions="FillAndExpand" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="2"
+                                                     Margin="5, 5, 5, 0"
+                                                     Spacing="5"
+                                                     Grid.ColumnSpan="2"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     Orientation="Horizontal">
+
+                                            <Label
+                                                TextColor="Black"
+                                                Text="Приоритет:"
+                                                VerticalOptions="Start"
+                                                HorizontalOptions="Start"
+                                                FontSize="15"
+                                                FontAttributes="Bold">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static xamarinJkh:AppResources.Priority}" />
+                                                        <Span Text=": " />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <StackLayout Spacing="0" x:Name="StackLayoutPriority"
+                                                         HorizontalOptions="FillAndExpand">
+                                                <StackLayout
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Orientation="Horizontal">
+                                                    <xamarinJkh:BorderlessPicker Title=""
+                                                        TitleColor="{x:DynamicResource MainColor}"
+                                                        TextColor="{x:DynamicResource MainColor}"
+                                                        VerticalOptions="End"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        FontSize="15"
+                                                        ItemsSource="{Binding Priority}"
+                                                        ItemDisplayBinding="{Binding Name}"
+                                                        SelectedItem="{Binding SelectedPriority}" />
+                                                    <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                                         HeightRequest="12"
+                                                                         WidthRequest="12"
+                                                                         Rotation="90"
+                                                                         Margin="0,5,0,0"
+                                                                         VerticalOptions="Center"
+                                                                         Foreground="{x:DynamicResource MainColor}"
+                                                                         HorizontalOptions="Center" />
+                                                </StackLayout>
+                                                <Label
+                                                    HeightRequest="1"
+                                                    BackgroundColor="{x:DynamicResource MainColor}"
+                                                    HorizontalOptions="Fill" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <Label Grid.Column="0" Grid.Row="1"
+                                               Grid.ColumnSpan="3"
+                                               HorizontalTextAlignment="Start"
+                                               Text="{x:Static xamarinJkh:AppResources.ConfigureAdmin}"
+                                               HorizontalOptions="FillAndExpand" />
+                                        <Label Grid.Column="3" Grid.Row="1"
+                                               HorizontalTextAlignment="Start"
+                                               Text="{x:Static xamarinJkh:AppResources.Signatories}"
+                                               TextDecorations="Underline"
+                                               FontAttributes="Bold"
+                                               TextColor="{x:DynamicResource MainColor}"
+                                               HorizontalOptions="FillAndExpand">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding OpenApprovedDialogCommand}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Grid>
+                                    <StackLayout x:Name="GeneralInfo">
+                                        <Label Grid.Column="3" Grid.Row="1"
+                                               HorizontalTextAlignment="Start"
+                                               Text="{x:Static xamarinJkh:AppResources.BasicInfo}"
+                                               Margin="5, 0, 5, 0"
+                                               FontAttributes="Bold"
+                                               FontSize="15"
+                                               TextColor="Black"
+                                               HorizontalOptions="FillAndExpand" />
+                                        <StackLayout
+                                            Margin="5, 5, 5, 5"
+                                            Spacing="5"
+                                            Grid.ColumnSpan="2"
+                                            HorizontalOptions="FillAndExpand"
+                                            Orientation="Horizontal">
+                                            <Label
+                                                TextColor="Black"
+                                                Text="Дом:"
+                                                HorizontalTextAlignment="Start"
+                                                VerticalOptions="Start"
+                                                HorizontalOptions="Start"
+                                                FontSize="15"
+                                                FontAttributes="Bold">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static xamarinJkh:AppResources.House}" />
+                                                        <Span Text=": " />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <StackLayout Spacing="0" x:Name="StackLayoutHouse"
+                                                         HorizontalOptions="FillAndExpand">
+                                                <StackLayout
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Orientation="Horizontal">
+                                                    <xamarinJkh:BorderlessPicker Title=""
+                                                        TitleColor="{x:DynamicResource MainColor}"
+                                                        TextColor="{x:DynamicResource MainColor}"
+                                                        VerticalOptions="End"
+                                                        HorizontalOptions="Center"
+                                                        HorizontalTextAlignment="Center"
+                                                        FontSize="15"
+                                                        ItemsSource="{Binding Houses}"
+                                                        ItemDisplayBinding="{Binding Address}"
+                                                        SelectedItem="{Binding SelectedHouse}" />
+                                                    <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                                         HeightRequest="12"
+                                                                         WidthRequest="12"
+                                                                         Rotation="90"
+                                                                         Margin="0,5,0,0"
+                                                                         VerticalOptions="Center"
+                                                                         Foreground="{x:DynamicResource MainColor}"
+                                                                         HorizontalOptions="EndAndExpand" />
+                                                </StackLayout>
+
+                                                <Label
+                                                    HeightRequest="1"
+                                                    BackgroundColor="{x:DynamicResource MainColor}"
+                                                    HorizontalOptions="FillAndExpand" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" Margin="5,0,5,0">
+                                            <StackLayout Orientation="Horizontal" IsVisible="False">
+                                                <Label Text="Документ на дом"
+                                                       TextColor="Black"
+                                                       VerticalOptions="Center"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="13" />
+                                                <CheckBox
+                                                    IsChecked="{Binding IsDocumentHouses}"
+                                                    x:Name="CheckBoxDocumentHouse"
+                                                    Color="{x:DynamicResource MainColor}" />
+
+                                            </StackLayout>
+                                            <StackLayout
+                                                Margin="0, 5, 5, 5"
+                                                Spacing="5"
+                                                Grid.ColumnSpan="2"
+                                                HorizontalOptions="FillAndExpand"
+                                                Orientation="Horizontal">
+                                                <Label
+                                                    TextColor="Black"
+                                                    Text="{x:Static xamarinJkh:AppResources.Premises}"
+                                                    HorizontalTextAlignment="Start"
+                                                    VerticalOptions="Start"
+                                                    HorizontalOptions="Start"
+                                                    FontSize="15"
+                                                    FontAttributes="Bold" />
+                                                <StackLayout Spacing="0"
+                                                             x:Name="LayoutPremises"
+                                                             IsEnabled="{Binding Path=IsChecked, Source={x:Reference CheckBoxDocumentHouse},Converter={converters:InverseBoolConverter}}"
+                                                             HorizontalOptions="FillAndExpand">
+                                                    <StackLayout
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Orientation="Horizontal">
+                                                        <xamarinJkh:BorderlessPicker Title=""
+                                                            TitleColor="{Binding Path=IsEnabled, Source={x:Reference LayoutPremises},Converter={converters:BoolToColorConverter}}"
+                                                            TextColor="{Binding Path=IsEnabled, Source={x:Reference LayoutPremises},Converter={converters:BoolToColorConverter}}"
+                                                            VerticalOptions="End"
+                                                            HorizontalOptions="Center"
+                                                            HorizontalTextAlignment="Center"
+                                                            FontSize="15"
+                                                            ItemsSource="{Binding Premises}"
+                                                            ItemDisplayBinding="{Binding DisplayText}"
+                                                            SelectedItem="{Binding SelectedPremises}" />
+                                                        <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                                             HeightRequest="12"
+                                                                             WidthRequest="12"
+                                                                             Rotation="90"
+                                                                             Margin="0,5,0,0"
+                                                                             VerticalOptions="Center"
+                                                                             Foreground="{Binding Path=IsEnabled, Source={x:Reference LayoutPremises},Converter={converters:BoolToColorConverter}}"
+                                                                             HorizontalOptions="EndAndExpand" />
+                                                    </StackLayout>
+
+                                                    <Label
+                                                        HeightRequest="1"
+                                                        BackgroundColor="{Binding Path=IsEnabled, Source={x:Reference LayoutPremises},Converter={converters:BoolToColorConverter}}"
+                                                        HorizontalOptions="FillAndExpand" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal"
+                                                     HorizontalOptions="FillAndExpand">
+                                            <Frame CornerRadius="15"
+                                                   x:Name="FrameFlat"
+                                                   BackgroundColor="White"
+                                                   HorizontalOptions="FillAndExpand"
+                                                   HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                                   BorderColor="{x:DynamicResource MainColor}"
+                                                   Margin="10, 10, 10, 0"
+                                                   Padding="10,10,10,10">
+                                                <Entry x:Name="EntryFloor"
+                                                       FontSize="15"
+                                                       VerticalOptions="End"
+                                                       HorizontalTextAlignment="Center"
+                                                       TextColor="Black"
+                                                       PlaceholderColor="#A2A2A2"
+                                                       Text="{Binding Floor}"
+                                                       Placeholder="{x:Static xamarinJkh:AppResources.Floor}"
+                                                       Keyboard="Numeric"
+                                                       HorizontalOptions="FillAndExpand">
+                                                    <Entry.Behaviors>
+                                                        <mask:MaskedBehavior
+                                                            Mask="{x:Static xamarinJkh:AppResources.FlatNumber}" />
+                                                    </Entry.Behaviors>
+                                                </Entry>
+                                            </Frame>
+                                            <Frame CornerRadius="15"
+                                                   x:Name="FrameEntrance"
+                                                   BackgroundColor="White"
+                                                   HorizontalOptions="FillAndExpand"
+                                                   HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                                   BorderColor="{x:DynamicResource MainColor}"
+                                                   Margin="10, 10, 10, 0"
+                                                   Padding="10,10,10,10">
+                                                <Entry x:Name="EntryEntrance"
+                                                       FontSize="15"
+                                                       VerticalOptions="End"
+                                                       HorizontalTextAlignment="Center"
+                                                       TextColor="Black"
+                                                       PlaceholderColor="#A2A2A2"
+                                                       Text="{Binding Intercom}"
+                                                       Placeholder="{x:Static xamarinJkh:AppResources.Intercom}"
+                                                       Keyboard="Numeric"
+                                                       HorizontalOptions="FillAndExpand">
+                                                    <Entry.Behaviors>
+                                                        <mask:MaskedBehavior
+                                                            Mask="Домофон № XXXXX" />
+                                                    </Entry.Behaviors>
+                                                </Entry>
+                                            </Frame>
+                                        </StackLayout>
+                                        <StackLayout x:Name="LayoutLS" Margin="5, 10, 5, 5">
+                                            <StackLayout
+                                                Spacing="5"
+                                                Grid.ColumnSpan="2"
+                                                HorizontalOptions="FillAndExpand"
+                                                Orientation="Horizontal">
+                                                <Label
+                                                    TextColor="Black"
+                                                    Text="{x:Static xamarinJkh:AppResources.Ident}"
+                                                    HorizontalTextAlignment="Start"
+                                                    VerticalOptions="Start"
+                                                    HorizontalOptions="Start"
+                                                    FontSize="15"
+                                                    FontAttributes="Bold" />
+                                                <StackLayout Spacing="0" x:Name="StackLayoutIdent"
+                                                             HorizontalOptions="FillAndExpand">
+                                                    <StackLayout
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Orientation="Horizontal">
+                                                        <xamarinJkh:BorderlessPicker Title=""
+                                                            TitleColor="{x:DynamicResource MainColor}"
+                                                            TextColor="{x:DynamicResource MainColor}"
+                                                            VerticalOptions="End"
+                                                            HorizontalOptions="Center"
+                                                            HorizontalTextAlignment="Center"
+                                                            FontSize="15"
+                                                            ItemsSource="{Binding SelectedPremises.Accounts}"
+                                                            ItemDisplayBinding="{Binding DisplayText}"
+                                                            SelectedItem="{Binding SelectedIdent}" />
+                                                        <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                                             HeightRequest="12"
+                                                                             WidthRequest="12"
+                                                                             Rotation="90"
+                                                                             Margin="0,5,0,0"
+                                                                             VerticalOptions="Center"
+                                                                             Foreground="{x:DynamicResource MainColor}"
+                                                                             HorizontalOptions="EndAndExpand" />
+                                                    </StackLayout>
+
+                                                    <Label
+                                                        HeightRequest="1"
+                                                        BackgroundColor="{x:DynamicResource MainColor}"
+                                                        HorizontalOptions="FillAndExpand" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                <Label
+                                                    TextColor="Black"
+                                                    Text=""
+                                                    HorizontalTextAlignment="Start"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    HorizontalOptions="Start"
+                                                    FontSize="15"
+                                                    FontAttributes="Bold">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{x:Static xamarinJkh:AppResources.FIO}" />
+                                                            <Span Text=": " />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <StackLayout HorizontalOptions="FillAndExpand">
+                                                    <Entry
+                                                        FontSize="15"
+                                                        VerticalOptions="End"
+                                                        HorizontalTextAlignment="Start"
+                                                        TextColor="Black"
+                                                        Text="{Binding FIO}"
+                                                        PlaceholderColor="#A2A2A2"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Placeholder=""
+                                                        Keyboard="Text" />
+                                                    <Label
+                                                        HeightRequest="1"
+                                                        Margin="0, 0, 0, 5"
+                                                        BackgroundColor="{x:DynamicResource MainColor}"
+                                                        HorizontalOptions="FillAndExpand" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <StackLayout
+                                                IsEnabled="{Binding Path=IsEnabled, Source={x:Reference LayoutPremises}}"
+                                                HorizontalOptions="FillAndExpand"
+                                                Orientation="Horizontal">
+                                                <Label
+                                                    TextColor="Black"
+                                                    Text=""
+                                                    HorizontalTextAlignment="Start"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    HorizontalOptions="Start"
+                                                    FontSize="15"
+                                                    FontAttributes="Bold">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{x:Static xamarinJkh:AppResources.Phone}" />
+                                                            <Span Text=": " />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <StackLayout HorizontalOptions="FillAndExpand">
+                                                    <Entry x:Name="EntryPhone"
+                                                           FontSize="15"
+                                                           VerticalOptions="End"
+                                                           HorizontalTextAlignment="Start"
+                                                           TextColor="Black"
+                                                           PlaceholderColor="Black"
+                                                           Text="{Binding Phone}"
+                                                           Placeholder=""
+                                                           Keyboard="Numeric"
+                                                           HorizontalOptions="FillAndExpand">
+
+                                                        <Entry.Behaviors>
+                                                            <mask:MaskedBehavior Mask="+7 (XXX) XXX-XXXX" />
+                                                        </Entry.Behaviors>
+                                                    </Entry>
+                                                    <Label
+                                                        HeightRequest="1"
+                                                        Margin="0, 0, 0, 15"
+                                                        BackgroundColor="{Binding Path=IsEnabled, Source={x:Reference LayoutPremises},Converter={converters:BoolToColorConverter}}"
+                                                        HorizontalOptions="FillAndExpand" />
+                                                </StackLayout>
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                        <StackLayout Margin="5, 0, 5, 5"
+                                                     x:Name="Source">
+                                            <StackLayout
+                                                Spacing="5"
+                                                Grid.ColumnSpan="2"
+                                                HorizontalOptions="FillAndExpand"
+                                                Orientation="Horizontal">
+                                                <Label
+                                                    TextColor="Black"
+                                                    Text="{x:Static xamarinJkh:AppResources.DocumentSource}"
+                                                    HorizontalTextAlignment="Start"
+                                                    VerticalOptions="Start"
+                                                    HorizontalOptions="Start"
+                                                    FontSize="15"
+                                                    FontAttributes="Bold" />
+                                                <StackLayout Spacing="0" x:Name="StackLayoutSource"
+                                                             HorizontalOptions="FillAndExpand">
+                                                    <StackLayout
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Orientation="Horizontal">
+                                                        <xamarinJkh:BorderlessPicker Title=""
+                                                            TitleColor="{x:DynamicResource MainColor}"
+                                                            TextColor="{x:DynamicResource MainColor}"
+                                                            VerticalOptions="End"
+                                                            HorizontalOptions="Center"
+                                                            HorizontalTextAlignment="Center"
+                                                            FontSize="15"
+                                                            ItemsSource="{Binding SourceTypes}"
+                                                            ItemDisplayBinding="{Binding Name}"
+                                                            SelectedItem="{Binding SelectedSourceType}" />
+                                                        <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                                             HeightRequest="12"
+                                                                             WidthRequest="12"
+                                                                             Rotation="90"
+                                                                             Margin="0,5,0,0"
+                                                                             VerticalOptions="Center"
+                                                                             Foreground="{x:DynamicResource MainColor}"
+                                                                             HorizontalOptions="EndAndExpand" />
+                                                    </StackLayout>
+
+                                                    <Label
+                                                        HeightRequest="1"
+                                                        BackgroundColor="{x:DynamicResource MainColor}"
+                                                        HorizontalOptions="FillAndExpand" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="False" Orientation="Horizontal">
+                                                <Label
+                                                    TextColor="Black"
+                                                    Text="Дата:"
+                                                    HorizontalTextAlignment="Start"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Start"
+                                                    FontSize="15"
+                                                    FontAttributes="Bold" />
+                                                <StackLayout Spacing="0" VerticalOptions="Center"
+                                                             x:Name="StackLayoutDate2">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <xamarinJkh:BorderlessDatePicker
+                                                            x:Name="DatePicker2"
+                                                            Margin="0,0,0,0"
+                                                            Format="dd.MM.yyyy"
+                                                            Date="{Binding DateDocument, Mode=TwoWay}"
+                                                            FontSize="16"
+                                                            HorizontalOptions="Center"
+                                                            TextColor="{x:StaticResource MainColor}" />
+                                                        <forms:SvgCachedImage
+                                                            Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                                            HeightRequest="12"
+                                                            Rotation="90"
+                                                            Margin="0,5,0,0"
+                                                            HorizontalOptions="Start"
+                                                            ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}"
+                                                            VerticalOptions="Center" />
+                                                    </StackLayout>
+                                                    <Label
+                                                        HeightRequest="1"
+                                                        BackgroundColor="{x:StaticResource MainColor}"
+                                                        HorizontalOptions="Fill" />
+                                                </StackLayout>
+                                                <Label
+                                                    TextColor="Black"
+                                                    Text="Время:"
+                                                    HorizontalTextAlignment="Start"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Start"
+                                                    Margin="5,0,0,0"
+                                                    FontSize="15"
+                                                    FontAttributes="Bold" />
+                                                <TimePicker x:Name="timePickerStart"
+                                                            TextColor="{x:StaticResource MainColor}"
+                                                            FontSize="15"
+                                                            Time="{Binding TimeDocument}"
+                                                            VerticalOptions="Start"
+                                                            HorizontalOptions="Start" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Margin="5, 0, 5, 5"
+                                                     x:Name="Executor">
+                                            <StackLayout
+                                                Spacing="5"
+                                                Grid.ColumnSpan="2"
+                                                HorizontalOptions="FillAndExpand"
+                                                Orientation="Horizontal">
+                                                <Label
+                                                    TextColor="Black"
+                                                    Text="Исполнитель:"
+                                                    HorizontalTextAlignment="Start"
+                                                    VerticalOptions="Start"
+                                                    HorizontalOptions="Start"
+                                                    FontSize="15"
+                                                    FontAttributes="Bold">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{x:Static xamarinJkh:AppResources.Executor}" />
+                                                            <Span Text=": " />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <StackLayout Spacing="0" x:Name="StackLayoutExecutor"
+                                                             HorizontalOptions="FillAndExpand">
+                                                    <StackLayout
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Orientation="Horizontal">
+                                                        <xamarinJkh:BorderlessPicker Title=""
+                                                            TitleColor="{x:DynamicResource MainColor}"
+                                                            TextColor="{x:DynamicResource MainColor}"
+                                                            VerticalOptions="End"
+                                                            HorizontalOptions="Center"
+                                                            HorizontalTextAlignment="Center"
+                                                            FontSize="15"
+                                                            ItemsSource="{Binding Dispatchers}"
+                                                            ItemDisplayBinding="{Binding Name}"
+                                                            SelectedItem="{Binding SelectedDispatcher}" />
+                                                        <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                                             HeightRequest="12"
+                                                                             WidthRequest="12"
+                                                                             Rotation="90"
+                                                                             Margin="0,5,0,0"
+                                                                             VerticalOptions="Center"
+                                                                             Foreground="{x:DynamicResource MainColor}"
+                                                                             HorizontalOptions="EndAndExpand" />
+                                                    </StackLayout>
+
+                                                    <Label
+                                                        HeightRequest="1"
+                                                        BackgroundColor="{x:DynamicResource MainColor}"
+                                                        HorizontalOptions="FillAndExpand" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label
+                                                    TextColor="Black"
+                                                    Text="{x:Static xamarinJkh:AppResources.Term}"
+                                                    HorizontalTextAlignment="Start"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Start"
+                                                    FontSize="15"
+                                                    FontAttributes="Bold" />
+                                                <StackLayout Spacing="0" VerticalOptions="Center">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <xamarinJkh:BorderlessDatePicker
+                                                            Margin="0,0,0,0"
+                                                            Format="dd.MM.yyyy"
+                                                            Date="{Binding DateTerm, Mode=TwoWay}"
+                                                            FontSize="16"
+                                                            HorizontalOptions="Center"
+                                                            TextColor="{x:StaticResource MainColor}" />
+                                                        <forms:SvgCachedImage
+                                                            Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                                            HeightRequest="12"
+                                                            Rotation="90"
+                                                            Margin="0,5,0,0"
+                                                            HorizontalOptions="Start"
+                                                            ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}"
+                                                            VerticalOptions="Center" />
+                                                    </StackLayout>
+                                                    <Label
+                                                        HeightRequest="1"
+                                                        BackgroundColor="{x:StaticResource MainColor}"
+                                                        HorizontalOptions="Fill" />
+                                                </StackLayout>
+                                                <TimePicker
+                                                    TextColor="{x:StaticResource MainColor}"
+                                                    FontSize="15"
+                                                    Time="{Binding TimeTerm}"
+                                                    VerticalOptions="Start"
+                                                    HorizontalOptions="Start" />
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                        <StackLayout
+                                            Orientation="Horizontal"
+                                            VerticalOptions="Center"
+                                            Margin="5, 0, 5, 5"
+                                            x:Name="StackLayoutAddFile"
+                                            HorizontalOptions="StartAndExpand">
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding OpenFileDialogCommand}" />
+                                            </StackLayout.GestureRecognizers>
+                                            <xamarinJkh:IconView Source="ic_add_file"
+                                                                 HeightRequest="20"
+                                                                 WidthRequest="20"
+                                                                 Foreground="{x:DynamicResource MainColor}"
+                                                                 HorizontalOptions="Center" />
+                                            <Label
+                                                Text="Прикрепить файлы"
+                                                FontSize="13"
+                                                TextDecorations="Underline"
+                                                FontAttributes="Bold"
+                                                TextColor="{x:DynamicResource MainColor}"
+                                                HorizontalOptions="End" >
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static xamarinJkh:AppResources.AttachFiles}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                        <Button x:Name="BtnMove"
+                                                Text="{x:Static xamarinJkh:AppResources.Create}"
+                                                TextColor="White"
+                                                IsEnabled="{Binding IsEnabled}"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="EndAndExpand"
+                                                Command="{Binding AddDocumentCommand}"
+                                                Padding="15,0"
+                                                BorderWidth="1"
+                                                CornerRadius="15"
+                                                FontAttributes="Bold"
+                                                BackgroundColor="{Binding IsEnabled, Converter={converters:BoolToColorConverter}}" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </ScrollView>
+                        <Frame IsVisible="{Binding IsBusy}" CornerRadius="30" HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand">
+                            <Frame.BackgroundColor>
+                                <Color>
+                                    <x:Arguments>
+                                        <x:Double>0</x:Double>
+                                        <x:Double>0</x:Double>
+                                        <x:Double>0</x:Double>
+                                        <x:Double>0.5</x:Double>
+                                    </x:Arguments>
+                                </Color>
+                            </Frame.BackgroundColor>
+                            <StackLayout Padding="10,0">
+                                <ActivityIndicator x:Name="progress"
+                                                   IsRunning="true"
+                                                   HeightRequest="40"
+                                                   VerticalOptions="CenterAndExpand"
+                                                   HorizontalOptions="CenterAndExpand"
+                                                   Color="{x:DynamicResource MainColor}" />
+                                <Label Text="{x:Static xamarinJkh:AppResources.AddDocument}"
+                                       VerticalOptions="CenterAndExpand"
+                                       TextColor="White"
+                                       HorizontalOptions="CenterAndExpand" />
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
