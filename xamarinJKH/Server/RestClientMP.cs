@@ -12,6 +12,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using xamarinJKH.Server.DataModel;
 using xamarinJKH.Utils;
+using System.Linq;
 
 namespace xamarinJKH.Server
 {
@@ -20,7 +21,6 @@ namespace xamarinJKH.Server
         // public const string SERVER_ADDR = "https://api.sm-center.ru/test_erc_udm"; // ОСС
          // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
         public const string SERVER_ADDR = "https://api.sm-center.ru/water"; // Тихая гавань water/ water2 - тихая гавань - 2 
-        // public const string SERVER_ADDR = "http://alphaapi.uk-gkh.org/water"; // Тихая гавань water/ water2 - тихая гавань - 2 
          // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
         // public const string SERVER_ADDR = "https://api.sm-center.ru/kapitall_all"; // Основа
         //public const string SERVER_ADDR = "https://api.sm-center.ru/newjkh"; // Еще одна тестовая база
@@ -875,9 +875,27 @@ namespace xamarinJKH.Server
                 };
             }
             Realm _realm = Realm.GetInstance();
-            _realm.Write(() => _realm.RemoveAll());
+            
+           await _realm.Write(async () => { 
+                _realm.RemoveAll();
+                if (_realm.All<RequestInfoDao>().Any())
+                {
+                    while (_realm.All<RequestInfoDao>().Any())
+                        await Task.Delay(50);
+                }                
+                _realm.Add(response.Data.Requests); });
+
             // List<RequestInfoDao> requestInfoDaos = response.Data.Requests.ConvertAll(new Converter<RequestInfo, RequestInfoDao>(RequestInfo.InfoToDao));
-            _realm.Write(() => _realm.Add(response.Data.Requests));
+            
+            //_realm.Write(() => _realm.RemoveAll());            
+
+            //if (_realm.All<RequestInfoDao>().Any())
+            //{
+            //    while (_realm.All<RequestInfoDao>().Any())
+            //        await Task.Delay(50);
+            //}
+
+            //_realm.Write(() => _realm.Add(response.Data.Requests));
             return response.Data;
         }
         public async Task<List<RequestInfo>> Search (List<CustomSearchCriteria> Criterias)
@@ -2997,6 +3015,7 @@ namespace xamarinJKH.Server
             return response.Data;
         }
 
+        static bool commissionLoading = false;
         /// <summary>
         /// Получить сумму комиссии
         /// </summary>
@@ -3004,25 +3023,39 @@ namespace xamarinJKH.Server
         /// <returns></returns>
         public async Task<ComissionModel> GetSumWithComission(string sum, string accountID)
         {
-            RestClient restClientMp = new RestClient(SERVER_ADDR);
-            RestRequest restRequest = new RestRequest(GET_SUM_COMISSION, Method.GET);
-            restRequest.RequestFormat = DataFormat.Json;
-            restRequest.AddHeader("client", Device.RuntimePlatform);
-            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
-            restRequest.AddHeader("acx", Settings.Person.acx);
-            restRequest.AddParameter("sum", sum.Replace(",", "."));
-            restRequest.AddParameter("accountID", accountID);
-            var response = await restClientMp.ExecuteTaskAsync<ComissionModel>(restRequest);
-            // Проверяем статус
-            if (response.StatusCode != HttpStatusCode.OK)
+            try
             {
-                return new ComissionModel()
-                {
-                    Error = $"Ошибка {response.StatusDescription}"
-                };
-            }
+                if (commissionLoading)
+                    return null;
+                commissionLoading = true;
 
-            return response.Data;
+                RestClient restClientMp = new RestClient(SERVER_ADDR);
+                RestRequest restRequest = new RestRequest(GET_SUM_COMISSION, Method.GET);
+                restRequest.RequestFormat = DataFormat.Json;
+                restRequest.AddHeader("client", Device.RuntimePlatform);
+                restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+                restRequest.AddHeader("acx", Settings.Person.acx);
+                restRequest.AddParameter("sum", sum.Replace(",", "."));
+                restRequest.AddParameter("accountID", accountID);
+                var response = await restClientMp.ExecuteTaskAsync<ComissionModel>(restRequest);
+                // Проверяем статус
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    return new ComissionModel()
+                    {
+                        Error = $"Ошибка {response.StatusDescription}"
+                    };
+                }
+
+                commissionLoading = false;
+
+                return response.Data;
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            
         }
 
         public async Task<Bonus> GetAccountBonusBalance(int id)
