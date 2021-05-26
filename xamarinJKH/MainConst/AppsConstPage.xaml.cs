@@ -652,19 +652,27 @@ namespace xamarinJKH.MainConst
 
         private async void startNewApp(object sender, EventArgs e)
         {
-            var action = await Application.Current.MainPage.DisplayActionSheet(AppResources.AddApp,
-                AppResources.Cancel, null,
-                AppResources.NewApplication,
-                AppResources.NewDocument);
-            if (action.Equals(AppResources.NewApplication))
+            if (Device.RuntimePlatform == Device.Android)
             {
-                if (Navigation.NavigationStack.FirstOrDefault(x => x is NewAppConstPage) == null)
-                    await Navigation.PushAsync(new NewAppConstPage(this));
+                var action = await Application.Current.MainPage.DisplayActionSheet(AppResources.AddApp,
+                    AppResources.Cancel, null,
+                    AppResources.NewApplication,
+                    AppResources.NewDocument);
+                if (action.Equals(AppResources.NewApplication))
+                {
+                    if (Navigation.NavigationStack.FirstOrDefault(x => x is NewAppConstPage) == null)
+                        await Navigation.PushAsync(new NewAppConstPage(this));
+                }
+                else
+                {
+                    if (Navigation.NavigationStack.FirstOrDefault(x => x is NewDocumentConstPage) == null)
+                        await Navigation.PushAsync(new NewDocumentConstPage());
+                }
             }
             else
             {
-                if (Navigation.NavigationStack.FirstOrDefault(x => x is NewDocumentConstPage) == null)
-                    await Navigation.PushAsync(new NewDocumentConstPage());
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is NewAppConstPage) == null)
+                    await Navigation.PushAsync(new NewAppConstPage(this));
             }
         }
 
