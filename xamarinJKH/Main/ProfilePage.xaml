@@ -408,7 +408,7 @@
                                         x:Name="LabelNotification"
                                         Margin="5, 0, 5, 0"
                                         IsVisible="true"
-                                        Text="На вашем устройстве для данного приложения отключен прием пуш уведомлений"
+                                        Text="{x:Static xamarinJkh:AppResources.PushDiasbleInfoMessage}"
                                         TextColor="Red"
                                         FontSize="16"
                                            />
