@@ -314,11 +314,11 @@ namespace xamarinJKH.MainConst
 
         private async Task HideBotTimer()
         {
-            Device.BeginInvokeOnMainThread(() =>
+            Device.BeginInvokeOnMainThread(async () =>
             {
                 additionalList.Scrolled -= OnCollectionViewScrolled;
             StackLayoutHide.IsVisible = !StackLayoutHide.IsVisible;
-            //await ImageHide.RotateTo(ImageHide.Rotation + 180 * rotation2);
+            await ImageHide.RotateTo(ImageHide.Rotation + 180 * rotation2);
             rotation2 *= -1;
             additionalList.Scrolled += OnCollectionViewScrolled;
                 //isNeedShow = StackLayoutHide.IsVisible;
