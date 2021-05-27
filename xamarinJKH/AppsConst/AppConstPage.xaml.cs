@@ -1142,14 +1142,29 @@ namespace xamarinJKH.AppsConst
                 Settings.DateUniq = "";
 
                 if (request.Messages != null)
-                    if (request.Messages.Count() > 0)
-                        foreach (var message in request.Messages)
                 {
-                    messages.Add(message);
-                    Device.BeginInvokeOnMainThread(() =>
+                    if (request.Messages.Any())
                     {
-                        addAppMessage(message, messages.Count > 1 ? messages[messages.Count - 2].AuthorName : null);
-                    });
+                        if (request.Calls.Any())
+                        {
+                            List<MessageCall> messageCalls = request.Calls.ConvertAll(new Converter<RequestCall,MessageCall>(MessageCall.CallToMessage));
+                            foreach (var call in messageCalls)
+                            {
+                                request.Messages.Add(call);
+                            }
+
+                            request.Messages = new List<RequestMessage>(request.Messages.OrderBy(x => x.Added));
+                        }
+                        foreach (var message in request.Messages)
+                        {
+                            messages.Add(message);
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                addAppMessage(message,
+                                    messages.Count > 1 ? messages[messages.Count - 2].AuthorName : null);
+                            });
+                        }
+                    }
                 }
 
                 LabelNumber.Text = "№ " + request.RequestNumber;

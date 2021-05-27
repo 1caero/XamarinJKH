@@ -199,6 +199,7 @@ namespace xamarinJKH.Server.RequestModel
         public string Phone { get; set; }
         public string Address { get; set; }
 
+        public List<RequestCall> Calls { get; set; }
         public string HalfAdress
         {
             get => !string.IsNullOrWhiteSpace(Address) && Address.Length > 50 ? Settings.GetHalfAddress(Address) : Address;
@@ -257,6 +258,31 @@ namespace xamarinJKH.Server.RequestModel
         }
     }
 
+    public class MessageCall : RequestMessage
+    {
+        public double Duration { get; set; }
+        public string Direction { get; set; }
+        public string Phone { get; set; }
+        public string Link => $"{RestClientMP.SERVER_ADDR}/SupportService/DownloadCall/{ID}?acx={Uri.EscapeDataString(Settings.Person.acx ?? string.Empty)}";
+        public static MessageCall CallToMessage(RequestCall call)
+        {
+            return new MessageCall
+            {
+                ID = call.ID,
+                Added = call.Added,
+                AuthorName = call.AuthorName,
+                IsSelf = call.IsSelf,
+                Duration = call.Duration,
+                Direction = call.Direction,
+                Phone = call.Phone,
+                FileID = -1,
+                Text = call.Direction == "IN" ? "Входящий звонок с номера " + call.Phone : "Исходящий звонок на номер " + call.Phone
+            };
+        }
+        
+        
+    }
+    
     public class RequestFile
     {
         public int ID { get; set; }

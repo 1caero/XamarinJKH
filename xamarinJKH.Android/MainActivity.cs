@@ -10,6 +10,7 @@ using Android.Speech;
 using Android.Support.V4.App;
 using Android.Util;
 using FFImageLoading.Forms.Platform;
+using MediaManager;
 using Messier16.Forms.Android.Controls;
 using PanCardView.Droid;
 using Plugin.CurrentActivity;
@@ -69,7 +70,7 @@ namespace xamarinJKH.Droid
             var width = Resources.DisplayMetrics.WidthPixels;
             var height = Resources.DisplayMetrics.HeightPixels;
             var density = Resources.DisplayMetrics.Density;
-
+            CrossMediaManager.Current.Init();
             App.ScreenWidth2 = (width - 0.5f) / density;
             App.ScreenHeight2 = (height - 0.5f) / density;
             LoadApplication(new App());

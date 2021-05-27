@@ -14,6 +14,7 @@ using FFImageLoading.Svg.Forms;
 using Microsoft.AppCenter.Analytics;
 //using Xamarin.Forms.Markup;
 using xamarinJKH.Apps;
+using xamarinJKH.CustomControls;
 
 namespace xamarinJKH.AppsConst
 {
@@ -192,9 +193,22 @@ namespace xamarinJKH.AppsConst
                 };
                 imageA.GestureRecognizers.Add(tgr);
             }
-
+            MessageCallControl messageCallControl = null ;
 
             stackLayoutContentA.Children.Add(imageA);
+            if (message is MessageCall)
+            {
+                messageCallControl = new MessageCallControl
+                {
+                    Call = (MessageCall) message,
+                    Color = message.IsHidden ? (Color) Application.Current.Resources["MainColor"] : Color.White
+                };
+                stackLayoutContentA.Children.Add(new StackLayout
+                {
+                    Children = {messageCallControl}
+                });
+                newDate = message.Added;
+            }
             stackLayoutContentA.Children.Add(indicator);
 
 
@@ -261,6 +275,8 @@ namespace xamarinJKH.AppsConst
                         frameTextA.BackgroundColor = Color.FromHex("#EBEBEB");
                         LabelTextA.TextColor = Color.Black;
                         LabeltimeA.Margin = new Thickness(0, -5, 5, 0);
+                        if (messageCallControl != null)
+                            messageCallControl.Color = (Color) Application.Current.Resources["MainColor"];
                         HiddenMess.IsVisible = false;
                     }
                     else
@@ -507,6 +523,18 @@ namespace xamarinJKH.AppsConst
 
             stackLayoutContent.Children.Add(LabelText);
             stackLayoutContent.Children.Add(image);
+            if (message is MessageCall)
+            {
+                stackLayoutContent.Children.Add(new StackLayout
+                {
+                    Children = { new MessageCallControl
+                    {
+                        Call = (MessageCall) message,
+                        Color = message.IsHidden ?  (Color) Application.Current.Resources["MainColor"] : Color.White
+                    }}
+                });
+                newDate = message.Added;
+            }
             frameText.Content = stackLayoutContent;
 
             StackLayout stackLayoutIconB = new StackLayout();

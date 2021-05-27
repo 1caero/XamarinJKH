@@ -4,6 +4,7 @@ using FFImageLoading.Forms.Platform;
 using Firebase.Crashlytics;
 using Foundation;
 using LabelHtml.Forms.Plugin.iOS;
+using MediaManager;
 using Messier16.Forms.iOS.Controls;
 using PanCardView.iOS;
 using Plugin.FirebasePushNotification;
@@ -60,7 +61,7 @@ namespace xamarinJKH.iOS
             Popup.Init();
             CachedImageRenderer.Init();
 
-            //CrossMediaManager.Current.Init();
+            CrossMediaManager.Current.Init();
             
             Platform.Init();
 

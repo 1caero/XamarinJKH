@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Frame xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+       Padding="10"
+       CornerRadius="0"
+       HorizontalOptions="FillAndExpand"
+       BackgroundColor="Transparent"
+       x:Class="xamarinJKH.CustomControls.MessageCallControl">
+    <Frame.Content>
+        <StackLayout>
+
+            <StackLayout  HorizontalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Fill" Spacing="0">
+                    <Label Text="{Binding PlayIcon}" FontSize="40" VerticalOptions="StartAndExpand"
+                           Margin="0, 0, 5, 0"
+                           VerticalTextAlignment="Start" TextColor="{Binding Color}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PlayPauseCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                        <Slider MinimumTrackColor="{Binding Color}" MaximumTrackColor="#C0C8D4"
+                                ThumbColor="{Binding Color}"
+                                ValueChanged="Slider_OnValueChanged"
+                                Value="{Binding Position.TotalSeconds, Mode=TwoWay}"
+                                Maximum="{Binding Maximum}" HorizontalOptions="FillAndExpand" />
+                        <Grid HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding Position, StringFormat='{0:mm\\:ss}'}" FontSize="12"
+                                   TextColor="{Binding Color}"
+                                   HorizontalOptions="Start" VerticalOptions="Center" />
+                            <Label Text="{Binding Duration, StringFormat='{0:mm\\:ss}'}" FontSize="12"
+                                   TextColor="{Binding Color}"
+                                   HorizontalOptions="End" VerticalOptions="Center" />
+                        </Grid>
+                        
+                    </StackLayout>
+                    <forms:SvgCachedImage x:Name="IconTech"
+                                          Source="resource://xamarinJKH.Resources.ic_file_download.svg"
+                                          HeightRequest="30"
+                                          ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#FFFFFF'}"
+                                          Margin="10"
+                                          HorizontalOptions="Start"
+                                          VerticalOptions="Center" >
+                        <forms:SvgCachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DownLoadCommand}"></TapGestureRecognizer>
+                        </forms:SvgCachedImage.GestureRecognizers>
+                    </forms:SvgCachedImage>
+                </StackLayout>
+
+            </StackLayout>
+        </StackLayout>
+    </Frame.Content>
+</Frame>
