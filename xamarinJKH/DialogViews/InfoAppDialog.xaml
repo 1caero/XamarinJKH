@@ -405,7 +405,7 @@
                 </StackLayout>
                 <svg:SvgCachedImage x:Name="BtnCopy"
                         Source="resource://xamarinJKH.Resources.ic_copy.svg"
-                        ReplaceStringMap="{Binding .,Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#000000'}"
+                        ReplaceStringMap="{Binding .,Converter={x:StaticResource SvgColor}}"
                         WidthRequest="25"
                         HeightRequest="25" 
                         HorizontalOptions="Start"
