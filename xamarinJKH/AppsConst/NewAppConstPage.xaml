@@ -6,6 +6,7 @@
              xmlns:mask="clr-namespace:xamarinJKH.Mask;assembly=xamarinJKH"
              xmlns:apps="clr-namespace:xamarinJKH.AppsConst;assembly=xamarinJKH"
              xmlns:converters="clr-namespace:xamarinJKH.Converters"
+             xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="{AppThemeBinding Light=White, Dark=#F3F3F3}"
              x:Class="xamarinJKH.AppsConst.NewAppConstPage">
     <ContentPage.Resources>
@@ -241,7 +242,40 @@
                                         </Entry.Behaviors>
                                     </Entry>
                                 </StackLayout>
-
+                                <StackLayout Margin="10,0,0,0" Orientation="Horizontal" HorizontalOptions="Center">
+                                    <Label
+                                        TextColor="Black"
+                                        Text="{x:Static xamarinJkh:AppResources.Term}"
+                                        HorizontalTextAlignment="Start"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Start"
+                                        FontSize="15"
+                                        FontAttributes="Bold" />
+                                    <StackLayout Spacing="0" VerticalOptions="Center">
+                                        <StackLayout Orientation="Horizontal">
+                                            <xamarinJkh:BorderlessDatePicker
+                                                Margin="0,0,0,0"
+                                                Format="dd.MM.yyyy"
+                                                Date="{Binding DateTerm, Mode=TwoWay}"
+                                                MinimumDate="{Binding MinimemDate}"
+                                                FontSize="16"
+                                                HorizontalOptions="Center"
+                                                TextColor="{x:StaticResource MainColor}" />
+                                            <forms:SvgCachedImage
+                                                Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                                HeightRequest="12"
+                                                Rotation="90"
+                                                Margin="0,5,0,0"
+                                                HorizontalOptions="Start"
+                                                ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}"
+                                                VerticalOptions="Center" />
+                                        </StackLayout>
+                                        <Label
+                                            HeightRequest="1"
+                                            BackgroundColor="{x:StaticResource MainColor}"
+                                            HorizontalOptions="Fill" />
+                                    </StackLayout>
+                                </StackLayout>
                                 <StackLayout
                                     Margin="5, 5, 5, 5"
                                     Spacing="0"
@@ -331,8 +365,8 @@
                                     </StackLayout>
                                 </StackLayout>
                                 <StackLayout>
-                                    <StackLayout  HorizontalOptions="StartAndExpand"
-                                                  Orientation="Horizontal">
+                                    <StackLayout HorizontalOptions="StartAndExpand"
+                                                 Orientation="Horizontal">
                                         <Switch
                                             OnColor="{Binding hex}"
                                             IsToggled="False"
@@ -345,8 +379,8 @@
                                                    TextColor="Black"
                                                    FontAttributes="Bold"
                                                    VerticalOptions="CenterAndExpand"
-                                                   HorizontalOptions="StartAndExpand"/>
-                                               
+                                                   HorizontalOptions="StartAndExpand" />
+
                                             <Label Text="Нажмите для выбора"
                                                    x:Name="LabelSwitchRead"
                                                    FontSize="16"
@@ -356,7 +390,7 @@
                                                    HorizontalOptions="StartAndExpand" />
                                         </StackLayout>
                                     </StackLayout>
-                                    
+
                                 </StackLayout>
                                 <Frame CornerRadius="15"
                                        BackgroundColor="White"

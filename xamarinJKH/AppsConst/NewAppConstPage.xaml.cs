@@ -535,6 +535,25 @@ namespace xamarinJKH.AppsConst
                 CreateTypes.Add(new NamedValue { Name = "Квартире" });
             }
 
+            #region DateTerm
+
+            private DateTime _dateTerm = DateTime.Now.AddDays(1);
+
+            public DateTime DateTerm
+            {
+                get { return _dateTerm; }
+                set
+                {
+                    _dateTerm = value;
+                    OnPropertyChanged("DateTerm");
+                }
+            }
+
+            #endregion
+            
+            public DateTime MinimemDate => DateTime.Now;
+            
+            
             bool _ident;
             public bool Ident
             {
@@ -623,7 +642,7 @@ namespace xamarinJKH.AppsConst
                         .Replace("(", "")
                         .Replace(")", "")
                         .Replace("-", "") : null;;
-                    IDResult result = await _server.newAppConst(null, typeId, text, phone, "", this.District, this.House, this.Flat, this.Street, SubTypeID);
+                    IDResult result = await _server.newAppConst(null, typeId, text, phone, "", this.District, this.House, this.Flat, this.Street, SubTypeID, DesiredTime: $"{_model.DateTerm:yyyy-MM-dd}");
                     await _server.SetReadedFlag(result.ID, true);
 
                     if (result.Error == null)
@@ -682,7 +701,8 @@ namespace xamarinJKH.AppsConst
                         .Replace(")", "")
                         .Replace("-", "") : null;;
                     string typeId = Convert.ToInt32(Settings.TypeApp[PickerType.SelectedIndex].ID).ToString();
-                    IDResult result = await _server.newAppConst(ident, typeId, text, phone);
+                    IDResult result = await _server.newAppConst(ident, typeId, text, phone,
+                        DesiredTime: $"{_model.DateTerm:yyyy-MM-dd}");
                     await _server.SetReadedFlag(result.ID, true);
 
                     if (result.Error == null)
