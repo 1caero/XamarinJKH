@@ -316,6 +316,7 @@ namespace xamarinJKH.Main
             }
             FrameTop.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
             FrameSettings.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
+            PushEnable.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
             
         }
 

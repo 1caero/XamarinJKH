@@ -282,6 +282,7 @@ namespace xamarinJKH.MainConst
             SetAdminName();
             FrameTop.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
             FrameSettings.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
+            PushEnable.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
             //if (DeviceInfo.Platform == DevicePlatform.Android)
             //{
             PushEnable.IsVisible = !DependencyService.Get<ISettingsService>().IsEnabledNotification();
