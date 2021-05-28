@@ -336,19 +336,7 @@ namespace xamarinJKH.MainConst
 
             IsVisibleFunction();
         }
-
-        protected override bool OnBackButtonPressed()
-        {
-            if (PopupNavigation.Instance.PopupStack.Count > 0)
-            {
-                PopupNavigation.Instance.PopAllAsync();
-                return true;
-            }
-            else
-            {
-                return base.OnBackButtonPressed();
-            }
-        }
+        
 
         private void CheckApp(string args)
         {

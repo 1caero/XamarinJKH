@@ -194,6 +194,20 @@ namespace xamarinJKH.MainConst
             BindingContext = this;
             Settings.ChechEnabledNotification(this);
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            if (PopupNavigation.Instance.PopupStack.Count > 0)
+            {
+                PopupNavigation.Instance.PopAllAsync();
+                return true;
+            }
+            else
+            {
+                return base.OnBackButtonPressed();
+            }
+        }
+
         void StartUpdateToken()
         {
             Device.StartTimer(TimeSpan.FromMinutes(5), OnTimerTick);
