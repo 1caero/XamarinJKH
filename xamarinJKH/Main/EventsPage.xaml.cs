@@ -363,7 +363,7 @@ namespace xamarinJKH.Main
 
         public int PollsCount
         {
-            get => pollsCount;
+            get => Settings.QuestVisible ? pollsCount : 0;
             set
             {
                 pollsCount = value;
