@@ -1020,12 +1020,20 @@ _appModel = new AddAppModel()
                 Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorNoInternet, "OK"));
                 return;
             }
-            foreach (var each in files)
+            if (Byteses != null)
             {
-                CommonResult commonResult = await _server.AddFileApps(id, each.GetFileName, Byteses[i],
-                    each.FilePath);
-                i++;
+                foreach (var each in files)
+                {
+                    if (i >= 0 && Byteses.Count > i)
+                    {
+                        CommonResult commonResult = await _server.AddFileApps(id, each.GetFileName, Byteses[i],
+                            each.FilePath);
+                    }
+
+                    i++;
+                }
             }
+
         }
 
         void SetPassApp()
