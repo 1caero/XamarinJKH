@@ -2033,4 +2033,13 @@
   <data name="NewDocument" xml:space="preserve">
     <value>New document</value>
   </data>
+  <data name="Saved" xml:space="preserve">
+    <value>saved</value>
+  </data>
+  <data name="CreatePin" xml:space="preserve">
+    <value>Enter PIN</value>
+  </data>
+  <data name="CreatePinExplonation" xml:space="preserve">
+    <value>Set a PIN code to access the application</value>
+  </data>
 </root>

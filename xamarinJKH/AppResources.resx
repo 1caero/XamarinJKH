@@ -2035,4 +2035,13 @@
   <data name="NewDocument" xml:space="preserve">
     <value>Новый документ</value>
   </data>
+  <data name="Saved" xml:space="preserve">
+    <value>сохранен</value>
+  </data>
+  <data name="CreatePin" xml:space="preserve">
+    <value>Введите пин-код</value>
+  </data>
+  <data name="CreatePinExplonation" xml:space="preserve">
+    <value>Задайте пин-код для входа в приложение</value>
+  </data>
 </root>

@@ -1906,4 +1906,13 @@
   <data name="NewDocument" xml:space="preserve">
     <value>Новый документ</value>
   </data>
+  <data name="Saved" xml:space="preserve">
+    <value>збережено</value>
+  </data>
+  <data name="CreatePin" xml:space="preserve">
+    <value>Введіть пін-код</value>
+  </data>
+  <data name="CreatePinExplonation" xml:space="preserve">
+    <value>Задайте пін-код для входу в програму</value>
+  </data>
 </root>
