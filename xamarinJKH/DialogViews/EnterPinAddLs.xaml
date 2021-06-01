@@ -23,8 +23,8 @@
            VerticalOptions="Start"
            BackgroundColor="white"
            HasShadow="True"
-           Margin="15,125,15,15"
-           Padding="25,20,25,20">
+           Margin="15,125,15,0"
+           Padding="25,20,25,0">
         <StackLayout WidthRequest="250" Spacing="15">
             <xamarinJkh:IconView x:Name="IconViewClose"
                                  Source="ic_close"
@@ -44,10 +44,24 @@
                    Keyboard="Chat"
                    VerticalTextAlignment="Center"
                    HorizontalTextAlignment="Center" />
+            <StackLayout x:Name="LayoutIrkc">
+                <Label x:Name="LabelIrkc"
+                       Text="{x:Static xamarinJkh:AppResources.AddLsIrkc}"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       FontSize="18"/>
+                <Label x:Name="LabelGoSite"
+                       Text="{x:Static xamarinJkh:AppResources.GoToSite}"
+                       HorizontalOptions="Center"
+                       TextColor="{x:DynamicResource MainColor}"
+                       HorizontalTextAlignment="Center"
+                       FontSize="18"/>
+            </StackLayout>
             <Button Text="{x:Static xamarinJkh:AppResources.Send}"
                     CornerRadius="20"
                     Clicked="Button_OnClicked"
                     FontSize="15"
+                    FontAttributes="Bold"
                     TextColor="White"
                     BackgroundColor="{x:DynamicResource MainColor}" />
         </StackLayout>
