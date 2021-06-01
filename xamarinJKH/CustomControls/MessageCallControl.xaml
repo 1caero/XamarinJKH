@@ -7,13 +7,13 @@
        CornerRadius="0"
        HorizontalOptions="FillAndExpand"
        BackgroundColor="Transparent"
-       x:Class="xamarinJKH.CustomControls.MessageCallControl">
+       x:Class="xamarinJKH.CustomControls.MessageCallControl" HasShadow="False">
     <Frame.Content>
         <StackLayout>
 
             <StackLayout  HorizontalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal" VerticalOptions="Fill" Spacing="0">
-                    <Label Text="{Binding PlayIcon}" FontSize="40" VerticalOptions="StartAndExpand"
+                    <Label Text="{Binding PlayIcon}" FontSize="40" VerticalOptions="StartAndExpand" 
                            Margin="0, 0, 5, 0"
                            VerticalTextAlignment="Start" TextColor="{Binding Color}">
                         <Label.GestureRecognizers>
