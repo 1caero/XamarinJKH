@@ -178,6 +178,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пин код можно узнать в личном кабинете на сайте https://irkcm.ru/ , на закладке &quot;настройки&quot;.
+        /// </summary>
+        internal static string AddLsIrkc {
+            get {
+                return ResourceManager.GetString("AddLsIrkc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  успешно подключён.
         /// </summary>
         internal static string AddLsString {
@@ -1191,6 +1200,24 @@ namespace xamarinJKH {
         internal static string CreatePass {
             get {
                 return ResourceManager.GetString("CreatePass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите пин-код.
+        /// </summary>
+        internal static string CreatePin {
+            get {
+                return ResourceManager.GetString("CreatePin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Задайте пин-код для входа в приложение.
+        /// </summary>
+        internal static string CreatePinExplonation {
+            get {
+                return ResourceManager.GetString("CreatePinExplonation", resourceCulture);
             }
         }
         
@@ -2469,6 +2496,15 @@ namespace xamarinJKH {
         internal static string GoodDay2 {
             get {
                 return ResourceManager.GetString("GoodDay2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Перейти на сайт.
+        /// </summary>
+        internal static string GoToSite {
+            get {
+                return ResourceManager.GetString("GoToSite", resourceCulture);
             }
         }
         
@@ -4411,7 +4447,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to В приложении отключены push-уведомления. Вы не сможете получать уведомления о новых квитанциях, сроках передачи показаний приборов учета, ответы на заявки.
+        ///   Looks up a localized string similar to В приложении отключены push-уведомления. Вы не сможете получать уведомления о новых квитанциях, сроках передачи показаний приборов учета, ответы на заявки..
         /// </summary>
         internal static string PushDiasbleInfoMessage {
             get {
@@ -4606,6 +4642,15 @@ namespace xamarinJKH {
         internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to сохранен.
+        /// </summary>
+        internal static string Saved {
+            get {
+                return ResourceManager.GetString("Saved", resourceCulture);
             }
         }
         

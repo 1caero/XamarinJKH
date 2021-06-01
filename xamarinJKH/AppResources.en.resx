@@ -2042,4 +2042,10 @@
   <data name="CreatePinExplonation" xml:space="preserve">
     <value>Set a PIN code to access the application</value>
   </data>
+  <data name="AddLsIrkc" xml:space="preserve">
+    <value>The PIN code can be found in the personal account on the website https://irkcm.ru/, on the "settings" tab </value>
+  </data>
+  <data name="GoToSite" xml:space="preserve">
+    <value>Go to the site</value>
+  </data>
 </root>

@@ -20,12 +20,13 @@ namespace xamarinJKH.Server
     {
         // public const string SERVER_ADDR = "https://api.sm-center.ru/test_erc_udm"; // ОСС
          // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
-        // public const string SERVER_ADDR = "https://api.sm-center.ru/water"; // Тихая гавань water/ water2 - тихая гавань - 2 
+        public const string SERVER_ADDR = "https://api.sm-center.ru/water"; // Тихая гавань water/ water2 - тихая гавань - 2 
          // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
         // public const string SERVER_ADDR = "https://api.sm-center.ru/kapitall_all"; // Основа
         //public const string SERVER_ADDR = "https://api.sm-center.ru/newjkh"; // Еще одна тестовая база
         // public const string SERVER_ADDR = "https://api.sm-center.ru/dgservicnew"; // Домжил (дом24)
-        public const string SERVER_ADDR = "https://api.sm-center.ru/UKUpravdom"; //Управдом Чебоксары
+        // public const string SERVER_ADDR = "https://api.sm-center.ru/UKUpravdom"; //Управдом Чебоксары
+        // public const string SERVER_ADDR = "https://api.sm-center.ru/eirkc_mobapp"; //ИРКЦ
         // public const string SERVER_ADDR = "https://api.sm-center.ru/uk_sibir_alians"; //Альянс
          //public const string SERVER_ADDR = "https://api.sm-center.ru/ooo_yegkh"; //Легкая жизнъ
         // public const string SERVER_ADDR = "https://api.sm-center.ru/vodokanal_narof"; // Водоканал

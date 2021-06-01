@@ -2,22 +2,25 @@
 using Microsoft.AppCenter.Analytics;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.Main;
 using xamarinJKH.Pays;
 using xamarinJKH.Server;
 using xamarinJKH.Server.RequestModel;
+using xamarinJKH.Utils;
 
 namespace xamarinJKH.DialogViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EnterPinAddLs :PopupPage
+    public partial class EnterPinAddLs : PopupPage
     {
         RestClientMP server = new RestClientMP();
         public string Ident { get; set; }
         private PaysPage paysPage;
         private AddIdent AddIdent;
+
         public EnterPinAddLs(string ident, PaysPage paysPage, AddIdent addIdent)
         {
             Ident = ident;
@@ -28,6 +31,13 @@ namespace xamarinJKH.DialogViews
             var close = new TapGestureRecognizer();
             close.Tapped += async (s, e) => { await PopupNavigation.Instance.PopAsync(); };
             IconViewClose.GestureRecognizers.Add(close);
+
+            LayoutIrkc.IsVisible = RestClientMP.SERVER_ADDR.Contains("eirkc_mobapp");
+            LabelIrkc.FormattedText = Settings.FormatedLink(AppResources.AddLsIrkc, Color.Gray, 18);
+
+            var goSite = new TapGestureRecognizer();
+            goSite.Tapped += async (s, e) => { await Launcher.OpenAsync("https://irkcm.ru/irkcm.htm"); };
+            LabelGoSite.GestureRecognizers.Add(goSite);
             BindingContext = this;
         }
 
@@ -35,15 +45,14 @@ namespace xamarinJKH.DialogViews
         {
             base.OnAppearing();
             PinCode.Focus();
-
         }
 
         private async void Button_OnClicked(object sender, EventArgs e)
         {
             string pinCodeText = PinCode.Text;
-            if(!string.IsNullOrEmpty(pinCodeText))
+            if (!string.IsNullOrEmpty(pinCodeText))
             {
-                AddAccountResult result = await server.AddIdent(Ident,false, pinCodeText);
+                AddAccountResult result = await server.AddIdent(Ident, false, pinCodeText);
                 if (result.Error == null)
                 {
                     await DisplayAlert("", $"{AppResources.Acc} " + Ident + $"{AppResources.AddLsString}", "ОК");

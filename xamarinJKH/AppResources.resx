@@ -2044,4 +2044,10 @@
   <data name="CreatePinExplonation" xml:space="preserve">
     <value>Задайте пин-код для входа в приложение</value>
   </data>
+  <data name="AddLsIrkc" xml:space="preserve">
+    <value>Пин код можно узнать в личном кабинете на сайте https://irkcm.ru/ , на закладке "настройки"</value>
+  </data>
+  <data name="GoToSite" xml:space="preserve">
+    <value>Перейти на сайт</value>
+  </data>
 </root>

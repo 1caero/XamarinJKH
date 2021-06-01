@@ -1915,4 +1915,10 @@
   <data name="CreatePinExplonation" xml:space="preserve">
     <value>Задайте пін-код для входу в програму</value>
   </data>
+  <data name="AddLsIrkc" xml:space="preserve">
+    <value>Пін код можна дізнатися в особистому кабінеті на сайті https://irkcm.ru/, на закладці "настройки" </value>
+  </data>
+  <data name="GoToSite" xml:space="preserve">
+    <value>Перейти на сайт</value>
+  </data>
 </root>
