@@ -353,6 +353,7 @@ namespace xamarinJKH.DialogViews
                             Device.StartTimer(new TimeSpan(0, 0, 1), () =>
                             {
                                 RequestUtils.UpdateRequestCons();
+                                MessagingCenter.Send<Object>(this,  "RefreshApp");
                                 return false; // runs again, or false to stop
                             });
                             await PopupNavigation.Instance.PopAsync();
