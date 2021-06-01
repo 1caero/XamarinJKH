@@ -300,28 +300,30 @@ namespace xamarinJKH.MainConst
             {
                 additionalList.Scrolled -= OnCollectionViewScrolled;
                 StackLayoutHide.IsVisible = !StackLayoutHide.IsVisible;
-                await ImageHide.RotateTo(ImageHide.Rotation + 180 * rotation, 500, Easing.Linear);
+                rotationdegrees = ImageHide.Rotation + 180 * rotation;
+                var r=  await ImageHide.RotateTo(rotationdegrees, 500, Easing.Linear);
                 rotation *= -1;
 
                 canHide = true;
                 additionalList.Scrolled += OnCollectionViewScrolled;
             });
-            //isNeedHide = StackLayoutHide.IsVisible;
-            //hideBotClikced = true;
         }
-
-        //bool hideBotClikced = false;
-
-        private async Task HideBotTimer()
+                
+        double rotationdegrees = 90;
+        private void HideBotTimer()
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            Device.BeginInvokeOnMainThread(() =>
             {
                 additionalList.Scrolled -= OnCollectionViewScrolled;
-            StackLayoutHide.IsVisible = !StackLayoutHide.IsVisible;
-            await ImageHide.RotateTo(ImageHide.Rotation + 180 * rotation2);
-            rotation2 *= -1;
-            additionalList.Scrolled += OnCollectionViewScrolled;
-                //isNeedShow = StackLayoutHide.IsVisible;
+                StackLayoutHide.IsVisible = !StackLayoutHide.IsVisible;
+                if (rotationdegrees == 90)
+                    rotationdegrees=ImageHide.Rotation = 270;
+                else
+                    rotationdegrees= ImageHide.Rotation = 90;
+
+                //var r = await ImageHide.RotateTo(rotationdegrees+180* rotation2, 500, Easing.Linear);
+                //rotation2 *= -1;
+                additionalList.Scrolled += OnCollectionViewScrolled;                
             });
         }
 
@@ -866,7 +868,7 @@ namespace xamarinJKH.MainConst
                     if (StackLayoutHide.IsVisible)
                     {
                         //isNeedShow = true;
-                        Device.BeginInvokeOnMainThread(async () => await HideBotTimer());
+                        Device.BeginInvokeOnMainThread(() => HideBotTimer());
                     }
                      alive = true;
                 }
@@ -880,7 +882,7 @@ namespace xamarinJKH.MainConst
                         //isNeedShow = false;
                         canHide = false;
                         Device.StartTimer(TimeSpan.FromMilliseconds(200), SetCanHideTrueAsync);
-                        Device.BeginInvokeOnMainThread(async () => await HideBotTimer());
+                        Device.BeginInvokeOnMainThread(() => HideBotTimer());
                     }
                 }
                 currentPos = lastPos;
@@ -907,7 +909,7 @@ namespace xamarinJKH.MainConst
                 if (canHide && StackLayoutHide.IsVisible)
                 {
                     //isNeedShow = true;
-                    await HideBotTimer();                    
+                    HideBotTimer();                    
                 }
 
                 if (e.FirstVisibleItemIndex > 0)
