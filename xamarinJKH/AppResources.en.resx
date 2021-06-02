@@ -1994,7 +1994,7 @@
   <data name="PushDiasbleInfoMessage" xml:space="preserve">
     <value>Push notifications are disabled in the application. You will not be able to receive notifications about new receipts, due dates for meter readings, responses to applications.</value>
   </data>
-  <data name="PushDisableMessageNeverShow" xml:space="preserve">
+  <data name="MessageNeverShow" xml:space="preserve">
     <value>Don't show this message again</value>
   </data>
   <data name="AddDocument" xml:space="preserve">
@@ -2047,5 +2047,17 @@
   </data>
   <data name="GoToSite" xml:space="preserve">
     <value>Go to the site</value>
+  </data>
+  <data name="PinCodeLogin" xml:space="preserve">
+    <value>Would you like to set a pin code to enter the application?</value>
+  </data>
+  <data name="DeletePin" xml:space="preserve">
+    <value>Remove pin</value>
+  </data>
+  <data name="EditPin" xml:space="preserve">
+    <value>Edit pin</value>
+  </data>
+  <data name="PinDeleted" xml:space="preserve">
+    <value>Pin code removed</value>
   </data>
 </root>

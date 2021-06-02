@@ -409,6 +409,31 @@ namespace xamarinJKH
             }            
         }
 
+        async Task AddPin()
+        {            
+            if(pin=="")
+            {
+                //var addPin = await DisplayActionSheet("Хотите установить пин-код для входа в приложение?", AppResources.NoThanks, null, new string[] { AppResources.Yes });
+                //if (addPin == AppResources.Yes)
+                Preferences.Set("DisplayPinAdd", true);
+                if (Preferences.Get("DisplayPinAdd", true))
+                {
+                    await PopupNavigation.Instance.PushAsync(new PinEnableCheck());
+                }                
+            }
+           
+        }
+
+        async Task<bool> PinCorrectAsync()
+        {
+                var pinEntered = await DisplayPromptAsync("Вход", "Введите пин-код для входа", AppResources.LoginAuth, AppResources.Cancel, "ваш пин-код", -1, Keyboard.Numeric, "");
+
+                return pinEntered!=null && pinEntered.Equals(pin);                
+        }
+
+        string pin = "";
+        bool cleanFilelds = false;
+
         public async void Login(string loginAuth, string pass, bool isButtonClick=false)
         {
             Analytics.TrackEvent("Авторизация пользователя");
@@ -419,15 +444,23 @@ namespace xamarinJKH
             var displayPassAlert = true;
 
             var a = await CrossFingerprint.Current.IsAvailableAsync();
-            var aA = await CrossFingerprint.Current.GetAvailabilityAsync();
-            var at = await CrossFingerprint.Current.GetAuthenticationTypeAsync();
+            //var aA = await CrossFingerprint.Current.GetAvailabilityAsync();
+            //var at = await CrossFingerprint.Current.GetAuthenticationTypeAsync();
+#if DEBUG
+           // Preferences.Set("PinCode", "");
+#endif
+
+            pin = Preferences.Get("PinCode", "");
 
             if (!isButtonClick)
             {
                 var b = Preferences.Get("FingerPrintsOn", "");
+                await AddPin();
+
+                pin = Preferences.Get("PinCode", "");
+                //биометрия не установлена вообще, предлогаем ее включить, если доступна  
                 if (b == "")
-                {
-                    //биометрия не установлена вообще, предлогаем ее включить, если доступна                    
+                {                                      
                     if (!a)
                     {
                         await DisplayAlert(AppResources.Attention, AppResources.BiometricNA, "OK");
@@ -446,11 +479,11 @@ namespace xamarinJKH
                             b = "false";
                         }
                     }
+                    displayPassAlert = await PinCheckAsync();
                 }
 
                 if (b == "true")
-                {//биометрия назначена ранее
-                    
+                {//биометрия назначена ранее                    
                     if (!a)
                     {
                         await DisplayAlert(AppResources.Attention, AppResources.BiometricNA, "OK");
@@ -462,23 +495,17 @@ namespace xamarinJKH
                         if (!ar.Authenticated)
                         {
                             await DisplayAlert(AppResources.Attention, AppResources.BiometricNotRecognizedDialog, "OK");
-                            EntryLogin.Text = "";
-                            EntryPass.Text = "";
-                            loginAuth = "";
-                            pass = "";
 
-                            displayPassAlert = false;
-                            //return;
+                            displayPassAlert = await PinCheckAsync();
                         }
                     }                   
                 }
 
                 if (b == "false")
                 {//биометрия отключена пользователем, делаем автовход если как это было раньше
-
-                }
-            }
-           
+                    displayPassAlert = await PinCheckAsync();
+                }                
+            }           
 
             var replace = !string.IsNullOrEmpty(loginAuth) ? loginAuth
                 .Replace("+", "")
@@ -540,10 +567,20 @@ namespace xamarinJKH
             FrameBtnLogin.IsVisible = false;
 
             //Биометрия
+#if DEBUG
+            Preferences.Set("PinCode", "");
+#endif
+            pin = Preferences.Get("PinCode", "");
+
             var displayPassAlert = true;
             if (!isButtonClick)
             {
                 var b = Preferences.Get("FingerPrintsOnCo", "");
+
+                await AddPin();
+
+                pin = Preferences.Get("PinCode", "");
+
                 if (b == "")
                 {
                     //биометрия не установлена вообще, предлогаем ее включить, если доступна
@@ -566,6 +603,8 @@ namespace xamarinJKH
                             b = "false";
                         }
                     }
+
+                    displayPassAlert = await PinCheckAsync();
                 }
 
                 if (b == "true")
@@ -575,20 +614,24 @@ namespace xamarinJKH
                     if (!ar.Authenticated)
                     {
                         await DisplayAlert(AppResources.Attention, AppResources.BiometricNotRecognizedDialog, "OK");
-                        EntryLogin.Text = "";
-                        EntryPass.Text = "";
-                        loginAuth = "";
-                        pass = "";
-
-                        displayPassAlert = false;
+                        
+                        displayPassAlert = await PinCheckAsync();
                     }
                 }
 
                 if (b == "false")
                 {//биометрия отключена пользователем, делаем автовход если как это было раньше
+                    displayPassAlert = await PinCheckAsync();
+                }              
+                
+               if(cleanFilelds)
+                {
+                    loginAuth = "";
+                    pass = "";
                 }
+
             }
-           
+
 
             var replace = loginAuth;
             if (!string.IsNullOrEmpty(replace) && !string.IsNullOrEmpty(pass)) 
@@ -645,6 +688,31 @@ namespace xamarinJKH
             
             progress.IsVisible = false;
             FrameBtnLogin.IsVisible = true;
+        }
+
+        async Task<bool> PinCheckAsync()
+        {
+            if (pin != "")
+            {
+                bool pinCorrect = false;
+                pinCorrect = await PinCorrectAsync();
+                if (!pinCorrect )
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        EntryLogin.Text = "";
+                        EntryPass.Text = "";
+                        EntryLoginConst.Text = "";                        
+                        EntryPassConst.Text= "";
+                    });
+
+                    cleanFilelds = true;
+
+                    //return true;
+                }
+                //return false;
+            }
+            return false;
         }
     }
 }

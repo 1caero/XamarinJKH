@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
+                 x:Class="xamarinJKH.DialogViews.EnterPin">
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation DurationIn="500"
+                                   DurationOut="700"
+                                   EasingIn="Linear"
+                                   EasingOut="Linear"
+                                   HasBackgroundAnimation="True"
+                                   PositionIn="Center"
+                                   PositionOut="Center"
+                                   ScaleIn="1.2"
+                                   ScaleOut="0.8" />
+    </pages:PopupPage.Animation>
+    <Frame CornerRadius="30"
+           x:Name="Frame"
+           HorizontalOptions="FillAndExpand"
+           VerticalOptions="Start"
+           BackgroundColor="white"
+           HasShadow="True"
+           Margin="15,125,15,15"
+           Padding="25,20,25,20">
+        <StackLayout WidthRequest="250" Spacing="15">
+            <xamarinJkh:IconView x:Name="IconViewClose"
+                                 Source="ic_close"
+                                 HeightRequest="15"
+                                 WidthRequest="15"
+                                 Foreground="Black"
+                                 HorizontalOptions="End"
+                                 VerticalOptions="Center" />
+            <Label Text="{x:Static xamarinJkh:AppResources.CreatePinExplonation}"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   FontSize="18"/>
+            <Entry Placeholder="{x:Static xamarinJkh:AppResources.CreatePin}"
+                   x:Name="PinCode"
+                   Text=""
+                   Margin="0,0,0,15"
+                   Keyboard="Numeric"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center" />
+            <Button Text="{x:Static xamarinJkh:AppResources.Send}"
+                    CornerRadius="20"
+                    Clicked="Button_OnClicked"
+                    FontSize="15"
+                    TextColor="White"
+                    BackgroundColor="{x:DynamicResource MainColor}" />
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

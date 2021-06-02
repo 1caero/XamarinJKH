@@ -1357,6 +1357,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Удалить пин-код.
+        /// </summary>
+        internal static string DeletePin {
+            get {
+                return ResourceManager.GetString("DeletePin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Удаление ЛС.
         /// </summary>
         internal static string DeletingIdent {
@@ -1479,6 +1488,15 @@ namespace xamarinJKH {
         internal static string EditMetersTarif3 {
             get {
                 return ResourceManager.GetString("EditMetersTarif3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Редактировать пин-код.
+        /// </summary>
+        internal static string EditPin {
+            get {
+                return ResourceManager.GetString("EditPin", resourceCulture);
             }
         }
         
@@ -2865,6 +2883,15 @@ namespace xamarinJKH {
         internal static string mb {
             get {
                 return ResourceManager.GetString("mb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не показывать больше это сообщение.
+        /// </summary>
+        internal static string MessageNeverShow {
+            get {
+                return ResourceManager.GetString("MessageNeverShow", resourceCulture);
             }
         }
         
@@ -4339,6 +4366,24 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Хотите установить пин-код для входа в приложение?.
+        /// </summary>
+        internal static string PinCodeLogin {
+            get {
+                return ResourceManager.GetString("PinCodeLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пин-код удален.
+        /// </summary>
+        internal static string PinDeleted {
+            get {
+                return ResourceManager.GetString("PinDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пин-код.
         /// </summary>
         internal static string PinField {
@@ -4452,15 +4497,6 @@ namespace xamarinJKH {
         internal static string PushDiasbleInfoMessage {
             get {
                 return ResourceManager.GetString("PushDiasbleInfoMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Не показывать больше это сообщение.
-        /// </summary>
-        internal static string PushDisableMessageNeverShow {
-            get {
-                return ResourceManager.GetString("PushDisableMessageNeverShow", resourceCulture);
             }
         }
         

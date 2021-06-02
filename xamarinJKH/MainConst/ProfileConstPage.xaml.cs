@@ -115,6 +115,22 @@ namespace xamarinJKH.MainConst
             // };
             // UkName.GestureRecognizers.Add(qr);
 
+            var ep = new TapGestureRecognizer();
+            ep.Tapped += async (s, e) =>
+            {
+                await PopupNavigation.Instance.PushAsync(new EnterPin());
+                
+            };
+            EditPin.GestureRecognizers.Add(ep);
+
+            var dp = new TapGestureRecognizer();
+            dp.Tapped += async (s, e) =>
+            {
+                Preferences.Remove("PinCode");
+                await DisplayAlert("", $"{AppResources.Info} {AppResources.PinDeleted}", "ОК");
+            };
+            DeletePin.GestureRecognizers.Add(dp);
+
             var createPush = new TapGestureRecognizer();
             createPush.Tapped += async (s, e) =>
             {

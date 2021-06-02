@@ -294,33 +294,14 @@ $ ";
 
         public static async void ChechEnabledNotification(Page page)
         {
-            //Preferences.Set("DisplayNotification", true);
+#if DEBUG 
+            Preferences.Set("DisplayNotification", true);
+#endif
 
             bool isDisplay = Preferences.Get("DisplayNotification", true);
 
             if (!DependencyService.Get<ISettingsService>().IsEnabledNotification() && isDisplay)
-                //var ret = await Dialog.Instance.ShowAsync<PushNotificationEnableCheck>(new
-                //{
-                //    HexColor = hex
-                //});
                 await PopupNavigation.Instance.PushAsync(new PushEnableCheck());
-
-
-            //bool isDisplay = Preferences.Get("DisplayNotification", true);
-            //    if (!DependencyService.Get<ISettingsService>().IsEnabledNotification() && isDisplay)
-            //    {
-            //       await Dialog.Instance.ShowAsync<PushNotificationEnableCheck>();
-
-            //        //bool displayAlert = await page.DisplayAlert("",
-            //        //    "На вашем устройстве для данного приложения отключен прием пуш уведомлений." +
-            //        //    " Включите прием уведомлений в настройках устройства", AppResources.DontRimind,
-            //        //    "OK");
-            //        //if (displayAlert)
-            //        //{
-            //        //    Preferences.Set("DisplayNotification", false);
-            //        //}
-            //    }
-
         }
     }
 }

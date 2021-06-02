@@ -624,6 +624,12 @@
     <Compile Update="DialogViews\CalendarDayDialog.xaml.cs">
       <DependentUpon>CalendarDayDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Update="DialogViews\EnterPin.xaml.cs">
+      <DependentUpon>EnterPin.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="DialogViews\PinEnableCheck.xaml.cs">
+      <DependentUpon>PinEnableCheck.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Main\BottomNavigationPage.xaml.cs">
       <DependentUpon>BottomNavigationPage.xaml</DependentUpon>
     </Compile>

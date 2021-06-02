@@ -1996,7 +1996,7 @@
   <data name="PushDiasbleInfoMessage" xml:space="preserve">
     <value>В приложении отключены push-уведомления. Вы не сможете получать уведомления о новых квитанциях, сроках передачи показаний приборов учета, ответы на заявки.</value>
   </data>
-  <data name="PushDisableMessageNeverShow" xml:space="preserve">
+  <data name="MessageNeverShow" xml:space="preserve">
     <value>Не показывать больше это сообщение</value>
   </data>
   <data name="AddDocument" xml:space="preserve">
@@ -2049,5 +2049,17 @@
   </data>
   <data name="GoToSite" xml:space="preserve">
     <value>Перейти на сайт</value>
+  </data>
+  <data name="PinCodeLogin" xml:space="preserve">
+    <value>Хотите установить пин-код для входа в приложение?</value>
+  </data>
+  <data name="DeletePin" xml:space="preserve">
+    <value>Удалить пин-код</value>
+  </data>
+  <data name="EditPin" xml:space="preserve">
+    <value>Редактировать пин-код</value>
+  </data>
+  <data name="PinDeleted" xml:space="preserve">
+    <value>Пин-код удален</value>
   </data>
 </root>

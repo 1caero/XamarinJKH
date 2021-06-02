@@ -1867,7 +1867,7 @@
   <data name="PushDiasbleInfoMessage" xml:space="preserve">
     <value>У програмі відключені push-повідомлення. Ви не зможете отримувати повідомлення про нові квитанції, терміни передачі показань приладів обліку, відповіді на заявки.</value>
   </data>
-  <data name="PushDisableMessageNeverShow" xml:space="preserve">
+  <data name="MessageNeverShow" xml:space="preserve">
     <value>Більше не відображати це повідомлення</value>
   </data>
   <data name="AddDocument" xml:space="preserve">
@@ -1920,5 +1920,17 @@
   </data>
   <data name="GoToSite" xml:space="preserve">
     <value>Перейти на сайт</value>
+  </data>
+  <data name="PinCodeLogin" xml:space="preserve">
+    <value>Хочете встановити пін-код для входу в програму?</value>
+  </data>
+  <data name="DeletePin" xml:space="preserve">
+    <value>Видалити пін-код</value>
+  </data>
+  <data name="EditPin" xml:space="preserve">
+    <value>Редагувати пін-код</value>
+  </data>
+  <data name="PinDeleted" xml:space="preserve">
+    <value>Пін-код видалено</value>
   </data>
 </root>

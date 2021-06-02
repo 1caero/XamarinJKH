@@ -84,9 +84,25 @@ namespace xamarinJKH.Main
                     if (phoneDialer.CanMakePhoneCall && !string.IsNullOrWhiteSpace(Settings.Person.companyPhone)) 
                         phoneDialer.MakePhoneCall(Regex.Replace(Settings.Person.companyPhone, "[^+0-9]", ""));
                 }
-
-            
             };
+
+            var ep = new TapGestureRecognizer();
+            ep.Tapped += async (s, e) =>
+            {
+                await PopupNavigation.Instance.PushAsync(new EnterPin());
+
+            };
+            EditPin.GestureRecognizers.Add(ep);
+
+            var dp = new TapGestureRecognizer();
+            dp.Tapped += async (s, e) =>
+            {
+                Preferences.Remove("PinCode");
+                await DisplayAlert("", $"{AppResources.Info} {AppResources.PinDeleted}", "ОК");
+            };
+            DeletePin.GestureRecognizers.Add(dp);
+
+
             FrameBtnExit.GestureRecognizers.Add(exitClick);
             var saveClick = new TapGestureRecognizer();
             saveClick.Tapped += async (s, e) => { ButtonClick(FrameBtnLogin, null); };
