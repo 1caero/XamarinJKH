@@ -642,8 +642,8 @@ namespace xamarinJKH.MainConst
 
         private async void startNewApp(object sender, EventArgs e)
         {
-            if (Device.RuntimePlatform == Device.Android)
-            {
+            //if (Device.RuntimePlatform == Device.Android)
+            //{
                 var action = await Application.Current.MainPage.DisplayActionSheet(AppResources.AddApp,
                     AppResources.Cancel, null,
                     AppResources.NewApplication,
@@ -658,12 +658,12 @@ namespace xamarinJKH.MainConst
                     if (Navigation.NavigationStack.FirstOrDefault(x => x is NewDocumentConstPage) == null)
                         await Navigation.PushAsync(new NewDocumentConstPage());
                 }
-            }
-            else
-            {
-                if (Navigation.NavigationStack.FirstOrDefault(x => x is NewAppConstPage) == null)
-                    await Navigation.PushAsync(new NewAppConstPage(this));
-            }
+            //}
+            //else
+            //{
+            //    if (Navigation.NavigationStack.FirstOrDefault(x => x is NewAppConstPage) == null)
+            //        await Navigation.PushAsync(new NewAppConstPage(this));
+            //}
         }
 
         public bool IndicatorRun { get; set; }

@@ -18,6 +18,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarinJKH.DialogViews;
+using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.MainConst;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Tech;
@@ -69,6 +70,17 @@ namespace xamarinJKH.AppsConst
             InitializeComponent();
             ClosePageCommand = new Command(async () => await Navigation.PopAsync());
             BindingContext = AddDocumentModel = new AddDocumentModel(ClosePageCommand);
+
+            switch (Device.RuntimePlatform)
+            {
+                case Device.iOS:
+                    int statusBarHeight = DependencyService.Get<IStatusBar>().GetHeight();
+                    Pancake.Padding = new Thickness(0, statusBarHeight, 0, 0);
+                    break;                
+                default:
+                    break;
+            }
+
             NavigationPage.SetHasNavigationBar(this, false);
             var focusPicker = new TapGestureRecognizer();
             focusPicker.Tapped += async (s, e) =>

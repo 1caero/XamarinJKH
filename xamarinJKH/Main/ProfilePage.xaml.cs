@@ -16,6 +16,8 @@ using xamarinJKH.Utils;
 using System.Collections.Generic;
 using System.Linq;
 using Plugin.Fingerprint;
+using Rg.Plugins.Popup.Services;
+using xamarinJKH.DialogViews;
 
 namespace xamarinJKH.Main
 {
