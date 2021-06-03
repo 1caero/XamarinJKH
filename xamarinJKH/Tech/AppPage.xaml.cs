@@ -332,7 +332,7 @@ namespace xamarinJKH.Tech
             };
             BackStackLayout.GestureRecognizers.Add(backClick);
             var sendMess = new TapGestureRecognizer();
-            sendMess.Tapped += (s, e) => { sendMessage(); };
+            sendMess.Tapped += (s, e) => { Device.BeginInvokeOnMainThread( ()=> sendMessage()); };
             IconViewSend.GestureRecognizers.Add(sendMess);
 
             var addApp = new TapGestureRecognizer();
@@ -683,27 +683,28 @@ namespace xamarinJKH.Tech
                 string message = EntryMess.Text;
                 if (!string.IsNullOrWhiteSpace(message))
                 {
-                     Device.BeginInvokeOnMainThread(() =>
-                    {
-                        IconViewSend.IsEnabled = true;
-                        IconViewMic.IsEnabled = true;
-                    });
-                    
+                    // Device.BeginInvokeOnMainThread(() =>
+                    //{
+                        IconViewSend.IsVisible = false;
+                        IconViewMic.IsVisible = false;
+                    progress.IsVisible = true;
+                    //});
+                    //await Task.Delay(1000);
                     IsSucceed result = await _server.AddMessageTech(message, Settings.Person.Phone, _isDeviceId);
                     if (result.isSucceed)
                     {
-                        Device.BeginInvokeOnMainThread(() =>
-                            {
-                                {
+                        //Device.BeginInvokeOnMainThread(() =>
+                        //    {
+                        //        {
                                     EntryMess.Text = "";
                                     
                                     // var lastChild = baseForApp.Children.LastOrDefault();
                                     // if (lastChild != null)
                                     //     Device.BeginInvokeOnMainThread(async () =>
                                     //         await scrollFroAppMessages.ScrollToAsync(lastChild, ScrollToPosition.End, false));
-                                }
-                            }
-                        );
+                        //        }
+                        //    }
+                        //);
                     }
                 }
                 else
@@ -717,11 +718,13 @@ namespace xamarinJKH.Tech
             }
             finally
             {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    IconViewSend.IsEnabled = true;
-                    IconViewMic.IsEnabled = true;
-                });
+                //Device.BeginInvokeOnMainThread(() =>
+                //{
+                    IconViewSend.IsVisible = true;
+                    IconViewMic.IsVisible = true;
+                progress.IsVisible = false;
+
+                //});
             }
         }
 

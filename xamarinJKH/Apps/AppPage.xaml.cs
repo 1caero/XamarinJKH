@@ -780,8 +780,10 @@ namespace xamarinJKH.Apps
                 string message = EntryMess.Text;
                 if (!string.IsNullOrWhiteSpace(message))
                 {
-                    progress.IsVisible = true;
                     IconViewSend.IsVisible = false;
+                    IconViewMic.IsVisible = false;
+                    progress.IsVisible = true;
+                    //await Task.Delay(3000);
                     CommonResult result = await _server.AddMessage(message, _requestInfo.ID.ToString());
                     if (result.Error == null)
                     {
@@ -802,7 +804,7 @@ namespace xamarinJKH.Apps
             {
                 await ShowToast(AppResources.MessageNotSent);
 
-
+                IconViewMic.IsVisible = true;
                 progress.IsVisible = false;
                 IconViewSend.IsVisible = true;
             }
