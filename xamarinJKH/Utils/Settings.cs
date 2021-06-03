@@ -165,6 +165,8 @@ namespace xamarinJKH.Utils
                 case 5:
                 case 8:
                 case 10:
+                case 11:
+                case 12:
                 case 7: return "ic_status_done";
                 case 1: return "ic_status_new";
                 default: return "ic_status_wait";

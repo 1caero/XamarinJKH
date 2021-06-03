@@ -111,6 +111,12 @@ namespace xamarinJKH.Server.RequestModel
         }
         
         public string Name { get; set; }
+        
+        public string NotNullName
+        {
+            get => string.IsNullOrWhiteSpace(Name) ? "" : Name;
+            set => Name = value;
+        }
         public string Text  { get; set; }
         public string HalfName
         {
