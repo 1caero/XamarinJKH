@@ -846,7 +846,7 @@ namespace xamarinJKH.MainConst
             if (RequestDefault != null)
             {
                 RequestInfos.Clear();
-                foreach (var each in RequestDefault.Where(_ => _.RequestNumber.Contains(e.NewTextValue) || _.Status.ToLowerInvariant().Contains(e.NewTextValue.ToLowerInvariant()) || _.Name.ToLowerInvariant().Contains(e.NewTextValue.ToLowerInvariant())))
+                foreach (var each in RequestDefault.Where(_ => _.RequestNumber.Contains(e.NewTextValue) || _.Status.ToLowerInvariant().Contains(e.NewTextValue.ToLowerInvariant()) || _.NotNullName.ToLowerInvariant().Contains(e.NewTextValue.ToLowerInvariant())))
                 {
 
                     Device.BeginInvokeOnMainThread((() =>
