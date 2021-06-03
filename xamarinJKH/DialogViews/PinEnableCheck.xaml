@@ -19,13 +19,13 @@
                         HeightRequest="40"
                         CornerRadius="20"
                         BorderWidth="1"
-                        BorderColor="{Binding HexColor}"
+                        BorderColor="{x:DynamicResource MainColor}"
                         TextColor="Black"
                         Clicked="Cancel_Clicked"
                         MinimumWidthRequest="100"
                         Text="{x:Static xamarinJkh:AppResources.NoThanks}"/>
                     <Button HorizontalOptions="CenterAndExpand"
-                        BackgroundColor="{Binding HexColor}" 
+                        BackgroundColor="{x:DynamicResource MainColor}" 
                         Margin="10,0"
                         Padding="10,0"
                         WidthRequest="130"
@@ -38,7 +38,7 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Margin="10,0">
                     <Switch
-                                        OnColor="{Binding HexColor}"
+                                        OnColor="{x:DynamicResource MainColor}"
                                         IsToggled="{Binding ShowClosed, Mode=TwoWay}"
                                         x:Name="NeverShowSwitch"
                                         VerticalOptions="Center"  />
