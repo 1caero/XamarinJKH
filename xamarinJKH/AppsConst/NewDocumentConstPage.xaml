@@ -157,6 +157,9 @@
                                                     HorizontalOptions="FillAndExpand" />
                                         </StackLayout>
                                     </StackLayout>
+                                    <Label HorizontalTextAlignment="Start" TextColor="#A2A2A2" FontSize="12" Margin="5,-5,5,0"
+                                               Text="{x:Static xamarinJkh:AppResources.ConfigureAdmin}"
+                                               HorizontalOptions="StartAndExpand" />
                                     <StackLayout     
                                         Margin="5, 5, 5, 5"
                                         Spacing="5"
@@ -207,15 +210,13 @@
                                         </StackLayout>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="6" Margin="5">
-                                        <Label HorizontalTextAlignment="Start"
-                                               Text="{x:Static xamarinJkh:AppResources.ConfigureAdmin}"
-                                               HorizontalOptions="StartAndExpand" />
+                                       
                                         <Label HorizontalTextAlignment="Start" 
                                                Text="{x:Static xamarinJkh:AppResources.Signatories}"
                                                TextDecorations="Underline"
                                                FontAttributes="Bold"
                                                TextColor="{x:DynamicResource MainColor}"
-                                               HorizontalOptions="End">
+                                               HorizontalOptions="StartAndExpand">
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding OpenApprovedDialogCommand}" />
                                             </Label.GestureRecognizers>
