@@ -1,0 +1,1277 @@
+{
+  "project_info": {
+    "project_number": "486573125776",
+    "firebase_url": "https://myprojects-e5656.firebaseio.com",
+    "project_id": "myprojects-e5656",
+    "storage_bucket": "myprojects-e5656.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:ec04d7db91bc0922",
+        "android_client_info": {
+          "package_name": "com.metinvest.nfc_marks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-tttd4u905qgiifjcjpj7f7ovar5nec5e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.metinvest.nfc_marks",
+            "certificate_hash": "276b9decdbcd3def8d004fde47bcbecd46077b84"
+          }
+        },
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:a5c28aebe336d9560fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.alternativa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:1a39a708437d44450fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.cb14"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:be082e91efe816db0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.centr_inv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:e38efcbdf3df33da0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.clear_city"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:fa8122724e47ce5a0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.doka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:087b899711d4e3ed0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ego"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:cf69a8bcf2e3200f0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.greenway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:dccc84a101b6e8490fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.gumse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:c9771a8cfa80892f0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.kapital"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:df2e79bc994568960fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.mainstream"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:0fd080a81291f3d30fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.occ"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:9e7b24515736613c0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.alfa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:e0f794b30eb8a7500fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.clean_and_right"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:3a710ee67882debb0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.ego_comfort"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:f123cb1fd6d8a0c00fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.ion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:c41fd914102e9d4c0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.kapitalinvest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:a2163482f0d06d760fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.new_mounting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:18c46305113f52a70fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.optium"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:1313a96bf20c79250fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.quiet_harbor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:77833a731e35036d0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.ramen_lefor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:b98e1365d38dd4c10fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.rkc_samara_ap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:98adee13201182200fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.rosvodokanal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:3489a5f5c21e1e7b0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.severnoe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:3ce104d771e42f790fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.sibir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:d0369a9e40b8a69b0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.suhanovo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:eabe2c223e67f1590fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.uk_maximum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:3b1b58ce9781d6870fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.uk_zip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:a58ca754339f823c0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.ukom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:5ff6297ea54fd8440fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.vest_snab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:667995230e44db880fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.vodokanal2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:dd46d9a9ebea136a0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.zhilupravkom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:9b63b92fd0b1ad8a0fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.un_resh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486573125776:android:373fbc743ddb44210fe815",
+        "android_client_info": {
+          "package_name": "sys_rom.valley"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIu-zUC_OzFPcbiec45qLt1O2rAM9Xk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486573125776-lg8cce55lh899bpen07ij4rl2dcf8t83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486573125776-08lmq5qrbi1q02966sds20qe4a9qrnf8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.mup-severnoe",
+                "app_store_id": "1504031191"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
