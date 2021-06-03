@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>486573125776-1178e07f3i3mp6dvtuoksd9tbis0e3he.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.486573125776-1178e07f3i3mp6dvtuoksd9tbis0e3he</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>486573125776-tttd4u905qgiifjcjpj7f7ovar5nec5e.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCXXubnZ2v510qu2D9k8cWTngmiIwG648s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>486573125776</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>rom.best.novogorskoe</string>
+	<key>PROJECT_ID</key>
+	<string>myprojects-e5656</string>
+	<key>STORAGE_BUCKET</key>
+	<string>myprojects-e5656.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:486573125776:ios:2b6d473028ffd9330fe815</string>
+	<key>DATABASE_URL</key>
+	<string>https://myprojects-e5656.firebaseio.com</string>
+</dict>
+</plist>
