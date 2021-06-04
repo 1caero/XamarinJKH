@@ -504,7 +504,13 @@ namespace xamarinJKH
                 if (b == "false")
                 {//биометрия отключена пользователем, делаем автовход если как это было раньше
                     displayPassAlert = await PinCheckAsync();
-                }                
+                }
+
+                if (cleanFilelds)
+                {
+                    loginAuth = "";
+                    pass = "";
+                }
             }           
 
             var replace = !string.IsNullOrEmpty(loginAuth) ? loginAuth
