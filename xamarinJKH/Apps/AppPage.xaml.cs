@@ -799,6 +799,7 @@ namespace xamarinJKH.Apps
 
                 progress.IsVisible = false;
                 IconViewSend.IsVisible = true;
+                IconViewMic.IsVisible = true;
             }
             catch (Exception e)
             {
