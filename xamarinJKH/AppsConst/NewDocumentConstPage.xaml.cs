@@ -384,6 +384,8 @@ namespace xamarinJKH.AppsConst
             set
             {
                 _selectedPremises = value;
+                Idents = new ObservableCollection<Account>(_selectedPremises.Accounts);
+                SelectedIdent = _selectedPremises.Accounts.FirstOrDefault();
                 OnPropertyChanged("SelectedPremises");
             }
         }
@@ -394,6 +396,24 @@ namespace xamarinJKH.AppsConst
 
         private Account _selectedIdent;
 
+        #region Idents
+
+        private ObservableCollection<Account> _idents;
+
+        public ObservableCollection<Account> Idents
+        {
+            get { return _idents; }
+            set
+            {
+                _idents = value;
+                OnPropertyChanged("Idents");
+            }
+        }
+
+        #endregion
+
+        
+        
         public Account SelectedIdent
         {
             get { return _selectedIdent; }
@@ -401,6 +421,16 @@ namespace xamarinJKH.AppsConst
             {
                 _selectedIdent = value;
                 OnPropertyChanged("SelectedIdent");
+                if (_selectedIdent != null)
+                {
+                    if (string.IsNullOrEmpty(Phone))
+                    {
+                        Phone = _selectedIdent?.Phone;
+                    }
+
+                    FIO = _selectedIdent?.FIO;
+                }
+
             }
         }
 

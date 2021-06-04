@@ -421,7 +421,7 @@
                                                             HorizontalOptions="Center"
                                                             HorizontalTextAlignment="Center"
                                                             FontSize="15"
-                                                            ItemsSource="{Binding SelectedPremises.Accounts}"
+                                                            ItemsSource="{Binding Idents}"
                                                             ItemDisplayBinding="{Binding DisplayText}"
                                                             SelectedItem="{Binding SelectedIdent}" />
                                                         <xamarinJkh:IconView Source="ic_arrow_forward"
