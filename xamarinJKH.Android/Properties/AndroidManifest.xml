@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="4" android:versionName="3.85" package="sys_rom.ru.quiet_harbor" android:installLocation="preferExternal">
-	<uses-sdk android:minSdkVersion="18" android:targetSdkVersion="29" />
+	<uses-sdk android:minSdkVersion="18" android:targetSdkVersion="30" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.CAMERA" />
