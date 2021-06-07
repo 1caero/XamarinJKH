@@ -2024,7 +2024,7 @@
     <value>Источник документа:</value>
   </data>
   <data name="Term" xml:space="preserve">
-    <value>Срок:</value>
+    <value>Выполнить до:</value>
   </data>
   <data name="AttachFiles" xml:space="preserve">
     <value>Прикрепить файлы:</value>

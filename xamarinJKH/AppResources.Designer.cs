@@ -5555,7 +5555,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Срок:.
+        ///   Looks up a localized string similar to Выполнить до:.
         /// </summary>
         internal static string Term {
             get {

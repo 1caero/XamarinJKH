@@ -1042,6 +1042,12 @@ _appModel = new AddAppModel()
             LayoutPassApp.IsVisible = true;
             LayoutFloor.IsVisible = false;
             LayoutSetType.IsVisible = false;
+            LayoutValidity.IsVisible = !Settings.MobileSettings.hidePassRequestLifetime;
+            FrameConstantPass.IsVisible = !Settings.MobileSettings.disablePermanentPasses;
+            if (Settings.MobileSettings.disablePermanentPasses)
+            {
+                ButtonOneOffPass_OnClicked(FrameOneOffPass, null);
+            }
         } 
         void SetPassApp2()
         {

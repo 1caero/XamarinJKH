@@ -304,14 +304,14 @@
                                                                          ItemsSource="{Binding AllType}"
                                                                          ItemDisplayBinding="{Binding Name}"
                                                                          SelectedItem="{Binding SelectedType}" />
-                                            <xamarinJkh:IconView Source="ic_arrow_forward"
-                                                                 HeightRequest="12"
-                                                                 WidthRequest="12"
-                                                                 Rotation="90"
-                                                                 Margin="0,5,0,0"
-                                                                 VerticalOptions="Center"
-                                                                 Foreground="{Binding hex}"
-                                                                 HorizontalOptions="Center" />
+                                            <forms:SvgCachedImage
+                                                Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                                HeightRequest="12"
+                                                Rotation="90"
+                                                Margin="0,5,0,0"
+                                                HorizontalOptions="Start"
+                                                ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}"
+                                                VerticalOptions="Center" />
                                         </StackLayout>
                                         <Label
                                             HeightRequest="1"

@@ -56,6 +56,8 @@ namespace xamarinJKH.Server.RequestModel
         public bool DontShowDebt { get; set; }
         public bool registerWithoutSMS { get; set; }
         public bool сheckCrashSystem { get; set; }
+        public bool disablePermanentPasses { get; set; } // галку, отключающую в МП создание "Постоянных" пропусков. 
+        public bool hidePassRequestLifetime { get; set; } // галку, которая бы убирала в форме создания заявки на пропуск поле "срок действия пропуска"
 
         public List<MobileMenu> menu { get; set; }
         public string Error { get; set; }
