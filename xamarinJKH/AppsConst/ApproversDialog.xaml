@@ -55,7 +55,7 @@
                                 <Label Text="{Binding Name}"
                                        TextColor="Black"
                                        VerticalOptions="Center"
-                                       HorizontalTextAlignment="Center"
+                                       HorizontalTextAlignment="Start"
                                        FontSize="12" />
                             </StackLayout>
 

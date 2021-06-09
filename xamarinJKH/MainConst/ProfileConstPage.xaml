@@ -284,7 +284,37 @@
                                                    Margin="5, 0, 0, 0"
                                                    VerticalOptions="Center" />
                                         </StackLayout>
-                                        <StackLayout Orientation="Horizontal" Spacing="12" HorizontalOptions="FillAndExpand" Margin="10,10">
+                                        <Frame IsVisible="true" CornerRadius="15"
+                                           BackgroundColor="{x:DynamicResource MainColor}"
+                                           HasShadow="{AppThemeBinding Light=false, Dark=true}"
+                                           Margin="0, 10, 0, 10"
+                                           x:Name="BtnAddPin"
+                                           Padding="0">
+                                            <StackLayout
+                                            x:Name="BtnAddPinStackLayout"
+                                            Orientation="Horizontal"
+                                            Margin="0"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="FillAndExpand">
+                                                <!--<svg:SvgCachedImage x:Name="IconViewSave"
+                                                            Margin="0, 10, 0, 10"
+                                                            Source="resource://xamarinJKH.Resources.ic_check_mark.svg"
+                                                            HeightRequest="25"
+                                                                ReplaceStringMap="{Binding svg2, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF|#FFFFFF'}"
+                                                            WidthRequest="35"
+                                                            VerticalOptions="Center" />-->
+                                                <Label x:Name="BtnPinAdding"
+                                                   Text="{x:Static xamarinJkh:AppResources.CreatePinExplonation}"
+                                                   Margin="0, 15, 0, 15"
+                                                   FontSize="15"
+                                                   TextColor="White"
+                                                   FontAttributes="Bold"
+                                                   HorizontalOptions="FillAndExpand"
+                                                   VerticalOptions="Center"
+                                                       HorizontalTextAlignment="Center"/>
+                                            </StackLayout>
+                                        </Frame>
+                                        <StackLayout IsVisible="false" x:Name="PinEditStack" Orientation="Horizontal" Spacing="12" HorizontalOptions="FillAndExpand" Margin="10,10">
                                             <Label x:Name="EditPin" Text="{x:Static xamarinJkh:AppResources.EditPin}" TextColor="{x:DynamicResource MainColor}" FontSize="18" HorizontalOptions="StartAndExpand"></Label>
                                             <Label x:Name="DeletePin" Text="{x:Static xamarinJkh:AppResources.DeletePin}" TextColor="{x:DynamicResource MainColor}" FontSize="18" HorizontalOptions="End"></Label>
                                         </StackLayout>
