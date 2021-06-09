@@ -1,0 +1,1314 @@
+{
+  "project_info": {
+    "project_number": "218509099028",
+    "firebase_url": "https://newjkh-73c37.firebaseio.com",
+    "project_id": "newjkh-73c37",
+    "storage_bucket": "newjkh-73c37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:2e88c4e861125a23",
+        "android_client_info": {
+          "package_name": "ru.kolesnikov.smssendler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:feefc5c8d6d7d31cdf2701",
+        "android_client_info": {
+          "package_name": "sys_rom.ric_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:105a720b79383f23",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.ads_68_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:b903008c6dab322edf2701",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.avalon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:5dbdce59bd2c754e",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.cristal_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:53c9b8a133a311bd",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.dj_service_vl_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:2270b8eb65ce7c53df2701",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.easy_life_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:85a765cc75570142",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.electrosbit_saratov_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-bsqhtqvk6l875p5koqsv1t3sqqddmpj1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sys_rom.ru.electrosbit_saratov_app",
+            "certificate_hash": "276b9decdbcd3def8d004fde47bcbecd46077b84"
+          }
+        },
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:f55c9231345c8355df2701",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.energoprogress_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:0f59631a36e4e1b0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.fregat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:cc703cc0c5b8c659",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.jkh_pavlovsk_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:86e54719313392b0df2701",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.mobilni_mir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:dad41da6abc35b9ddf2701",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.monolit_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:2da21b1d54b26cf6",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.mup_irkc_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:e187393377f8ce9bdf2701",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.mup_vodokonal_sergposad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:e6bf64752c32c95b",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.naryan_mar_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:b631c516172e5b55",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.new_opaliha_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:fddd5636c9b87135",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.parus_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:2a15dea7ce0eec1a",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.pritom_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:35f5e9b6e4ae177ddf2701",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.rkc_samara_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:3cd9b0537792ed5d",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.rodnikmup_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:d0672249efeb0679",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.servicecom_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:939b09e27ccf5cea",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.sib_aliance_uk_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:cbda909eb5091bf2",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.spartak_uk_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:bcf152bd5bf6d8e0",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.stroimbud_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:0c7005bf669fe03d",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.teplovodoresources_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:1041c82e76c211c5",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.tsj_archangel_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:cc4b52b0f951a8e8",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.tsj_kosm11_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:1fc1d048090195dd",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.tsn_dnestr_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:56d322ed0229fef3",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.tsn_rible40_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:e48131608677821a",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.uk_garmonia_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:5055f8af3bf83aae",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.uk_paritet_khab_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:467801f32ff10c95",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.uk_perspectiva_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:1d9757bf220efaaddf2701",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.uk_upravdom_che_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218509099028:android:7e2c3e97339765ca",
+        "android_client_info": {
+          "package_name": "sys_rom.ru.uyut_service_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-oUauRlFdTx-N1U31BCYSQcfIgT1b2Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218509099028-df9cvedj7v1k4otq1s1sn02d68886p9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "218509099028-08tsokl7djt6aq3arrvbsvp2k9elfgmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "rom.best.tsn-ruble40",
+                "app_store_id": "1475867400"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
