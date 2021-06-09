@@ -15,6 +15,7 @@ namespace xamarinJKH.Server.DataModel
         public int StatusID { get; set; }
         public bool IsClosed { get; set; }
         public bool IsPerformed { get; set; }
+        public bool IsPaid { get; set; }
         public string Address { get; set; }
         // Флаг "Прочитана сотрудником"
         public bool IsReaded { get; set; }
@@ -41,5 +42,10 @@ namespace xamarinJKH.Server.DataModel
         public bool PassIsConstant { get; set; }
         // дата окончания
         public string PassExpiration { get; set; }
+        public string PaidRequestStatus { get; set; }
+        public bool IsPaidByUser { get; set; }
+        public int ShopId { get; set; }
+        
+        public string PaidRequestCompleteCode { get; set; }//  - код подтверждения(подтягивается только для жителя)
     }
 }

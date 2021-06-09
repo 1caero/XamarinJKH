@@ -86,7 +86,7 @@ namespace xamarinJKH
         {
             InitializeComponent();
             var config = RealmConfiguration.DefaultConfiguration;
-            config.SchemaVersion = 2;
+            config.SchemaVersion = 4;
             SyncfusionLicenseProvider.RegisterLicense(
                 "MzU2OTY1QDMxMzgyZTMzMmUzMEtpcFNHRnBKOUppMFJ1RUxjWTlsbUt6QzFOY3JyMUlGVi9McDJSSmQxVW89");
             PdfViewerResourceManager.Manager = new ResourceManager("xamarinJKH.Resources.Syncfusion.SfPdfViewer.XForms",

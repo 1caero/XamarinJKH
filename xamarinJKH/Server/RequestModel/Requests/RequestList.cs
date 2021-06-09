@@ -35,6 +35,7 @@ namespace xamarinJKH.Server.RequestModel
                 Name=requestInfo.Name,
                 Status=requestInfo.Status,
                 StatusID=requestInfo.StatusID,
+                IsPaid = requestInfo.IsPaid,
                 IsClosed=requestInfo.IsClosed,
                 IsPerformed=requestInfo.IsPerformed,
                 Address=requestInfo.Address,
@@ -49,6 +50,10 @@ namespace xamarinJKH.Server.RequestModel
                 HasPass=requestInfo.HasPass,
                 PassIsConstant=requestInfo.PassIsConstant,
                 PassExpiration=requestInfo.PassExpiration,
+                PaidRequestStatus = requestInfo.PaidRequestStatus,
+                IsPaidByUser = requestInfo.IsPaidByUser,
+                ShopId = requestInfo.ShopId,
+                PaidRequestCompleteCode = requestInfo.PaidRequestCompleteCode
             };
         }
         public static RequestInfo DaoToInfo(RequestInfoDao requesDao)
@@ -65,6 +70,7 @@ namespace xamarinJKH.Server.RequestModel
                 Status=requesDao.Status,
                 StatusID=requesDao.StatusID,
                 IsClosed=requesDao.IsClosed,
+                IsPaid = requesDao.IsPaid,
                 IsPerformed=requesDao.IsPerformed,
                 Address=requesDao.Address,
                 IsReaded=requesDao.IsReaded,
@@ -78,6 +84,10 @@ namespace xamarinJKH.Server.RequestModel
                 HasPass=requesDao.HasPass,
                 PassIsConstant=requesDao.PassIsConstant,
                 PassExpiration=requesDao.PassExpiration,
+                PaidRequestStatus = requesDao.PaidRequestStatus,
+                IsPaidByUser = requesDao.IsPaidByUser,
+                ShopId = requesDao.ShopId,
+                PaidRequestCompleteCode = requesDao.PaidRequestCompleteCode
             };
         }
         public int ID { get; set; }
