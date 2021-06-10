@@ -79,6 +79,9 @@ namespace xamarinJKH.MainConst
             InitializeComponent();
             Analytics.TrackEvent("Профиль сотрудника");
 
+          
+            
+
             isSave = Preferences.Get("isPass", false);
 
             var ub = Preferences.Get("FingerPrintsOnCo", "");
@@ -126,10 +129,47 @@ namespace xamarinJKH.MainConst
             var dp = new TapGestureRecognizer();
             dp.Tapped += async (s, e) =>
             {
-                Preferences.Remove("PinCode");
-                await DisplayAlert("", $"{AppResources.Info} {AppResources.PinDeleted}", "ОК");
+                var deleteResult = await DisplayActionSheet($" {AppResources.DeletePin}?", AppResources.Cancel, null, new[] { "ОК" });
+                if (deleteResult == "ОК")
+                {
+                    Preferences.Remove("PinCode");
+                    BtnAddPin.IsVisible = true;
+                    PinEditStack.IsVisible = false;
+                    await DisplayAlert(AppResources.Info, AppResources.PinDeleted, "ОК");
+                }
             };
             DeletePin.GestureRecognizers.Add(dp);
+
+            MessagingCenter.Subscribe<Object>(this, "PinAddedSucces", (sender) => {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    if (!string.IsNullOrWhiteSpace(Preferences.Get("PinCode", "")))
+                    {
+                        BtnAddPin.IsVisible = false;
+                        PinEditStack.IsVisible = true;
+                    }
+                });                
+            }
+            );
+
+            var addpinButtonGR = new TapGestureRecognizer();
+            addpinButtonGR.Tapped += async (s, e) =>
+             {
+                 await PopupNavigation.Instance.PushAsync(new EnterPin());
+                
+             };
+            BtnAddPin.GestureRecognizers.Add(addpinButtonGR);
+
+            if (string.IsNullOrWhiteSpace(Preferences.Get("PinCode", "")))
+            {
+                BtnAddPin.IsVisible = true;
+                PinEditStack.IsVisible = false;
+            }
+            else
+            {
+                BtnAddPin.IsVisible = false;
+                PinEditStack.IsVisible = true;
+            }
 
             var createPush = new TapGestureRecognizer();
             createPush.Tapped += async (s, e) =>

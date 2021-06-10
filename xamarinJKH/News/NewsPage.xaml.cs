@@ -164,7 +164,11 @@ namespace xamarinJKH.News
             };
             BackStackLayout.GestureRecognizers.Add(backClick);
             SetText();
-            NewsInfos = new ObservableCollection<NewsInfo>(Settings.EventBlockData.News);
+            if (Settings.EventBlockData!=null && Settings.EventBlockData.News != null)
+                NewsInfos = new ObservableCollection<NewsInfo>(Settings.EventBlockData.News);
+            else
+                NewsInfos = new ObservableCollection<NewsInfo>();
+
             this.BindingContext = this;
             NotificationList.BackgroundColor = Color.Transparent;
             NotificationList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));

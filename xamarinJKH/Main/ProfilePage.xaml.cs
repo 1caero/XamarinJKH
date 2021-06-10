@@ -96,14 +96,62 @@ namespace xamarinJKH.Main
             };
             EditPin.GestureRecognizers.Add(ep);
 
+            //var dp = new TapGestureRecognizer();
+            //dp.Tapped += async (s, e) =>
+            //{
+            //    var deleteResult = await DisplayActionSheet($" {AppResources.DeletePin}?", AppResources.Cancel, null, new[] { "ОК" });
+            //    if (deleteResult == "ОК")
+            //    {
+            //        Preferences.Remove("PinCode");
+            //        await DisplayAlert(AppResources.Info, AppResources.PinDeleted, "ОК");
+            //    }                
+            //};
+            //DeletePin.GestureRecognizers.Add(dp);
+
             var dp = new TapGestureRecognizer();
             dp.Tapped += async (s, e) =>
             {
-                Preferences.Remove("PinCode");
-                await DisplayAlert("", $"{AppResources.Info} {AppResources.PinDeleted}", "ОК");
+                var deleteResult = await DisplayActionSheet($" {AppResources.DeletePin}?", AppResources.Cancel, null, new[] { "ОК" });
+                if (deleteResult == "ОК")
+                {
+                    Preferences.Remove("PinCode");
+                    BtnAddPin.IsVisible = true;
+                    PinEditStack.IsVisible = false;
+                    await DisplayAlert(AppResources.Info, AppResources.PinDeleted, "ОК");
+                }
             };
             DeletePin.GestureRecognizers.Add(dp);
 
+            MessagingCenter.Subscribe<Object>(this, "PinAddedSucces", (sender) => {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    if (!string.IsNullOrWhiteSpace(Preferences.Get("PinCode", "")))
+                    {
+                        BtnAddPin.IsVisible = false;
+                        PinEditStack.IsVisible = true;
+                    }
+                });
+            }
+            );
+
+            var addpinButtonGR = new TapGestureRecognizer();
+            addpinButtonGR.Tapped += async (s, e) =>
+            {
+                await PopupNavigation.Instance.PushAsync(new EnterPin());
+
+            };
+            BtnAddPin.GestureRecognizers.Add(addpinButtonGR);
+
+            if (string.IsNullOrWhiteSpace(Preferences.Get("PinCode", "")))
+            {
+                BtnAddPin.IsVisible = true;
+                PinEditStack.IsVisible = false;
+            }
+            else
+            {
+                BtnAddPin.IsVisible = false;
+                PinEditStack.IsVisible = true;
+            }
 
             FrameBtnExit.GestureRecognizers.Add(exitClick);
             var saveClick = new TapGestureRecognizer();
