@@ -25,6 +25,7 @@ using Xamarin.Forms.Xaml;
 using xamarinJKH.DialogViews;
 using xamarinJKH.InterfacesIntegration;
 using xamarinJKH.Server;
+using xamarinJKH.Server.DataModel;
 using xamarinJKH.Server.RequestModel;
 using xamarinJKH.Utils;
 using xamarinJKH.Utils.ReqiestUtils;
@@ -1177,7 +1178,8 @@ namespace xamarinJKH.AppsConst
                     {
                         var res = await _server.SetReadedFlag(request.ID);
                         var instance = Realm.GetInstance();
-                        instance.Write(() => RequestInfo.InfoToDao(request).IsReaded = true);
+                        var requestInfoDao = instance.Find<RequestInfoDao>(request.ID);
+                        instance.Write(() => requestInfoDao.IsReaded = true);
                         if (Settings.MobileSettings.requestTypeForPassRequest > 0)
                         {
                             if (request.TypeID == Settings.MobileSettings.requestTypeForPassRequest)
@@ -1185,7 +1187,7 @@ namespace xamarinJKH.AppsConst
                                 MessagingCenter.Send<Object, int>(this, "SetRequestsPassAmount", -1);
                             }
                         }
-                        Device.StartTimer(new TimeSpan(0, 0, 1), () =>
+                        Device.StartTimer(new TimeSpan(0, 0, 0), () =>
                         {
                             RequestUtils.UpdateRequestCons();
                             return false; // runs again, or false to stop

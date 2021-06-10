@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AiForms.Dialogs;
@@ -585,6 +586,14 @@ namespace xamarinJKH.MainConst
 
         async void getApps()
         {
+            bool switchRead = Preferences.Get("SwitchAppRead",false);
+            bool switchApp = Preferences.Get("SwitchApp",false);
+            bool switchHide = Preferences.Get("SwitchAppHidePerfom",false);
+                
+            SwitchApp.IsToggled = switchApp;
+            SwitchAppRead.IsToggled = switchRead;
+            SwitchAppHidePerfom.IsToggled = switchHide;
+
             var requestInfoDaos = _realm.All<RequestInfoDao>();
 
             if (requestInfoDaos.Any())
@@ -594,13 +603,7 @@ namespace xamarinJKH.MainConst
                 RequestDefault =new List<RequestInfoDao>( requestInfoDaos).ConvertAll(
                     new Converter<RequestInfoDao, RequestInfo>(RequestInfo.DaoToInfo));
                 
-                bool switchRead = Preferences.Get("SwitchAppRead",false);
-                bool switchApp = Preferences.Get("SwitchApp",false);
-                bool switchHide = Preferences.Get("SwitchAppHidePerfom",false);
                 
-                SwitchApp.IsToggled = switchApp;
-                SwitchAppRead.IsToggled = switchRead;
-                SwitchAppHidePerfom.IsToggled = switchHide;
                 
                 SetReaded();
                 Device.StartTimer(new TimeSpan(0, 0, 1), () =>

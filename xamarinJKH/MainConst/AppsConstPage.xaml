@@ -474,13 +474,13 @@
                                     HeightRequest="25"
                                     x:Name="ImageHide"
                                     WidthRequest="25"
-                                    Rotation="90"
+                                    Rotation="270"
                                     VerticalOptions="CenterAndExpand"
                                     HorizontalOptions="FillAndExpand"
                                     Margin="0"
                                     ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}"/>
                                 </StackLayout>
-                                <StackLayout x:Name="StackLayoutHide">
+                                <StackLayout x:Name="StackLayoutHide" IsVisible="False">
                                     <StackLayout Orientation="Horizontal"
                                                  IsVisible="False"
                                                  Margin="0,0,0,10"
