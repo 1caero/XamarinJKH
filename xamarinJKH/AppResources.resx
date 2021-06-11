@@ -1415,7 +1415,7 @@
     <value>Легковой</value>
   </data>
   <data name="PassGazele" xml:space="preserve">
-    <value>Газель</value>
+    <value>Газель и ее аналоги</value>
   </data>
   <data name="PassCargo" xml:space="preserve">
     <value>Грузовой</value>
@@ -1952,7 +1952,7 @@
     <value>Номер счёта</value>
   </data>
   <data name="PassMixer" xml:space="preserve">
-    <value>Миксер</value>
+    <value>Строительная техника</value>
   </data>
   <data name="AutoColor" xml:space="preserve">
     <value>Цвет</value>

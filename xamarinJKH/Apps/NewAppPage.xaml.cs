@@ -299,6 +299,7 @@ _appModel = new AddAppModel()
                 TSBrandList.IsVisible = false;
             }
             TSBrandList.EndRefresh();
+            _passApp.CarBrand = e.NewTextValue;
         }
 
         void SetVisibleLayout(string listsd)

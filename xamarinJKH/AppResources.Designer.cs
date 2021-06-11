@@ -4069,7 +4069,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Газель.
+        ///   Looks up a localized string similar to Газель и ее аналоги.
         /// </summary>
         internal static string PassGazele {
             get {
@@ -4087,7 +4087,7 @@ namespace xamarinJKH {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Миксер.
+        ///   Looks up a localized string similar to Строительная техника.
         /// </summary>
         internal static string PassMixer {
             get {

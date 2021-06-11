@@ -32,7 +32,7 @@
                     <LinearItemsLayout Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.EmptyView>
-                    <Label Text="Отсутствутет история списания бонусов"
+                    <Label Text="Отсутствует история списания бонусов"
                        VerticalTextAlignment="Center"
                        Padding="40"
                        HorizontalTextAlignment="Center"/>
