@@ -42,6 +42,7 @@ namespace xamarinJKH.DialogViews
                 Preferences.Set("PinCode", pinCodeText);
                 Preferences.Set("PinAddNeed", false);
                 await DisplayAlert("", $"{AppResources.PinField} {AppResources.Saved}", "ОК");
+                MessagingCenter.Send<object>(this, "PinAddedSucces");
                 await PopupNavigation.Instance.PopAsync();
             }
             else
