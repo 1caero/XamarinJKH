@@ -173,7 +173,7 @@
                                            Grid.Column="0"
                                            HorizontalOptions="StartAndExpand"
                                            Color="{Binding hex}" />
-                        <xamarinJkh:BordlessEditor x:Name="EntryMess" 
+                        <xamarinJkh:BordlessEditorChat x:Name="EntryMess"  Focused="EntryMess_Focused"
                                                    FontSize="18"
                                                    VerticalOptions="CenterAndExpand"
                                                    Text=""

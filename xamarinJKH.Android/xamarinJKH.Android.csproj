@@ -187,6 +187,7 @@
     <Compile Include="CustomRenderers\BorderlessDatePickerMonitorRenderer.cs" />
     <Compile Include="CustomRenderers\BorderlessDatePickerRenderer.cs" />
     <Compile Include="CustomRenderers\BorderlessPickerRenderer.cs" />
+    <Compile Include="CustomRenderers\BordlessEditorChatRender.cs" />
     <Compile Include="CustomRenderers\BordlessEditorRender.cs" />
     <Compile Include="CustomRenderers\SettingsServiceRenderer.cs" />
     <Compile Include="CustomRenderers\CounterEntryNewRenderer.cs" />

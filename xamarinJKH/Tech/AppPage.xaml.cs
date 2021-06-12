@@ -314,6 +314,12 @@ namespace xamarinJKH.Tech
                 default:
                     break;
             }
+            var hideKeyBoardgesture = new TapGestureRecognizer();
+            hideKeyBoardgesture.Tapped += async (s, e) =>
+            {
+                MessagingCenter.Send<AppPage>(this, "FocusKeyboardStatus");
+            };
+            baseForApp.GestureRecognizers.Add(hideKeyBoardgesture);
 
             NavigationPage.SetHasNavigationBar(this, false);
             var backClick = new TapGestureRecognizer();
@@ -680,6 +686,7 @@ namespace xamarinJKH.Tech
         {
             try
             {
+                
                 string message = EntryMess.Text;
                 if (!string.IsNullOrWhiteSpace(message))
                 {
@@ -892,7 +899,7 @@ namespace xamarinJKH.Tech
 
         private void EntryMess_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var entry = sender as BordlessEditor;
+            var entry = sender as BordlessEditorChat;
             if(e.NewTextValue==""&& Device.RuntimePlatform != Device.Android)
             {
               Device.BeginInvokeOnMainThread(()=>  entry.HeightRequest = MessageBoxStartHeigth);
@@ -1031,6 +1038,11 @@ namespace xamarinJKH.Tech
                     progressRecognition.IsVisible = false;
                 }
             });
+        }
+
+        private void EntryMess_Focused(object sender, FocusEventArgs e)
+        {
+            MessagingCenter.Send<AppPage>(this, "SetKeyboardFocusStatic");
         }
     }
 }

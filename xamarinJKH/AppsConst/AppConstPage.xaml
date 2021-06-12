@@ -155,7 +155,7 @@
                             <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_add_file.svg"
                                                 x:Name="IconViewAddFile"
                                                 ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}}"/>
-                            <xamarinJkh:BordlessEditor x:Name="EntryMess"
+                            <xamarinJkh:BordlessEditorChat x:Name="EntryMess"
                                                        Grid.Column="1"
                                                FontSize="18"
                                                VerticalOptions="Center"
