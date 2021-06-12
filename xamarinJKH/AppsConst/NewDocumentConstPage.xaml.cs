@@ -88,7 +88,7 @@ namespace xamarinJKH.AppsConst
                 try
                 {
                     StackLayout container = (StackLayout) s;
-                    StackLayout pickerContainer = (StackLayout) container.Children[0];
+                    Grid pickerContainer = (Grid) container.Children[0];
                     BorderlessPicker picker = (BorderlessPicker) pickerContainer.Children[0];
                     Device.BeginInvokeOnMainThread(action: async () => picker.Focus());
                 }
@@ -327,9 +327,9 @@ namespace xamarinJKH.AppsConst
 
         #region Houses
 
-        private ObservableCollection<HouseProfile> _hpuses;
+        private List<HouseProfile> _hpuses;
 
-        public ObservableCollection<HouseProfile> Houses
+        public List<HouseProfile> Houses
         {
             get { return _hpuses; }
             set
@@ -384,7 +384,7 @@ namespace xamarinJKH.AppsConst
             set
             {
                 _selectedPremises = value;
-                Idents = new ObservableCollection<Account>(_selectedPremises.Accounts);
+                Idents = new List<Account>(_selectedPremises.Accounts);
                 SelectedIdent = _selectedPremises.Accounts.FirstOrDefault();
                 OnPropertyChanged("SelectedPremises");
             }
@@ -398,9 +398,9 @@ namespace xamarinJKH.AppsConst
 
         #region Idents
 
-        private ObservableCollection<Account> _idents;
+        private List<Account> _idents;
 
-        public ObservableCollection<Account> Idents
+        public List<Account> Idents
         {
             get { return _idents; }
             set
@@ -819,7 +819,7 @@ namespace xamarinJKH.AppsConst
             SelectedPriority = Priority.Count > 1 ? Priority[1] : Priority.FirstOrDefault();
             Approvers = new ObservableCollection<DocumentApproverViewModel>(dispatchers.Where(x => x.Name != null)
                 .Select(x => new DocumentApproverViewModel(x)).OrderBy(x => x.Name));
-            Houses = new ObservableCollection<HouseProfile>(itemsList.Data.Where(x => x.Address != null));
+            Houses = new List<HouseProfile>(itemsList.Data.Where(x => x.Address != null));
             SourceTypes = new ObservableCollection<NamedValue>(requestSourceTypes);
             Dispatchers = new ObservableCollection<ConsultantInfo>(dispatchers.Where(x => x.Name != null));
             CloseDialogCommand = new Command(CloseDialogAction);
