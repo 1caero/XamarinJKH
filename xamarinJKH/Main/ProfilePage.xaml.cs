@@ -481,7 +481,10 @@ namespace xamarinJKH.Main
             {
                 _ = await Navigation.PopAsync();
             }
-            catch { }
+            catch
+            {
+                _ = await Navigation.PopModalAsync();
+            }
         }
 
         private async void Russian_CheckedChanged(object sender, CheckedChangedEventArgs e)

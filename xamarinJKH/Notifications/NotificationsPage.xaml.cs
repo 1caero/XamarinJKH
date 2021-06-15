@@ -150,8 +150,15 @@ namespace xamarinJKH
             };
             SetText();
             if(Settings.EventBlockData!=null && Settings.EventBlockData.Announcements!=null)
-            Settings.EventBlockData.Announcements = Settings.EventBlockData.Announcements.OrderByDescending(x => DateTime.ParseExact(x.Created, "dd.MM.yyyy", null)).ToList();
-            Notifications = Settings.EventBlockData.Announcements.Take(3).ToList();
+                Settings.EventBlockData.Announcements = Settings.EventBlockData.Announcements.OrderByDescending(x => DateTime.ParseExact(x.Created, "dd.MM.yyyy", null)).ToList();
+            if (Settings.EventBlockData != null && Settings.EventBlockData?.Announcements?.Count > 3)
+            {
+                Notifications = Settings.EventBlockData.Announcements.Take(3).ToList();
+            }
+            else
+            {
+                Notifications = Settings.EventBlockData?.Announcements;
+            }
             this.BindingContext = this;
             NotificationList.BackgroundColor = Color.Transparent;
             NotificationList.Effects.Add(Effect.Resolve("MyEffects.ListViewHighlightEffect"));

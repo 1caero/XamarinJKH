@@ -44,7 +44,7 @@ namespace xamarinJKH
             profile.Tapped += async (s, e) =>
             {
                 if (Navigation.NavigationStack.FirstOrDefault(x => x is ProfilePage) == null)
-                    await Navigation.PushAsync(new ProfilePage());
+                    await Navigation.PushModalAsync(new ProfilePage());
             };
             IconViewProfile.GestureRecognizers.Add(profile);
 
@@ -53,7 +53,7 @@ namespace xamarinJKH
 
         async void Tech(object sender, EventArgs args)
         {
-            await Navigation.PushAsync(new AppPage());
+            await Navigation.PushModalAsync(new AppPage());
         }
 
         void Back(object sender, EventArgs args)
