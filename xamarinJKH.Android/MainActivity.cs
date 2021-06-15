@@ -9,6 +9,7 @@ using Android.Provider;
 using Android.Speech;
 using Android.Support.V4.App;
 using Android.Util;
+using Android.Views;
 using FFImageLoading.Forms.Platform;
 using MediaManager;
 using Messier16.Forms.Android.Controls;
@@ -183,6 +184,31 @@ namespace xamarinJKH.Droid
 
             base.OnActivityResult(requestCode, resultCode, data);
         }
-        
+
+        private bool _lieAboutCurrentFocus;
+        public override bool DispatchTouchEvent(MotionEvent ev)
+        {
+            var focused = CurrentFocus;
+            bool customEntryRendererFocused = focused != null && focused.Parent is BordlessEditorChatRender;
+
+            _lieAboutCurrentFocus = customEntryRendererFocused;
+            var result = base.DispatchTouchEvent(ev);
+            _lieAboutCurrentFocus = false;
+
+            return result;
+        }
+
+        public override Android.Views.View CurrentFocus
+        {
+            get
+            {
+                if (_lieAboutCurrentFocus)
+                {
+                    return null;
+                }
+
+                return base.CurrentFocus;
+            }
+        }
     }
 }
