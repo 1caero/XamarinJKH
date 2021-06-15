@@ -276,8 +276,10 @@ namespace xamarinJKH.Pays
 
         private async void EntrySum_OnTextChanged(object sender, TextChangedEventArgs e)
         {
+            
            if(!string.IsNullOrWhiteSpace(e.NewTextValue) && !isDigit(e.NewTextValue.Last()))
             {
+                Analytics.TrackEvent($"ОИзменение суммы.  {e.NewTextValue}");
                 if (e.OldTextValue.Length< e.NewTextValue.Length && e.OldTextValue.Contains(e.NewTextValue.Last()))
                 {
                     Device.BeginInvokeOnMainThread(() =>
@@ -418,8 +420,9 @@ namespace xamarinJKH.Pays
                 if (sumPay > 0)
                 {
                     Analytics.TrackEvent("Оплата " + paymentSystem);
+                    bool insurance = !account.DontShowInsurance && (SwitchInsurance.IsToggled && SwitchInsurance.IsVisible);
                     if (Navigation.NavigationStack.FirstOrDefault(x => x is PayServicePage) == null)
-                        await Navigation.PushAsync(new PayServicePage(account.AccountID, sumPay, null, SwitchInsurance.IsToggled && SwitchInsurance.IsVisible, paymentSystem));
+                        await Navigation.PushAsync(new PayServicePage(account.AccountID, sumPay, null, insurance, paymentSystem));
                 }
                 else
                 {
