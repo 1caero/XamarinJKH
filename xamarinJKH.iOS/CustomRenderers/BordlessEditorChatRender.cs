@@ -25,8 +25,8 @@ namespace xamarinJKH.iOS.CustomRenderers
                 Control.InputAccessoryView = null;
                 Control.ShouldEndEditing += DisableHidingKeyboard;
 
-                MessagingCenter.Unsubscribe<AppPage>(this, "SetKeyboardFocusStatic");
-                MessagingCenter.Subscribe<AppPage>(this, "SetKeyboardFocusStatic", (sender) =>
+                MessagingCenter.Unsubscribe<object>(this, "SetKeyboardFocusStatic");
+                MessagingCenter.Subscribe<object>(this, "SetKeyboardFocusStatic", (sender) =>
                 {
 
                     if (Control != null)
@@ -34,11 +34,12 @@ namespace xamarinJKH.iOS.CustomRenderers
                         Control.ShouldEndEditing += DisableHidingKeyboard;
                     }
 
-                    //MessagingCenter.Unsubscribe<AppPage>(this, "SetKeyboardFocusStatic");
+                    //MessagingCenter.Unsubscribe<object>(this, "SetKeyboardFocusStatic");
                 });
 
-                MessagingCenter.Unsubscribe<AppPage>(this, "FocusKeyboardStatus");
-                MessagingCenter.Subscribe<AppPage>(this, "FocusKeyboardStatus", (sender) =>
+
+                MessagingCenter.Unsubscribe<object>(this, "FocusKeyboardStatus");
+                MessagingCenter.Subscribe<object>(this, "FocusKeyboardStatus", (sender) =>
                 {
 
                     if (Control != null)
@@ -46,7 +47,7 @@ namespace xamarinJKH.iOS.CustomRenderers
                         Control.ShouldEndEditing += EnableHidingKeyboard;
                     }
 
-                    //MessagingCenter.Unsubscribe<AppPage>(this, "FocusKeyboardStatus");
+                    //MessagingCenter.Unsubscribe<object>(this, "FocusKeyboardStatus");
                 });
             }                
         }

@@ -583,6 +583,14 @@ namespace xamarinJKH.AppsConst
 
                 }
             });
+
+            var hideKeyBoardgesture = new TapGestureRecognizer();
+            hideKeyBoardgesture.Tapped += async (s, e) =>
+            {
+                MessagingCenter.Send<object>(this, "FocusKeyboardStatus");
+            };
+            baseForApp.GestureRecognizers.Add(hideKeyBoardgesture);
+
             NavigationPage.SetHasNavigationBar(this, false);
             var backClick = new TapGestureRecognizer();
             backClick.Tapped += async (s, e) => { await ClosePage(); };
@@ -1373,6 +1381,12 @@ namespace xamarinJKH.AppsConst
             }
 
             await Dialog.Instance.ShowAsync(new AppConstDialogWindow(Items, request.ID, request.ShopId));
+        }
+
+        
+        private void EntryMess_Focused(object sender, FocusEventArgs e)
+        {
+            MessagingCenter.Send<object>(this, "SetKeyboardFocusStatic");
         }
     }
 }

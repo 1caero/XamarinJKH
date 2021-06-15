@@ -367,6 +367,13 @@ namespace xamarinJKH.Apps
                     requestInfo.IsReadedByClient = true;
                 });
             }
+
+            var hideKeyBoardgesture = new TapGestureRecognizer();
+            hideKeyBoardgesture.Tapped += async (s, e) =>
+            {
+                MessagingCenter.Send<object>(this, "FocusKeyboardStatus");
+            };
+            baseForApp.GestureRecognizers.Add(hideKeyBoardgesture);
         }
         
     async void TranscribeClicked(object sender, EventArgs e)
@@ -961,6 +968,11 @@ namespace xamarinJKH.Apps
         private void ImageButton_OnReleased(object sender, EventArgs e)
         {
             TranscribeClicked(sender, e);
+        }
+
+        private void EntryMess_Focused(object sender, FocusEventArgs e)
+        {
+            MessagingCenter.Send<object>(this, "SetKeyboardFocusStatic");
         }
     }
 }

@@ -163,7 +163,8 @@
                                                Placeholder="{x:Static xamarinJkh:AppResources.ChatPlaceholder}"
                                                TextColor="Black"
                                                HorizontalOptions="FillAndExpand" 
-                                               AutoSize="TextChanges"/>
+                                               AutoSize="TextChanges"
+                                                           Focused="EntryMess_Focused"/>
                             <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_send_mess.svg"
                                                 Grid.Column="2"
                                                 WidthRequest="25"

@@ -212,7 +212,8 @@
                                                    TextColor="#A2A2A2"
                                                    MinimumHeightRequest="35"
                                                    HorizontalOptions="FillAndExpand" 
-                                                   AutoSize="TextChanges"/>
+                                                   AutoSize="TextChanges"
+                                                       Focused="EntryMess_Focused"/>
                         <Grid Grid.Column="2"
                         >
                         <svg:SvgCachedImage
