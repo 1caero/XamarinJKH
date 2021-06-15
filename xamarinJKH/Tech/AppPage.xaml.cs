@@ -317,7 +317,10 @@ namespace xamarinJKH.Tech
             var hideKeyBoardgesture = new TapGestureRecognizer();
             hideKeyBoardgesture.Tapped += async (s, e) =>
             {
-                MessagingCenter.Send<object>(this, "FocusKeyboardStatus");
+                if (Device.RuntimePlatform == Device.iOS)
+                    MessagingCenter.Send<object>(this, "FocusKeyboardStatus");
+                else
+                    EntryMess.Unfocus();
             };
             baseForApp.GestureRecognizers.Add(hideKeyBoardgesture);
 
