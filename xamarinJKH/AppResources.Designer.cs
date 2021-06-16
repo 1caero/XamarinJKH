@@ -5564,6 +5564,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Введите текст(обязательно для заполнения).
+        /// </summary>
+        internal static string TextRequired {
+            get {
+                return ResourceManager.GetString("TextRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не поступает звонок?  Получите текстовое сообщение:.
         /// </summary>
         internal static string TextSms {

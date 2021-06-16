@@ -1933,4 +1933,7 @@
   <data name="PinDeleted" xml:space="preserve">
     <value>Пін-код видалено</value>
   </data>
+  <data name="TextRequired" xml:space="preserve">
+    <value>Введіть текст (обов'язково для заповнення)</value>
+  </data>
 </root>

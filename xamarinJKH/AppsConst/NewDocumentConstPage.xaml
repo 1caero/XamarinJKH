@@ -101,7 +101,7 @@
                                                                    TextChanged="BordlessEditor_OnTextChanged"
                                                                    IsSpellCheckEnabled="True"
                                                                    PlaceholderColor="#A2A2A2"
-                                                                   Placeholder="{x:Static xamarinJkh:AppResources.SfPdfViewerPlaceHolderText}"
+                                                                   Placeholder="{x:Static xamarinJkh:AppResources.TextRequired}"
                                                                    TextColor="Black"
                                                                    HorizontalOptions="FillAndExpand" />
                                     </pancakeView:PancakeView>                                    

@@ -2062,4 +2062,7 @@
   <data name="PinDeleted" xml:space="preserve">
     <value>Пин-код удален</value>
   </data>
+  <data name="TextRequired" xml:space="preserve">
+    <value>Введите текст(обязательно для заполнения)</value>
+  </data>
 </root>

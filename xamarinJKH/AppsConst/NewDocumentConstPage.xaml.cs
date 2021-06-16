@@ -69,7 +69,11 @@ namespace xamarinJKH.AppsConst
         {
             InitializeComponent();
             ClosePageCommand = new Command(async () => await Navigation.PopAsync());
-            BindingContext = AddDocumentModel = new AddDocumentModel(ClosePageCommand);
+            AddDocumentModel = new AddDocumentModel(ClosePageCommand);
+            AddDocumentModel.IsEnabled = false;
+            BindingContext = AddDocumentModel;// = new AddDocumentModel(ClosePageCommand);
+            
+            //BtnMove.IsEnabled = false;
 
             switch (Device.RuntimePlatform)
             {
@@ -165,9 +169,9 @@ namespace xamarinJKH.AppsConst
 
         #region DocumentTypes
 
-        private ObservableCollection<DocumentType> _documentTypes;
+        private List<DocumentType> _documentTypes;
 
-        public ObservableCollection<DocumentType> DocumentTypes
+        public List<DocumentType> DocumentTypes
         {
             get { return _documentTypes; }
             set
@@ -384,8 +388,15 @@ namespace xamarinJKH.AppsConst
             set
             {
                 _selectedPremises = value;
-                Idents = new List<Account>(_selectedPremises.Accounts);
-                SelectedIdent = _selectedPremises.Accounts.FirstOrDefault();
+                if(value!=null)
+                {
+                    Idents = new List<Account>(_selectedPremises.Accounts);
+                    SelectedIdent = _selectedPremises.Accounts.FirstOrDefault();
+                }
+                else
+                {
+                    Idents = null; SelectedIdent = null;
+                }
                 OnPropertyChanged("SelectedPremises");
             }
         }
@@ -430,6 +441,11 @@ namespace xamarinJKH.AppsConst
 
                     FIO = _selectedIdent?.FIO;
                 }
+                else
+                {
+                    Phone = null;
+                    FIO = null;
+                }
 
             }
         }
@@ -438,9 +454,9 @@ namespace xamarinJKH.AppsConst
 
         #region SourceTypes
 
-        private ObservableCollection<NamedValue> _SourceTypes;
+        private List<NamedValue> _SourceTypes;
 
-        public ObservableCollection<NamedValue> SourceTypes
+        public List<NamedValue> SourceTypes
         {
             get { return _SourceTypes; }
             set
@@ -558,7 +574,7 @@ namespace xamarinJKH.AppsConst
         {
             get { return _isEnabled; }
             set
-            {
+            {                
                 _isEnabled = value;
                 OnPropertyChanged("IsEnabled");
             }
@@ -592,6 +608,7 @@ namespace xamarinJKH.AppsConst
             set
             {
                 _textChangedCommand = value;
+                
                 OnPropertyChanged("TextChangedCommand");
             }
         }
@@ -815,12 +832,12 @@ namespace xamarinJKH.AppsConst
             var dispatchers = await Server.GetConsultants();
             ItemsList<HouseProfile> itemsList = await Server.GetHouse();
             Priority = new ObservableCollection<NamedValue>(Settings.PrioritetsApp);
-            DocumentTypes = new ObservableCollection<DocumentType>(resultTypes);
+            DocumentTypes =  resultTypes.Any()? resultTypes:null;
             SelectedPriority = Priority.Count > 1 ? Priority[1] : Priority.FirstOrDefault();
             Approvers = new ObservableCollection<DocumentApproverViewModel>(dispatchers.Where(x => x.Name != null)
                 .Select(x => new DocumentApproverViewModel(x)).OrderBy(x => x.Name));
             Houses = new List<HouseProfile>(itemsList.Data.Where(x => x.Address != null));
-            SourceTypes = new ObservableCollection<NamedValue>(requestSourceTypes);
+            SourceTypes = requestSourceTypes;
             Dispatchers = new ObservableCollection<ConsultantInfo>(dispatchers.Where(x => x.Name != null));
             CloseDialogCommand = new Command(CloseDialogAction);
             CloseFileDialogCommand = new Command(CloseFileDialogAction);
@@ -830,12 +847,17 @@ namespace xamarinJKH.AppsConst
             RemoveFileCommand = new Command(RemoveFileAction);
             TextChangedCommand = new Command(IsEnabledCreate);
             AddDocumentCommand = new Command(AddDocumentAction);
+            IsEnabledCreate();
         }
 
         private async void AddDocumentAction()
         {
             IsBusy = true;
-
+            if (string.IsNullOrWhiteSpace(TextDocument))
+            {
+                IsBusy = false;
+                return;
+            }
             var arguments = new AddDocumentArguments()
             {
                 AccountId = SelectedIdent?.ID,
@@ -915,7 +937,8 @@ namespace xamarinJKH.AppsConst
 
         private void IsEnabledCreate()
         {
-            IsEnabled = !string.IsNullOrWhiteSpace(TextDocument) && SelectedDocumentType != null;
+            bool f = string.IsNullOrWhiteSpace(TextDocument) || SelectedDocumentType == null;
+            IsEnabled = !f;// !string.IsNullOrWhiteSpace(TextDocument) && SelectedDocumentType != null;
         }
 
         private async void RemoveFileAction(object obj)
