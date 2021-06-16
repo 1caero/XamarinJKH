@@ -12,7 +12,7 @@ namespace xamarinJKH.AppsConst
         public string ID { get; set; }
 
         public bool HasSubTypes { get; set; }
-        public List<NamedValue> SubTypes { get; set; }
+        public List<RequestType> SubTypes { get; set; }
         public bool IsVisible { get; set; }
 
         bool selected;

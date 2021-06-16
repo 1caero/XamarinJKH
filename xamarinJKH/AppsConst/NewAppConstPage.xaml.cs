@@ -523,7 +523,25 @@ namespace xamarinJKH.AppsConst
             
             public Color hex { get; set; }
             public ObservableCollection<NamedValue> CreateTypes { get; set; }
-            public ObservableCollection<NamedValue> PodTypes { get; set; } = new ObservableCollection<NamedValue>();
+
+            #region IsVisibleDetails
+
+            private bool _isVisibleDetails;
+
+            public bool IsVisibleDetails
+            {
+                get { return _isVisibleDetails; }
+                set
+                {
+                    _isVisibleDetails = value;
+                    OnPropertyChanged("IsVisibleDetails");
+                }
+            }
+
+            #endregion
+
+            
+            public ObservableCollection<RequestType> PodTypes { get; set; } = new ObservableCollection<RequestType>();
             public AddAppConstModel()
             {
                 Ident = true;
@@ -575,14 +593,25 @@ namespace xamarinJKH.AppsConst
                 }
             }
             
-            NamedValue _podTypSelected;
-            public NamedValue PodTypSelected
+            RequestType _podTypSelected;
+            public RequestType PodTypSelected
             {
                 get => _podTypSelected;
                 set
                 {
                     _podTypSelected = value;
                     OnPropertyChanged("PodTypSelected");
+                    if (_podTypSelected != null) IsVisibleDetails = _podTypSelected.HasSubTypes;
+                }
+            }
+            RequestType _detailsPodTypSelected;
+            public RequestType DetailsPodTypSelected
+            {
+                get => _detailsPodTypSelected;
+                set
+                {
+                    _detailsPodTypSelected = value;
+                    OnPropertyChanged("DetailsPodTypSelected");
                 }
             }
         }
@@ -593,7 +622,8 @@ namespace xamarinJKH.AppsConst
             FrameBtnAdd.IsVisible = false;
             progress.IsVisible = true;
             string ident = EntryLS.Text;
-
+            int? subTypeId = _model.PodTypSelected?.ID;
+            int? detailsSubTypeId = _model.DetailsPodTypSelected?.ID;
             
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
@@ -635,14 +665,14 @@ namespace xamarinJKH.AppsConst
                             House = null;
                             break;
                     }
-                    int? SubTypeID = _model.PodTypSelected?.ID;
+                    
                     string phone =  !string.IsNullOrEmpty(EntryPhone.Text) ? EntryPhone.Text
                         .Replace("+", "")
                         .Replace(" ", "")
                         .Replace("(", "")
                         .Replace(")", "")
                         .Replace("-", "") : null;;
-                    IDResult result = await _server.newAppConst(null, typeId, text, phone, "", this.District, this.House, this.Flat, this.Street, SubTypeID, DesiredTime: $"{_model.DateTerm:yyyy-MM-dd}");
+                    IDResult result = await _server.newAppConst(null, typeId, text, phone, "", this.District, this.House, this.Flat, this.Street, subTypeId, DesiredTime: $"{_model.DateTerm:yyyy-MM-dd}", detailsSubTypeId);
                     await _server.SetReadedFlag(result.ID, true);
 
                     if (result.Error == null)
@@ -702,7 +732,7 @@ namespace xamarinJKH.AppsConst
                         .Replace("-", "") : null;;
                     string typeId = Convert.ToInt32(Settings.TypeApp[PickerType.SelectedIndex].ID).ToString();
                     IDResult result = await _server.newAppConst(ident, typeId, text, phone,
-                        DesiredTime: $"{_model.DateTerm:yyyy-MM-dd}");
+                        DesiredTime: $"{_model.DateTerm:yyyy-MM-dd}", SubTypeID: subTypeId,  DetailedSubTypeID:detailsSubTypeId);
                     await _server.SetReadedFlag(result.ID, true);
 
                     if (result.Error == null)

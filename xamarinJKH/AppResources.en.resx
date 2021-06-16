@@ -2060,6 +2060,9 @@
   <data name="PinDeleted" xml:space="preserve">
     <value>Pin code removed</value>
   </data>
+  <data name="DetailsPodType" xml:space="preserve">
+    <value>Detail view:</value>
+  </data>
   <data name="TextRequired" xml:space="preserve">
     <value>Enter text (required)</value>
   </data>
