@@ -1393,6 +1393,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Подробный вид:.
+        /// </summary>
+        internal static string DetailsPodType {
+            get {
+                return ResourceManager.GetString("DetailsPodType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Район.
         /// </summary>
         internal static string District {

@@ -2062,4 +2062,7 @@
   <data name="PinDeleted" xml:space="preserve">
     <value>Пин-код удален</value>
   </data>
+  <data name="DetailsPodType" xml:space="preserve">
+    <value>Подробный вид:</value>
+  </data>
 </root>

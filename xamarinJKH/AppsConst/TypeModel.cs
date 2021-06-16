@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms;
+using xamarinJKH.Server.RequestModel;
 using xamarinJKH.ViewModels;
 
 namespace xamarinJKH.AppsConst
@@ -8,7 +9,9 @@ namespace xamarinJKH.AppsConst
     {
         
         public string Name { get; set; }
+        public string Comment { get; set; }
         public string Image { get; set; }
+        public List<RequestType> SubTypes { get; set; }
         public int ID { get; set; }
         public bool HasSubTypes { get; set; }
         

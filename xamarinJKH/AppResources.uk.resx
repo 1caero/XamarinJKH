@@ -1933,4 +1933,7 @@
   <data name="PinDeleted" xml:space="preserve">
     <value>Пін-код видалено</value>
   </data>
+  <data name="DetailsPodType" xml:space="preserve">
+    <value>Подробный вид:</value>
+  </data>
 </root>

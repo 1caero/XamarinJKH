@@ -7,6 +7,7 @@ namespace xamarinJKH.Server.RequestModel
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public string Comment { get; set; }
         public int Value { get; set; }
 
         public string _Name
@@ -44,7 +45,7 @@ namespace xamarinJKH.Server.RequestModel
     public class RequestType : NamedValue
     {
 
-        public List<NamedValue> SubTypes { get; set; }
+        public List<RequestType> SubTypes { get; set; }
         public bool HasSubTypes { get; set; }
 
     }

@@ -319,6 +319,51 @@
                                                     HorizontalOptions="Fill" />
                                             </StackLayout>
                                             
+                                        </StackLayout>  
+                                        <StackLayout
+                                            Margin="0,0,0,0"
+                                            Spacing="1"
+                                            IsVisible="{Binding IsVisibleDetailsPodType}"
+                                            HorizontalOptions="Center"
+                                            Orientation="Horizontal">
+
+                                            <Label
+
+                                                TextColor="Black"
+                                                Text="{x:Static xamarinJkh:AppResources.DetailsPodType}"
+                                                VerticalOptions="Center"
+                                                FontAttributes="Bold"
+                                                FontSize="15" />
+                                            <StackLayout Spacing="0">
+                                                <StackLayout
+                                                    Orientation="Horizontal" x:Name="StackLayoutDetailsPodType">
+                                                    <xamarinJkh:BorderlessPicker x:Name="PickerDetailsPodType"
+                                                        Title="{x:Static xamarinJkh:AppResources.Choose}"
+                                                        TitleColor="{Binding hex}"
+                                                        TextColor="{Binding hex}"
+                                                        VerticalOptions="End"
+                                                        FontSize="15"
+                                                        SizeChanged = "PickerType_OnSizeChanged"
+                                                        HorizontalOptions="Fill"
+                                                        SelectedIndexChanged="PickerPodType_OnSelectedIndexChanged"
+                                                        ItemsSource="{Binding PodTypSelected.SubTypes}"
+                                                        ItemDisplayBinding="{Binding Name}"
+                                                        SelectedItem="{Binding DetailsPodTypSelected}" />
+                                                    <xamarinJkh:IconView Source="ic_arrow_forward"
+                                                                         HeightRequest="12"
+                                                                         WidthRequest="12"
+                                                                         Rotation="90"
+                                                                         Margin="0,5,0,0"
+                                                                         VerticalOptions="Center"
+                                                                         Foreground="{Binding hex}"
+                                                                         HorizontalOptions="Center" />
+                                                </StackLayout>
+                                                <Label
+                                                    HeightRequest="1"
+                                                    BackgroundColor="{Binding hex}"
+                                                    HorizontalOptions="Fill" />
+                                            </StackLayout>
+                                            
                                         </StackLayout>
                                         <Label TextColor="Red"
                                                Text="{Binding AlertText}"

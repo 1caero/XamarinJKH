@@ -43,6 +43,7 @@ namespace xamarinJKH.Server.DataModel
         // дата окончания
         public string PassExpiration { get; set; }
         public string PaidRequestStatus { get; set; }
+        public string DetailedMalfunctionType { get; set; }
         public bool IsPaidByUser { get; set; }
         public int ShopId { get; set; }
         

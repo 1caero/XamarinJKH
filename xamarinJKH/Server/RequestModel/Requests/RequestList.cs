@@ -32,6 +32,7 @@ namespace xamarinJKH.Server.RequestModel
                 IsReadedByClient = requestInfo.IsReadedByClient,
                 RequestNumber=requestInfo.RequestNumber,
                 Added=requestInfo.Added,
+                DetailedMalfunctionType = requestInfo.DetailedMalfunctionType,
                 Name=requestInfo.Name,
                 Status=requestInfo.Status,
                 StatusID=requestInfo.StatusID,
@@ -81,6 +82,7 @@ namespace xamarinJKH.Server.RequestModel
                 PriorityId=requesDao.PriorityId,
                 Debt=requesDao.Debt,
                 Source=requesDao.Source,
+                DetailedMalfunctionType = requesDao.DetailedMalfunctionType,
                 HasPass=requesDao.HasPass,
                 PassIsConstant=requesDao.PassIsConstant,
                 PassExpiration=requesDao.PassExpiration,
@@ -94,6 +96,7 @@ namespace xamarinJKH.Server.RequestModel
         public int TypeID { get; set; }
         private int index = 0;
         public string RequestNumber { get; set; }
+        public string DetailedMalfunctionType { get; set; }
         public string Added { get; set; }
         
         public string RequestTerm { get; set; }
@@ -198,9 +201,15 @@ namespace xamarinJKH.Server.RequestModel
 
         public string _MalfunctionType
         {
-            get => string.IsNullOrWhiteSpace(MalfunctionType)? "" :  " (" + MalfunctionType + ")";
+            get => string.IsNullOrWhiteSpace(MalfunctionType)? "" :  " (" + MalfunctionType + " " + _DetailedMalfunctionType + ")";
             set => MalfunctionType = value;
+        } 
+        public string _DetailedMalfunctionType
+        {
+            get => string.IsNullOrWhiteSpace(DetailedMalfunctionType)? "" :  " (" + DetailedMalfunctionType + ")";
         }
+        
+        
         // исполнитель
         public string PerofmerName { get; set; }
 
