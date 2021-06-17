@@ -35,6 +35,9 @@ using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus; //usi
 namespace xamarinJKH.AppsConst
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    /*!
+\b Форма для работы с заявкой сотрудником
+*/
     public partial class AppConstPage : ContentPage
     {
         private RequestInfo _requestInfo;
@@ -191,7 +194,9 @@ namespace xamarinJKH.AppsConst
         }
 
         static bool autoUpdateRun = false;
-
+        /// <summary>
+        /// Установка прочтения заявки
+        /// </summary>
         async void SetReadedApp()
         {
             Device.BeginInvokeOnMainThread(async () =>
@@ -222,7 +227,10 @@ namespace xamarinJKH.AppsConst
 
             base.OnDisappearing();
         }
-
+        /// <summary>
+        /// Обновление данных
+        /// </summary>
+        /// <param name="cmn"></param>
         private async Task RefreshData([CallerMemberName] string cmn="")
         {
             try
@@ -327,7 +335,11 @@ namespace xamarinJKH.AppsConst
         public bool CanComplete => Settings.Person.UserSettings.RightPerformRequest;
         public bool CanClose => Settings.Person.UserSettings.RightCloseRequest;
 
-
+        /// <summary>
+        /// Добавление сообщения к отображению
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="prevAuthor"></param>
         void addAppMessage(RequestMessage message, string prevAuthor)
         {
             StackLayout data;
@@ -700,7 +712,9 @@ namespace xamarinJKH.AppsConst
          
            
         }
-
+        /// <summary>
+        /// Выполнение заявки
+        /// </summary>
         private void ComplicationRun()
         {
             Device.BeginInvokeOnMainThread(async () =>
@@ -723,7 +737,11 @@ namespace xamarinJKH.AppsConst
             }
                                    );
         }
-
+        /// <summary>
+        /// Получение файлы
+        /// </summary>
+        /// <param name="id">id</param>
+        /// <param name="fileName">имя файла</param>
         async void getFile(string id, string fileName)
         {
             var UpdateTask = new Task(async () => { await GetFile(id, fileName); });
@@ -776,7 +794,9 @@ namespace xamarinJKH.AppsConst
                 }
             });            
         }
-
+        /// <summary>
+        /// Закрытие текущей формы
+        /// </summary>
         private async Task ClosePage()
         {
             MessagingCenter.Unsubscribe<Object, KeyValuePair<int, string>>(this, "performApp");
@@ -828,7 +848,9 @@ namespace xamarinJKH.AppsConst
             }
         }
 
-
+        /// <summary>
+        /// Добавление файлов к заявке
+        /// </summary>
         async void addFileApp()
         {
             if (Device.RuntimePlatform == "Android")
@@ -1095,6 +1117,10 @@ namespace xamarinJKH.AppsConst
         }
 
         DateTime checkBot = DateTime.Now.AddMinutes(-1);
+        
+        /// <summary>
+        /// Отправка сообщения
+        /// </summary>
         async void sendMessage()
         {
             //чаще 1 раза в секунду отправлять не давать. спам. 
@@ -1132,7 +1158,10 @@ namespace xamarinJKH.AppsConst
             progress.IsVisible = false;
             IconViewSend.IsVisible = true;
         }
-
+        /// <summary>
+        /// Отображение вымплывающего сообщения
+        /// </summary>
+        /// <param name="text">Текст</param>
         private async Task ShowToast(string text)
         {
             if (Device.RuntimePlatform == Device.iOS)
@@ -1145,7 +1174,9 @@ namespace xamarinJKH.AppsConst
             }
         }
 
-
+        /// <summary>
+        /// Получение сообщений по заявке
+        /// </summary>
         async void getMessage2()
         {
             request = await _server.GetRequestsDetailListConst(_requestInfo.ID.ToString());
@@ -1215,7 +1246,9 @@ namespace xamarinJKH.AppsConst
 
             await MethodWithDelayAsync(1000);
         }
-
+        /// <summary>
+        /// Принятие заявки сотрудником
+        /// </summary>
         async void acceptApp()
         {
             progress.IsVisible = true;
@@ -1242,7 +1275,9 @@ namespace xamarinJKH.AppsConst
 
             progress.IsVisible = false;
         }
-
+        /// <summary>
+        /// Выполнение заявки сотрудником
+        /// </summary>
         async void performApp()
         {
             progress.IsVisible = true;
@@ -1270,7 +1305,10 @@ namespace xamarinJKH.AppsConst
 
             progress.IsVisible = false;
         }
-
+        /// <summary>
+        /// Скроллинг к последненму сообщению
+        /// </summary>
+        /// <param name="milliseconds"></param>
         public async Task MethodWithDelayAsync(int milliseconds)
         {
             try
@@ -1286,7 +1324,9 @@ namespace xamarinJKH.AppsConst
                 Console.WriteLine(e);
             }
         }
-
+        /// <summary>
+        /// Установка текста
+        /// </summary>
         void setText()
         {
             try
@@ -1302,7 +1342,9 @@ namespace xamarinJKH.AppsConst
             FrameKeys.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.FromHex("#B5B5B5"));
             FrameMessage.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
         }
-
+        /// <summary>
+        /// Отображение информации по заявке
+        /// </summary>
         private async void ShowInfo()
         {
             if (request != null)
@@ -1352,7 +1394,9 @@ namespace xamarinJKH.AppsConst
                 }
             }
         }
-
+        /// <summary>
+        /// Команда вызова  звонилки
+        /// </summary>
         public Command<string> Call { get; set; }
 
         private async void Transit_OnTapped(object sender, EventArgs e)
@@ -1386,7 +1430,11 @@ namespace xamarinJKH.AppsConst
             await Dialog.Instance.ShowAsync(new AppConstDialogWindow(Items, request.ID, request.ShopId));
         }
 
-        
+        /// <summary>
+        /// Обработка изменения фокуса текстового поля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EntryMess_Focused(object sender, FocusEventArgs e)
         {
             MessagingCenter.Send<object>(this, "SetKeyboardFocusStatic");

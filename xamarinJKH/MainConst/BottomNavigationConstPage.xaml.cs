@@ -16,11 +16,17 @@ using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
 namespace xamarinJKH.MainConst
 {
+    /*!
+\b Форма нижней навигации
+*/
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BottomNavigationConstPage : TabbedPage
     {
         private RestClientMP server = new RestClientMP();
         public Command ChangeTheme { get; set; }
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public BottomNavigationConstPage()
         {
             InitializeComponent();
@@ -207,7 +213,9 @@ namespace xamarinJKH.MainConst
                 return base.OnBackButtonPressed();
             }
         }
-
+        /// <summary>
+        /// Инициализация автообновления токена доступа
+        /// </summary>
         void StartUpdateToken()
         {
             Device.StartTimer(TimeSpan.FromMinutes(5), OnTimerTick);
@@ -232,7 +240,10 @@ namespace xamarinJKH.MainConst
                 OnPropertyChanged("RequestsAmountPass");
             }
         }
-
+        /// <summary>
+        /// Обработка тика таймера
+        /// </summary>
+        /// <returns></returns>
         private  bool OnTimerTick()
         {
             Device.BeginInvokeOnMainThread(async () =>
@@ -263,6 +274,9 @@ namespace xamarinJKH.MainConst
             });
             return true;
         }
+        /// <summary>
+        /// Обработка переключения таба
+        /// </summary>
         protected override void OnCurrentPageChanged()
         {
             base.OnCurrentPageChanged();
@@ -286,7 +300,9 @@ namespace xamarinJKH.MainConst
             Preferences.Remove(AppFilterDialog.REQUEST_SUB_TYPE_ID);
             Preferences.Remove(AppFilterDialog.REQUEST_PRIORITY_ID);
         }
-
+        /// <summary>
+        /// Регистрация токена устройства
+        /// </summary>
         async void RegisterNewDevice()
         {
             if (Device.RuntimePlatform == "Android")

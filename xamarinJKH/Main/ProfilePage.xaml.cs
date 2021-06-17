@@ -21,6 +21,9 @@ using xamarinJKH.DialogViews;
 
 namespace xamarinJKH.Main
 {
+    /*!
+\b Форма нстроек профиля 
+*/
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage : ContentPage
     {
@@ -45,7 +48,9 @@ namespace xamarinJKH.Main
         {
             base.OnAppearing();
         }
-
+        /// <summary>
+        /// Коструктор
+        /// </summary>
         public ProfilePage()
         {
             InitializeComponent();
@@ -232,7 +237,11 @@ namespace xamarinJKH.Main
                 ImageBack.ReplaceStringMap = colors;
             });
         }
-        
+        /// <summary>
+        /// Установка почты и имени
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void ButtonClick(object sender, EventArgs e)
         {
             Regex regex = new Regex(@"^([a-zA-Z0-9А-Яа-я_-]+\.)*[a-zA-Z0-9А-Яа-я_-]+@[a-zA-Z0-9А-Яа-я_-]+(\.[a-zA-Z0-9А-Яа-я_-]+)*\.[a-zA-ZА-Яа-я]{2,6}$");
@@ -252,7 +261,11 @@ namespace xamarinJKH.Main
                  await DisplayAlert(null, AppResources.CorrectEmail, "OK");
             }
         }
-        
+        /// <summary>
+        /// Сохранения данных на сервере
+        /// </summary>
+        /// <param name="fio">ФИО</param>
+        /// <param name="email">ПОчта</param>
         public async void SaveInfoAccount(string fio, string email)
         {
             if (fio != "" && email != "")
@@ -304,7 +317,9 @@ namespace xamarinJKH.Main
                 }
             }
         }
-        
+        /// <summary>
+        /// Установка названия УК
+        /// </summary>
         void SetText()
         {
             UkName.Text = Settings.MobileSettings.main_name;
@@ -313,12 +328,18 @@ namespace xamarinJKH.Main
             PushEnable.IsVisible = !DependencyService.Get<ISettingsService>().IsEnabledNotification();
             //}
         }
-
+        /// <summary>
+        /// Открытие настроек приложения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Clicked(object sender, EventArgs e)
         {
             Xamarin.Essentials.AppInfo.ShowSettingsUI();
         }
-
+        /// <summary>
+        /// Установка фирменного цвета УК
+        /// </summary>
         void SetColor()
         {
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
@@ -386,12 +407,20 @@ namespace xamarinJKH.Main
             
         }
 
-        
+        /// <summary>
+        /// Включение/Отключения автоматического входа в приложение
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="toggledEventArgs"></param>
         private void SwitchSavePass_OnPropertyChanged(object sender, ToggledEventArgs toggledEventArgs)
         {
             Preferences.Set("isPass",isSave);
         }
-
+        /// <summary>
+        /// Включение/Отключение авторизации по биометрии
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="toggledEventArgs"></param>
         private async void SwitchUseBio_OnPropertyChanged(object sender, ToggledEventArgs toggledEventArgs)
         {
             if (toggledEventArgs.Value == true)
@@ -408,7 +437,11 @@ namespace xamarinJKH.Main
             else
             Preferences.Set("FingerPrintsOn", useBio.ToString().ToLower());
         }
-
+        /// <summary>
+        /// Установка темной темы приложений
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RadioButtonDark_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             Application.Current.UserAppTheme = OSAppTheme.Dark;
@@ -431,7 +464,11 @@ namespace xamarinJKH.Main
             }
 
         }
-
+        /// <summary>
+        /// Установка системной темы приложения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RadioButtonAuto_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             //только темная тема в ios 
@@ -466,7 +503,11 @@ namespace xamarinJKH.Main
 
 
         }
-
+        /// <summary>
+        /// Установка светлой темы приложения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RadioButtonLigth_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             Application.Current.UserAppTheme = OSAppTheme.Light;
@@ -474,7 +515,11 @@ namespace xamarinJKH.Main
             MessagingCenter.Send<Object>(this, "ChangeThemeCounter");
             Preferences.Set("Theme", 2);
         }
-
+        /// <summary>
+        /// Закрытие текущей формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private async void GoBack(object sender, EventArgs args)
         {
             try
@@ -486,7 +531,11 @@ namespace xamarinJKH.Main
                 _ = await Navigation.PopModalAsync();
             }
         }
-
+        /// <summary>
+        /// Установка русского языка приложения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Russian_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             if (Application.Current.Properties["Culture"].ToString() != "ru")
@@ -501,7 +550,11 @@ namespace xamarinJKH.Main
             Application.Current.Properties["Culture"] = "ru";
             await Application.Current.SavePropertiesAsync();
         }
-
+        /// <summary>
+        /// Установка английского языка
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void English_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             if (Application.Current.Properties["Culture"].ToString() != "en")
@@ -516,7 +569,11 @@ namespace xamarinJKH.Main
             Application.Current.Properties["Culture"] = "en";
             await Application.Current.SavePropertiesAsync();
         }
-        
+        /// <summary>
+        /// Установка Украинского языка
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Ukranian_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             if (Application.Current.Properties["Culture"].ToString() != "uk")

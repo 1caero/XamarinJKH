@@ -15,11 +15,16 @@ using xamarinJKH.Utils;
 
 namespace xamarinJKH.Main
 {
+    /*!
+\b Форма нижней навигации
+*/
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BottomNavigationPage : TabbedPage
     {
         private RestClientMP server = new RestClientMP();
-
+        /// <summary>
+        /// Команда смены темы
+        /// </summary>
         public Command ChangeTheme { get; set; }
         int request_amount;
         public int RequestsAmount
@@ -47,7 +52,9 @@ namespace xamarinJKH.Main
                 OnPropertyChanged(nameof(EventsAmount));
             }
         }
-
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public BottomNavigationPage()
         {
             App.isStart = true;
@@ -235,12 +242,17 @@ namespace xamarinJKH.Main
             base.OnDisappearing();
             App.isStart = false;
         }
-
+        /// <summary>
+        /// Обновление токена доступа
+        /// </summary>
         void StartUpdateToken()
         {
             Device.StartTimer(TimeSpan.FromMinutes(5), OnTimerTick);
         }
-
+        /// <summary>
+        /// Установка текущего таба
+        /// </summary>
+        /// <param name="title"></param>
         async void SetTab(string title)
         {
             var services = this.Children.FirstOrDefault(x => x.Title == title);
@@ -265,7 +277,9 @@ namespace xamarinJKH.Main
                 return base.OnBackButtonPressed();
             }
         }
-
+        /// <summary>
+        /// Загрузка табов
+        /// </summary>
         async void Loadtab()
         {
             try
@@ -316,7 +330,9 @@ namespace xamarinJKH.Main
             }
             
         }
-
+        /// <summary>
+        /// Получение брендов авто
+        /// </summary>
         private void GetBrand()
         {
             Device.BeginInvokeOnMainThread(async () =>
@@ -332,6 +348,10 @@ namespace xamarinJKH.Main
                 }
             });
         }
+        /// <summary>
+        /// Обработка тика таймера
+        /// </summary>
+        /// <returns></returns>
         private bool OnTimerTick()
         {
             Device.BeginInvokeOnMainThread(async () =>
@@ -361,7 +381,9 @@ namespace xamarinJKH.Main
             });
             return true;
         }
-
+        /// <summary>
+        /// Установка видимости вкладок
+        /// </summary>
         void VisibleMenu()
         {
             try
@@ -440,7 +462,9 @@ namespace xamarinJKH.Main
             }
         }
 
-
+        /// <summary>
+        /// Обработка переключения вкладок
+        /// </summary>
         protected override void OnCurrentPageChanged()
         {
             try
@@ -467,7 +491,9 @@ namespace xamarinJKH.Main
             
         }
 
-
+        /// <summary>
+        /// Регистрация токе устройства
+        /// </summary>
         async void RegisterNewDevice()
         {
             App.token = DependencyService.Get<IFirebaseTokenObtainer>().GetToken();

@@ -23,11 +23,16 @@ using xamarinJKH.ViewModels;
 
 namespace xamarinJKH.Main
 {
+    /*!
+ \b Форма событий УК
+*/
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EventsPage : ContentPage
     {
         EventsPageViewModel viewModel { get; set; }
-
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public EventsPage()
         {
             InitializeComponent();
@@ -143,7 +148,9 @@ namespace xamarinJKH.Main
                 MessagingCenter.Send<Object, AnnouncementInfo>(this, "OpenAnnouncement", Settings.EventBlockData.Announcements.FirstOrDefault(x => x.Header == args.Item2 && x.Text == args.Item1));
             });
         }
-
+        /// <summary>
+        /// Обработка переоткрытия формы
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -164,7 +171,12 @@ namespace xamarinJKH.Main
             //для ОСС
             setVisible(false, StartOSS, FrameOSS);
         }
-
+        /// <summary>
+        /// Установка видимости вьюх
+        /// </summary>
+        /// <param name="visible">отображать или нет</param>
+        /// <param name="funk">функция для открытия формы</param>
+        /// <param name="frame">Блок которой нужно скрыть/показать</param>
         void setVisible(bool visible, Action funk, VisualElement frame)
         {
             if (visible)
@@ -177,6 +189,9 @@ namespace xamarinJKH.Main
             }
         }
 
+        /// <summary>
+        /// Открытие формы новостей
+        /// </summary>
         private void StartNews()
         {
             var startNews = new TapGestureRecognizer();
@@ -188,6 +203,9 @@ namespace xamarinJKH.Main
             FrameNews.GestureRecognizers.Add(startNews);
         }
 
+        /// <summary>
+        /// Открытие формы опросов
+        /// </summary>
         private void StartQuestions()
         {
             var startQuest = new TapGestureRecognizer();
@@ -199,6 +217,7 @@ namespace xamarinJKH.Main
             FrameQuestions.GestureRecognizers.Add(startQuest);
         }
 
+        
         private async void StartOffers()
         {
             var startAdditional = new TapGestureRecognizer();
@@ -210,6 +229,9 @@ namespace xamarinJKH.Main
             FrameOffers.GestureRecognizers.Add(startAdditional);
         }
 
+        /// <summary>
+        /// Открытие формы уведомлений
+        /// </summary>
         private void StartNotification()
         {
             var startNotif = new TapGestureRecognizer();
@@ -220,7 +242,9 @@ namespace xamarinJKH.Main
             };
             FrameNotification.GestureRecognizers.Add(startNotif);
         }
-
+        /// <summary>
+        /// Открытие формы общеего голосования собственников
+        /// </summary>
         private void StartOSS()
         {
             var startOSSTGR = new TapGestureRecognizer();
@@ -235,13 +259,16 @@ namespace xamarinJKH.Main
         private void StartShop()
         {
         }
-
+        /// <summary>
+        /// Установка названия УК
+        /// </summary>
         void SetText()
         {
             UkName.Text = Settings.MobileSettings.main_name;
-
         }
-
+        /// <summary>
+        /// Установка фирменного цвета УК
+        /// </summary>
         void SetColor()
         {
             Color hexColor = (Color) Application.Current.Resources["MainColor"];
@@ -255,17 +282,26 @@ namespace xamarinJKH.Main
             FrameCameras.SetAppThemeColor(MaterialFrame.BorderColorProperty, hexColor, Color.White);
         }
 
+        /// <summary>
+        /// Открытие Формы просмотра камер видеонаблюдения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Cameras(object sender, EventArgs e)
         {
             if (Navigation.NavigationStack.FirstOrDefault(x => x is CameraListPage) == null)
                 await Navigation.PushAsync(new CameraListPage());
         }
     }
-
+    /*!
+ \b Вью модель для взаимодействия с формой событий УК
+*/
     public class EventsPageViewModel : BaseViewModel
     {
         bool _showNews;
-
+        /// <summary>
+        /// Установка видимости новостей
+        /// </summary>
         public bool ShowNews
         {
             get => _showNews;
@@ -277,7 +313,9 @@ namespace xamarinJKH.Main
         }
 
         bool _showPolls;
-
+        /// <summary>
+        /// Установка видимости опросов
+        /// </summary>
         public bool ShowPolls
         {
             get => _showPolls;
@@ -289,7 +327,9 @@ namespace xamarinJKH.Main
         }
 
         bool _showAnnouncements;
-
+        /// <summary>
+        /// Установка видимости уведомлений
+        /// </summary>
         public bool ShowAnnouncements
         {
             get => _showAnnouncements;
@@ -312,7 +352,9 @@ namespace xamarinJKH.Main
             }
         }  
         bool _ShowOSS;
-
+        /// <summary>
+        /// Установка видимости Общего голосования собственнеков
+        /// </summary>
         public bool ShowOss
         {
             get => _ShowOSS;
@@ -324,7 +366,9 @@ namespace xamarinJKH.Main
         }
 
         bool _showCameras;
-
+        /// <summary>
+        /// Установка видимости web камер
+        /// </summary>
         public bool ShowCameras
         {
             get
@@ -343,12 +387,19 @@ namespace xamarinJKH.Main
             set {  _showCameras = value;
                 OnPropertyChanged("ShowCameras"); }
         }
-
+        /// <summary>
+        /// Команда загрузки данных с сервера
+        /// </summary>
         public Command LoadData { get; set; }
+        /// <summary>
+        /// Команда подсчета новых событиф для отображения в бейдже
+        /// </summary>
         public Command CountNew { get; set; }
 
         int announcementsCount;
-
+        /// <summary>
+        /// Кол-во новых уведомлений
+        /// </summary>
         public int AnnounsmentsCount
         {
             get => announcementsCount;
@@ -360,7 +411,9 @@ namespace xamarinJKH.Main
         }
 
         int pollsCount;
-
+        /// <summary>
+        /// Кол-во новых опросов
+        /// </summary>
         public int PollsCount
         {
             get => Settings.QuestVisible ? pollsCount : 0;
@@ -372,6 +425,9 @@ namespace xamarinJKH.Main
         }
 
         int newsCount;
+        /// <summary>
+        /// Кол -во новых новостей
+        /// </summary>
         public int NewsCount
         {
             get => newsCount;
@@ -381,7 +437,9 @@ namespace xamarinJKH.Main
                 OnPropertyChanged(nameof(NewsCount));
             }
         }
-
+        /// <summary>
+        /// Коструктор
+        /// </summary>
         public EventsPageViewModel()
         {
             Analytics.TrackEvent("Конструктор модели страницы событий");

@@ -30,6 +30,9 @@ using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
 namespace xamarinJKH.Apps
 {
+    /*!
+\b Форма создания заявки/пропуска
+*/
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewAppPage : ContentPage
     {
@@ -48,7 +51,10 @@ namespace xamarinJKH.Apps
         private AddAppModel _appModel;
         private bool isPassAPP = false;
         PassApp _passApp = new PassApp();
-
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="isPassApp">Пропуск</param>
         public NewAppPage(bool isPassApp = false)
         {
             isPassAPP = isPassApp;
@@ -242,7 +248,11 @@ _appModel = new AddAppModel()
             }
         }
 
-
+        /// <summary>
+        /// Обработка изменения текста в строке поиска типа пропуска
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             PassTypesList.IsVisible = true;
@@ -272,7 +282,11 @@ _appModel = new AddAppModel()
 
             PassTypesList.EndRefresh();
         }
-
+        /// <summary>
+        /// Обработка изменения текста в строке поиска марки автомобиля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TSBrand_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             TSBrandList.IsVisible = true;
@@ -301,7 +315,10 @@ _appModel = new AddAppModel()
             TSBrandList.EndRefresh();
             _passApp.CarBrand = e.NewTextValue;
         }
-
+        /// <summary>
+        /// Установка видимости вьюх
+        /// </summary>
+        /// <param name="listsd"></param>
         void SetVisibleLayout(string listsd)
         {
             if (listsd != null)
@@ -332,7 +349,11 @@ _appModel = new AddAppModel()
                 _passApp.idType = 0;
             }
         }
-
+        /// <summary>
+        /// Обработка нажатия на элемент списка
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListView_OnItemTapped(Object sender, ItemTappedEventArgs e)
         {
             String listsd = e.Item as string;
@@ -347,7 +368,9 @@ _appModel = new AddAppModel()
             base.OnAppearing();
             await Task.Delay(TimeSpan.FromSeconds(1));
         }
-
+        /// <summary>
+        /// Добавления файлов к заявке
+        /// </summary>
         private async void AddFile()
         {
             if (Device.RuntimePlatform == "Android")
@@ -408,7 +431,9 @@ _appModel = new AddAppModel()
             {
             }
         }
-
+        /// <summary>
+        /// Закрытие формы
+        /// </summary>
         async void ClosePage()
         {
             try
@@ -447,7 +472,10 @@ _appModel = new AddAppModel()
 
             await PickAndShowFile(fileTypes);
         }
-
+        /// <summary>
+        /// Выбор файла
+        /// </summary>
+        /// <param name="fileTypes">Типы</param>
         private async Task PickAndShowFile(string[] fileTypes)
         {
             try
@@ -477,7 +505,9 @@ _appModel = new AddAppModel()
                 await DisplayAlert(AppResources.ErrorTitle, ex.ToString(), "OK");
             }
         }
-
+        /// <summary>
+        /// Получение фотки с камеры
+        /// </summary>
         async Task getCameraFile()
         {
             await CrossMedia.Current.Initialize();
@@ -508,7 +538,9 @@ _appModel = new AddAppModel()
             _appModel.Files = files;
             ListViewFiles.ItemsSource = _appModel.Files;
         }
-
+        /// <summary>
+        /// Получение файлы с галереи
+        /// </summary>
         async Task GetGalaryFile()
         {
             await CrossMedia.Current.Initialize();
@@ -532,7 +564,11 @@ _appModel = new AddAppModel()
             _appModel.Files = files;
             ListViewFiles.ItemsSource = _appModel.Files;
         }
-
+        /// <summary>
+        /// Перевод потока в байты
+        /// </summary>
+        /// <param name="stream">поток</param>
+        /// <returns>байты</returns>
         public static byte[] StreamToByteArray(Stream stream)
         {
             if (stream is MemoryStream)
@@ -544,7 +580,11 @@ _appModel = new AddAppModel()
                 return ReadFully(stream);
             }
         }
-
+        /// <summary>
+        /// Получение имени файла
+        /// </summary>
+        /// <param name="path">путь к файлу</param>
+        /// <returns>Имя файла</returns>
         string getFileName(string path)
         {
             try
@@ -557,7 +597,11 @@ _appModel = new AddAppModel()
                 return "filename";
             }
         }
-
+        /// <summary>
+        /// Прочтение входного потока
+        /// </summary>
+        /// <param name="input">поток</param>
+        /// <returns>байты</returns>
         public static byte[] ReadFully(Stream input)
         {
             using (MemoryStream ms = new MemoryStream())
@@ -566,7 +610,9 @@ _appModel = new AddAppModel()
                 return ms.ToArray();
             }
         }
-
+        /// <summary>
+        /// Установка текста
+        /// </summary>
         void SetText()
         {
             UkName.Text = Settings.MobileSettings.main_name;
@@ -575,14 +621,33 @@ _appModel = new AddAppModel()
             FrameTop.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
         }
 
-
+        /*!
+\b Вьюмодель для создания заявок
+*/
         public class AddAppModel : BaseViewModel
-        {
+        {   /// <summary>
+            /// Лицевые счета
+            /// </summary>
             public List<AccountInfo> AllAcc { get; set; }
+            /// <summary>
+            /// Типы заявок
+            /// </summary>
             public List<RequestType> AllType { get; set; }
+            /// <summary>
+            /// Марки авто
+            /// </summary>
             public List<string> AllBrand { get; set; }
+            /// <summary>
+            /// Типы пропусков
+            /// </summary>
             public List<string> AllKindPass { get; set; }
+            /// <summary>
+            /// Выбранный ЛС
+            /// </summary>
             public AccountInfo SelectedAcc { get; set; }
+            /// <summary>
+            /// Выбранный тип заявик
+            /// </summary>
             public NamedValue SelectedType { get; set; }
             public ObservableCollection<AccountInfo> Accounts { get; set; }
             AccountInfo selectedAccount;
@@ -854,7 +919,11 @@ _appModel = new AddAppModel()
         }
 
         private bool PassIsConstant = true;
-
+        /// <summary>
+        /// Добавление заявки на сервер
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void addApp(object sender, EventArgs e)
         {
             string text = EntryMess.Text;
@@ -960,7 +1029,11 @@ _appModel = new AddAppModel()
             FrameBtnAdd.IsVisible = true;
             progress.IsVisible = false;
         }
-
+        /// <summary>
+        /// Проверка фозможности создания заявки
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         bool GetEnabledAdd(string text)
         {
             if (isPassAPP)
@@ -1049,7 +1122,11 @@ _appModel = new AddAppModel()
                 }
             }
         }
-
+        /// <summary>
+        /// Обработка нажатия на элемент спика файлов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             FileData select = e.Item as FileData;
@@ -1070,7 +1147,10 @@ _appModel = new AddAppModel()
             }
         }
 
-
+        /// <summary>
+        /// Отправка файлов после создания заявки
+        /// </summary>
+        /// <param name="id"></param>
         async void sendFiles(string id)
         {
             int i = 0;
@@ -1095,7 +1175,9 @@ _appModel = new AddAppModel()
                 }
             }
         }
-
+        /// <summary>
+        /// Инициализация формы создания пропуска
+        /// </summary>
         void SetPassApp()
         {
             FrameEntryMess.IsVisible = false;
@@ -1116,7 +1198,9 @@ _appModel = new AddAppModel()
             LayoutPassApp.IsVisible = true;
             LayoutFloor.IsVisible = false;
         }
-
+        /// <summary>
+        /// Инициализация дефолтной формы
+        /// </summary>
         void SetDefaultApp()
         {
             FrameEntryMess.IsVisible = true;
@@ -1174,7 +1258,9 @@ _appModel = new AddAppModel()
             // }
         }
 
-
+        /*!
+\b Класс пропуска
+*/
         class PassApp
         {
             public int idType { get; set; } = 0;
@@ -1184,7 +1270,11 @@ _appModel = new AddAppModel()
             public string SeriaNumber { get; set; }
             public string VehicleColor { get; set; }
         }
-
+        /// <summary>
+        /// Обработка нажатия на элемент списка марок
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TSBrandList_OnItemTapped(Object sender, ItemTappedEventArgs e)
         {
             String listsd = e.Item as string;
@@ -1328,7 +1418,11 @@ _appModel = new AddAppModel()
         private void PickerPodType_OnSelectedIndexChanged(object sender, EventArgs e)
         {
         }
-
+        /// <summary>
+        /// Установка иностранного номера
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckBoxInNumber_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             if (CheckBoxInNumber.IsChecked)

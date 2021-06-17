@@ -25,6 +25,9 @@ using Microsoft.AppCenter.Crashes;
 
 namespace xamarinJKH
 {
+    /*!
+	\b Форма регистрации пользователей в приложении
+*/
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegistrForm : ContentPage
     {
@@ -47,6 +50,10 @@ namespace xamarinJKH
         RegistrFormViewModel viewModel { get; set; }
         public bool ShowBirthDay => Settings.MobileSettings.requireBirthDate;
 
+        /// <summary>
+        /// Конструктор класса авторизации
+        /// </summary>
+        /// <param name="mainPage">Страница авторизации для последующей автоматической авторизации после успешной регистрации</param>
         public RegistrForm(MainPage mainPage)
         {
             Analytics.TrackEvent("Регистрация");
@@ -179,6 +186,10 @@ namespace xamarinJKH
             BindingContext = this;
         }
 
+        /// <summary>
+        /// Отправка кода подтверждения в смс для регистрации 
+        /// </summary>
+        /// <param name="isWhatsApp">отправка кода в WhatsApp</param>
         private async void SendCheckCode(bool isWhatsApp)
         {
             isSmsOrCall = true;
@@ -245,6 +256,12 @@ namespace xamarinJKH
                 {
                 }
         }
+        
+        /// <summary>
+        /// Проверка наличия установленного приложения (Android, Ios)
+        /// </summary>
+        /// <param name="package">Id приложения из магазина</param>
+        /// <returns>Поток</returns>
         private async Task<bool> LoadUrl(string package)
         {
             try
@@ -299,7 +316,12 @@ namespace xamarinJKH
         {
             FirstStepReg();
         }
-
+        /// <summary>
+        /// Обработка нажатия на кнопку "Обратиться в тех.поддержку"
+        /// открывается форма обращения в тех поддержку
+        /// </summary>
+        /// <param name="sender">Целевой объект нажатия</param>
+        /// <param name="e">События</param>
         private async void Tech(object sender, EventArgs e)
         {
             // await PopupNavigation.Instance.PushAsync(new TechDialog(false));
@@ -315,11 +337,19 @@ namespace xamarinJKH
                 await PopupNavigation.Instance.PushAsync(new EnterPhoneDialog(true,true));
             }
         }
+        /// <summary>
+        /// Открытие персональной политики
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void PersonPolicity(object sender, EventArgs e)
         {
             await PopupNavigation.Instance.PushAsync(new PersonalPolicityDialog());
         }
 
+        /// <summary>
+        /// Возврат на первый шаг авторизации
+        /// </summary>
         void returnOneStep()
         {
             RegistrationFrameStep1.IsVisible = true;
@@ -330,6 +360,9 @@ namespace xamarinJKH
             step = 0;
         }
 
+        /// <summary>
+        /// Возврат на второй шаг регистрации
+        /// </summary>
         void returnTwoStep()
         {
             RegistrationFrameStep2.IsVisible = true;
@@ -340,6 +373,9 @@ namespace xamarinJKH
             step = 1;
         }
 
+        /// <summary>
+        /// Инициализация первого шага регистрации
+        /// </summary>
         private async void FirstStepReg()
         {
             Analytics.TrackEvent("Певый шаг регистрации");
@@ -428,6 +464,11 @@ namespace xamarinJKH
             }
         }
 
+        /// <summary>
+        /// Обработка нажатия кнопки назад
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void BackClick(object sender, EventArgs e)
         {
             switch (step)
@@ -452,6 +493,10 @@ namespace xamarinJKH
             }
         }
 
+        /// <summary>
+        /// Обработка нажатия физической кнопки назад
+        /// </summary>
+        /// <returns></returns>
         protected override bool OnBackButtonPressed()
         {
             switch (step)
@@ -485,7 +530,9 @@ namespace xamarinJKH
         {
             SecondStep();
         }
-
+        /// <summary>
+        /// Инициализация второго шага регистрации
+        /// </summary>
         private async void SecondStep()
         {
             Analytics.TrackEvent("Второй шаг регистрации");
@@ -507,6 +554,10 @@ namespace xamarinJKH
             }
         }
 
+        /// <summary>
+        /// Отключение возможности запроса кода в смс
+        /// </summary>
+        /// <param name="isEnabled">Отключение вьюхи</param>
         void setDisabledSms(bool isEnabled)
         {
             StackLayoutSms.IsEnabled = !isEnabled;
@@ -545,6 +596,12 @@ namespace xamarinJKH
         }
         
         private bool isSms = false;
+        
+        /// <summary>
+        /// Слушатель изменения текста кода регистрации
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EntryCode_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             if (!EntryCode.Text.Equals(""))
@@ -570,6 +627,11 @@ namespace xamarinJKH
         }
 
         private bool isSmsOrCall = false;
+        
+        /// <summary>
+        /// Обработка одного тика таймера
+        /// </summary>
+        /// <returns>Завершился таймер или нет</returns>
         private bool OnTimerTick()
         {
             string smsOrCall = AppResources.AskForCodeAgain;
@@ -624,7 +686,9 @@ namespace xamarinJKH
 
 
         bool pressed;
-
+        /// <summary>
+        /// Отправка кода подтверждения на проверку на сервер
+        /// </summary>
         private async Task RequestCodeTask()
         {
             isSmsOrCall = false;
@@ -690,7 +754,9 @@ namespace xamarinJKH
         //{
         //    FinalRegg();
         //}
-
+        /// <summary>
+        /// Инициализаия финального шага регистрации
+        /// </summary>
         private async void FinalRegg()
         {
             try {
@@ -740,11 +806,16 @@ namespace xamarinJKH
           
         }
 
+        /// <summary>
+        /// Слущатель изменения выбора даты
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void datePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
             isDate = true;
         }
-
+        
         private void DateEntry_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             if (DateEntry.Text.Contains(","))

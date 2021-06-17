@@ -27,6 +27,9 @@ using xamarinJKH.Utils;
 
 namespace xamarinJKH.Main
 {
+    /*!
+\b Форма передачи показаний по ПУ
+*/
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CountersPage : ContentPage
     {
@@ -39,7 +42,9 @@ namespace xamarinJKH.Main
 
 
         public Color hex { get; set; }
-
+        /// <summary>
+        /// Отображение загрузки данных
+        /// </summary>
         public bool IsRefreshing
         {
             get { return _isRefreshing; }
@@ -49,9 +54,13 @@ namespace xamarinJKH.Main
                 OnPropertyChanged(nameof(IsRefreshing));
             }
         }
-
+        /// <summary>
+        /// Команда смены темы устройства
+        /// </summary>
         public Command ChangeTheme { get; set; }
-
+        /// <summary>
+        /// Команда обновления данных
+        /// </summary>
         public ICommand RefreshCommand
         {
             get
@@ -77,7 +86,9 @@ namespace xamarinJKH.Main
             });
             return true;
         }
-
+        /// <summary>
+        /// Таск для обновления данных
+        /// </summary>
         public async Task RefreshCountersData()
         {
             try
@@ -263,7 +274,11 @@ namespace xamarinJKH.Main
             //countersList.ItemsSource = null;
             //countersList.ItemsSource = _meterInfo;
         }
-
+        /// <summary>
+        /// Открытие ПУ для передачи показаний
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Tap_Tapped(object sender, EventArgs e)
         {
             int currDay = DateTime.Now.Day;
@@ -271,7 +286,10 @@ namespace xamarinJKH.Main
             MeterInfo select = ((MetersThreeCell) sender).meterInfo; // as MeterInfo;
             await OpenMeter(@select);
         }
-
+        /// <summary>
+        /// Открытие выбранного ПУ
+        /// </summary>
+        /// <param name="select">ПУ</param>
         public async Task OpenMeter(MeterInfo @select)
         {
             if (@select != null)
@@ -348,7 +366,9 @@ namespace xamarinJKH.Main
                             }
             }
         }
-
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public CountersPage()
         {
             InitializeComponent();
@@ -618,7 +638,9 @@ namespace xamarinJKH.Main
 
             
         }
-
+        /// <summary>
+        /// Установка заголовков вьюх
+        /// </summary>
         private void SetTitle()
         {
             OSAppTheme currentTheme = Application.Current.RequestedTheme;
@@ -643,7 +665,10 @@ namespace xamarinJKH.Main
             //    currentTheme = OSAppTheme.Dark;
             SetHeader(currentTheme);
         }
-
+        /// <summary>
+        /// Инициализация шапки 
+        /// </summary>
+        /// <param name="currentTheme">Текущая тема приложения</param>
         private void SetHeader(OSAppTheme currentTheme)
         {
             var day = DateTime.Now.Day;
@@ -894,7 +919,11 @@ namespace xamarinJKH.Main
             //    }
             //}
         }
-
+        /// <summary>
+        /// Обработка измения ЛС
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         protected async void OnIdentChanged(object sender, SelectionChangedEventArgs args)
         {
             try
@@ -1000,14 +1029,18 @@ namespace xamarinJKH.Main
         private async void ButtonClick(object sender, EventArgs e)
         {
         }
-
+        /// <summary>
+        /// Установка фирменного цвет УК
+        /// </summary>
         void SetTextAndColor()
         {
             UkName.Text = Settings.MobileSettings.main_name;
         }
 
         AccountInfo selectedAccount;
-
+        /// <summary>
+        /// Выбранный аккаунт
+        /// </summary>
         public AccountInfo SelectedAccount
         {
             get => selectedAccount;
@@ -1017,7 +1050,9 @@ namespace xamarinJKH.Main
                 OnPropertyChanged("SelectedAccount");
             }
         }
-
+        /// <summary>
+        /// Получение списка ПУ
+        /// </summary>
         async void getInfo()
         {
             if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)

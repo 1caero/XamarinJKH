@@ -21,6 +21,9 @@ using AppPage = xamarinJKH.Tech.AppPage;
 
 namespace xamarinJKH.Main
 {
+    /*!
+\b Форма Работы с заявками по ПУ
+*/
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AppsPage : ContentPage
     {
@@ -61,7 +64,13 @@ namespace xamarinJKH.Main
         //}
 
         Task UpdateTask;
-
+        /// <summary>
+        /// Отображение выплывающего сообщения
+        /// </summary>
+        /// <param name="message">Текст</param>
+        /// <param name="title">Заголовок</param>
+        /// <param name="buttonText">Текст кнопки</param>
+        /// <param name="afterHideCallback">Колбек функция</param>
         public async Task ShowMessage(string message,
             string title,
             string buttonText,
@@ -76,7 +85,9 @@ namespace xamarinJKH.Main
         }
 
         bool showNoInetWindow = true;
-
+        /// <summary>
+        /// Инициализация автоматического обновления списка заявок
+        /// </summary>
         void StartAutoUpdate()
         {
             CheckAkk();
@@ -118,7 +129,9 @@ namespace xamarinJKH.Main
             {
             }
         }
-
+        /// <summary>
+        /// Проверка подключенны ли ЛС
+        /// </summary>
         private void CheckAkk()
         {
             if (Settings.Person.Accounts != null)
@@ -168,7 +181,9 @@ namespace xamarinJKH.Main
 
         public CancellationTokenSource CancellationTokenSource { get; set; }
         public CancellationToken CancellationToken { get; set; }
-
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public AppsPage()
         {
             InitializeComponent();
@@ -417,7 +432,11 @@ namespace xamarinJKH.Main
            });
             Analytics.TrackEvent("Заявки жителя-RemoveIdent подписались");
         }
-
+        /// <summary>
+        /// Показать выполненные заявки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SwitchApp_Toggled(object sender, ToggledEventArgs e)
         {
             viewModel.ShowClosed = SwitchApp.IsToggled;
@@ -460,7 +479,9 @@ namespace xamarinJKH.Main
             {
             }
         }
-
+        /// <summary>
+        /// Обработка переоткрытия формы
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -499,7 +520,9 @@ namespace xamarinJKH.Main
             viewModel.IsChangeTheme = !viewModel.IsChangeTheme;
             viewModel.SetAppTheme();
         }
-
+        /// <summary>
+        /// Установка названия УК
+        /// </summary>
         void SetText()
         {
             UkName.Text = Settings.MobileSettings.main_name;
@@ -574,7 +597,11 @@ namespace xamarinJKH.Main
             if (Navigation.NavigationStack.FirstOrDefault(x => x is Apps.AppPage) == null)
                 await Navigation.PushAsync(new Apps.AppPage(select));
         }
-
+        /// <summary>
+        /// Открытие формы создания заявки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void startNewApp(object sender, EventArgs e)
         {
             try
@@ -639,7 +666,11 @@ namespace xamarinJKH.Main
             Grid grid = (Grid) sender; 
             grid.Children[1].IsVisible = false;
         }
-
+        /// <summary>
+        /// Обработка нажатия на элемент списка заявок
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             var s = (StackLayout)sender;
@@ -675,7 +706,11 @@ namespace xamarinJKH.Main
                 }
             }
         }
-
+        /// <summary>
+        /// Открытие формы создания заявки на пропуск
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void StartNewPass(object sender, EventArgs e)
         {
             try
