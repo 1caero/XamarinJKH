@@ -321,6 +321,7 @@ namespace xamarinJKH.Tech
                     MessagingCenter.Send<object>(this, "FocusKeyboardStatus");
                 else
                     EntryMess.Unfocus();
+                hideKeyBoard.IsVisible = false;
             };
             baseForApp.GestureRecognizers.Add(hideKeyBoardgesture);
 
@@ -1046,6 +1047,17 @@ namespace xamarinJKH.Tech
         private void EntryMess_Focused(object sender, FocusEventArgs e)
         {
             MessagingCenter.Send<object>(this, "SetKeyboardFocusStatic");
+            hideKeyBoard.IsVisible = true;
+        }
+
+        private void hideKeyBoard_Clicked(object sender, EventArgs e)
+        {
+            if (Device.RuntimePlatform == Device.iOS)
+                MessagingCenter.Send<object>(this, "FocusKeyboardStatus");
+            else
+                EntryMess.Unfocus();
+
+            hideKeyBoard.IsVisible = false;
         }
     }
 }

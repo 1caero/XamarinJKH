@@ -126,36 +126,50 @@
                 </RefreshView>
                
             </customRenderers:MaterialFrame>
-            <Frame CornerRadius="30"
+                <Frame HasShadow="False"  Padding="10" IsVisible="false" Margin="20,-60,0,20" BackgroundColor="Transparent" CornerRadius="20" BorderColor="{Binding hex}" x:Name="hideKeyBoard" HorizontalOptions="Start">
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span  Text="Свернуть ">                                    
+                                </Span>
+                                <Span FontSize="16" Text="↓"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="hideKeyBoard_Clicked"></TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                </Frame>                
+                <Frame CornerRadius="30"
                    Margin="15, -30, 15, 5"
                    BackgroundColor="White"
                    HasShadow="{AppThemeBinding Light=false, Dark=true}"
                    BorderColor="{Binding hex}"
                    IsVisible="{Binding isNotRead}"
                    Padding="5">
-                <!--<StackLayout
+                    <!--<StackLayout
                     
                     MinimumHeightRequest="50"
                     Orientation="Horizontal" >-->
-                        <Grid Padding="0" HorizontalOptions="FillAndExpand"  Margin="0" HeightRequest="60" x:Name="Grid" MinimumHeightRequest="50">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.06*" />
-                                <ColumnDefinition Width="0.72*" />
-                                <ColumnDefinition Width="0.06*" />
-                                <ColumnDefinition Width="0.16*" />                                
-                            </Grid.ColumnDefinitions>
-                            <ActivityIndicator x:Name="progressFile"
+                    <Grid Padding="0" HorizontalOptions="FillAndExpand"  Margin="0" HeightRequest="60" x:Name="Grid" MinimumHeightRequest="50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.06*" />
+                            <ColumnDefinition Width="0.72*" />
+                            <ColumnDefinition Width="0.06*" />
+                            <ColumnDefinition Width="0.16*" />
+                        </Grid.ColumnDefinitions>
+                        <ActivityIndicator x:Name="progressFile"
                                                Grid.Column="0"
                                        IsRunning="true"
                                        HeightRequest="25"
                                        WidthRequest="25"
                                        IsVisible="False"
                                        HorizontalOptions="StartAndExpand"
-                                       Color="{Binding hex}" />                            
-                            <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_add_file.svg"
+                                       Color="{Binding hex}" />
+                        <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_add_file.svg"
                                                 x:Name="IconViewAddFile"
                                                 ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}}"/>
-                            <xamarinJkh:BordlessEditorChat x:Name="EntryMess"
+                        <xamarinJkh:BordlessEditorChat x:Name="EntryMess"
                                                        Grid.Column="1"
                                                FontSize="18"
                                                VerticalOptions="Center"
@@ -165,7 +179,7 @@
                                                HorizontalOptions="FillAndExpand" 
                                                AutoSize="TextChanges"
                                                            Focused="EntryMess_Focused"/>
-                            <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_send_mess.svg"
+                        <svg:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_send_mess.svg"
                                                 Grid.Column="2"
                                                 WidthRequest="25"
                                                 HeightRequest="25"
@@ -173,29 +187,29 @@
                                                 VerticalOptions="Center"
                                                 x:Name="IconViewSend"
                                                 ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}}"/>
-                            <ActivityIndicator x:Name="progress"
+                        <ActivityIndicator x:Name="progress"
                                                Grid.Column="2"
                                        IsRunning="true"
                                        HeightRequest="20"
                                        WidthRequest="20"
                                        IsVisible="False"
                                        Color="{Binding hex}" />
-                            <StackLayout Grid.Column="3" Spacing="-10" IsVisible="False" VerticalOptions="Center" x:Name="hiddenComent" >                                
-                                    <CheckBox
+                        <StackLayout Grid.Column="3" Spacing="-10" IsVisible="False" VerticalOptions="Center" x:Name="hiddenComent" >
+                            <CheckBox
                                     x:Name="CheckBoxHidden"
                             HorizontalOptions="Center"
                             Color="{Binding hex}" />
-                                    <Label
+                            <Label
                             FontSize="10"
                             TextColor="Black"
                             HorizontalOptions="Center"
                             Text="{x:Static xamarinJkh:AppResources.Hidden}" />
-                            </StackLayout>
-                        </Grid>
+                        </StackLayout>
+                    </Grid>
 
                     <!--</StackLayout>-->
-            </Frame>
-        </StackLayout>
+                </Frame>
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

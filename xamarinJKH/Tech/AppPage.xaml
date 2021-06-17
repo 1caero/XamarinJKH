@@ -135,7 +135,21 @@
                         </Frame>
                     </Grid>
             </pancakeView:PancakeView>
-            <Frame CornerRadius="30"
+                <Frame HasShadow="False"  Padding="10" IsVisible="false" Margin="20,-60,0,20" BackgroundColor="Transparent" CornerRadius="20" BorderColor="{Binding hex}" x:Name="hideKeyBoard" HorizontalOptions="Start">
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span  Text="Свернуть ">
+                                </Span>
+                                <Span FontSize="16" Text="↓"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="hideKeyBoard_Clicked"></TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Frame CornerRadius="30"
                    Margin="15, -30, 15, 5"
                    BackgroundColor="White"
                    IsVisible="{Binding closeMessages}"

@@ -45,6 +45,12 @@ namespace xamarinJKH.iOS.CustomRenderers
                     if (Control != null)
                     {
                         Control.ShouldEndEditing += EnableHidingKeyboard;
+                        Control.EndEditing(true);
+                        //Control.ShouldEndEditing += EnableHidingKeyboard;
+                    }
+                    else
+                    {
+
                     }
 
                     //MessagingCenter.Unsubscribe<object>(this, "FocusKeyboardStatus");
