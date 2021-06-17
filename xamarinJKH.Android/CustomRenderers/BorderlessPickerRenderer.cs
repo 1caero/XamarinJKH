@@ -8,7 +8,7 @@ using xamarinJKH;
 [assembly: ExportRenderer(typeof(BorderlessPicker), typeof(BorderlessPickerRenderer))]
 namespace xamarinJKH.Droid.CustomRenderers
 {
-    public class BorderlessPickerRenderer : Xamarin.Forms.Platform.Android.AppCompat.PickerRenderer
+    public class BorderlessPickerRenderer :PickerRenderer
     {
         public static void Init() { }
         protected override void OnElementChanged(ElementChangedEventArgs<Picker> e)
