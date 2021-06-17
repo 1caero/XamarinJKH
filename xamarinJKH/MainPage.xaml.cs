@@ -31,7 +31,7 @@ namespace xamarinJKH
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
-
+    
     public partial class MainPage : ContentPage
     {
         private RestClientMP server = new RestClientMP();
@@ -51,7 +51,9 @@ namespace xamarinJKH
                 OnPropertyChanged("hex");
             }
         }
-
+/// <summary>
+/// Точка входа в приложение и экран авторизации
+/// </summary>
         public MainPage()
         {
             adress = "sdf";
@@ -171,7 +173,9 @@ namespace xamarinJKH
                 Preferences.Set("IsFirstStart", false);
             }
         }
-        
+        /// <summary>
+        /// Функция для автоматического входа в приложение
+        /// </summary>
         private void AutoLogin()
         {
             string login = Preferences.Get("login", "");
@@ -225,7 +229,10 @@ namespace xamarinJKH
             });
         }
 
-
+        /// <summary>
+        /// Обработка нажатия физической кнопки назад на устройстве
+        /// </summary>
+        /// <returns>true если успешная обработка иначе false</returns>
         protected override bool OnBackButtonPressed()
         {
             if (Device.RuntimePlatform == Device.Android)
@@ -236,7 +243,9 @@ namespace xamarinJKH
 
             return base.OnBackButtonPressed();
         }
-
+        /// <summary>
+        /// Проверка наличия более новых версий приложения в магазинах
+        /// </summary>
         async void CheckForUpdate()
         {
             Analytics.TrackEvent("Проверка обновлений");
@@ -248,7 +257,9 @@ namespace xamarinJKH
                 Device.BeginInvokeOnMainThread(async () => await Dialog.Instance.ShowAsync<UpdateNotificationDialog>());
             }
         }
-
+        /// <summary>
+        /// Функция получения настроек приложения с сервера
+        /// </summary>
         private async void getSettings()
         {
             Analytics.TrackEvent("Запрос настроек");
@@ -344,7 +355,11 @@ namespace xamarinJKH
                 IconViewLogin.Source = "resource://xamarinJKH.Resources.ic_phone_login.svg";
             }
         }
-
+        /// <summary>
+        /// Обработчик нажатия на кнопку "вход для сотрудника" или "вход для жителя"
+        /// </summary>
+        /// <param name="sender">Целевой объект нажатия</param>
+        /// <param name="e">События</param>
         private async void ChoiceAuth(object sender, EventArgs e)
         {
             Analytics.TrackEvent("Переход к входу сотрудника");
@@ -377,7 +392,12 @@ namespace xamarinJKH
                 IconViewLogin.Source = "resource://xamarinJKH.Resources.ic_fio_reg.svg";
             }
         }
-
+        /// <summary>
+        /// Обработка нажатия на кнопку "Обратиться в тех.поддержку"
+        /// открывается форма обращения в тех поддержку
+        /// </summary>
+        /// <param name="sender">Целевой объект нажатия</param>
+        /// <param name="e">События</param>
         private async void TechSend(object sender, EventArgs e)
         {
             
@@ -396,7 +416,11 @@ namespace xamarinJKH
             }
         }
         
-
+        /// <summary>
+        /// Обработка нажатия на кнопку войти
+        /// </summary>
+        /// <param name="sender">Целевой объект нажатия</param>
+        /// <param name="e">События</param>
         private async void ButtonClick(object sender, EventArgs e)
         {
             if (Settings.ConstAuth)
@@ -433,7 +457,12 @@ namespace xamarinJKH
 
         string pin = "";
         bool cleanFilelds = false;
-
+        /// <summary>
+        /// Авторизация жителя в приложении
+        /// </summary>
+        /// <param name="loginAuth">Логин</param>
+        /// <param name="pass">Пароль</param>
+        /// <param name="isButtonClick">Флаг отвечающий за проверку использования авторизации по биометрии</param>
         public async void Login(string loginAuth, string pass, bool isButtonClick=false)
         {
             Analytics.TrackEvent("Авторизация пользователя");
@@ -565,7 +594,12 @@ namespace xamarinJKH
             progress.IsVisible = false;
             FrameBtnLogin.IsVisible = true;
         }
-
+        /// <summary>
+        /// Авторизация сотрудника УК в приложении
+        /// </summary>
+        /// <param name="loginAuth">Логин</param>
+        /// <param name="pass">Пароль</param>
+        /// <param name="isButtonClick">Флаг отвечающий за проверку использования авторизации по биометрии</param>
         public async void LoginDispatcher(string loginAuth, string pass, bool isButtonClick = false)
         {
             Analytics.TrackEvent("Авторизация сотрудника");

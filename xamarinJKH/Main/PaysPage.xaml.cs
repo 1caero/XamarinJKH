@@ -24,6 +24,9 @@ using xamarinJKH.Utils;
 
 namespace xamarinJKH.Main
 {
+    /*!
+\b Форма оплаты УК
+*/
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PaysPage : ContentPage
     {
@@ -35,7 +38,9 @@ namespace xamarinJKH.Main
         private RestClientMP server = new RestClientMP();
 
         public bool forSvg { get; set; }
-
+        /// <summary>
+        /// Отображение загрузки данных
+        /// </summary>
         public bool IsRefreshing
         {
             get { return _isRefreshing; }
@@ -45,7 +50,9 @@ namespace xamarinJKH.Main
                 OnPropertyChanged(nameof(IsRefreshing));
             }
         }
-
+        /// <summary>
+        /// Комманда загрузки данных по ЛС
+        /// </summary>
         public ICommand RefreshCommand
         {
             get
@@ -80,7 +87,9 @@ namespace xamarinJKH.Main
             return true;
         }
 
-
+        /// <summary>
+        /// Коструктор
+        /// </summary>
         public PaysPage()
         {
             InitializeComponent();
@@ -184,7 +193,9 @@ namespace xamarinJKH.Main
             });
         }
         private bool _isChangeTheme;
-
+        /// <summary>
+        /// Отображение смены темы приложения
+        /// </summary>
         public bool IsChangeTheme
         {
             get => _isChangeTheme;
@@ -194,6 +205,10 @@ namespace xamarinJKH.Main
                 OnPropertyChanged(nameof(IsChangeTheme));
             }
         }
+        
+        /// <summary>
+        /// Обработка переоткрытия формы
+        /// </summary>
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -215,6 +230,9 @@ namespace xamarinJKH.Main
             });
         }
 
+        /// <summary>
+        /// Установка фирменного цвета УК
+        /// </summary>
         void SetTextAndColor()
         {
             UkName.Text = Settings.MobileSettings.main_name;
@@ -236,7 +254,9 @@ namespace xamarinJKH.Main
                         AccExistsLbl.IsVisible = true;
                     }    
         }
-
+        /// <summary>
+        /// Получение информации о ЛС
+        /// </summary>
         async void getInfo()
         {
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
@@ -286,7 +306,11 @@ namespace xamarinJKH.Main
                 await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorCountersNoData, "OK");
             }
         }
-
+        /// <summary>
+        /// Открытие формы квитанций
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void openSaldo(object sender, EventArgs e)
         {
             if (_accountingInfo != null && _accountingInfo.Count > 0)
@@ -299,7 +323,11 @@ namespace xamarinJKH.Main
                 await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAppsNoIdent, "OK");
             }
         }
-
+        /// <summary>
+        /// Открытие формы истрия платежей
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OpenHistory(object sender, EventArgs e)
         {
             oh();
@@ -326,7 +354,10 @@ namespace xamarinJKH.Main
                 await DisplayAlert(AppResources.ErrorTitle, AppResources.ErrorAppsNoIdent, "OK");
             }
         }
-
+        /// <summary>
+        /// Обработка отключения ЛС от аккаунта
+        /// </summary>
+        /// <param name="Ident"></param>
         public async void DellLs(string Ident)
         {
             bool answer = await Settings.mainPage.DisplayAlert(AppResources.Delete,
@@ -454,12 +485,21 @@ namespace xamarinJKH.Main
                 IsRefreshing = false;
             });
         }
-
+        /// <summary>
+        /// Отображения истории списания бонусов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         async void ShowBonusHistory(object sender, EventArgs e)
         {
             await Dialog.Instance.ShowAsync(new BonusHistoryDialogView("123"));
         }
-
+        /// <summary>
+        /// Формирования вывода списка ЛС на экран
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="_accountingInfo"></param>
+        /// <returns></returns>
         MaterialFrame AddAccountToList(AccountAccountingInfo info, List<AccountAccountingInfo> _accountingInfo)
         {
             var accounts = Settings.Person.Accounts;

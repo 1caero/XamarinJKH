@@ -19,9 +19,16 @@ namespace xamarinJKH.Server.RequestModel
         public string UpdateKey { get; set; }
         public string Error { get; set; }
     }
-    
+    /*!
+\b Заявка
+*/
     public class RequestInfo
     {
+        /// <summary>
+        /// Конвертация типов из дао
+        /// </summary>
+        /// <param name="requestInfo">Дао</param>
+        /// <returns></returns>
         public static RequestInfoDao InfoToDao(RequestInfo requestInfo)
         {
             return new RequestInfoDao
@@ -57,6 +64,11 @@ namespace xamarinJKH.Server.RequestModel
                 PaidRequestCompleteCode = requestInfo.PaidRequestCompleteCode
             };
         }
+        /// <summary>
+        /// Конвертация типов в дао
+        /// </summary>
+        /// <param name="requesDao"></param>
+        /// <returns></returns>
         public static RequestInfo DaoToInfo(RequestInfoDao requesDao)
         {
             return new RequestInfo

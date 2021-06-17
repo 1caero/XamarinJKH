@@ -28,6 +28,9 @@ using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
 namespace xamarinJKH.Apps
 {
+    /*!
+\b Форма работы с заявкой
+*/
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AppPage : ContentPage
     {
@@ -46,7 +49,9 @@ namespace xamarinJKH.Apps
         const string CAMERA = "camera";
         const string GALERY = "galery";
         const string FILE = "file";
-
+        /// <summary>
+        /// Отборажения обновления
+        /// </summary>
         public bool IsRefreshing
         {
             get { return _isRefreshing; }
@@ -56,7 +61,9 @@ namespace xamarinJKH.Apps
                 OnPropertyChanged(nameof(IsRefreshing));
             }
         }
-
+        /// <summary>
+        /// Команда обновления данных
+        /// </summary>
         public ICommand RefreshCommand
         {
             get
@@ -162,7 +169,9 @@ namespace xamarinJKH.Apps
             MessagingCenter.Send<Object>(this, "AutoUpdate");
             base.OnDisappearing();
         }
-
+        /// <summary>
+        /// Такс обновления данных 
+        /// </summary>
         public async Task RefreshData()
         {
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
@@ -225,6 +234,13 @@ namespace xamarinJKH.Apps
         SpeechRecognizer recognizer;
         IMicrophoneService micService;
         bool isTranscribing = false;
+        
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="requestInfo">Заявка</param>
+        /// <param name="closeAll">Закрыть все форммы в стеке</param>
+        /// <param name="paid">Платная заявка</param>
         public AppPage(RequestInfo requestInfo, bool closeAll = false, bool paid = false)
         {
             close = closeAll;
@@ -378,7 +394,11 @@ namespace xamarinJKH.Apps
             };
             baseForApp.GestureRecognizers.Add(hideKeyBoardgesture);
         }
-        
+        /// <summary>
+        /// Транскрибация голосо в текст
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
     async void TranscribeClicked(object sender, EventArgs e)
         {
             bool isMicEnabled = await micService.GetPermissionAsync();
@@ -444,7 +464,10 @@ namespace xamarinJKH.Apps
             }
             UpdateDisplayState();
         }
-
+        /// <summary>
+        /// Обновление транскрибации
+        /// </summary>
+        /// <param name="newText">Новый текст</param>
         void UpdateTranscription(string newText)
         {
             Device.BeginInvokeOnMainThread(() =>
@@ -461,7 +484,9 @@ namespace xamarinJKH.Apps
             var msg = $"=================\n{DateTime.Now.ToString()}\n=================";
             UpdateTranscription(msg);
         }
-
+        /// <summary>
+        /// Отображение прогресса отапрвки сообщения
+        /// </summary>
         void UpdateDisplayState()
         {
             Device.BeginInvokeOnMainThread(() =>
@@ -480,7 +505,9 @@ namespace xamarinJKH.Apps
                 }
             });
         }
-
+        /// <summary>
+        /// Запуск записи с микрофона
+        /// </summary>
         private async void RecordMic()
         {
             TranscribeClicked(this, null);
@@ -511,7 +538,10 @@ namespace xamarinJKH.Apps
         }
 
         //private ISpeechToText _speechRecongnitionInstance;
-        
+        /// <summary>
+        /// Обработка нажатия физической кнопкия назад
+        /// </summary>
+        /// <returns></returns>
         protected override bool OnBackButtonPressed()
         {
             if (close)
@@ -527,6 +557,9 @@ namespace xamarinJKH.Apps
                 return base.OnBackButtonPressed();
             }
         }
+        /// <summary>
+        /// Добавление файла к заявке
+        /// </summary>
         async void addFileApp()
         {
             MediaFile file = null;
@@ -651,7 +684,10 @@ namespace xamarinJKH.Apps
 
             Loading.Instance.Hide();
         }
-
+        /// <summary>
+        /// Добавление фото с камеры к заявке
+        /// </summary>
+        /// <param name="file"></param>
         async Task getCameraFile(MediaFile file)
         {
             if (file == null)
@@ -665,7 +701,11 @@ namespace xamarinJKH.Apps
                 await RefreshData();
             }
         }
-
+        /// <summary>
+        /// Старт загрузки файла на сервер
+        /// </summary>
+        /// <param name="metod">Фото с камеры,Галерея,Файл</param>
+        /// <param name="file">сам файл</param>
         public async Task startLoadFile(string metod, MediaFile file)
         {
             // Loading settings
@@ -693,7 +733,10 @@ namespace xamarinJKH.Apps
                 }
             });
         }
-
+        /// <summary>
+        /// Получение файлы из галереи
+        /// </summary>
+        /// <param name="file">файл</param>
         async Task GetGalaryFile(MediaFile file)
         {
             CommonResult commonResult = await _server.AddFileApps(_requestInfo.ID.ToString(),
@@ -705,7 +748,11 @@ namespace xamarinJKH.Apps
                 await RefreshData();
             }
         }
-
+        /// <summary>
+        /// Перевод потока в байты
+        /// </summary>
+        /// <param name="stream">поток</param>
+        /// <returns>байты</returns>
         public static byte[] StreamToByteArray(Stream stream)
         {
             if (stream is MemoryStream)
@@ -718,7 +765,11 @@ namespace xamarinJKH.Apps
                 return ReadFully(stream);
             }
         }
-
+        /// <summary>
+        /// Получение имени файла
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         string getFileName(string path)
         {
             try
@@ -731,7 +782,11 @@ namespace xamarinJKH.Apps
                 return "filename";
             }
         }
-
+        /// <summary>
+        /// Прочтение входного потока
+        /// </summary>
+        /// <param name="input">входной поток</param>
+        /// <returns>байты</returns>
         public static byte[] ReadFully(Stream input)
         {
             using (MemoryStream ms = new MemoryStream())
@@ -740,7 +795,7 @@ namespace xamarinJKH.Apps
                 return ms.ToArray();
             }
         }
-
+        
         private async Task PickAndShowFile(string[] fileTypes)
         {
             try
@@ -782,7 +837,9 @@ namespace xamarinJKH.Apps
             IconViewAddFile.IsVisible = true;
             progressFile.IsVisible = false;
         }
-
+        /// <summary>
+        /// Отправка сообщения
+        /// </summary>
         async void sendMessage()
         {
             try
@@ -821,7 +878,10 @@ namespace xamarinJKH.Apps
             }
 
         }
-
+        /// <summary>
+        /// Отображение короткого всплывающего сообщения
+        /// </summary>
+        /// <param name="text">текст</param>
         private async Task ShowToast(string text)
         {
             if (Device.RuntimePlatform == Device.iOS)
@@ -834,7 +894,9 @@ namespace xamarinJKH.Apps
             }
         }
 
-
+        /// <summary>
+        /// Получение сообщений по заявке
+        /// </summary>
         async void getMessage2()
         {
 
@@ -864,7 +926,11 @@ namespace xamarinJKH.Apps
             await MethodWithDelayAsync(1000);
 
         }
-
+        /// <summary>
+        /// Добавление сообщения к отображению
+        /// </summary>
+        /// <param name="message">Сообщение</param>
+        /// <param name="prevAuthor">Автор сообщения</param>
         void addAppMessage(RequestMessage message, string prevAuthor)
         {
             StackLayout data;
@@ -884,7 +950,10 @@ namespace xamarinJKH.Apps
         }
 
 
-
+        /// <summary>
+        /// Автоскролл к последнему сообщению
+        /// </summary>
+        /// <param name="milliseconds"></param>
         public async Task MethodWithDelayAsync(int milliseconds)
         {
             await Task.Delay(milliseconds);
@@ -897,7 +966,9 @@ namespace xamarinJKH.Apps
             }
             catch { }
         }
-
+        /// <summary>
+        /// Установка текста
+        /// </summary>
         async void setText()
         {
             await CrossMedia.Current.Initialize();
@@ -915,7 +986,9 @@ namespace xamarinJKH.Apps
             FrameMessage.SetAppThemeColor(Frame.BorderColorProperty, hexColor, Color.White);
 
         }
-
+        /// <summary>
+        /// Отображение диалога с информацией по заявке
+        /// </summary>
         private async void ShowInfo()
         {
             if (request != null)
@@ -957,22 +1030,38 @@ namespace xamarinJKH.Apps
             
             
         }
-
+        /// <summary>
+        /// Отображения чека по платной заявке
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private async void OpenReceipt(object sender, EventArgs args)
         {
             await Dialog.Instance.ShowAsync(new AppReceiptDialogWindow(new AppRecieptViewModel(request.ReceiptItems)));
         }
-
+        /// <summary>
+        /// Обработка нажатия на микрофон
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImageButton_OnPressed(object sender, EventArgs e)
         {
             TranscribeClicked(sender, e);
         }
-
+        /// <summary>
+        /// Обработка отпускания микрофона
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImageButton_OnReleased(object sender, EventArgs e)
         {
             TranscribeClicked(sender, e);
         }
-
+        /// <summary>
+        /// Обработка смены фокуса текстового поля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EntryMess_Focused(object sender, FocusEventArgs e)
         {
             MessagingCenter.Send<object>(this, "SetKeyboardFocusStatic");

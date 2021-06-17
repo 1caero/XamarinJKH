@@ -18,6 +18,9 @@ using System.Linq;
 
 namespace xamarinJKH.Apps
 {
+    /*!
+\b Контрол для отображения авторских сообщений
+*/
     public class MessageCellAuthor : StackLayout
     {
         private StackLayout ConteinerA = new StackLayout();
@@ -28,7 +31,14 @@ namespace xamarinJKH.Apps
         Frame frameDateA = new Frame();
         SvgCachedImage imageA = new SvgCachedImage();
         Frame frameA = new Frame();
-
+        /// <summary>
+        /// Генерация вьюхи с отображением авторского сообщения
+        /// </summary>
+        /// <param name="message">Сообщение</param>
+        /// <param name="p">Страница вызова</param>
+        /// <param name="DateUniq">Дата</param>
+        /// <param name="newDate">Новая дата</param>
+        /// <param name="isTech">Техподдержка</param>
         public MessageCellAuthor(RequestMessage message, Page p, string DateUniq, out string newDate,
             bool isTech = false)
         {
@@ -261,7 +271,9 @@ namespace xamarinJKH.Apps
 
     }
 
-    
+    /*!
+\b Контрол для отображения сообщений собеседника
+*/
     public class MessageCellService : StackLayout
     {       
 
@@ -277,7 +289,14 @@ namespace xamarinJKH.Apps
 
         private RestClientMP _server = new RestClientMP();
 
-
+        /// <summary>
+        /// Генерация вьюхи с отображением сообщения собеседника
+        /// </summary>
+        /// <param name="message">Сообщение</param>
+        /// <param name="p">Страница вызова</param>
+        /// <param name="DateUniq">Дата</param>
+        /// <param name="newDate">Новая дата</param>
+        /// <param name="isTech">Техподдержка</param>
         public MessageCellService(RequestMessage message, Page p, string DateUniq, out string newDate, string prevAuthor, bool isTech = false)
         {
             frame.HorizontalOptions = LayoutOptions.Start;

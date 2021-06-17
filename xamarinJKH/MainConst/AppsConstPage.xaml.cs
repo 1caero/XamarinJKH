@@ -26,6 +26,9 @@ using xamarinJKH.Utils.ReqiestUtils;
 
 namespace xamarinJKH.MainConst
 {
+    /*!
+\b Форма заявок сотрудника
+*/
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AppsConstPage : ContentPage
     {
@@ -111,7 +114,9 @@ namespace xamarinJKH.MainConst
             }
         }
         
-        
+        /// <summary>
+        /// Обновление данных
+        /// </summary>
         public async Task RefreshData()
         {
             SetDisableCheck();
@@ -121,10 +126,19 @@ namespace xamarinJKH.MainConst
             IsVisibleFunction();
         
         }
-
+        /// <summary>
+        /// Возможность массова выполнять заявки
+        /// </summary>
         public bool CanComplete => Settings.Person.UserSettings.RightPerformRequest;
+        /// <summary>
+        /// Возможность массово закрывать заявки
+        /// </summary>
         public bool CanClose => Settings.Person.UserSettings.RightCloseRequest;
-
+        /// <summary>
+        /// Открытие формы тех.под
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void TechSend(object sender, EventArgs e)
         {
                 
@@ -149,6 +163,10 @@ namespace xamarinJKH.MainConst
         public bool CanDoMassOps = false;
         public bool IsPass = false;
         private readonly Realm _realm;
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="isPass">Форма отображения пропусков?</param>
         public AppsConstPage(bool isPass)
         {
             InitializeComponent();
@@ -280,7 +298,10 @@ namespace xamarinJKH.MainConst
 
             Device.StartTimer(TimeSpan.FromMilliseconds(100), SetCanHideTrueAsync);
         }
-
+        /// <summary>
+        /// Возможность скрытия нижнего меню настроек
+        /// </summary>
+        /// <returns></returns>
         bool SetCanHideTrueAsync()
         {
             Device.BeginInvokeOnMainThread(async () => {
@@ -295,6 +316,9 @@ namespace xamarinJKH.MainConst
 
         private int rotation = 1;
         private int rotation2 = 1;
+        /// <summary>
+        /// Скрытие нижнего меню настроек
+        /// </summary>
         private async Task HideBot()
         {
             Device.BeginInvokeOnMainThread(async () =>
@@ -311,6 +335,9 @@ namespace xamarinJKH.MainConst
         }
                 
         double rotationdegrees = 90;
+        /// <summary>
+        /// Скрытие по таймеру
+        /// </summary>
         private void HideBotTimer()
         {
             Device.BeginInvokeOnMainThread(() =>
@@ -327,7 +354,10 @@ namespace xamarinJKH.MainConst
                 additionalList.Scrolled += OnCollectionViewScrolled;                
             });
         }
-
+        /// <summary>
+        /// Снятие выбора заявок
+        /// </summary>
+        /// <param name="args"></param>
         private void CheckDown(string args)
         {
             RequestInfo requestInfo = getRequestInfo(args);
@@ -340,7 +370,10 @@ namespace xamarinJKH.MainConst
             IsVisibleFunction();
         }
         
-
+        /// <summary>
+        /// Выбор заявки
+        /// </summary>
+        /// <param name="args"></param>
         private void CheckApp(string args)
         {
             RequestInfo requestInfo = getRequestInfo(args);
@@ -352,7 +385,9 @@ namespace xamarinJKH.MainConst
 
             IsVisibleFunction();
         }
-
+        /// <summary>
+        /// Массовое закрытие выбранных  заявок
+        /// </summary>
         private async Task CloseApps()
         {
             // Loading settings
@@ -379,7 +414,9 @@ namespace xamarinJKH.MainConst
                 
             });
         }
-
+        /// <summary>
+        /// Массовое выполнение выбранных заявок
+        /// </summary>
         private async Task PerformsApps()
         {
             // Loading settings
@@ -405,7 +442,11 @@ namespace xamarinJKH.MainConst
                 }
             });
         }
-
+        /// <summary>
+        /// Получение заявки по номеру
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
         private RequestInfo getRequestInfo(string number)
         {
             foreach (var each in RequestInfos)
@@ -432,6 +473,9 @@ namespace xamarinJKH.MainConst
                 // ignored
             }
         }
+        /// <summary>
+        /// Открытие кнопока для массовой работы с заявками
+        /// </summary>
         private void IsVisibleFunction()
         {
             if (CheckRequestInfos.Count > 0)
@@ -445,7 +489,9 @@ namespace xamarinJKH.MainConst
                 StackLayoutBot.IsVisible = true;
             }
         }
-        
+        /// <summary>
+        /// Установка имени сотрудника
+        /// </summary>
         private void SetAdminName()
         {
             FormattedString formattedName = new FormattedString();
@@ -494,7 +540,9 @@ namespace xamarinJKH.MainConst
             
         }
         
-
+        /// <summary>
+        /// Установка текста
+        /// </summary>
         void SetText()
         {
             UkName.Text = Settings.MobileSettings.main_name;
@@ -583,7 +631,9 @@ namespace xamarinJKH.MainConst
             // bottomMenu.SetAppThemeColor(PancakeView.BorderColorProperty, hexColor, Color.Transparent);
         }
 
-
+        /// <summary>
+        /// Получение заявок
+        /// </summary>
         async void getApps()
         {
             bool switchRead = Preferences.Get("SwitchAppRead",false);
@@ -642,7 +692,11 @@ namespace xamarinJKH.MainConst
 
             MessagingCenter.Send<Object, int>(this, "SetAppReadConst", select.ID);
         }
-
+        /// <summary>
+        /// Открытие формы создания заявко
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void startNewApp(object sender, EventArgs e)
         {
             //if (Device.RuntimePlatform == Device.Android)
@@ -674,6 +728,9 @@ namespace xamarinJKH.MainConst
         {
             5,6,7,8,10,11,12
         }; 
+        /// <summary>
+        /// Установка прочтения заявки
+        /// </summary>
         private void SetReaded()
         {
             Device.BeginInvokeOnMainThread(() => aInd.IsVisible = true);
@@ -784,7 +841,11 @@ namespace xamarinJKH.MainConst
             //this.BindingContext = this;
             Device.BeginInvokeOnMainThread(() => aInd.IsVisible = false);
         }
-
+        /// <summary>
+        /// Обработка нажатия на элемент списка заявок
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             var s = (StackLayout)sender;
@@ -819,7 +880,11 @@ namespace xamarinJKH.MainConst
                 }
             }
         }
-
+        /// <summary>
+        /// Обработка изменения чекбокса
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckBox_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             try
@@ -843,7 +908,11 @@ namespace xamarinJKH.MainConst
                 Console.WriteLine(exception);
             }
         }
-
+        /// <summary>
+        /// Фильтрация заявок по тексту
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void filter_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (RequestDefault != null)
@@ -902,6 +971,11 @@ namespace xamarinJKH.MainConst
 
         
         //private double marginTopDefault = 0;
+        /// <summary>
+        /// Обработка скрола заявок
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void OnCollectionViewScrolled(object sender, ItemsViewScrolledEventArgs e)
         {
             if(canHide && StackLayoutHide.IsVisible)
@@ -944,20 +1018,32 @@ namespace xamarinJKH.MainConst
 
         }
         
-
+        /// <summary>
+        /// По сроку исполнения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SwitchApp_OnToggled(object sender, ToggledEventArgs e)
         {
             SetReaded();
             Preferences.Set("SwitchApp",e.Value);
 
         }
-
+        /// <summary>
+        /// Первые непрочитаннык
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SwitchAppRead_OnToggled(object sender, ToggledEventArgs e)
         {
             SetReaded();
             Preferences.Set("SwitchAppRead",e.Value);
         }
-
+        /// <summary>
+        /// Скрыть выполненные
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SwitchAppHidePerfom_OnToggled(object sender, ToggledEventArgs e)
         {
             SetReaded();

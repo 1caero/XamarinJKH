@@ -13,12 +13,22 @@ using xamarinJKH.Server;
 
 namespace xamarinJKH.Apps
 {
+    /*!
+\b Форма просмотра фотографий
+*/
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PhotoPage : ContentPage
     {
         private RestClientMP server = new RestClientMP();
         private byte[] _file = null;
         private string _fileName = "";
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="idFile">ID файла</param>
+        /// <param name="fileName">Имя файла</param>
+        /// <param name="isConst">Сотрудник?</param>
+        /// <param name="isTech">ТехПоддержка?</param>
         public PhotoPage(string idFile, string fileName, bool isConst, bool isTech=false)
         {
             InitializeComponent();
@@ -44,10 +54,13 @@ namespace xamarinJKH.Apps
             BackStackLayout.GestureRecognizers.Add(backClick);
             Task.Run(async ()=> await LoadPhoto(idFile, isConst,isTech));
         }
-
-        async 
-        Task
-LoadPhoto(string id, bool isConst, bool isTech)
+        /// <summary>
+        /// Загрузка фото с сервера
+        /// </summary>
+        /// <param name="id">id файла</param>
+        /// <param name="isConst">Сотрудник?</param>
+        /// <param name="isTech">ТехПоддержка?</param>
+        async Task LoadPhoto(string id, bool isConst, bool isTech)
         {
             //new Task(async () =>
             //{
@@ -96,6 +109,11 @@ LoadPhoto(string id, bool isConst, bool isTech)
             }
             return output.ToArray();
         }
+        /// <summary>
+        /// Поделиться фоткой
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void SharePhoto(object sender, EventArgs e)
         {
             if (_file != null)
