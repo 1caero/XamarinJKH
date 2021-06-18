@@ -69,7 +69,7 @@ namespace xamarinJKH.iOS
 
             SfCalendarRenderer.Init();
             SfPickerRenderer.Init();
-
+            Syncfusion.SfImageEditor.XForms.iOS.SfImageEditorRenderer.Init();
             LoadApplication(new App());
             UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
             Firebase.Core.App.Configure();

@@ -5,7 +5,8 @@
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH" 
              xmlns:customrenderers="clr-namespace:xamarinJKH.CustomRenderers"
-             xmlns:pinch="clr-namespace:Xamarin.Forms.PinchZoomImage;assembly=Xamarin.Forms.PinchZoomImage" 
+             xmlns:pinch="clr-namespace:Xamarin.Forms.PinchZoomImage;assembly=Xamarin.Forms.PinchZoomImage"
+             xmlns:xForms="clr-namespace:Syncfusion.SfImageEditor.XForms;assembly=Syncfusion.SfImageEditor.XForms"
 
              x:Class="xamarinJKH.Pays.ImageSaldoPage">
     <ContentPage.Content>
@@ -63,20 +64,40 @@
                 </Grid.RowDefinitions>
 
                     <!--<customrenderers:ZoomImage x:Name="Image"  Grid.Row="0" />-->
-                <pinch:PinchZoom>
-                    <pinch:PinchZoom.Content>
-                        <Image x:Name="Image"  Grid.Row="0" />
-                    </pinch:PinchZoom.Content>
-                </pinch:PinchZoom>
+                    <!-- <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Both"> -->
+                <!-- <customrenderers:PinchToZoomContainer HorizontalOptions="Fill" VerticalOptions="Fill"> -->
+                <!--     <customrenderers:PinchToZoomContainer.Content> -->
+                <!--         <Image x:Name="Image"  Grid.Row="0" /> -->
+                <!--     </customrenderers:PinchToZoomContainer.Content> -->
+                <!-- </customrenderers:PinchToZoomContainer> -->
+                    <xForms:SfImageEditor x:Name="editor" ZoomLevel="10" PanningMode="SingleFinger">
+                        <xForms:SfImageEditor.ToolbarSettings>
+                            <xForms:ToolbarSettings IsVisible="False" />
+                        </xForms:SfImageEditor.ToolbarSettings>
+                    </xForms:SfImageEditor>
+                    <!-- </ScrollView> -->
 
-                <ActivityIndicator x:Name="progress"
-                                   IsRunning="true"
-                                   IsVisible="True"
-                                   HeightRequest="40"
-                                   VerticalOptions="Center"
-                                   Color="{x:DynamicResource MainColor}" 
-                                    Grid.Row="0"/>
-            </Grid>
+                        <ActivityIndicator x:Name="progress"
+                                           IsRunning="true"
+                                           IsVisible="True"
+                                           HeightRequest="40"
+                                           VerticalOptions="Center"
+                                           Color="{x:DynamicResource MainColor}" 
+                                           Grid.Row="0"/>
+                    <forms:SvgCachedImage Source="resource://xamarinJKH.Resources.ic_flip.svg"
+                                        HorizontalOptions="EndAndExpand"
+                                        VerticalOptions="EndAndExpand"
+                                        x:Name="ImageFlip"
+                                        HeightRequest="40"
+                                        WidthRequest="40"
+                                        Margin="15"
+                                        ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}"
+                                        >
+                        <forms:SvgCachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Button_Clicked"/>
+                        </forms:SvgCachedImage.GestureRecognizers>   
+                    </forms:SvgCachedImage>
+              </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

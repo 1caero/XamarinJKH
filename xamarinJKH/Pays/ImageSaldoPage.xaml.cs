@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using FFImageLoading.Svg.Forms;
+using Syncfusion.SfImageEditor.XForms;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -53,17 +55,18 @@ namespace xamarinJKH.Pays
         {
             ViewPrint.IsEnabled = false;
             ViewHare.IsEnabled = false;
+            ImageFlip.IsEnabled = false;
             new Task(async () =>
             {
                 byte[] stream;
-                
+                // $"{RestClientMP.SERVER_ADDR}/Accounting/Check/{IdPay}?acx={Uri.EscapeDataString(Settings.Person.acx ?? string.Empty)}";
                 stream = !_isHist ? await server.DownloadFileAsync(_billInfo.ID.ToString(), 1): await server.GetCheckPP(_billInfo.ID.ToString(),1); 
 
                 if (stream != null)
                 {
                     Stream streamM = new MemoryStream(stream);
                     Device.BeginInvokeOnMainThread(async () =>
-                        Image.Source = ImageSource.FromStream(() => { return streamM; }));
+                        editor.Source =  ImageSource.FromStream(() => { return streamM; }));
                     _file = !_isHist ? await server.DownloadFileAsync(_billInfo.ID.ToString()) : await server.GetCheckPP(_billInfo.ID.ToString()); //await server.DownloadFileAsync(_billInfo.ID.ToString());
                 }
                 else
@@ -78,6 +81,7 @@ namespace xamarinJKH.Pays
                 {
                     ViewPrint.IsEnabled = true;
                     ViewHare.IsEnabled = true;
+                    ImageFlip.IsEnabled = true;
                     progress.IsVisible = false;
                 });
             }).Start();
@@ -126,6 +130,32 @@ namespace xamarinJKH.Pays
             {
                 ViewPrint.IsEnabled = true;
             }
+        }
+
+        private bool _isFlipp = false;
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            SvgCachedImage flip = (SvgCachedImage) sender;
+
+            if (!_isFlipp)
+            {
+                await flip.ScaleTo(0.6, 250, Easing.Linear);
+                await flip.ScaleTo(1, 250, Easing.Linear);
+                _isFlipp = true;
+                editor.Rotate();
+                editor.ZoomLevel *= 4;
+
+
+            }
+            else
+            {
+                await flip.ScaleTo(0.6, 250, Easing.Linear);
+                await flip.ScaleTo(1, 250, Easing.Linear);
+                _isFlipp = false;
+                editor.Reset();
+            }
+            
+
         }
     }
 }
