@@ -220,6 +220,7 @@ namespace xamarinJKH
                     else
                     {
                         MessagingCenter.Send<Object>(this, "AutoUpdate");
+                        MessagingCenter.Send<Object>(this, "AutoUpdateComments");
                     }
 
                     try
