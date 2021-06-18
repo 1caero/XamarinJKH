@@ -16,7 +16,7 @@ namespace xamarinJKH.Converters
             }
             else
             {
-                return Color.Gray;
+                return Color.LightGray;
             }
         }
 

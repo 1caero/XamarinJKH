@@ -8,7 +8,6 @@
                          xmlns:xamarinJkh="clr-namespace:xamarinJKH;assembly=xamarinJKH"
                          xmlns:appsConst="clr-namespace:xamarinJKH.AppsConst;assembly=xamarinJKH"
                          x:Class="xamarinJKH.AppsConst.FilesDialog">
-    <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand"
                      Margin="10"
                      HeightRequest="300">
@@ -55,6 +54,7 @@
                                 <!--     FileName="{Binding GetFileName}" -->
                                 <!--     FileSize="{Binding DataArray}" /> -->
                                 <Frame x:Name="buttonFilter"
+                                       HasShadow="False"
                                        BorderColor="{x:DynamicResource MainColor}"
                                        BackgroundColor="White"
                                        CornerRadius="10"
@@ -91,7 +91,7 @@
                             HorizontalOptions="Center"
                             VerticalOptions="EndAndExpand"
                             Padding="15,0"
-                            BorderWidth="1"
+                            BorderWidth="0"
                             Command="{Binding AddFileCommand}"
                             CornerRadius="15"
                             FontAttributes="Bold"
@@ -100,5 +100,5 @@
                 </StackLayout>
             </Frame>
         </StackLayout>
-    </ContentPage.Content>
+    
 </abstractions:DialogView>

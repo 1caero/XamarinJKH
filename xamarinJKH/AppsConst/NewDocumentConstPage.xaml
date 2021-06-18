@@ -729,9 +729,11 @@
                                                 <TimePicker
                                                     TextColor="{x:StaticResource MainColor}"
                                                     FontSize="15"
+                                                    
                                                     Time="{Binding TimeTerm}"
                                                     VerticalOptions="Start"
-                                                    HorizontalOptions="Start" />
+                                                    HorizontalOptions="Center"
+                                                    WidthRequest="56"/>
                                             </StackLayout>
 
                                         </StackLayout>
