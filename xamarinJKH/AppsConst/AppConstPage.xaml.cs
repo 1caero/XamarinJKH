@@ -1438,7 +1438,8 @@ namespace xamarinJKH.AppsConst
         private void EntryMess_Focused(object sender, FocusEventArgs e)
         {
             MessagingCenter.Send<object>(this, "SetKeyboardFocusStatic");
-            hideKeyBoard.IsVisible = true;
+            if (Device.RuntimePlatform == Device.iOS)
+                hideKeyBoard.IsVisible = true;
         }
 
         private void hideKeyBoard_Clicked(object sender, EventArgs e)
@@ -1450,5 +1451,7 @@ namespace xamarinJKH.AppsConst
 
             hideKeyBoard.IsVisible = false;
         }
+
+        
     }
 }

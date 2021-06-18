@@ -135,7 +135,7 @@
                         </Frame>
                     </Grid>
             </pancakeView:PancakeView>
-                <Frame HasShadow="False"  Padding="10" IsVisible="false" Margin="20,-60,0,20" BackgroundColor="Transparent" CornerRadius="20" BorderColor="{Binding hex}" x:Name="hideKeyBoard" HorizontalOptions="Start">
+                <!--<Frame HasShadow="False"  Padding="10" IsVisible="false" Margin="20,-60,0,20" BackgroundColor="Transparent" CornerRadius="20" BorderColor="{Binding hex}" x:Name="hideKeyBoard" HorizontalOptions="Start">
                     <Label>
                         <Label.FormattedText>
                             <FormattedString>
@@ -148,7 +148,7 @@
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="hideKeyBoard_Clicked"></TapGestureRecognizer>
                     </Frame.GestureRecognizers>
-                </Frame>
+                </Frame>-->
                 <Frame CornerRadius="30"
                    Margin="15, -30, 15, 5"
                    BackgroundColor="White"
@@ -232,7 +232,24 @@
                     </Grid>
                 </StackLayout>
             </Frame>
-        </StackLayout>
+                <Frame HasShadow="False" Margin="0" Padding="5" IsVisible="false" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent"  x:Name="hideKeyBoard" >
+                    <StackLayout HorizontalOptions="Center" x:Name="StackLayoutArrow" Spacing="0" Orientation="Horizontal">
+                        <forms:SvgCachedImage
+                                    Source="resource://xamarinJKH.Resources.ic_arrow_forward.svg"
+                                    HeightRequest="20"
+                                    x:Name="ImageHide"
+                                    WidthRequest="20"
+                                    Rotation="90"
+                                    VerticalOptions="CenterAndExpand"
+                                    HorizontalOptions="Center"
+                                    Margin="0"
+                                    ReplaceStringMap="{Binding ., Converter={x:StaticResource SvgColor}}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="hideKeyBoard_Clicked"></TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </StackLayout>
             </Grid>
     </ContentPage.Content>
 </ContentPage>
