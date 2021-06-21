@@ -167,7 +167,8 @@ namespace xamarinJKH.Counters
             var saveClick = new TapGestureRecognizer();
             saveClick.Tapped += async (s, e) => { ButtonClick(FrameBtnLogin, null); };
             FrameBtnLogin.GestureRecognizers.Add(saveClick);
-            FrameBtnLogin.BackgroundColor = Color.FromHex(Settings.MobileSettings.color);
+            if (Settings.MobileSettings.color != null)
+                FrameBtnLogin.BackgroundColor = Color.FromHex(Settings.MobileSettings.color);
 
             if (counterPrevMonth > 0)
             {

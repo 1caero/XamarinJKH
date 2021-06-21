@@ -352,7 +352,17 @@ namespace xamarinJKH.Tech
                 {
                     if (Navigation.NavigationStack.FirstOrDefault(x => x is NewAppPage) == null)
                     {
-                        await Navigation.PushAsync(new NewAppPage());
+                        try
+                        {
+                            await Navigation.PushAsync(new NewAppPage());
+
+                        }
+                        catch (Exception exception)
+                        {
+                            Console.WriteLine(exception);
+                            await Navigation.PushModalAsync(new NewAppPage());
+
+                        }
                     }
                 }
                 catch (Exception exception)

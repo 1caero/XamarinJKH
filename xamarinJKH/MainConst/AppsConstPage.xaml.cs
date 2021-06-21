@@ -275,8 +275,11 @@ namespace xamarinJKH.MainConst
                     var request = RequestInfos.First(x => x.ID == args);
                     if (request != null)
                     {
+                        
                         if (Navigation.NavigationStack.FirstOrDefault(x => x is AppConstPage) == null)
                         {
+                            var requestInfoDao = _realm.Find<RequestInfoDao>(request.ID);
+                            _realm.Write(() => requestInfoDao.IsReaded = true);
                             List<RequestInfo> req = new List<RequestInfo>(additionalList.ItemsSource as IEnumerable<RequestInfo> ?? Array.Empty<RequestInfo>());
                             var index = req.IndexOf(request);
                             Preferences.Set("scrollY",index);
