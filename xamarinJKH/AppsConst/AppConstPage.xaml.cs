@@ -1221,7 +1221,7 @@ namespace xamarinJKH.AppsConst
                         var res = await _server.SetReadedFlag(request.ID);
                         var instance = Realm.GetInstance();
                         var requestInfoDao = instance.Find<RequestInfoDao>(request.ID);
-                        instance.Write(() => requestInfoDao.IsReaded = true);
+                        instance.Write(() => requestInfoDao != null && (requestInfoDao.IsReaded = true));
                         if (Settings.MobileSettings.requestTypeForPassRequest > 0)
                         {
                             if (request.TypeID == Settings.MobileSettings.requestTypeForPassRequest)
@@ -1359,6 +1359,11 @@ namespace xamarinJKH.AppsConst
                         if (r.IsMatch(request.Phone))
                         {
                             request.Phone = "+" + request.Phone;
+                        }
+
+                        if (request.Phone.StartsWith("+8"))
+                        {
+                            request.Phone = request.Phone.Replace("+8", "+7");
                         }
                     }
                         
