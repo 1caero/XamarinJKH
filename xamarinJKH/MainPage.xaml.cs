@@ -446,7 +446,7 @@ namespace xamarinJKH
             {
                 //var addPin = await DisplayActionSheet("Хотите установить пин-код для входа в приложение?", AppResources.NoThanks, null, new string[] { AppResources.Yes });
                 //if (addPin == AppResources.Yes)
-                Preferences.Set("DisplayPinAdd", true);
+                //Preferences.Get("DisplayPinAdd", true)                
                 if (Preferences.Get("DisplayPinAdd", true))
                 {
                     await PopupNavigation.Instance.PushAsync(new PinEnableCheck());
