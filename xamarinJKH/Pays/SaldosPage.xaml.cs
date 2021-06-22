@@ -95,12 +95,18 @@ namespace xamarinJKH.Pays
         {            
             InitializeComponent();
             Analytics.TrackEvent("Квитанции");
+
             if(infos==null)
             {                
                 Analytics.TrackEvent($"infos null:{infos == null}") ;
+                
             }
             SetBills(infos);
-            Accounts = new List<AccountAccountingInfo>(infos);
+            if (infos != null)
+                Accounts = new List<AccountAccountingInfo>(infos);
+            else
+                Accounts = new List<AccountAccountingInfo>();
+
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
