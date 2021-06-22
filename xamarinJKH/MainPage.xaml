@@ -330,6 +330,7 @@
                     Margin="0,-100,0,0"
                     HorizontalOptions="CenterAndExpand">
                     <Image 
+                            x:Name="ImageLoad"
                            Source="icon_login"
                            HeightRequest="100"
                            HorizontalOptions="Center"

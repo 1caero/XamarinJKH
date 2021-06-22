@@ -58,6 +58,7 @@ namespace xamarinJKH
         {
             adress = "sdf";
             CrossBadge.Current.ClearBadge();
+          
             //Application.Current.Properties.Remove("Culture");
             if (Application.Current.Properties.ContainsKey("Culture"))
             {
@@ -84,6 +85,12 @@ namespace xamarinJKH
                 }
             }
             InitializeComponent();
+            if (RestClientMP.SERVER_ADDR.Contains("kapitalinvest_uk_kapitalinvest"))
+            {
+                IconViewNameUk.Source = "logo_app_invest.png";
+                IconViewNameUk.Aspect = Aspect.AspectFill;
+                IconViewNameUk.WidthRequest = 150;
+            }
             getSettings();
             NavigationPage.SetHasNavigationBar(this, false);
             var startRegForm = new TapGestureRecognizer();
