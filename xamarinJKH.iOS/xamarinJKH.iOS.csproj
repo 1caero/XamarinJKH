@@ -566,4 +566,9 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_apps.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\logo_app_invest.png">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
 </Project>

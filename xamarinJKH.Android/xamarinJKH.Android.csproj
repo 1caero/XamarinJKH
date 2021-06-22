@@ -289,6 +289,7 @@
     <AndroidResource Include="Resources\drawable\ic_web_cams_top_light.png" />
     <AndroidResource Include="Resources\drawable\kb_separator_line.xml" />
     <AndroidResource Include="Resources\drawable\keyboard_background.xml" />
+    <AndroidResource Include="Resources\drawable\logo_app_invest.png" />
     <AndroidResource Include="Resources\drawable\normal.xml" />
     <AndroidResource Include="Resources\drawable\pay.png" />
     <AndroidResource Include="Resources\drawable\pressed.xml" />
