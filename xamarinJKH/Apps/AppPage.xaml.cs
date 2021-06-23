@@ -255,39 +255,6 @@ namespace xamarinJKH.Apps
             Analytics.TrackEvent("Заявка жителя №" + requestInfo.RequestNumber);
             MessagingCenter.Subscribe<Object>(this, "AutoUpdateComments",  (sender) => {  Device.BeginInvokeOnMainThread(async () =>  await RefreshData()); });
 
-//            try
-//            {
-//                _speechRecongnitionInstance = DependencyService.Get<ISpeechToText>();
-//            }
-//            catch (Exception ex)
-//            {
-//#if DEBUG
-//                //ошибку выводить в сообщение для дебага
-//                EntryMess.Text = ex.Message;
-//#endif
-//                throw ex;
-//            }
-
-//            MessagingCenter.Subscribe<ISpeechToText, string>(this, "STT", (sender, args) =>
-//            {
-//                SpeechToTextFinalResultRecieved(args);
-//            });
-
-//            MessagingCenter.Subscribe<ISpeechToText>(this, "Final", (sender) =>
-//            {
-//                Device.BeginInvokeOnMainThread(() =>
-//                {
-//                    new PopupPage();
-//                    IconViewMic.ReplaceStringMap = new Dictionary<string, string> { { "#000000", hex.ToHex() } };
-//                });                
-//            });
-
-//            MessagingCenter.Subscribe<IMessageSender, string>(this, "STT", (sender, args) =>
-//            {
-//                SpeechToTextFinalResultRecieved(args);
-//            });
-
-
             if (!isPayd)
             {
                 ScrollView.WidthRequest = 100;
@@ -394,6 +361,8 @@ namespace xamarinJKH.Apps
                 hideKeyBoard.IsVisible = false;
             };
             baseForApp.GestureRecognizers.Add(hideKeyBoardgesture);
+
+            EntryMess.Keyboard = Keyboard.Create(KeyboardFlags.CapitalizeSentence | KeyboardFlags.Spellcheck);
         }
         /// <summary>
         /// Транскрибация голосо в текст

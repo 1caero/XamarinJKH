@@ -699,9 +699,7 @@ namespace xamarinJKH.AppsConst
                     {
                     }
                 }
-            });
-
-            
+            });            
 
             hiddenComent.IsVisible = !Settings.Person.UserSettings.AlwaysPostHiddenMessage;
             if (Settings.Person.UserSettings.AlwaysPostHiddenMessage)
@@ -711,6 +709,9 @@ namespace xamarinJKH.AppsConst
                 Grid.Children.Add(IconViewSend,3,0);
                 Grid.Children.Add(progress,3,0);
             }
+
+            EntryMess.Keyboard = Keyboard.Create(KeyboardFlags.CapitalizeSentence | KeyboardFlags.Spellcheck);
+
         }
         /// <summary>
         /// Выполнение заявки
