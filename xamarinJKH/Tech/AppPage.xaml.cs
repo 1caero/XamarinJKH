@@ -727,6 +727,7 @@ namespace xamarinJKH.Tech
                         //    }
                         //);
                     }
+                    await RefreshData();
                 }
                 else
                 {
