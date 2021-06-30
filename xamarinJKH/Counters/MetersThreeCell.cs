@@ -7,6 +7,7 @@ using FFImageLoading.Svg.Forms;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using xamarinJKH.Counters;
 using xamarinJKH.CustomRenderers;
 using xamarinJKH.DialogViews;
 using xamarinJKH.Server;
@@ -63,12 +64,22 @@ namespace xamarinJKH.Main
             Orientation = StackOrientation.Horizontal,
             IsVisible = false,
             Spacing = 3
-        }; 
+        };
+
+        StackLayout PenanceCommonStack = new StackLayout
+        {
+            Orientation = StackOrientation.Horizontal,            
+            HorizontalOptions = LayoutOptions.FillAndExpand
+        };
+
         StackLayout AllPenanseStack = new StackLayout
         {
             Orientation = StackOrientation.Horizontal,
-            Spacing = 3
+            Spacing = 3,
+            HorizontalOptions = LayoutOptions.Start
+
         }; 
+
         StackLayout delStack = new StackLayout
         {
             Orientation = StackOrientation.Horizontal,
@@ -341,7 +352,24 @@ namespace xamarinJKH.Main
             
             AllPenanseStack.Children.Add(AllPenanse);
             AllPenanseStack.Children.Add(AllPenanceLabel);
+
+            PenanceCommonStack.Children.Add(AllPenanseStack);
             
+            //статистика
+            var statisticLabel = new Label { Text = "Статистика", HorizontalOptions=LayoutOptions.EndAndExpand };
+
+            var meterStatisticGestureRecognizer = new TapGestureRecognizer();
+            meterStatisticGestureRecognizer.Tapped += async (s, e) =>
+            {
+                if (Navigation.NavigationStack.FirstOrDefault(x => x is StatiscticsPage) == null)
+                {
+                    await Navigation.PushAsync(new StatiscticsPage(meterInfo));
+                }
+            };
+            statisticLabel.GestureRecognizers.Add(meterStatisticGestureRecognizer);
+
+            PenanceCommonStack.Children.Add(statisticLabel);
+
             editStack.Children.Add(EditPenanse);
             editStack.Children.Add(editLabel);
             
@@ -350,7 +378,7 @@ namespace xamarinJKH.Main
             
             count1Stack.Children.Add(editStack);
             count1Stack.Children.Add(delStack);
-            count1Stack.Children.Add(AllPenanseStack);
+            count1Stack.Children.Add(PenanceCommonStack);
             
             tarif1.FontSize = 13;
             tarif1.TextColor = Color.FromHex("#A2A2A2"); //Color.Red;

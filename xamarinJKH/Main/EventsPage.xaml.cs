@@ -447,7 +447,15 @@ namespace xamarinJKH.Main
             {
                 bool isPerson = Settings.Person?.Accounts?.Count > 0;
                 var server = new RestClientMP();
-                var data = Settings.EventBlockData;
+                
+                EventBlockData data=new EventBlockData();
+                if(Settings.EventBlockData!=null)
+                data = Settings.EventBlockData;
+                else
+                {
+                    data = null;
+                }
+
                 data = await server.GetEventBlockData();
                 Settings.EventBlockData = data;
                 if (data != null)

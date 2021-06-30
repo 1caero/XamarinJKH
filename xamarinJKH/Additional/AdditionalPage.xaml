@@ -94,55 +94,8 @@
 
                                         <ScrollView  x:Name="StackLayoutContainer"  >
                                             <StackLayout x:Name="allService" Spacing="3"></StackLayout>
-                                        </ScrollView>
-                                        <!--<CollectionView x:Name="GropusColl" 
-                                                        ItemsSource="{Binding AdditionalGroups, Mode=TwoWay}"
-                                                        ItemsLayout="VerticalGrid, 4"
-                                                        IsGrouped="true"
-                                                        
-                                                    SelectionMode="None"
-                                                    SelectionChanged="OnItemTapped">
-                                            --><!--<CollectionView.ItemsLayout >
-                                                <GridItemsLayout Orientation="Vertical"
-                                                     VerticalItemSpacing="0"  />
-                                            </CollectionView.ItemsLayout>--><!--
-                                            <CollectionView.ItemTemplate>
-                                            <DataTemplate>
-                                                        <StackLayout BackgroundColor="Aqua" VerticalOptions="FillAndExpand"
-                                                                     Margin="5" Padding="5">
-                                                        <pancakeView:PancakeView CornerRadius="20" HeightRequest = "65"
-                                                                             WidthRequest = "65"
-                                                                             x:Name="Pic"
-                                                                             HorizontalOptions="Center"
-                                                                                 VerticalOptions="Start"
-                                                                            >
-                                                            <forms:CachedImage Source="{Binding LogoLink}"
-                                                                               HeightRequest = "65"
-                                                                             WidthRequest = "65"
-                                                                        Aspect="AspectFill" VerticalOptions="Start"/>
-                                                        </pancakeView:PancakeView>
-                                                        <Label Text="{Binding FormatName}"
-                                                               TextColor="Black"
-                                                               HorizontalOptions="Center"                                                               
-                                                               FontSize="12"
-                                                               HorizontalTextAlignment="Center"
-                                                               VerticalOptions="Start"/>
-                                                    </StackLayout>
-                                            </DataTemplate>
-                                        </CollectionView.ItemTemplate>
-                                            <CollectionView.GroupHeaderTemplate>
-                                                <DataTemplate>
-                                                    <Label Text="{Binding Name}"
-                                                           BackgroundColor="Transparent"
-                                                           FontSize="Medium"
-                                                           TextColor="Black"
-                                                           FontAttributes="Bold" />
-                                                </DataTemplate>
-                                            </CollectionView.GroupHeaderTemplate>
-                                    </CollectionView>-->
+                                        </ScrollView>                                        
                                     </RefreshView>
-                                    
-
                                 </StackLayout>
                             </StackLayout>
                         </pancakeView:PancakeView>

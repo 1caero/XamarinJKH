@@ -2066,4 +2066,7 @@
   <data name="TextRequired" xml:space="preserve">
     <value>Enter text (required)</value>
   </data>
+  <data name="CounterStatistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
 </root>

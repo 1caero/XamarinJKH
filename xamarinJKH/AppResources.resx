@@ -2068,4 +2068,7 @@
   <data name="TextRequired" xml:space="preserve">
     <value>Введите текст(обязательно для заполнения)</value>
   </data>
+  <data name="CounterStatistics" xml:space="preserve">
+    <value>Статистика</value>
+  </data>
 </root>

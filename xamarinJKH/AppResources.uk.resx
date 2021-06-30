@@ -1939,4 +1939,7 @@
   <data name="TextRequired" xml:space="preserve">
     <value>Введіть текст (обов'язково для заповнення)</value>
   </data>
+  <data name="CounterStatistics" xml:space="preserve">
+    <value>Статистика</value>
+  </data>
 </root>

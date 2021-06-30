@@ -1177,6 +1177,15 @@ namespace xamarinJKH {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Статистика.
+        /// </summary>
+        internal static string CounterStatistics {
+            get {
+                return ResourceManager.GetString("CounterStatistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to в текущем месяце!.
         /// </summary>
         internal static string CountersThisMonth {

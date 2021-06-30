@@ -11,6 +11,7 @@ using Plugin.FirebasePushNotification;
 using Rg.Plugins.Popup;
 using Syncfusion.SfAutoComplete.XForms.iOS;
 using Syncfusion.SfCalendar.XForms.iOS;
+using Syncfusion.SfChart.XForms.iOS.Renderers;
 using Syncfusion.SfPdfViewer.XForms.iOS;
 using Syncfusion.SfPicker.XForms.iOS;
 using Syncfusion.SfRangeSlider.XForms.iOS;
@@ -74,6 +75,7 @@ namespace xamarinJKH.iOS
             UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
             Firebase.Core.App.Configure();
             SfMaskedEditRenderer.Init();
+            SfChartRenderer.Init();
             Crashlytics.Configure();
 
             FirebasePushNotificationManager.Initialize(options, true);

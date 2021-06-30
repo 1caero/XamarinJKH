@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:xamarinJkh="clr-namespace:xamarinJKH" 
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:picker="clr-namespace:Syncfusion.SfPicker.XForms;assembly=Syncfusion.SfPicker.XForms" xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             x:Class="xamarinJKH.Counters.StatiscticsPage">
+    <ContentPage.Content>
+        <Grid x:Name="ScrollViewContainer" VerticalOptions="FillAndExpand" >
+            <Image x:Name="ImageFon"
+                   Source="{AppThemeBinding Light=ic_app_top_light, Dark=ic_app_top_in}"
+                   VerticalOptions="Start"
+                   Margin="0,0,0,0"
+                   Aspect="{OnPlatform Android=Fill, iOS=AspectFill}"
+                   HorizontalOptions="FillAndExpand" />
+            <StackLayout x:Name="mainStack" >
+                <StackLayout
+                        Margin="25,0,15,0"
+                        Orientation="Horizontal" x:Name="Pancake">
+                    <Label x:Name="UkName"  VerticalOptions="Center"
+                               Text="Название"
+                               FontAttributes="Bold"
+                               HorizontalOptions="StartAndExpand"
+                               FontSize="15"
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                    <StackLayout
+                            HorizontalOptions="EndAndExpand"
+                            Orientation="Horizontal">
+                        <xamarinJkh:ButtonSupport x:Name="LabelTech"></xamarinJkh:ButtonSupport>
+                        <xamarinJkh:ButtonProfile  x:Name="IconViewProfile" Margin="2,0,5,0"></xamarinJkh:ButtonProfile>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout
+                        x:Name="BackStackLayout"
+                        Orientation="Horizontal"
+                        Margin="25, 0, 0, 0"
+                        Spacing="0"
+                        HorizontalOptions="Start">
+                    <forms:SvgCachedImage
+                            Source="resource://xamarinJKH.Resources.ic_arrow_back.svg"
+                            HeightRequest="25"
+                            HorizontalOptions="Start"
+                            ReplaceStringMap="{Binding hex, Converter={x:StaticResource SvgColor}, ConverterParameter='#FFFFFF'}"
+                            VerticalOptions="Center" />
+                    <Label
+                            Text="{x:Static xamarinJkh:AppResources.CounterStatistics}"
+                            FontSize="24"
+                            TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Start" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="30,10">
+                    <Label Text="Потребление" TextColor="{AppThemeBinding Light=Black, Dark=White}" VerticalOptions="Center" HorizontalOptions="StartAndExpand"></Label>
+                    <Picker TextColor="{AppThemeBinding Light=Black, Dark=White}" x:Name="yearPicker" 
+                        ItemsSource="{Binding Years}" 
+                        BackgroundColor="Transparent" 
+                        HorizontalOptions="EndAndExpand" 
+                        MinimumWidthRequest="100"                            
+                            WidthRequest="60"
+                        SelectedIndexChanged="yearPicker_SelectedIndexChanged" ></Picker>
+                </StackLayout>
+                
+                <ActivityIndicator IsVisible="{Binding IsBusy}" Color="{Binding hex}" VerticalOptions="Center" HorizontalOptions="Center" Scale="2" ></ActivityIndicator>
+                <Grid Margin="5,5" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Frame Padding="5" BorderColor="{Binding hex}" CornerRadius="10" Grid.Column="0"  >
+                        <StackLayout Orientation="Vertical" VerticalOptions="Center" >
+                            <Label FontSize="Small" Text="Наибольшее потребление"  HorizontalTextAlignment="Center"></Label>
+                            <Label FontAttributes="Bold" Text="{Binding MaxValue}" HorizontalTextAlignment="Center"></Label>
+                        </StackLayout>                        
+                    </Frame>
+                    <Frame Padding="5" BorderColor="{Binding hex}" CornerRadius="10"  Grid.Column="1">
+                        <StackLayout Orientation="Vertical" VerticalOptions="Center" >
+                            <Label FontSize="Small" Text="Наименьшее потребление" HorizontalTextAlignment="Center"  ></Label>
+                            <Label FontAttributes="Bold" Text="{Binding MinValue}" HorizontalTextAlignment="Center"></Label>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Padding="5" BorderColor="{Binding hex}" CornerRadius="10" Grid.Column="2">
+                        <StackLayout Orientation="Vertical" VerticalOptions="Center" >
+                            <Label FontSize="Small" Text="Всего потреблено" HorizontalTextAlignment="Center"></Label>
+                            <Label FontAttributes="Bold" Text="{Binding TotalValue}" HorizontalTextAlignment="Center"></Label>
+                        </StackLayout>
+                    </Frame>
+                    <Label Text=""></Label>
+                </Grid>
+                <ScrollView VerticalOptions="FillAndExpand" Padding="0,10,15,5">
+                    <chart:SfChart x:Name="mainChart" VerticalOptions="FillAndExpand" HorizontalOptions="Fill" >
+                        <chart:SfChart.Legend>
+                            <chart:ChartLegend   />
+                        </chart:SfChart.Legend>
+                        
+                        <chart:SfChart.ChartBehaviors>
+                            <!--<chart:ChartZoomPanBehavior/>-->
+                            <chart:ChartTrackballBehavior ShowLabel="True" ShowLine="True"/>
+                        </chart:SfChart.ChartBehaviors>
+                        
+                        <chart:SfChart.PrimaryAxis >
+                            <chart:CategoryAxis>
+                            </chart:CategoryAxis>
+                        </chart:SfChart.PrimaryAxis>
+                        <chart:SfChart.SecondaryAxis>
+                            <chart:NumericalAxis>
+                            </chart:NumericalAxis>
+                        </chart:SfChart.SecondaryAxis>
+
+                        <chart:LineSeries Label="{Binding DataName}"  ItemsSource="{Binding Data}" XBindingPath="Month" YBindingPath="Target" Color="LightBlue" EnableDataPointSelection="True" SelectedDataPointColor="Aqua">
+                            <chart:LineSeries.DataMarker>
+
+                                <chart:ChartDataMarker/>
+
+                            </chart:LineSeries.DataMarker>
+                        </chart:LineSeries>
+                        <chart:LineSeries IsVisibleOnLegend="{Binding DataName2Visible}" Label="{Binding DataName2}" ItemsSource="{Binding Data2}" XBindingPath="Month" YBindingPath="Target"  EnableDataPointSelection="True" Color="Green" SelectedDataPointColor="GreenYellow">
+                            <chart:LineSeries.DataMarker>
+
+                                <chart:ChartDataMarker/>
+
+                            </chart:LineSeries.DataMarker>
+                        </chart:LineSeries>
+                        <chart:LineSeries IsVisibleOnLegend="{Binding DataName3Visible}" Label="{Binding DataName3}" ItemsSource="{Binding Data3}" XBindingPath="Month" YBindingPath="Target"  EnableDataPointSelection="True" Color="Red"  SelectedDataPointColor="Orange">
+                            <chart:LineSeries.DataMarker>
+
+                                <chart:ChartDataMarker/>
+
+                            </chart:LineSeries.DataMarker>
+                        </chart:LineSeries>
+
+                    </chart:SfChart>
+                </ScrollView>
+               
+                
+                
+            </StackLayout>
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>
