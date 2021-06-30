@@ -65,46 +65,54 @@ namespace xamarinJKH.MainConst
                         {
                             MeterInfo meterInfo = meterInfos.FirstOrDefault(x => !x.IsDisabled);
 
-
-                            if (Navigation.NavigationStack.FirstOrDefault(x => x is AddMetersPage) == null)
+                            if(meterInfo==null)
                             {
-                                if (meterInfo.ValuesCanAdd)
+                                await DisplayAlert(AppResources.Attention, $"Прибор учета {meterInfos[0].UniqueNum} отключен", "OK");
+                                //Toast.Instance.Show<ToastDialog>(new { Title = $"Прибор учета {meterInfos[0].UniqueNum} отключен", Duration = 5500, ColorB = Color.Gray, ColorT = Color.White });
+                                return;
+                            }
+                            else
+                            {
+                                if (Navigation.NavigationStack.FirstOrDefault(x => x is AddMetersPage) == null)
                                 {
-                                    if (meterInfo?.Values != null && meterInfo.Values.Count >= 1)
+                                    if (meterInfo.ValuesCanAdd)
                                     {
-                                        if (meterInfo.Values[0].IsCurrentPeriod)
+                                        if (meterInfo?.Values != null && meterInfo.Values.Count >= 1)
                                         {
-                                            var counterThisMonth = meterInfo.Values[0].Value;
-                                            var counterThisMonth2 =
-                                                meterInfo.Values.Count >= 2 ? meterInfo.Values[1].Value : 0;
-                                            await Navigation.PushAsync(new AddMetersPage(meterInfo, meterInfos, null,
-                                                counterThisMonth,
-                                                counterThisMonth2));
+                                            if (meterInfo.Values[0].IsCurrentPeriod)
+                                            {
+                                                var counterThisMonth = meterInfo.Values[0].Value;
+                                                var counterThisMonth2 =
+                                                    meterInfo.Values.Count >= 2 ? meterInfo.Values[1].Value : 0;
+                                                await Navigation.PushAsync(new AddMetersPage(meterInfo, meterInfos, null,
+                                                    counterThisMonth,
+                                                    counterThisMonth2));
+                                            }
+                                            else
+                                            {
+                                                var counterThisMonth = meterInfo.Values[0].Value;
+                                                if (Navigation.NavigationStack.FirstOrDefault(x => x is AddMetersPage) ==
+                                                    null)
+                                                    await Navigation.PushAsync(new AddMetersPage(meterInfo, meterInfos,
+                                                        null, 0,
+                                                        counterThisMonth));
+                                            }
                                         }
                                         else
                                         {
-                                            var counterThisMonth = meterInfo.Values[0].Value;
-                                            if (Navigation.NavigationStack.FirstOrDefault(x => x is AddMetersPage) ==
-                                                null)
-                                                await Navigation.PushAsync(new AddMetersPage(meterInfo, meterInfos,
-                                                    null, 0,
+                                            var counterThisMonth = meterInfo.StartValue ?? 0;
+                                            if (Navigation.NavigationStack.FirstOrDefault(x => x is AddMetersPage) == null)
+                                                await Navigation.PushAsync(new AddMetersPage(meterInfo, meterInfos, null, 0,
                                                     counterThisMonth));
                                         }
                                     }
                                     else
                                     {
-                                        var counterThisMonth = meterInfo.StartValue ?? 0;
-                                        if (Navigation.NavigationStack.FirstOrDefault(x => x is AddMetersPage) == null)
-                                            await Navigation.PushAsync(new AddMetersPage(meterInfo, meterInfos, null, 0,
-                                                counterThisMonth));
+                                        Toast.Instance.Show<ToastDialog>(new
+                                        { Title = meterInfo.PeriodMessage, Duration = 5500, ColorB = Color.Gray, ColorT = Color.White });
                                     }
                                 }
-                                else
-                                {
-                                    Toast.Instance.Show<ToastDialog>(new
-                                        {Title = meterInfo.PeriodMessage, Duration = 5500, ColorB = Color.Gray,  ColorT = Color.White});
-                                }
-                            }
+                            }                           
                         }
                         else
                         {
