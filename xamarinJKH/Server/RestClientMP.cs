@@ -20,7 +20,7 @@ namespace xamarinJKH.Server
     {
         // public const string SERVER_ADDR = "https://api.sm-center.ru/test_erc_udm"; // ОСС
          // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
-         public const string SERVER_ADDR = "https://api.sm-center.ru/kapitalinvest_uk_kapitalinvest"; // Тихая гавань water/ water2 - тихая гавань - 2 
+         //public const string SERVER_ADDR = "https://api.sm-center.ru/water2"; // Тихая гавань water/ water2 - тихая гавань - 2 
          // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
         // public const string SERVER_ADDR = "https://api.sm-center.ru/kapitall_all"; // Основа
         //public const string SERVER_ADDR = "https://api.sm-center.ru/newjkh"; // Еще одна тестовая база
@@ -28,7 +28,7 @@ namespace xamarinJKH.Server
         // public const string SERVER_ADDR = "https://api.sm-center.ru/UKUpravdom"; //Управдом Чебоксары
         // public const string SERVER_ADDR = "https://api.sm-center.ru/eirkc_mobapp"; //ИРКЦ
         // public const string SERVER_ADDR = "https://api.sm-center.ru/uk_sibir_alians"; //Альянс
-        //public const string SERVER_ADDR = "https://api.sm-center.ru/ooo_yegkh"; //Легкая жизнъ
+        public const string SERVER_ADDR = "https://api.sm-center.ru/ooo_yegkh"; //Легкая жизнъ
         // public const string SERVER_ADDR = "https://api.sm-center.ru/vodokanal_narof"; // Водоканал
         //public const string SERVER_ADDR = "https://api.sm-center.ru/uk_egokomfort"; // Эгокомфорт
         // public const string SERVER_ADDR = "https://api.sm-center.ru/tsg_sivtsev_vrazhek14"; // ТСЖ Сивцев Вражек 14
@@ -160,8 +160,8 @@ namespace xamarinJKH.Server
         public const string ADD_IDENT_PROFILE = "User/AddAccountByIdent"; // Привязать ЛС к профилю
         public const string DEL_IDENT_PROFILE = "User/DeleteAccountByIdent"; // отвязать ЛС от профиля
 
-        public const string
-            GET_PERSONAL_DATA = "User/GetPersonalDataByIdent"; // Получение данных о физ лице по номеру л/сч
+        //public const string
+        //    GET_PERSONAL_DATA = "User/GetPersonalDataByIdent"; // Получение данных о физ лице по номеру л/сч
 
         public const string ADD_PERSONAL_DATA = "User/AddPersonalData"; // Добавление/обновление информации о физ лице
         public const string REGISTR_DEVICE = "User/RegisterDevice"; // регистрация устройства
@@ -2163,35 +2163,35 @@ namespace xamarinJKH.Server
         }
 
 
-        /// <summary>
-        /// Получение данных о физ лице по номеру л/сч
-        /// </summary>
-        /// <param name="Ident"> Лицевой счет</param>
-        /// <returns></returns>
-        public async Task<NaturalPerson> GetPersonalDataByIdent(string Ident)
-        {
-            RestClient restClientMp = new RestClient(SERVER_ADDR);
-            RestRequest restRequest = new RestRequest(GET_PERSONAL_DATA, Method.GET);
-            restRequest.RequestFormat = DataFormat.Json;
-            restRequest.AddHeader("client", Device.RuntimePlatform);
-            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
-            restRequest.AddHeader("acx", Settings.Person.acx);
-            restRequest.AddBody(new
-            {
-                Ident
-            });
-            var response = await restClientMp.ExecuteTaskAsync<NaturalPerson>(restRequest);
-            // Проверяем статус
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                return new NaturalPerson()
-                {
-                    Error = $"Ошибка {response.StatusDescription}"
-                };
-            }
+        ///// <summary>
+        ///// Получение данных о физ лице по номеру л/сч
+        ///// </summary>
+        ///// <param name="Ident"> Лицевой счет</param>
+        ///// <returns></returns>
+        //public async Task<NaturalPerson> GetPersonalDataByIdent(string Ident)
+        //{
+        //    RestClient restClientMp = new RestClient(SERVER_ADDR);
+        //    RestRequest restRequest = new RestRequest(GET_PERSONAL_DATA, Method.GET);
+        //    restRequest.RequestFormat = DataFormat.Json;
+        //    restRequest.AddHeader("client", Device.RuntimePlatform);
+        //    restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+        //    restRequest.AddHeader("acx", Settings.Person.acx);
+        //    restRequest.AddBody(new
+        //    {
+        //        Ident
+        //    });
+        //    var response = await restClientMp.ExecuteTaskAsync<NaturalPerson>(restRequest);
+        //    // Проверяем статус
+        //    if (response.StatusCode != HttpStatusCode.OK)
+        //    {
+        //        return new NaturalPerson()
+        //        {
+        //            Error = $"Ошибка {response.StatusDescription}"
+        //        };
+        //    }
 
-            return response.Data;
-        }
+        //    return response.Data;
+        //}
 
         /// <summary>
         /// Добавление/обновление информации о физ лице

@@ -99,7 +99,7 @@ namespace xamarinJKH.Tech
                 {
                     while (!Token.IsCancellationRequested)
                     {
-                        await Task.Delay(TimeSpan.FromSeconds(2));
+                        await Task.Delay(TimeSpan.FromSeconds(10));
                         var update = await _server.GetRequestsDetailListTech(Settings.Person.Phone, GetLastIdMessage(),
                             _isDeviceId);
                         if (update.Error == null)
