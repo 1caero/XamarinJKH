@@ -356,7 +356,7 @@ namespace xamarinJKH.Main
             PenanceCommonStack.Children.Add(AllPenanseStack);
             
             //статистика
-            var statisticLabel = new Label { Text = "Статистика", HorizontalOptions=LayoutOptions.EndAndExpand };
+            var statisticLabel = new Label { FontSize=12, Text = "Статистика", HorizontalOptions=LayoutOptions.EndAndExpand };
 
             var meterStatisticGestureRecognizer = new TapGestureRecognizer();
             meterStatisticGestureRecognizer.Tapped += async (s, e) =>

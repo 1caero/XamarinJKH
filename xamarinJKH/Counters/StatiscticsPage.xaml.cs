@@ -119,7 +119,35 @@ namespace xamarinJKH.Counters
 
         public bool DataName2Visible { get => dataName2Visible; set { dataName2Visible = value; OnPropertyChanged("DataName2Visible"); } }
         public bool DataName3Visible { get => dataName3Visible; set { dataName3Visible = value; OnPropertyChanged("DataName3Visible"); } }
-        
+
+
+        decimal GetDelta(MeterValueInfo start, MeterValueInfo end)
+        {
+            decimal delta = 0;
+            delta = end.Value - start.Value;
+            if (start.ValueT2 != null)
+            {
+                delta = (decimal)(end.ValueT2 - start.ValueT2);
+            }
+            if (start.ValueT3 != null)
+            {
+                delta = (decimal)(end.ValueT3 - start.ValueT3);
+            }
+
+            return delta;
+        }
+        void getmax(int year)
+        {
+            var selection = ValuesOrdered.Where(_ => _.Period.Split('.')[2] == year.ToString()).ToList();
+           
+            decimal delta;
+            int index = 0;
+            if(year==Years.Max())
+            {
+                if (Years.Count > 1)
+                   delta=selection.First().Value- ValuesOrdered.Where(_ => _.Period.Split('.')[2] == (year - 1).ToString()).Last().Value;
+            }
+        }
         public void SetChart(int? year)
         {
             if (year == null)
