@@ -126,7 +126,7 @@
                             <StackLayout
                                 x:Name="StackLayoutSortDate"
                                 Orientation="Horizontal"
-                                HorizontalOptions="Start">
+                                HorizontalOptions="FillAndExpand">
                                 <forms:SvgCachedImage x:Name="IconViewSortDate"
                                                       Source="resource://xamarinJKH.Resources.up_arrow.svg"
                                                       HeightRequest="15"
@@ -142,7 +142,9 @@
                                     VerticalOptions="Center"
                                     TextColor="Red"
                                     TextDecorations="Underline"
-                                    HorizontalOptions="Start" />
+                                    HorizontalOptions="StartAndExpand" />
+                                <Label HorizontalOptions="End" FontSize="15" Text="К оплате"></Label>
+                                <Label HorizontalOptions="End" FontSize="15" Text="Начислено" Margin="0,0,40,0"></Label>
                             </StackLayout>
                             <StackLayout
                                 x:Name="StackLayoutSortIdent"
@@ -164,6 +166,7 @@
                                     VerticalOptions="Center"
                                     TextColor="Gray"
                                     HorizontalOptions="Start" />
+
                             </StackLayout>
                             <!-- </StackLayout> -->
                             <ListView x:Name="additionalList"
@@ -185,7 +188,8 @@
                                             Ident="{Binding Ident}"
                                             HasImage="{Binding HasFile}"
                                             DateIdent="{Binding Period}"
-                                            SumPay="{Binding Total}" />
+                                            SumPay="{Binding Total}"
+                                            Accural="{Binding Accounting}"/>
                                     </DataTemplate>
 
                                 </ListView.ItemTemplate>

@@ -14,6 +14,8 @@ namespace xamarinJKH.Pays
         private Label sum = new Label();
         private SvgCachedImage file = new SvgCachedImage();
 
+        private Label accuralSum = new Label();
+
         public SaldosCell()
         {
             StackLayout container = new StackLayout();
@@ -23,6 +25,9 @@ namespace xamarinJKH.Pays
             identDate.HorizontalOptions = LayoutOptions.FillAndExpand;
             sum.HorizontalOptions = LayoutOptions.End;
             sum.HorizontalTextAlignment = TextAlignment.End;
+            accuralSum.HorizontalOptions = LayoutOptions.End;
+            accuralSum.HorizontalTextAlignment = TextAlignment.End;
+            accuralSum.Margin = new Thickness(10, 0);
             file.HorizontalOptions = LayoutOptions.End;
             file.ReplaceStringMap = new Dictionary<string, string>
             {
@@ -34,6 +39,7 @@ namespace xamarinJKH.Pays
             file.Source = "resource://xamarinJKH.Resources.ic_file.svg";
             container.Children.Add(identDate);
             container.Children.Add(sum);
+            container.Children.Add(accuralSum);
             container.Children.Add(file);
 
             View = container;
@@ -51,6 +57,10 @@ namespace xamarinJKH.Pays
 
         public static readonly BindableProperty SumPayProperty =
             BindableProperty.Create("SumPay", typeof(string), typeof(SaldosCell), "");
+
+        public static readonly BindableProperty AccuralProperty =
+            BindableProperty.Create("Accural", typeof(string), typeof(SaldosCell), "");
+        
 
         public string Ident
         {
@@ -76,6 +86,11 @@ namespace xamarinJKH.Pays
             set { SetValue(SumPayProperty, value); }
         }
 
+        public string Accural
+        {
+            get { return (string)GetValue(AccuralProperty); }
+            set { SetValue(AccuralProperty, value); }
+        }
 
         protected override async void OnBindingContextChanged()
         {
@@ -124,7 +139,7 @@ namespace xamarinJKH.Pays
                 formattedIdent = new FormattedString();
 
                 double sum2;
-                    var parseSumpayOk = Double.TryParse(SumPay, NumberStyles.Float, new CultureInfo("ru-RU"), out sum2);
+                var parseSumpayOk = Double.TryParse(SumPay, NumberStyles.Float, new CultureInfo("ru-RU"), out sum2);
                 if(parseSumpayOk)
                 {
                     formattedIdent.Spans.Add(new Span
@@ -158,13 +173,56 @@ namespace xamarinJKH.Pays
                         FontSize = fs - 2
                     });
                 }
-               
 
                 sum.FormattedText = formattedIdent;
+
+                #region Accural
+                var formattedAccural = new FormattedString();
+                double sumAccural;
+                var parsesumAccuralOk = Double.TryParse(Accural, NumberStyles.Float, new CultureInfo("ru-RU"), out sumAccural);
+                if (parsesumAccuralOk)
+                {
+                    formattedAccural.Spans.Add(new Span
+                    {
+                        Text = $"{sumAccural:0.00}".Replace(',', '.'),
+                        TextColor = Color.Black,
+                        FontAttributes = FontAttributes.Bold,
+                        FontSize = fs
+                    });
+                    formattedAccural.Spans.Add(new Span
+                    {
+                        Text = $"\n{AppResources.Currency}",
+                        TextColor = Color.Gray,
+                        FontSize = fs - 2
+                    });
+
+                }
+                else
+                {
+                    formattedAccural.Spans.Add(new Span
+                    {
+                        Text = $"{Accural}".Replace(',', '.'),
+                        TextColor = Color.Black,
+                        FontAttributes = FontAttributes.Bold,
+                        FontSize = fs
+                    });
+                    formattedAccural.Spans.Add(new Span
+                    {
+                        Text = $"\n{AppResources.Currency}",
+                        TextColor = Color.Gray,
+                        FontSize = fs - 2
+                    });
+                }
+
+                accuralSum.FormattedText = formattedAccural;
+                #endregion
+
                 if (!HasImage)
                 {
                     file.IsVisible = false;
                 }
+
+
             }
         }
 

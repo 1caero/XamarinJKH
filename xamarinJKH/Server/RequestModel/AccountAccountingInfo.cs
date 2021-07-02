@@ -57,7 +57,7 @@ namespace xamarinJKH.Server.RequestModel
         /// <summary>
         /// начислено
         /// </summary>
-        public decimal Accrual { get; set; }
+        public decimal Accounting { get; set; }
     }
     
     
