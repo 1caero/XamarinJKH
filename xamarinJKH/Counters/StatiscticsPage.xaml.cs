@@ -127,27 +127,82 @@ namespace xamarinJKH.Counters
             delta = end.Value - start.Value;
             if (start.ValueT2 != null)
             {
-                delta = (decimal)(end.ValueT2 - start.ValueT2);
+                delta += (decimal)(end.ValueT2 - start.ValueT2);
             }
             if (start.ValueT3 != null)
             {
-                delta = (decimal)(end.ValueT3 - start.ValueT3);
+                delta += (decimal)(end.ValueT3 - start.ValueT3);
             }
 
             return delta;
         }
-        void getmax(int year)
-        {
-            var selection = ValuesOrdered.Where(_ => _.Period.Split('.')[2] == year.ToString()).ToList();
-           
-            decimal delta;
-            int index = 0;
-            if(year==Years.Max())
+
+        decimal GetDeltaT(MeterValueInfo start, MeterValueInfo end, int t)
+        {            
+            switch (t)
             {
-                if (Years.Count > 1)
-                   delta=selection.First().Value- ValuesOrdered.Where(_ => _.Period.Split('.')[2] == (year - 1).ToString()).Last().Value;
+                case 1:
+                    return end.Value - start.Value;
+                case 2:
+                    return (decimal)(end.ValueT2 - start.ValueT2);
+                case 3:
+                    return (decimal)(end.ValueT3 - start.ValueT3);
             }
+
+            return 0;
         }
+
+
+
+        decimal max;
+        decimal min;
+        decimal sum;
+        string maxMName;
+        string minMName;
+
+        decimal GetMax(decimal delta, List<MeterValueInfo> selection, out int index)
+        {
+            index = 0;
+
+            for (var i = 1; i < selection.Count() - 1; i++)
+            {
+                var deltaNew = GetDelta(selection[i - 1], selection[i]);
+                if (delta < deltaNew)
+                { 
+                    delta = deltaNew;
+                    index = i;
+                }
+            }
+
+            return delta;
+        }
+
+        decimal GetMin(decimal delta, List<MeterValueInfo> selection, out int index)
+        {
+            index = 0;
+
+            for (var i = 1; i < selection.Count() - 1; i++)
+            {
+                var deltaNew = GetDelta(selection[i - 1], selection[i]);
+                if (delta > deltaNew)
+                {
+                    delta = deltaNew;
+                    index = i;
+                }
+            }
+            return delta;
+        }
+
+        decimal GetSum(decimal delta, List<MeterValueInfo> selection)
+        {
+            for (var i = 1; i < selection.Count() - 1; i++)
+            {
+                var deltaNew = GetDelta(selection[i - 1], selection[i]);
+                delta += deltaNew;
+            }
+            return delta;
+        }
+
         public void SetChart(int? year)
         {
             if (year == null)
@@ -160,54 +215,119 @@ namespace xamarinJKH.Counters
             Data2 = new ObservableCollection<StatiscticsPageModel>();
             Data3 = new ObservableCollection<StatiscticsPageModel>();
 
-            var cltr = Application.Current.Properties["Culture"].ToString();
+            var ruCultureInfo = new CultureInfo(Application.Current.Properties["Culture"].ToString());
 
-            foreach (var value in ValuesOrdered)
+            var selection = ValuesOrdered.Where(_ => _.Period.Split('.')[2] == year.ToString() && _.Kind == "Учтено").ToList();
+            decimal delta;
+
+            var start = selection.First();
+
+            if (Years.Count > 1 && year > Years.Min())
+                delta = GetDelta(start, ValuesOrdered.Where(_ => _.Period.Split('.')[2] == (year - 1).ToString()).Last());
+            else
             {
-                var periodArray = value.Period.Split('.');
-                if (periodArray[2] == year.ToString())
+                
+                delta = start.Value;
+                if (start.ValueT2 != null)
                 {
-                    var mon = (new DateTime(1, Convert.ToInt32(periodArray[1]), 1)).ToString("MMM", new CultureInfo(cltr));
-                    Data.Add(new StatiscticsPageModel(mon, value.Value));
-                    if (value.ValueT2 != null)
-                        Data2.Add(new StatiscticsPageModel(mon, (decimal)value.ValueT2));
-                    if (value.ValueT3 != null)
-                        Data3.Add(new StatiscticsPageModel(mon, (decimal)value.ValueT3));
+                    delta += (decimal)(start.ValueT2);
+                }
+                if (start.ValueT3 != null)
+                {
+                    delta += (decimal)(start.ValueT3);
                 }
             }
+
+            max = GetMax(delta, selection, out int indexMax);
+
+            maxMName = (new DateTime(1, Convert.ToInt32(selection[indexMax].Period.Split('.')[1]), 1)).ToString("MMM", ruCultureInfo);
+            min = GetMin(delta, selection, out int indexMin);
+            minMName = (new DateTime(1, Convert.ToInt32(selection[indexMin].Period.Split('.')[1]), 1)).ToString("MMM", ruCultureInfo);
+            sum = GetSum(delta, selection);
+
+            MaxValue = $"{maxMName} - {max} {meter.Units}";           
+            
+            MinValue = $"{minMName} - {min} {meter.Units}";
+
+            TotalValue = $"{sum} {meter.Units}";
+
+            //заполнение графиков 
+            //for (var i = 0; i < ValuesOrdered.Count; i++)
+            //{
+            //    var periodArray = ValuesOrdered[i].Period.Split('.');
+            //    if (periodArray[2] == year.ToString())
+            //    {
+            //        var mon = (new DateTime(1, Convert.ToInt32(periodArray[1]), 1)).ToString("MMM", ruCultureInfo);
+            //        //Data.Add(new StatiscticsPageModel(mon, value.Value));
+            //        //if (value.ValueT2 != null)
+            //        //    Data2.Add(new StatiscticsPageModel(mon, (decimal)value.ValueT2));
+            //        //if (value.ValueT3 != null)
+            //        //    Data3.Add(new StatiscticsPageModel(mon, (decimal)value.ValueT3));
+            //    }
+            //}
+
+
+            var mon = (new DateTime(1, Convert.ToInt32(start.Period.Split('.')[1]), 1)).ToString("MMM", ruCultureInfo);
+
+            if (Years.Count > 1 && year > Years.Min())
+            {
+                var end = ValuesOrdered.Where(_ => _.Period.Split('.')[2] == (year - 1).ToString()).Last();
+                delta = GetDeltaT(start, end , 1);
+                Data.Add(new StatiscticsPageModel(mon, delta));
+                if(meter.TariffNumberInt==2)
+                {
+                    delta = GetDeltaT(start, end, 2);
+                    Data2.Add(new StatiscticsPageModel(mon, delta));
+                }
+                if (meter.TariffNumberInt == 3)
+                {
+                    delta = GetDeltaT(start, end, 3);
+                    Data3.Add(new StatiscticsPageModel(mon, delta));
+                }
+            }                
+            else
+            {                                
+                Data.Add(new StatiscticsPageModel(mon, start.Value));
+
+                if (meter.TariffNumberInt == 2)
+                {
+                    Data2.Add(new StatiscticsPageModel(mon, (decimal)start.ValueT2));
+                }
+                if (meter.TariffNumberInt == 3)
+                {                    
+                    Data3.Add(new StatiscticsPageModel(mon, (decimal)start.ValueT3));
+                }                
+            }
+
+            for (var i = 1; i < selection.Count() - 1; i++)
+            {
+                var deltaNew = GetDeltaT(selection[i - 1], selection[i],1);
+                mon = (new DateTime(1, Convert.ToInt32(selection[i].Period.Split('.')[1]), 1)).ToString("MMM", ruCultureInfo);
+                Data.Add(new StatiscticsPageModel(mon, deltaNew));
+
+                if (meter.TariffNumberInt == 2)
+                {
+                    Data2.Add(new StatiscticsPageModel(mon, GetDeltaT(selection[i - 1], selection[i], 2)));
+                }
+                if (meter.TariffNumberInt == 3)
+                {
+                    Data3.Add(new StatiscticsPageModel(mon, GetDeltaT(selection[i - 1], selection[i], 3)));
+                }
+
+            }
+
 
             DataName2Visible = false;
             DataName3Visible = false;
 
-            var maxV = Data.Max(_ => _.Target);
-            var minV = Data.Min(_ => _.Target);
-            var tot = Data.Sum(_ => _.Target);
             if (Data2 != null && Data2.Any())
             {
                 DataName2Visible = true;
-   maxV += Data2.Max(_ => _.Target);
-                minV += Data2.Min(_ => _.Target);
-                tot += Data2.Sum(_ => _.Target);
             }
             if (Data3 != null && Data3.Any())
             {
                 DataName3Visible = true;
-
-                maxV += Data3.Max(_ => _.Target);
-                minV += Data3.Min(_ => _.Target);
-                tot += Data3.Sum(_ => _.Target);
             }
-
-            var max = Data.Max(_ => _.Target);
-            var maxMName = Data.First(_ => _.Target == max).Month;
-
-            MaxValue = $"{maxMName} - {maxV} {meter.Units}";
-
-            var min = Data.Min(_ => _.Target);
-            var minMName = Data.First(_ => _.Target == min).Month;
-            MinValue = $"{minMName} - {minV} {meter.Units}";
-
-            TotalValue = $"{tot} {meter.Units}";
         }
 
         List<MeterValueInfo> ValuesOrdered = new List<MeterValueInfo>();
@@ -223,22 +343,16 @@ namespace xamarinJKH.Counters
         {
             IsBusy = true;
             ItemsList<MeterValueInfo> meterValues = await Server.MeterValues(UniqueNum);
+            var ruCulture = System.Globalization.CultureInfo.GetCultureInfo("RU");
             if (meterValues.Error == null)
             {
                 foreach (var val in meterValues.Data)
                 {
-
-
                     if (DateTime.TryParseExact(val.Period, "dd.mm.yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out DateTime pdate))
-                        ValuesOrdered.Add(val);
-                    else
-                    {
-
-                    }
-
+                        ValuesOrdered.Add(val);                    
                 }
-                ValuesOrdered = ValuesOrdered.OrderBy(_ => Convert.ToDateTime(_.Period, System.Globalization.CultureInfo.GetCultureInfo("RU"))).ToList();
-                Years = ValuesOrdered.Select(_ => Convert.ToDateTime(_.Period, System.Globalization.CultureInfo.GetCultureInfo("RU")).Year).Distinct().ToList();
+                ValuesOrdered = ValuesOrdered.OrderBy(_ => Convert.ToDateTime(_.Period, ruCulture)).ToList();
+                Years = ValuesOrdered.Select(_ => Convert.ToDateTime(_.Period, ruCulture).Year).Distinct().ToList();
                 SetChart(null);
             }
             else
