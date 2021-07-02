@@ -63,7 +63,8 @@
                     FontSize="15"
                     FontAttributes="Bold"
                     TextColor="White"
-                    BackgroundColor="{x:DynamicResource MainColor}" />
+                    BackgroundColor="{x:DynamicResource MainColor}" 
+                    Margin="0,0,0,30"/>
         </StackLayout>
     </Frame>
 </pages:PopupPage>
