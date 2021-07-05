@@ -485,7 +485,10 @@ namespace xamarinJKH.Main
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            FrameBtnAddPass.IsVisible = Settings.Person.Accounts.Any(_=>_.AllowPassRequestCreation);
+            if (Settings.Person != null && Settings.Person.Accounts != null)
+                FrameBtnAddPass.IsVisible = Settings.Person.Accounts.Any(_ => _.AllowPassRequestCreation);
+            else
+                FrameBtnAddPass.IsVisible = false;
             FrameSwitch.IsVisible = FrameBtnAddPass.IsVisible;
             LayoutSwitch.IsVisible = !FrameBtnAddPass.IsVisible;
             

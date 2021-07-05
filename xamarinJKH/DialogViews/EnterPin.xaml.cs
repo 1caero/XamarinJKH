@@ -21,7 +21,9 @@ namespace xamarinJKH.DialogViews
             InitializeComponent();
             Analytics.TrackEvent("Диалог для ввода пин-кода");
             var close = new TapGestureRecognizer();
-            close.Tapped += async (s, e) => { await PopupNavigation.Instance.PopAsync(); };
+            close.Tapped += async (s, e) => {
+                if (PopupNavigation.Instance.PopupStack.Count > 0) 
+                    await PopupNavigation.Instance.PopAsync(); };
             IconViewClose.GestureRecognizers.Add(close);
             BindingContext = this;
         }
@@ -43,7 +45,9 @@ namespace xamarinJKH.DialogViews
                 Preferences.Set("PinAddNeed", false);
                 await DisplayAlert("", $"{AppResources.PinField} {AppResources.Saved}", "ОК");
                 MessagingCenter.Send<object>(this, "PinAddedSucces");
-                await PopupNavigation.Instance.PopAsync();
+
+                if (PopupNavigation.Instance.PopupStack.Count>0)
+                    await PopupNavigation.Instance.PopAsync();
             }
             else
             {

@@ -333,7 +333,15 @@ namespace xamarinJKH.AppsConst
 
         public string DateUniq = "";
         public bool CanComplete => Settings.Person.UserSettings.RightPerformRequest;
-        public bool CanClose => Settings.Person.UserSettings.RightCloseRequest;
+        public bool CanClose
+        {
+            get
+            {
+                if (Settings.Person != null && Settings.Person.UserSettings != null)
+                    return Settings.Person.UserSettings.RightCloseRequest;
+                return false;
+            }
+        }
 
         /// <summary>
         /// Добавление сообщения к отображению
