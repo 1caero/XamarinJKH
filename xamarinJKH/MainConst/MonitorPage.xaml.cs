@@ -1939,7 +1939,10 @@ namespace xamarinJKH.MainConst
                     {
                         try
                         {
-                            var result = await _server.GetMultipleStats(queries);
+                            var result = await _server.GetMultipleStats(queries); 
+                            var result2 = await _server.GetMultipleStatsSimple(queries);
+
+
                             if (result != null && result.Error == null)
                             {
 

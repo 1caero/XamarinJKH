@@ -13,18 +13,20 @@ using Xamarin.Forms;
 using xamarinJKH.Server.DataModel;
 using xamarinJKH.Utils;
 using System.Linq;
+using xamarinJKH.Server.RequestModel.Monitor;
 
 namespace xamarinJKH.Server
 {
     public class RestClientMP
     {
         // public const string SERVER_ADDR = "https://api.sm-center.ru/test_erc_udm"; // ОСС
-         // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
-         public const string SERVER_ADDR = "https://api.sm-center.ru/water2"; // Тихая гавань water/ water2 - тихая гавань - 2 
-         // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
+        // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
+        public const string SERVER_ADDR = "https://api.sm-center.ru/water2"; // Тихая гавань water/ water2 - тихая гавань - 2 
+        //public const string SERVER_ADDR = "https://api.sm-center.ru/ooo_lastola"; // Ластола
+        // public const string SERVER_ADDR = "https://api.sm-center.ru/komfortnew"; // Гранель
         // public const string SERVER_ADDR = "https://api.sm-center.ru/kapitall_all"; // Основа
         //public const string SERVER_ADDR = "https://api.sm-center.ru/newjkh"; // Еще одна тестовая база
-         // public const string SERVER_ADDR = "https://api.sm-center.ru/dgservicnew"; // Домжил (дом24)
+        // public const string SERVER_ADDR = "https://api.sm-center.ru/dgservicnew"; // Домжил (дом24)
         // public const string SERVER_ADDR = "https://api.sm-center.ru/UKUpravdom"; //Управдом Чебоксары
         // public const string SERVER_ADDR = "https://api.sm-center.ru/eirkc_mobapp"; //ИРКЦ
         // public const string SERVER_ADDR = "https://api.sm-center.ru/uk_sibir_alians"; //Альянс
@@ -141,7 +143,10 @@ namespace xamarinJKH.Server
 
         public const string
             GET_REQUESTS_STATS = "RequestsDispatcher/RequestStats"; // Возвращает статистику по заявкам.  
+        public const string
+            GET_REQUESTS_STATS_SIMPLE = "RequestsDispatcher/RequestStatsSimple"; // Возвращает статистику по заявкам, без списка заявок
 
+        public const string REQUEST_MULTIPLE_Simple = "RequestsDispatcher/RequestStatsMultipleSimple"; //Запрос по нескольким ID,без списка заявок
 
         public const string REQUEST_LIST = "Requests/List"; // Заявки
         public const string REQUEST_DETAIL_LIST = "Requests/Details"; // Детали заявки
@@ -3019,6 +3024,42 @@ namespace xamarinJKH.Server
             return response.Data;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="districtId"></param>
+        /// <param name="houseId"></param>
+        /// <param name="customPeriodStart"></param>
+        /// <param name="customPeriodEnd"></param>
+        /// <returns></returns>
+        public async Task<ItemsList<RequestStatsSimple>> RequestStatsSimple(int? districtId = null, int? houseId = -1, string customPeriodStart = null,
+          string customPeriodEnd = null)
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(GET_REQUESTS_STATS_SIMPLE, Method.GET);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            restRequest.AddParameter("districtId", districtId);
+            restRequest.AddParameter("houseId", houseId);
+            restRequest.AddParameter("customPeriodStart", customPeriodStart);
+            restRequest.AddParameter("customPeriodEnd", customPeriodEnd);
+            var response = await restClientMp.ExecuteTaskAsync<ItemsList<RequestStatsSimple>>(restRequest);
+            // Проверяем статус
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new ItemsList<RequestStatsSimple>()
+                {
+                    Error = $"Ошибка {response.StatusDescription}"
+                };
+            }
+
+            return response.Data;
+        }
+
+        
+
         static bool commissionLoading = false;
         /// <summary>
         /// Получить сумму комиссии
@@ -3439,6 +3480,21 @@ namespace xamarinJKH.Server
                 return response.Data;
             }
             
+        }
+        public async Task<ItemsList<RequestStatsSimple>> GetMultipleStatsSimple(List<xamarinJKH.Server.RequestModel.Monitor.RequestStatsQuerySettings> Queries)
+        {
+            RestClient restClientMp = new RestClient(SERVER_ADDR);
+            RestRequest restRequest = new RestRequest(REQUEST_MULTIPLE_Simple, Method.POST);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("client", Device.RuntimePlatform);
+            restRequest.AddHeader("CurrentLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            restRequest.AddHeader("acx", Settings.Person.acx);
+            restRequest.AddJsonBody(new
+            {
+                Queries
+            });
+            var response = await restClientMp.ExecuteAsync<ItemsList<RequestStatsSimple>>(restRequest);
+            return response.Data;
         }
     }
 }
