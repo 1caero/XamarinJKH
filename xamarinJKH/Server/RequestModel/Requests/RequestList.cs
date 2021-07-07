@@ -61,7 +61,11 @@ namespace xamarinJKH.Server.RequestModel
                 PaidRequestStatus = requestInfo.PaidRequestStatus,
                 IsPaidByUser = requestInfo.IsPaidByUser,
                 ShopId = requestInfo.ShopId,
-                PaidRequestCompleteCode = requestInfo.PaidRequestCompleteCode
+                PaidRequestCompleteCode = requestInfo.PaidRequestCompleteCode,
+                IsDocument = requestInfo.IsDocument,
+                DocumentIsApproving = requestInfo.DocumentIsApproving,
+                DocumentApprovementRequired = requestInfo.DocumentApprovementRequired,
+                DocumentType = requestInfo.DocumentType
             };
         }
         /// <summary>
@@ -101,7 +105,11 @@ namespace xamarinJKH.Server.RequestModel
                 PaidRequestStatus = requesDao.PaidRequestStatus,
                 IsPaidByUser = requesDao.IsPaidByUser,
                 ShopId = requesDao.ShopId,
-                PaidRequestCompleteCode = requesDao.PaidRequestCompleteCode
+                PaidRequestCompleteCode = requesDao.PaidRequestCompleteCode,
+                IsDocument = requesDao.IsDocument,
+                DocumentIsApproving = requesDao.DocumentIsApproving,
+                DocumentApprovementRequired = requesDao.DocumentApprovementRequired,
+                DocumentType = requesDao.DocumentType
             };
         }
         public int ID { get; set; }
@@ -225,6 +233,10 @@ namespace xamarinJKH.Server.RequestModel
         // исполнитель
         public string PerofmerName { get; set; }
 
+        public bool IsDocument { get; set; }
+        public bool DocumentIsApproving { get; set; }
+        public bool DocumentApprovementRequired { get; set; }
+        public string DocumentType { get; set; }
         //public override string ToString()
         //{
         //    return $"Id={ID} isClosed={IsClosed} RequestNumber={RequestNumber}";

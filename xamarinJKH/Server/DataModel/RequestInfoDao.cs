@@ -48,5 +48,9 @@ namespace xamarinJKH.Server.DataModel
         public int ShopId { get; set; }
         
         public string PaidRequestCompleteCode { get; set; }//  - код подтверждения(подтягивается только для жителя)
+        public bool IsDocument { get; set; }
+        public bool DocumentIsApproving { get; set; }
+        public bool DocumentApprovementRequired { get; set; }
+        public string DocumentType { get; set; }
     }
 }

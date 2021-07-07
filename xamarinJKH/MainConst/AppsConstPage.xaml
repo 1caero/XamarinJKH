@@ -160,14 +160,21 @@
                                                             HorizontalOptions="Start"
                                                             Margin="0"
                                                             ReplaceStringMap="{Binding _Added, Converter={x:StaticResource SvgColor}}"/>
-                                                        <Label x:Name="LabelStatus"
-                                                               FontSize="15"
-                                                               Text="{Binding Status}"
-                                                               TextColor="Black"
-                                                               VerticalTextAlignment="Center"
-                                                               VerticalOptions="Center"
-                                                        ></Label>
-                                                    </StackLayout>
+                                                                                <Label x:Name="LabelStatus" IsVisible="{Binding IsDocument, Converter={converters:InverseBoolConverter}}"
+                                                                                FontSize="15"
+                                                                                Text="{Binding Status}"
+                                                                                TextColor="Black"
+                                                                                VerticalTextAlignment="Center"
+                                                                                VerticalOptions="Center">                                                                                    
+                                                                                </Label>
+                                                                                <Label x:Name="LabelDoc" IsVisible="{Binding IsDocument}"
+                                                                                FontSize="15"
+                                                                                Text="Документ"
+                                                                                TextColor="Black"
+                                                                                VerticalTextAlignment="Center"
+                                                                                VerticalOptions="Center">
+                                                                                </Label>
+                                                                            </StackLayout>
                                                 </StackLayout>
                                             </Grid>
                                             
